@@ -7,12 +7,13 @@ import Image from 'next/image'
 import { ArrowLeft, Download, CheckCircle, Clock, BookOpen, MessageSquare } from 'lucide-react'
 
 // This would come from your database
+// This would come from your database
 const webinarData = {
   'intro-ai-agents': {
     id: 'intro-ai-agents',
     title: 'Introduction to AI Agents',
     description: 'Learn how AI agents can transform your DMO operations with practical examples and implementation strategies.',
-    duration: '45 min',
+    duration: '38 min',
     muxPlaybackId: 'DZMjucH02v9101xDceIuIa017xewOTUq5Qhat3TW902vMRw',
     instructor: 'Janette Roush',
     instructorTitle: 'Chief AI Officer, Brand USA',
@@ -22,7 +23,7 @@ const webinarData = {
       { time: 600, title: 'DMO Use Cases' },
       { time: 1200, title: 'Implementation Strategy' },
       { time: 1800, title: 'Best Practices' },
-      { time: 2400, title: 'Q&A Session' },
+      { time: 2100, title: 'Q&A Session' },
     ],
     resources: [
       { name: 'AI Agents Playbook', url: '/resources/ai-agents-playbook.pdf' },
@@ -30,7 +31,72 @@ const webinarData = {
       { name: 'Prompt Templates', url: '/resources/prompt-templates.pdf' },
     ],
   },
-  // Add other webinars as they're uploaded
+  'ai-101': {
+    id: 'ai-101',
+    title: 'AI 101',
+    description: 'Foundation concepts of AI for tourism professionals. Start here to build your AI knowledge base.',
+    duration: '45 min',
+    muxPlaybackId: 'xeIP7quWBJdSYdKTbun1SK00M00UP01oBR9freqwjtIDHg',
+    instructor: 'Janette Roush',
+    instructorTitle: 'Chief AI Officer, Brand USA',
+    chapters: [
+      { time: 0, title: 'Welcome & Introduction' },
+      { time: 300, title: 'What is AI?' },
+      { time: 900, title: 'Machine Learning Basics' },
+      { time: 1500, title: 'Natural Language Processing' },
+      { time: 2100, title: 'AI in Tourism' },
+      { time: 2400, title: 'Getting Started' },
+    ],
+    resources: [
+      { name: 'AI Fundamentals Guide', url: '/resources/ai-fundamentals.pdf' },
+      { name: 'Glossary of AI Terms', url: '/resources/ai-glossary.pdf' },
+      { name: 'Further Reading List', url: '/resources/reading-list.pdf' },
+    ],
+  },
+  'ai-tool-playground': {
+    id: 'ai-tool-playground',
+    title: 'AI Tool Playground',
+    description: 'Hands-on exploration of AI tools specifically curated for destination marketing teams.',
+    duration: '44 min',
+    muxPlaybackId: 'lnI021VbkiTfHvQhGmtvUW9qvcXGycbE3F9wryWLKYmU',
+    instructor: 'Janette Roush',
+    instructorTitle: 'Chief AI Officer, Brand USA',
+    chapters: [
+      { time: 0, title: 'Introduction to AI Tools' },
+      { time: 300, title: 'Content Generation Tools' },
+      { time: 900, title: 'Image & Video AI' },
+      { time: 1500, title: 'Data Analysis Tools' },
+      { time: 2100, title: 'Chatbots & Customer Service' },
+      { time: 2400, title: 'Live Demo & Practice' },
+    ],
+    resources: [
+      { name: 'Tool Comparison Chart', url: '/resources/tool-comparison.pdf' },
+      { name: 'Quick Start Guides', url: '/resources/quick-start-guides.pdf' },
+      { name: 'DMO Tool Templates', url: '/resources/dmo-templates.pdf' },
+    ],
+  },
+  'ai-dmo-leadership': {
+    id: 'ai-dmo-leadership',
+    title: 'AI for DMO Leadership',
+    description: 'Strategic guidance for tourism leaders on AI adoption, governance, and organizational transformation.',
+    duration: '41 min',
+    muxPlaybackId: 'zj2p7UBXIAnISzODlWHqmwa15j6ftYeJgjKkD02T7B01k',
+    instructor: 'Janette Roush',
+    instructorTitle: 'Chief AI Officer, Brand USA',
+    chapters: [
+      { time: 0, title: 'Executive Overview' },
+      { time: 300, title: 'Building an AI Strategy' },
+      { time: 900, title: 'Governance & Ethics' },
+      { time: 1500, title: 'Team Development' },
+      { time: 2100, title: 'ROI & Metrics' },
+      { time: 2400, title: 'Future Roadmap' },
+    ],
+    resources: [
+      { name: 'AI Strategy Template', url: '/resources/ai-strategy-template.pdf' },
+      { name: 'Governance Framework', url: '/resources/governance-framework.pdf' },
+      { name: 'Executive Brief', url: '/resources/executive-brief.pdf' },
+    ],
+  },
 }
 
 export default function WebinarPage({ params }: { params: { id: string } }) {
