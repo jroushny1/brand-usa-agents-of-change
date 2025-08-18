@@ -143,7 +143,7 @@ export default function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {webinars.map((webinar) => (
+            {webinars.map((webinar, index) => (
               <Link
                 key={webinar.id}
                 href={`/webinar/${webinar.id}`}
