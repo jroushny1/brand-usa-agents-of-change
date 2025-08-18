@@ -15,9 +15,9 @@ export default function EnterPage() {
     setLoading(true)
     
     // Check if code is correct (case insensitive)
-    if (code.toLowerCase() === 'yougotthis') {
+    if (code.toLowerCase() === 'goteamusa') {
       // Set cookie and redirect
-      document.cookie = `partner_access=YouGotThis; path=/; max-age=${60 * 60 * 24 * 30}` // 30 days
+      document.cookie = `partner_access=GoTeamUSA; path=/; max-age=${60 * 60 * 24 * 30}` // 30 days
       window.location.href = '/'
     } else {
       setError(true)
