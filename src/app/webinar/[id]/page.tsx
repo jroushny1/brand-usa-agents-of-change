@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowLeft, Download, CheckCircle, Clock, BookOpen, MessageSquare } from 'lucide-react'
 import HLSPlayer from './hls-player'
+import AccessCheck from '@/components/AccessCheck'
 
 // This would come from your database
 const webinarData = {
@@ -126,11 +127,18 @@ export default function WebinarPage({ params }: { params: { id: string } }) {
   }
 
   if (!webinar) {
-    return <div>Webinar not found</div>
+    return (
+      <AccessCheck>
+        <div className="min-h-screen flex items-center justify-center">
+          <p className="text-xl text-gray-600">Webinar not found</p>
+        </div>
+      </AccessCheck>
+    )
   }
 
   return (
-    <>
+    <AccessCheck>
+      <>
       {/* Header */}
       <header className="border-b border-gray-200 bg-white sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -317,5 +325,6 @@ export default function WebinarPage({ params }: { params: { id: string } }) {
         </div>
       </div>
     </>
+    </AccessCheck>
   )
 }
