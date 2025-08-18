@@ -12,10 +12,11 @@ interface HLSPlayerProps {
   playbackId: string
   onTimeUpdate?: (time: number) => void
   onEnded?: () => void
+  onLoadedMetadata?: (duration: number) => void
   poster?: string
 }
 
-export default function HLSPlayer({ playbackId, onTimeUpdate, onEnded, poster }: HLSPlayerProps) {
+export default function HLSPlayer({ playbackId, onTimeUpdate, onEnded, onLoadedMetadata, poster }: HLSPlayerProps) {
   const videoRef = useRef<HTMLVideoElement>(null)
 
   useEffect(() => {
@@ -62,6 +63,7 @@ export default function HLSPlayer({ playbackId, onTimeUpdate, onEnded, poster }:
       poster={poster}
       onTimeUpdate={(e) => onTimeUpdate?.(e.currentTarget.currentTime)}
       onEnded={() => onEnded?.()}
+      onLoadedMetadata={(e) => onLoadedMetadata?.(e.currentTarget.duration)}
     />
   )
 }
