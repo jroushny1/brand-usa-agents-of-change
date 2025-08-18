@@ -48,7 +48,7 @@ const webinars = [
 const stats = [
   { label: 'Hours of Content', value: '3+', icon: Clock },
   { label: 'Expert-Led Sessions', value: '4', icon: Users },
-  { label: 'Completion Certificate', value: '✓', icon: TrendingUp },
+  { label: 'Certificate', value: 'Coming Soon', icon: TrendingUp },
 ]
 
 export default function HomePage() {
@@ -72,15 +72,15 @@ export default function HomePage() {
               </span>
             </div>
             <nav className="flex items-center space-x-4">
-              <Link href="/login" className="text-gray-600 hover:text-gray-900">
-                Sign In
-              </Link>
-              <Link 
-                href="/register" 
-                className="bg-brand-blue text-white px-4 py-2 rounded-lg hover:bg-brand-navy transition"
+              <button
+                onClick={() => {
+                  document.cookie = 'partner_access=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;'
+                  window.location.href = '/enter'
+                }}
+                className="text-sm text-gray-500 hover:text-gray-700"
               >
-                Get Started
-              </Link>
+                Exit Beta
+              </button>
             </nav>
           </div>
         </div>
@@ -204,7 +204,7 @@ export default function HomePage() {
           </p>
           <div className="space-y-4 text-sm text-blue-100">
             <p>Access code required for beta access</p>
-            <p>Questions? Email <a href="mailto:partners@thebrandusa.com" className="underline">partners@thebrandusa.com</a></p>
+            <p>Questions? Email <a href="mailto:jroush@thebrandusa.com" className="underline">jroush@thebrandusa.com</a></p>
           </div>
         </div>
       </section>
