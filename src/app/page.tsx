@@ -3,58 +3,60 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { Play, Clock, TrendingUp, Users } from 'lucide-react'
+import AccessCheck from '@/components/AccessCheck'
 
 // Temporary data - we'll move this to Supabase later
 const webinars = [
   {
-    id: 'ai-101',
-    title: 'AI 101',
-    description: 'Foundation concepts of AI for tourism professionals. Start here to build your AI knowledge base.',
-    duration: '45 min',
-    muxPlaybackId: 'ue02eduy5uif9Do00iXI6jG02u02O600tu00FauvIOLX2Ayg8',
-    thumbnail: 'https://image.mux.com/ue02eduy5uif9Do00iXI6jG02u02O600tu00FauvIOLX2Ayg8/thumbnail.png?width=800&height=450&time=10',
-    level: 'Beginner',
-  },
-  {
     id: 'intro-ai-agents',
     title: 'Introduction to AI Agents',
     description: 'Learn how AI agents can transform your DMO operations with practical examples and implementation strategies.',
-    duration: '38 min',
-    muxPlaybackId: '3TPl1Jgmg01b9BdEXU4WVtJbz4DSetOA7TsyHGvjxJQs',
-    thumbnail: 'https://image.mux.com/3TPl1Jgmg01b9BdEXU4WVtJbz4DSetOA7TsyHGvjxJQs/thumbnail.png?width=800&height=450&time=10',
+    duration: '45 min',
+    muxPlaybackId: 'DZMjucH02v9101xDceIuIa017xewOTUq5Qhat3TW902vMRw',
+    thumbnail: 'https://image.mux.com/DZMjucH02v9101xDceIuIa017xewOTUq5Qhat3TW902vMRw/thumbnail.png?width=800&height=450',
     level: 'Intermediate',
+  },
+  {
+    id: 'ai-101',
+    title: 'AI 101',
+    description: 'Foundation concepts of AI for tourism professionals. Start here to build your AI knowledge base.',
+    duration: '40 min',
+    muxPlaybackId: 'pending', // Update when uploaded
+    thumbnail: '/placeholder-1.jpg',
+    level: 'Beginner',
   },
   {
     id: 'ai-tool-playground',
     title: 'AI Tool Playground',
     description: 'Hands-on exploration of AI tools specifically curated for destination marketing teams.',
-    duration: '44 min',
-    muxPlaybackId: 'H6B01F00lAc4PGT8Ick32jTwVa7LVA8Y5yqTq8xyD6DzA',
-    thumbnail: 'https://image.mux.com/H6B01F00lAc4PGT8Ick32jTwVa7LVA8Y5yqTq8xyD6DzA/thumbnail.png?width=800&height=450&time=10',
+    duration: '50 min',
+    muxPlaybackId: 'pending', // Update when uploaded
+    thumbnail: '/placeholder-2.jpg',
     level: 'Intermediate',
   },
   {
     id: 'ai-dmo-leadership',
     title: 'AI for DMO Leadership',
     description: 'Strategic guidance for tourism leaders on AI adoption, governance, and organizational transformation.',
-    duration: '41 min',
-    muxPlaybackId: 'NQACe9aTXRuntXd4r7eHWsXVDFVhaUUwyotE8RF5SQE',
-    thumbnail: 'https://image.mux.com/NQACe9aTXRuntXd4r7eHWsXVDFVhaUUwyotE8RF5SQE/thumbnail.png?width=800&height=450&time=10',
-    level: 'Beginner',
+    duration: '45 min',
+    muxPlaybackId: 'pending', // Update when uploaded
+    thumbnail: '/placeholder-3.jpg',
+    level: 'Advanced',
   },
 ]
 
 const stats = [
   { label: 'DMO Partners', value: '150+', icon: Users },
-  { label: 'Hours of Content', value: '3+', icon: Clock },
+  { label: 'Hours of Content', value: '12+', icon: Clock },
   { label: 'AI Skills Covered', value: '25+', icon: TrendingUp },
 ]
 
 export default function HomePage() {
   return (
-    <>
-      {/* Header */}
-      <header className="border-b border-gray-200 bg-white">
+    <AccessCheck>
+      <>
+        {/* Header */}
+        <header className="border-b border-gray-200 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
@@ -69,23 +71,17 @@ export default function HomePage() {
                 Agents of Change
               </span>
             </div>
-           <nav className="flex items-center space-x-4">
-  <button
-    onClick={() => {
-      document.cookie = 'partner_access=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;'
-      window.location.href = '/enter'
-    }}
-    className="text-sm text-gray-600 hover:text-gray-900"
-  >
-    Exit Beta
-  </button>
-  <Link 
-    href="/register" 
-    className="bg-brand-blue text-white px-4 py-2 rounded-lg hover:bg-brand-navy transition"
-  >
-    Get Started
-  </Link>
-</nav>
+            <nav className="flex items-center space-x-4">
+              <Link href="/login" className="text-gray-600 hover:text-gray-900">
+                Sign In
+              </Link>
+              <Link 
+                href="/register" 
+                className="bg-brand-blue text-white px-4 py-2 rounded-lg hover:bg-brand-navy transition"
+              >
+                Get Started
+              </Link>
+            </nav>
           </div>
         </div>
       </header>
@@ -98,7 +94,7 @@ export default function HomePage() {
               Become an AI Agent of Change
             </h1>
             <p className="text-xl md:text-2xl mb-8 text-blue-100 max-w-3xl mx-auto">
-              Brand USA's AI learning platform is designed for U.S. tourism and destination marketing professionals ready to lead the future of tourism.
+              Join Brand USA's exclusive AI learning platform designed for destination marketing professionals ready to lead the future of tourism.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link 
@@ -226,5 +222,6 @@ export default function HomePage() {
         </div>
       </section>
     </>
+    </AccessCheck>
   )
 }
