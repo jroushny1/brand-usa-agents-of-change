@@ -297,13 +297,13 @@ export default function WebinarPage({ params }: { params: { id: string } }) {
                   <div className="flex justify-between text-sm mb-1">
                     <span className="text-gray-600">Watch Progress</span>
                     <span className="font-medium text-gray-900">
-                      {Math.round((currentTime / (webinar.duration.includes('45') ? 2700 : 2400)) * 100)}%
+                      {duration > 0 ? Math.round((currentTime / duration) * 100) : 0}%
                     </span>
                   </div>
                   <div className="w-full bg-gray-200 rounded-full h-2">
                     <div 
                       className="bg-brand-blue h-2 rounded-full transition-all duration-300"
-                      style={{ width: `${Math.round((currentTime / (webinar.duration.includes('45') ? 2700 : 2400)) * 100)}%` }}
+                      style={{ width: `${duration > 0 ? Math.round((currentTime / duration) * 100) : 0}%` }}
                     />
                   </div>
                 </div>
