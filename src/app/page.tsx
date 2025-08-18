@@ -38,13 +38,13 @@ const webinars = [
     duration: '41 min',
     muxPlaybackId: 'NQACe9aTXRuntXd4r7eHWsXVDFVhaUUwyotE8RF5SQE',
     thumbnail: 'https://image.mux.com/NQACe9aTXRuntXd4r7eHWsXVDFVhaUUwyotE8RF5SQE/thumbnail.png?width=800&height=450&time=10',
-    level: 'Advanced',
+    level: 'Beginner',
   },
 ]
 
 const stats = [
   { label: 'DMO Partners', value: '150+', icon: Users },
-  { label: 'Hours of Content', value: '12+', icon: Clock },
+  { label: 'Hours of Content', value: '3+', icon: Clock },
   { label: 'AI Skills Covered', value: '25+', icon: TrendingUp },
 ]
 
@@ -90,7 +90,7 @@ export default function HomePage() {
               Become an AI Agent of Change
             </h1>
             <p className="text-xl md:text-2xl mb-8 text-blue-100 max-w-3xl mx-auto">
-              Join Brand USA's exclusive AI learning platform designed for destination marketing professionals ready to lead the future of tourism.
+              Brand USA's AI learning platform is designed for U.S. tourism and destination marketing professionals ready to lead the future of tourism.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link 
