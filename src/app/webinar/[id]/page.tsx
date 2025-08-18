@@ -167,14 +167,20 @@ export default function WebinarPage({ params }: { params: { id: string } }) {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-6">
-           {/* Video Player */}
+      
+            {/* Video Player */}
             <div className="rounded-xl overflow-hidden shadow-lg bg-black aspect-video">
-              <iframe
-                src={`https://stream.mux.com/embed/${webinar.muxPlaybackId}?autoplay=false&controls=true`}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="w-full h-full"
-                style={{ border: 'none' }}
+              <HLSPlayer
+                playbackId={webinar.muxPlaybackId}
+                poster={`https://image.mux.com/${webinar.muxPlaybackId}/thumbnail.png`}
+                onTimeUpdate={(time) => {
+                  setCurrentTime(time)
+                  saveProgress(time)
+                }}
+                onEnded={() => {
+                  setCompleted(true)
+                  saveProgress(currentTime, true)
+                }}
               />
             </div>
 
