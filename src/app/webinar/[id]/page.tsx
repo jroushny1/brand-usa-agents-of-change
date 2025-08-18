@@ -1,12 +1,10 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import MuxPlayer from '@mux/mux-player-react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowLeft, Download, CheckCircle, Clock, BookOpen, MessageSquare } from 'lucide-react'
 
-// This would come from your database
 // This would come from your database
 const webinarData = {
   'intro-ai-agents': {
@@ -169,14 +167,11 @@ export default function WebinarPage({ params }: { params: { id: string } }) {
           <div className="lg:col-span-2 space-y-6">
             {/* Video Player */}
             <div className="rounded-xl overflow-hidden shadow-lg bg-black">
-              <MuxPlayer
-                playbackId={webinar.muxPlaybackId}
-                metadata={{
-                  video_title: webinar.title,
-                  viewer_user_id: 'anonymous', // Update with actual user ID
-                }}
-                streamType="on-demand"
-                startTime={currentTime}
+              <video
+                controls
+                className="w-full"
+                src={`https://stream.mux.com/${webinar.muxPlaybackId}.m3u8`}
+                poster={`https://image.mux.com/${webinar.muxPlaybackId}/thumbnail.png?width=1920&height=1080&time=5`}
                 onTimeUpdate={(e) => {
                   const time = (e.target as HTMLVideoElement).currentTime
                   setCurrentTime(time)
@@ -188,8 +183,9 @@ export default function WebinarPage({ params }: { params: { id: string } }) {
                 }}
                 onPlay={() => setIsPlaying(true)}
                 onPause={() => setIsPlaying(false)}
-                className="w-full"
-              />
+              >
+                Your browser does not support the video tag.
+              </video>
             </div>
 
             {/* Video Info */}
@@ -231,7 +227,7 @@ export default function WebinarPage({ params }: { params: { id: string } }) {
                   <button
                     key={index}
                     onClick={() => {
-                      const player = document.querySelector('mux-player') as any
+                      const player = document.querySelector('video') as any
                       if (player) {
                         player.currentTime = chapter.time
                         player.play()
