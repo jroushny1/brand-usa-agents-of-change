@@ -166,27 +166,15 @@ export default function WebinarPage({ params }: { params: { id: string } }) {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-6">
-            {/* Video Player */}
-            <div className="rounded-xl overflow-hidden shadow-lg bg-black">
-              <video
-                controls
-                className="w-full"
-                src={`https://stream.mux.com/${webinar.muxPlaybackId}/high.mp4`}
-                poster={`https://image.mux.com/${webinar.muxPlaybackId}/thumbnail.png?width=1920&height=1080&time=5`}
-                onTimeUpdate={(e) => {
-                  const time = (e.target as HTMLVideoElement).currentTime
-                  setCurrentTime(time)
-                  saveProgress(time)
-                }}
-                onEnded={() => {
-                  setCompleted(true)
-                  saveProgress(currentTime, true)
-                }}
-                onPlay={() => setIsPlaying(true)}
-                onPause={() => setIsPlaying(false)}
-              >
-                Your browser does not support the video tag.
-              </video>
+           {/* Video Player */}
+            <div className="rounded-xl overflow-hidden shadow-lg bg-black aspect-video">
+              <iframe
+                src={`https://stream.mux.com/embed/${webinar.muxPlaybackId}?autoplay=false&controls=true`}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="w-full h-full"
+                style={{ border: 'none' }}
+              />
             </div>
 
             {/* Video Info */}
