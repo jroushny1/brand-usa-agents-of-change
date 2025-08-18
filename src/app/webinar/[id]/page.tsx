@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowLeft, Download, CheckCircle, Clock, BookOpen, MessageSquare } from 'lucide-react'
+import HLSPlayer from './hls-player'
 
 // This would come from your database
 const webinarData = {
@@ -167,14 +168,14 @@ export default function WebinarPage({ params }: { params: { id: string } }) {
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-6">
             {/* Video Player */}
-            <div className="rounded-xl overflow-hidden shadow-lg bg-black">
-              <video
-                controls
-                className="w-full"
-                src={`https://stream.mux.com/${webinar.muxPlaybackId}/high.mp4`}
-                poster={`https://image.mux.com/${webinar.muxPlaybackId}/thumbnail.png?width=1920&height=1080&time=5`}
-                onTimeUpdate={(e) => {
-                  const time = (e.target as HTMLVideoElement).currentTime
+            <div className="rounded-xl overflow-hidden shadow-lg bg-black aspect-video">
+              <HLSPlayer
+                playbackId={webinar.muxPlaybackId}
+                poster={`https://image.mux.com/${webinar.muxPlaybackId}/thumbnail.png`}
+                onLoadedMetadata={(dur) => {
+                  setDuration(dur)
+                }}
+                onTimeUpdate={(time) => {
                   setCurrentTime(time)
                   saveProgress(time)
                 }}
@@ -182,11 +183,7 @@ export default function WebinarPage({ params }: { params: { id: string } }) {
                   setCompleted(true)
                   saveProgress(currentTime, true)
                 }}
-                onPlay={() => setIsPlaying(true)}
-                onPause={() => setIsPlaying(false)}
-              >
-                Your browser does not support the video tag.
-              </video>
+              />
             </div>
 
             {/* Video Info */}
