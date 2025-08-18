@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowLeft, Download, CheckCircle, Clock, BookOpen, MessageSquare } from 'lucide-react'
+import MuxVideo from './mux-video'
 
 // This would come from your database
 const webinarData = {
@@ -227,7 +228,7 @@ export default function WebinarPage({ params }: { params: { id: string } }) {
                   <button
                     key={index}
                     onClick={() => {
-                      const player = document.querySelector('video') as any
+                      const player = document.querySelector('mux-video') as any
                       if (player) {
                         player.currentTime = chapter.time
                         player.play()
