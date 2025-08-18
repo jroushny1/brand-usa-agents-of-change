@@ -67,17 +67,23 @@ export default function HomePage() {
                 Agents of Change
               </span>
             </div>
-            <nav className="flex items-center space-x-4">
-              <Link href="/login" className="text-gray-600 hover:text-gray-900">
-                Sign In
-              </Link>
-              <Link 
-                href="/register" 
-                className="bg-brand-blue text-white px-4 py-2 rounded-lg hover:bg-brand-navy transition"
-              >
-                Get Started
-              </Link>
-            </nav>
+           <nav className="flex items-center space-x-4">
+  <button
+    onClick={() => {
+      document.cookie = 'partner_access=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;'
+      window.location.href = '/enter'
+    }}
+    className="text-sm text-gray-600 hover:text-gray-900"
+  >
+    Exit Beta
+  </button>
+  <Link 
+    href="/register" 
+    className="bg-brand-blue text-white px-4 py-2 rounded-lg hover:bg-brand-navy transition"
+  >
+    Get Started
+  </Link>
+</nav>
           </div>
         </div>
       </header>
