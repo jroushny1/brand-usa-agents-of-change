@@ -12,7 +12,7 @@ const webinarData = {
     title: 'Introduction to AI Agents',
     description: 'Learn how AI agents can transform your DMO operations with practical examples and implementation strategies.',
     duration: '38 min',
-    muxPlaybackId: 'DZMjucH02v9101xDceIuIa017xewOTUq5Qhat3TW902vMRw',
+    muxPlaybackId: '3TPl1Jgmg01b9BdEXU4WVtJbz4DSetOA7TsyHGvjxJQs',
     instructor: 'Janette Roush',
     instructorTitle: 'Chief AI Officer, Brand USA',
     chapters: [
@@ -34,7 +34,7 @@ const webinarData = {
     title: 'AI 101',
     description: 'Foundation concepts of AI for tourism professionals. Start here to build your AI knowledge base.',
     duration: '45 min',
-    muxPlaybackId: 'xeIP7quWBJdSYdKTbun1SK00M00UP01oBR9freqwjtIDHg',
+    muxPlaybackId: 'ue02eduy5uif9Do00iXI6jG02u02O600tu00FauvIOLX2Ayg8',
     instructor: 'Janette Roush',
     instructorTitle: 'Chief AI Officer, Brand USA',
     chapters: [
@@ -56,7 +56,7 @@ const webinarData = {
     title: 'AI Tool Playground',
     description: 'Hands-on exploration of AI tools specifically curated for destination marketing teams.',
     duration: '44 min',
-    muxPlaybackId: 'lnI021VbkiTfHvQhGmtvUW9qvcXGycbE3F9wryWLKYmU',
+    muxPlaybackId: 'H6B01F00lAc4PGT8Ick32jTwVa7LVA8Y5yqTq8xyD6DzA',
     instructor: 'Janette Roush',
     instructorTitle: 'Chief AI Officer, Brand USA',
     chapters: [
@@ -78,7 +78,7 @@ const webinarData = {
     title: 'AI for DMO Leadership',
     description: 'Strategic guidance for tourism leaders on AI adoption, governance, and organizational transformation.',
     duration: '41 min',
-    muxPlaybackId: 'zj2p7UBXIAnISzODlWHqmwa15j6ftYeJgjKkD02T7B01k',
+    muxPlaybackId: 'NQACe9aTXRuntXd4r7eHWsXVDFVhaUUwyotE8RF5SQE',
     instructor: 'Janette Roush',
     instructorTitle: 'Chief AI Officer, Brand USA',
     chapters: [
@@ -170,7 +170,7 @@ export default function WebinarPage({ params }: { params: { id: string } }) {
               <video
                 controls
                 className="w-full"
-                src={`https://stream.mux.com/${webinar.muxPlaybackId}/high.mp4`}
+                src={`https://stream.mux.com/${webinar.muxPlaybackId}.m3u8`}
                 poster={`https://image.mux.com/${webinar.muxPlaybackId}/thumbnail.png?width=1920&height=1080&time=5`}
                 onTimeUpdate={(e) => {
                   const time = (e.target as HTMLVideoElement).currentTime
