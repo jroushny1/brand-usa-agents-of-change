@@ -170,7 +170,7 @@ export default function WebinarPage({ params }: { params: { id: string } }) {
               <video
                 controls
                 className="w-full"
-                src={`https://stream.mux.com/${webinar.muxPlaybackId}.m3u8`}
+                src={`https://stream.mux.com/${webinar.muxPlaybackId}/high.mp4`}
                 poster={`https://image.mux.com/${webinar.muxPlaybackId}/thumbnail.png?width=1920&height=1080&time=5`}
                 onTimeUpdate={(e) => {
                   const time = (e.target as HTMLVideoElement).currentTime
