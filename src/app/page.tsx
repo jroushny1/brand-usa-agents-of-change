@@ -8,39 +8,39 @@ import AccessCheck from '@/components/AccessCheck'
 // Temporary data - we'll move this to Supabase later
 const webinars = [
   {
-    id: 'intro-ai-agents',
-    title: 'Introduction to AI Agents',
-    description: 'Learn how AI agents can transform your DMO operations with practical examples and implementation strategies.',
-    duration: '45 min',
-    muxPlaybackId: 'DZMjucH02v9101xDceIuIa017xewOTUq5Qhat3TW902vMRw',
-    thumbnail: 'https://image.mux.com/DZMjucH02v9101xDceIuIa017xewOTUq5Qhat3TW902vMRw/thumbnail.png?width=800&height=450',
-    level: 'Intermediate',
-  },
-  {
     id: 'ai-101',
     title: 'AI 101',
     description: 'Foundation concepts of AI for tourism professionals. Start here to build your AI knowledge base.',
-    duration: '40 min',
-    muxPlaybackId: 'pending', // Update when uploaded
-    thumbnail: '/placeholder-1.jpg',
+    duration: '45 min',
+    muxPlaybackId: 'ue02eduy5uif9Do00iXI6jG02u02O600tu00FauvIOLX2Ayg8',
+    thumbnail: 'https://image.mux.com/ue02eduy5uif9Do00iXI6jG02u02O600tu00FauvIOLX2Ayg8/thumbnail.png?width=800&height=450&time=10',
     level: 'Beginner',
+  },
+  {
+    id: 'intro-ai-agents',
+    title: 'Introduction to AI Agents',
+    description: 'Learn how AI agents can transform your DMO operations with practical examples and implementation strategies.',
+    duration: '38 min',
+    muxPlaybackId: '3TPl1Jgmg01b9BdEXU4WVtJbz4DSetOA7TsyHGvjxJQs',
+    thumbnail: 'https://image.mux.com/3TPl1Jgmg01b9BdEXU4WVtJbz4DSetOA7TsyHGvjxJQs/thumbnail.png?width=800&height=450&time=10',
+    level: 'Intermediate',
   },
   {
     id: 'ai-tool-playground',
     title: 'AI Tool Playground',
     description: 'Hands-on exploration of AI tools specifically curated for destination marketing teams.',
-    duration: '50 min',
-    muxPlaybackId: 'pending', // Update when uploaded
-    thumbnail: '/placeholder-2.jpg',
+    duration: '44 min',
+    muxPlaybackId: 'H6B01F00lAc4PGT8Ick32jTwVa7LVA8Y5yqTq8xyD6DzA',
+    thumbnail: 'https://image.mux.com/H6B01F00lAc4PGT8Ick32jTwVa7LVA8Y5yqTq8xyD6DzA/thumbnail.png?width=800&height=450&time=10',
     level: 'Intermediate',
   },
   {
     id: 'ai-dmo-leadership',
     title: 'AI for DMO Leadership',
     description: 'Strategic guidance for tourism leaders on AI adoption, governance, and organizational transformation.',
-    duration: '45 min',
-    muxPlaybackId: 'pending', // Update when uploaded
-    thumbnail: '/placeholder-3.jpg',
+    duration: '41 min',
+    muxPlaybackId: 'NQACe9aTXRuntXd4r7eHWsXVDFVhaUUwyotE8RF5SQE',
+    thumbnail: 'https://image.mux.com/NQACe9aTXRuntXd4r7eHWsXVDFVhaUUwyotE8RF5SQE/thumbnail.png?width=800&height=450&time=10',
     level: 'Advanced',
   },
 ]
@@ -150,20 +150,14 @@ export default function HomePage() {
                 className="group relative rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 bg-white"
               >
                 <div className="aspect-video relative overflow-hidden bg-gray-100">
-                  {webinar.muxPlaybackId !== 'pending' ? (
-                    <Image
-                      src={webinar.thumbnail}
-                      alt={webinar.title}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-300"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      priority={index === 0}
-                    />
-                  ) : (
-                    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200">
-                      <span className="text-gray-500 font-medium">Coming Soon</span>
-                    </div>
-                  )}
+                  <Image
+                    src={webinar.thumbnail}
+                    alt={webinar.title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    priority={index === 0}
+                  />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
                   <div className="absolute bottom-4 left-4 right-4">
                     <div className="flex items-center text-white">
