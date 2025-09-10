@@ -13,7 +13,7 @@ export function middleware(req: NextRequest) {
   }
   
   // Check for access code cookie
-  const hasAccess = req.cookies.get('partner_access')?.value === 'GoTeamUSA'
+  const hasAccess = req.cookies.get('partner_access')?.value === 'AmericaTheBeautiful'
   
   if (!hasAccess) {
     // Redirect to enter page
