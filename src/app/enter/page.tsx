@@ -17,7 +17,7 @@ export default function EnterPage() {
     // Check if code is correct (case insensitive)
     if (code.toLowerCase() === 'goteamusa') {
       // Set cookie and redirect
-      document.cookie = `partner_access=GoTeamUSA; path=/; max-age=${60 * 60 * 24 * 30}` // 30 days
+      document.cookie = `partner_access=AmericaTheBeautiful; path=/; max-age=${60 * 60 * 24 * 30}` // 30 days
       window.location.href = '/'
     } else {
       setError(true)
@@ -54,7 +54,7 @@ export default function EnterPage() {
               <Lock className="h-8 w-8 text-brand-blue" />
             </div>
             <h2 className="text-2xl font-bold text-gray-900 mb-2">
-              Partner Access Required
+              Password Required for Access
             </h2>
             <p className="text-gray-600">
               Enter your access code to continue to the learning platform
@@ -104,7 +104,7 @@ export default function EnterPage() {
           <div className="mt-6 pt-6 border-t border-gray-200">
             <p className="text-center text-sm text-gray-600">
               Don't have an access code?{' '}
-              <a href="mailto:partners@thebrandusa.com" className="text-brand-blue hover:underline">
+              <a href="mailto:jroush@thebrandusa.com" className="text-brand-blue hover:underline">
                 Contact Brand USA
               </a>
             </p>
