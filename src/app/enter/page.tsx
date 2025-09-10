@@ -9,23 +9,26 @@ export default function EnterPage() {
   const [error, setError] = useState(false)
   const [loading, setLoading] = useState(false)
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setError(false)
-    setLoading(true)
-    
-    // Check if code is correct (case insensitive)
-    if (code.toLowerCase() === 'americathebeautiful') {
-      // Set cookie and redirect
-      document.cookie = `partner_access=americathebeautiful; path=/; max-age=${60 * 60 * 24 * 30}` // 30 days
-      window.location.href = '/'
-    } else {
-      setError(true)
-      setLoading(false)
-      // Clear the input for retry
-      setTimeout(() => setError(false), 3000)
-    }
+ const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault()
+  setError(false)
+  setLoading(true)
+  
+  console.log('Entered code:', code)
+  console.log('Lowercase code:', code.toLowerCase())
+  console.log('Expected:', 'americathebeautiful')
+  
+  // Check if code is correct (case insensitive)
+  if (code.toLowerCase() === 'americathebeautiful') {
+    // Set cookie and redirect
+    document.cookie = `partner_access=americathebeautiful; path=/; max-age=${60 * 60 * 24 * 30}`
+    window.location.href = '/'
+  } else {
+    setError(true)
+    setLoading(false)
+    setTimeout(() => setError(false), 3000)
   }
+}
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-brand-blue to-brand-navy flex items-center justify-center px-4">
