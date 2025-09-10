@@ -24,20 +24,24 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-{/* Google tag (gtag.js) */}
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-DXWHJGXCKD"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-DXWHJGXCKD');
-</script>
       </head>
       <body className={inter.className}>
         <div className="min-h-screen bg-white">
           {children}
         </div>
+        {/* Google Analytics */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-DXWHJGXCKD"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-DXWHJGXCKD');
+          `}
+        </Script>
       </body>
     </html>
   )
