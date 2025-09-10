@@ -74,7 +74,7 @@ export default function EnterPage() {
                 type="text"
                 value={code}
                 onChange={(e) => setCode(e.target.value)}
-                placeholder="Enter your partner code"
+                placeholder="Enter your code"
                 className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-brand-blue focus:border-transparent transition ${
                   error ? 'border-red-500' : 'border-gray-300'
                 }`}
