@@ -1,9 +1,9 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { ArrowLeft, Download, CheckCircle, Clock, BookOpen, MessageSquare } from 'lucide-react'
+import { ArrowLeft, Download, Clock, BookOpen } from 'lucide-react'
 import HLSPlayer from './hls-player'
 import AccessCheck from '@/components/AccessCheck'
 
@@ -18,12 +18,18 @@ const webinarData = {
     instructor: 'Janette Roush',
     instructorTitle: 'Chief AI Officer, Brand USA',
     chapters: [
-      { time: 0, title: 'Introduction' },
-      { time: 180, title: 'What are AI Agents?' },
-      { time: 600, title: 'DMO Use Cases' },
-      { time: 1200, title: 'Implementation Strategy' },
-      { time: 1800, title: 'Best Practices' },
-      { time: 2100, title: 'Q&A Session' },
+      { time: 0, title: 'Introduction to AI Agents' },
+      { time: 13, title: 'Janette\'s AI Agenda at Brand USA' },
+      { time: 79, title: 'What is an AI Agent?' },
+      { time: 119, title: 'The Four Jobs of Today\'s AI Agents' },
+      { time: 154, title: 'Operator Agents: Taking Control of Your Tasks' },
+      { time: 718, title: 'Researcher Agents: Deep Dives into Information' },
+      { time: 875, title: 'Builder Agents: Creating Digital Products from Text' },
+      { time: 1115, title: 'Automator Agents: Connecting Apps and Eliminating Repetitive Steps' },
+      { time: 1677, title: 'How Will Agents Evolve? A Look at 2027 and 2030' },
+      { time: 1913, title: 'The Future of AI: Personal AI and the Model Context Protocol (MCP)' },
+      { time: 2164, title: 'Our AI Mantras' },
+      { time: 2274, title: 'Conclusion' },
     ],
     resources: [
       { name: 'AI Agents Playbook', url: '/resources/ai-agents-playbook.pdf' },
@@ -40,12 +46,18 @@ const webinarData = {
     instructor: 'Janette Roush',
     instructorTitle: 'Chief AI Officer, Brand USA',
     chapters: [
-      { time: 0, title: 'Welcome & Introduction' },
-      { time: 300, title: 'What is AI?' },
-      { time: 900, title: 'Machine Learning Basics' },
-      { time: 1500, title: 'Natural Language Processing' },
-      { time: 2100, title: 'AI in Tourism' },
-      { time: 2400, title: 'Getting Started' },
+      { time: 0, title: 'Introduction: Generative AI 101' },
+      { time: 24, title: 'Today\'s Agenda' },
+      { time: 94, title: 'What is ChatGPT?' },
+      { time: 218, title: 'Prompting Basics' },
+      { time: 345, title: 'Interactive AI Break' },
+      { time: 457, title: 'How to Cheat with AI: A Practical Example' },
+      { time: 655, title: 'Prompting in Action: Creating a Campaign Strategy' },
+      { time: 1061, title: 'Watch-outs and Governance' },
+      { time: 1754, title: 'Practical Account Setup for ChatGPT' },
+      { time: 2041, title: 'Using Custom GPTs' },
+      { time: 2387, title: 'Next Steps for Your Organization' },
+      { time: 2678, title: 'Conclusion & Thank You' },
     ],
     resources: [
       { name: 'AI Fundamentals Guide', url: '/resources/ai-fundamentals.pdf' },
@@ -62,12 +74,25 @@ const webinarData = {
     instructor: 'Janette Roush',
     instructorTitle: 'Chief AI Officer, Brand USA',
     chapters: [
-      { time: 0, title: 'Introduction to AI Tools' },
-      { time: 300, title: 'Content Generation Tools' },
-      { time: 900, title: 'Image & Video AI' },
-      { time: 1500, title: 'Data Analysis Tools' },
-      { time: 2100, title: 'Chatbots & Customer Service' },
-      { time: 2400, title: 'Live Demo & Practice' },
+      { time: 0, title: 'Welcome to the AI Tool Playground' },
+      { time: 46, title: 'Janette\'s AI Agenda' },
+      { time: 123, title: 'Frontier Models: The Basis of AI Tools' },
+      { time: 141, title: 'Tool 1: ChatGPT (OpenAI)' },
+      { time: 286, title: 'Tool 2: Claude (Anthropic)' },
+      { time: 396, title: 'Tool 3: Gemini & NotebookLM (Google)' },
+      { time: 662, title: 'Image Generation Tools' },
+      { time: 806, title: 'Tool 4: Midjourney' },
+      { time: 1073, title: 'Video Generation & Editing' },
+      { time: 1077, title: 'Tool 5: Descript' },
+      { time: 1261, title: 'Tool 6: Runway' },
+      { time: 1366, title: 'Tool 7: Pika' },
+      { time: 1375, title: 'Vibe-Coding Tools' },
+      { time: 1380, title: 'Tool 8: Lovable' },
+      { time: 1542, title: 'Tool 9: Agent.ai & n8n' },
+      { time: 1736, title: 'Meeting & Presentation Tools' },
+      { time: 1739, title: 'Tool 10: Beautiful.ai' },
+      { time: 1857, title: 'Tool 11: Napkin' },
+      { time: 2022, title: 'Summary and Live Q&A' },
     ],
     resources: [
       { name: 'Tool Comparison Chart', url: '/resources/tool-comparison.pdf' },
@@ -84,47 +109,37 @@ const webinarData = {
     instructor: 'Janette Roush',
     instructorTitle: 'Chief AI Officer, Brand USA',
     chapters: [
-      { time: 0, title: 'Executive Overview' },
-      { time: 300, title: 'Building an AI Strategy' },
-      { time: 900, title: 'Governance & Ethics' },
-      { time: 1500, title: 'Team Development' },
-      { time: 2100, title: 'ROI & Metrics' },
-      { time: 2400, title: 'Future Roadmap' },
+      { time: 0, title: 'Introduction & Welcome' },
+      { time: 56, title: 'AI in the Tourism Industry: Three Focus Areas' },
+      { time: 103, title: 'Scaling AI at Your DMO' },
+      { time: 158, title: 'Building AI Workflows & Team Adoption' },
+      { time: 298, title: 'The Importance of SOPs and Process Mapping' },
+      { time: 363, title: 'AI Governance: Addressing Employee Concerns' },
+      { time: 412, title: 'AI Risk Areas: Security, Privacy, and Content Integrity' },
+      { time: 438, title: 'Best Practices for Data Security & Privacy' },
+      { time: 672, title: 'Intellectual Property and AI Use' },
+      { time: 950, title: 'Shadow AI & BYO AI: Risks and Recommendations' },
+      { time: 1139, title: 'Developing AI Guidelines for Your Organization' },
+      { time: 1288, title: 'Brand USA\'s AI Guidelines Example' },
+      { time: 1328, title: 'Maintaining Human Oversight & Responsibility' },
+      { time: 1477, title: 'Red Teaming and Ongoing AI Model Evaluation' },
+      { time: 1556, title: 'Vendor Partnerships & Tool Vetting' },
+      { time: 1723, title: 'AI Mantras & Leadership Focus' },
+      { time: 1793, title: 'Encouraging AI Adoption: Start Small, Think Big' },
+      { time: 1823, title: 'Top-Down and Bottom-Up AI Adoption' },
+      { time: 2047, title: 'Q&A: Tools, Resources, and Training' },
+      { time: 2376, title: 'Closing Thoughts & Future Topics' },
     ],
     resources: [
-      { name: 'AI Strategy Template', url: '/resources/ai-strategy-template.pdf' },
-      { name: 'Governance Framework', url: '/resources/governance-framework.pdf' },
-      { name: 'Executive Brief', url: '/resources/executive-brief.pdf' },
+      { name: 'AI Implementation Roadmap', url: '/resources/ai-implementation-roadmap.pdf' },
+      { name: 'Vendor & Tool Vetting Checklist', url: '/resources/vendor-tool-vetting-checklist.pdf' },
+      { name: 'AI Governance Framework Template', url: '/resources/ai-governance-framework-template.pdf' },
     ],
   },
 }
 
 export default function WebinarPage({ params }: { params: { id: string } }) {
   const webinar = webinarData[params.id as keyof typeof webinarData]
-  const [completed, setCompleted] = useState(false)
-  const [currentTime, setCurrentTime] = useState(0)
-  const [duration, setDuration] = useState(0)
-  const [isPlaying, setIsPlaying] = useState(false)
-
-  // Load progress from localStorage (we'll move to Supabase later)
-  useEffect(() => {
-    const savedProgress = localStorage.getItem(`progress_${params.id}`)
-    if (savedProgress) {
-      const progress = JSON.parse(savedProgress)
-      setCompleted(progress.completed)
-      setCurrentTime(progress.currentTime || 0)
-    }
-  }, [params.id])
-
-  // Save progress
-  const saveProgress = (time: number, completed: boolean = false) => {
-    const progress = {
-      currentTime: time,
-      completed,
-      lastUpdated: new Date().toISOString(),
-    }
-    localStorage.setItem(`progress_${params.id}`, JSON.stringify(progress))
-  }
 
   if (!webinar) {
     return (
@@ -137,9 +152,9 @@ export default function WebinarPage({ params }: { params: { id: string } }) {
   }
 
   return (
-    <AccessCheck>
-      <>
-      {/* Header */}
+    <>
+      <AccessCheck>
+        {/* Header */}
       <header className="border-b border-gray-200 bg-white sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
@@ -160,12 +175,7 @@ export default function WebinarPage({ params }: { params: { id: string } }) {
               />
             </div>
             <div className="flex items-center space-x-4">
-              {completed && (
-                <span className="flex items-center text-green-600 text-sm font-medium">
-                  <CheckCircle className="h-5 w-5 mr-1" />
-                  Completed
-                </span>
-              )}
+              {/* Header actions can go here */}
             </div>
           </div>
         </div>
@@ -180,17 +190,6 @@ export default function WebinarPage({ params }: { params: { id: string } }) {
               <HLSPlayer
                 playbackId={webinar.muxPlaybackId}
                 poster={`https://image.mux.com/${webinar.muxPlaybackId}/thumbnail.png`}
-                onLoadedMetadata={(dur) => {
-                  setDuration(dur)
-                }}
-                onTimeUpdate={(time) => {
-                  setCurrentTime(time)
-                  saveProgress(time)
-                }}
-                onEnded={() => {
-                  setCompleted(true)
-                  saveProgress(currentTime, true)
-                }}
               />
             </div>
 
@@ -247,9 +246,6 @@ export default function WebinarPage({ params }: { params: { id: string } }) {
                       </span>
                       <span className="ml-3 text-gray-900">{chapter.title}</span>
                     </div>
-                    {currentTime >= chapter.time && currentTime < (webinar.chapters[index + 1]?.time || Infinity) && (
-                      <span className="text-brand-blue text-sm font-medium">Playing</span>
-                    )}
                   </button>
                 ))}
               </div>
@@ -263,68 +259,25 @@ export default function WebinarPage({ params }: { params: { id: string } }) {
               <h2 className="text-lg font-semibold text-brand-navy mb-4">Resources</h2>
               <div className="space-y-3">
                 {webinar.resources.map((resource, index) => (
-                  <a
+                  <div
                     key={index}
-                    href={resource.url}
-                    className="flex items-center justify-between p-3 rounded-lg border border-gray-200 hover:border-brand-blue hover:bg-blue-50 transition group"
+                    className="flex items-center justify-between p-3 rounded-lg border border-gray-200 bg-gray-50"
                   >
                     <div className="flex items-center">
-                      <Download className="h-5 w-5 text-gray-400 group-hover:text-brand-blue mr-3" />
-                      <span className="text-gray-900 group-hover:text-brand-blue font-medium">
+                      <Download className="h-5 w-5 text-gray-400 mr-3" />
+                      <span className="text-gray-700 font-medium">
                         {resource.name}
                       </span>
                     </div>
-                    <span className="text-xs text-gray-500">PDF</span>
-                  </a>
+                    <span className="text-xs text-blue-600 font-medium">Coming Soon</span>
+                  </div>
                 ))}
-              </div>
-            </div>
-
-            {/* Ask a Question */}
-            <div className="bg-gradient-to-br from-brand-blue to-brand-navy rounded-xl shadow-sm p-6 text-white">
-              <div className="flex items-center mb-3">
-                <MessageSquare className="h-6 w-6 mr-2" />
-                <h2 className="text-lg font-semibold">AI Q&A</h2>
-              </div>
-              <p className="text-blue-100 text-sm mb-4">
-                Ask questions about this webinar content and get instant AI-powered answers.
-              </p>
-              <button className="w-full bg-white text-brand-blue px-4 py-2 rounded-lg font-medium hover:bg-gray-100 transition">
-                Coming Soon
-              </button>
-            </div>
-
-            {/* Progress Card */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-              <h2 className="text-lg font-semibold text-brand-navy mb-4">Your Progress</h2>
-              <div className="space-y-3">
-                <div>
-                  <div className="flex justify-between text-sm mb-1">
-                    <span className="text-gray-600">Watch Progress</span>
-                    <span className="font-medium text-gray-900">
-                      {duration > 0 ? Math.round((currentTime / duration) * 100) : 0}%
-                    </span>
-                  </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
-                    <div 
-                      className="bg-brand-blue h-2 rounded-full transition-all duration-300"
-                      style={{ width: `${duration > 0 ? Math.round((currentTime / duration) * 100) : 0}%` }}
-                    />
-                  </div>
-                </div>
-                {completed && (
-                  <div className="pt-3 border-t border-gray-200">
-                    <button className="w-full bg-brand-blue text-white px-4 py-2 rounded-lg font-medium hover:bg-brand-navy transition">
-                      Download Certificate
-                    </button>
-                  </div>
-                )}
               </div>
             </div>
           </div>
         </div>
       </div>
+      </AccessCheck>
     </>
-    </AccessCheck>
   )
 }

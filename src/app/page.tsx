@@ -14,7 +14,7 @@ const webinars = [
     duration: '45 min',
     muxPlaybackId: 'ue02eduy5uif9Do00iXI6jG02u02O600tu00FauvIOLX2Ayg8',
     thumbnail: 'https://image.mux.com/ue02eduy5uif9Do00iXI6jG02u02O600tu00FauvIOLX2Ayg8/thumbnail.png?width=800&height=450&time=10',
-    level: 'Beginner',
+    level: 'Strategic',
   },
   {
     id: 'intro-ai-agents',
@@ -23,7 +23,7 @@ const webinars = [
     duration: '38 min',
     muxPlaybackId: '3TPl1Jgmg01b9BdEXU4WVtJbz4DSetOA7TsyHGvjxJQs',
     thumbnail: 'https://image.mux.com/3TPl1Jgmg01b9BdEXU4WVtJbz4DSetOA7TsyHGvjxJQs/thumbnail.png?width=800&height=450&time=10',
-    level: 'Intermediate',
+    level: 'Tactical',
   },
   {
     id: 'ai-tool-playground',
@@ -32,7 +32,7 @@ const webinars = [
     duration: '44 min',
     muxPlaybackId: 'H6B01F00lAc4PGT8Ick32jTwVa7LVA8Y5yqTq8xyD6DzA',
     thumbnail: 'https://image.mux.com/H6B01F00lAc4PGT8Ick32jTwVa7LVA8Y5yqTq8xyD6DzA/thumbnail.png?width=800&height=450&time=10',
-    level: 'Intermediate',
+    level: 'Tactical',
   },
   {
     id: 'ai-dmo-leadership',
@@ -41,7 +41,7 @@ const webinars = [
     duration: '41 min',
     muxPlaybackId: 'NQACe9aTXRuntXd4r7eHWsXVDFVhaUUwyotE8RF5SQE',
     thumbnail: 'https://image.mux.com/NQACe9aTXRuntXd4r7eHWsXVDFVhaUUwyotE8RF5SQE/thumbnail.png?width=800&height=450&time=10',
-    level: 'Advanced',
+    level: 'Strategic',
   },
 ]
 
@@ -169,8 +169,7 @@ export default function HomePage() {
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-2">
                     <span className={`text-sm font-medium px-3 py-1 rounded-full ${
-                      webinar.level === 'Beginner' ? 'bg-green-100 text-green-700' :
-                      webinar.level === 'Intermediate' ? 'bg-blue-100 text-blue-700' :
+                      webinar.level === 'Tactical' ? 'bg-blue-100 text-blue-700' :
                       'bg-purple-100 text-purple-700'
                     }`}>
                       {webinar.level}
