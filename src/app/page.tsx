@@ -43,6 +43,15 @@ const webinars = [
     thumbnail: 'https://image.mux.com/NQACe9aTXRuntXd4r7eHWsXVDFVhaUUwyotE8RF5SQE/thumbnail.png?width=800&height=450&time=10',
     level: 'Strategic',
   },
+  {
+    id: 'custom-gpts',
+    title: 'Custom GPTs: Your New AI Colleague!',
+    description: 'Discover how to create and deploy custom GPT assistants that revolutionize your tourism marketing workflows.',
+    duration: '34 min',
+    muxPlaybackId: 'aYcGzhmJnP8jdz2o92EPP00JgmRWd2jLNcChaUgytgG8',
+    thumbnail: 'https://image.mux.com/aYcGzhmJnP8jdz2o92EPP00JgmRWd2jLNcChaUgytgG8/thumbnail.png?width=800&height=450&time=10',
+    level: 'Tactical',
+  },
 ]
 
 const stats = [
