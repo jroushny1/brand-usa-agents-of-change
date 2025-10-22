@@ -90,15 +90,7 @@ export default function HomePage() {
               </span>
             </div>
             <nav className="flex items-center space-x-4">
-              <button
-                onClick={() => {
-                  document.cookie = 'partner_access=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;'
-                  window.location.href = '/enter'
-                }}
-                className="text-sm text-gray-500 hover:text-gray-700"
-              >
-                Exit Beta
-              </button>
+              {/* Password protection removed - Exit Beta button hidden */}
             </nav>
           </div>
         </div>

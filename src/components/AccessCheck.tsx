@@ -4,6 +4,11 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
 export default function AccessCheck({ children }: { children: React.ReactNode }) {
+  // Password protection disabled - render content immediately
+  return <>{children}</>
+
+  // Uncomment below to re-enable password protection:
+  /*
   const [isAuthorized, setIsAuthorized] = useState<boolean | null>(null)
   const router = useRouter()
 
@@ -33,4 +38,5 @@ export default function AccessCheck({ children }: { children: React.ReactNode })
 
   // Authorized - show the content
   return <>{children}</>
+  */
 }
