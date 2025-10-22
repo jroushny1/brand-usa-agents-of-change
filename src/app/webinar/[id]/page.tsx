@@ -179,9 +179,13 @@ const webinarData = {
     instructor: 'Janette Roush',
     instructorTitle: 'Chief AI Officer, Brand USA',
     chapters: [
-      { time: 0, title: 'Introduction' },
-      { time: 60, title: 'AI for Convention Sales Overview' },
-      { time: 120, title: 'Key Strategies for Delegate Acquisition' },
+      { time: 0, title: 'Introduction & The Role of AI in Business Events' },
+      { time: 72, title: 'Understanding Custom GPTs: Introduction, Example & Benefits' },
+      { time: 218, title: 'Building Custom GPTs: A Step-by-Step Guide' },
+      { time: 598, title: 'Practical AI Applications: Meeting Follow-up, Competitive Analysis & Lead Research' },
+      { time: 1477, title: 'Introduction to Vibe Coding: Concept, Future & Prompting' },
+      { time: 1695, title: 'Vibe Coding in Action: Demos (Visit Orlando MapCon & Replit)' },
+      { time: 2478, title: 'AI Integration, Workflow & Conclusion' },
     ],
     resources: [
       { name: 'Convention Sales AI Guide', url: '/resources/convention-sales-guide.pdf' },
