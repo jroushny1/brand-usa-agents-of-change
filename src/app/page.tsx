@@ -57,8 +57,8 @@ const webinars = [
     title: 'AI for Convention Sales',
     description: 'Harness AI to transform convention sales strategies and increase delegate acquisition for your destination.',
     duration: '42 min',
-    muxPlaybackId: 'PIImn3WMwfRnyGMAX01uxijSystQvX1t02ZzwzJ3ddzX4',
-    thumbnail: 'https://image.mux.com/PIImn3WMwfRnyGMAX01uxijSystQvX1t02ZzwzJ3ddzX4/thumbnail.png?width=800&height=450&time=10',
+    muxPlaybackId: '5xZnY5oJP5nlS5wQsEGv00U00gsf201r00aF00Y902ug26K9o',
+    thumbnail: 'https://image.mux.com/5xZnY5oJP5nlS5wQsEGv00U00gsf201r00aF00Y902ug26K9o/thumbnail.png?width=800&height=450&time=10',
     level: 'Tactical',
   },
 ]

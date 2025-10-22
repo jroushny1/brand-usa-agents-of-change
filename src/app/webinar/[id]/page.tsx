@@ -175,7 +175,7 @@ const webinarData = {
     title: 'AI for Convention Sales',
     description: 'Harness AI to transform convention sales strategies and increase delegate acquisition for your destination.',
     duration: '42 min',
-    muxPlaybackId: 'PIImn3WMwfRnyGMAX01uxijSystQvX1t02ZzwzJ3ddzX4',
+    muxPlaybackId: '5xZnY5oJP5nlS5wQsEGv00U00gsf201r00aF00Y902ug26K9o',
     instructor: 'Janette Roush',
     instructorTitle: 'Chief AI Officer, Brand USA',
     chapters: [
