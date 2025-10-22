@@ -64,8 +64,8 @@ const webinars = [
 ]
 
 const stats = [
-  { label: 'Hours of Content', value: '3+', icon: Clock },
-  { label: 'Expert-Led Sessions', value: '4', icon: Users },
+  { label: 'Hours of Content', value: '4+', icon: Clock },
+  { label: 'Expert-Led Sessions', value: '6', icon: Users },
   { label: 'Certificate', value: 'Coming Soon', icon: TrendingUp },
 ]
 
