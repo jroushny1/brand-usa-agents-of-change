@@ -173,7 +173,7 @@ const webinarData = {
   'ai-convention-sales': {
     id: 'ai-convention-sales',
     title: 'AI for Convention Sales',
-    description: 'Harness AI to transform convention sales strategies and increase delegate acquisition for your destination.',
+    description: 'Master Custom GPTs for meeting follow-up and lead research, then discover vibe coding to build AI-powered tools for business events.',
     duration: '42 min',
     muxPlaybackId: '5xZnY5oJP5nlS5wQsEGv00U00gsf201r00aF00Y902ug26K9o',
     instructor: 'Janette Roush',
