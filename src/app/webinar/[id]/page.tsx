@@ -170,6 +170,24 @@ const webinarData = {
       { name: 'Implementation Worksheet', url: '/resources/gpt-implementation-worksheet.pdf' },
     ],
   },
+  'ai-convention-sales': {
+    id: 'ai-convention-sales',
+    title: 'AI for Convention Sales',
+    description: 'Harness AI to transform convention sales strategies and increase delegate acquisition for your destination.',
+    duration: '42 min',
+    muxPlaybackId: 'PIImn3WMwfRnyGMAX01uxijSystQvX1t02ZzwzJ3ddzX4',
+    instructor: 'Janette Roush',
+    instructorTitle: 'Chief AI Officer, Brand USA',
+    chapters: [
+      { time: 0, title: 'Introduction' },
+      { time: 60, title: 'AI for Convention Sales Overview' },
+      { time: 120, title: 'Key Strategies for Delegate Acquisition' },
+    ],
+    resources: [
+      { name: 'Convention Sales AI Guide', url: '/resources/convention-sales-guide.pdf' },
+      { name: 'Implementation Templates', url: '/resources/convention-sales-templates.pdf' },
+    ],
+  },
 }
 
 export default function WebinarPage({ params }: { params: { id: string } }) {
