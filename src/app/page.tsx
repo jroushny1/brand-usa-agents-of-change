@@ -61,11 +61,20 @@ const webinars = [
     thumbnail: 'https://image.mux.com/5xZnY5oJP5nlS5wQsEGv00U00gsf201r00aF00Y902ug26K9o/thumbnail.png?width=800&height=450&time=10',
     level: 'Tactical',
   },
+  {
+    id: 'crit-framework',
+    title: 'AI Prompting Using the CRIT Framework',
+    description: 'This video introduces the CRIT (Context, Role, Interview, Task) framework for creating effective AI prompts, emphasizing that providing detailed, spoken context leads to much better results than simple typed commands. It then provides two in-depth demonstrations: first, using the CRIT method to plan a detailed one-hour workshop, and second, brainstorming a low-budget marketing activation by uploading a PDF for the AI to use as a source of truth.',
+    duration: '12 min',
+    muxPlaybackId: 'OC72C8icortMHMBjS87615i9PRYu3C2dGt7XA22JlWU',
+    thumbnail: 'https://image.mux.com/OC72C8icortMHMBjS87615i9PRYu3C2dGt7XA22JlWU/thumbnail.png?width=800&height=450&time=10',
+    level: 'Tactical',
+  },
 ]
 
 const stats = [
   { label: 'Hours of Content', value: '4+', icon: Clock },
-  { label: 'Expert-Led Sessions', value: '6', icon: Users },
+  { label: 'Expert-Led Sessions', value: '7', icon: Users },
   { label: 'Certificate', value: 'Coming Soon', icon: TrendingUp },
 ]
 

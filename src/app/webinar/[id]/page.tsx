@@ -192,6 +192,26 @@ const webinarData = {
       { name: 'Implementation Templates', url: '/resources/convention-sales-templates.pdf' },
     ],
   },
+  'crit-framework': {
+    id: 'crit-framework',
+    title: 'AI Prompting Using the CRIT Framework',
+    description: 'This video introduces the CRIT (Context, Role, Interview, Task) framework for creating effective AI prompts, emphasizing that providing detailed, spoken context leads to much better results than simple typed commands. It then provides two in-depth demonstrations: first, using the CRIT method to plan a detailed one-hour workshop, and second, brainstorming a low-budget marketing activation by uploading a PDF for the AI to use as a source of truth.',
+    duration: '12 min',
+    muxPlaybackId: 'OC72C8icortMHMBjS87615i9PRYu3C2dGt7XA22JlWU',
+    instructor: 'Janette Roush',
+    instructorTitle: 'Chief AI Officer, Brand USA',
+    chapters: [
+      { time: 0, title: 'The CRIT Framework for AI Prompting' },
+      { time: 60, title: 'Example 1: Prompting for a Workshop Plan' },
+      { time: 330, title: 'How the AI Interviews You for Better Results' },
+      { time: 490, title: 'Example 2: Brainstorming a Marketing Plan with a PDF' },
+      { time: 707, title: 'Conclusion: Why Context is Key for AI' },
+    ],
+    resources: [
+      { name: 'CRIT Framework Guide', url: '/resources/crit-framework-guide.pdf' },
+      { name: 'Prompt Templates', url: '/resources/crit-prompt-templates.pdf' },
+    ],
+  },
 }
 
 export default function WebinarPage({ params }: { params: { id: string } }) {
