@@ -221,9 +221,7 @@ const webinarData = {
     instructor: 'Janette Roush',
     instructorTitle: 'Chief AI Officer, Brand USA',
     isShortForm: true, // Flag for vertical player layout
-    chapters: [
-      { time: 0, title: 'Building a Business Trip Packing Assistant with Claude' },
-    ],
+    chapters: [], // No chapters for short-form content
     resources: [
       { name: 'Claude Artifacts Guide', url: '/resources/claude-artifacts-guide.pdf' },
       { name: 'Prompt Examples', url: '/resources/claude-prompt-examples.pdf' },
