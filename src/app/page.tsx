@@ -72,9 +72,22 @@ const webinars = [
   },
 ]
 
+// Short-form video content - demos, quick tutorials, and bite-sized learning
+const shortFormVideos = [
+  {
+    id: 'clueless-packing-app',
+    title: 'Building a "Clueless"-Inspired AI Packing App Using Claude Artifacts',
+    description: 'Using Anthropic\'s Claude, the team used the "artifacts" feature—described as a reusable prompt similar to a custom GPT—to build a "Business Trip Packing Assistant." The app\'s design was inspired by the iconic virtual closet from the movie Clueless. Learn how the tool was developed entirely with natural language prompts (like "make it more sparkly"), resulting in a "sparkly, interactive app" that any employee can now use to plan their clothing for business trips.',
+    duration: '5 min',
+    muxPlaybackId: 'O7pzzrithO55xsLb6p02GCgtmGyXTO1C7rSztJDl0002Bo',
+    thumbnail: 'https://image.mux.com/O7pzzrithO55xsLb6p02GCgtmGyXTO1C7rSztJDl0002Bo/thumbnail.png?width=800&height=450&time=10',
+    category: 'Demo',
+  },
+]
+
 const stats = [
-  { label: 'Hours of Content', value: '4+', icon: Clock },
-  { label: 'Expert-Led Sessions', value: '7', icon: Users },
+  { label: 'Hours of Content', value: '5+', icon: Clock },
+  { label: 'Total Videos', value: '8', icon: Users },
   { label: 'Certificate', value: 'Coming Soon', icon: TrendingUp },
 ]
 
@@ -203,6 +216,60 @@ export default function HomePage() {
                   </h3>
                   <p className="text-gray-600 line-clamp-2">
                     {webinar.description}
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Short-Form Videos Section */}
+      <section className="py-16 lg:py-24 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
+              Quick Demos & Tutorials
+            </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Bite-sized videos showcasing practical AI applications and hands-on demonstrations.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {shortFormVideos.map((video, index) => (
+              <Link
+                key={video.id}
+                href={`/webinar/${video.id}`}
+                className="group relative rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 bg-white"
+              >
+                <div className="aspect-video relative overflow-hidden bg-gray-100">
+                  <Image
+                    src={video.thumbnail}
+                    alt={video.title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                  <div className="absolute top-3 right-3">
+                    <span className="bg-brand-sky text-white text-xs font-semibold px-2 py-1 rounded">
+                      {video.category}
+                    </span>
+                  </div>
+                  <div className="absolute bottom-3 left-3 right-3">
+                    <div className="flex items-center text-white">
+                      <Play className="h-8 w-8 mr-2 drop-shadow-lg" fill="white" />
+                      <span className="font-semibold drop-shadow-lg">{video.duration}</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="p-5">
+                  <h3 className="text-lg font-bold text-brand-navy mb-2 group-hover:text-brand-blue transition-colors line-clamp-2">
+                    {video.title}
+                  </h3>
+                  <p className="text-gray-600 text-sm line-clamp-3">
+                    {video.description}
                   </p>
                 </div>
               </Link>

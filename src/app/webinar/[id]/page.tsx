@@ -212,6 +212,22 @@ const webinarData = {
       { name: 'Prompt Templates', url: '/resources/crit-prompt-templates.pdf' },
     ],
   },
+  'clueless-packing-app': {
+    id: 'clueless-packing-app',
+    title: 'Building a "Clueless"-Inspired AI Packing App Using Claude Artifacts',
+    description: 'Using Anthropic\'s Claude, the team used the "artifacts" feature—described as a reusable prompt similar to a custom GPT—to build a "Business Trip Packing Assistant." The app\'s design was inspired by the iconic virtual closet from the movie Clueless. Learn how the tool was developed entirely with natural language prompts (like "make it more sparkly"), resulting in a "sparkly, interactive app" that any employee can now use to plan their clothing for business trips.',
+    duration: '5 min',
+    muxPlaybackId: 'O7pzzrithO55xsLb6p02GCgtmGyXTO1C7rSztJDl0002Bo',
+    instructor: 'Janette Roush',
+    instructorTitle: 'Chief AI Officer, Brand USA',
+    chapters: [
+      { time: 0, title: 'Building a Business Trip Packing Assistant with Claude' },
+    ],
+    resources: [
+      { name: 'Claude Artifacts Guide', url: '/resources/claude-artifacts-guide.pdf' },
+      { name: 'Prompt Examples', url: '/resources/claude-prompt-examples.pdf' },
+    ],
+  },
 }
 
 export default function WebinarPage({ params }: { params: { id: string } }) {
