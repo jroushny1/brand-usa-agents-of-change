@@ -78,7 +78,7 @@ const shortFormVideos = [
     id: 'clueless-packing-app',
     title: 'Building a "Clueless"-Inspired AI Packing App Using Claude Artifacts',
     description: 'Using Anthropic\'s Claude, the team used the "artifacts" feature—described as a reusable prompt similar to a custom GPT—to build a "Business Trip Packing Assistant." The app\'s design was inspired by the iconic virtual closet from the movie Clueless. Learn how the tool was developed entirely with natural language prompts (like "make it more sparkly"), resulting in a "sparkly, interactive app" that any employee can now use to plan their clothing for business trips.',
-    duration: '5 min',
+    duration: '1 min',
     muxPlaybackId: 'O7pzzrithO55xsLb6p02GCgtmGyXTO1C7rSztJDl0002Bo',
     thumbnail: 'https://image.mux.com/O7pzzrithO55xsLb6p02GCgtmGyXTO1C7rSztJDl0002Bo/thumbnail.png?width=800&height=450&time=10',
     category: 'Demo',

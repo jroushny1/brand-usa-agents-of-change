@@ -216,10 +216,11 @@ const webinarData = {
     id: 'clueless-packing-app',
     title: 'Building a "Clueless"-Inspired AI Packing App Using Claude Artifacts',
     description: 'Using Anthropic\'s Claude, the team used the "artifacts" feature—described as a reusable prompt similar to a custom GPT—to build a "Business Trip Packing Assistant." The app\'s design was inspired by the iconic virtual closet from the movie Clueless. Learn how the tool was developed entirely with natural language prompts (like "make it more sparkly"), resulting in a "sparkly, interactive app" that any employee can now use to plan their clothing for business trips.',
-    duration: '5 min',
+    duration: '1 min',
     muxPlaybackId: 'O7pzzrithO55xsLb6p02GCgtmGyXTO1C7rSztJDl0002Bo',
     instructor: 'Janette Roush',
     instructorTitle: 'Chief AI Officer, Brand USA',
+    isShortForm: true, // Flag for vertical player layout
     chapters: [
       { time: 0, title: 'Building a Business Trip Packing Assistant with Claude' },
     ],
@@ -274,16 +275,81 @@ export default function WebinarPage({ params }: { params: { id: string } }) {
       </header>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Main Content */}
-          <div className="lg:col-span-2 space-y-6">
-            {/* Video Player */}
-            <div className="rounded-xl overflow-hidden shadow-lg bg-black aspect-video">
-              <HLSPlayer
-                playbackId={webinar.muxPlaybackId}
-                poster={`https://image.mux.com/${webinar.muxPlaybackId}/thumbnail.png`}
-              />
+        {webinar.isShortForm ? (
+          // TikTok-style vertical layout for short-form videos
+          <div className="max-w-2xl mx-auto">
+            <div className="flex flex-col items-center space-y-6">
+              {/* Vertical Video Player */}
+              <div className="w-full max-w-md rounded-xl overflow-hidden shadow-2xl bg-black" style={{ aspectRatio: '9/16' }}>
+                <HLSPlayer
+                  playbackId={webinar.muxPlaybackId}
+                  poster={`https://image.mux.com/${webinar.muxPlaybackId}/thumbnail.png`}
+                />
+              </div>
+
+              {/* Video Info Below Player */}
+              <div className="w-full max-w-md bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <h1 className="text-2xl font-bold text-brand-navy mb-2">
+                  {webinar.title}
+                </h1>
+                <p className="text-gray-600 mb-4">{webinar.description}</p>
+
+                <div className="flex items-center space-x-4 text-sm text-gray-500 mb-6">
+                  <div className="flex items-center">
+                    <Clock className="h-4 w-4 mr-1" />
+                    {webinar.duration}
+                  </div>
+                </div>
+
+                <div className="pt-6 border-t border-gray-200">
+                  <div className="flex items-center">
+                    <div className="h-12 w-12 rounded-full bg-brand-blue text-white flex items-center justify-center font-bold text-lg">
+                      {webinar.instructor.split(' ').map(n => n[0]).join('')}
+                    </div>
+                    <div className="ml-3">
+                      <div className="font-medium text-gray-900">{webinar.instructor}</div>
+                      <div className="text-sm text-gray-500">{webinar.instructorTitle}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Resources */}
+              {webinar.resources && webinar.resources.length > 0 && (
+                <div className="w-full max-w-md bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                  <h2 className="text-lg font-semibold text-brand-navy mb-4">Resources</h2>
+                  <div className="space-y-3">
+                    {webinar.resources.map((resource, index) => (
+                      <div
+                        key={index}
+                        className="flex items-center justify-between p-3 rounded-lg border border-gray-200 bg-gray-50"
+                      >
+                        <div className="flex items-center">
+                          <Download className="h-5 w-5 text-gray-400 mr-3" />
+                          <span className="text-gray-700 font-medium">
+                            {resource.name}
+                          </span>
+                        </div>
+                        <span className="text-xs text-blue-600 font-medium">Coming Soon</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
+          </div>
+        ) : (
+          // Standard horizontal layout for webinars
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Main Content */}
+            <div className="lg:col-span-2 space-y-6">
+              {/* Video Player */}
+              <div className="rounded-xl overflow-hidden shadow-lg bg-black aspect-video">
+                <HLSPlayer
+                  playbackId={webinar.muxPlaybackId}
+                  poster={`https://image.mux.com/${webinar.muxPlaybackId}/thumbnail.png`}
+                />
+              </div>
 
             {/* Video Info */}
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
@@ -368,6 +434,7 @@ export default function WebinarPage({ params }: { params: { id: string } }) {
             </div>
           </div>
         </div>
+        )}
       </div>
       </AccessCheck>
     </>
