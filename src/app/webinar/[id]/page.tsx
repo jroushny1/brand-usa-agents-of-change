@@ -273,7 +273,7 @@ export default function WebinarPage({ params }: { params: { id: string } }) {
       </header>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {webinar.isShortForm ? (
+        {(webinar as any).isShortForm ? (
           // TikTok-style vertical layout for short-form videos
           <div className="max-w-2xl mx-auto">
             <div className="flex flex-col items-center space-y-6">
