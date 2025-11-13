@@ -70,6 +70,15 @@ const webinars = [
     thumbnail: 'https://image.mux.com/OC72C8icortMHMBjS87615i9PRYu3C2dGt7XA22JlWU/thumbnail.png?width=800&height=450&time=10',
     level: 'Tactical',
   },
+  {
+    id: 'model-context-protocol',
+    title: 'Model Context Protocol',
+    description: 'This presentation introduces the Model Context Protocol (MCP) as a technical breakthrough designed to solve AI\'s trustworthiness problem in travel planning by acting as a "source of truth." Janette explains how this technology allows personal AIs to reliably connect with real-time data, demonstrates practical applications for tourism, and outlines the strategic shift for destination marketing organizations.',
+    duration: '27 min',
+    muxPlaybackId: 'V1DanWAF02sOwwIFov4BXNaTzwT3Kn41TnUWdcyNZfZk',
+    thumbnail: 'https://image.mux.com/V1DanWAF02sOwwIFov4BXNaTzwT3Kn41TnUWdcyNZfZk/thumbnail.png?width=800&height=450&time=10',
+    level: 'Strategic',
+  },
 ]
 
 // Short-form video content - demos, quick tutorials, and bite-sized learning
@@ -87,7 +96,7 @@ const shortFormVideos = [
 
 const stats = [
   { label: 'Hours of Content', value: '5+', icon: Clock },
-  { label: 'Total Videos', value: '8', icon: Users },
+  { label: 'Total Videos', value: '9', icon: Users },
   { label: 'Certificate', value: 'Coming Soon', icon: TrendingUp },
 ]
 

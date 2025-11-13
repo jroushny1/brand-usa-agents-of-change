@@ -227,6 +227,27 @@ const webinarData = {
       { name: 'Prompt Examples', url: '/resources/claude-prompt-examples.pdf' },
     ],
   },
+  'model-context-protocol': {
+    id: 'model-context-protocol',
+    title: 'Model Context Protocol',
+    description: 'This presentation introduces the Model Context Protocol (MCP) as a technical breakthrough designed to solve AI\'s trustworthiness problem in travel planning by acting as a "source of truth." Janette explains how this technology allows personal AIs to reliably connect with real-time data, demonstrates practical applications for tourism, and outlines the strategic shift for destination marketing organizations.',
+    duration: '27 min',
+    muxPlaybackId: 'V1DanWAF02sOwwIFov4BXNaTzwT3Kn41TnUWdcyNZfZk',
+    instructor: 'Janette Roush',
+    instructorTitle: 'Chief AI Officer, Brand USA',
+    chapters: [
+      { time: 1, title: 'The Context Shift & The MCP Solution' },
+      { time: 235, title: 'How MCPs Work: APIs vs. Apps in ChatGPT' },
+      { time: 588, title: 'Practical Applications for Tourism' },
+      { time: 905, title: 'Strategic Implications for DMOs' },
+      { time: 1154, title: 'Next Steps & Technical Demo' },
+    ],
+    resources: [
+      { name: 'MCP Implementation Guide', url: '/resources/mcp-implementation-guide.pdf' },
+      { name: 'Technical Documentation', url: '/resources/mcp-technical-docs.pdf' },
+      { name: 'Strategic Planning Worksheet', url: '/resources/mcp-strategic-planning.pdf' },
+    ],
+  },
 }
 
 export default function WebinarPage({ params }: { params: { id: string } }) {
