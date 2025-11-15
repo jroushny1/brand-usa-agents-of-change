@@ -92,11 +92,20 @@ const shortFormVideos = [
     thumbnail: 'https://image.mux.com/O7pzzrithO55xsLb6p02GCgtmGyXTO1C7rSztJDl0002Bo/thumbnail.png?width=800&height=450&time=10',
     category: 'Demo',
   },
+  {
+    id: 'ai-presentations',
+    title: 'How AI Can Help with Presentations',
+    description: 'Janette walks you through her complete AI-powered workflow for creating compelling presentations from the ground up. She shares her entire process, from organizing research in ChatGPT and brainstorming narrative frameworks to generating custom images and even getting AI-powered rehearsal feedback from Gemini.',
+    duration: '9 min',
+    muxPlaybackId: 'qZkSL00Sd00Qe01OLuiv6TdEiIVYKXZKKk1UPR5RckP2fM',
+    thumbnail: 'https://image.mux.com/qZkSL00Sd00Qe01OLuiv6TdEiIVYKXZKKk1UPR5RckP2fM/thumbnail.png?width=800&height=450&time=10',
+    category: 'Tutorial',
+  },
 ]
 
 const stats = [
-  { label: 'Hours of Content', value: '5+', icon: Clock },
-  { label: 'Total Videos', value: '9', icon: Users },
+  { label: 'Hours of Content', value: '6+', icon: Clock },
+  { label: 'Total Videos', value: '10', icon: Users },
   { label: 'Certificate', value: 'Coming Soon', icon: TrendingUp },
 ]
 
@@ -240,16 +249,23 @@ export default function HomePage() {
             <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
               Quick Demos & Tutorials
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-4">
               Bite-sized videos showcasing practical AI applications and hands-on demonstrations.
             </p>
+            <Link
+              href="/shorts"
+              className="inline-flex items-center text-brand-blue hover:text-brand-navy font-semibold"
+            >
+              Watch in TikTok-style feed
+              <Play className="ml-2 h-5 w-5" />
+            </Link>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {shortFormVideos.map((video, index) => (
               <Link
                 key={video.id}
-                href={`/webinar/${video.id}`}
+                href="/shorts"
                 className="group relative rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 bg-white"
               >
                 <div className="aspect-video relative overflow-hidden bg-gray-100">
