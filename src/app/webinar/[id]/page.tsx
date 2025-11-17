@@ -295,6 +295,233 @@ All right. I want to thank everybody so much for your time today.`,
     muxPlaybackId: 'ue02eduy5uif9Do00iXI6jG02u02O600tu00FauvIOLX2Ayg8',
     instructor: 'Janette Roush',
     instructorTitle: 'Chief AI Officer, Brand USA',
+    transcript: `My name is Janette Roush. I am the SVP of Innovation and Chief AI Officer for brand USA. If you're not familiar with us, we are the destination marketing organization for the United States. Uh, and we focus on driving international inbound, uh, uh, visitation to the US. So first of all, I want to assuage any fears that you have that this might be dry or not useful.
+
+I'm including, uh, the image that you see of the Play-Doh version of Jeanette getting squished because I. Have seen a lot of AI presentations, and I know a lot of them are just a list of all the little tricks and tips that you can do, but you don't actually see anything useful that you can then take back to your office and actually use for work.
+
+So while I think the fun stuff is fun, and if you wanna make one of these on your own, it is free@pika.art P-I-K-A-R-T. Uh. But for the rest of the presentation, going to be more on practical use cases. So we're talking very briefly with an overview of what are large language models like chat GPT and others.
+
+We're going to walk through the. The basics of putting together a prompt. I'm then going to tell you how to cheat using ai. That's where I'm going to walk through a couple of case studies so you can actually see what this looks like in action. Uh, and then when we end, we're going to wrap up with some tips for how you can continue to incorporate AI work into, uh, the stuff you do every day.
+
+So to get get us started, what is chat GPT? It is, one version of a large language model and chat. GPT is the interface that allows you to communicate with that large language model. So the large language model itself, uh, might be called GPT-4 oh, or any number of other names. I'll go through, uh, a little bit later in the presentation, but.
+
+None of that is what you really need to focus on. If you are new to working with ai, you just need to remember that. Similar to how Alexa's Amazon device or Amazon's Alexa device is a conduit that allows you to communicate with a number of small ais in the background. That's what we're doing with chat GPT.
+
+There's other ways that you can communicate with a large language model. Like if you're a developer, you might use APIs to do that, but we are only worried about that text interface right now. And what's happening in the scene behind the scenes is that this is just a giant algorithm, right? Open ai and these other companies, they went out to the internet, they stole every single word of the human language that has ever been written.
+
+And then they used math to predict what word comes next in the sentence and some sentences are pretty easy. Like Mary had a little blank. We can guess that lamb might be that last word in the sentence, but for other sentences it's figured out an algorithm to predict possible answers for all of them.
+
+And how it knows what answer to give you is based on context clues. So if it sees the word bacon. It is looking in a multidimensional space where words are grouped together and there's one grouping in this multidimensional space that is going to be all about breakfast foods. And there's another grouping in this space that is all about movie actors.
+
+And so using context clues is how the language models know. If that word bacon, if you are talking about Kevin Bacon, or if you are talking about having bacon for breakfast. When we're working with this, because it's just predicting the likely next word in a sentence, we need to remember that this is not a database of facts.
+
+So chat, GPT is not checking in with Wikipedia before giving a response to you. It is just. Using math to determine what answer might make you happy. And so part of what we'll discuss today is how you can let chat GPT and similar tools know that what will make you happy is actually a truthful answer and not something that's been hallucinated.
+
+When we're getting ready, you know, to use these tools. I think the scariest part of them is this very unhelpful screen that, you know, what can I help with? And you're like, I don't know. So that's what we're gonna focus on first. How do you get past that fear of the blank prompt? A great use case is of course, you know, writing content or copy, but not in the, you know, and I use it for that.
+
+It's very rarely, Hey, write this entire thing for me. It's more likely to be, you know, rephrase a sentence for me. Take a really long bio, make it shorter. Don't take the short bio and ask for it to be made longer because that is an invitation for the model to hallucinate, to make up an answer that it thinks might make you happy.
+
+It's also excellent at working with data because again, it's looking to find patterns and data that is what the original algorithm does that determine what word in the sentence might make you happy. So it's really good at looking at your information and finding the patterns and your own data. So if you are working with Excel, you can ask for, you know, what information is contained in your web, your spreadsheet, and that could use, uploading the spreadsheet to chat GPT or if there's private information in that spreadsheet, you could copy just a few rows of it.
+
+Paste those rows into chat GPT and you know, remove anything you don't want to share and explain what you are trying to do, the formula you are trying to write. And it will give you suggestions on that formula for how you can, you know, it could even write it for you and then tell you what cell to put it in.
+
+So it becomes a much more useful helping tool than going. You know, through the Microsoft Excel help menu or trying to search for the answer online. So now we're at the interactive part, so please, the QR code, it just takes you to chat GPT. So if you already have that open. Go straight to chat GPT or the AI tool, you know, that you typically use.
+
+So that could be, uh, Gemini from Google, that could be Claude from Anthropic, Microsoft, uh, copilot. So go to a website where you can use chat GPT. That could be chat.com. If you're using your phone, I would like you to take a picture of the screen. Uh, and that's another just fast tip for working with AI is that you don't necessarily have to type anything.
+
+These tools are multimodal, so you can talk to them if that's easier and faster for you, and it can read words that are inside of images. So what I like about this prompt, and I hope you'll email me or uh, contact me on LinkedIn after this presentation and let me know what your response was, but I want to illustrate that where chat GPT really shines is on questions that could have infinite answers because there's no right or wrong answer to what kind of campaign could turn Minnesota's winter weather into a tourism asset.
+
+That's not a yes or no, that there's any number of responses for that. And so this is an opportunity to see that in action. Every single person on this webinar gets a different response for this prompt. Whereas if you think about questions that only have one correct answer, like what is the weather? Or you know, what was the score of the game yesterday. That is still an excellent use case for Google because that is where you were going to be able to check sources and see where that one true answer is. So now I'm going to teach you how to cheat on papers.
+
+Uh, but I like to give this example because it shows you how I think you should vote, you know, uh, approach writing using ai. So the way that we think college students cheat on their homework is just open up chat, GPT and give it the, the assignment, right? Write a six page close reading of the id. If you're a good cheater, what you actually do is say, I need to write a six page close reading of the Iliad, give me options for, for thesis statements.
+
+And so what makes that different is that the, the student in this case is breaking down the task into smaller chunks, so. The best way that you will, you know the, the best use cases you will find for using these tools is when you are able to take your own process and break it out into component steps.
+
+So here, great. We have some options for thesis statements. It suggests writing about the role of women in the Iliad, and I was like, yeah, that sounds great. So now what's the next step in that process? You write an outline. Ask chat GPT to write that outline for you, and now you have something to react to.
+
+You can look at it and make changes. You are, there's no law that says you're required to write anything that chat GPT gives you, right? It's a partner for us. It is not our boss. Uh, and it gives you, uh, the opportunity to, you know, remember we can't take these things at face value. So one of the. Sentences it gave me in this outline was that Helen of Troy caused the Trojan War because she was too beautiful.
+
+I thought about that and I'm like, well, I don't wanna write a paper about that. Maybe it is the fault of the men for fighting over the pretty girl, and maybe they're the ones who caused the war. So go back, push back on the language model and say, I don't think I agree with that. And then, because it's very, you know, sick of fantic, it wants to make you happy.
+
+So, oh my goodness, you're so right. You know? How smart of you. Thank you. Here's the new, you know. Uh, take for that paragraph. And if you were to go and then write a paper using, you know, these tips from chat GPT, like, it's going to be completely in your own words, right? That's gonna be the student's own work.
+
+But I wanna remind us all that when we are at work. We're not students necessarily. And so for our jobs, it is not cheating to use ai. And that is one of the kind of secret things that live in the back of our heads rent free that I want to help us overcome. Uh, in many cases, I know many of the folks on this, uh, call work for dmo.
+
+We are nonprofits. So I think we have a responsibility as stewards of public funding to make sure that we are using it in the best way possible. That we are not spending seven hours to do a task that AI could help you do in seven minutes. And for commercial companies, you know, think about this from an agency model.
+
+If you hire a lawyer, do you want to pay, you know, the law firm for seven hours of discovery work? That could have happened in seven minutes. And maybe right now that answer is yes, but I think we're seeing that answer change, and I think part of that change is us realizing that AI isn't cheating. Now, I'm gonna walk through an example of how you can create campaign strategy using ai.
+
+Again, we are going to take the approach of looking at this step by step. So you wanna start, if you were making a campaign, like what are the goals of the campaign? You know, do you have research to be able to understand your target audiences? You know, have you done a SWOT analysis? You have a. Clear, unique selling proposition.
+
+So having a clear process really helps you to get the most use out of chat GPT. So the way to get started, I think, with any process that you want to be grounded in, truth is you don't wanna trust whatever is, you know, in the underlying knowledge of this stat of, you know, underlying data of the large language model.
+
+You want to give it the information that you consider to be the truth. You want to prime that prompt. So what does that mean? What does that look like? So here in this example, I am walking through, uh, a campaign that I worked on for New York City tourism a year ago, uh, around America two 50. And how is the city going to celebrate the 400th anniversary of New York City and the 250th anniversary of the United States?
+
+So how do you wanna start? Find research? Where is research? It's still at Google. So Google, even though they are, you know, making a lot of changes that incorporate AI into their work as well, Google hasn't gone anywhere. It still exists and it still serves a different function than doing that same search in a tool like chat, GPT.
+
+So go Google for these sources of research. Uh, another great tool you might not be familiar with is a search engine called Perplexity. I think it's perplexity.ai, and perplexity is a search engine that was built entirely around ai. So now most of the language models offer some version of this. You can do search, you know, natively inside of chat, GPT inside of Claude, obviously inside of Google's Gemini.
+
+Perplexity just has a different way that they have wrapped everything together. I think it's really interesting the work that they do. So give that a try. When you are looking for sources of research. Here, you can see that I have found five different sources from perplexity, so that gives me an opportunity to download the answers because just like we're seeing in AI overviews on Google search, when you get an answer now, when you put in a search query in the prompt window, you're going to get back an answer to your question, and then you will get some footnotes with those sources.
+
+And then I think a really interesting tool is called Google's Notebook, lm. Uh, so this is baked into the Google Gemini plan. Now, I think they might still have a free version, but it's very cool because it allows you to create what they call notebooks. And you can see here I have a variety of notebooks on different topics.
+
+And when you have a notebook. Here, this is the opportunity you have. You upload all of your files, and in this instance I was uploading files about, with research about, uh. Who travels for heritage, who travels for culture, like what would these target audiences for heritage tourism look like for New York City?
+
+And you are able to ask questions about your sources. And then here it's giving me an answer about, you know, how the travel motivations for a heritage traveler and a cultural traveler are different and it's giving me citations. And when I click on one of these citations. On the left, it opens up the the source that I was looking at, and it will highlight the part of the source that it used to answer the question.
+
+So for anything that you are doing that needs to be very grounded in truth. This is going to be helpful. It was actually created by a division in Google that was looking at products that would support students and researchers. So it wasn't meant initially to be a commercial product. Uh, but now you may have heard of it, uh, in last October because they came out with a podcast.
+
+Version of Notebook lm. So not only can you ask questions of all of your sources, but you can press a button and it will generate a 10 to 15 minute, uh, podcast that sounds very natural talking about your material. And you can now make edits to that podcast. You can interrupt the podcasters and ask them questions and they will have a conversation with you and Notebook.
+
+LM will make a mind map. Out of topics that are contain, contained in all of the source material you upload. So really cool tool. And so let's say we have all of this information loaded into Notebook, lm, or you can even upload it to chat GPT or the tool of your choice. It's given you a primed prompt. And so now all of the other elements that I outlined you can use this prompt to help you with.
+
+So looking at the competitive landscape. When New York City is thinking about, you know, America two 50, we knew that we were in a slightly different competitive place in the market than Washington DC or Philadelphia or Boston. And that's because New York City tore down a lot of our old stuff. But we knew that we're still, you know, a very important player in what happened 250 years ago.
+
+And so use chat GPT to spell out what does that competitive landscape look like? Have it help you outline and define your target audiences. Then move on to the steps of writing the brief for your creative team or for your ad agency. So look at what problem does the creative team need to solve? What is the objective of this campaign?
+
+And then I used all of this information to put together like a really good creative brief for the New York City tourism, their in-house creative team. And then this is the really important part. There's no rule that says that. AI has to do everything for us, and AI has to do the part of our job that's the most important or that we value the most or enjoy doing the most.
+
+So here humans came together and did a lot of work to write the positioning statement for Founded by NYC, which is the campaign that ultimately came out of this work. And. The humans typically, like I'm embarrassed to say, I don't think I put that much work or energy into putting together a great creative brief in the past.
+
+So again, yes, maybe this sped up work and maybe it. Didn't, but I wasn't looking at it as an exercise to make things as fast as possible. For me, this was an opportunity to do more thorough, more thoughtful work than I had done in the past. And so remember, AI is a great partner for that type of work as well.
+
+Now I'm going to take a little bit of time to talk about watch outs and governance. What do we need to be concerned with when we are using, uh, AI tools at work? So first we need to think about how do we keep our information secure, safe, and with integrity? And these are topics that I'm going to address a lot on future webinars.
+
+So. As you may have read in one of the emails about this, uh, the Agents of Change webinar is gonna be a series I'm looking at doing it approximately every other week, and we're going to flip between practical use cases for d os and, you know, so getting tactical and looking more at the strategic layer.
+
+Uh, so in future strategic, uh, webinars, I'm going to focus on a lot more on things like. AI safety and what kind of systems do we need to set up so that our staff, our teams, are using AI appropriately at our organizations. Uh, but to give a really top line overview of this information. Status security. So that is making sure that the information you put into a tool like chat, GPT, that it can't be, you know, stolen by bad actors.
+
+And the easiest way to make sure that you are protecting data is to use a paid version of an AI tool. It's very likely you have heard the, you know, the, the saying that if you, if you're not paying for a product, the product is you. So. It's still true, and if you're using a free version of a tool of like chat GPT, it probably has training.
+
+The underlying model turned on. What does that mean? So anything that you put into a language model, it is traveling to the cloud. Just like you know, you're writing something in your Gmail account and in the cloud is where the language model actually takes your prompt, puts it into the language model, and generates this response that it then sends back to you.
+
+Chat, GPT, like OpenAI has, they are looking for more information to train future models. All of these companies are, and. If you are using it for free, they're saying, great, we're, we're happy to have you as a free user, but it costs us money. So we are going to monetize your participation in the system by taking everything you put in and every file that you upload.
+
+And we're going to use that to make the next version of chat, GPT even better. So that's not necessarily something we want to do with our, uh, private work documents. So when you get a paid account, you are given the option to turn off model training on your information, and that's really important when we're using these tools for work or if you're using it for personal use cases and it's something you don't necessarily want to share.
+
+So you wanna have that training turned off. You also want to have SOC two compliance on your data. So that just means when your data is traveling to the cloud and when your data is at rest in the cloud, that it is protected to make it harder for hackers to access. Uh, if you have heard of hipaa, which applies to healthcare protocols, that's, it's the same thing.
+
+HIPAA is more stringent than SOC two. But for corporate use cases, for the most part, SOC two is going to be fine. And this is the kind of thing that you wanna have a conversation about, uh, with. Your IT department, of course. Next, I wanna talk very quickly about data privacy. So here we wanna protect people.
+
+And so if you look at uh, GDPR and the EU AI Act, they consider data. You know, to be owned only by the person whose data it is. And so whenever you get somebody's personally identifiable information, their PII like email addresses, mailing addresses, that that belongs to the person and they can allow you to use it, but they also get the opportunity to revoke your use of it.
+
+So PII and language models are tricky because once something goes into the underlying training data of a language model, it can never be removed. It is part of the algorithm and it's there permanently. So we don't want to upload people's information into a language model unless they have given us explicit consent that it is okay with us that they, that.
+
+It that it is okay with them that we do that. So we are very rarely. I am sure getting the consent of anybody who is an EU resident before. Having access to their data. So the best use case here is don't put PII personally identifiable information into a language model. Even if you have a paid instance and you have the training turned off, it would still be a violation of the EU AI Act.
+
+Then the final piece of this is content integrity. And so this goes through the question of what is okay to put into a language model? And in a couple of weeks when I do, uh, the presentation on AI for leaders, I'm going to spend a little more time focusing on content integrity and things to be concerned with.
+
+But it's, again, it's another sign that we wanna make sure we are using versions of these models that have the training turned off because. You don't want every single confidential, you know, company document to become part of the underlying frontier models that power, uh, tools like chat, GPT, other things that we need to be concerned with when we're using language models.
+
+Hallucinations. So I touched on this at the beginning, that these tools are just putting words in a particular order with the hope that it will make you happy. And here, uh, this is from a couple of years ago actually, so I will say hallucinations, this kind of thing has gotten a lot better in the last two years, particularly since search has been baked into tools like chat, GPT.
+
+If I were to do this search now or ask for it to write a bio of me, now it knows that I am asking it something that is not in its underlying data and it's going to go online and search for me and use that information to write, uh, the bio of me. But before it had internet access and it was only using underlying information in the language model, I had asked it to ride a haiku on early morning Amtrak rides because.
+
+That's what I was doing at the moment, and then the next prompt, I asked for it to write a bio for Jeanette Roush. And every single word on here is made up. So I am not an accomplished academic. I don't have a PhD. I didn't study tourism management, didn't go to Cornell or work at Amtrak or any of these things.
+
+So chat, GPT just went to town having some fun. And we have to be careful to make sure that even in more subtle ways. That chat, GPT isn't making something up. So whenever you have AI write something for you, you have to be the fact checker. Uh, it's on, you know, and we may see our jobs kind of pivot in that direction, where instead of spending as much time doing the writing, we may be the ones that are spending more of our time doing the editing, doing the fact checking, making sure that this is what we want to share with the world.
+
+Bias is also a concern when you are working with language models. Uh, they were trained on all of the information stolen from everywhere across the internet. It was that all that was written by humans, humans have bias. So the output of language models, it is based on human writing, so it is going to contain bias.
+
+Just like the example earlier, uh, from cheating on papers, I'm like, that just reflects a particular. Bias that Helen of Troy caused the Trojan War because she was too beautiful, right? And typically all writing is going to have some form of bias in it. If you look at most language models, many of the ones that we use most, most commonly are created in the United States, and they're trained primarily on English language text.
+
+And so there is some kind of bias baked into. Those systems that's going to be very American centric. And so if you are writing for the point of view of another country, you wanna keep an eye out for those biases that are going to be baked into the language. And so there's no, you know, people are working on addressing this, but ultimately, you, it is our responsibility to make sure that the output that we share reflects our own point of view.
+
+And sustainability is a very big topic when it comes to ai and there's, Sam Altman was just, uh, speaking on this very recently, and none of the na, none of the ai uh, companies have been very forthright, which with talking about exactly how much energy do their tools use. So the issue is that the enormous data centers that create the underlying models that.
+
+You know, crunch through all of the information ever written on the internet. Those models need a ton of water to cool down the computers that are doing that work. And so like, just inherently, it is not a terribly sustainable thing to create and to use language models. Now, Sam Altman came out maybe a day ago and said it takes one.
+
+15th of a teaspoon, I believe, of water to power, essentially one query into chat, GPT. It's hard for me to, you know, be able to tell you right off the bat exactly what does that mean if you were comparing it to Netflix usage or an hour of playing on a PlayStation, but. My, my point of view on the sustainability issue is that it's really important for people to understand how AI works, and that means using it a lot.
+
+I think everybody should be using AI a lot more than we are using it right now, because that's what it takes to really understand how it works to get proficient with it so that you have big ideas for how to use it later on, but. We're not, you know, and the reason that we do all of this work is so that we can build bigger things with ai, right?
+
+Like the end goal of AI is not necessarily to, you know, rewrite an email for me. So if I am learning AI now and will create software that uses AI in the future. I want to understand all of the different models and how much energy those different models use because that will help me on a corporate level pick the least, you know, the most sustainable, least invasive version of an AI tool to power whatever I'm doing.
+
+So to have that knowledge, you just have to have experience using ai. So ultimately, you know, what we do as individual contributors is very, very small in the world of sustainability. It's, you know, what happens on that corporate level is going to be much more impactful. So become educated now. So that when you are a decision maker at that corporate level, you can steer the models into the ones that are less expensive.
+
+And what makes them less expensive is that they use less resources. They use less energy and less water to work. So now I'm gonna walk through setting up your chat GPT account. So again, if you're pretty new to chat GPT and you have a second screen, go ahead and have that open because I'll give you a few tips that will help make the outputs you get better.
+
+So first. You'll see that over here on the right side of the screen. That's going to be the menu for where you see all of the controls and settings. For chat. Uh, for chat GPT. So for this first bit, I'm going to go to customize chat, GPT, and that brings up this window. This is the second half of the window, uh, where you get to tell chat GPT things you want it to know about yourself.
+
+So I find it very helpful to let it know, you know, who I am, where I work, all of this information about what I am trying to do, because. That saves me from explaining over and over again what my job title is or what it means, or what is A DMO. All of that I have baked at a, you know, instructions level for chat.
+
+GPT here for what traits should chat GPT have, you can click on these buttons. It will populate inside of the what traits should chat GPT half Box. And I've put in a couple of these things on my own. So I tell it don't use M dashes or the, it's not, it's not just about this. It's also about this kind of sentence construction that we're seeing a lot of LinkedIn and some other places.
+
+Right now I don't want to ever see that sentence construction. So I have put it as a instruction here. It's good to know that when we're giving instructions to chat, GPT, that it could be a little bit funny. So by saying something, you are putting it in its little chat. GPT brain. Kind of like if I were to tell you, don't think about pink elephants, you're going to picture a pink elephant, right?
+
+So chat GPT can do the same thing. It doesn't see the knot. As much as it just says M dashes, it's not X, it's Y. And so it's possible it might actually focus a little more on those prompts when you call. Its attention to it. So if doing these instructions doesn't always work, that's the reason why. Now I'm looking at the settings.
+
+So this is still inside the the chat GPT Settings menu. When you go to data controls, that's when you see the option, improve the model for everyone. What that means is that chat, GPT, is taking everything that you put into it and using that to train a future model. So if you're doing anything private or confidential, you wanna have that set to off.
+
+And the model selector, and that you will see people making fun of this online because it's pretty ridiculous at this point. How many different things there are and how similar they all look. And how on earth are you supposed to know which ones are you meant to use? Uh. This will all get solved at some point because OpenAI will release uh, GPT five and they claim their hope is that GPT five will encompass all of these models and it will automatically detect which one to use to answer your question, and you won't have to pick one anymore.
+
+But in the meantime, I would say GPT-4 oh. That is just as it says here, for most things, this is going to be the most useful tool. The only other one that I would really worry about at this point, honestly, if you have access to OO three Pro, I would try that, but all of these reasoning models. Are going to be basically the same.
+
+O three PRO just was released widely over the weekend, so that's the newest, hottest thing. I would use that type of model on something that you need a lot of thought put into, right, because it's the, the difference between those models and something like GPT-4 oh is that it's. Thinking through many different possible responses.
+
+And if you remember, choose your own adventure books where you kind of follow along. And then you, oh, you know, you have to make a choice and you can skip ahead to page one 16 if you choose this. And page 2 22 if you make the other choice. So it's, it's moving along a decision tree and then backtracking if it doesn't like the ultimate destination it gets to.
+
+And so it's following this chain of thought reasoning process to determine what is the best answer to your question. So if you have something like the creating a Campaign example that I showed earlier, that is something that I would do in one of the reasoning models. If I am looking for, you know, help rewriting an email, I'm going to use four oh for that.
+
+Something else I think is very useful to be aware of, uh, custom GPTs. So. One of the great jokes of working with AI is that the name for everything is horrible, so we're supposed to know, you know, what is a custom GPT and is, how is that different from chat GPT and. OpenAI doesn't even always call these custom GPTs, so it makes it difficult to talk about in a, in a webinar.
+
+But when it comes to how do you practically use a tool like chat, GPT, they're very helpful. And if you use a Gemini, it's called Gems inside of Gemini, you will find custom GPTs here if you're familiar with the the left rail on your chat GPT account. Click on GPTs, and then here it's bringing up something that really the best analogy for it is thinking of Apple's App Store.
+
+You can go through, you can see all the different categories of apps, except in this case it's just categories of prompts that have been pre-written for you. So in some cases. That's really interesting because there are people who are much better, I suppose, at certain types of prompts than I am. So you can explore and see what other people have created.
+
+But truthfully, I really only use the ones that our team has made or that I have made. So if you have a team account, and I think a chat GPT team account. If you are a business with fewer than 150 employees, I think this is the best path forward if you do not have a paid secure AI tool in place yet. And one of the great things is it allows you to share GPTs across your organization.
+
+I. So here I have made a custom GPT for our travel and expense policy, and all that is, is in the background. I have given a prompt to chat GPT that says, uh, you know, here is a copy of our 40 page, you know, PDF file that has our expense policy in it. And whenever somebody asks you a question, you can, uh.
+
+Whenever somebody asks you a question, this is how I want you to address the question. And I will say in this example, you know, this is one of the first things I made when I started at Brand USA. And we've been updating it over the last eight months or so, because occasionally it stops working correctly because AI is funny.
+
+It, it's just, uh, think of it as that quirky, incredibly smart intern who doesn't know anything about who you are or what you do. So sometimes. They changed the underlying model and it changes the way that your prompts worked for these custom gpt. So I had to go in and write the prompt to be more strict because, uh, Alexis on our events team asked about the per diem for Chicago and it gave her the wrong answer.
+
+And so I used actually the deep research function of chat GPT, which I'll talk about in future webinars, uh, to, but I used that to upload where the mistakes were and say. Help me understand. This is pretty simple. How, how could this have gotten it wrong? And it turns out that because Chicago is not explicitly spelled out in our expense policy, our custom GPT said, oh, wait a second.
+
+Chicago is kind of an expensive city. It shouldn't be tier one. It should be, it should be higher than tier one. And it gave the wrong answer very confidently to Alexis. So. We went back and rewrote the rules to say, no, you must very explicitly follow the instructions of the PDFI use chat GPT to help me write those instructions.
+
+And then here we have the perfect just single prompt that easily answers the questions that you have. And so we have a question actually in the chat about what are the different use cases for a project. Versus a custom GPT, so a custom GPT. It's really, and I will tell you, there's a lot of overlap and you can do a lot of the same things in a custom GPT that you can do in a project.
+
+But what a project does, and here, this is where you're going to find projects inside of chat. GPTI don't have very many. I I only have this one set up right now because I actually use Quad for all of my project work, weirdly. But here, if you want to use a project, you're gonna start by clicking on new project.
+
+And then this is what a project looks like. So I, you can upload files, which is also something you can do in a custom GPT. You can give it instructions, which is something you can, you know, in a custom GPT, you are giving it a prompt, whereas the instructions in a project are. It, it's less of a direct prompt because as you can see here, you create the prompt using the prompt window, uh, but you are just telling it overall.
+
+What is the goal of you having all of this information in one place? And then what really makes this different is every time I start a chat in the future of D os. Uh, project That chat is going to get filed inside of that project. So if you see over here again, back in my, my threads, those two chats that I've had about the future of D mos inside that project.
+
+I don't find them down here. I find them up here in the folder. So almost the best use case for this is just helping you be a little more organized if you use a custom GPT every time you open it up. I. And you open it up by coming over, you know here, and you find the custom GPT area and you just click on it.
+
+But every time you do it, it is just a new blank prompt. And that's because if I'm asking about, uh, our per diem in Chicago, the next time I use it, I'm asking about the per diem in Washington DC right? I don't need to access the history of my chat there, here. I'm using this specifically because I do want to access my chat history, and so now before q and a I am going to look at what are the next steps that everyone can take advantage of?
+
+What are the things that you need to be thinking about on your AI journey? So first, please stay focused on your mission. So we're not doing AI for AI's sake. We wanna look at what problems are we solving for our stakeholders. How can generative AI help us do this better or faster? We wanna remember that AI is a tool.
+
+It is not the solution to the problem. And when we're looking at organizational change and how do we all move forward with AI adoption, there's two approaches and we need to do them both at the same time. It's top down and it is bottom up, and you cannot choose between them. You have to have both. So for any leadership that's on this call, and again, in a couple of weeks, I will be doing another webinar that, uh, is going to be specifically dedicated to leadership, uh, but make an AI committee.
+
+The idea here is that we need to get AI use out of the shadows. If people are finding ways to save time or do things better, we need to share what those ideas are. We need to adopt guidelines for generative AI use. Uh, and this is another question that just came in, uh, over the chat. How do you deal with, uh, people uploading proprietary data?
+
+I, and the way you deal with it is your organization needs to have guidelines that outlines what is okay and what is not okay to put in a large language model. So on the next webinar and I. Don't have the date off the top of my head and I meant to. So Allie, maybe you can put that in the chat so that people can see it.
+
+Uh, but for the next webinar, we're going to go pretty in depth on AI guidelines and what should you put in, uh. Ultimately, and that's going to be different for every, for every company because every company is going to have a different risk profile when it comes to working with ip. Everyone is going to have different contracts with vendors.
+
+Uh. One of the things we need to think about is if you are asking yourself, is it okay to put this into a language model? You need to think about is it a a secure account or not? Because the secure accounts have training turned off. Or is it a free account where anything you enter would be kind of subsumed into the, uh, into the model?
+
+So you want training turned off and then you wanna look at those contracts because if you are buying proprietary research, let's say if it was research that was custom made for your organization. It might be okay legally to put that into a language model that if you are buying syndicated research, there may be a clause that says you cannot share this research with a third party and chat GPT is a third party.
+
+So in those instances, rather than throwing up your hands and saying, shoot, well, I guess I can't do it. Have the conversation. Because research companies want us to use their research. This is an excellent way to make sure that it is being used like research to put that into custom GPTs or to put that into a project to inform your strategy.
+
+Fantastic use case, uh, but you want to make sure that you're doing that properly.
+
+Then the bottom up approach. So for the individual contributors, how can you get better at using these tools? I'll say what I did when I first started working with ai, and I guess, guess I could have shared this at the beginning of the webinar, but I. I am not a technologist. You know, I came to this as a very curious person, but you know, my background, I'm a theater major, so I promise you that you do not need to have some kind of special tech background in order to get amazing things out of working with these tools.
+
+You just have to do it. So in January of 2023, when chat, GPT was new and I really wanted to understand what it could be good for. I opened it up on my second screen and once a day I would just ask myself, I wonder what would be a, you know, I wonder if this thing that I'm doing, if there's some way that AI could help me do this thing.
+
+And I try and sometimes it did and sometimes it didn't. But either way, I learned something and then I would share what I learned on LinkedIn because I just knew not enough people were sharing what they were learning about ai. Uh, so using it and using it for things you may not think are the perfect use case.
+
+Is how you need to get started. Uh, I have heard that this might be a Gen X kind of issue with using ai. Is that, and I clearly, it wasn't true for me and I'm the Gen Xs, uh, but everybody says, oh no, I'm big fan of ai, very happy to use ai. I'm just, you know, I'm waiting until I have the right thing and then I'm going to do it.
+
+The right thing doesn't exist. You know, the people who invented these models have no idea how they work, so, right. They, they don't know what they can do. They're certainly not worrying about how, you know, the tourism industry or D mos are working with their tools. So that's why we need to share. I share our ideas because we have to build the use cases together.
+
+Like we have to make that user manual because nobody is going to make it for us. And I wanna thank everybody so much, uh, for joining today.`,
     // Enhanced metadata for AI discoverability
     keyTakeaways: [
       'AI is a creative partner, not a fact database. Large Language Models (LLMs) are math-based algorithms that predict the next word; they are not "checking Wikipedia." This means they will "hallucinate" (make things up) and users are responsible for fact-checking.',
