@@ -1798,6 +1798,52 @@ export default function WebinarPage({ params }: { params: { id: string } }) {
     )
   }
 
+  // Map of AI tools mentioned in each webinar for schema.org mentions property
+  const webinarMentions: Record<string, any[]> = {
+    'intro-ai-agents': [
+      { '@type': 'SoftwareApplication', name: 'ChatGPT', applicationCategory: 'AI Assistant', url: 'https://chatgpt.com' },
+      { '@type': 'SoftwareApplication', name: 'Browse.ai', applicationCategory: 'Web Scraping', url: 'https://browse.ai' },
+      { '@type': 'SoftwareApplication', name: 'Manus.im', applicationCategory: 'AI Agent', url: 'https://manus.im' },
+      { '@type': 'SoftwareApplication', name: 'Lovable.ai', applicationCategory: 'Website Builder', url: 'https://lovable.ai' },
+      { '@type': 'SoftwareApplication', name: 'Claude Artifacts', applicationCategory: 'AI Builder', url: 'https://claude.ai' },
+      { '@type': 'SoftwareApplication', name: 'N8N', applicationCategory: 'Workflow Automation', url: 'https://n8n.io' },
+      { '@type': 'SoftwareApplication', name: 'Agent.ai', applicationCategory: 'AI Agent Builder', url: 'https://agent.ai' },
+      { '@type': 'SoftwareApplication', name: 'Google Gemini', applicationCategory: 'AI Assistant', url: 'https://gemini.google.com' },
+    ],
+    'custom-gpts': [
+      { '@type': 'SoftwareApplication', name: 'ChatGPT', applicationCategory: 'AI Assistant', url: 'https://chatgpt.com' },
+      { '@type': 'SoftwareApplication', name: 'Custom GPTs', applicationCategory: 'AI Assistant', url: 'https://chatgpt.com' },
+    ],
+    'ai-convention-sales': [
+      { '@type': 'SoftwareApplication', name: 'ChatGPT', applicationCategory: 'AI Assistant', url: 'https://chatgpt.com' },
+      { '@type': 'SoftwareApplication', name: 'Custom GPTs', applicationCategory: 'AI Assistant', url: 'https://chatgpt.com' },
+      { '@type': 'SoftwareApplication', name: 'Claude Artifacts', applicationCategory: 'AI Builder', url: 'https://claude.ai' },
+    ],
+    'crit-framework': [
+      { '@type': 'SoftwareApplication', name: 'ChatGPT', applicationCategory: 'AI Assistant', url: 'https://chatgpt.com' },
+      { '@type': 'SoftwareApplication', name: 'Claude', applicationCategory: 'AI Assistant', url: 'https://claude.ai' },
+    ],
+    'model-context-protocol': [
+      { '@type': 'SoftwareApplication', name: 'Claude', applicationCategory: 'AI Assistant', url: 'https://claude.ai' },
+      { '@type': 'SoftwareApplication', name: 'Model Context Protocol', applicationCategory: 'AI Protocol', url: 'https://modelcontextprotocol.io' },
+    ],
+    'ai-101': [
+      { '@type': 'SoftwareApplication', name: 'ChatGPT', applicationCategory: 'AI Assistant', url: 'https://chatgpt.com' },
+      { '@type': 'SoftwareApplication', name: 'Claude', applicationCategory: 'AI Assistant', url: 'https://claude.ai' },
+      { '@type': 'SoftwareApplication', name: 'Google Gemini', applicationCategory: 'AI Assistant', url: 'https://gemini.google.com' },
+    ],
+    'ai-tool-playground': [
+      { '@type': 'SoftwareApplication', name: 'ChatGPT', applicationCategory: 'AI Assistant', url: 'https://chatgpt.com' },
+      { '@type': 'SoftwareApplication', name: 'Claude', applicationCategory: 'AI Assistant', url: 'https://claude.ai' },
+      { '@type': 'SoftwareApplication', name: 'Google Gemini', applicationCategory: 'AI Assistant', url: 'https://gemini.google.com' },
+      { '@type': 'SoftwareApplication', name: 'Lovable.ai', applicationCategory: 'Website Builder', url: 'https://lovable.ai' },
+    ],
+    'ai-dmo-leadership': [
+      { '@type': 'SoftwareApplication', name: 'ChatGPT', applicationCategory: 'AI Assistant', url: 'https://chatgpt.com' },
+      { '@type': 'SoftwareApplication', name: 'Claude', applicationCategory: 'AI Assistant', url: 'https://claude.ai' },
+    ],
+  }
+
   // Generate enhanced JSON-LD schema for AI discoverability
   const videoSchema = {
     '@context': 'https://schema.org',
@@ -1808,10 +1854,46 @@ export default function WebinarPage({ params }: { params: { id: string } }) {
     thumbnailUrl: `https://image.mux.com/${webinar.muxPlaybackId}/thumbnail.png`,
     contentUrl: `https://stream.mux.com/${webinar.muxPlaybackId}.m3u8`,
     uploadDate: '2024-01-01',
+    inLanguage: 'en-US',
+    isAccessibleForFree: true,
     creator: {
       '@type': 'Person',
       name: webinar.instructor,
       jobTitle: webinar.instructorTitle,
+    },
+    author: {
+      '@type': 'Person',
+      name: 'Janette Roush',
+      jobTitle: 'Chief AI Officer, SVP Innovation',
+      affiliation: {
+        '@type': 'Organization',
+        name: 'Brand USA'
+      },
+      knowsAbout: [
+        'AI for tourism marketing',
+        'Destination marketing AI strategy',
+        'Model Context Protocol (MCP)',
+        'AI agents for DMOs',
+        'Custom GPTs for tourism',
+        'CRIT framework for AI prompts',
+        'Agentic AI in destination marketing',
+        'AI governance in tourism industry',
+        'Claude Artifacts for DMO operations',
+        'Tourism industry automation'
+      ]
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Brand USA Agents of Change',
+      url: 'https://brand-usa-agents-of-change.vercel.app'
+    },
+    isPartOf: {
+      '@type': 'Course',
+      name: 'AI for Destination Marketing Organizations',
+      provider: {
+        '@type': 'Organization',
+        name: 'Brand USA Agents of Change'
+      }
     },
     educationalLevel: (webinar as any).level || 'Professional',
     keywords: (webinar as any).topics?.join(', ') || '',
@@ -1834,14 +1916,44 @@ export default function WebinarPage({ params }: { params: { id: string } }) {
     ...(webinar as any).transcript && {
       transcript: {
         '@type': 'WebPageElement',
-        text: (webinar as any).transcript
+        text: (webinar as any).transcript,
+        encodingFormat: 'text/plain'
       }
     },
     hasPart: webinar.chapters.map((chapter: any) => ({
       '@type': 'Clip',
       name: chapter.title,
       startOffset: chapter.time
-    }))
+    })),
+    ...(webinarMentions[params.id] && {
+      mentions: webinarMentions[params.id]
+    })
+  }
+
+  // BreadcrumbList schema for navigation hierarchy
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: 'https://brand-usa-agents-of-change.vercel.app'
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Webinars',
+        item: 'https://brand-usa-agents-of-change.vercel.app/#webinars'
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: webinar.title,
+        item: `https://brand-usa-agents-of-change.vercel.app/webinar/${params.id}`
+      }
+    ]
   }
 
   return (
@@ -1854,6 +1966,11 @@ export default function WebinarPage({ params }: { params: { id: string } }) {
           id="video-schema"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(videoSchema) }}
+        />
+        <Script
+          id="breadcrumb-schema"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
         />
 
         {/* Header */}

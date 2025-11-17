@@ -106,7 +106,7 @@ const shortFormVideos = [
 
 
 export default function HomePage() {
-  // Organization Schema
+  // Organization Schema (clean, no teaches/audience)
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": ["Organization", "EducationalOrganization"],
@@ -131,10 +131,6 @@ export default function HomePage() {
         "name": "Brand USA"
       }
     },
-    "audience": {
-      "@type": "Audience",
-      "audienceType": ["Destination Marketing Organization (DMO) professionals", "Tourism professionals", "National Tourism Organization staff", "State tourism office employees", "Convention and Visitors Bureau staff"]
-    },
     "knowsAbout": [
       "AI for tourism marketing",
       "Destination marketing AI strategy",
@@ -146,7 +142,31 @@ export default function HomePage() {
       "AI governance in tourism industry",
       "Claude Artifacts for DMO operations",
       "Tourism industry automation"
-    ],
+    ]
+  }
+
+  // Course Schema (with teaches and audience)
+  const courseSchema = {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    "name": "AI for Destination Marketing Organizations",
+    "description": "Comprehensive training program covering AI fundamentals, strategy, and implementation for tourism marketing professionals",
+    "provider": {
+      "@type": "Organization",
+      "name": "Brand USA Agents of Change"
+    },
+    "audience": {
+      "@type": "Audience",
+      "audienceType": "tourism professionals",
+      "educationalRole": ["destination marketing organization staff", "tourism board employees", "convention and visitors bureau staff", "state tourism office employees", "national tourism organization staff"]
+    },
+    "coursePrerequisites": "No technical background required",
+    "educationalLevel": "Professional",
+    "hasCourseInstance": {
+      "@type": "CourseInstance",
+      "courseMode": "online",
+      "courseWorkload": "PT8H"
+    },
     "teaches": [
       "The four types of AI agents: Operator, Researcher, Builder, and Automator",
       "CRIT (Context, Role, Interview, Task) framework for effective AI prompting",
@@ -156,7 +176,24 @@ export default function HomePage() {
       "Practical applications of Claude Artifacts for DMO operations",
       "Prompt engineering strategies specific to tourism industry contexts",
       "Workflow automation using AI agents for tourism operations"
-    ]
+    ],
+    "about": [
+      {
+        "@type": "Thing",
+        "name": "AI Agents"
+      },
+      {
+        "@type": "Thing",
+        "name": "Model Context Protocol"
+      },
+      {
+        "@type": "Thing",
+        "name": "Destination Marketing"
+      }
+    ],
+    "numberOfCredits": 8,
+    "isAccessibleForFree": true,
+    "inLanguage": "en-US"
   }
 
   // WebSite Schema
@@ -232,6 +269,11 @@ export default function HomePage() {
           id="collection-schema"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionPageSchema) }}
+        />
+        <Script
+          id="course-schema"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(courseSchema) }}
         />
 
         {/* Header */}
