@@ -1960,12 +1960,12 @@ export default function WebinarPage({ params }: { params: { id: string } }) {
           id="video-schema"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(videoSchema) }}
-        />
+        ></script>
         <script
           id="breadcrumb-schema"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-        />
+        ></script>
 
         {/* Header */}
       <header className="border-b border-gray-200 bg-white sticky top-0 z-50">

@@ -109,12 +109,12 @@ export default function GlossaryPage() {
         id="defined-term-set-schema"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(definedTermSetSchema) }}
-      />
+      ></script>
       <script
         id="faq-page-schema"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageSchema) }}
-      />
+      ></script>
 
       <GlossaryClient />
     </>
