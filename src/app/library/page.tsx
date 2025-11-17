@@ -116,25 +116,25 @@ const resources = [
       {
         title: 'Brand USA Talks Travel – "AI for DMOs"',
         description: 'Guest host Janette Roush leads a discussion with Esra Calvert and Signe Jungersted on how AI can enhance destination marketing strategy, exploring practical ways DMOs can integrate AI. (March 11, 2025)',
-        url: 'https://podcasts.apple.com/us/podcast/brand-usa-talks-travel/id1496784880',
+        url: 'https://podcasts.apple.com/us/podcast/ai-for-dmos-how-travel-organizations-can-leverage-ai-today/id1593907064?i=1000698806117',
         icon: Podcast,
       },
       {
         title: 'Destination Discourse – "Is There a Right Way to Roll Out AI?"',
         description: 'Panel debate on how DMOs should implement AI. Janette Roush advocates quick experimentation while discussing AI governance policies and strategies for building internal support. (May 22, 2025)',
-        url: 'https://mytourismiq.com/destination-discourse/',
+        url: 'https://mytourismiq.com/posts/31-is-there-a-right-way-to-roll-out-ai-janette-roush-vimal-vyas',
         icon: Podcast,
       },
       {
         title: 'The Future of Tourism – "AI Governance for DMOs and Their Leaders"',
         description: 'Janette Roush outlines the urgent need for DMO leaders to devise ethical AI strategies, covering opportunities, risks, and how to implement AI responsibly across tourism organizations. (June 4, 2025)',
-        url: 'https://podcasts.apple.com/us/podcast/the-future-of-tourism/id1609831369',
+        url: 'https://podcasts.apple.com/de/podcast/symposium-special-ai-governance-for-dmos-and-their-leaders/id1518309902?i=1000711206699',
         icon: Podcast,
       },
       {
         title: 'Tourpreneur – "Demystifying AI for Tour Operators"',
         description: 'Mitch Bach sits down with Janette Roush to discuss practical ways tour operators can start using AI, offering a beginner-friendly approach for companies overwhelmed by rapid AI changes. (June 26, 2025)',
-        url: 'https://podcasts.apple.com/us/podcast/tourpreneur-tour-business-podcast/id1458117428',
+        url: 'https://podcasts.apple.com/ca/podcast/tourpreneur-tour-business-podcast/id1447408463',
         icon: Podcast,
       },
       {
@@ -146,7 +146,7 @@ const resources = [
       {
         title: 'Travel Trends – "The Impact of AI on Destination Marketing"',
         description: 'Dan Christian kicks off an AI-focused mini-series discussing how destination marketing is evolving as trip planning shifts from traditional search to chatbots and AI itineraries. (Oct 9, 2025)',
-        url: 'https://www.listennotes.com/podcasts/travel-trends-podcast/',
+        url: 'https://www.listennotes.com/podcasts/travel-trends-with/the-impact-of-ai-on-9G8EexwrySJ/',
         icon: Podcast,
       },
     ]
