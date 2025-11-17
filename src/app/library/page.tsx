@@ -28,7 +28,7 @@ const resources = [
     ]
   },
   {
-    category: 'AI in Tourism: Podcast Episodes',
+    category: 'Conversations on AI in Tourism',
     items: [
       {
         title: 'Travel Trends – "The Impact of AI on Destination Marketing"',
@@ -152,7 +152,7 @@ const resources = [
         icon: Podcast,
       },
       {
-        title: 'Everything AI in Travel by Colin Nagy',
+        title: 'Everything AI in Travel by Tony Carne',
         description: 'Newsletter covering artificial intelligence applications, trends, and innovations specifically for the travel and tourism industry.',
         url: 'https://everythingaiintravel.beehiiv.com/',
         icon: FileText,
@@ -164,7 +164,7 @@ const resources = [
         icon: FileText,
       },
       {
-        title: 'CEO.AI Newsletter by Sunil Malhotra',
+        title: 'CEO.AI Newsletter by Greg Oates',
         description: 'LinkedIn newsletter on AI strategy, leadership, and implementation for executives and decision-makers.',
         url: 'https://www.linkedin.com/newsletters/ceo-ai-7346953760369164290/',
         icon: FileText,
