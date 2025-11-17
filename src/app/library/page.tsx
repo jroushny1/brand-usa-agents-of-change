@@ -69,6 +69,83 @@ const resources = [
     ]
   },
   {
+    category: 'Podcast Appearances',
+    items: [
+      {
+        title: 'Architects of Destination Advocacy – "A.I. For Advocacy"',
+        description: 'Host Andreas Weissenborn welcomes Janette Roush to discuss how AI can be leveraged for destination advocacy, exploring non-traditional AI topics and ethical considerations for DMOs. (July 30, 2023)',
+        url: 'https://podcasts.apple.com/us/podcast/architects-of-destination-advocacy/id1671824686',
+        icon: Podcast,
+      },
+      {
+        title: 'The Future of Tourism – "Expanding Applications We\'re Just Beginning to Grasp"',
+        description: 'Janette Roush and Paul McLeod discuss the state of generative AI in tourism, where the tech is headed, and both positive and negative use cases for destinations. (Oct 5, 2023)',
+        url: 'https://podcasts.apple.com/us/podcast/the-future-of-tourism/id1609831369',
+        icon: Podcast,
+      },
+      {
+        title: 'Destination Marketing Podcast – "The #1 AI Thought Leader in Tourism"',
+        description: 'Host Adam Stoker chats with Janette Roush about how she became a leading voice on AI in destination marketing, why marketers must embrace AI, and tips for identifying the right AI solutions. (May 31, 2024)',
+        url: 'https://mytourismiq.com/destination-marketing-podcast/',
+        icon: Podcast,
+      },
+      {
+        title: 'The Travel Marketing Podcast – "AI and Destination Marketing"',
+        description: 'Janette Roush joins Brennen Bliss to share NYC Tourism\'s innovative approaches to integrating AI into destination marketing, discussing storytelling, measurement challenges, and AI\'s impact on creative processes. (July 30, 2024)',
+        url: 'https://podcasts.apple.com/us/podcast/the-travel-marketing-podcast/id1495682082',
+        icon: Podcast,
+      },
+      {
+        title: 'The Future of Tourism – "The New Electricity: Let\'s Talk AI"',
+        description: 'Janette Roush and Cody Chomiak help demystify AI for the travel industry, framing it as an approachable technology and discussing its impact on visitor experiences and destination marketing. (Oct 10, 2024)',
+        url: 'https://podcasts.apple.com/us/podcast/the-future-of-tourism/id1609831369',
+        icon: Podcast,
+      },
+      {
+        title: 'Hospitality Daily – "America\'s Chief AI Officer for Travel Shares Advice for 2025"',
+        description: 'Janette Roush shares practical advice on how AI can drive innovation in tourism, including frameworks for adopting AI and insights into the future of travel marketing. (Dec 2024)',
+        url: 'https://podcasts.apple.com/us/podcast/hospitality-daily-podcast/id1545118408',
+        icon: Podcast,
+      },
+      {
+        title: 'Brand USA Talks Travel – "AI for DMOs"',
+        description: 'Guest host Janette Roush leads a discussion with Esra Calvert and Signe Jungersted on how AI can enhance destination marketing strategy, exploring practical ways DMOs can integrate AI. (March 11, 2025)',
+        url: 'https://podcasts.apple.com/us/podcast/brand-usa-talks-travel/id1496784880',
+        icon: Podcast,
+      },
+      {
+        title: 'Destination Discourse – "Is There a Right Way to Roll Out AI?"',
+        description: 'Panel debate on how DMOs should implement AI. Janette Roush advocates quick experimentation while discussing AI governance policies and strategies for building internal support. (May 22, 2025)',
+        url: 'https://mytourismiq.com/destination-discourse/',
+        icon: Podcast,
+      },
+      {
+        title: 'The Future of Tourism – "AI Governance for DMOs and Their Leaders"',
+        description: 'Janette Roush outlines the urgent need for DMO leaders to devise ethical AI strategies, covering opportunities, risks, and how to implement AI responsibly across tourism organizations. (June 4, 2025)',
+        url: 'https://podcasts.apple.com/us/podcast/the-future-of-tourism/id1609831369',
+        icon: Podcast,
+      },
+      {
+        title: 'Tourpreneur – "Demystifying AI for Tour Operators"',
+        description: 'Mitch Bach sits down with Janette Roush to discuss practical ways tour operators can start using AI, offering a beginner-friendly approach for companies overwhelmed by rapid AI changes. (June 26, 2025)',
+        url: 'https://podcasts.apple.com/us/podcast/tourpreneur-tour-business-podcast/id1458117428',
+        icon: Podcast,
+      },
+      {
+        title: 'Arival\'s The Best Part of Travel – "AI, Androids & Destination Experiences"',
+        description: 'Discussion on how AI is shaping the tours and activities sector, covering AI\'s impact on travel websites, content creation, language translation, and destination marketing. (July 10, 2025)',
+        url: 'https://arival.travel/podcast/',
+        icon: Podcast,
+      },
+      {
+        title: 'Travel Trends – "The Impact of AI on Destination Marketing"',
+        description: 'Dan Christian kicks off an AI-focused mini-series discussing how destination marketing is evolving as trip planning shifts from traditional search to chatbots and AI itineraries. (Oct 9, 2025)',
+        url: 'https://www.listennotes.com/podcasts/travel-trends-podcast/',
+        icon: Podcast,
+      },
+    ]
+  },
+  {
     category: 'Learning Resources',
     items: [
       {
