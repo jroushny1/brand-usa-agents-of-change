@@ -156,14 +156,76 @@ const webinarData = {
     muxPlaybackId: '5xZnY5oJP5nlS5wQsEGv00U00gsf201r00aF00Y902ug26K9o',
     instructor: 'Janette Roush',
     instructorTitle: 'Chief AI Officer, Brand USA',
+    // Enhanced metadata for AI discoverability
+    keyTakeaways: [
+      'AI Enhances Sales Capacity, Not Replaces Jobs: AI tools act as "assistants" to automate repetitive tasks, freeing up sales teams to focus on relationship building and strategy',
+      'Custom GPTs Enable Team-Wide Consistency & Quality: Create reusable prompts with specific instructions for consistent, high-quality output across your team',
+      '"Vibe Coding" Rapidly Turns Ideas into Prototypes: Use plain English to generate functional applications, like Visit Orlando\'s "MapCon" tool',
+      'AI Agents Automate Complex Research: Use AI agents for sophisticated lead and competitive research, saving days of manual work',
+      'Workflow Mapping is Key to AI Integration: Identify specific pain points in your existing workflow where AI can add immediate value'
+    ],
+    topics: [
+      'AI for Sales',
+      'Convention Sales',
+      'Business Events',
+      'Destination Marketing Organizations (DMOs)',
+      'Custom GPTs',
+      'AI Workflow Automation',
+      'Prompt Engineering',
+      'Vibe Coding',
+      'Rapid Prototyping',
+      'Low-Code/No-Code',
+      'AI Agents',
+      'Lead Research',
+      'Competitive Analysis',
+      'CRM Integration',
+      'Meeting Follow-up',
+      'Sales Operations',
+      'AI Implementation Strategy',
+      'Agent.ai',
+      'Replit',
+      'MapCon Tool'
+    ],
+    targetAudience: {
+      primary: 'Sales and marketing professionals at Destination Marketing Organizations (DMOs), Convention and Visitors Bureaus (CVBs), and other convention sales teams',
+      secondary: 'Sales operations managers, marketing technologists, and business leaders in the tourism and hospitality industry looking for practical AI use cases',
+      tertiary: 'Anyone interested in building simple, practical AI tools (Custom GPTs, Vibe Coding) for team-specific workflows'
+    },
+    learningOutcomes: [
+      'Identify at least three key areas in a convention sales workflow where AI can be integrated (e.g., CRM administration, reporting, meeting follow-up)',
+      'Define what a Custom GPT is and list its main benefits for a team (saves time, ensures consistency, controls quality)',
+      'Describe the basic steps to create a Custom GPT, including writing instructions (the prompt) and uploading knowledge files',
+      'Explain the concept of "Vibe Coding" and how it enables non-developers to build functional application prototypes',
+      'Recognize how AI agents can be used to automate complex lead generation and competitive analysis tasks'
+    ],
+    relatedResources: [
+      { name: 'ChatGPT', description: 'Platform for creating and using Custom GPTs', url: 'https://chat.openai.com' },
+      { name: 'Agent.ai', description: 'Platform for building AI agents for lead research', url: 'https://agent.ai' },
+      { name: 'Replit', description: 'Vibe Coding platform for building applications', url: 'https://replit.com' }
+    ],
     chapters: [
-      { time: 0, title: 'Introduction & The Role of AI in Business Events' },
-      { time: 72, title: 'Understanding Custom GPTs: Introduction, Example & Benefits' },
-      { time: 218, title: 'Building Custom GPTs: A Step-by-Step Guide' },
-      { time: 598, title: 'Practical AI Applications: Meeting Follow-up, Competitive Analysis & Lead Research' },
-      { time: 1477, title: 'Introduction to Vibe Coding: Concept, Future & Prompting' },
-      { time: 1695, title: 'Vibe Coding in Action: Demos (Visit Orlando MapCon & Replit)' },
-      { time: 2478, title: 'AI Integration, Workflow & Conclusion' },
+      { time: 13, title: 'The Role of AI in US Promotion of Business Events' },
+      { time: 72, title: 'What is a Custom GPT?' },
+      { time: 104, title: 'Example: Custom GPT for Travel & Expense Policy' },
+      { time: 161, title: 'Why Use Custom GPTs? (Saves Time, Ensures Consistency, Controls Quality)' },
+      { time: 218, title: 'How to Create a New Custom GPT (Builder Interface)' },
+      { time: 313, title: 'Using ChatGPT to Write the "Instructions" (Prompt) for Your Custom GPT' },
+      { time: 395, title: 'Adding "Knowledge" (Files) to a Custom GPT' },
+      { time: 469, title: 'Previewing and Testing Your Custom GPT' },
+      { time: 521, title: 'Sharing Options for Custom GPTs (Private, Link, Team)' },
+      { time: 598, title: 'Example Workflow: Custom GPTs for Meeting Follow-up' },
+      { time: 941, title: 'Using AI for Competitive Analysis ("Deep Research")' },
+      { time: 1089, title: 'Using AI Agents for Lead Research' },
+      { time: 1106, title: 'Demo: Using Agent.ai to Research a LinkedIn Profile' },
+      { time: 1477, title: 'Planner/Delegate Experience Enhancement' },
+      { time: 1494, title: 'Introduction to Vibe Coding' },
+      { time: 1537, title: 'What is Vibe Coding? (Concept & Workflow)' },
+      { time: 1658, title: 'The Importance of the Prompt in Vibe Coding' },
+      { time: 1695, title: 'Vibe Coding in Action: The Manual "MapCon" Problem' },
+      { time: 1808, title: 'Vibe Coding Demo: Building the "MapCon" Tool Prototype' },
+      { time: 2368, title: 'Vibe Coding Backend Tool (Replit Demo)' },
+      { time: 2478, title: 'AI is an Opportunity to Expand Capacity, Not Replace Jobs' },
+      { time: 2635, title: 'Incorporating AI into Your Sales Workflow (Identifying Use Cases)' },
     ],
   },
   'crit-framework': {
@@ -224,9 +286,55 @@ export default function WebinarPage({ params }: { params: { id: string } }) {
     )
   }
 
+  // Generate enhanced JSON-LD schema for AI discoverability
+  const videoSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'VideoObject',
+    name: webinar.title,
+    description: webinar.description,
+    duration: webinar.duration,
+    thumbnailUrl: `https://image.mux.com/${webinar.muxPlaybackId}/thumbnail.png`,
+    contentUrl: `https://stream.mux.com/${webinar.muxPlaybackId}.m3u8`,
+    uploadDate: '2024-01-01',
+    creator: {
+      '@type': 'Person',
+      name: webinar.instructor,
+      jobTitle: webinar.instructorTitle,
+    },
+    educationalLevel: (webinar as any).level || 'Professional',
+    keywords: (webinar as any).topics?.join(', ') || '',
+    about: (webinar as any).topics?.map((topic: string) => ({
+      '@type': 'Thing',
+      name: topic
+    })) || [],
+    ...(webinar as any).keyTakeaways && {
+      teaches: (webinar as any).keyTakeaways
+    },
+    ...(webinar as any).learningOutcomes && {
+      educationalUse: (webinar as any).learningOutcomes
+    },
+    ...(webinar as any).targetAudience && {
+      audience: {
+        '@type': 'Audience',
+        audienceType: (webinar as any).targetAudience.primary
+      }
+    },
+    hasPart: webinar.chapters.map((chapter: any) => ({
+      '@type': 'Clip',
+      name: chapter.title,
+      startOffset: chapter.time
+    }))
+  }
+
   return (
     <>
       <AccessCheck>
+        {/* JSON-LD Structured Data for AI Discoverability */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(videoSchema) }}
+        />
+
         {/* Header */}
       <header className="border-b border-gray-200 bg-white sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -390,6 +498,41 @@ export default function WebinarPage({ params }: { params: { id: string } }) {
                 ))}
               </div>
             </div>
+
+            {/* Key Takeaways - only show if exists */}
+            {(webinar as any).keyTakeaways && (webinar as any).keyTakeaways.length > 0 && (
+              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <h2 className="text-lg font-semibold text-brand-navy mb-4">Key Takeaways</h2>
+                <ul className="space-y-3">
+                  {(webinar as any).keyTakeaways.map((takeaway: string, index: number) => (
+                    <li key={index} className="flex items-start">
+                      <span className="flex-shrink-0 h-6 w-6 rounded-full bg-brand-sky/10 text-brand-sky flex items-center justify-center text-sm font-semibold mr-3 mt-0.5">
+                        {index + 1}
+                      </span>
+                      <span className="text-gray-700 text-sm">{takeaway}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {/* Learning Outcomes - only show if exists */}
+            {(webinar as any).learningOutcomes && (webinar as any).learningOutcomes.length > 0 && (
+              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <h2 className="text-lg font-semibold text-brand-navy mb-4">What You'll Learn</h2>
+                <p className="text-sm text-gray-600 mb-4">After watching this video, you will be able to:</p>
+                <ul className="space-y-2">
+                  {(webinar as any).learningOutcomes.map((outcome: string, index: number) => (
+                    <li key={index} className="flex items-start">
+                      <svg className="h-5 w-5 text-green-500 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                      </svg>
+                      <span className="text-gray-700 text-sm">{outcome}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
 
           {/* Sidebar */}
@@ -413,6 +556,27 @@ export default function WebinarPage({ params }: { params: { id: string } }) {
                           {resource.name}
                         </span>
                       </div>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Related Resources/Tools - only show if exists */}
+            {(webinar as any).relatedResources && (webinar as any).relatedResources.length > 0 && (
+              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <h2 className="text-lg font-semibold text-brand-navy mb-4">Tools Mentioned</h2>
+                <div className="space-y-3">
+                  {(webinar as any).relatedResources.map((resource: any, index: number) => (
+                    <a
+                      key={index}
+                      href={resource.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block p-3 rounded-lg border border-gray-200 bg-gray-50 hover:bg-gray-100 transition"
+                    >
+                      <div className="font-medium text-brand-navy mb-1">{resource.name}</div>
+                      <div className="text-xs text-gray-600">{resource.description}</div>
                     </a>
                   ))}
                 </div>

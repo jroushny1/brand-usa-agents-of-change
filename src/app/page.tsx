@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { Play, Clock, TrendingUp, Users } from 'lucide-react'
+import { Play, Clock, TrendingUp, Users, BookOpen } from 'lucide-react'
 import AccessCheck from '@/components/AccessCheck'
 
 // Temporary data - we'll move this to Supabase later
@@ -176,6 +176,20 @@ export default function HomePage() {
                 </div>
               )
             })}
+          </div>
+
+          {/* Library CTA */}
+          <div className="mt-12 text-center">
+            <Link
+              href="/library"
+              className="inline-flex items-center px-6 py-3 bg-brand-sky text-white font-semibold rounded-lg hover:bg-brand-sky/90 transition-colors shadow-md hover:shadow-lg"
+            >
+              <BookOpen className="h-5 w-5 mr-2" />
+              Browse Full Learning Library
+            </Link>
+            <p className="mt-3 text-sm text-gray-600">
+              All content structured for AI discoverability and citations
+            </p>
           </div>
         </div>
       </section>
