@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import Script from 'next/script'
 import { ArrowLeft, Download, Clock, BookOpen, ChevronDown, ChevronUp } from 'lucide-react'
 import HLSPlayer from './hls-player'
 import AccessCheck from '@/components/AccessCheck'
@@ -1846,8 +1847,11 @@ export default function WebinarPage({ params }: { params: { id: string } }) {
   return (
     <>
       <AccessCheck>
-        {/* JSON-LD Structured Data for AI Discoverability */}
-        <script
+        {/* JSON-LD Structured Data for AI Discoverability
+            Using Script component ensures schema is properly injected in SSR HTML
+            Even though this is a client component, Next.js will server-render this */}
+        <Script
+          id="video-schema"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(videoSchema) }}
         />
