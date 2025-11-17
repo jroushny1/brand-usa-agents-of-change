@@ -1213,6 +1213,221 @@ It's that sharing that makes it different. If you use the custom GPT 20 times, y
     muxPlaybackId: '5xZnY5oJP5nlS5wQsEGv00U00gsf201r00aF00Y902ug26K9o',
     instructor: 'Janette Roush',
     instructorTitle: 'Chief AI Officer, Brand USA',
+    transcript: `My name is Janette Roush. I am the SVP of Innovation and Chief AI Officer for Brand USA, and today we are going to talk about AI for convention sales. So as a quick reminder of my role here at Brand USA, I am looking at how we can transform the promotion of business events across the United States using AI through three tranches of work. The first is operational excellence and how can we upskill what we are doing internally with the assistance of AI. The second piece, that's what this webinar is right now, industry empowerment. How are we able to increase the capacity of the US tourism industry to do this work?
+
+And then the third piece is planner and delegate experience enhancement. How can we use AI to improve the discoverability and book- ability of the United States? Later in the presentation, I'm going to be joined by Gabe from Visit Orlando's technology team and he is going to walk through an app that he has vibe coded for Visit Orlando's team. So I'm excited to see that as well.
+
+One of the most useful tools when it comes to convention sales teams and how you can adopt AI not just for individual use cases, but across your department, is by building custom gpt for your team.
+
+A custom GPT is a reusable prompt that inside of ChatGPT, it's one set of instructions with a set of files that have already been saved, and it allows you to use that prompt over and over again. So this is an example of a custom GPT that we use here at Brand USA, and it is for our travel and expense policy.
+
+Here in the backend, I have uploaded our 40 plus page PDF file with our expense policy in it. And then you are able to log in and ask questions like what is my per diem in Tokyo?
+
+I have instructed it to look at sources in order to answer the question, what is the per diem in Tokyo? And here we see that we have the hotel, the meal, and the incidental per diem spelled out. And then what makes Custom GPTs particularly useful and interesting is that you can continue to have a conversation so you can clarify things that you don't understand about the answer.
+
+So here now I can dive in a little deeper and ask about booking the business class seats from New York City to Tokyo. So why would we want to use the same prompt more than one time? There's three uses for that. The first is that it saves time. You don't have to retype the prompt every single time.
+
+I don't have to upload that PDF file every single time I want to ask a question of it. It's already uploaded. It's already saved, and all of the custom gpt are stored in one place on your ChatGPT account, so you don't have to do a search for that old chat that you would had going if that's the way you're currently doing this work.
+
+The second piece is that this ensures consistency, particularly across a team. It makes sure that everybody is getting the same answers in the same format, and because of that. It can help to control quality. Again, there's going to be one consistent prompt that everybody is using, which creates one consistent output.
+
+Let's look what it would take to create a new custom GPT for a convention sales team. Start by navigating to explore GPTs, so you will want to have a paid version of ChatGPT to really dig into using these tools. I believe there's some limited access in the free accounts, but in order to create, to share them across a department, you want to have a paid team or enterprise account.
+
+And you'll see here on the left rail, there's the Explore GPTs button. Then when you open that up, you're going to get, you can see what looks like the GPT store, which is Open AI's version of the Apple's app store, essentially. And you'll see on the top right hand corner there is a button that allows you to create a new GPT.
+
+And then when you click on it, you get this screen to get started, you are going to type in something for the name and the description. Now that information doesn't change how the GPT works, that is just for your own reference. To find the GPT, again, the most important component is here in the middle. It is the instructions.
+
+And the instructions are just another name for a prompt. And so it is something that every time you use this custom GPT, it is going to refer back to this prompt in order to. Find out what it should do with your request. Now, a great way to use this is actually have ChatGPT write that prompt for you. So the example that I am going to show is making a workflow for taking notes, a transcript of a sales call that you have, and then from that sales call, pulling out all of the bullet points that you would then need to paste into your CRM tool, whether that is Simpleview, Salesforce, or another tool. Here I'm explaining to ChatGPT what I want to have, and then it's responding by giving me a prompt, and you'll see the prompt is written in a code called JSON.
+
+When a prompt is written in JSON, it makes it easier for ChatGPT to provide a consistent response because it is following the code.
+
+Even if you don't read code, you can tell these are all of the things that it is looking for in the transcript of your conversation in order to pull out a bullet list for you of that important information. You just copy that from ChatGPT. Go back into the custom GPT that you're building and you paste the instructions into the instructions field.
+
+You then have the opportunity to upload knowledge. So in the case of Brand USA's GPT for our travel and expense policy, I've uploaded our travel and expense policy. So you may not need to upload any files for something like a CRM note taker, but you might want to, if you have examples of good output, what you consider a positive output to look like, you could upload that. If you were creating a reusable prompt in order to look at research, you could then upload that research here and it could review that every time you asked a question about a particular market segment where you have research about that market uploaded into a custom GPT.
+
+And then as you're getting closer to finishing the custom GPT, you can do things like add in a logo or image in order to make it easier for you to find that tool inside of your toolbar. There will just be a plus sign and you can select that plus sign in order to upload an image or have ChatGPT create that image for you.
+
+Then inside of that page, you have the opportunity to preview the custom GPT to see how it works. So here I actually had ChatGPT make a fake transcript of a phone call, and then I uploaded it to this custom GPT to see what the output looks like. What I particularly liked about this custom GPT is that I'm doing a completion check at the end, and it's telling me that some of the data is missing and then you are able to look up and for the question, what prior destinations has this event been held in?
+
+We see that it says unknown, so we know that the next time that we have a call with this person, we may want to clarify whether or not they've held this event in previous destinations and what those destinations were, and then you're going to hit the create button. It's then going to give you options for whether or not you would like to share this GPT. So here I can keep it so that it's just for my own personal use. I can make it invite only and I can get a link where I can share that with other people. I can type in the names of people in the Brand USA workspace and select names from a list in order to share it across with specific people in my company or.
+
+I can make it so that anybody at Brand USA can see this. And in that way, when they go to their version of the GPT store, there's a section at the top with all of the GPTs that are available to the entire company. Then finally you have the option to share it outside of your organization. So if I wanted to create a GPT on how to make custom gpt, I could share that link or that QR code here in the webinar, and then anybody who has that link would be able to use it or we can make it public, and then it goes into that public GPT exchange.
+
+And then the final product, when you open it up inside of your ChatGPT account, this is what it's going to look like.
+
+So what are other examples of custom gpt that you could make? If we wanted to focus just on follow up from meetings, let's imagine you are recording your meetings at IMEX by downloading a transcription or a meeting note taker tool onto your phone. You would want to get permission for recording that meeting, right? Getting consent, whether it is for a recording over Zoom, Microsoft Teams or in person.
+
+There are many meeting note taking tools, some of which you will see join your meeting as a participant. There are other meeting note taking tools that do not join your meeting visibly, but still may be recording your meeting and making a transcription. So it is important to know while you understand, you could be recorded at any time, don't be that person doing that and get consent before you record the call. Once you do, make sure that during the call, you are asking the same key questions that you always would during that initial sales call. So whether it is in person, whether it is over zoom, if you need to know the number of room nights on peak and prior destinations for the meeting has been held, just make sure that you go through all of the questions that you would need to ask, and then you have the opportunity to export that transcript and then put it into a custom GPT.
+
+So we already walked through the idea of making a custom GPT that would work with your CRM tool. So to take all of the information that you might have scribbled on to a note, or you might have you might need to read the entire transcript in order to find all of those individual details. Now it can pull it out for you in one spot.
+
+You could use that same transcript, but create a different custom GPT that is a sales coach. So in my time at New York City Tourism and Conventions, we had a five borough mandate. If a member of the team was talking about New York City as a meeting destination, ideally they aren't just talking about Manhattan, they're talking about the four other boroughs in New York City as well.
+
+If you wanted to spend more time training up junior staff, but you don't always have the bandwidth to listen in on every one of their calls, you could create a custom GPT where the prompt is, review this sales call and then give helpful suggestions on what the sales person could do differently on their next call.
+
+That might be a more comfortable way for somebody to do training where they don't feel like it's another person watching over them. And then you could program into the prompt, make sure that the person on the call is abiding by the five borough mandate and is offering at least one borough in addition to the borough of Manhattan for the meeting destination.
+
+And then finally, of course, it's the email follow up and we know that emails can get a little rote, so the idea isn't to have ChatGPT completely do your email follow up for you, but it's very rare if you're coming back from a conference that you're going to sit down with a blank email every single time that you have to write that follow up.
+
+You're typically starting from some kind of template, and then you are adjusting that template so you can take a little pressure off of yourself. Have ChatGPT, it understands what you consider a good sales follow up to be. Give examples of those good emails to ChatGPT, and then say, please write some guidance so that a future large language model can replicate this style when it's shown a transcript of a call.
+
+And then that will get you faster to the first draft, so that then all you need to do is worry about editing that draft. So how would that process work specifically? I'd say start by choosing five strong post-call emails. The more examples you have, the better. You're then going to go to ChatGPT and create a custom GPT, and then when you're filling in the name and instructions.
+
+Typically, when I am naming a custom GPT, I like to give it a name. Describes the task that it does. So you are, convention sales follow up assistant and that is its job. The only thing it does is assist you in following up on sales conversations. So say, you're a follow-up assistant for A DMO. You help write post-call follow-up emails based on a transcript, match the sales rep's tone and writing style from the examples provided.
+
+Focus on being professional, warm, concise, and helpful. Emphasize next steps and destination benefits relevant to the planner's needs. A really great, straightforward, clear prompt, just telling ChatGPT what do you want it to do every single time somebody pastes in a call transcript, you can then upload your email samples, the files, you can paste them all into one word document if you'd like. Test it with a call transcript to make sure that you are getting the output you are hoping for, and then you can publish that custom GPT.
+
+Now I'd like to talk about how you can use any of the AI tools, which could include Anthropic's Claude or Google's Gemini with a product that they call deep research. It is embedded in all three of the frontier language models and deep research is like giving an assistant 30 minutes to go out and just deeply query a question that you have, and then to take all of this information that the assistant finds on the internet and write a McKinsey style report for you about that information.
+
+I think that this is particularly powerful when it comes to creating a competitive analysis. I wanted to understand what is Brand USA's place amongst 30 national tourism organizations when it comes to the global business event market. So I want to understand for places like Business Events Australia, what is their unique selling proposition and their brand promise?
+
+Do they have a tagline? Can we uncover somewhere hidden in files on the internet information about how much they spend a year on? On meetings and advertising to that market segment, do they offer any incentives to planners who book events in their destination? So this is something that if I were to do it across 30 different organizations, it would take me days.
+
+Here, it will do something similar in about 30 minutes. You have to know that they hallucinate, they will make things up. But in that report, you'll be given links so that you can actually click through to the sources and read those sources yourself to see if you agree with the outcome that ChatGPT gave you in this research report.
+
+If you are looking to see what your competitive set is doing, it is a very powerful tool. It would also be excellent for doing things like researching more deeply on a particular market segment that you were looking to attract to your destination or to learn about trends in the meeting space. If you were looking more at incentives from a particular market, you could get up to date really in-depth, detailed information by giving a powerful prompt to one of these deep research tools.
+
+Now I'm going to walk through a slightly more complex example, which is using agents for lead research. And the example that I'm going to show you today is completely free to access it is from a website that is called agent.ai, and it was created by one of the co-founders of HubSpot.
+
+If you use HubSpot, they have a lot of integrations between agent.ai and the HubSpot ecosystem, and one of the really helpful things they have is access to the API for LinkedIn. So it means you can query LinkedIn and if the people you are querying have open profiles on LinkedIn, you can learn things about them without needing to be inside of LinkedIn and navigating to their profile page.
+
+So I went to agent.ai to make an agent that provides insights on business event planners for DMOs. And here I've written a description of exactly what I want it to do. I want it to deliver actionable sales intelligence based on identifying the key selling points, decision making patterns, and how I could personalize an approach to reach out to this planner based on their professional history.
+
+And it's going to do that by reading the LinkedIn posts that were made by the planner, and then taking those posts and putting them inside a prompt so that a large language model is analyzing the posts and then coming up with an output. The deep research example that I just showed you, that is also an example of agentic AI.
+
+You don't have to move your computer mouse to click on all of the websites that it's researching. You give it a task and it goes out and completes the task on your behalf. So this is a slightly different type of agent where I've spelled out a workflow, and then AI helps the steps in the workflow to move forward.
+
+When you log in and you say, I want to create a new agent, this is what the first landing page will look like. You begin by giving a description that's public of how you say this agent will work. Then here is where you spell out the steps. This agent is very simple. It only has five steps.
+
+And then over here on the right side, this is where you can test the agent to see if it works the way that you want it to. And so the five steps are that you want to get input from the user. So that's this section right here. If I'm the user, this needs input, in this case, the URL of the planner on LinkedIn in order to move to the second step.
+
+The second step is that it's going to go to that URL's LinkedIn profile and save it. It's then going to get the last 25 posts on LinkedIn for that URL, and it is going to save it in a file called LinkedIn posts. So then we're going to invoke GPT-4 .5 in this example, and it's going to review all of that data from LinkedIn, and then it is going to provide a summary, and then it's going to show us that summary in markdown format, so it's easy to read.
+
+So what does this look like? This is creating step number one, getting user input. The input type is text. You're going to, this is what we're asking for, the LinkedIn URL of the business event planner. You can provide examples so that the user of the agent can see what they're meant to do, and then you give that variable, that output and name.
+
+Here, i'm LinkedIn URL. And then let's move forward to the piece where we are using generative AI in this tool. This is just a prompt. I'm providing you with a LinkedIn profile and posts of a business event planner. Please provide a detailed summary of what interests them, what destinations they write about, if any, what a good sales approach could be for them, and then give me a bulleted list that would include key selling points, decision making patterns, and personalized approaches based on that planner's professional history.
+
+Conclude the output with one surprising insight about the planner. And then here I'm telling it what to look at. I want it to look at the data from this person's profile and the post output, the list of their last 25 posts, and then it's going to return that as out summary or output summary. Then this is the output summary rendered in markdown format.
+
+You could see this is six and seven of many different insights that we got from this business event planner, but we now understand some of their key selling points, things that would be interesting to this person as you were conducting a sales pitch with them, and we understand like the surprising insight that this person isn't just a business event planner, he's also a thought leader and an advisor.
+
+He's really on the forefront of this work. All of this, if you are in the midst of the pitching process to host a special meeting in your destination or in your venue, this is very helpful information to have, and it's something you could get by yourself from LinkedIn, but it would take a long time. They don't make it easy in LinkedIn to find the last 25, 50, or 100 LinkedIn posts that someone wrote.
+
+So this makes it much simpler to do that work. And then if you wanted to make this even more agentic, you could set it up on the backend so that it's connected to your Outlook calendar so it knows who you have meetings with, and then could run this script automatically and send you an email every morning with this information.
+
+That's a little more complicated to pull off, but it's something that's entirely possible using today's technology. And so now, this is my opportunity to turn it over to Gabe because I am very excited to hear what he has been vibe coding with Visit Orlando. Gabe, do you want to jump on? Sure. Thanks Janette.
+
+All right. Hello everyone. My name is Gabriel Itajahy. I am the manager of Enterprise Applications at Visit Orlando. I've been here a little bit over 10 years now, and I primarily oversee all of our CMS and CRM integrations. We are Simpleview clients. But today I'm going to be talking a little bit about vibe coding and what the next evolution is in my opinion with AI.
+
+Vibe coding lets you turn some ideas, some brainstorming into quick applications. And I'm going to be demoing something I built for our convention sales team. It's still a prototype. I'm going to be doing a live demo of something we've we're doing with our convention maps.
+
+I did a quick deck for vibe coding, just to give an overview of what it is, and then we'll head over to the demo. Vibe coding essentially is turning plain English into code. So similar to ChatGPT and copilot, you can type something in an idea. Vibe coding turns that into a real application, a website, a platform, a database, a backend, whatever you want, just chatting into a prompt based system. Here on the right hand side, you'll see what that workflow looks like. So number one, you're going to describe what you want. In this example, I need a login form. The AI then generates what you put in and spits out, again, a real application that can be used real time.
+
+Number three talks about refinement. So this is where you go back and forth with vibe coding, changing colors, changing workflows, changing things you don't like, adding things to a form in this example. And then finally, when all that is done, you can implement it and turn something live through the use of vibe, coding and some of these platforms, which I'll show you in a second.
+
+It allows for rapid prototyping. Something that could have taken weeks, months, years to build, can now take hours or days. The fun part is, again, I am on the tech team, but I'm not a developer. Everyone can contribute. Designers can contribute. Business leaders can contribute. CMS users, CRM users, they can go in and build a prototype using vibe coding.
+
+And this has caused a big shift with developers. Developers obviously still code, but now they're leveraging and using Vibe coding to start their process, and now they're looking at QA and security of the code that's output. And just to highlight what we just talked about on the previous slide, the collaboration is big.
+
+It allows people from different departments to participate directly. You're seeing vibe coding and all of these development tools including GitHub, co-pilot, ChatGPTs, and other integrated development environments, and back to the developer roles, it's starting to shift from sitting down and writing code all day to reviewing what the AI has produced.
+
+The big key with vibe coating is the prompt. The prompt is key, is probably the most important thing that you need when vibe coating. Good prompts are clear, specific and outcome oriented. Bad prompts can lead to messy results. Here is a very basic example of a vague prompt, make me a website.
+
+That's not really useful. A clear one would be code a one page site that includes a header and more specifics. And the example I'm going to show you, our prompt was like four pages long and we spent probably more time in the prompt than in the vibe coding tool itself. Here's some examples of vibe coding in action.
+
+We are in the middle of implementing an AI tool on our website, and I wanted to create a quick Gantt chart to highlight the timeline, and I went into Vibe code. We're using a tool called Replit. I told them what we needed. I need a Gantt chart where I can modify the dates, puts out the dates and the nice timeline and something I can quickly share.
+
+We also created a convention map tool. What we've learned in the vibe coding process over the last few months, the benefits are great for proofs of concept, internal tools, fast iteration. It helps bridge those visual, those ideas, and allows business leaders to visualize something. Whether it's a prototype, mockups, a quick app, you can build something quick to show your leaders or stakeholders, and it allows to increase collaboration. Now, it's not always perfect. Sometimes you can get caught in this vibe coding loop and end up spending more time than if you were to just go buy a product or have a developer work on it.
+
+We've experienced that in the past with a few other ideas our team tried to implement. You also don't want to reinvent the wheel if there's a tool out there. Then use that tool, they've probably spent a lot of time perfecting that tool. And there's no need to recreate something that already exists, and you still do need some expertise.
+
+Now, if you're building a simple one-page website by holding, anyone can do it. If you're building something more complex with a backend with databases, integration with different platforms, you're still going to need that technical expertise, whether it's a developer, a technical project manager, or a tech leader.
+
+So things to keep in mind with vibe coding. Alright, now I'm going to show you what we built.
+
+As part of our convention sales team, we work with meeting planners to bring conferences and conventions to Orlando. One of the tools we offer, it's something in Simpleview CMS, it's our map publishing tool. And whenever we have a convention, we let them know, Hey, we have this tool and we can highlight hotels around the convention center, attractions, around the convention center, restaurants, whatever you like.
+
+We can create a map, we can create a shareable URL. You can send out to your attendees, and this is an example of a convention map that created last week. Just showcasing you what it looks like using the map publishing tool from Simpleview. Tool works great. It's easy to use. It pulls live listings from our CRM and we use this probably 80% of the time with our clients.
+
+Everyone's happy and even generates a downloadable PDF that our meeting planners like to add to a brochure or directly in an email. Now, every now and then we want to highlight our International Drive district. So if you're unfamiliar with Orlando, our I Drive district is our tourist district right outside of Disney, Universal, and SeaWorld. I Drive is where all the action happens.
+
+We've developed a custom map, and this is outdated. We're actually working on a new one now of our I Drive district. Sometimes meeting planners want to use this custom map and then plot hotels on this map directly, we can do that, but this is a manual process, so every time a special request comes in, our creative services team will get all of the hotels needed to plot on the map, and they'll manually, I think, using Photoshop, they'll manually plot these points and manually add all of these hotels.
+
+We don't do it often, maybe less than 50 a year, but every time we need to do it, it's a very time consuming process. Again, this one alone has 18 points of interest. I've seen maps that have over 40, over 50. I think we calculated it takes about an hour and a half to make one of these manually.
+
+So again, one and a half hours times 50 a year it starts to add up. So my team and I, we were really looking into vibe coding. We're like, where's, what's a solution? Where's the problem that we can actually solve using vibe coding? And then this came up and we said, all right, let's figure it out. Let's solve it.
+
+And we built a, we call it MAP Con, a convention mapping tool using vibe coding. Now quickly create a map so you can see what it does. Okay, so here I'm going to create a new map. And then again, this is where you'll put your conference information, you'll put in the dates.
+
+My conference will be next year. The location, all the information we collect already. An event logo. I created a logo earlier and now here's where you're going to select the base map. So this is a concept we're testing with. The one I'm going to use is the I Drive sample map, which is what you saw in our example here.
+
+But we're going to be able to add multiple base maps. So if in the future if we build more than one I Drive district map or a Disney Map or Sea World Map, we can select it from this select base map option.
+
+Now, once you select your base map, again, I'm going to use the I Drive example I'm going to create sections. Sections are these areas here that we created using the map publishing tool. So the first section I'll call hotels near West Concourse, and then I'll add the points of interest that are there. Let me see here.
+
+Rosen.
+
+All right, and then I see we also have another Section SeaWorld and I Drive, so I'll go up here, add a new section, SeaWorld, and I Drive. I'll add a point of interest under it and DoubleTree, and then I'll add our last section, and for this one I won't put everything. So I Drive and Convention Center and Castle Hotel.
+
+I'll just add one. So now I've picked my points and you'll see my new map has been generated, grabbing those points of interest and plotting them on the map. Again, this is still in prototype phase. We have some design issues to get through and we're going to use a new map over here in the next few weeks, but what took an hour and a half before just took me maybe less than five minutes, maybe 10 minutes tops, and I just generated a new map. Now, from here, I'll click Create Map to officially create it, and you'll see it here. Now in the backend, I've created a new map. I can create a public URL that I can share.
+
+It looks like this. And there is also a way to download the PDF and it creates this. So we went from where's the other one? From here to here in about five minutes. And that was the goal to make our creative services team time more efficient, more effective. So probably by January, they're going to be using this tool primarily to handle those one-off requests.
+
+Now, you might be asking, how did this tool know to plot those points for those specific areas? That's all done in the backend, in the admin console. So here's your front end. If I click on admin, this is where the magic happens. Under base maps you can upload any new map, any document that you want to plot points against.
+
+Again, here are our four examples. Now this is the interesting part, and this is where we do some manual work, but it's just a one-time thing. And let me show you what that looks like. For every point of interest we have to manually plot it just one time, 'cause without that, there's no way of the system knowing how to apply a plot to a map because it's not to scale, so you can't really use the lat and long that's provided by our CRM or by Google.
+
+So what I'm going to do now is input a POI and Janette's ice cream shop. We added categories and this is a restaurant and we create the POI. Now that POI is set up, it's in the backend here. You can search for it. I actually use Janette for a few other examples here. There's Janette's Ice Cream Shop.
+
+Now, once you set up a POI, you have to go back into your base map and plot that POI to the map.
+
+So here I'm going to get the ice cream shop and plot it somewhere on the map. So let's put it right by Universal. That way it's easy to see. All right. Again, this was the one-time thing. Moving forward, the system's always going to know that the ice cream shop for this space map gets plotted next to Universal.
+
+I'm going to go ahead and save changes.
+
+Okay, now I'm going to go back to the map I created and I'm going to add it here. Now, I might have to refresh a few times, so making sure it's saved here. Okay. There it is.
+
+All right. There it is. I'll go ahead and save it. And now you'll see up here the ice cream shop was applied, if you have hundreds of POIs, that for initial setup could take some time. But you saw that after that initial setup, creating maps, again, we're talking minutes, not hours or days. And all of this was done using a tool called Replit, and this is what it looks like in the backend.
+
+So Replit, you have a normal ChatGPT style prompt on the left hand side. As you prompt it, it generates an app on the right hand side, and I will do a quick demo of what that looks like. So again, this is Replit. There's some other ones out there. Lovable is a popular one. There's some, Claude has one.
+
+But I really liked and enjoyed using Replit. I am going to grab that example from the deck here.
+
+So essentially you just come in here, put in your idea.
+
+And then you start the chat and builds it for you. Unfortunately I might not be able to show you 'cause it does take five to eight minutes, but essentially you just put that in here and Replit and vibe coding will do its thing. And then again, from there you just, it's a lot of back and forth trying to fix things and get things right.
+
+Replit is a cool tool because it allows you to deploy apps without any other backend configuration. Oh, you'll see here, it tells you how long some of these things take. Replit lets you deploy websites and apps using Replit tool itself. So you don't have to go to GitHub, to Azure to host your platform.
+
+You could do it all within the app, which is what you're seeing here with my Map Con app. It's all hosted by the Replit app.
+
+So Janette, I think I covered a lot there. I wanted to showcase everything we've been doing to help the convention sales team and our creative services team using AI to make their jobs their day-to-day a little bit more efficient.
+
+I am so blown away by this tool. I think that this is a terrific example of how AI, it's not here to replace jobs.
+
+I see this as an opportunity to expand what we can do, because how many additional maps are you going to be able to make now a year compared to what you did before? Probably 10 x at least. Yeah. So there, I'm sure a number of conventions that felt like they weren't important enough, or somebody didn't scream loudly enough to get the design team to make the map, right?
+
+And now every single meeting can have their own custom map. Yeah. I brought up the developer piece a few times on purpose because there's been articles out there now saying that vibe coding can't do it all. We still need the developers and there's been organizations that are bringing developers back.
+
+Basically the QA and analyze vibe coding. So yeah, it's not replacing anybody, but it's here to stay and we just have to leverage it and use it correctly. Yeah, I absolutely agree. I'm going to quickly share an app that I vibe coded, and again, it's like, to your point about developers, I'm not trying to sell a SaaS subscription to this, but this is a website that I vibe coded for this webinar series because I wanted to have a space where you could watch all of the video content, and so you could see it was password protected.
+
+You're able to click onto the video content. I haven't done this yet, but when it was vibe coding, it said you should probably have downloadable resources. So once I create the PDF files, they'll be downloadable. I uploaded all of these videos and we'll post this video onto this landing page once we're done editing it after the webinar.
+
+I uploaded them into Google's Gemini, which is able to watch and understand videos, and I said, create chapter headings for me. So it found the timestamps and chapter headings, and then when you click on it, something else I think is very useful, it jumps ahead to that point in the webinar and I didn't tell it to do that initially.
+
+Like it just started doing it because it knew that is something that is very useful inside of a content learning system. The ability of AI to make SaaS products available to us and to be perfectly customizable to us.
+
+ I really appreciate you coming on, and now I am going use the last 10 minutes here to talk about incorporating AI into your workflow at your convention sales team. The way that I like to think about the workflow piece as opposed to the individual contributor piece is, look at the department and then double click on all of the roles that happen inside of that department. And it could be separate jobs, separate positions, but it it could be one person is managing sales operations and lead generation and market intelligence. But let's say we wanted to focus on just one of those roles to start, and we want to focus on sales operations because that's the piece that's not out talking to people, right? It's the backend, it's the part that you want to get out of the way so that we can do the real part of the job, which is communicating with the buyers. You could take the sales operations role and break it down into all of these individual touchpoint.
+
+So what does that involve? CRM administration, forecasting, reporting. Go through then and determine what is one way that you can use AI for each element of this process. If you have your sales process written out, ask AI to suggest ways to simplify that workflow we already talked about for your CRM transforming transcripts into notes for forecasting.
+
+Look at historical data and try to understand patterns in that data. That's something that AI is really good at. So knowing what are the little details that you may not have noticed. But ChatGPT or the AI tool of your choice sees that actually contributes to a closed deal. Again, reporting, having the opportunity to put a report into ChatGPT and say, break this down into the things I need to know from this report or on the other side to take information and turn it into a report to make your reporting process simpler so you're not wasting so much time describing what it is that you're doing. I really like tools like ChatGPT for a gap analysis. So what am I not thinking about that I should be thinking about or give me three ways to improve this proposal?
+
+And then we talked about competitive intelligence using deep research tools as well.
+
+To conclude today's webinar, I want to remind everyone that at work it is not cheating to use AI. You want to make sure that you're using it responsibly, that you are using paid secure tools for that work. But please don't think that by taking a shortcut that you aren't still doing your job. Remember, like when it comes to RFPs, your job isn't to write RFPs or to respond to RFPs. It's to do the work that the RFP is about, and that's communicating with the people and developing those relationships, and actually getting the meeting to be held in the United States and in your destination.
+
+AI gives us more capacity to make that happen. I want to thank Gabe so much again. Thank you Visit Orlando for sharing Gabe with us for today. I learned a lot from that and I hope you did as well.`,
     // Enhanced metadata for AI discoverability
     keyTakeaways: [
       'AI Enhances Sales Capacity, Not Replaces Jobs: AI tools act as "assistants" to automate repetitive tasks, freeing up sales teams to focus on relationship building and strategy',
