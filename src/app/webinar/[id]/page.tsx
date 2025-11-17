@@ -31,11 +31,6 @@ const webinarData = {
       { time: 2164, title: 'Our AI Mantras' },
       { time: 2274, title: 'Conclusion' },
     ],
-    resources: [
-      { name: 'AI Agents Playbook', url: '/resources/ai-agents-playbook.pdf' },
-      { name: 'Implementation Checklist', url: '/resources/implementation-checklist.pdf' },
-      { name: 'Prompt Templates', url: '/resources/prompt-templates.pdf' },
-    ],
   },
   'ai-101': {
     id: 'ai-101',
@@ -58,11 +53,6 @@ const webinarData = {
       { time: 2041, title: 'Using Custom GPTs' },
       { time: 2387, title: 'Next Steps for Your Organization' },
       { time: 2678, title: 'Conclusion & Thank You' },
-    ],
-    resources: [
-      { name: 'AI Fundamentals Guide', url: '/resources/ai-fundamentals.pdf' },
-      { name: 'Glossary of AI Terms', url: '/resources/ai-glossary.pdf' },
-      { name: 'Further Reading List', url: '/resources/reading-list.pdf' },
     ],
   },
   'ai-tool-playground': {
@@ -93,11 +83,6 @@ const webinarData = {
       { time: 1739, title: 'Tool 10: Beautiful.ai' },
       { time: 1857, title: 'Tool 11: Napkin' },
       { time: 2022, title: 'Summary and Live Q&A' },
-    ],
-    resources: [
-      { name: 'Tool Comparison Chart', url: '/resources/tool-comparison.pdf' },
-      { name: 'Quick Start Guides', url: '/resources/quick-start-guides.pdf' },
-      { name: 'DMO Tool Templates', url: '/resources/dmo-templates.pdf' },
     ],
   },
   'ai-dmo-leadership': {
@@ -131,9 +116,7 @@ const webinarData = {
       { time: 2376, title: 'Closing Thoughts & Future Topics' },
     ],
     resources: [
-      { name: 'AI Implementation Roadmap', url: '/resources/ai-implementation-roadmap.pdf' },
-      { name: 'Vendor & Tool Vetting Checklist', url: '/resources/vendor-tool-vetting-checklist.pdf' },
-      { name: 'AI Governance Framework Template', url: '/resources/ai-governance-framework-template.pdf' },
+      { name: 'Brand USA AI Policy', url: 'https://thebrandusa.app.box.com/s/bbsg85jl4w1rbgolcyg2kwjzy7he9g64' },
     ],
   },
   'custom-gpts': {
@@ -164,11 +147,6 @@ const webinarData = {
       { time: 1471, title: 'More Ideas for Custom GPTs' },
       { time: 1744, title: 'Live Q&A and Conclusion' },
     ],
-    resources: [
-      { name: 'Custom GPT Creation Guide', url: '/resources/custom-gpt-guide.pdf' },
-      { name: 'GPT Prompt Templates', url: '/resources/gpt-prompt-templates.pdf' },
-      { name: 'Implementation Worksheet', url: '/resources/gpt-implementation-worksheet.pdf' },
-    ],
   },
   'ai-convention-sales': {
     id: 'ai-convention-sales',
@@ -187,10 +165,6 @@ const webinarData = {
       { time: 1695, title: 'Vibe Coding in Action: Demos (Visit Orlando MapCon & Replit)' },
       { time: 2478, title: 'AI Integration, Workflow & Conclusion' },
     ],
-    resources: [
-      { name: 'Convention Sales AI Guide', url: '/resources/convention-sales-guide.pdf' },
-      { name: 'Implementation Templates', url: '/resources/convention-sales-templates.pdf' },
-    ],
   },
   'crit-framework': {
     id: 'crit-framework',
@@ -207,10 +181,6 @@ const webinarData = {
       { time: 490, title: 'Example 2: Brainstorming a Marketing Plan with a PDF' },
       { time: 707, title: 'Conclusion: Why Context is Key for AI' },
     ],
-    resources: [
-      { name: 'CRIT Framework Guide', url: '/resources/crit-framework-guide.pdf' },
-      { name: 'Prompt Templates', url: '/resources/crit-prompt-templates.pdf' },
-    ],
   },
   'clueless-packing-app': {
     id: 'clueless-packing-app',
@@ -222,10 +192,6 @@ const webinarData = {
     instructorTitle: 'Chief AI Officer, Brand USA',
     isShortForm: true, // Flag for vertical player layout
     chapters: [], // No chapters for short-form content
-    resources: [
-      { name: 'Claude Artifacts Guide', url: '/resources/claude-artifacts-guide.pdf' },
-      { name: 'Prompt Examples', url: '/resources/claude-prompt-examples.pdf' },
-    ],
   },
   'model-context-protocol': {
     id: 'model-context-protocol',
@@ -241,11 +207,6 @@ const webinarData = {
       { time: 588, title: 'Practical Applications for Tourism' },
       { time: 905, title: 'Strategic Implications for DMOs' },
       { time: 1154, title: 'Next Steps & Technical Demo' },
-    ],
-    resources: [
-      { name: 'MCP Implementation Guide', url: '/resources/mcp-implementation-guide.pdf' },
-      { name: 'Technical Documentation', url: '/resources/mcp-technical-docs.pdf' },
-      { name: 'Strategic Planning Worksheet', url: '/resources/mcp-strategic-planning.pdf' },
     ],
   },
 }
@@ -431,26 +392,30 @@ export default function WebinarPage({ params }: { params: { id: string } }) {
 
           {/* Sidebar */}
           <div className="space-y-6">
-            {/* Resources */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-              <h2 className="text-lg font-semibold text-brand-navy mb-4">Resources</h2>
-              <div className="space-y-3">
-                {webinar.resources.map((resource, index) => (
-                  <div
-                    key={index}
-                    className="flex items-center justify-between p-3 rounded-lg border border-gray-200 bg-gray-50"
-                  >
-                    <div className="flex items-center">
-                      <Download className="h-5 w-5 text-gray-400 mr-3" />
-                      <span className="text-gray-700 font-medium">
-                        {resource.name}
-                      </span>
-                    </div>
-                    <span className="text-xs text-blue-600 font-medium">Coming Soon</span>
-                  </div>
-                ))}
+            {/* Resources - only show if resources exist */}
+            {(webinar as any).resources && (webinar as any).resources.length > 0 && (
+              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <h2 className="text-lg font-semibold text-brand-navy mb-4">Resources</h2>
+                <div className="space-y-3">
+                  {(webinar as any).resources.map((resource: any, index: number) => (
+                    <a
+                      key={index}
+                      href={resource.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-between p-3 rounded-lg border border-gray-200 bg-gray-50 hover:bg-gray-100 transition"
+                    >
+                      <div className="flex items-center">
+                        <Download className="h-5 w-5 text-gray-400 mr-3" />
+                        <span className="text-gray-700 font-medium">
+                          {resource.name}
+                        </span>
+                      </div>
+                    </a>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
         )}
