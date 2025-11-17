@@ -143,6 +143,35 @@ const resources = [
     ]
   },
   {
+    category: 'Tourism Voices in AI',
+    items: [
+      {
+        title: 'Travel Trends Podcast',
+        description: 'Tourism industry podcast exploring AI trends, destination marketing innovation, and technology adoption in travel.',
+        url: 'https://www.traveltrendspodcast.com/',
+        icon: Podcast,
+      },
+      {
+        title: 'Everything AI in Travel',
+        description: 'Newsletter covering artificial intelligence applications, trends, and innovations specifically for the travel and tourism industry.',
+        url: 'https://everythingaiintravel.beehiiv.com/',
+        icon: FileText,
+      },
+      {
+        title: 'Kara Franker - AI in Tourism',
+        description: 'Insights and analysis on AI applications in destination marketing, tourism trends, and industry innovation.',
+        url: 'https://karafranker.substack.com/',
+        icon: FileText,
+      },
+      {
+        title: 'CEO.AI Newsletter',
+        description: 'LinkedIn newsletter on AI strategy, leadership, and implementation for executives and decision-makers.',
+        url: 'https://www.linkedin.com/newsletters/ceo-ai-7346953760369164290/',
+        icon: FileText,
+      },
+    ]
+  },
+  {
     category: 'Research & Productivity',
     items: [
       {
@@ -320,12 +349,6 @@ const resources = [
         title: 'Allie K. Miller - AI Learning',
         description: 'AI educator and advisor sharing practical guidance on AI adoption, strategy, and implementation for business leaders.',
         url: 'https://www.alliekmiller.com',
-        icon: BookOpen,
-      },
-      {
-        title: 'Connor Grennan - AI Education',
-        description: 'Dean at NYU Stern teaching AI and leadership, creating accessible AI education for business professionals.',
-        url: 'https://www.connorgrennan.com',
         icon: BookOpen,
       },
     ]
