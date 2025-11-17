@@ -1,4 +1,3 @@
-import Script from 'next/script'
 import GlossaryClient from './GlossaryClient'
 
 const terms = [
@@ -106,12 +105,12 @@ export default function GlossaryPage() {
   return (
     <>
       {/* JSON-LD Structured Data - Server-Rendered */}
-      <Script
+      <script
         id="defined-term-set-schema"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(definedTermSetSchema) }}
       />
-      <Script
+      <script
         id="faq-page-schema"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageSchema) }}

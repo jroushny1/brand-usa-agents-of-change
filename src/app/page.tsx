@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import Script from 'next/script'
 import { Play, Clock, Video, Headphones, Wrench, ArrowRight } from 'lucide-react'
 import AccessCheck from '@/components/AccessCheck'
 
@@ -259,22 +258,22 @@ export default function HomePage() {
     <AccessCheck>
       <>
         {/* JSON-LD Structured Data for Homepage */}
-        <Script
+        <script
           id="organization-schema"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
         />
-        <Script
+        <script
           id="website-schema"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
-        <Script
+        <script
           id="collection-schema"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionPageSchema) }}
         />
-        <Script
+        <script
           id="course-schema"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(courseSchema) }}
