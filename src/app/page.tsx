@@ -178,11 +178,6 @@ export default function HomePage() {
                 Explore Resources
               </Link>
             </div>
-
-            {/* Social Proof */}
-            <p className="text-white/80 text-sm">
-              Trusted by 200+ tourism professionals across the USA
-            </p>
           </div>
         </div>
       </section>
