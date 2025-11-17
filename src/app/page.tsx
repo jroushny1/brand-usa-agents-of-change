@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { Play, Clock, TrendingUp, Users, BookOpen } from 'lucide-react'
+import { Play, Clock, Video, Headphones, Wrench, ArrowRight } from 'lucide-react'
 import AccessCheck from '@/components/AccessCheck'
 
 // Temporary data - we'll move this to Supabase later
@@ -103,89 +103,161 @@ const shortFormVideos = [
   },
 ]
 
-const stats = [
-  { label: 'Hours of Content', value: '6+', icon: Clock },
-  { label: 'Total Videos', value: '10', icon: Users },
-  { label: 'Certificate', value: 'Coming Soon', icon: TrendingUp },
-]
 
 export default function HomePage() {
   return (
     <AccessCheck>
       <>
         {/* Header */}
-        <header className="border-b border-gray-200 bg-white">
+        <header className="border-b border-gray-200 bg-white shadow-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
+          <div className="flex justify-between items-center h-18">
             <div className="flex items-center">
               <Image
                 src="/brandusa-logo.png"
                 alt="Brand USA"
-                width={120}
-                height={40}
+                width={100}
+                height={33}
                 className="h-8 w-auto"
               />
-              <span className="ml-3 text-xl font-semibold text-brand-navy">
+              <span className="ml-4 text-xl font-semibold text-[#191B56]">
                 Agents of Change
               </span>
             </div>
-            <nav className="flex items-center space-x-4">
-              {/* Password protection removed - Exit Beta button hidden */}
+            <nav className="hidden md:flex items-center space-x-8">
+              <a href="#webinars" className="text-base font-medium text-[#191B56] hover:text-[#0056D2] transition-colors">
+                Videos
+              </a>
+              <Link href="/library" className="text-base font-medium text-[#191B56] hover:text-[#0056D2] transition-colors">
+                Resources
+              </Link>
+              <Link href="/shorts" className="text-base font-medium text-[#191B56] hover:text-[#0056D2] transition-colors">
+                Quick Tutorials
+              </Link>
             </nav>
           </div>
         </div>
       </header>
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-brand-blue to-brand-navy text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
-          <div className="text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              Become an AI Agent of Change
+      <section className="relative overflow-hidden h-[600px] flex items-center text-white">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="https://images.unsplash.com/photo-1534430480872-3498386e7856?q=80&w=2070&auto=format&fit=crop"
+            alt="Times Square New York"
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-[#191B56] opacity-85" />
+        </div>
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+          <div className="text-center max-w-4xl mx-auto">
+            <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight tracking-tight">
+              Master AI for Tourism Marketing
             </h1>
-            <p className="text-xl md:text-2xl mb-8 text-blue-100 max-w-3xl mx-auto">
-              Join Brand USA's exclusive AI learning platform designed for tourism professionals ready to lead the future of tourism.
+            <p className="text-xl md:text-2xl mb-10 text-white/90 max-w-3xl mx-auto leading-relaxed">
+              Exclusive training, tools, and community for Brand USA professionals leading the future of travel
             </p>
-            <div className="flex justify-center">
-              <a 
-                href="#webinars" 
-                className="bg-white text-brand-blue px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition inline-flex items-center justify-center"
+
+            {/* Dual CTAs */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
+              <a
+                href="#webinars"
+                className="bg-white text-[#0056D2] px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition inline-flex items-center justify-center shadow-lg hover:shadow-xl text-lg"
               >
-                Watch Webinars
+                Start Learning
                 <Play className="ml-2 h-5 w-5" />
               </a>
+              <Link
+                href="/library"
+                className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white/10 transition inline-flex items-center justify-center text-lg"
+              >
+                Explore Resources
+              </Link>
             </div>
+
+            {/* Social Proof */}
+            <p className="text-white/80 text-sm">
+              Trusted by 200+ tourism professionals across the USA
+            </p>
           </div>
         </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-brand-navy/20 to-transparent pointer-events-none" />
       </section>
 
-      {/* Stats Section */}
-      <section className="py-12 bg-gray-50">
+      {/* Content Navigation Cards */}
+      <section className="py-16 bg-gradient-to-b from-gray-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {stats.map((stat) => {
-              const Icon = stat.icon
-              return (
-                <div key={stat.label} className="text-center">
-                  <div className="inline-flex items-center justify-center w-12 h-12 bg-brand-sky/10 rounded-lg mb-4">
-                    <Icon className="h-6 w-6 text-brand-sky" />
-                  </div>
-                  <div className="text-3xl font-bold text-brand-navy">{stat.value}</div>
-                  <div className="text-gray-600">{stat.label}</div>
-                </div>
-              )
-            })}
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-[#191B56] mb-4">
+              Explore Our Platform
+            </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Choose your learning path with curated content designed for tourism professionals
+            </p>
           </div>
 
-          {/* Library CTA */}
-          <div className="mt-12 text-center">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {/* AI Training Videos Card */}
+            <Link
+              href="#webinars"
+              className="group bg-white rounded-xl border border-gray-200 p-8 hover:shadow-xl hover:-translate-y-2 transition-all duration-300"
+            >
+              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#0056D2] to-[#6BA6AA] flex items-center justify-center mb-6">
+                <Video className="h-8 w-8 text-white" />
+              </div>
+              <h3 className="text-2xl font-semibold text-[#191B56] mb-3">
+                AI Training Videos
+              </h3>
+              <p className="text-gray-600 mb-6 leading-relaxed">
+                8 comprehensive webinars covering AI fundamentals, strategy, and implementation for tourism marketing
+              </p>
+              <div className="inline-flex items-center text-[#0056D2] font-semibold group-hover:gap-2 transition-all">
+                Watch Now
+                <ArrowRight className="ml-1 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              </div>
+            </Link>
+
+            {/* Podcasts & Interviews Card */}
+            <Link
+              href="/library#podcasts"
+              className="group bg-white rounded-xl border border-gray-200 p-8 hover:shadow-xl hover:-translate-y-2 transition-all duration-300"
+            >
+              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#AB606F] to-[#950E1D] flex items-center justify-center mb-6">
+                <Headphones className="h-8 w-8 text-white" />
+              </div>
+              <h3 className="text-2xl font-semibold text-[#191B56] mb-3">
+                Podcasts & Interviews
+              </h3>
+              <p className="text-gray-600 mb-6 leading-relaxed">
+                13 expert conversations exploring AI's impact on destination marketing from 2023-2025
+              </p>
+              <div className="inline-flex items-center text-[#0056D2] font-semibold group-hover:gap-2 transition-all">
+                Listen
+                <ArrowRight className="ml-1 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              </div>
+            </Link>
+
+            {/* AI Tools & Resources Card */}
             <Link
               href="/library"
-              className="inline-flex items-center px-6 py-3 bg-brand-sky text-white font-semibold rounded-lg hover:bg-brand-sky/90 transition-colors shadow-md hover:shadow-lg"
+              className="group bg-white rounded-xl border border-gray-200 p-8 hover:shadow-xl hover:-translate-y-2 transition-all duration-300"
             >
-              <BookOpen className="h-5 w-5 mr-2" />
-              Browse Full Learning Library
+              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#DEB041] to-[#A66326] flex items-center justify-center mb-6">
+                <Wrench className="h-8 w-8 text-white" />
+              </div>
+              <h3 className="text-2xl font-semibold text-[#191B56] mb-3">
+                AI Tools & Resources
+              </h3>
+              <p className="text-gray-600 mb-6 leading-relaxed">
+                Curated AI tools, platforms, templates, and industry resources for immediate implementation
+              </p>
+              <div className="inline-flex items-center text-[#0056D2] font-semibold group-hover:gap-2 transition-all">
+                Browse
+                <ArrowRight className="ml-1 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              </div>
             </Link>
           </div>
         </div>
