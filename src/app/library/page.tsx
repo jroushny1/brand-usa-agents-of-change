@@ -175,6 +175,12 @@ const resources = [
         url: 'https://www.linkedin.com/newsletters/ceo-ai-7346953760369164290/',
         icon: FileText,
       },
+      {
+        title: 'Janette Roush - Chief AI Officer, Brand USA',
+        description: 'Follow for insights on AI strategy, implementation, and innovation in destination marketing and tourism.',
+        url: 'https://www.linkedin.com/in/janetteroush/',
+        icon: FileText,
+      },
     ]
   },
   {
