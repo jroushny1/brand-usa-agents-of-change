@@ -14,6 +14,12 @@ const resources = [
         url: 'https://www.thebrandusa.com/partner-resources?tab-order=3',
         icon: FileText,
       },
+      {
+        title: 'Brand USA Agents of Change',
+        description: 'Register for upcoming webinars here.',
+        url: 'https://www.thebrandusa.com/events/webinars',
+        icon: FileText,
+      },
     ]
   },
   {
