@@ -1508,6 +1508,89 @@ AI gives us more capacity to make that happen. I want to thank Gabe so much agai
     muxPlaybackId: 'OC72C8icortMHMBjS87615i9PRYu3C2dGt7XA22JlWU',
     instructor: 'Janette Roush',
     instructorTitle: 'Chief AI Officer, Brand USA',
+    transcript: `What makes AI work well is how much context or information you give it.
+
+ The framework is called CRIT. Context, role, interview and task.  If you can provide all of these pieces of detail, you're going to get a much more interesting response than if you just type a few sentences into a prompt window,  using a voice-to-text tool to do this work.
+
+Inside of the paid versions of ChatGPT, we have a dictate button.
+
+The trick with using the dictate button is  the dictation always starts at the end of all of the prompts. There's a number of voice-to-text systems that one can use. I use a piece of software called Monologue because it's local to my computer, so it does not ever go into the cloud.
+
+Another version that's very popular is called Wispr Flow.
+
+  When we're using AI, we should talk to it because that is how you start giving enough information to AI to help it do its job.  We have HQ Week next week, and I am doing a Lunch and Learn, and I want the lunch and learn to be about building an artifact inside of Claude.
+
+I am just going to talk to the AI and give it all the information it needs to help me come up with a plan. The first thing I'm going to do is up here in the model picker, I'm going to pick thinking, which means that it's going to think longer in order to give me a response.
+
+It's going to think through many different possible answers, and then it's going to decide which is the best answer and give that answer to me.  That's why I like to use thinking mode for a more complicated task.  Now I'm going to hit the hot key to start my voice transcription. I'm going to say the context that I want you to help me with is that Brand USA is having an HQ Week next week I am the host of a lunch and learn where I would like us to use Claude.
+
+In order to have each individual person create an artifact inside of Claude that is something that they can share between their department and would provide value to the company, would be simple to explain and simple to participate in, but would be something that's both fun. And really useful. I only have an hour for this workshop.
+
+People will be eating lunch during the workshop, so there can't be too much typing involved in this project, and I want it to be enjoyable. There will be room for laptops. We'll have good wifi, but there won't be  tons of space to spread out. We'll be pretty packed in.
+
+But you can see that I just started talking. Now all of those words are in ChatGPT, and I didn't have to type it all out and you could just say whatever pops into your head. AI will make sense of it so you don't have to do it perfectly.
+
+AI will still understand it.
+
+I have given some detailed background or context about the project I want help with.  So the next step, and again, I'm hitting shift return to enter to a new line here in the prompt, I'm going to assign AI a specific expert role.  So I've started recording and I'm going to say the specific expert role that I am giving to you is as me. Your expert role is you're the Chief AI Officer for Brand USA with a background in education, and you want to make this accessible to everybody on the team. You want it to be fun for experts and for beginners.
+
+There we go.
+
+Then this is a really important step. We want to prompt AI to ask us questions in order to get the best results. And so that's how it's going to pull more specific context from us in order to provide a more interesting answer. So I'm recording and I'm going to say, please ask me two additional questions, one at a time in order to really understand what I am trying to accomplish and to create the best possible workshop programming for this hour,
+
+right?  And then this specific objective that I want.
+
+I need help creating an outline for a one hour workshop for the Brand USA team. Everybody will be able to complete on their individual computers and will result in them having a working Claude artifact. That might help with some aspect of doing their job at Brand USA. But we don't have to boil the ocean all at once.
+
+We can start by making a Pomodoro timer as a team, and then people can come up with ideas for what a Claude artifact could be. Most of the hours should focus on coming up with a good idea. That would be useful because making the actual artifact will be pretty fast.
+
+Great. So now you can see that this is a pretty long prompt. It's longer than I would normally type in to ChatGPT or Claude for something like this. I'm going to hit enter. It's in thinking mode, so it's going to take a little bit of, oh, it's going to start with an asking the questions.  So who's in the room? It will be representatives across our entire 60 person company who's going to be in the room.
+
+So it's going to include finance, partnerships, marketing, social media, analytics, research, technology, and legal.  There will be probably not a lot of access to data, so let's not have any external tools in this. Let's come up with examples that are self-contained and fairly simple, and now it's going to use my answer there to help inform what the second question is that it's going to ask me.
+
+At the end of the hour, I want the Claude artifact to be a content brief generator, a mini Q&A bot, a reusable prompt template. All of those are really good ideas. I just want it to be something that will be useful to the individual who created the artifact and the success metric I care most about, honestly, it would be immediate adoption by somebody else in that person's department so that we can encourage working as a team using the same tools.
+
+All of this stuff much longer than the prompts I normally type out, and we get to see how it's planning because it's in thinking mode.
+
+ Now I have an output that I've now used ChatGPT for something that's a little more advanced than rewriting an email to sound more polite or using it like fancy Google. It's  creating this workshop outline for me, and we see what the goals are.  We know that everybody is going to have a laptop with Claude open.
+
+I'll have a timer.  That's an instruction for me in the room. In 45 minutes, you're going to ship one Claude artifact that a teammate will adopt today. We want it to be explainable in 30 seconds, so we'll start by going through pain points. Then we're going to use that to come up with the idea for what the artifact will be.
+
+And then at the end of it, we'll ask people to swap so that people are literally using one another's artifacts inside of the workshop. We have some idea starters so that is a good starting place. The entire idea behind this CRIT framework is that it forces you to give enough information to ChatGPT that it can give you a good response back.
+
+I'll share my screen because this is another example of adding context.
+
+We're downloading this briefing document, and now I'm going to add it as context here.  I want to help our Brazilian rep firm come up with a really great interesting idea to engage the travel trade in Brazil with our new campaign America The Beautiful.
+
+ I'm going to assume this would need to be low budget, let's say no more than a thousand dollars.  Think about the ideas rather than the execution at this point. If we wanted to bring America the Beautiful to life for the Brazilian travel trade at a local trade event, what kind of activation could we do in a Brand USA booth that would be taking advantage of all of the opportunities of America the Beautiful?
+
+We want to assign it an expert role. Your role is as a marketing director who specializes in international tourism and is an expert on the United States, and you have deep relationships with the travel trade in Brazil, and you want to make sure that everybody is making the United States  their number one destination for their customers in 2026 and beyond based on this campaign.
+
+ Honestly, this should be enough, even if it doesn't go and ask questions. This is already a longer prompt than a lot of people ever put into ChatGPT, because we used the voice tool so that we were able to deliver a lot of context to the tool.  Loaded this briefing document so it is pulling from real information about this campaign to make sure that everything it suggests is grounded in our brand.
+
+ We already have localized Portuguese videos, carousels, banners, and toolkit guidance to lean on.  We want to put all the spend into simple high impact engagement and lead capture.
+
+Okay, so we could have Passport to the Beautiful. Each pillar is a 30-second pitch and a QR code that leads you to a Google form that has downloadable open sell sheets and social assets.  You get a small drawing prize or priority access to a webinar.
+
+I think they overestimate how excited people are to watch a webinar.
+
+Reels in a Box. Set up a recording station and ask the agents to create social posts for us.
+
+The Route Builder.  Magnetic map of the United States with magnet tiles tied to the demand drivers that Brazilians love.  Football, food. Look at my Portuguese. It's pretty good.  It says shopping parks, snow, soccer, wine, astronomy,  road trips, routes, car route, road trips.
+
+That's fun. You assemble a seven day itinerary in 60 seconds. Snap a photo and it says, text them a polished PDF version by a QR code after the show. I bet you could use AI I That could be a Claude artifact,  turn this picture of magnets on a map into an itinerary.
+
+ This went very deep and it didn't even do the prompt correctly because I hit enter too soon.  This illustrates how the more context, the more information you give to ChatGPT, the better the results are.
+
+ If I wanted to dig in deeper, because none of these tools are meant to be one shot, if I wanted to say, can you help me design an AI integration that, I am already forgetting that I have the text  tool, because that's one of those things you have to train to remember to use.  Can you help me design an AI integration  that would connect a photo that I take of this map with the magnet tiles on it sends it using Zapier or another tool to ChatGPT, which reads the picture and writes out an itinerary, and then I can put that itinerary into MindTrip and it can fill in the details.
+
+Do you think that's possible? And can you write this out as like next steps so the map, let's say with the image, we have an image that we can, that you could, share or load or whatever it is, and see what it come up with to compare it to our itineraries to see how realistic the itinerary suggestions that it gives to road trip itineraries.
+
+I share all of this to show how AI can be used as a brainstorming tool, but rooted in the truth of what needs to be accomplished. And the way that we rooted in truth is by providing a whole lot of context around it and providing that source of truth, which was the briefing document from the marketing team about the campaign.
+
+ But I do the approach of just paste it in and then piece by piece, provide the information. And obviously it still works if you're typing instead of talking to it, but the more we get into the habit of talking, the better the AI outputs will be, and certainly you don't have to feel limited to English to do that.
+
+You can use whatever your first language is. AI is very likely going to understand it.  It doesn't have to be clean and polished. You can just let thoughts come to your head and let the AI make sense out of it. We don't have to have all of the answers at once.`,
     // Enhanced metadata for AI discoverability
     keyTakeaways: [
       'The CRIT framework (Context, Role, Interview, Task) is a structured method for providing comprehensive details to an AI, which leads to significantly more useful and interesting responses',
