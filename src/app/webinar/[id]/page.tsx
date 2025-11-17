@@ -1,12 +1,10 @@
-'use client'
-
-import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import Script from 'next/script'
-import { ArrowLeft, Download, Clock, BookOpen, ChevronDown, ChevronUp } from 'lucide-react'
+import { ArrowLeft, Download, Clock, BookOpen } from 'lucide-react'
 import HLSPlayer from './hls-player'
 import AccessCheck from '@/components/AccessCheck'
+import TranscriptToggle from './TranscriptToggle'
 
 // This would come from your database
 const webinarData = {
@@ -1786,7 +1784,6 @@ You can use whatever your first language is. AI is very likely going to understa
 
 export default function WebinarPage({ params }: { params: { id: string } }) {
   const webinar = webinarData[params.id as keyof typeof webinarData]
-  const [transcriptExpanded, setTranscriptExpanded] = useState(false)
 
   if (!webinar) {
     return (
@@ -2081,26 +2078,7 @@ export default function WebinarPage({ params }: { params: { id: string } }) {
 
               {/* Transcript - only show if transcript exists */}
               {(webinar as any).transcript && (
-                <div className="bg-white rounded-xl shadow-sm border border-gray-200">
-                  <button
-                    onClick={() => setTranscriptExpanded(!transcriptExpanded)}
-                    className="w-full flex items-center justify-between p-4 hover:bg-gray-50 transition"
-                  >
-                    <h2 className="text-lg font-semibold text-brand-navy">Transcript</h2>
-                    {transcriptExpanded ? (
-                      <ChevronUp className="h-5 w-5 text-gray-500" />
-                    ) : (
-                      <ChevronDown className="h-5 w-5 text-gray-500" />
-                    )}
-                  </button>
-                  {transcriptExpanded && (
-                    <div className="px-6 pb-6 pt-2">
-                      <div className="prose prose-sm max-w-none text-gray-700 leading-relaxed whitespace-pre-wrap">
-                        {(webinar as any).transcript}
-                      </div>
-                    </div>
-                  )}
-                </div>
+                <TranscriptToggle transcript={(webinar as any).transcript} />
               )}
 
             {/* Video Info */}
