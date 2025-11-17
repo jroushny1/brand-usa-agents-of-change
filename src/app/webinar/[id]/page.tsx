@@ -2,7 +2,6 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowLeft, Download, Clock, BookOpen } from 'lucide-react'
 import HLSPlayer from './hls-player'
-import AccessCheck from '@/components/AccessCheck'
 import TranscriptToggle from './TranscriptToggle'
 
 // This would come from your database
@@ -1786,11 +1785,9 @@ export default function WebinarPage({ params }: { params: { id: string } }) {
 
   if (!webinar) {
     return (
-      <AccessCheck>
-        <div className="min-h-screen flex items-center justify-center">
-          <p className="text-xl text-gray-600">Webinar not found</p>
-        </div>
-      </AccessCheck>
+      <div className="min-h-screen flex items-center justify-center">
+        <p className="text-xl text-gray-600">Webinar not found</p>
+      </div>
     )
   }
 
@@ -1966,8 +1963,7 @@ export default function WebinarPage({ params }: { params: { id: string } }) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       ></script>
 
-      <AccessCheck>
-        {/* Header */}
+      {/* Header */}
       <header className="border-b border-gray-200 bg-white sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
@@ -2223,7 +2219,6 @@ export default function WebinarPage({ params }: { params: { id: string } }) {
         </div>
         )}
       </div>
-      </AccessCheck>
     </>
   )
 }
