@@ -143,6 +143,18 @@ const resources = [
     ]
   },
   {
+    category: 'Research & Productivity',
+    items: [
+      {
+        title: 'Google NotebookLM',
+        description: 'AI-powered research and note-taking tool that synthesizes information from your documents, creates study guides, and generates podcast-style audio overviews.',
+        url: 'https://notebooklm.google.com',
+        icon: Code,
+        logo: 'https://www.gstatic.com/lamda/images/gemini_sparkle_v002_d4735304ff6292a690345.svg',
+      },
+    ]
+  },
+  {
     category: 'AI Language Models',
     items: [
       {
@@ -165,6 +177,13 @@ const resources = [
         url: 'https://gemini.google.com',
         icon: Code,
         logo: 'https://www.gstatic.com/lamda/images/gemini_sparkle_v002_d4735304ff6292a690345.svg',
+      },
+      {
+        title: 'Microsoft Copilot',
+        description: 'Microsoft\'s AI assistant with web search, image generation, and deep integration with Microsoft 365 applications.',
+        url: 'https://copilot.microsoft.com',
+        icon: Code,
+        logo: 'https://assets-global.website-files.com/6408f6907936855c20961f84/668a45e0b34fde86eb65e1f6_microsoft-copilot-icon.svg',
       },
     ]
   },
@@ -222,16 +241,92 @@ const resources = [
         icon: Code,
         logo: 'https://cdn.prod.website-files.com/6009ec8cda7f305645c9d91b/6408f6907936855c20961f84_descript-logo.png',
       },
+      {
+        title: 'Napkin.ai',
+        description: 'AI tool that transforms text into visual diagrams, infographics, and presentations with automatic smart layouts.',
+        url: 'https://www.napkin.ai',
+        icon: Code,
+      },
     ]
   },
   {
-    category: 'AI Agents & Research',
+    category: 'Image & Video Generation',
+    items: [
+      {
+        title: 'Pika',
+        description: 'AI video generation platform that creates and edits videos from text prompts and images with cinematic effects.',
+        url: 'https://pika.art',
+        icon: Code,
+      },
+      {
+        title: 'Midjourney',
+        description: 'Leading AI image generation platform known for artistic, high-quality outputs from text descriptions.',
+        url: 'https://www.midjourney.com',
+        icon: Code,
+      },
+      {
+        title: 'Runway',
+        description: 'Professional AI video editor with text-to-video, image-to-video, and advanced editing capabilities for creators.',
+        url: 'https://runwayml.com',
+        icon: Code,
+      },
+    ]
+  },
+  {
+    category: 'Copywriting & Content',
+    items: [
+      {
+        title: 'Jasper',
+        description: 'AI writing assistant specialized in marketing copy, blog posts, and long-form content creation with brand voice customization.',
+        url: 'https://www.jasper.ai',
+        icon: Code,
+      },
+    ]
+  },
+  {
+    category: 'AI Agents & Automation',
     items: [
       {
         title: 'Agent.ai',
         description: 'Platform for building autonomous AI agents that perform lead research, competitive analysis, and data enrichment tasks.',
         url: 'https://agent.ai',
         icon: Code,
+      },
+      {
+        title: 'N8N',
+        description: 'Open-source workflow automation platform that connects AI models with apps and services for complex automation workflows.',
+        url: 'https://n8n.io',
+        icon: Code,
+      },
+      {
+        title: 'Supabase',
+        description: 'Open-source Firebase alternative with PostgreSQL database, authentication, and real-time subscriptions for building AI applications.',
+        url: 'https://supabase.com',
+        icon: Code,
+        logo: 'https://supabase.com/favicon/favicon-96x96.png',
+      },
+    ]
+  },
+  {
+    category: 'AI Learning & Certifications',
+    items: [
+      {
+        title: 'AI Marketing Institute',
+        description: 'Professional AI training and certification programs for marketers, offering courses on AI strategy and implementation.',
+        url: 'https://www.marketingaiinstitute.com',
+        icon: BookOpen,
+      },
+      {
+        title: 'Allie K. Miller - AI Learning',
+        description: 'AI educator and advisor sharing practical guidance on AI adoption, strategy, and implementation for business leaders.',
+        url: 'https://www.alliekmiller.com',
+        icon: BookOpen,
+      },
+      {
+        title: 'Connor Grennan - AI Education',
+        description: 'Dean at NYU Stern teaching AI and leadership, creating accessible AI education for business professionals.',
+        url: 'https://www.connorgrennan.com',
+        icon: BookOpen,
       },
     ]
   },
