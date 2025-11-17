@@ -236,12 +236,66 @@ const webinarData = {
     muxPlaybackId: 'OC72C8icortMHMBjS87615i9PRYu3C2dGt7XA22JlWU',
     instructor: 'Janette Roush',
     instructorTitle: 'Chief AI Officer, Brand USA',
+    // Enhanced metadata for AI discoverability
+    keyTakeaways: [
+      'The CRIT framework (Context, Role, Interview, Task) is a structured method for providing comprehensive details to an AI, which leads to significantly more useful and interesting responses',
+      'Context is key: The quality of an AI\'s output is directly proportional to the quality and quantity of the background information, constraints, and "source of truth" (like a PDF) you provide',
+      'Use voice-to-text to "talk" to the AI: Dictation tools allow you to provide much richer, more natural, and detailed context than you would normally type',
+      'Instructing the AI to "interview" you by asking clarifying questions is a powerful technique to ensure it gathers all the necessary details before generating a solution',
+      'Generative AI is a powerful brainstorming and workflow partner that can be used for complex, practical tasks like planning an entire workshop or developing a multi-part marketing activation'
+    ],
+    topics: [
+      'AI Prompting',
+      'Prompt Engineering',
+      'CRIT Framework',
+      'Generative AI',
+      'AI for Business',
+      'AI for Marketing',
+      'Contextual AI',
+      'AI Brainstorming',
+      'AI Productivity',
+      'Workshop Planning',
+      'Marketing Activation',
+      'Voice-to-Text',
+      'AI Dictation',
+      'ChatGPT',
+      'Claude',
+      'Monologue',
+      'Wispr Flow'
+    ],
+    targetAudience: {
+      primary: 'Professionals, marketers, and corporate trainers who want to move beyond basic AI queries and learn a structured system for getting practical, high-quality, and creative results from generative AI tools for complex business tasks',
+      secondary: 'Business professionals seeking to improve their AI prompting skills',
+      tertiary: 'Anyone interested in advanced AI communication techniques'
+    },
+    learningOutcomes: [
+      'Understand and apply the four parts of the CRIT framework (Context, Role, Interview, Task) to their own prompts',
+      'Articulate why providing deep context and a "source of truth" (like a PDF) is essential for high-quality AI output',
+      'Use voice dictation as a tool to create more detailed and effective AI prompts quickly',
+      'Structure a prompt that encourages the AI to ask clarifying questions to refine its understanding',
+      'Brainstorm and plan complex, multi-step projects (like a workshop or marketing campaign) in collaboration with an AI'
+    ],
+    relatedResources: [
+      { name: 'ChatGPT', description: 'AI model used for demonstrations', url: 'https://chat.openai.com' },
+      { name: 'Claude', description: 'AI model mentioned in examples', url: 'https://claude.ai' },
+      { name: 'Monologue', description: 'Local voice-to-text transcription software', url: 'https://monologue.app' },
+      { name: 'Wispr Flow', description: 'Voice-to-text dictation tool', url: 'https://www.wispr.ai' },
+      { name: 'Zapier', description: 'Integration tool mentioned in workflow example', url: 'https://zapier.com' },
+      { name: 'MindTrip', description: 'Itinerary planning tool mentioned', url: 'https://www.mindtrip.com' }
+    ],
     chapters: [
-      { time: 0, title: 'The CRIT Framework for AI Prompting' },
-      { time: 60, title: 'Example 1: Prompting for a Workshop Plan' },
-      { time: 330, title: 'How the AI Interviews You for Better Results' },
-      { time: 490, title: 'Example 2: Brainstorming a Marketing Plan with a PDF' },
-      { time: 707, title: 'Conclusion: Why Context is Key for AI' },
+      { time: 3, title: 'Introduction to the CRIT (Context, Role, Interview, Task) Framework' },
+      { time: 26, title: 'The benefit of using voice-to-text for detailed prompting' },
+      { time: 62, title: 'The core principle: "We should talk to AI" to provide rich context' },
+      { time: 119, title: 'Example 1 - Context: Describing the setup for a one-hour workshop' },
+      { time: 222, title: 'Example 1 - Role: Assigning the AI the expert role of "Chief AI Officer"' },
+      { time: 237, title: 'Example 1 - Interview: Prompting the AI to ask clarifying questions' },
+      { time: 274, title: 'Example 1 - Task: Defining the specific goal (create a workshop outline)' },
+      { time: 338, title: 'The AI begins its "interview" process, asking the first question' },
+      { time: 490, title: 'Example 2 - Context: Uploading a PDF as a "source of truth" for brainstorming' },
+      { time: 556, title: 'Example 2 - Role: Assigning the AI the role of "Marketing Director"' },
+      { time: 615, title: 'The AI generates ideas grounded in the provided PDF' },
+      { time: 779, title: 'Final summary: "Brainstorming with AI: Context is Key"' },
     ],
   },
   'clueless-packing-app': {

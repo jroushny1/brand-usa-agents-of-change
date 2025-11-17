@@ -17,6 +17,17 @@ const resources = [
     ]
   },
   {
+    category: 'Industry Programs',
+    items: [
+      {
+        title: 'AI Opener for Destinations',
+        description: 'Learn about the AI Opener for Destinations program where Janette Roush serves as an expert advisor for both the North America and Europe editions, helping destinations implement AI strategies.',
+        url: 'https://www.aiopenerfordestinations.com/',
+        icon: BookOpen,
+      },
+    ]
+  },
+  {
     category: 'AI Tools & Platforms',
     items: [
       {
@@ -41,6 +52,18 @@ const resources = [
         title: 'Replit',
         description: '"Vibe Coding" platform for building applications with natural language.',
         url: 'https://replit.com',
+        icon: Code,
+      },
+      {
+        title: 'Monologue',
+        description: 'Local voice-to-text transcription software for detailed AI prompting (mentioned in CRIT Framework video).',
+        url: 'https://monologue.app',
+        icon: Code,
+      },
+      {
+        title: 'Wispr Flow',
+        description: 'Voice-to-text dictation tool for creating rich, detailed AI prompts.',
+        url: 'https://www.wispr.ai',
         icon: Code,
       },
     ]
