@@ -187,9 +187,6 @@ export default function HomePage() {
               <BookOpen className="h-5 w-5 mr-2" />
               Browse Full Learning Library
             </Link>
-            <p className="mt-3 text-sm text-gray-600">
-              All content structured for AI discoverability and citations
-            </p>
           </div>
         </div>
       </section>
@@ -327,7 +324,6 @@ export default function HomePage() {
             Join tourism professionals across the USA who are leading with AI.
           </p>
           <div className="space-y-4 text-sm text-blue-100">
-            <p>Access code required for beta access</p>
             <p>Questions? Email <a href="mailto:jroush@thebrandusa.com" className="underline">jroush@thebrandusa.com</a></p>
           </div>
         </div>
