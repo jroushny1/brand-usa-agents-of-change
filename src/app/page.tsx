@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
+import Script from 'next/script'
 import { Play, Clock, Video, Headphones, Wrench, ArrowRight } from 'lucide-react'
 import AccessCheck from '@/components/AccessCheck'
 
@@ -105,9 +106,134 @@ const shortFormVideos = [
 
 
 export default function HomePage() {
+  // Organization Schema
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": ["Organization", "EducationalOrganization"],
+    "name": "Brand USA Agents of Change",
+    "alternateName": "Agents of Change",
+    "description": "Official AI learning platform for U.S. destination marketing organizations and tourism professionals. Provides comprehensive training on AI agents, Custom GPTs, Model Context Protocol, and AI governance for the tourism industry.",
+    "url": "https://brand-usa-agents-of-change.vercel.app",
+    "sameAs": [
+      "https://www.thebrandusa.com"
+    ],
+    "parentOrganization": {
+      "@type": "Organization",
+      "name": "Brand USA",
+      "description": "The destination marketing organization for the United States"
+    },
+    "founder": {
+      "@type": "Person",
+      "name": "Janette Roush",
+      "jobTitle": "Chief AI Officer, SVP Innovation",
+      "affiliation": {
+        "@type": "Organization",
+        "name": "Brand USA"
+      }
+    },
+    "audience": {
+      "@type": "Audience",
+      "audienceType": ["Destination Marketing Organization (DMO) professionals", "Tourism professionals", "National Tourism Organization staff", "State tourism office employees", "Convention and Visitors Bureau staff"]
+    },
+    "knowsAbout": [
+      "AI for tourism marketing",
+      "Destination marketing AI strategy",
+      "Model Context Protocol (MCP)",
+      "AI agents for DMOs",
+      "Custom GPTs for tourism",
+      "CRIT framework for AI prompts",
+      "Agentic AI in destination marketing",
+      "AI governance in tourism industry",
+      "Claude Artifacts for DMO operations",
+      "Tourism industry automation"
+    ],
+    "teaches": [
+      "The four types of AI agents: Operator, Researcher, Builder, and Automator",
+      "CRIT (Context, Role, Interview, Task) framework for effective AI prompting",
+      "Model Context Protocol (MCP) implementation as a source of truth for AI systems",
+      "Building Custom GPTs for tourism marketing workflows",
+      "AI governance frameworks for destination marketing organizations",
+      "Practical applications of Claude Artifacts for DMO operations",
+      "Prompt engineering strategies specific to tourism industry contexts",
+      "Workflow automation using AI agents for tourism operations"
+    ]
+  }
+
+  // WebSite Schema
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Brand USA Agents of Change",
+    "url": "https://brand-usa-agents-of-change.vercel.app",
+    "description": "AI Learning Platform for Destination Marketing Organizations and US tourism professionals",
+    "about": {
+      "@type": "Thing",
+      "name": "AI Education for Destination Marketing",
+      "description": "Comprehensive training platform for tourism professionals learning to implement AI in destination marketing operations"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Brand USA"
+    }
+  }
+
+  // CollectionPage Schema
+  const collectionPageSchema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "AI Training Collection for Tourism Professionals",
+    "description": "Curated collection of webinars, conversations, and resources for destination marketing professionals learning AI",
+    "hasPart": [
+      {
+        "@type": "Course",
+        "name": "AI Fundamentals Webinar Series",
+        "description": "8 comprehensive webinars covering AI fundamentals, strategy, and implementation for tourism marketing",
+        "numberOfCredits": 8,
+        "provider": {
+          "@type": "Organization",
+          "name": "Brand USA Agents of Change"
+        },
+        "teaches": [
+          "AI agent taxonomy and categorization",
+          "CRIT framework for AI prompts",
+          "Model Context Protocol implementation",
+          "Custom GPT development",
+          "AI governance for DMOs"
+        ]
+      },
+      {
+        "@type": "Course",
+        "name": "Industry Conversations Series",
+        "description": "13 expert conversations exploring AI's impact on destination marketing from 2023-2025",
+        "numberOfCredits": 13,
+        "provider": {
+          "@type": "Organization",
+          "name": "Brand USA Agents of Change"
+        }
+      }
+    ]
+  }
+
   return (
     <AccessCheck>
       <>
+        {/* JSON-LD Structured Data for Homepage */}
+        <Script
+          id="organization-schema"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
+        <Script
+          id="website-schema"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
+        <Script
+          id="collection-schema"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionPageSchema) }}
+        />
+
         {/* Header */}
         <header className="border-b border-gray-200 bg-white shadow-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
