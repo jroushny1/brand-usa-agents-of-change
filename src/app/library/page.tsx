@@ -10,7 +10,7 @@ const resources = [
     items: [
       {
         title: 'Brand USA Partner Resources',
-        description: 'Access official partner resources, brand guidelines, and marketing materials from Brand USA.',
+        description: 'Official partner resources, brand guidelines, and marketing materials.',
         url: 'https://www.thebrandusa.com/partner-resources?tab-order=3',
         icon: FileText,
       },
@@ -21,50 +21,9 @@ const resources = [
     items: [
       {
         title: 'AI Opener for Destinations',
-        description: 'Learn about the AI Opener for Destinations program where Janette Roush serves as an expert advisor for both the North America and Europe editions, helping destinations implement AI strategies.',
+        description: 'Expert program for implementing AI strategies in destination marketing.',
         url: 'https://www.aiopenerfordestinations.com/',
         icon: BookOpen,
-      },
-    ]
-  },
-  {
-    category: 'AI Tools & Platforms',
-    items: [
-      {
-        title: 'ChatGPT',
-        description: 'OpenAI\'s conversational AI platform. Create custom GPTs and automate workflows.',
-        url: 'https://chat.openai.com',
-        icon: Code,
-      },
-      {
-        title: 'Claude',
-        description: 'Anthropic\'s AI assistant. Features Artifacts for rapid prototyping and development.',
-        url: 'https://claude.ai',
-        icon: Code,
-      },
-      {
-        title: 'Agent.ai',
-        description: 'Platform for building AI agents for lead research and competitive analysis.',
-        url: 'https://agent.ai',
-        icon: Code,
-      },
-      {
-        title: 'Replit',
-        description: '"Vibe Coding" platform for building applications with natural language.',
-        url: 'https://replit.com',
-        icon: Code,
-      },
-      {
-        title: 'Monologue',
-        description: 'Local voice-to-text transcription software for detailed AI prompting (mentioned in CRIT Framework video).',
-        url: 'https://monologue.app',
-        icon: Code,
-      },
-      {
-        title: 'Wispr Flow',
-        description: 'Voice-to-text dictation tool for creating rich, detailed AI prompts.',
-        url: 'https://www.wispr.ai',
-        icon: Code,
       },
     ]
   },
@@ -156,17 +115,58 @@ const resources = [
     items: [
       {
         title: 'AI Training Videos',
-        description: 'Watch our full collection of AI training webinars and tutorials.',
+        description: 'Full collection of AI training webinars and tutorials.',
         url: '/',
         icon: Video,
         isInternal: true,
       },
       {
         title: 'Short-Form Tutorials',
-        description: 'Quick demos and practical AI applications in TikTok-style format.',
+        description: 'Quick demos and practical AI applications.',
         url: '/shorts',
         icon: Video,
         isInternal: true,
+      },
+    ]
+  },
+  {
+    category: 'AI Tools & Platforms',
+    items: [
+      {
+        title: 'ChatGPT',
+        description: 'Conversational AI platform for custom GPTs and workflow automation.',
+        url: 'https://chat.openai.com',
+        icon: Code,
+      },
+      {
+        title: 'Claude',
+        description: 'AI assistant with Artifacts for rapid prototyping.',
+        url: 'https://claude.ai',
+        icon: Code,
+      },
+      {
+        title: 'Agent.ai',
+        description: 'Build AI agents for lead research and competitive analysis.',
+        url: 'https://agent.ai',
+        icon: Code,
+      },
+      {
+        title: 'Replit',
+        description: '"Vibe Coding" platform for building applications with natural language.',
+        url: 'https://replit.com',
+        icon: Code,
+      },
+      {
+        title: 'Monologue',
+        description: 'Local voice-to-text transcription for detailed AI prompting.',
+        url: 'https://monologue.app',
+        icon: Code,
+      },
+      {
+        title: 'Wispr Flow',
+        description: 'Voice-to-text dictation for creating detailed AI prompts.',
+        url: 'https://www.wispr.ai',
+        icon: Code,
       },
     ]
   },
@@ -208,12 +208,12 @@ export default function LibraryPage() {
         />
 
         {/* Header */}
-        <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <header className="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-16">
               <Link
                 href="/"
-                className="flex items-center text-brand-navy hover:text-brand-sky"
+                className="flex items-center text-[#191B56] hover:text-[#0056D2] transition-colors"
               >
                 <ArrowLeft className="h-5 w-5 mr-2" />
                 Back to Home
@@ -231,73 +231,86 @@ export default function LibraryPage() {
           </div>
         </header>
 
+        {/* Page Header */}
+        <section className="bg-gradient-to-b from-white to-[#F7F0DE] py-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 className="text-5xl font-bold text-[#191B56] mb-4">
+              AI Tools & Resources
+            </h1>
+            <p className="text-xl text-gray-700 max-w-3xl mx-auto mb-8">
+              Podcasts, tools, guides, and industry links curated for tourism professionals
+            </p>
+          </div>
+        </section>
+
         {/* Main Content */}
-        <main className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            {/* Page Header */}
-            <div className="text-center mb-12">
-              <div className="flex items-center justify-center mb-4">
-                <BookOpen className="h-12 w-12 text-brand-sky" />
-              </div>
-              <h1 className="text-4xl font-bold text-brand-navy mb-4">
-                Learning Library
-              </h1>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Curated resources, tools, and links to help you implement AI in your tourism organization.
-              </p>
-            </div>
+        <main className="bg-white min-h-screen">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
 
             {/* Resource Categories */}
-            <div className="space-y-10">
-              {resources.map((category, categoryIndex) => (
-                <section key={categoryIndex}>
-                  <h2 className="text-2xl font-bold text-brand-navy mb-6">
-                    {category.category}
-                  </h2>
-                  <div className="grid grid-cols-1 gap-4">
-                    {category.items.map((item, itemIndex) => {
-                      const Icon = item.icon
-                      return (
-                        <a
-                          key={itemIndex}
-                          href={item.url}
-                          target={(item as any).isInternal ? undefined : "_blank"}
-                          rel={(item as any).isInternal ? undefined : "noopener noreferrer"}
-                          className="group bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-200 p-6 border border-gray-200 hover:border-brand-sky"
-                        >
-                          <div className="flex items-start justify-between">
-                            <div className="flex items-start flex-1">
-                              <div className="flex-shrink-0 mr-4">
-                                <div className="h-12 w-12 bg-brand-sky/10 rounded-lg flex items-center justify-center group-hover:bg-brand-sky/20 transition-colors">
-                                  <Icon className="h-6 w-6 text-brand-sky" />
-                                </div>
-                              </div>
-                              <div className="flex-1">
-                                <h3 className="text-lg font-semibold text-brand-navy mb-2 group-hover:text-brand-sky transition-colors">
-                                  {item.title}
-                                </h3>
-                                <p className="text-gray-600 text-sm">
-                                  {item.description}
-                                </p>
-                              </div>
+            <div className="space-y-16">
+              {resources.map((category, categoryIndex) => {
+                // Define gradient colors by category
+                const getCategoryGradient = () => {
+                  if (category.category.includes('Podcast')) return 'from-[#AB606F] to-[#950E1D]'
+                  if (category.category.includes('AI Tools')) return 'from-[#DEB041] to-[#A66326]'
+                  if (category.category.includes('Industry')) return 'from-[#066466] to-[#191B56]'
+                  if (category.category.includes('Official')) return 'from-[#0056D2] to-[#6BA6AA]'
+                  if (category.category.includes('Learning')) return 'from-[#0056D2] to-[#6BA6AA]'
+                  return 'from-[#0056D2] to-[#6BA6AA]'
+                }
+
+                return (
+                  <section key={categoryIndex} id={category.category.toLowerCase().replace(/\s+/g, '-')}>
+                    <div className="flex items-center mb-8">
+                      <h2 className="text-3xl font-bold text-[#191B56]">
+                        {category.category}
+                      </h2>
+                      <span className="ml-3 text-lg text-gray-500">
+                        ({category.items.length})
+                      </span>
+                    </div>
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+                      {category.items.map((item, itemIndex) => {
+                        const Icon = item.icon
+                        return (
+                          <a
+                            key={itemIndex}
+                            href={item.url}
+                            target={(item as any).isInternal ? undefined : "_blank"}
+                            rel={(item as any).isInternal ? undefined : "noopener noreferrer"}
+                            className="group bg-white rounded-lg border border-gray-200 p-4 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center"
+                          >
+                            {/* Icon - Larger and more prominent */}
+                            <div className={`w-16 h-16 rounded-full bg-gradient-to-br ${getCategoryGradient()} flex items-center justify-center mb-3 group-hover:scale-110 transition-transform`}>
+                              <Icon className="h-8 w-8 text-white" />
                             </div>
-                            <div className="ml-4 flex-shrink-0">
-                              <ExternalLink className="h-5 w-5 text-gray-400 group-hover:text-brand-sky transition-colors" />
+
+                            {/* Title */}
+                            <h3 className="text-sm font-semibold text-[#191B56] mb-2 line-clamp-2 min-h-[2.5rem]">
+                              {item.title}
+                            </h3>
+
+                            {/* CTA */}
+                            <div className="mt-auto">
+                              <span className="text-xs font-semibold text-[#0056D2] group-hover:text-[#0056D2]/80">
+                                {(item as any).isInternal ? 'View' : 'Visit'}
+                              </span>
                             </div>
-                          </div>
-                        </a>
-                      )
-                    })}
-                  </div>
-                </section>
-              ))}
+                          </a>
+                        )
+                      })}
+                    </div>
+                  </section>
+                )
+              })}
             </div>
 
             {/* Footer Note */}
-            <div className="mt-12 p-6 bg-blue-50 border border-blue-200 rounded-xl">
-              <h3 className="font-semibold text-brand-navy mb-2">Have a Resource to Share?</h3>
-              <p className="text-sm text-gray-700">
-                Found a helpful AI tool or resource for tourism professionals? Email <a href="mailto:jroush@thebrandusa.com" className="text-brand-sky hover:underline">jroush@thebrandusa.com</a> to suggest additions to this library.
+            <div className="mt-16 p-8 bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-xl">
+              <h3 className="text-lg font-semibold text-[#191B56] mb-2">Have a Resource to Share?</h3>
+              <p className="text-gray-700">
+                Found a helpful AI tool or resource for tourism professionals? Email <a href="mailto:jroush@thebrandusa.com" className="text-[#0056D2] hover:underline font-semibold">jroush@thebrandusa.com</a> to suggest additions to this library.
               </p>
             </div>
           </div>

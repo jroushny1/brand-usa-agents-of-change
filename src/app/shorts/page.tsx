@@ -129,18 +129,18 @@ export default function ShortsPage() {
                   />
                 </div>
 
-                {/* Video Info Overlay */}
-                <div className="absolute bottom-20 left-0 right-0 px-6 pb-6 bg-gradient-to-t from-black/80 via-black/40 to-transparent pt-20">
+                {/* Video Info Overlay - Minimal */}
+                <div className="absolute bottom-16 left-0 right-0 px-4 pb-4 bg-gradient-to-t from-black/90 via-black/60 to-transparent pt-8">
                   <div className="text-white">
-                    <div className="flex items-center mb-2">
-                      <span className="bg-brand-sky px-2 py-1 rounded text-xs font-semibold mr-2">
-                        {video.category}
-                      </span>
-                      <span className="text-sm opacity-80">{video.duration}</span>
+                    <div className="flex items-center justify-between mb-1">
+                      <div className="flex items-center">
+                        <span className="bg-brand-sky px-2 py-0.5 rounded text-xs font-semibold mr-2">
+                          {video.category}
+                        </span>
+                        <span className="text-xs opacity-80">{video.duration}</span>
+                      </div>
                     </div>
-                    <h2 className="text-xl font-bold mb-2">{video.title}</h2>
-                    <p className="text-sm opacity-90 line-clamp-3 mb-2">{video.description}</p>
-                    <p className="text-sm opacity-75">{video.instructor}</p>
+                    <h2 className="text-base font-bold line-clamp-2">{video.title}</h2>
                   </div>
                 </div>
               </div>

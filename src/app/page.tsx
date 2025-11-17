@@ -332,16 +332,9 @@ export default function HomePage() {
             <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
               Quick Demos & Tutorials
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-4">
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
               Bite-sized videos showcasing practical AI applications and hands-on demonstrations.
             </p>
-            <Link
-              href="/shorts"
-              className="inline-flex items-center text-brand-blue hover:text-brand-navy font-semibold"
-            >
-              Watch in TikTok-style feed
-              <Play className="ml-2 h-5 w-5" />
-            </Link>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
