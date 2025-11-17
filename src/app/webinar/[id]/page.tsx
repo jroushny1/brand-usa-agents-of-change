@@ -1954,19 +1954,19 @@ export default function WebinarPage({ params }: { params: { id: string } }) {
 
   return (
     <>
-      <AccessCheck>
-        {/* JSON-LD Structured Data for AI Discoverability - Server-Side Rendered */}
-        <script
-          id="video-schema"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(videoSchema) }}
-        ></script>
-        <script
-          id="breadcrumb-schema"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-        ></script>
+      {/* JSON-LD Structured Data for AI Discoverability - Server-Rendered OUTSIDE client components */}
+      <script
+        id="video-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(videoSchema) }}
+      ></script>
+      <script
+        id="breadcrumb-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      ></script>
 
+      <AccessCheck>
         {/* Header */}
       <header className="border-b border-gray-200 bg-white sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

@@ -255,30 +255,30 @@ export default function HomePage() {
   }
 
   return (
-    <AccessCheck>
-      <>
-        {/* JSON-LD Structured Data for Homepage */}
-        <script
-          id="organization-schema"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
-        ></script>
-        <script
-          id="website-schema"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
-        ></script>
-        <script
-          id="collection-schema"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionPageSchema) }}
-        ></script>
-        <script
-          id="course-schema"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(courseSchema) }}
-        ></script>
+    <>
+      {/* JSON-LD Structured Data for Homepage - Server-Rendered OUTSIDE client components */}
+      <script
+        id="organization-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+      ></script>
+      <script
+        id="website-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+      ></script>
+      <script
+        id="collection-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionPageSchema) }}
+      ></script>
+      <script
+        id="course-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(courseSchema) }}
+      ></script>
 
+      <AccessCheck>
         {/* Header */}
         <header className="border-b border-gray-200 bg-white shadow-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -559,7 +559,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+      </AccessCheck>
     </>
-    </AccessCheck>
   )
 }
