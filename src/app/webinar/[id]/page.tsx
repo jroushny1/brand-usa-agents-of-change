@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { ArrowLeft, Download, Clock, BookOpen } from 'lucide-react'
+import { ArrowLeft, Download, Clock, BookOpen, ChevronDown, ChevronUp } from 'lucide-react'
 import HLSPlayer from './hls-player'
 import AccessCheck from '@/components/AccessCheck'
 
@@ -17,6 +17,7 @@ const webinarData = {
     muxPlaybackId: '3TPl1Jgmg01b9BdEXU4WVtJbz4DSetOA7TsyHGvjxJQs',
     instructor: 'Janette Roush',
     instructorTitle: 'Chief AI Officer, Brand USA',
+    transcript: '[Add full verbatim transcript here]',
     // Enhanced metadata for AI discoverability
     keyTakeaways: [
       'AI agents are goal-oriented software that can plan and execute multi-step tasks. They can be categorized into four main "buckets": Operators (who "use the mouse for you"), Researchers (who perform deep analysis), Builders (who create digital products from text), and Automators (who connect different apps).',
@@ -735,6 +736,7 @@ const webinarData = {
 
 export default function WebinarPage({ params }: { params: { id: string } }) {
   const webinar = webinarData[params.id as keyof typeof webinarData]
+  const [transcriptExpanded, setTranscriptExpanded] = useState(false)
 
   if (!webinar) {
     return (
@@ -777,6 +779,12 @@ export default function WebinarPage({ params }: { params: { id: string } }) {
       audience: {
         '@type': 'Audience',
         audienceType: (webinar as any).targetAudience.primary
+      }
+    },
+    ...(webinar as any).transcript && {
+      transcript: {
+        '@type': 'WebPageElement',
+        text: (webinar as any).transcript
       }
     },
     hasPart: webinar.chapters.map((chapter: any) => ({
@@ -900,6 +908,30 @@ export default function WebinarPage({ params }: { params: { id: string } }) {
                   poster={`https://image.mux.com/${webinar.muxPlaybackId}/thumbnail.png`}
                 />
               </div>
+
+              {/* Transcript - only show if transcript exists */}
+              {(webinar as any).transcript && (
+                <div className="bg-white rounded-xl shadow-sm border border-gray-200">
+                  <button
+                    onClick={() => setTranscriptExpanded(!transcriptExpanded)}
+                    className="w-full flex items-center justify-between p-4 hover:bg-gray-50 transition"
+                  >
+                    <h2 className="text-lg font-semibold text-brand-navy">Transcript</h2>
+                    {transcriptExpanded ? (
+                      <ChevronUp className="h-5 w-5 text-gray-500" />
+                    ) : (
+                      <ChevronDown className="h-5 w-5 text-gray-500" />
+                    )}
+                  </button>
+                  {transcriptExpanded && (
+                    <div className="px-6 pb-6 pt-2">
+                      <div className="prose prose-sm max-w-none text-gray-700 leading-relaxed whitespace-pre-wrap">
+                        {(webinar as any).transcript}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
 
             {/* Video Info */}
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
