@@ -294,15 +294,18 @@ export default function WebinarPage({ params }: { params: { id: string } }) {
                 </div>
               </div>
 
-              {/* Resources */}
-              {webinar.resources && webinar.resources.length > 0 && (
+              {/* Resources - only show if resources exist */}
+              {(webinar as any).resources && (webinar as any).resources.length > 0 && (
                 <div className="w-full max-w-md bg-white rounded-xl shadow-sm border border-gray-200 p-6">
                   <h2 className="text-lg font-semibold text-brand-navy mb-4">Resources</h2>
                   <div className="space-y-3">
-                    {webinar.resources.map((resource, index) => (
-                      <div
+                    {(webinar as any).resources.map((resource: any, index: number) => (
+                      <a
                         key={index}
-                        className="flex items-center justify-between p-3 rounded-lg border border-gray-200 bg-gray-50"
+                        href={resource.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-between p-3 rounded-lg border border-gray-200 bg-gray-50 hover:bg-gray-100 transition"
                       >
                         <div className="flex items-center">
                           <Download className="h-5 w-5 text-gray-400 mr-3" />
@@ -310,8 +313,7 @@ export default function WebinarPage({ params }: { params: { id: string } }) {
                             {resource.name}
                           </span>
                         </div>
-                        <span className="text-xs text-blue-600 font-medium">Coming Soon</span>
-                      </div>
+                      </a>
                     ))}
                   </div>
                 </div>
