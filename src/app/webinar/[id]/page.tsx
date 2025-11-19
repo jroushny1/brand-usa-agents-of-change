@@ -856,12 +856,6 @@ export default function WebinarPage({ params }: { params: { id: string } }) {
         audienceType: (webinar as any).targetAudience.primary
       }
     },
-    ...(webinar as any).transcript && {
-      hasPart: webinar.chapters.map((chapter: any) => ({
-      '@type': 'Clip',
-      name: chapter.title,
-      startOffset: chapter.time
-    })),
     ...(webinarMentions[params.id] && {
       mentions: webinarMentions[params.id]
     })
