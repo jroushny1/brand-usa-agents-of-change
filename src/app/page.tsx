@@ -156,7 +156,7 @@ export default function HomePage() {
       "name": "Brand USA Agents of Change"
     },
     "audience": {
-      "@type": "Audience",
+      "@type": "EducationalAudience",
       "audienceType": "tourism professionals",
       "educationalRole": ["destination marketing organization staff", "tourism board employees", "convention and visitors bureau staff", "state tourism office employees", "national tourism organization staff"]
     },

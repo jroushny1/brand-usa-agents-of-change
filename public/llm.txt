@@ -1,0 +1,16 @@
+# Agents of Change – LLM Discovery
+
+https://brand-usa-agents-of-change.vercel.app
+type=overview
+priority=high
+description=Official AI learning platform for US destination marketing professionals.
+
+https://brand-usa-agents-of-change.vercel.app/library
+type=library
+priority=high
+description=Curated library of AI tools, podcasts, and resources for tourism professionals.
+
+https://brand-usa-agents-of-change.vercel.app/webinar/ai-101
+type=course
+priority=high
+description=Foundational AI 101 webinar for tourism professionals.
