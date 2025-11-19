@@ -2,7 +2,6 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowLeft, Download, Clock, BookOpen } from 'lucide-react'
 import HLSPlayer from './hls-player'
-import TranscriptToggle from './TranscriptToggle'
 
 // This would come from your database
 const webinarData = {
@@ -1007,10 +1006,6 @@ export default function WebinarPage({ params }: { params: { id: string } }) {
                 />
               </div>
 
-              {/* Transcript - only show if transcript exists */}
-              {(webinar as any).transcript && (
-                <TranscriptToggle transcript={(webinar as any).transcript} />
-              )}
 
             {/* Video Info */}
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
