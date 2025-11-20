@@ -68,6 +68,9 @@ export default function HLSPlayer({
     }
 
     function setupPlayer() {
+      if (!video) {
+        return
+      }
       if (video.canPlayType('application/vnd.apple.mpegurl')) {
         // Native HLS support (Safari)
         video.src = src
