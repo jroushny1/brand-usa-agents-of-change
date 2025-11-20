@@ -1,3 +1,5 @@
+'use client'
+
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowLeft, Download, Clock, BookOpen } from 'lucide-react'
