@@ -28,13 +28,18 @@ export default function HLSPlayer({
   const hlsRef = useRef<any>(null)
 
   useEffect(() => {
+    // Ensure this code only runs on the client
+    if (typeof window === 'undefined') {
+      return
+    }
+
     const video = videoRef.current
     if (!video) return
 
     const src = `https://stream.mux.com/${playbackId}.m3u8`
 
     function setupHlsPlayer() {
-      if (hlsRef.current) {
+      if (window.Hls && hlsRef.current) {
         hlsRef.current.destroy()
       }
       const hls = new window.Hls()
@@ -46,11 +51,11 @@ export default function HLSPlayer({
         if (data.fatal) {
           switch (data.type) {
             case window.Hls.ErrorTypes.NETWORK_ERROR:
-              console.error('fatal network error encountered, trying to recover');
+              console.error('fatal network error encountered, trying to recover')
               hls.startLoad()
               break
             case window.Hls.ErrorTypes.MEDIA_ERROR:
-              console.error('fatal media error encountered, trying to recover');
+              console.error('fatal media error encountered, trying to recover')
               hls.recoverMediaError()
               break
             default:
