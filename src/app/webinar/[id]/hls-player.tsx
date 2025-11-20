@@ -33,11 +33,7 @@ export default function HLSPlayer({
 
     const src = `https://stream.mux.com/${playbackId}.m3u8`
 
-    // Check for native HLS support (Safari)
-    if (video.canPlayType('application/vnd.apple.mpegurl')) {
-      video.src = src
-    } else if (window.Hls && window.Hls.isSupported()) {
-      // Use HLS.js if available
+    function setupHlsPlayer() {
       if (hlsRef.current) {
         hlsRef.current.destroy()
       }
@@ -45,34 +41,58 @@ export default function HLSPlayer({
       hlsRef.current = hls
       hls.loadSource(src)
       hls.attachMedia(video)
-      
+
       hls.on(window.Hls.Events.ERROR, function (event: any, data: any) {
         if (data.fatal) {
           switch (data.type) {
             case window.Hls.ErrorTypes.NETWORK_ERROR:
-              // try to recover network error
               console.error('fatal network error encountered, trying to recover');
-              hls.startLoad();
-              break;
+              hls.startLoad()
+              break
             case window.Hls.ErrorTypes.MEDIA_ERROR:
               console.error('fatal media error encountered, trying to recover');
-              hls.recoverMediaError();
-              break;
+              hls.recoverMediaError()
+              break
             default:
-              // cannot recover
-              console.error('unrecoverable fatal error', data);
-              hls.destroy();
-              break;
+              console.error('unrecoverable fatal error', data)
+              hls.destroy()
+              break
           }
         }
-      });
-    } else {
-      console.warn('HLS.js is not loaded or supported. Falling back to MP4.')
-      // Fallback for browsers without HLS support
-       video.src = `https://stream.mux.com/${playbackId}/high.mp4`
+      })
     }
 
-    // Cleanup function
+    function setupPlayer() {
+      if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        // Native HLS support (Safari)
+        video.src = src
+      } else if (window.Hls && window.Hls.isSupported()) {
+        // HLS.js for other browsers
+        setupHlsPlayer()
+      } else {
+        // Fallback for browsers without HLS support
+        console.warn('HLS.js not loaded or supported. Falling back to MP4.')
+        video.src = `https://stream.mux.com/${playbackId}/high.mp4`
+      }
+    }
+
+    // If HLS.js is already loaded, setup the player immediately
+    if (window.Hls) {
+      setupPlayer()
+    } else {
+      // Otherwise, wait for it to load
+      const checkInterval = setInterval(() => {
+        if (window.Hls) {
+          clearInterval(checkInterval)
+          setupPlayer()
+        }
+      }, 100)
+
+      // Cleanup the interval if the component unmounts
+      return () => clearInterval(checkInterval)
+    }
+
+    // Cleanup function for HLS instance
     return () => {
       if (hlsRef.current) {
         hlsRef.current.destroy()
