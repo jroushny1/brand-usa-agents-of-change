@@ -1,5 +1,5 @@
 
-import { Code, ImageIcon, Link, Presentation, MessageSquare, Pencil, PersonStanding, GanttChartSquare, Megaphone, Video } from 'lucide-react';
+import { Code, ImageIcon, Link, Presentation, BotMessageSquare, Pencil, PersonStanding, GanttChartSquare, Megaphone, Video } from 'lucide-react';
 
 export const resourceCategories = [
   {
@@ -82,7 +82,7 @@ export const resourceCategories = [
       {
         title: 'Reclaim.ai',
         description: 'AI-powered scheduling assistant that automatically manages your calendar and tasks.',
-        url: 'https://reclaim..ai',
+        url: 'https://reclaim.ai',
         icon: GanttChartSquare,
         logo: 'https://assets-global.website-files.com/6303b6d4b4491775e54d3156/6303b6d4b449174f884d3179_reclaim-logo-wordmark.svg',
       },
