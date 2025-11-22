@@ -10,26 +10,24 @@ const config: Config = {
     extend: {
       colors: {
         brand: {
-          blue: '#003E7E',      // Brand USA primary blue
-          sky: '#0084CA',       // Bright accent blue
-          navy: '#001A57',      // Deep navy
-          red: '#EE3124',       // Brand accent red
+          blue: '#00549F',      // Primary brand blue
+          cyan: '#00A9E0',      // Primary brand cyan
+          navy: '#101F36',      // Alternate navy
           gray: {
-            50: '#F8FAFC',
-            100: '#F1F5F9',
-            200: '#E2E8F0',
-            300: '#CBD5E1',
-            400: '#94A3B8',
-            500: '#64748B',
-            600: '#475569',
-            700: '#334155',
-            800: '#1E293B',
-            900: '#0F172A',
+            blue: '#4c5768',    // Complementary gray-blue
+            brown: '#7b6b6b',   // Complementary gray-brown
+            DEFAULT: '#878f9a', // Complementary light gray
+          },
+          accent: {
+            blue: '#5a7eb4',    // Complementary medium blue
+            cream: '#f4efe3',   // Complementary cream
           }
         }
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['Montserrat', 'system-ui', 'sans-serif'],
+        display: ['Oswald', 'sans-serif'],
+        body: ['Montserrat', 'system-ui', 'sans-serif'],
       },
       animation: {
         'fade-in': 'fade-in 0.5s ease-out',

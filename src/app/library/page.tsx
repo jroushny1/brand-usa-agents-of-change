@@ -37,6 +37,13 @@ const resources = [
     category: 'Conversations on AI in Tourism',
     items: [
       {
+        title: 'Destination Discourse – "What Happens When AI Becomes the Primary Interface for Travel?"',
+        description: 'Stuart and Adam are joined by Brand USA\'s Janette Roush for a provocative exploration of the question no one in tourism wants to ask out loud: what happens to DMOs when AI becomes the primary interface for travel inspiration, planning, and booking?',
+        url: 'https://www.youtube.com/watch?v=gvCOpVNtvHY&t=2729s',
+        icon: Podcast,
+        date: 'Nov 20, 2025',
+      },
+      {
         title: 'Travel Trends – "The Impact of AI on Destination Marketing"',
         description: 'Dan Christian kicks off an AI-focused mini-series discussing how destination marketing is evolving as trip planning shifts from traditional search to chatbots and AI itineraries.',
         url: 'https://www.listennotes.com/podcasts/travel-trends-with/the-impact-of-ai-on-9G8EexwrySJ/',
@@ -158,6 +165,12 @@ const resources = [
         icon: Podcast,
       },
       {
+        title: 'Destination Discourse',
+        description: 'A robust discussion show featuring some of the smartest minds in the destination marketing industry. If you\'re a destination marketer or supplier this show will challenge you to think outside of the constraints of everyday marketing tactics and will encourage you to challenge the status quo.',
+        url: 'https://www.youtube.com/@DestinationDiscourse',
+        icon: Podcast,
+      },
+      {
         title: 'Everything AI in Travel by Tony Carne',
         description: 'Newsletter covering artificial intelligence applications, trends, and innovations specifically for the travel and tourism industry.',
         url: 'https://everythingaiintravel.beehiiv.com/',
@@ -180,18 +193,6 @@ const resources = [
         description: 'Follow for insights on AI strategy, implementation, and innovation in destination marketing and tourism.',
         url: 'https://www.linkedin.com/in/janetteroush/',
         icon: FileText,
-      },
-    ]
-  },
-  {
-    category: 'Research & Productivity',
-    items: [
-      {
-        title: 'Google NotebookLM',
-        description: 'AI-powered research and note-taking tool that synthesizes information from your documents, creates study guides, and generates podcast-style audio overviews.',
-        url: 'https://notebooklm.google.com',
-        icon: Code,
-        logo: 'https://www.gstatic.com/lamda/images/gemini_sparkle_v002_d4735304ff6292a690345.svg',
       },
     ]
   },
@@ -224,7 +225,6 @@ const resources = [
         description: 'Microsoft\'s AI assistant with web search, image generation, and deep integration with Microsoft 365 applications.',
         url: 'https://copilot.microsoft.com',
         icon: Code,
-        logo: 'https://assets-global.website-files.com/6408f6907936855c20961f84/668a45e0b34fde86eb65e1f6_microsoft-copilot-icon.svg',
       },
     ]
   },
@@ -243,6 +243,18 @@ const resources = [
         url: 'https://replit.com',
         icon: Code,
         logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/New_Replit_Logo.svg/1200px-New_Replit_Logo.svg.png',
+      },
+    ]
+  },
+  {
+    category: 'Research & Productivity',
+    items: [
+      {
+        title: 'Google NotebookLM',
+        description: 'AI-powered research and note-taking tool that synthesizes information from your documents, creates study guides, and generates podcast-style audio overviews.',
+        url: 'https://notebooklm.google.com',
+        icon: Code,
+        logo: 'https://www.gstatic.com/lamda/images/gemini_sparkle_v002_d4735304ff6292a690345.svg',
       },
     ]
   },
@@ -363,6 +375,12 @@ const resources = [
         url: 'https://www.alliekmiller.com',
         icon: BookOpen,
       },
+      {
+        title: 'Every.to',
+        description: 'Every is a media and software company that publishes a daily newsletter about what comes next in technology. We also build software products, offer courses, and provide AI consulting and training services.',
+        url: 'https://every.to/newsletter',
+        icon: BookOpen,
+      },
     ]
   },
 ]
@@ -408,7 +426,7 @@ export default function LibraryPage() {
             <div className="flex justify-between items-center h-16">
               <Link
                 href="/"
-                className="flex items-center text-[#191B56] hover:text-[#0056D2] transition-colors"
+                className="flex items-center text-brand-navy hover:text-brand-cyan transition-colors"
               >
                 <ArrowLeft className="h-5 w-5 mr-2" />
                 Back to Home
@@ -427,16 +445,16 @@ export default function LibraryPage() {
         </header>
 
         {/* Page Header */}
-        <section className="relative bg-gradient-to-br from-[#191B56] via-[#0056D2] to-[#6BA6AA] py-20">
+        <section className="relative bg-gradient-to-br from-brand-navy via-brand-blue to-brand-cyan py-8 sm:py-12 md:py-16">
           <div className="absolute inset-0 opacity-10">
             <div className="absolute top-10 left-10 w-72 h-72 bg-white rounded-full blur-3xl"></div>
             <div className="absolute bottom-10 right-10 w-96 h-96 bg-white rounded-full blur-3xl"></div>
           </div>
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-white mb-3 sm:mb-4">
               AI Tools & Resources
             </h1>
-            <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto">
+            <p className="text-base sm:text-lg md:text-xl text-white/90 max-w-3xl mx-auto">
               Podcasts, tools, guides, and industry links curated for tourism professionals
             </p>
           </div>
@@ -444,42 +462,42 @@ export default function LibraryPage() {
 
         {/* Main Content */}
         <main className="bg-gradient-to-b from-gray-50 to-white min-h-screen">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 md:py-12">
 
             {/* Resource Categories */}
-            <div className="space-y-20">
+            <div className="space-y-6 sm:space-y-10 md:space-y-12">
               {resources.map((category, categoryIndex) => {
                 const isPodcast = category.category.includes('Podcast')
                 const isTools = category.category.includes('AI') && !category.category.includes('Podcast')
 
                 // Define gradient colors by category
                 const getCategoryGradient = () => {
-                  if (isPodcast) return 'from-[#AB606F] to-[#950E1D]'
-                  if (isTools) return 'from-[#DEB041] to-[#A66326]'
-                  if (category.category.includes('Industry')) return 'from-[#066466] to-[#191B56]'
-                  if (category.category.includes('Official')) return 'from-[#0056D2] to-[#6BA6AA]'
-                  if (category.category.includes('Learning')) return 'from-[#0056D2] to-[#6BA6AA]'
-                  return 'from-[#0056D2] to-[#6BA6AA]'
+                  if (isPodcast) return 'from-brand-blue to-brand-navy'
+                  if (isTools) return 'from-brand-cyan to-brand-blue'
+                  if (category.category.includes('Industry')) return 'from-brand-accent-blue to-brand-navy'
+                  if (category.category.includes('Official')) return 'from-brand-blue to-brand-cyan'
+                  if (category.category.includes('Learning')) return 'from-brand-blue to-brand-cyan'
+                  return 'from-brand-blue to-brand-cyan'
                 }
 
                 const getBgColor = () => {
-                  if (isPodcast) return 'bg-gradient-to-br from-purple-50 to-pink-50'
-                  if (isTools) return 'bg-gradient-to-br from-amber-50 to-yellow-50'
+                  if (isPodcast) return 'bg-gradient-to-br from-blue-50 to-cyan-50'
+                  if (isTools) return 'bg-gradient-to-br from-cyan-50 to-blue-50'
                   return 'bg-white'
                 }
 
                 return (
-                  <section key={categoryIndex} id={category.category.toLowerCase().replace(/\s+/g, '-')} className={`${getBgColor()} rounded-3xl p-8 md:p-12 shadow-sm`}>
+                  <section key={categoryIndex} id={category.category.toLowerCase().replace(/\s+/g, '-')} className={`${getBgColor()} rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 shadow-sm`}>
                     {/* Section Header */}
-                    <div className="mb-8">
-                      <h2 className="text-3xl font-bold text-[#191B56]">
+                    <div className="mb-4 sm:mb-6">
+                      <h2 className="text-xl sm:text-2xl md:text-3xl font-display font-bold text-brand-navy">
                         {category.category}
                       </h2>
                     </div>
 
                     {/* Podcast Layout - Grid of Small Cards with Logos */}
                     {isPodcast ? (
-                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
                         {category.items.map((item, itemIndex) => {
                           const Icon = item.icon
                           // Extract podcast name and episode title from the title
@@ -493,16 +511,16 @@ export default function LibraryPage() {
                               href={item.url}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="group bg-white rounded-xl border border-gray-200 p-5 hover:shadow-xl hover:border-[#AB606F] hover:-translate-y-1 transition-all duration-300 flex flex-col"
+                              className="group bg-white rounded-lg border border-gray-200 p-3 sm:p-4 hover:shadow-lg hover:border-brand-blue hover:-translate-y-0.5 transition-all duration-200 flex flex-col"
                             >
                               {/* Podcast Icon & Name */}
-                              <div className="flex items-start gap-3 mb-3">
-                                <div className="w-12 h-12 flex-shrink-0 rounded-lg bg-gradient-to-br from-[#AB606F] to-[#950E1D] flex items-center justify-center">
-                                  <Icon className="h-6 w-6 text-white" />
+                              <div className="flex items-start gap-2 sm:gap-3 mb-2">
+                                <div className="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 rounded-lg bg-gradient-to-br from-brand-blue to-brand-navy flex items-center justify-center">
+                                  <Icon className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
                                 </div>
                                 {/* Podcast Name & Date */}
-                                <div className="flex-1 pt-1">
-                                  <div className="text-xs font-semibold text-[#AB606F] leading-tight">
+                                <div className="flex-1 pt-0.5">
+                                  <div className="text-xs font-semibold text-brand-blue leading-tight">
                                     {podcastName}
                                   </div>
                                   {(item as any).date && (
@@ -515,19 +533,19 @@ export default function LibraryPage() {
 
                               {/* Episode Title */}
                               {episodeTitle && (
-                                <h3 className="text-base font-bold text-[#191B56] mb-2 group-hover:text-[#0056D2] transition-colors line-clamp-2">
+                                <h3 className="text-sm sm:text-base font-bold text-brand-navy mb-1.5 sm:mb-2 group-hover:text-brand-cyan transition-colors line-clamp-2">
                                   {episodeTitle}
                                 </h3>
                               )}
 
                               {/* Description */}
-                              <p className="text-sm text-gray-600 leading-relaxed line-clamp-3 mb-3">
+                              <p className="text-xs sm:text-sm text-gray-600 leading-relaxed line-clamp-2 sm:line-clamp-3 mb-2">
                                 {item.description}
                               </p>
 
                               {/* Listen Link */}
-                              <div className="mt-auto pt-2 border-t border-gray-100">
-                                <span className="text-xs font-semibold text-[#AB606F] group-hover:text-[#0056D2] inline-flex items-center gap-1">
+                              <div className="mt-auto pt-1.5 sm:pt-2 border-t border-gray-100">
+                                <span className="text-xs font-semibold text-brand-blue group-hover:text-brand-cyan inline-flex items-center gap-1">
                                   Listen Now
                                   <ExternalLink className="h-3 w-3" />
                                 </span>
@@ -538,7 +556,7 @@ export default function LibraryPage() {
                       </div>
                     ) : isTools ? (
                       /* AI Tools Layout - Logo Grid */
-                      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
                         {category.items.map((item, itemIndex) => {
                           const Icon = item.icon
                           return (
@@ -547,37 +565,37 @@ export default function LibraryPage() {
                               href={item.url}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="group bg-white rounded-xl border border-gray-200 p-6 hover:shadow-xl hover:border-[#DEB041] hover:-translate-y-1 transition-all duration-300"
+                              className="group bg-white rounded-lg border border-gray-200 p-3 sm:p-4 hover:shadow-lg hover:border-brand-cyan hover:-translate-y-0.5 transition-all duration-200"
                             >
                               {/* Logo */}
-                              <div className="w-16 h-16 rounded-xl overflow-hidden mb-4 group-hover:scale-105 transition-transform flex items-center justify-center bg-gray-50">
+                              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-lg overflow-hidden mb-2 sm:mb-3 group-hover:scale-105 transition-transform flex items-center justify-center bg-gray-50">
                                 {(item as any).logo ? (
                                   <img
                                     src={(item as any).logo}
                                     alt={item.title}
-                                    className="w-full h-full object-contain p-2"
+                                    className="w-full h-full object-contain p-1.5 sm:p-2"
                                   />
                                 ) : (
                                   <div className={`w-full h-full bg-gradient-to-br ${getCategoryGradient()} flex items-center justify-center`}>
-                                    <Icon className="h-8 w-8 text-white" />
+                                    <Icon className="h-6 w-6 sm:h-7 sm:w-7 text-white" />
                                   </div>
                                 )}
                               </div>
 
                               {/* Title */}
-                              <h3 className="text-lg font-bold text-[#191B56] mb-2 group-hover:text-[#0056D2] transition-colors">
+                              <h3 className="text-sm sm:text-base font-bold text-brand-navy mb-1.5 sm:mb-2 group-hover:text-brand-cyan transition-colors line-clamp-1">
                                 {item.title}
                               </h3>
 
                               {/* Description */}
-                              <p className="text-sm text-gray-600 leading-relaxed mb-3">
+                              <p className="text-xs sm:text-sm text-gray-600 leading-relaxed mb-2 line-clamp-2 sm:line-clamp-3">
                                 {item.description}
                               </p>
 
                               {/* CTA */}
-                              <div className="inline-flex items-center text-sm font-semibold text-[#DEB041] group-hover:gap-1 transition-all">
+                              <div className="inline-flex items-center text-xs sm:text-sm font-semibold text-brand-cyan group-hover:gap-1 transition-all">
                                 Explore
-                                <ExternalLink className="ml-1 h-4 w-4" />
+                                <ExternalLink className="ml-1 h-3 w-3 sm:h-4 sm:w-4" />
                               </div>
                             </a>
                           )
@@ -585,7 +603,7 @@ export default function LibraryPage() {
                       </div>
                     ) : (
                       /* Other Resources - Compact Cards */
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
                         {category.items.map((item, itemIndex) => {
                           const Icon = item.icon
                           return (
@@ -594,28 +612,28 @@ export default function LibraryPage() {
                               href={item.url}
                               target={(item as any).isInternal ? undefined : "_blank"}
                               rel={(item as any).isInternal ? undefined : "noopener noreferrer"}
-                              className="group bg-white rounded-xl border border-gray-200 p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex gap-4 items-start"
+                              className="group bg-white rounded-lg border border-gray-200 p-3 sm:p-4 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 flex gap-3 items-start"
                             >
                               {/* Icon */}
-                              <div className={`flex-shrink-0 w-14 h-14 rounded-lg bg-gradient-to-br ${getCategoryGradient()} flex items-center justify-center group-hover:scale-105 transition-transform`}>
-                                <Icon className="h-7 w-7 text-white" />
+                              <div className={`flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-gradient-to-br ${getCategoryGradient()} flex items-center justify-center group-hover:scale-105 transition-transform`}>
+                                <Icon className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
                               </div>
 
                               {/* Content */}
                               <div className="flex-1 min-w-0">
-                                <h3 className="text-lg font-bold text-[#191B56] mb-2 group-hover:text-[#0056D2] transition-colors">
+                                <h3 className="text-sm sm:text-base font-bold text-brand-navy mb-1 sm:mb-1.5 group-hover:text-brand-cyan transition-colors">
                                   {item.title}
                                 </h3>
-                                <p className="text-gray-600 text-sm leading-relaxed">
+                                <p className="text-gray-600 text-xs sm:text-sm leading-relaxed line-clamp-2">
                                   {item.description}
                                 </p>
                               </div>
 
                               {/* Arrow */}
                               {(item as any).isInternal ? (
-                                <div className="flex-shrink-0 text-[#0056D2]">→</div>
+                                <div className="flex-shrink-0 text-brand-cyan text-lg sm:text-xl">→</div>
                               ) : (
-                                <ExternalLink className="flex-shrink-0 h-5 w-5 text-gray-400 group-hover:text-[#0056D2] transition-colors" />
+                                <ExternalLink className="flex-shrink-0 h-4 w-4 sm:h-5 sm:w-5 text-gray-400 group-hover:text-brand-cyan transition-colors" />
                               )}
                             </a>
                           )
@@ -628,10 +646,10 @@ export default function LibraryPage() {
             </div>
 
             {/* Footer Note */}
-            <div className="mt-20 p-10 bg-gradient-to-br from-[#191B56] to-[#0056D2] rounded-3xl shadow-xl">
-              <h3 className="text-2xl font-bold text-white mb-3">Have a Resource to Share?</h3>
-              <p className="text-white/90 text-lg">
-                Found a helpful AI tool or resource for tourism professionals? Email <a href="mailto:jroush@thebrandusa.com" className="text-white hover:text-[#DEB041] underline font-semibold transition-colors">jroush@thebrandusa.com</a> to suggest additions to this library.
+            <div className="mt-8 sm:mt-12 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-brand-navy to-brand-blue rounded-xl sm:rounded-2xl shadow-lg">
+              <h3 className="text-lg sm:text-xl md:text-2xl font-display font-bold text-white mb-2 sm:mb-3">Have a Resource to Share?</h3>
+              <p className="text-white/90 text-sm sm:text-base md:text-lg">
+                Found a helpful AI tool or resource for tourism professionals? Email <a href="mailto:jroush@thebrandusa.com" className="text-white hover:text-brand-cyan underline font-semibold transition-colors">jroush@thebrandusa.com</a> to suggest additions to this library.
               </p>
             </div>
           </div>

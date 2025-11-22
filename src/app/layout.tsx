@@ -1,9 +1,19 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Montserrat, Oswald } from 'next/font/google'
 import './globals.css'
 import Script from 'next/script'
 
-const inter = Inter({ subsets: ['latin'] })
+const montserrat = Montserrat({
+  subsets: ['latin'],
+  variable: '--font-montserrat',
+  display: 'swap',
+})
+
+const oswald = Oswald({
+  subsets: ['latin'],
+  variable: '--font-oswald',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: 'Brand USA Agents of Change',
@@ -25,7 +35,7 @@ export default function RootLayout({
       <head>
         <Script src="https://cdn.jsdelivr.net/npm/hls.js@latest" strategy="beforeInteractive" />
       </head>
-      <body className={inter.className}>
+      <body className={`${montserrat.variable} ${oswald.variable} font-sans`}>
         <div className="min-h-screen bg-white">
           {children}
         </div>
