@@ -25,9 +25,9 @@ const config: Config = {
         }
       },
       fontFamily: {
-        sans: ['Montserrat', 'system-ui', 'sans-serif'],
-        display: ['Oswald', 'sans-serif'],
-        body: ['Montserrat', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-montserrat)', 'system-ui', 'sans-serif'],
+        display: ['var(--font-oswald)', 'sans-serif'],
+        body: ['var(--font-montserrat)', 'system-ui', 'sans-serif'],
       },
       animation: {
         'fade-in': 'fade-in 0.5s ease-out',
