@@ -291,18 +291,18 @@ export default function HomePage() {
                 height={33}
                 className="h-8 w-auto"
               />
-              <span className="ml-4 text-xl font-semibold text-[#191B56]">
+              <span className="ml-4 text-xl font-semibold text-brand-navy">
                 Agents of Change
               </span>
             </div>
             <nav className="hidden md:flex items-center space-x-8">
-              <a href="#webinars" className="text-base font-medium text-[#191B56] hover:text-[#0056D2] transition-colors">
+              <a href="#webinars" className="text-base font-medium text-brand-navy hover:text-brand-cyan transition-colors">
                 Videos
               </a>
-              <Link href="/library" className="text-base font-medium text-[#191B56] hover:text-[#0056D2] transition-colors">
+              <Link href="/library" className="text-base font-medium text-brand-navy hover:text-brand-cyan transition-colors">
                 Resources
               </Link>
-              <Link href="/shorts" className="text-base font-medium text-[#191B56] hover:text-[#0056D2] transition-colors">
+              <Link href="/shorts" className="text-base font-medium text-brand-navy hover:text-brand-cyan transition-colors">
                 Quick Tutorials
               </Link>
             </nav>
@@ -321,7 +321,7 @@ export default function HomePage() {
             className="object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-[#191B56] opacity-85" />
+          <div className="absolute inset-0 bg-brand-navy opacity-85" />
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
@@ -337,7 +337,7 @@ export default function HomePage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
               <a
                 href="#webinars"
-                className="bg-white text-[#0056D2] px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition inline-flex items-center justify-center shadow-lg hover:shadow-xl text-lg"
+                className="bg-white text-brand-cyan px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition inline-flex items-center justify-center shadow-lg hover:shadow-xl text-lg"
               >
                 Start Learning
                 <Play className="ml-2 h-5 w-5" />
@@ -357,7 +357,7 @@ export default function HomePage() {
       <section className="py-16 bg-gradient-to-b from-gray-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-[#191B56] mb-4">
+            <h2 className="text-4xl font-bold text-brand-navy mb-4 font-display">
               Explore Our Platform
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
@@ -371,16 +371,16 @@ export default function HomePage() {
               href="#webinars"
               className="group bg-white rounded-xl border border-gray-200 p-8 hover:shadow-xl hover:-translate-y-2 transition-all duration-300"
             >
-              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#0056D2] to-[#6BA6AA] flex items-center justify-center mb-6">
+              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-brand-blue to-brand-cyan flex items-center justify-center mb-6">
                 <Video className="h-8 w-8 text-white" />
               </div>
-              <h3 className="text-2xl font-semibold text-[#191B56] mb-3">
+              <h3 className="text-2xl font-semibold text-brand-navy mb-3">
                 AI Training Videos
               </h3>
               <p className="text-gray-600 mb-6 leading-relaxed">
                 8 comprehensive webinars covering AI fundamentals, strategy, and implementation for tourism marketing
               </p>
-              <div className="inline-flex items-center text-[#0056D2] font-semibold group-hover:gap-2 transition-all">
+              <div className="inline-flex items-center text-brand-cyan font-semibold group-hover:gap-2 transition-all">
                 Watch Now
                 <ArrowRight className="ml-1 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </div>
@@ -391,16 +391,16 @@ export default function HomePage() {
               href="/library#podcasts"
               className="group bg-white rounded-xl border border-gray-200 p-8 hover:shadow-xl hover:-translate-y-2 transition-all duration-300"
             >
-              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#AB606F] to-[#950E1D] flex items-center justify-center mb-6">
+              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-brand-blue to-brand-navy flex items-center justify-center mb-6">
                 <Headphones className="h-8 w-8 text-white" />
               </div>
-              <h3 className="text-2xl font-semibold text-[#191B56] mb-3">
+              <h3 className="text-2xl font-semibold text-brand-navy mb-3">
                 Podcasts & Interviews
               </h3>
               <p className="text-gray-600 mb-6 leading-relaxed">
                 13 expert conversations exploring AI's impact on destination marketing from 2023-2025
               </p>
-              <div className="inline-flex items-center text-[#0056D2] font-semibold group-hover:gap-2 transition-all">
+              <div className="inline-flex items-center text-brand-cyan font-semibold group-hover:gap-2 transition-all">
                 Listen
                 <ArrowRight className="ml-1 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </div>
@@ -411,16 +411,16 @@ export default function HomePage() {
               href="/library"
               className="group bg-white rounded-xl border border-gray-200 p-8 hover:shadow-xl hover:-translate-y-2 transition-all duration-300"
             >
-              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#DEB041] to-[#A66326] flex items-center justify-center mb-6">
+              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-brand-cyan to-brand-blue flex items-center justify-center mb-6">
                 <Wrench className="h-8 w-8 text-white" />
               </div>
-              <h3 className="text-2xl font-semibold text-[#191B56] mb-3">
+              <h3 className="text-2xl font-semibold text-brand-navy mb-3">
                 AI Tools & Resources
               </h3>
               <p className="text-gray-600 mb-6 leading-relaxed">
                 Curated AI tools, platforms, templates, and industry resources for immediate implementation
               </p>
-              <div className="inline-flex items-center text-[#0056D2] font-semibold group-hover:gap-2 transition-all">
+              <div className="inline-flex items-center text-brand-cyan font-semibold group-hover:gap-2 transition-all">
                 Browse
                 <ArrowRight className="ml-1 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </div>
