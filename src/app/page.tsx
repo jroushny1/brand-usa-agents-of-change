@@ -305,6 +305,9 @@ export default function HomePage() {
               <Link href="/shorts" className="text-base font-medium text-brand-navy hover:text-brand-cyan transition-colors">
                 Quick Tutorials
               </Link>
+              <Link href="/ai-audit" className="text-base font-medium text-brand-navy hover:text-brand-cyan transition-colors">
+                AI Audit
+              </Link>
             </nav>
           </div>
         </div>
