@@ -428,7 +428,7 @@ export default function LibraryPage() {
                 href="/"
                 className="flex items-center text-brand-navy hover:text-brand-cyan transition-colors"
               >
-                <ArrowLeft className="h-5 w-5 mr-2" />
+                <ArrowLeft className="h-5 w-5 mr-2" aria-hidden="true" />
                 Back to Home
               </Link>
               <div className="flex items-center">
@@ -497,7 +497,7 @@ export default function LibraryPage() {
 
                     {/* Podcast Layout - Grid of Small Cards with Logos */}
                     {isPodcast ? (
-                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+                      <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 list-none">
                         {category.items.map((item, itemIndex) => {
                           const Icon = item.icon
                           // Extract podcast name and episode title from the title
@@ -506,139 +506,146 @@ export default function LibraryPage() {
                             : [item.title, '']
 
                           return (
-                            <a
-                              key={itemIndex}
-                              href={item.url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="group bg-white rounded-lg border border-gray-200 p-3 sm:p-4 hover:shadow-lg hover:border-brand-blue hover:-translate-y-0.5 transition-all duration-200 flex flex-col"
-                            >
-                              {/* Podcast Icon & Name */}
-                              <div className="flex items-start gap-2 sm:gap-3 mb-2">
-                                <div className="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 rounded-lg bg-gradient-to-br from-brand-blue to-brand-navy flex items-center justify-center">
-                                  <Icon className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
-                                </div>
-                                {/* Podcast Name & Date */}
-                                <div className="flex-1 pt-0.5">
-                                  <div className="text-xs font-semibold text-brand-blue leading-tight">
-                                    {podcastName}
+                            <li key={itemIndex}>
+                              <a
+                                href={item.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                aria-label={`Listen to ${item.title}${(item as any).date ? ` from ${(item as any).date}` : ''}`}
+                                className="group bg-white rounded-lg border border-gray-200 p-3 sm:p-4 hover:shadow-lg hover:border-brand-blue hover:-translate-y-0.5 transition-all duration-200 flex flex-col h-full"
+                              >
+                                {/* Podcast Icon & Name */}
+                                <div className="flex items-start gap-2 sm:gap-3 mb-2">
+                                  <div className="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 rounded-lg bg-gradient-to-br from-brand-blue to-brand-navy flex items-center justify-center">
+                                    <Icon className="h-5 w-5 sm:h-6 sm:w-6 text-white" aria-hidden="true" />
                                   </div>
-                                  {(item as any).date && (
-                                    <div className="text-xs text-gray-500 mt-0.5">
-                                      {(item as any).date}
+                                  {/* Podcast Name & Date */}
+                                  <div className="flex-1 pt-0.5">
+                                    <div className="text-xs font-semibold text-brand-blue leading-tight">
+                                      {podcastName}
+                                    </div>
+                                    {(item as any).date && (
+                                      <div className="text-xs text-gray-500 mt-0.5">
+                                        {(item as any).date}
+                                      </div>
+                                    )}
+                                  </div>
+                                </div>
+
+                                {/* Episode Title */}
+                                {episodeTitle && (
+                                  <h3 className="text-sm sm:text-base font-bold text-brand-navy mb-1.5 sm:mb-2 group-hover:text-brand-cyan transition-colors line-clamp-2">
+                                    {episodeTitle}
+                                  </h3>
+                                )}
+
+                                {/* Description */}
+                                <p className="text-xs sm:text-sm text-gray-600 leading-relaxed line-clamp-2 sm:line-clamp-3 mb-2">
+                                  {item.description}
+                                </p>
+
+                                {/* Listen Link */}
+                                <div className="mt-auto pt-1.5 sm:pt-2 border-t border-gray-100">
+                                  <span className="text-xs font-semibold text-brand-blue group-hover:text-brand-cyan inline-flex items-center gap-1">
+                                    Listen Now
+                                    <ExternalLink className="h-3 w-3" aria-hidden="true" />
+                                  </span>
+                                </div>
+                              </a>
+                            </li>
+                          )
+                        })}
+                      </ul>
+                    ) : isTools ? (
+                      /* AI Tools Layout - Logo Grid */
+                      <ul className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 list-none">
+                        {category.items.map((item, itemIndex) => {
+                          const Icon = item.icon
+                          return (
+                            <li key={itemIndex}>
+                              <a
+                                href={item.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                aria-label={`Explore ${item.title}: ${item.description}`}
+                                className="group bg-white rounded-lg border border-gray-200 p-3 sm:p-4 hover:shadow-lg hover:border-brand-cyan hover:-translate-y-0.5 transition-all duration-200 flex flex-col h-full"
+                              >
+                                {/* Logo */}
+                                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-lg overflow-hidden mb-2 sm:mb-3 group-hover:scale-105 transition-transform flex items-center justify-center bg-gray-50">
+                                  {(item as any).logo ? (
+                                    <img
+                                      src={(item as any).logo}
+                                      alt=""
+                                      aria-hidden="true"
+                                      className="w-full h-full object-contain p-1.5 sm:p-2"
+                                    />
+                                  ) : (
+                                    <div className={`w-full h-full bg-gradient-to-br ${getCategoryGradient()} flex items-center justify-center`}>
+                                      <Icon className="h-6 w-6 sm:h-7 sm:w-7 text-white" aria-hidden="true" />
                                     </div>
                                   )}
                                 </div>
-                              </div>
 
-                              {/* Episode Title */}
-                              {episodeTitle && (
-                                <h3 className="text-sm sm:text-base font-bold text-brand-navy mb-1.5 sm:mb-2 group-hover:text-brand-cyan transition-colors line-clamp-2">
-                                  {episodeTitle}
-                                </h3>
-                              )}
-
-                              {/* Description */}
-                              <p className="text-xs sm:text-sm text-gray-600 leading-relaxed line-clamp-2 sm:line-clamp-3 mb-2">
-                                {item.description}
-                              </p>
-
-                              {/* Listen Link */}
-                              <div className="mt-auto pt-1.5 sm:pt-2 border-t border-gray-100">
-                                <span className="text-xs font-semibold text-brand-blue group-hover:text-brand-cyan inline-flex items-center gap-1">
-                                  Listen Now
-                                  <ExternalLink className="h-3 w-3" />
-                                </span>
-                              </div>
-                            </a>
-                          )
-                        })}
-                      </div>
-                    ) : isTools ? (
-                      /* AI Tools Layout - Logo Grid */
-                      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
-                        {category.items.map((item, itemIndex) => {
-                          const Icon = item.icon
-                          return (
-                            <a
-                              key={itemIndex}
-                              href={item.url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="group bg-white rounded-lg border border-gray-200 p-3 sm:p-4 hover:shadow-lg hover:border-brand-cyan hover:-translate-y-0.5 transition-all duration-200"
-                            >
-                              {/* Logo */}
-                              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-lg overflow-hidden mb-2 sm:mb-3 group-hover:scale-105 transition-transform flex items-center justify-center bg-gray-50">
-                                {(item as any).logo ? (
-                                  <img
-                                    src={(item as any).logo}
-                                    alt={item.title}
-                                    className="w-full h-full object-contain p-1.5 sm:p-2"
-                                  />
-                                ) : (
-                                  <div className={`w-full h-full bg-gradient-to-br ${getCategoryGradient()} flex items-center justify-center`}>
-                                    <Icon className="h-6 w-6 sm:h-7 sm:w-7 text-white" />
-                                  </div>
-                                )}
-                              </div>
-
-                              {/* Title */}
-                              <h3 className="text-sm sm:text-base font-bold text-brand-navy mb-1.5 sm:mb-2 group-hover:text-brand-cyan transition-colors line-clamp-1">
-                                {item.title}
-                              </h3>
-
-                              {/* Description */}
-                              <p className="text-xs sm:text-sm text-gray-600 leading-relaxed mb-2 line-clamp-2 sm:line-clamp-3">
-                                {item.description}
-                              </p>
-
-                              {/* CTA */}
-                              <div className="inline-flex items-center text-xs sm:text-sm font-semibold text-brand-cyan group-hover:gap-1 transition-all">
-                                Explore
-                                <ExternalLink className="ml-1 h-3 w-3 sm:h-4 sm:w-4" />
-                              </div>
-                            </a>
-                          )
-                        })}
-                      </div>
-                    ) : (
-                      /* Other Resources - Compact Cards */
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
-                        {category.items.map((item, itemIndex) => {
-                          const Icon = item.icon
-                          return (
-                            <a
-                              key={itemIndex}
-                              href={item.url}
-                              target={(item as any).isInternal ? undefined : "_blank"}
-                              rel={(item as any).isInternal ? undefined : "noopener noreferrer"}
-                              className="group bg-white rounded-lg border border-gray-200 p-3 sm:p-4 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 flex gap-3 items-start"
-                            >
-                              {/* Icon */}
-                              <div className={`flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-gradient-to-br ${getCategoryGradient()} flex items-center justify-center group-hover:scale-105 transition-transform`}>
-                                <Icon className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
-                              </div>
-
-                              {/* Content */}
-                              <div className="flex-1 min-w-0">
-                                <h3 className="text-sm sm:text-base font-bold text-brand-navy mb-1 sm:mb-1.5 group-hover:text-brand-cyan transition-colors">
+                                {/* Title */}
+                                <h3 className="text-sm sm:text-base font-bold text-brand-navy mb-1.5 sm:mb-2 group-hover:text-brand-cyan transition-colors line-clamp-1">
                                   {item.title}
                                 </h3>
-                                <p className="text-gray-600 text-xs sm:text-sm leading-relaxed line-clamp-2">
+
+                                {/* Description */}
+                                <p className="text-xs sm:text-sm text-gray-600 leading-relaxed mb-2 line-clamp-2 sm:line-clamp-3">
                                   {item.description}
                                 </p>
-                              </div>
 
-                              {/* Arrow */}
-                              {(item as any).isInternal ? (
-                                <div className="flex-shrink-0 text-brand-cyan text-lg sm:text-xl">→</div>
-                              ) : (
-                                <ExternalLink className="flex-shrink-0 h-4 w-4 sm:h-5 sm:w-5 text-gray-400 group-hover:text-brand-cyan transition-colors" />
-                              )}
-                            </a>
+                                {/* CTA */}
+                                <div className="inline-flex items-center text-xs sm:text-sm font-semibold text-brand-cyan group-hover:gap-1 transition-all mt-auto">
+                                  Explore
+                                  <ExternalLink className="ml-1 h-3 w-3 sm:h-4 sm:w-4" aria-hidden="true" />
+                                </div>
+                              </a>
+                            </li>
                           )
                         })}
-                      </div>
+                      </ul>
+                    ) : (
+                      /* Other Resources - Compact Cards */
+                      <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 list-none">
+                        {category.items.map((item, itemIndex) => {
+                          const Icon = item.icon
+                          return (
+                            <li key={itemIndex}>
+                              <a
+                                href={item.url}
+                                target={(item as any).isInternal ? undefined : "_blank"}
+                                rel={(item as any).isInternal ? undefined : "noopener noreferrer"}
+                                aria-label={`${(item as any).isInternal ? 'View' : 'Visit'} ${item.title}: ${item.description}`}
+                                className="group bg-white rounded-lg border border-gray-200 p-3 sm:p-4 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 flex gap-3 items-start h-full"
+                              >
+                                {/* Icon */}
+                                <div className={`flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-gradient-to-br ${getCategoryGradient()} flex items-center justify-center group-hover:scale-105 transition-transform`}>
+                                  <Icon className="h-5 w-5 sm:h-6 sm:w-6 text-white" aria-hidden="true" />
+                                </div>
+
+                                {/* Content */}
+                                <div className="flex-1 min-w-0">
+                                  <h3 className="text-sm sm:text-base font-bold text-brand-navy mb-1 sm:mb-1.5 group-hover:text-brand-cyan transition-colors">
+                                    {item.title}
+                                  </h3>
+                                  <p className="text-gray-600 text-xs sm:text-sm leading-relaxed line-clamp-2">
+                                    {item.description}
+                                  </p>
+                                </div>
+
+                                {/* Arrow */}
+                                {(item as any).isInternal ? (
+                                  <div className="flex-shrink-0 text-brand-cyan text-lg sm:text-xl" aria-hidden="true">→</div>
+                                ) : (
+                                  <ExternalLink className="flex-shrink-0 h-4 w-4 sm:h-5 sm:w-5 text-gray-400 group-hover:text-brand-cyan transition-colors" aria-hidden="true" />
+                                )}
+                              </a>
+                            </li>
+                          )
+                        })}
+                      </ul>
                     )}
                   </section>
                 )
