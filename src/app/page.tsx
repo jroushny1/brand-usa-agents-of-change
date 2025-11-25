@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Play, Clock, Video, Headphones, Wrench, ArrowRight } from 'lucide-react'
 import AccessCheck from '@/components/AccessCheck'
+import Header from '@/components/Header'
 
 // Temporary data - we'll move this to Supabase later
 const webinars = [
@@ -279,39 +280,7 @@ export default function HomePage() {
       ></script>
 
       <AccessCheck>
-        {/* Header */}
-        <header className="border-b border-gray-200 bg-white shadow-sm sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-18">
-            <div className="flex items-center">
-              <Image
-                src="/brandusa-logo.png"
-                alt="Brand USA"
-                width={100}
-                height={33}
-                className="h-8 w-auto"
-              />
-              <span className="ml-4 text-xl font-semibold text-brand-navy">
-                Agents of Change
-              </span>
-            </div>
-            <nav className="hidden md:flex items-center space-x-8">
-              <a href="#webinars" className="text-base font-medium text-brand-navy hover:text-brand-cyan transition-colors">
-                Videos
-              </a>
-              <Link href="/library" className="text-base font-medium text-brand-navy hover:text-brand-cyan transition-colors">
-                Resources
-              </Link>
-              <Link href="/shorts" className="text-base font-medium text-brand-navy hover:text-brand-cyan transition-colors">
-                Quick Tutorials
-              </Link>
-              <Link href="/ai-audit" className="text-base font-medium text-brand-navy hover:text-brand-cyan transition-colors">
-                AI Audit
-              </Link>
-            </nav>
-          </div>
-        </div>
-      </header>
+        <Header />
 
       {/* Hero Section */}
       <section className="relative overflow-hidden h-[600px] flex items-center text-white">
