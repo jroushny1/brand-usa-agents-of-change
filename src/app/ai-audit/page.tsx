@@ -169,7 +169,10 @@ export default function AIAuditPage() {
 
         // Check 4: Accessibility/Aria
         const images = Array.from(doc.querySelectorAll('img'));
-        const imagesWithAlt = images.filter(img => img.getAttribute('alt') && img.getAttribute('alt').trim() !== "");
+        const imagesWithAlt = images.filter(img => {
+            const alt = img.getAttribute('alt');
+            return alt !== null && alt.trim() !== "";
+        });
         const altRatio = images.length > 0 ? imagesWithAlt.length / images.length : 1;
 
         if (altRatio > 0.9) {
@@ -259,11 +262,14 @@ export default function AIAuditPage() {
         const isLikelyCSR = content.length > 5000 && charCount < 500;
 
         // 4. Image Analysis
-        const imgAnalysis = Array.from(doc.querySelectorAll('img')).map(img => ({
-            src: img.getAttribute('src'),
-            alt: img.getAttribute('alt') || "MISSING ALT TEXT",
-            hasAlt: !!img.getAttribute('alt') && img.getAttribute('alt').trim().length > 0
-        }));
+        const imgAnalysis = Array.from(doc.querySelectorAll('img')).map(img => {
+            const alt = img.getAttribute('alt');
+            return {
+                src: img.getAttribute('src'),
+                alt: alt || "MISSING ALT TEXT",
+                hasAlt: alt !== null && alt.trim().length > 0
+            };
+        });
 
         // 5. Schema Extraction
         const jsonLd = Array.from(schemas).map(s => {
