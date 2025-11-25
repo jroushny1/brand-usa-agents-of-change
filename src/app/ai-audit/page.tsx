@@ -17,14 +17,18 @@ import {
   Info,
   ShieldCheck,
   Zap,
-  ArrowLeft
+  ArrowLeft,
+  Layers,
+  AlertOctagon,
+  List,
+  Layout,
+  BarChart
 } from 'lucide-react';
 import Link from 'next/link';
 
 export default function AIAuditPage() {
-  // Changed default tab to 'knowledge' (Schema) as requested
-  const [activeTab, setActiveTab] = useState('knowledge');
-  const [inputMode, setInputMode] = useState('html'); // 'html', 'text', or 'url'
+  const [activeTab, setActiveTab] = useState('audit');
+  const [inputMode, setInputMode] = useState('html');
   const [inputText, setInputText] = useState('');
   const [urlInput, setUrlInput] = useState('');
 
@@ -50,7 +54,10 @@ export default function AIAuditPage() {
 </head>
 <body>
     <nav>
-        <a href="/">Home</a> | <a href="/news">News</a> | <a href="/login">Login</a>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/news">News</a></li>
+        </ul>
     </nav>
     <main>
         <article>
@@ -85,7 +92,7 @@ export default function AIAuditPage() {
     setInputMode('html');
     setInputText(demoHTML);
     setFetchError(null);
-    setActiveTab('knowledge');
+    setActiveTab('audit');
   };
 
   const parseContent = (content: string, sourceUrl = '') => {
@@ -93,72 +100,196 @@ export default function AIAuditPage() {
         const parser = new DOMParser();
         const doc = parser.parseFromString(content, 'text/html');
 
-        // 1. Raw Text Extraction (Total Characters)
-        const rawText = doc.body ? doc.body.textContent : content;
+        // --- SMART DETECTION: Frameworks ---
+        let detectedFramework = null;
+        if (doc.getElementById('__NEXT_DATA__') || content.includes('self.__next_f') || content.includes('_next/static')) {
+            detectedFramework = 'Next.js';
+        }
+        else if (doc.getElementById('___gatsby')) { detectedFramework = 'Gatsby'; }
+        else if (doc.getElementById('__nuxt')) { detectedFramework = 'Nuxt.js'; }
+
+        // --- SEMANTIC HEALTH CHECK (The "Gold" Test) ---
+        let semanticPoints = 0;
+        let totalSemanticChecks = 0;
+        const auditLog: Array<{ pass: boolean; msg: string }> = [];
+
+        // Check 1: Landmarks
+        const hasMain = doc.querySelector('main');
+        const hasNav = doc.querySelector('nav');
+        const hasHeader = doc.querySelector('header');
+        const hasFooter = doc.querySelector('footer');
+        const landmarkCount = [hasMain, hasNav, hasHeader, hasFooter].filter(Boolean).length;
+
+        if (landmarkCount >= 3) {
+            semanticPoints += 20;
+            auditLog.push({ pass: true, msg: "Excellent use of Landmarks (<main>, <nav>, etc.)" });
+        } else if (landmarkCount > 0) {
+            semanticPoints += 10;
+            auditLog.push({ pass: true, msg: "Some Landmarks found, but could be better." });
+        } else {
+            auditLog.push({ pass: false, msg: "Missing Landmarks (AI struggles to find the main content)." });
+        }
+        totalSemanticChecks += 20;
+
+        // Check 2: Heading Hierarchy
+        const h1 = doc.querySelectorAll('h1').length;
+        if (h1 === 1) {
+            semanticPoints += 20;
+            auditLog.push({ pass: true, msg: "Perfect Heading Structure (One H1)." });
+        } else if (h1 > 1) {
+            semanticPoints += 10;
+            auditLog.push({ pass: false, msg: "Multiple H1 tags found (Confusing for AI)." });
+        } else {
+            auditLog.push({ pass: false, msg: "No H1 tag found." });
+        }
+        totalSemanticChecks += 20;
+
+        // Check 3: List Usage for Links
+        const navLinks = doc.querySelectorAll('nav a, header a, footer a');
+        let linksInLists = 0;
+        navLinks.forEach(a => {
+            if (a.closest('li')) linksInLists++;
+        });
+        const listRatio = navLinks.length > 0 ? linksInLists / navLinks.length : 1;
+
+        if (listRatio > 0.8) {
+            semanticPoints += 20;
+            auditLog.push({ pass: true, msg: "Navigation links are correctly structured in Lists." });
+        } else if (listRatio > 0.3) {
+            semanticPoints += 10;
+            auditLog.push({ pass: false, msg: "Some nav links are missing List structure (<ul><li>)." });
+        } else {
+            if (navLinks.length > 0) {
+                auditLog.push({ pass: false, msg: "Navigation links found floating in Divs (Div Soup)." });
+            } else {
+                semanticPoints += 20;
+            }
+        }
+        totalSemanticChecks += 20;
+
+        // Check 4: Accessibility/Aria
+        const images = Array.from(doc.querySelectorAll('img'));
+        const imagesWithAlt = images.filter(img => img.getAttribute('alt') && img.getAttribute('alt').trim() !== "");
+        const altRatio = images.length > 0 ? imagesWithAlt.length / images.length : 1;
+
+        if (altRatio > 0.9) {
+            semanticPoints += 20;
+            auditLog.push({ pass: true, msg: "Images have Alt Text (High Accessibility)." });
+        } else {
+            semanticPoints += Math.round(altRatio * 20);
+            auditLog.push({ pass: false, msg: `${images.length - imagesWithAlt.length} images missing Alt Text.` });
+        }
+        totalSemanticChecks += 20;
+
+        // Check 5: Schema
+        const schemas = doc.querySelectorAll('script[type="application/ld+json"]');
+        if (schemas.length > 0) {
+            semanticPoints += 20;
+            auditLog.push({ pass: true, msg: "Schema.org Structured Data detected." });
+        } else {
+            auditLog.push({ pass: false, msg: "No Structured Data (Knowledge Graph) found." });
+        }
+        totalSemanticChecks += 20;
+
+        const semanticScore = Math.round((semanticPoints / totalSemanticChecks) * 100);
+
+
+        // --- SCORING CLEANUP (Framework Aware) ---
+        const scoringClone = doc.cloneNode(true) as Document;
+
+        // Remove Framework Scripts for Fairness
+        const techTags = scoringClone.querySelectorAll('script, style, noscript, template, svg');
+        techTags.forEach(el => el.remove());
+
+        // 1. Raw Text Extraction
+        const rawText = scoringClone.body ? scoringClone.body.textContent : "";
         const cleanRawText = rawText.replace(/\s+/g, ' ').trim();
         const charCount = cleanRawText.length;
         const tokenCount = Math.ceil(charCount / 4);
 
-        // 2. Extract Headers
-        const headers = Array.from(doc.querySelectorAll('h1, h2, h3, h4, h5, h6')).map(h => ({
+        // 2. Headers
+        const headerTags = Array.from(doc.querySelectorAll('h1, h2, h3, h4, h5, h6')).map(h => ({
             tag: h.tagName,
             text: h.textContent
         }));
 
-        // 3. RAG/Content Extraction (Cleaning the Noise)
-        const clone = doc.cloneNode(true) as Document;
-        const irrelevantTags = ['nav', 'footer', 'script', 'style', 'noscript', 'iframe', 'svg'];
+        // 3. RAG/Content Extraction
+        const ragClone = doc.cloneNode(true) as Document;
+
+        // Aggressive cleanup for RAG - Removing interface elements
+        // NOTE: We do NOT remove generic 'div's here, only specific semantic noise
+        const irrelevantTags = ['nav', 'footer', 'header', 'script', 'style', 'noscript', 'iframe', 'svg', 'aside', 'form'];
         irrelevantTags.forEach(tag => {
-            const elements = clone.querySelectorAll(tag);
-            elements.forEach(el => el.remove());
-        });
-        const noisyClasses = ['ad', 'banner', 'menu', 'sidebar', 'cookie', 'popup', 'nav', 'social', 'widget'];
-        noisyClasses.forEach(cls => {
-            const elements = clone.querySelectorAll(`[class*="${cls}"]`);
+            const elements = ragClone.querySelectorAll(tag);
             elements.forEach(el => el.remove());
         });
 
-        let coreContent = clone.body ? clone.body.innerHTML : content;
+        // CAREFUL: Do not use partial matches for short strings like 'ad' or 'menu' as they match 'gradient' and 'menu-item'
+        // Only use exact class matches or safe partials
+        const safeNoisySelectors = [
+            '.ad-banner', '.banner', '.cookie-banner', '.popup',
+            '.sidebar', '.widget', '.social-share', '.newsletter-signup',
+            '[class*="ad-box"]', '[class*="advertisement"]'
+        ];
+
+        safeNoisySelectors.forEach(sel => {
+            try {
+                const elements = ragClone.querySelectorAll(sel);
+                elements.forEach(el => {
+                    if (el.textContent && el.textContent.length < 500) el.remove();
+                });
+            } catch(e) { /* ignore invalid selectors */ }
+        });
+
+        let coreContent = ragClone.body ? ragClone.body.innerHTML : "";
         const tmp = document.createElement('DIV');
         tmp.innerHTML = coreContent;
-        const ragText = tmp.textContent || tmp.innerText || "";
+        // Prefer textContent to avoid innerText layout dependency issues in non-rendered DOM
+        const ragText = tmp.textContent || "";
         const ragTextClean = ragText.replace(/\s+/g, ' ').trim();
         const usefulCharCount = ragTextClean.length;
 
-        // Calculate Noise Ratio (Clamped 0-100)
-        // If useful > raw (rare, but possible with some encoding), noise is 0.
+        // Calculate Noise Ratio
         let noiseRatio = 0;
         if (charCount > 0) {
             noiseRatio = Math.round((1 - (usefulCharCount / charCount)) * 100);
         }
         noiseRatio = Math.max(0, Math.min(100, noiseRatio));
 
+        const isLikelyCSR = content.length > 5000 && charCount < 500;
+
         // 4. Image Analysis
-        const images = Array.from(doc.querySelectorAll('img')).map(img => ({
+        const imgAnalysis = Array.from(doc.querySelectorAll('img')).map(img => ({
             src: img.getAttribute('src'),
             alt: img.getAttribute('alt') || "MISSING ALT TEXT",
-            hasAlt: !!img.getAttribute('alt') && img.getAttribute('alt')!.trim().length > 0
+            hasAlt: !!img.getAttribute('alt') && img.getAttribute('alt').trim().length > 0
         }));
 
-        // 5. Schema/Meta
-        const metaTitle = doc.querySelector('title')?.textContent;
-        const metaDesc = doc.querySelector('meta[name="description"]')?.getAttribute('content');
-        const jsonLd = Array.from(doc.querySelectorAll('script[type="application/ld+json"]')).map(s => {
+        // 5. Schema Extraction
+        const jsonLd = Array.from(schemas).map(s => {
             try { return JSON.parse(s.textContent || ''); } catch (e) { return "Invalid JSON-LD"; }
         });
+
+        // 6. Meta Extraction
+        const metaTitle = doc.querySelector('title')?.textContent;
+        const metaDesc = doc.querySelector('meta[name="description"]')?.getAttribute('content');
 
         return {
             tokenCount,
             charCount,
             usefulCharCount,
             noiseRatio,
-            headers,
+            headers: headerTags,
             ragText: ragTextClean,
-            images,
+            images: imgAnalysis,
             meta: { title: metaTitle, description: metaDesc },
             jsonLd,
             rawHtml: content,
-            url: sourceUrl
+            url: sourceUrl,
+            framework: detectedFramework,
+            isLikelyCSR,
+            semanticScore,
+            auditLog
         };
     } catch (error) {
         console.error(error);
@@ -172,7 +303,7 @@ export default function AIAuditPage() {
     setIsLoading(true);
     setFetchError(null);
     setAnalysis(null);
-    setActiveTab('knowledge'); // Reset to first tab
+    setActiveTab('audit'); // Default to Audit view
 
     try {
         const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(urlInput)}`);
@@ -192,7 +323,7 @@ export default function AIAuditPage() {
     }
   };
 
-  const TabButton = ({ id, icon: Icon, label }: { id: string, icon: any, label: string }) => (
+  const TabButton = ({ id, icon: Icon, label }: { id: string; icon: any; label: string }) => (
     <button
       onClick={() => setActiveTab(id)}
       className={`flex items-center space-x-2 px-4 py-3 border-b-2 transition-colors duration-200 whitespace-nowrap ${
@@ -209,30 +340,29 @@ export default function AIAuditPage() {
   return (
     <div className="flex flex-col h-screen bg-gray-50 font-sans text-gray-800">
       {/* Header */}
-      <header className="bg-white shadow-sm border-b px-6 py-4 z-10">
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <div className="flex items-center space-x-6">
-            <Link href="/" className="flex items-center text-brand-navy hover:text-brand-cyan transition-colors">
-              <ArrowLeft className="h-5 w-5 mr-2" />
-              Back to Home
-            </Link>
-            <div className="flex items-center space-x-3">
-              <div className="bg-brand-cyan p-2 rounded-lg text-white">
-                <Cpu size={24} />
-              </div>
-              <div>
-                <h1 className="text-xl font-display font-bold text-gray-900">AI Vision Simulator</h1>
-                <p className="text-xs text-gray-500">See your content through the eyes of an LLM</p>
-              </div>
-            </div>
-          </div>
-          <button
-            onClick={loadDemo}
-            className="text-sm bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-md transition-colors"
+      <header className="bg-white shadow-sm border-b px-6 py-4 flex justify-between items-center z-10">
+        <div className="flex items-center space-x-3">
+          <Link
+            href="/"
+            className="flex items-center text-brand-navy hover:text-brand-cyan transition-colors mr-4"
           >
-            Load Demo Content
-          </button>
+            <ArrowLeft className="h-5 w-5 mr-2" aria-hidden="true" />
+            Back to Home
+          </Link>
+          <div className="bg-brand-cyan p-2 rounded-lg text-white">
+            <Cpu size={24} />
+          </div>
+          <div>
+            <h1 className="text-xl font-bold text-brand-navy font-display">AI Vision Simulator</h1>
+            <p className="text-xs text-gray-500">See your content through the eyes of an LLM</p>
+          </div>
         </div>
+        <button
+          onClick={loadDemo}
+          className="text-sm bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-md transition-colors"
+        >
+          Load Demo Content
+        </button>
       </header>
 
       <div className="flex flex-1 overflow-hidden">
@@ -279,7 +409,7 @@ export default function AIAuditPage() {
                     <button
                         onClick={handleUrlFetch}
                         disabled={isLoading || !urlInput}
-                        className={`w-full py-3 rounded-lg font-medium text-white flex items-center justify-center ${isLoading || !urlInput ? 'bg-brand-cyan/40 cursor-not-allowed' : 'bg-brand-cyan hover:bg-brand-blue'}`}
+                        className={`w-full py-3 rounded-lg font-medium text-white flex items-center justify-center ${isLoading || !urlInput ? 'bg-brand-cyan/50 cursor-not-allowed' : 'bg-brand-cyan hover:bg-brand-blue'}`}
                     >
                         {isLoading ? <Loader className="animate-spin mr-2" size={18} /> : null}
                         {isLoading ? 'Fetching...' : 'Analyze Website'}
@@ -319,11 +449,11 @@ export default function AIAuditPage() {
         <div className="flex-1 flex flex-col bg-gray-50 overflow-hidden">
           {/* Tabs */}
           <div className="bg-white border-b flex overflow-x-auto">
-            <TabButton id="knowledge" icon={Database} label="1. Schema" />
-            <TabButton id="structure" icon={Type} label="2. Structure" />
-            <TabButton id="images" icon={ImageIcon} label="3. Visuals" />
-            <TabButton id="stream" icon={Activity} label="4. Token Stream" />
-            <TabButton id="rag" icon={FileText} label="5. RAG Context" />
+            <TabButton id="audit" icon={ShieldCheck} label="Semantic Audit" />
+            <TabButton id="knowledge" icon={Database} label="Schema" />
+            <TabButton id="structure" icon={Layout} label="Structure" />
+            <TabButton id="stream" icon={Activity} label="Token Stream" />
+            <TabButton id="rag" icon={FileText} label="RAG Context" />
           </div>
 
           {/* Content Area */}
@@ -342,24 +472,56 @@ export default function AIAuditPage() {
             ) : (
               <div className="max-w-4xl mx-auto space-y-6">
 
-                {/* TAB 1: SCHEMA (Knowledge) */}
+                {/* TAB 1: SEMANTIC AUDIT (NEW) */}
+                {activeTab === 'audit' && (
+                  <div className="space-y-6">
+                    <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                        <div className="flex items-center justify-between mb-6">
+                            <div>
+                                <h3 className="text-xl font-bold text-brand-navy font-display">Semantic Health Score</h3>
+                                <p className="text-sm text-gray-500">Does an AI truly understand your site&apos;s layout?</p>
+                            </div>
+                            <div className={`text-4xl font-extrabold ${analysis.semanticScore >= 80 ? 'text-green-600' : analysis.semanticScore >= 50 ? 'text-yellow-500' : 'text-red-500'}`}>
+                                {analysis.semanticScore}/100
+                            </div>
+                        </div>
+
+                        <div className="space-y-3">
+                            {analysis.auditLog.map((item: any, i: number) => (
+                                <div key={i} className={`flex items-start p-3 rounded border ${item.pass ? 'bg-green-50 border-green-100' : 'bg-red-50 border-red-100'}`}>
+                                    <div className={`mr-3 mt-0.5 ${item.pass ? 'text-green-600' : 'text-red-600'}`}>
+                                        {item.pass ? <CheckCircle size={18} /> : <AlertTriangle size={18} />}
+                                    </div>
+                                    <div>
+                                        <p className={`text-sm font-medium ${item.pass ? 'text-green-900' : 'text-red-900'}`}>
+                                            {item.msg}
+                                        </p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* TAB 2: SCHEMA */}
                 {activeTab === 'knowledge' && (
                   <div className="space-y-6">
                     <div className="bg-blue-50 p-6 rounded-lg border border-blue-100 flex items-start">
                         <Info className="flex-shrink-0 text-blue-500 mr-3 mt-1" size={20} />
                         <div>
-                            <h3 className="text-sm font-bold text-blue-900 mb-1">Why Schema Matters</h3>
+                            <h3 className="text-sm font-bold text-blue-900 mb-1 font-display">Knowledge Layer</h3>
                             <p className="text-sm text-blue-800 leading-relaxed">
-                                Structured Data (Schema.org) is the language of facts. AI uses this layer to confirm details like <strong>Events, Products, and Authors</strong> with 100% confidence. Without this, the AI is just guessing based on your text.
+                                Structured Data (Schema.org) confirms facts like <strong>Events and Authors</strong> with 100% confidence.
                             </p>
                         </div>
                     </div>
 
                     <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
                         <div className="flex justify-between items-center mb-4">
-                            <h3 className="text-lg font-semibold text-gray-900 font-display">Structured Data (JSON-LD)</h3>
-                            <span className={`px-2 py-1 rounded text-xs font-bold uppercase ${analysis.jsonLd.length > 0 ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
-                                {analysis.jsonLd.length} Objects Found
+                            <h3 className="text-lg font-semibold text-brand-navy font-display">JSON-LD Objects</h3>
+                            <span className="px-2 py-1 rounded text-xs font-bold uppercase bg-gray-100 text-gray-600">
+                                {analysis.jsonLd.length} Found
                             </span>
                         </div>
 
@@ -373,105 +535,54 @@ export default function AIAuditPage() {
                                 </div>
                             ))
                         ) : (
-                            <div className="flex flex-col items-center justify-center p-8 bg-gray-50 border border-dashed rounded-lg">
-                                <AlertTriangle className="text-yellow-500 mb-2" size={24} />
-                                <p className="text-gray-600 font-medium">No Schema Markup Found</p>
-                                <p className="text-gray-400 text-sm text-center mt-1">
-                                    Your site is missing the &quot;Knowledge Layer&quot; that AI relies on.
-                                </p>
-                            </div>
+                            <div className="text-center p-8 text-gray-400">No Schema Markup Found</div>
                         )}
                     </div>
                   </div>
                 )}
 
-                {/* TAB 2: STRUCTURE */}
+                {/* TAB 3: STRUCTURE */}
                 {activeTab === 'structure' && (
                   <div className="space-y-6">
                     <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-                        <h3 className="text-lg font-semibold mb-4 text-gray-900 font-display">Semantic Hierarchy</h3>
-                        <p className="text-sm text-gray-500 mb-4">AI reads your headers (H1-H6) to understand your article&apos;s outline.</p>
+                        <h3 className="text-lg font-semibold mb-4 text-brand-navy font-display">Header Outline</h3>
                         <div className="space-y-2">
                             {analysis.headers.length > 0 ? (
                                 analysis.headers.map((h: any, i: number) => (
-                                    <div key={i} className={`flex items-center p-2 rounded ${h.tag === 'H1' ? 'bg-blue-50 border-l-4 border-brand-cyan' : 'bg-gray-50 border-l-4 border-gray-300'} ml-${(parseInt(h.tag[1]) - 1) * 4}`}>
+                                    <div key={i} className={`flex items-center p-2 rounded ${h.tag === 'H1' ? 'bg-blue-50 border-l-4 border-blue-500' : 'bg-gray-50 border-l-4 border-gray-300'} ml-${(parseInt(h.tag[1]) - 1) * 4}`}>
                                         <span className="text-xs font-bold uppercase w-12 text-gray-500">{h.tag}</span>
                                         <span className="font-medium text-gray-800">{h.text}</span>
                                     </div>
                                 ))
                             ) : (
-                                <div className="text-yellow-600 flex items-center p-4 bg-yellow-50 rounded">
-                                    <AlertTriangle className="mr-2" size={18} />
-                                    No header tags (H1-H6) found.
-                                </div>
+                                <div className="text-yellow-600 p-4">No header tags found.</div>
                             )}
                         </div>
                     </div>
-                    <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-                        <h3 className="text-lg font-semibold mb-4 text-gray-900 font-display">Meta Tags</h3>
-                        <div className="grid grid-cols-1 gap-4">
-                            <div className="p-3 bg-gray-50 rounded">
-                                <span className="text-xs font-bold text-gray-400 uppercase block mb-1">Page Title</span>
-                                <div className="text-gray-800 font-medium">{analysis.meta.title || <span className="text-red-400 italic">Missing Title</span>}</div>
-                            </div>
-                            <div className="p-3 bg-gray-50 rounded">
-                                <span className="text-xs font-bold text-gray-400 uppercase block mb-1">Meta Description</span>
-                                <div className="text-gray-800">{analysis.meta.description || <span className="text-red-400 italic">Missing Description</span>}</div>
-                            </div>
-                        </div>
-                    </div>
                   </div>
                 )}
 
-                {/* TAB 3: VISUALS */}
-                {activeTab === 'images' && (
-                  <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-                    <h3 className="text-lg font-semibold mb-4 text-gray-900 flex items-center font-display">
-                        <ImageIcon className="mr-2 text-purple-500" size={20}/>
-                        Image Accessibility (Alt Text)
-                    </h3>
-                    <p className="text-sm text-gray-500 mb-6">
-                        Non-vision AI models are &quot;blind.&quot; They can only &quot;see&quot; your images if you provide descriptive <code>alt</code> text.
-                    </p>
-                    <div className="space-y-3">
-                        {analysis.images.length > 0 ? (
-                            analysis.images.map((img: any, i: number) => (
-                                <div key={i} className="flex items-start p-3 border rounded-lg bg-gray-50">
-                                    <div className="h-12 w-12 bg-gray-200 rounded flex items-center justify-center flex-shrink-0 text-gray-400 overflow-hidden relative">
-                                        {img.src && img.src.startsWith('http') ? (
-                                            <img src={img.src} className="w-full h-full object-cover opacity-50" alt="" />
-                                        ) : (
-                                            <ImageIcon size={20} />
-                                        )}
-                                    </div>
-                                    <div className="ml-4 flex-1">
-                                        <div className="text-xs font-mono text-gray-400 mb-1 break-all">{img.src}</div>
-                                        {img.hasAlt ? (
-                                            <div className="flex items-center text-green-700 font-medium bg-green-50 px-2 py-1 rounded w-fit">
-                                                <CheckCircle size={14} className="mr-2" />
-                                                &quot;{img.alt}&quot;
-                                            </div>
-                                        ) : (
-                                            <div className="flex items-center text-red-600 font-medium bg-red-50 px-2 py-1 rounded w-fit">
-                                                <AlertTriangle size={14} className="mr-2" />
-                                                Missing Alt Text
-                                            </div>
-                                        )}
-                                    </div>
-                                </div>
-                            ))
-                        ) : (
-                            <div className="text-gray-500 italic p-4 text-center">No images found in the input.</div>
-                        )}
-                    </div>
-                  </div>
-                )}
-
-                {/* TAB 4: TOKEN STREAM (With Noise Scorecard) */}
+                {/* TAB 4: TOKEN STREAM */}
                 {activeTab === 'stream' && (
                   <div className="space-y-6">
+
+                     {/* FRAMEWORK ALERT */}
+                     {analysis.framework && (
+                        <div className="bg-indigo-50 border border-indigo-100 rounded-lg p-4 flex items-center justify-between">
+                            <div className="flex items-center">
+                                <Layers className="text-indigo-600 mr-3" size={20} />
+                                <div>
+                                    <h4 className="text-sm font-bold text-indigo-900 font-display">Smart Mode: {analysis.framework}</h4>
+                                    <p className="text-xs text-indigo-700">
+                                        Framework scripts excluded from noise calculation.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                     )}
+
                      <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-                        <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center font-display">
+                        <h3 className="text-lg font-bold text-brand-navy mb-4 flex items-center font-display">
                             <ShieldCheck className="mr-2 text-green-600" size={20} />
                             Signal-to-Noise Scorecard
                         </h3>
@@ -517,13 +628,7 @@ export default function AIAuditPage() {
                      </div>
 
                      <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-                        <h3 className="text-lg font-semibold mb-3 flex items-center font-display">
-                            <Activity className="mr-2 text-brand-cyan" size={20}/>
-                            Token Visualization
-                        </h3>
-                        <p className="text-sm text-gray-600 mb-4">
-                            This is how the AI &quot;reads&quot; your page. Each colored block is a token (a chunk of text). If your Noise Ratio is high, you are paying for tokens that don&apos;t help the AI understand your content.
-                        </p>
+                        <h3 className="text-lg font-semibold mb-3 font-display">Token Visualization</h3>
                         <div className="font-mono text-sm leading-relaxed bg-gray-50 p-4 rounded border text-gray-700 break-words max-h-96 overflow-y-auto">
                             {analysis.ragText.split(' ').map((word: string, i: number) => (
                                 <span key={i} className={`inline-block mr-1 px-1 rounded ${i % 2 === 0 ? 'bg-blue-50 text-blue-900' : 'bg-green-50 text-green-900'}`}>
@@ -538,26 +643,29 @@ export default function AIAuditPage() {
                 {/* TAB 5: RAG CONTEXT */}
                 {activeTab === 'rag' && (
                   <div className="space-y-6">
-                    <div className="bg-purple-50 p-6 rounded-lg border border-purple-100 flex items-start">
-                        <Zap className="flex-shrink-0 text-purple-500 mr-3 mt-1" size={20} />
-                        <div>
-                            <h3 className="text-sm font-bold text-purple-900 mb-1">What is &quot;RAG&quot;?</h3>
-                            <p className="text-sm text-purple-800 leading-relaxed">
-                                <strong>R</strong>etrieval-<strong>A</strong>ugmented <strong>G</strong>eneration is how bots like ChatGPT or Perplexity read the web. They strip away your design, ads, and navigation to find the &quot;pure&quot; text.
-                            </p>
-                            <p className="text-sm text-purple-800 mt-2 font-medium">
-                                If the box below looks clean (like a newspaper article), your site is AI-Ready. If it contains menu items, &quot;Buy Now&quot; buttons, or code, the AI will get confused.
-                            </p>
-                        </div>
-                    </div>
-
                     <div className="bg-white p-8 rounded-lg shadow-sm border border-gray-200 max-w-3xl">
-                        <h3 className="text-lg font-semibold mb-4 text-gray-900 border-b pb-2 font-display">
+                        <h3 className="text-lg font-semibold mb-4 text-brand-navy border-b pb-2 font-display">
                             Clean Context Preview
                         </h3>
-                        <div className="prose prose-sm max-w-none text-gray-800 whitespace-pre-line font-serif leading-relaxed">
-                            {analysis.ragText}
-                        </div>
+                        {analysis.ragText ? (
+                            <div className="prose prose-sm max-w-none text-gray-800 whitespace-pre-line font-serif leading-relaxed">
+                                {analysis.ragText}
+                            </div>
+                        ) : (
+                            <div className="flex flex-col items-center justify-center py-12 text-center">
+                                {analysis.isLikelyCSR ? (
+                                    <>
+                                        <AlertOctagon size={48} className="text-orange-500 mb-4" />
+                                        <h4 className="text-lg font-bold text-gray-900 font-display">Hidden Content (CSR)</h4>
+                                        <p className="text-sm text-gray-600 max-w-md mt-2">
+                                            Your content is hidden inside JavaScript. Basic AI crawlers cannot see this.
+                                        </p>
+                                    </>
+                                ) : (
+                                    <p className="text-gray-500">No text content found.</p>
+                                )}
+                            </div>
+                        )}
                     </div>
                   </div>
                 )}
