@@ -78,6 +78,15 @@ const webinars = [
     thumbnail: 'https://image.mux.com/V1DanWAF02sOwwIFov4BXNaTzwT3Kn41TnUWdcyNZfZk/thumbnail.png?width=800&height=450&time=10',
     level: 'Strategic',
   },
+  {
+    id: 'ai-policy-governance',
+    title: 'AI Policy & Governance for Organizations',
+    description: 'Comprehensive guide to building effective AI policies for your organization. Learn the three key questions every AI policy must answer: What are we protecting? What are we providing? What are we expecting? This session covers data security, privacy considerations, content integrity, vendor management, and practical implementation strategies with real-world examples including Brand USA\'s AI policy.',
+    duration: '40 min',
+    muxPlaybackId: 'MIs97m4ZKNZZJwNPP35c02VDqDqIgkZKgmnWhUtzi1s4',
+    thumbnail: 'https://image.mux.com/MIs97m4ZKNZZJwNPP35c02VDqDqIgkZKgmnWhUtzi1s4/thumbnail.png?width=800&height=450&time=10',
+    level: 'Strategic',
+  },
 ]
 
 // Short-form video content - demos, quick tutorials, and bite-sized learning
@@ -228,8 +237,8 @@ export default function HomePage() {
       {
         "@type": "Course",
         "name": "AI Fundamentals Webinar Series",
-        "description": "8 comprehensive webinars covering AI fundamentals, strategy, and implementation for tourism marketing",
-        "numberOfCredits": 8,
+        "description": "9 comprehensive webinars covering AI fundamentals, strategy, and implementation for tourism marketing",
+        "numberOfCredits": 9,
         "provider": {
           "@type": "Organization",
           "name": "Brand USA Agents of Change"
@@ -350,7 +359,7 @@ export default function HomePage() {
                 AI Training Videos
               </h3>
               <p className="text-gray-600 mb-6 leading-relaxed">
-                8 comprehensive webinars covering AI fundamentals, strategy, and implementation for tourism marketing
+                9 comprehensive webinars covering AI fundamentals, strategy, and implementation for tourism marketing
               </p>
               <div className="inline-flex items-center text-brand-cyan font-semibold group-hover:gap-2 transition-all">
                 Watch Now

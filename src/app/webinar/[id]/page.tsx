@@ -729,6 +729,90 @@ const webinarData = {
       { time: 1250, title: 'How to access/create MCP servers (technical demo with Claude & Wrike)' },
     ],
   },
+  'ai-policy-governance': {
+    id: 'ai-policy-governance',
+    title: 'AI Policy & Governance for Organizations',
+    description: 'Comprehensive guide to building effective AI policies for your organization. Learn the three key questions every AI policy must answer: What are we protecting? What are we providing? What are we expecting? This session covers data security, privacy considerations, content integrity, vendor management, and practical implementation strategies with real-world examples including Brand USA\'s AI policy.',
+    duration: '40 min',
+    muxPlaybackId: 'MIs97m4ZKNZZJwNPP35c02VDqDqIgkZKgmnWhUtzi1s4',
+    instructor: 'Janette Roush',
+    instructorTitle: 'Chief AI Officer, Brand USA',
+    // Enhanced metadata for AI discoverability
+    keyTakeaways: [
+      'Effective AI policy is built on three foundational questions: What are we protecting (data security, privacy, IP), what are we providing (secure tools, clear guidance), and what are we expecting (transparency, verification, accountability)',
+      'Data security requires protecting three layers: model training (use enterprise tools with training opt-out), encryption (SOC2 compliance), and data retention policies with clear admin controls and sub-processor transparency',
+      'Data privacy means never putting Personally Identifiable Information (PII) into AI systems, understanding GDPR and EU AI Act compliance requirements, and always obtaining consent before using employee or customer data',
+      'Content integrity requires safeguarding intellectual property rights, understanding the risks of uploading confidential information to AI tools, and reviewing contracts to ensure your organization owns AI-generated work',
+      'Successful AI adoption requires both providing employees with secure, approved tools (to prevent "shadow AI") and establishing clear points of contact through an AI committee, IT support, and HR guidance for policy questions'
+    ],
+    topics: [
+      'AI Policy',
+      'AI Governance',
+      'Data Security',
+      'Data Privacy',
+      'Content Integrity',
+      'Intellectual Property (IP)',
+      'Personally Identifiable Information (PII)',
+      'GDPR Compliance',
+      'EU AI Act',
+      'SOC2 Compliance',
+      'Model Training',
+      'Data Encryption',
+      'Data Retention',
+      'Sub-processors',
+      'AI Committee',
+      'Shadow AI',
+      'BYOAI (Bring Your Own AI)',
+      'Vendor Management',
+      'AI Implementation',
+      'Change Management',
+      'Employee Training',
+      'AI Transparency',
+      'Human Accountability',
+      'Boston AI Policy',
+      'Brand USA AI Policy'
+    ],
+    targetAudience: {
+      primary: 'Organizational leaders, executives, and managers responsible for AI policy development',
+      secondary: 'IT security professionals, HR managers, legal and compliance teams, risk management professionals',
+      tertiary: 'Destination Marketing Organizations (DMOs), tourism professionals, and anyone implementing AI governance frameworks'
+    },
+    learningOutcomes: [
+      'Articulate the three core questions that form the foundation of effective AI policy: protection, provision, and expectations',
+      'Identify critical data security requirements including SOC2 compliance, encryption standards, model training controls, and sub-processor transparency',
+      'Explain why PII must never be entered into AI systems and understand GDPR and EU AI Act compliance obligations',
+      'Evaluate vendor contracts for AI usage rights, data ownership, privacy protections, and incident reporting requirements',
+      'Design an AI governance structure that balances employee empowerment with organizational risk management',
+      'Create a practical AI policy framework covering vision, ethical principles, transparency, responsibility, confidentiality, and governance'
+    ],
+    relatedResources: [
+      { name: 'Brand USA AI Policy', description: 'Public example of organizational AI policy', url: 'https://thebrandusa.app.box.com/s/bbsg85jl4w1rbgolcyg2kwjzy7he9g64' },
+      { name: 'City of Boston AI Policy', description: 'Municipal AI policy example with guidelines for using generative AI', url: 'https://www.boston.gov/sites/default/files/file/2023/05/Guidelines-for-Using-Generative-AI-2023.pdf' },
+      { name: 'IAPP (International Association of Privacy Professionals)', description: 'Leading resource for AI governance and privacy certification', url: 'https://iapp.org' },
+      { name: 'Dr. David Privacy', description: 'Privacy and AI governance expertise', url: 'https://drdavidprivacy.com' },
+      { name: 'Luiza\'s Newsletter', description: 'AI policy and governance insights', url: 'https://luizasnewsletter.com' },
+      { name: 'Oliver Patel\'s Newsletter', description: 'AI governance and policy analysis', url: 'https://oliverpatel.substack.com' },
+      { name: 'ChatGPT Enterprise', description: 'Enterprise AI platform with security controls', url: 'https://openai.com/chatgpt/enterprise' },
+      { name: 'Claude for Enterprise', description: 'Anthropic\'s enterprise AI solution', url: 'https://www.anthropic.com/claude' },
+      { name: 'Microsoft Copilot', description: 'Enterprise AI assistant', url: 'https://copilot.microsoft.com' },
+      { name: 'SOC 2 Compliance', description: 'Security and compliance framework', url: 'https://www.aicpa.org/soc' }
+    ],
+    chapters: [
+      { time: 0, title: 'Introduction & Personal Journey' },
+      { time: 210, title: 'Foundations of AI Governance' },
+      { time: 360, title: 'Why AI Policy Matters for Employees' },
+      { time: 420, title: 'Three Key Questions for AI Policy' },
+      { time: 480, title: 'What Are We Protecting? (Data Security, Privacy, Content Integrity)' },
+      { time: 960, title: 'What Are We Providing? (Secure Tools, Clear Guidance, Points of Contact)' },
+      { time: 1140, title: 'What Are We Expecting? (Transparency, Verification, Human Accountability)' },
+      { time: 1320, title: 'Building an AI Policy: Structure & Guidelines' },
+      { time: 1680, title: 'Brand USA\'s AI Policy Example' },
+      { time: 1920, title: 'Working with Vendors & Third Parties' },
+      { time: 2160, title: 'Leadership & AI Adoption' },
+      { time: 2280, title: 'Getting the Most from AI' },
+      { time: 2370, title: 'Conclusion & Resources' },
+    ],
+  },
 }
 
 export default function WebinarPage({ params }: { params: { id: string } }) {
@@ -785,6 +869,11 @@ export default function WebinarPage({ params }: { params: { id: string } }) {
     'ai-dmo-leadership': [
       { '@type': 'SoftwareApplication', name: 'ChatGPT', applicationCategory: 'AI Assistant', url: 'https://chatgpt.com' },
       { '@type': 'SoftwareApplication', name: 'Claude', applicationCategory: 'AI Assistant', url: 'https://claude.ai' },
+    ],
+    'ai-policy-governance': [
+      { '@type': 'SoftwareApplication', name: 'ChatGPT Enterprise', applicationCategory: 'AI Assistant', url: 'https://openai.com/chatgpt/enterprise' },
+      { '@type': 'SoftwareApplication', name: 'Claude for Enterprise', applicationCategory: 'AI Assistant', url: 'https://www.anthropic.com/claude' },
+      { '@type': 'SoftwareApplication', name: 'Microsoft Copilot', applicationCategory: 'AI Assistant', url: 'https://copilot.microsoft.com' },
     ],
   }
 

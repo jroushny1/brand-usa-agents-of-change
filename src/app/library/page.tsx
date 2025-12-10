@@ -383,6 +383,47 @@ const resources = [
       },
     ]
   },
+  {
+    category: 'AI Governance & Policy',
+    items: [
+      {
+        title: 'IAPP (International Association of Privacy Professionals)',
+        description: 'Leading global resource for AI governance, privacy certification, and professional development in data protection and AI ethics.',
+        url: 'https://iapp.org',
+        icon: FileText,
+      },
+      {
+        title: 'Dr. David Privacy',
+        description: 'Expert insights on privacy, data protection, and AI governance frameworks for organizations navigating compliance and ethical AI implementation.',
+        url: 'https://drdavidprivacy.com',
+        icon: FileText,
+      },
+      {
+        title: 'Luiza\'s Newsletter',
+        description: 'In-depth analysis and practical guidance on AI policy, governance frameworks, and regulatory developments affecting organizations.',
+        url: 'https://luizasnewsletter.com',
+        icon: FileText,
+      },
+      {
+        title: 'Oliver Patel\'s Newsletter',
+        description: 'Strategic perspectives on AI governance, policy analysis, and best practices for building responsible AI systems in organizations.',
+        url: 'https://oliverpatel.substack.com',
+        icon: FileText,
+      },
+      {
+        title: 'Brand USA AI Policy',
+        description: 'Public example of organizational AI policy with practical guidelines for implementing AI governance in tourism and destination marketing.',
+        url: 'https://thebrandusa.app.box.com/s/bbsg85jl4w1rbgolcyg2kwjzy7he9g64',
+        icon: FileText,
+      },
+      {
+        title: 'City of Boston AI Guidelines',
+        description: 'Municipal AI policy example providing guidelines for using generative AI in government and organizational settings.',
+        url: 'https://www.boston.gov/sites/default/files/file/2023/05/Guidelines-for-Using-Generative-AI-2023.pdf',
+        icon: FileText,
+      },
+    ]
+  },
 ]
 
 // Generate JSON-LD structured data for the resource library
