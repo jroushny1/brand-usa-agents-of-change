@@ -55,8 +55,7 @@ export default function RootLayout({
     },
     "url": "https://www.janetteroush.com",
     "sameAs": [
-      "https://www.linkedin.com/in/janetteroush/",
-      "https://twitter.com/janetteroush"
+      "https://www.linkedin.com/in/janetteroush/"
     ],
     "knowsAbout": [
       "Artificial Intelligence",
