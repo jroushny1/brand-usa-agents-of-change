@@ -1,5 +1,6 @@
 'use client'
 
+import { use } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowLeft, Download, Clock, BookOpen } from 'lucide-react'
@@ -815,8 +816,9 @@ const webinarData = {
   },
 }
 
-export default function WebinarPage({ params }: { params: { id: string } }) {
-  const webinar = webinarData[params.id as keyof typeof webinarData]
+export default function WebinarPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params)
+  const webinar = webinarData[id as keyof typeof webinarData]
 
   if (!webinar) {
     return (
@@ -918,7 +920,7 @@ export default function WebinarPage({ params }: { params: { id: string } }) {
     publisher: {
       '@type': 'Organization',
       name: 'Brand USA Agents of Change',
-      url: 'https://brand-usa-agents-of-change.vercel.app'
+      url: 'https://www.janetteroush.com'
     },
     isPartOf: {
       '@type': 'Course',
@@ -946,8 +948,8 @@ export default function WebinarPage({ params }: { params: { id: string } }) {
         audienceType: (webinar as any).targetAudience.primary
       }
     },
-    ...(webinarMentions[params.id] && {
-      mentions: webinarMentions[params.id]
+    ...(webinarMentions[id] && {
+      mentions: webinarMentions[id]
     })
   }
 
@@ -960,19 +962,19 @@ export default function WebinarPage({ params }: { params: { id: string } }) {
         '@type': 'ListItem',
         position: 1,
         name: 'Home',
-        item: 'https://brand-usa-agents-of-change.vercel.app'
+        item: 'https://www.janetteroush.com'
       },
       {
         '@type': 'ListItem',
         position: 2,
         name: 'Webinars',
-        item: 'https://brand-usa-agents-of-change.vercel.app/#webinars'
+        item: 'https://www.janetteroush.com/#webinars'
       },
       {
         '@type': 'ListItem',
         position: 3,
         name: webinar.title,
-        item: `https://brand-usa-agents-of-change.vercel.app/webinar/${params.id}`
+        item: `https://www.janetteroush.com/webinar/${id}`
       }
     ]
   }
