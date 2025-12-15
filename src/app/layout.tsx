@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     title: 'Janette Roush | Chief AI Officer & Innovation Keynote Speaker',
     description: 'Janette Roush is the SVP of Innovation & Chief AI Officer at Brand USA. A LinkedIn Top Voice and Broadway veteran, she specializes in Generative AI strategy for travel and marketing.',
     images: ['/og-image.png'],
-    url: 'https://brand-usa-agents-of-change.vercel.app',
+    url: 'https://www.janetteroush.com',
     siteName: 'Janette Roush - Brand USA Agents of Change',
     locale: 'en_US',
     type: 'profile',
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     description: 'Janette Roush is the SVP of Innovation & Chief AI Officer at Brand USA. A LinkedIn Top Voice and Broadway veteran, she specializes in Generative AI strategy for travel and marketing.',
     creator: '@janetteroush',
   },
-  metadataBase: new URL('https://brand-usa-agents-of-change.vercel.app'),
+  metadataBase: new URL('https://www.janetteroush.com'),
 }
 
 export default function RootLayout({
@@ -50,7 +50,7 @@ export default function RootLayout({
       "@type": "Organization",
       "name": "Brand USA"
     },
-    "url": "https://brand-usa-agents-of-change.vercel.app",
+    "url": "https://www.janetteroush.com",
     "sameAs": [
       "https://www.linkedin.com/in/janetteroush/",
       "https://twitter.com/janetteroush"
