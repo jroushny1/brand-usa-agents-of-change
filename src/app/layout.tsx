@@ -18,6 +18,9 @@ const oswald = Oswald({
 export const metadata: Metadata = {
   title: 'Janette Roush | Chief AI Officer & Innovation Keynote Speaker',
   description: 'Janette Roush is the SVP of Innovation & Chief AI Officer at Brand USA. A LinkedIn Top Voice and Broadway veteran, she specializes in Generative AI strategy for travel and marketing.',
+  alternates: {
+    canonical: 'https://www.janetteroush.com',
+  },
   openGraph: {
     title: 'Janette Roush | Chief AI Officer & Innovation Keynote Speaker',
     description: 'Janette Roush is the SVP of Innovation & Chief AI Officer at Brand USA. A LinkedIn Top Voice and Broadway veteran, she specializes in Generative AI strategy for travel and marketing.',
