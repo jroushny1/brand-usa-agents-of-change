@@ -1,42 +1,5 @@
-'use client'
-
-import { useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
-
+// Server Component - No client-side code needed when password protection is disabled
 export default function AccessCheck({ children }: { children: React.ReactNode }) {
-  // Password protection disabled - render content immediately
+  // Password protection disabled - render content immediately on server
   return <>{children}</>
-
-  // Uncomment below to re-enable password protection:
-  /*
-  const [isAuthorized, setIsAuthorized] = useState<boolean | null>(null)
-  const router = useRouter()
-
-  useEffect(() => {
-    // Check for access cookie
-    const hasAccess = document.cookie
-      .split('; ')
-      .find(row => row.startsWith('partner_access='))
-      ?.split('=')[1] === 'GoTeamUSA'
-
-    if (!hasAccess) {
-      router.push('/enter')
-    } else {
-      setIsAuthorized(true)
-    }
-  }, [router])
-
-  // Don't render anything until we've checked
-  if (isAuthorized === null) {
-    return null
-  }
-
-  // If not authorized, they're being redirected
-  if (!isAuthorized) {
-    return null
-  }
-
-  // Authorized - show the content
-  return <>{children}</>
-  */
 }

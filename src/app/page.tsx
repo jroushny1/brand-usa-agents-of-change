@@ -297,7 +297,7 @@ export default function HomePage() {
         <div className="absolute inset-0 z-0">
           <Image
             src="https://images.unsplash.com/photo-1534430480872-3498386e7856?q=80&w=2070&auto=format&fit=crop"
-            alt="Times Square New York"
+            alt="Times Square in New York City illuminated at night with crowds of tourists - representing destination marketing and tourism innovation"
             fill
             className="object-cover"
             priority

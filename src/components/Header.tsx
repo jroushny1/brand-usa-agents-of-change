@@ -15,7 +15,7 @@ export default function Header() {
           <div className="flex items-center">
             <Image
               src="/brandusa-logo.png"
-              alt="Brand USA"
+              alt="Brand USA - Destination Marketing Organization for the United States"
               width={100}
               height={33}
               className="h-8 w-auto"

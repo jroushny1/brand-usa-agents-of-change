@@ -16,13 +16,24 @@ const oswald = Oswald({
 })
 
 export const metadata: Metadata = {
-  title: 'Brand USA Agents of Change',
-  description: 'AI Learning Platform for Destination Marketing Organizations and US tourism professionals',
+  title: 'Janette Roush | Chief AI Officer & Innovation Keynote Speaker',
+  description: 'Janette Roush is the SVP of Innovation & Chief AI Officer at Brand USA. A LinkedIn Top Voice and Broadway veteran, she specializes in Generative AI strategy for travel and marketing.',
   openGraph: {
-    title: 'Brand USA Agents of Change',
-    description: 'AI Learning Platform for Destination Marketing Organizations and US tourism professionals',
+    title: 'Janette Roush | Chief AI Officer & Innovation Keynote Speaker',
+    description: 'Janette Roush is the SVP of Innovation & Chief AI Officer at Brand USA. A LinkedIn Top Voice and Broadway veteran, she specializes in Generative AI strategy for travel and marketing.',
     images: ['/og-image.png'],
+    url: 'https://brand-usa-agents-of-change.vercel.app',
+    siteName: 'Janette Roush - Brand USA Agents of Change',
+    locale: 'en_US',
+    type: 'profile',
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Janette Roush | Chief AI Officer & Innovation Keynote Speaker',
+    description: 'Janette Roush is the SVP of Innovation & Chief AI Officer at Brand USA. A LinkedIn Top Voice and Broadway veteran, she specializes in Generative AI strategy for travel and marketing.',
+    creator: '@janetteroush',
+  },
+  metadataBase: new URL('https://brand-usa-agents-of-change.vercel.app'),
 }
 
 export default function RootLayout({
@@ -30,10 +41,38 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const personSchema = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Janette Roush",
+    "jobTitle": "SVP of Innovation and Chief AI Officer",
+    "affiliation": {
+      "@type": "Organization",
+      "name": "Brand USA"
+    },
+    "url": "https://brand-usa-agents-of-change.vercel.app",
+    "sameAs": [
+      "https://www.linkedin.com/in/janetteroush/",
+      "https://twitter.com/janetteroush"
+    ],
+    "knowsAbout": [
+      "Artificial Intelligence",
+      "Destination Marketing",
+      "Broadway",
+      "Generative AI",
+      "Innovation Strategy"
+    ]
+  }
+
   return (
     <html lang="en">
       <head>
         <Script src="https://cdn.jsdelivr.net/npm/hls.js@latest" strategy="beforeInteractive" />
+        {/* JSON-LD for Janette Roush Person Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+        />
       </head>
       <body className={`${montserrat.variable} ${oswald.variable} font-sans`}>
         <div className="min-h-screen bg-white">
