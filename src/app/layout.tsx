@@ -16,23 +16,26 @@ const oswald = Oswald({
 })
 
 export const metadata: Metadata = {
-  title: 'Janette Roush | Chief AI Officer & Innovation Keynote Speaker',
+  title: {
+    default: 'Agents of Change | AI Research & Innovation by Janette Roush',
+    template: '%s | Agents of Change',
+  },
   description: 'Janette Roush is the SVP of Innovation & Chief AI Officer at Brand USA. A LinkedIn Top Voice and Broadway veteran, she specializes in Generative AI strategy for travel and marketing.',
   alternates: {
     canonical: 'https://www.janetteroush.com',
   },
   openGraph: {
-    title: 'Janette Roush | Chief AI Officer & Innovation Keynote Speaker',
+    title: 'Agents of Change | AI Research & Innovation by Janette Roush',
     description: 'Janette Roush is the SVP of Innovation & Chief AI Officer at Brand USA. A LinkedIn Top Voice and Broadway veteran, she specializes in Generative AI strategy for travel and marketing.',
     images: ['/og-image.png'],
     url: 'https://www.janetteroush.com',
-    siteName: 'Janette Roush - Brand USA Agents of Change',
+    siteName: 'Agents of Change | AI Research & Innovation by Janette Roush',
     locale: 'en_US',
     type: 'profile',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Janette Roush | Chief AI Officer & Innovation Keynote Speaker',
+    title: 'Agents of Change | AI Research & Innovation by Janette Roush',
     description: 'Janette Roush is the SVP of Innovation & Chief AI Officer at Brand USA. A LinkedIn Top Voice and Broadway veteran, she specializes in Generative AI strategy for travel and marketing.',
     creator: '@janetteroush',
   },

@@ -12,7 +12,7 @@ export default function Header() {
     <header className="border-b border-gray-200 bg-white shadow-sm sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-18">
-          <div className="flex items-center">
+          <Link href="/" className="flex items-center hover:opacity-80 transition-opacity">
             <Image
               src="/brandusa-logo.png"
               alt="Brand USA - Destination Marketing Organization for the United States"
@@ -23,18 +23,24 @@ export default function Header() {
             <span className="ml-4 text-xl font-semibold text-brand-navy font-display">
               Agents of Change
             </span>
-          </div>
+          </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            <a href="#webinars" className="text-base font-medium text-brand-navy hover:text-brand-cyan transition-colors">
-              Videos
-            </a>
+            <Link href="/" className="text-base font-medium text-brand-navy hover:text-brand-cyan transition-colors">
+              Home
+            </Link>
+            <Link href="/notes" className="text-base font-medium text-brand-navy hover:text-brand-cyan transition-colors">
+              Field Notes
+            </Link>
+            <Link href="/glossary" className="text-base font-medium text-brand-navy hover:text-brand-cyan transition-colors">
+              Glossary
+            </Link>
             <Link href="/library" className="text-base font-medium text-brand-navy hover:text-brand-cyan transition-colors">
               Resources
             </Link>
             <Link href="/shorts" className="text-base font-medium text-brand-navy hover:text-brand-cyan transition-colors">
-              Quick Tutorials
+              Shorts
             </Link>
             <Link href="/ai-audit" className="text-base font-medium text-brand-navy hover:text-brand-cyan transition-colors">
               AI Audit
@@ -61,13 +67,27 @@ export default function Header() {
       {mobileMenuOpen && (
         <div className="md:hidden border-t border-gray-200">
           <div className="px-2 pt-2 pb-3 space-y-1">
-            <a
-              href="#webinars"
+            <Link
+              href="/"
               className="block px-3 py-2 rounded-md text-base font-medium text-brand-navy hover:text-brand-cyan hover:bg-gray-50 transition-colors"
               onClick={() => setMobileMenuOpen(false)}
             >
-              Videos
-            </a>
+              Home
+            </Link>
+            <Link
+              href="/notes"
+              className="block px-3 py-2 rounded-md text-base font-medium text-brand-navy hover:text-brand-cyan hover:bg-gray-50 transition-colors"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Field Notes
+            </Link>
+            <Link
+              href="/glossary"
+              className="block px-3 py-2 rounded-md text-base font-medium text-brand-navy hover:text-brand-cyan hover:bg-gray-50 transition-colors"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Glossary
+            </Link>
             <Link
               href="/library"
               className="block px-3 py-2 rounded-md text-base font-medium text-brand-navy hover:text-brand-cyan hover:bg-gray-50 transition-colors"
@@ -80,7 +100,7 @@ export default function Header() {
               className="block px-3 py-2 rounded-md text-base font-medium text-brand-navy hover:text-brand-cyan hover:bg-gray-50 transition-colors"
               onClick={() => setMobileMenuOpen(false)}
             >
-              Quick Tutorials
+              Shorts
             </Link>
             <Link
               href="/ai-audit"
