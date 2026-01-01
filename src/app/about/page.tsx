@@ -47,7 +47,7 @@ export default function AboutPage() {
                 Janette Roush and the Brand USA innovation team are available to present these findings to industry partners and stakeholders.
               </p>
               <a
-                href="https://www.thebrandusa.com"
+                href="https://www.thebrandusa.com/requestspeaker"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-brand-blue text-white px-6 py-3 rounded-lg font-semibold hover:bg-brand-navy transition-colors"
