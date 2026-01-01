@@ -2423,12 +2423,12 @@ export default function WebinarPage({ params }: { params: Promise<{ id: string }
               </div>
             )}
 
-            {/* Transcript - only show if exists - using native HTML details/summary */}
+            {/* Transcript - Server-rendered HTML for SEO/GEO crawlability */}
             {(webinar as any).transcript && (
               <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-                <details className="group">
+                <details className="group" open>
                   <summary className="flex items-center justify-between cursor-pointer list-none">
-                    <h2 className="text-lg font-semibold text-brand-navy">Read Transcript</h2>
+                    <h2 className="text-lg font-semibold text-brand-navy">Full Transcript: AI for Tourism Professionals</h2>
                     <svg
                       className="h-5 w-5 text-gray-500 transition-transform group-open:rotate-180"
                       fill="none"
