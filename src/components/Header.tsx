@@ -30,6 +30,9 @@ export default function Header() {
             <Link href="/" className="text-base font-medium text-brand-navy hover:text-brand-cyan transition-colors">
               Home
             </Link>
+            <Link href="/about" className="text-base font-medium text-brand-navy hover:text-brand-cyan transition-colors">
+              About
+            </Link>
             <Link href="/notes" className="text-base font-medium text-brand-navy hover:text-brand-cyan transition-colors">
               Field Notes
             </Link>
@@ -38,9 +41,6 @@ export default function Header() {
             </Link>
             <Link href="/library" className="text-base font-medium text-brand-navy hover:text-brand-cyan transition-colors">
               Resources
-            </Link>
-            <Link href="/shorts" className="text-base font-medium text-brand-navy hover:text-brand-cyan transition-colors">
-              Shorts
             </Link>
             <Link href="/ai-audit" className="text-base font-medium text-brand-navy hover:text-brand-cyan transition-colors">
               AI Audit
@@ -75,6 +75,13 @@ export default function Header() {
               Home
             </Link>
             <Link
+              href="/about"
+              className="block px-3 py-2 rounded-md text-base font-medium text-brand-navy hover:text-brand-cyan hover:bg-gray-50 transition-colors"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              About
+            </Link>
+            <Link
               href="/notes"
               className="block px-3 py-2 rounded-md text-base font-medium text-brand-navy hover:text-brand-cyan hover:bg-gray-50 transition-colors"
               onClick={() => setMobileMenuOpen(false)}
@@ -94,13 +101,6 @@ export default function Header() {
               onClick={() => setMobileMenuOpen(false)}
             >
               Resources
-            </Link>
-            <Link
-              href="/shorts"
-              className="block px-3 py-2 rounded-md text-base font-medium text-brand-navy hover:text-brand-cyan hover:bg-gray-50 transition-colors"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Shorts
             </Link>
             <Link
               href="/ai-audit"
