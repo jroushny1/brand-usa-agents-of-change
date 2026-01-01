@@ -308,10 +308,10 @@ export default function HomePage() {
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight tracking-tight">
-              Master AI for Tourism Marketing
+              The AI Lab for Travel Innovation
             </h1>
             <p className="text-xl md:text-2xl mb-10 text-white/90 max-w-3xl mx-auto leading-relaxed">
-              Exclusive training, tools, and community for Brand USA professionals leading the future of travel
+              A strategic toolkit and research library for the Agents of Change program. Curated by Janette Roush.
             </p>
 
             {/* Dual CTAs */}
