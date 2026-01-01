@@ -38,6 +38,7 @@ export const metadata: Metadata = {
     title: 'Agents of Change | AI Research & Innovation by Janette Roush',
     description: 'Janette Roush is the SVP of Innovation & Chief AI Officer at Brand USA. A LinkedIn Top Voice and Broadway veteran, she specializes in Generative AI strategy for travel and marketing.',
     creator: '@janetteroush',
+    images: ['/og-image.png'],
   },
   metadataBase: new URL('https://www.janetteroush.com'),
 }
