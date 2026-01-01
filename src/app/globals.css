@@ -9,6 +9,33 @@
   }
 }
 
+@layer components {
+  /* Card container - replaces 72-char string with 14 chars */
+  .card-container {
+    @apply bg-white rounded-xl shadow-sm border border-gray-200 p-6;
+  }
+
+  /* Flex center - replaces 24 chars with 11 chars */
+  .flex-center {
+    @apply flex items-center;
+  }
+
+  /* Flex start - for list items */
+  .flex-start {
+    @apply flex items-start;
+  }
+
+  /* Transcript paragraph - replaces 44 chars with 20 chars */
+  .transcript-paragraph {
+    @apply text-gray-700 leading-relaxed mb-4;
+  }
+
+  /* Badge/number circle for takeaways */
+  .takeaway-badge {
+    @apply flex-shrink-0 h-6 w-6 rounded-full bg-brand-cyan/10 text-brand-cyan flex items-center justify-center text-sm font-semibold mr-3 mt-0.5;
+  }
+}
+
 body {
   background-color: #f3f4f6;
   color: #111827;

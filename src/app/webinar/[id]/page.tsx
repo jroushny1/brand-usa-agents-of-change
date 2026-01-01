@@ -3,8 +3,13 @@
 import { use } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { ArrowLeft, Download, Clock, BookOpen } from 'lucide-react'
+import { ArrowLeft, Clock, BookOpen } from 'lucide-react'
 import HLSPlayer from './hls-player'
+import KeyTakeawaysList from '@/components/webinar/KeyTakeawaysList'
+import LearningOutcomesList from '@/components/webinar/LearningOutcomesList'
+import TranscriptSection from '@/components/webinar/TranscriptSection'
+import ChaptersList from '@/components/webinar/ChaptersList'
+import ResourcesList from '@/components/webinar/ResourcesList'
 
 // This would come from your database
 const webinarData = {
@@ -2292,26 +2297,8 @@ export default function WebinarPage({ params }: { params: Promise<{ id: string }
 
               {/* Resources - only show if resources exist */}
               {(webinar as any).resources && (webinar as any).resources.length > 0 && (
-                <div className="w-full max-w-md bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-                  <h2 className="text-lg font-semibold text-brand-navy mb-4">Resources</h2>
-                  <div className="space-y-3">
-                    {(webinar as any).resources.map((resource: any, index: number) => (
-                      <a
-                        key={index}
-                        href={resource.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center justify-between p-3 rounded-lg border border-gray-200 bg-gray-50 hover:bg-gray-100 transition"
-                      >
-                        <div className="flex items-center">
-                          <Download className="h-5 w-5 text-gray-400 mr-3" />
-                          <span className="text-gray-700 font-medium">
-                            {resource.name}
-                          </span>
-                        </div>
-                      </a>
-                    ))}
-                  </div>
+                <div className="w-full max-w-md">
+                  <ResourcesList resources={(webinar as any).resources} />
                 </div>
               )}
             </div>
@@ -2362,93 +2349,21 @@ export default function WebinarPage({ params }: { params: Promise<{ id: string }
             </div>
 
             {/* Chapters */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-              <h2 className="text-lg font-semibold text-brand-navy mb-4">Chapters</h2>
-              <div className="space-y-2">
-                {webinar.chapters.map((chapter, index) => (
-                  <button
-                    key={index}
-                    onClick={() => {
-                      const player = document.querySelector('video') as any
-                      if (player) {
-                        player.currentTime = chapter.time
-                        player.play()
-                      }
-                    }}
-                    className="w-full flex items-center justify-between p-3 rounded-lg hover:bg-gray-50 transition text-left"
-                  >
-                    <div className="flex items-center">
-                      <span className="text-sm font-medium text-gray-500 w-12">
-                        {Math.floor(chapter.time / 60)}:{(chapter.time % 60).toString().padStart(2, '0')}
-                      </span>
-                      <span className="ml-3 text-gray-900">{chapter.title}</span>
-                    </div>
-                  </button>
-                ))}
-              </div>
-            </div>
+            <ChaptersList chapters={webinar.chapters} />
 
             {/* Key Takeaways - only show if exists */}
             {(webinar as any).keyTakeaways && (webinar as any).keyTakeaways.length > 0 && (
-              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-                <h2 className="text-lg font-semibold text-brand-navy mb-4">Key Takeaways</h2>
-                <ul className="space-y-3">
-                  {(webinar as any).keyTakeaways.map((takeaway: string, index: number) => (
-                    <li key={index} className="flex items-start">
-                      <span className="flex-shrink-0 h-6 w-6 rounded-full bg-brand-sky/10 text-brand-sky flex items-center justify-center text-sm font-semibold mr-3 mt-0.5">
-                        {index + 1}
-                      </span>
-                      <span className="text-gray-700 text-sm">{takeaway}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              <KeyTakeawaysList takeaways={(webinar as any).keyTakeaways} />
             )}
 
             {/* Learning Outcomes - only show if exists */}
             {(webinar as any).learningOutcomes && (webinar as any).learningOutcomes.length > 0 && (
-              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-                <h2 className="text-lg font-semibold text-brand-navy mb-4">What You'll Learn</h2>
-                <p className="text-sm text-gray-600 mb-4">After watching this video, you will be able to:</p>
-                <ul className="space-y-2">
-                  {(webinar as any).learningOutcomes.map((outcome: string, index: number) => (
-                    <li key={index} className="flex items-start">
-                      <svg className="h-5 w-5 text-green-500 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                      </svg>
-                      <span className="text-gray-700 text-sm">{outcome}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              <LearningOutcomesList outcomes={(webinar as any).learningOutcomes} />
             )}
 
             {/* Transcript - Server-rendered HTML for SEO/GEO crawlability */}
             {(webinar as any).transcript && (
-              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-                <details className="group" open>
-                  <summary className="flex items-center justify-between cursor-pointer list-none">
-                    <h2 className="text-lg font-semibold text-brand-navy">Full Transcript: AI for Tourism Professionals</h2>
-                    <svg
-                      className="h-5 w-5 text-gray-500 transition-transform group-open:rotate-180"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </summary>
-                  <div className="mt-6 pt-6 border-t border-gray-200">
-                    <div className="prose prose-sm max-w-none">
-                      {(webinar as any).transcript.split('\n\n').map((paragraph: string, idx: number) => (
-                        <p key={idx} className="text-gray-700 leading-relaxed mb-4">
-                          {paragraph}
-                        </p>
-                      ))}
-                    </div>
-                  </div>
-                </details>
-              </div>
+              <TranscriptSection transcript={(webinar as any).transcript} />
             )}
           </div>
 
@@ -2456,27 +2371,7 @@ export default function WebinarPage({ params }: { params: Promise<{ id: string }
           <div className="space-y-6">
             {/* Resources - only show if resources exist */}
             {(webinar as any).resources && (webinar as any).resources.length > 0 && (
-              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-                <h2 className="text-lg font-semibold text-brand-navy mb-4">Resources</h2>
-                <div className="space-y-3">
-                  {(webinar as any).resources.map((resource: any, index: number) => (
-                    <a
-                      key={index}
-                      href={resource.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-between p-3 rounded-lg border border-gray-200 bg-gray-50 hover:bg-gray-100 transition"
-                    >
-                      <div className="flex items-center">
-                        <Download className="h-5 w-5 text-gray-400 mr-3" />
-                        <span className="text-gray-700 font-medium">
-                          {resource.name}
-                        </span>
-                      </div>
-                    </a>
-                  ))}
-                </div>
-              </div>
+              <ResourcesList resources={(webinar as any).resources} />
             )}
 
             {/* Related Resources/Tools - only show if exists */}
