@@ -70,6 +70,15 @@ const webinars = [
     level: 'Tactical',
   },
   {
+    id: 'crit-framework-workshop',
+    title: 'CRIT Prompting Framework Workshop',
+    description: 'A comprehensive hands-on workshop on the CRIT (Context, Role, Interview, Task) prompting framework. Janette demonstrates live prompting across ChatGPT, Gemini, and Claude with five real-world use cases: getting AI starter ideas, planning educational strategy, handling difficult board conversations, creating partnership pitches, and strategic business planning. Learn how voice dictation tools like Monologue can dramatically improve your prompting.',
+    duration: '42 min',
+    muxPlaybackId: '2ZX01y15p3KHi2ZCG01sMTStnn01HcvhFKMAQeetJ2Zd8o',
+    thumbnail: 'https://image.mux.com/2ZX01y15p3KHi2ZCG01sMTStnn01HcvhFKMAQeetJ2Zd8o/thumbnail.png?width=800&height=450&time=10',
+    level: 'Tactical',
+  },
+  {
     id: 'model-context-protocol',
     title: 'Model Context Protocol',
     description: 'This presentation introduces the Model Context Protocol (MCP) as a technical breakthrough designed to solve AI\'s trustworthiness problem in travel planning by acting as a "source of truth." Janette explains how this technology allows personal AIs to reliably connect with real-time data, demonstrates practical applications for tourism, and outlines the strategic shift for destination marketing organizations.',

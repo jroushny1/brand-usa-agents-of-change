@@ -1600,6 +1600,311 @@ I want to thank Gabe so much again. Thank you, Visit Orlando, for sharing Gabe w
       { time: 779, title: 'Final summary: "Brainstorming with AI: Context is Key"' },
     ],
   },
+  'crit-framework-workshop': {
+    id: 'crit-framework-workshop',
+    title: 'CRIT Prompting Framework Workshop',
+    description: 'A comprehensive hands-on workshop on the CRIT (Context, Role, Interview, Task) prompting framework. Janette demonstrates live prompting across ChatGPT, Gemini, and Claude with five real-world use cases: getting AI starter ideas, planning educational strategy, handling difficult board conversations, creating partnership pitches, and strategic business planning. Learn how voice dictation tools like Monologue can dramatically improve your prompting.',
+    duration: '42 min',
+    muxPlaybackId: '2ZX01y15p3KHi2ZCG01sMTStnn01HcvhFKMAQeetJ2Zd8o',
+    instructor: 'Janette Roush',
+    instructorTitle: 'Chief AI Officer, Brand USA',
+    transcript: `My name is Janette Roush. I am the SVP of Innovation and Chief AI Officer for Brand USA. And cross your fingers because there's going to be some live demoing. Today we are doing a prompting workshop, learning the CRIT framework for prompting. So if you are accustomed to using tools like ChatGPT, either as fancy Google, or as the thing that makes my emails sound nicer than I really am, this is what's going to help you move from that level of prompting into actually using AI as your thought partner.
+
+What do when I say prompting framework? It sounds fancy and hard and like a lot of work.
+
+A framework is just a tool that helps us to organize information. So when you were a kid in school and you learned about the five Ws, the who, what, where, when, why, when you were putting together a news article in third grade, that's a framework. A SWOT analysis, looking at the strengths, weaknesses, opportunities and threats to an organization, that's a framework. So a prompt framework is just meant to be a way to make it easier for us to remember what kind of information is helpful to include in a prompt when we're working with Claude, with Gemini or with ChatGPT.
+
+And then you might also hear the phrase prompt engineering thrown around. I roll my eye at that. I don't love stuff that makes working with AI more difficult than what it actually is. But prompt engineering, it's just the process of developing and using a prompt framework that is designed to fit a particular need that you have in that moment.
+
+This framework, I'm giving all credit to Geoff Woods who wrote a book called the AI Driven Leader. He has a website where he spells out this prompting framework. You can see there ai leadership.com. He's actually built a custom GPT that allows you to work within that framework on his website. And you can see that if you go to ai leadership.com/thought partner. So the book, I bought it over the break, actually, I, most of the way through it.
+
+I was introduced to his work through a conference called MAICON, the Marketing AI Institute conference which I spoke at back in October, and he was one of the lead keynotes for the event. If you are looking for AI keynote speakers, he did an absolutely fantastic job. Energetic speaker, and he does something that I don't do a lot, and that is live demonstration on stage using voice instead of typing to the AI. I've read this all over the place, voice is becoming the main way that in the future we will be engaging with AI systems because it takes too long to type.
+
+What I'll be doing during this live demonstration is using my voice to give inputs to the prompt so that you give as much context to the model as you possibly can. Just total word dump everything you are thinking of into a prompt, but you don't turn the model onto voice mode. Voice mode is you talk to the model and it talks to you back and it can be pretty slow to work with. What many people are moving towards is actually talk to the model and then read the results back. And you use a voice dictation tool to make that work.
+
+The CRIT framework is context, role, interview and task.
+
+So context, it's just providing background information, all of the details you possibly can, so the AI understands what it's working with.
+
+Role. This is you tell the AI what role it is playing when it is answering your question so it understands what level of expertise it has and it helps guide its output by telling it what perspective to take.
+
+Now interview. This is really the key part of what makes this prompting framework work so well, is that you tell the AI to ask you questions so that it can create a better response for you. And if you work with AI a little bit, you know that sometimes it will just ask you infinite questions to keep the conversation going. The way that I'll be using it here is telling the AI the context of my situation. This is the role I want you to play. In order to get more context, I want you to ask me no more than three questions, one at a time. This is going to help the AI draw more information out of you.
+
+And then finally, the task. What do you want that output to look like? Are you looking for an outline? Are you looking for a bulleted list? Are you looking for a paragraph? And that will, again, help shape what AI gives you so that it's actually usable for you.
+
+CRIT is not the only example of a prompting framework. Here on the screen are a number of different frameworks that are good for uses in different ways. I don't personally get overly hung up on using a framework. For me, what works best with working with AI is just using it reflexively. Every time I have a task I'm trying to do, I am going to AI and just piecemeal back and forth.
+
+Giving information, receiving information, I treat it like a conversation rather than some kind of big official prompt that I need to give it. But I think the CRIT framework is different specifically because it forces you to slow down and be interviewed by ChatGPT or whatever your preferred language model is. That's what separates it from the other frameworks that exist.
+
+Throughout this, remember that you are the thought leader. The AI is the thought partner. It is here to help you. You do not just blindly follow and do whatever AI tells you to do. We are still in the driver's seat. Humans are still the boss.
+
+And part of what makes this work so well is, and of course you can do this, typing it out, but dictation tools if you can get comfortable with them. And you'll see today I am still struggling to force myself to be comfortable with dictating. Part of it is, if you've met me in real life, I'm really loud and I'm self-conscious, even when I'm at home, I'm like, I know I'm bothering my husband in the next room if I'm just talking to my computer all day. So I just hate thinking aloud, but doing that is going to give you a better output.
+
+I'll use two of these tools today, one of which will be on my Mac, using the dictation tool that is built into your Mac. And if you're on Windows, the same thing exists on Windows. But there's also two other dictation tools that you can use. I have heard fantastic things about Wispr Flow. So Wispr Flow is really considered the gold standard when it comes to third party dictation services. And I personally use Monologue because it is tied to a subscription that I have with a really great AI media company called Every.to.
+
+If you're looking to read more about AI in your free time, I recommend Every.to as a subscription, but Monologue operates locally on your machine, so it's not taking information and sending it anywhere. It takes your verbal garbage and it turns it into sentences that make sense without changing what you are saying. Whereas a dictation tool, it doesn't necessarily put in punctuation unless you say the word period or question mark. I'll start off by using the MAC setting so you can see what that looks like. And then I'm going to move to Monologue so that we actually get better results moving forward.
+
+And these are the five examples that I am going to walk through. We're going to do a live version of how does the CRIT framework work for prompting with each of these use cases.
+
+You'll also see here that I am using ChatGPT Thinking. So if you're somewhat new to AI, you may not be familiar with the different models that exist inside of each of the main large language models. Unless you are looking for a fast answer, like an ingredient substitution for a recipe when you are cooking, if you're using AI for work, you want to have it set on Thinking mode. You're not going to get anything insightful from using the instant mode. That's just going to give you the quicker answer.
+
+All right, so ChatGPT. I would like to use the CRIT framework for prompting to work with you on a project. CRIT stands for context, role interrogate and Task. The context for my project is that I am brand new to using AI and I'm trying to get some ideas for I think I see that's the trick with using this stuff and a, you can also see how this is just a run on sentence, and if you click any other button on your screen, then it stops the dictation tool.
+
+And I am looking for ideas for integrating AI into the work that I do. So I just need some quick, easy use cases for AI that would relate to like my real life job, and I need some inspiration, so I'm hoping you can help me with that. The role that I want you to play is as an educator who has all kinds of deep knowledge and experience about AI period.
+
+You are a patient teacher and you are very well versed in all of the ways that people might use AI at work, period. For the task, I want you to give me three terrific, easy use cases for incorporating AI into my daily work as the Chief AI Officer for Brand USA, which is the destination marketing organization for the United States.
+
+I want to start this project by you asking me three questions, one at a time in order to get all the context you need in order to gimme the best possible answer. Before you start answering this question period, please start with your first question.
+
+Okay. Quite, and you'll see I was very clear and specific when I was giving this thread, and part of that was I was doing this project. I was, I like to have my bases covered. And so I actually made screen recordings of me doing this exact same thing earlier today.
+
+Also to force myself to practice using the transcription tools. And if you take any shortcut at all, ChatGPT, one time I did it. It was perfect. The second time that I did it, it starts giving me a huge, long answer to the question before it even started asking me questions. So when you are very clear about what you want, you're going to be more clear in the output that you get.
+
+And that is true with AI across the board. So let's look at this question.
+
+I spend let's see. In a typical week, I, let's say I am reviewing performance of our Mindtrip Chat bot. I am drafting emails and I am preparing for speeches or podcast appearances.
+
+Well done means clear storytelling, tight insights, it sounds like me. Tone, consistency accuracy.
+
+The reason that I'm going to move to Monologue in a second, you can see here all of my ums and ahs the text transcription tool all picks up literally, whereas Monologue understands maybe I don't need that actually to be used here. And then the most common inputs I have available for these tasks
+
+for Mindtrip, I have transcripts of the conversations and a dashboard giving me higher level information about Mindtrip. I have all of my prior speeches. In a few cases it will be the actual text of the speech, but typically it's just going to be the beautiful AI deck that I presented.
+
+I don't use PowerPoint. I do have brand voice guidelines that I probably should be using them more. And in terms of tools, I have ChatGPT. I have Gemini, I have Claude. We do not put customer data in ai, but none of these projects involve customer data. I also have access to tools like Descript or video and audio editing.
+
+So this is already, all of this we've been doing, for five, eight minutes. Now. This is just giving the prompt to ChatGPT. And here we have three high impact AI use cases for my week. So Mindtrip, weekly intelligence brief. So I have lots of conversational data and a higher level dashboard, but the insights are scattered.
+
+So yeah, getting a one page brief I could drop into an exec update would be cool.
+
+And then here we get the workflow of what this would look like and a prompt that I could use with ChatGPT. So if I'd never used AI before to understand, oh, this is a way you can work with AI to analyze all of this text-based input and get something useful out of it, like that's a great way to use ai.
+
+I would go the next level if I were not. The entry level person asking, for easy ways to get started using ai. And I'd say, great, let's turn this into an agentic workflow, right? What are the steps that can be automated using tools like Zapier? Here are the second idea voice plus structure co-pilot for emails.
+
+So we want to have emails that sound like me, follow my brand voice and land the point fast. And this is good advice, right? AI will follow, like it's looking for a model of what you consider to be good. So if you have emails you think are good emails, that's something you want to share with AI so it understands how to, keep producing something that you already like.
+
+And then again, down here we have a reusable prompt. And let's see, this one, a speech or podcast narrative builder. So we want to have a tight spoken narrative with a talk track that's structured on brand and optimized for delivery. So you paste in your deck or the goals of the talk text from a prior speech that you liked the audience and what they care about.
+
+So this is interest. I would actually try this out, right? Like I am very much, this is how I work with AI on building presentations already. And if you are looking for more ways to use AI with presentations I'll be working with their head of research Chelsea Benitez. We are delivering next month's Agents of Change webinar on using AI for your presentations.
+
+But this idea of creating that three act structure like that is a way that I will work with AI's. What is a framework that helps take all of this information and helps it to make sense as opposed to, oh, it's just a bunch of scattered thoughts coming outta my head. And here we get the the prompt to reuse and the fastest win for the week.
+
+I'd say this is well worth the time that we invested in prompting AI like deeply and with a lot of clarity.
+
+We are looking at Google Gemini, and now I am going to try to use a Monologue for this, which is the tool from Every that does speech transcription. So I put start by making sure that my cursor is inside the prompt window, because otherwise there is nowhere for the text to go when it's done.
+
+All right. Hi, Gemini. I would like to work with you on a project that is going to use the CRIT framework for prompting. The C stands for context. The R stands for role, the I stands for interrogate, and the T stands for task. And the project is planning an educational strategy for Brand USA and the US tourism industry, so that everybody across the industry in the United States is excited to use AI.
+
+The role that I want you to play is as a business consultant. So pretend that you're a consultant for McKinsey or Boston Consulting Group, and I want you to think really deeply about what is the best strategy we could put forward to get the entire industry. Ready, AI enabled the ultimate task.
+
+I would like you to give me an outline of what this educational strategy could look like. And for the interrogation, I want you to ask me three questions, one at a time to get more context to, fully answer my prompt.
+
+Yes. Oh, I, my heart stopped beating because this thing, it doesn't let you know that it's working the same way that the other tool does. You can see here, like this reads more like I had typed it. I don't think it's super important for AI to get a perfect prompt. If you are changing, correcting typos when you're writing a prompt, which I do as well, you don't have to.
+
+AI knows what you mean, but it is still to provide something cleaner versus less clean, I think is useful. So we're going to submit this. You will see over here, Gemini exactly like with ChatGPT has different models available, so you can click here and you are able to use pro mode thinking mode or fast.
+
+And of course they make it sound confusing, but it's just good, better, best. You want to use the best tools available for the most part when you're doing work. All right, so now it's blowing smoke. It's being sycophantic the way AI likes to do. Oh, it's a fascinating challenge.
+
+All right, so this is a large scale change management and digital transformation initiative. All right, so we need to define the scope. We're moving into the interrogate phase, and here is my first question. Who is the primary client or governing body driving this initiative? Good question. The strategy will be led by Brand USA.
+
+I am the Chief AI Officer for Brand USA, and we are the destination marketing organization for the United States. So it is being led by a national nonprofit.
+
+And what are the reasons people say talk to AI is you're giving it much more information because you can just rattle it off than you would if you have to type it out so you're not constrained by your typing speed.
+
+All right? Oh, yes. I'm sitting at the nexus of public-private partnership. All right. We cannot mandate AI adoption, and I'd have to say, I think anybody would have a hard time mandating AI adoption. Like you have to encourage people to come with you, right? You can't force anybody on this journey. So yes, we must rely on incentives, value creation, and competitive advantage to bring people along.
+
+People need to want to adopt it. Second question. Ooh,
+
+this is a great question. I am focusing on option C for this. I think all of these options are incredibly important, but Brand USA doesn't necessarily have all of the direct relationships with small and medium enterprises the way that we have the relationships with local and state dmo whereas those local and state DMO do have those downstream relationships.
+
+So one of my ideas was creating almost a Train the Trainer program where the DMO become educated and empowered in order to bring training to their SMEs. But I don't think Brand USA necessarily is providing that training directly.
+
+All right, now it's thinking about it.
+
+Oh, a cascading capability model. Yes. This is exactly what I was thinking. Only it sounds fancier. My third and final interrogation question, .AI is a massive umbrella. All right, so the primary scope of the applications we are teaching pure marketing and content. I think I am starting with option A to begin with because honestly, I don't have the expertise to be an educator about predictive analytics. Also, predictive analytics don't necessarily live inside of generative ai, and that's really where my focus is. So machine learning and other forms of ai, I am not diving into that necessarily.
+
+I want to live specifically in the generative AI space.
+
+All right, so we're hitting submit. Those are our three questions.
+
+In the meantime yet, I'm going to answer Q and A. Do I need Gemini Pro to get the same results or can I just use the good, better, best options? Also this person was just in France, and yes, Europe has different access to AI models than we have in the United States because there's just much less regulation of AI in the US.
+
+Typically all of these companies make all of the versions of their models available widely, but they limit how much you can use the better versions of their models. In terms of testing out and playing with it, you can absolutely do that for free.
+
+I know for ChatGPT you can, but if you let the model picker select which model you get, it's always going to select the cheap model. So you have to actually choose the model you're looking for, and then it'll just tell you, we have to move you to a cheaper model when it does that.
+
+All right, so now we have an outline for this actual project I have. Creating an educational strategy, to uplevel everyone across the United States who touches tourism to make us AI ready.
+
+Moving the from fear of replacement to joy of creation, and how AI is a creative force multiplier, a center of excellence by creating our own playbook.
+
+This is great strategic partnerships. I love that. Train the trainer academy. So using some of the information I already gave it to expand upon that AI ambassador certification, I think that's interesting in a box toolkit. Oh, I love that. This is, these are some really interesting ideas, I think.
+
+Yes. And a small business enablement, a downstream activation, gamify the adoption, prompt library. I don't like to get hung up on prompts, so I'm never going to make a prompt library. Like a prompt framework is almost more structured than I like in my prompting. You just have to get used to giving AI information and for telling it to ask you for more from you when you need it.
+
+You don't need a prompt library. Yeah, spelling out A curriculum. APIs, yes, obsolescence, anything you make today could be obsolete tomorrow. But I think if you start with the broad theories, obsolescence is less of a risk. If you go very detailed, three years ago, prompt libraries were a big deal because AI was less powerful.
+
+Now they're meaningless. So I think as long as you focus on kind of the big picture, I'm not so worried about that. So this was this, for me, this was a really useful response and some things I'm already thinking about is in there. I wouldn't take it and say, okay, great, I'm all done with putting this together.
+
+But now I can continue the conversation to build out the ideas that I think are excellent and move them into my own strategy for AI adoption in the industry.
+
+And here: I am working on a project that I am using the CRIT prompting framework to develop an answer to. So the C is for context, the R is for role, the I is for interrogate, and the T is for task. The context is that I have a board meeting tomorrow and I have a board member who is angry that their referral traffic from my website is declining, and I know they're going to make a whole big public thing about it.
+
+And I am nervous going into this board meeting. And I need some talking points to help me sound like I know what I am talking about when they are mad that website traffic from our website is down. The role I want you to play is an expert in SEO and generative search optimization. Because let's say I just don't understand everything about those tools, and so I want a little help guiding me through it.
+
+And to interrogate me, I want you to ask me three questions, one at a time to get more context in order to help me manage my angry board member.
+
+Great. And again, you'll see here this is best. The good, better, best. A Haiku is a small poem and an opus is a really long poem. Claude is a real jerk about rate limits. So it will frequently, even if you are working with the paid model, which I am, it will run outta the credits and tell you to wait.
+
+But I'll say Opus 4.5 is an excellent reasoning engine. And it's also, I think, a little better at this kind of emotional work, which is why I am using it for this example. I also, in case you were wondering, yes, it's completely an imaginary example. We don't have a board meeting tomorrow.
+
+What is the nature of this board member's relationship to the referral traffic? All right. And I'm doing this as a role play imagining that I am at a city DMO who would have these kinds of board meetings where board members might want to grandstand a little bit about what it is they think the DMO should be doing.
+
+The, oh, I don't think I, the board member is an attraction who is accustomed to receiving referral traffic from our website.
+
+Now, what could be tricky here is I'm thinking, I'm acting like a city DMO partner, but Claude has persistent memory, so it actually knows who I am. It knows that I am Janette Roush, the Chief AI Officer for Brand USA.
+
+All right, referral traffic is down. Honestly, it's a result of how everybody's referral traffic has been down, or everybody's site. Traffic in general has been down as a result of, Google instituting AI overviews which are resulting in zero click searches, as well as people going directly to generative AI with the types of queries they might have come to A DMO website in the past to answer.
+
+All right. To adapt to this shift. Yes, I am a, we are exploring MCP server work to make destination data available to AI systems. So all of the things that it put in here, and this is all based on past conversations that I've had with Claude about exploring different ways that Brand USA can help guide the industry to not be so reliant on traffic, organic traffic to our website, so that type of referral traffic, but to really lead the industry and, all right, this is the next thing.
+
+How can A DMO be the source of truth about events for a destination or providing content about a destination? So yes, all of everything that you included here I think is important to include in this answer back to the board member.
+
+This is, as a side note, this is why the persistent context is so cool with AI. It really makes it easier to stop working with AI like it's an intern and treat it like it's a thought partner who already understands your business.
+
+And now it's giving me the talking points that I can go back to this imaginary board member with to help them understand the issue with the referral traffic.
+
+Oh, and that's nice. Make them a collaborator instead of a critic. I learned that in my agency days. You don't want to be butting heads, right? You want to be fighting the problem together. You want to join forces. So again, I think that's a really useful output.
+
+We're going to start a new chat: I am using the CRIT prompting framework to solve a problem with you. The C is for context. The R is for role. The I is for interrogate, and the T is for task. And the context for my query is, I want to know what is the business that will put DMOs out of business and how can we build it first?
+
+I am very concerned with the rapid rise of generative ai, and its use in business that as we see traffic declining to our websites, that we have to find new ways to provide value to our stakeholders, which would include the communities we serve, local, state, federal government, the actual travelers and businesses in our destinations that benefit from tourism. So what? What business is going to put us out of business and how can we pivot so that we beat them to the punch?
+
+There we go.
+
+Now, Gemini doesn't have the same persistent memory, so it may come back and say, I'm sorry, I don't know what a DMO is. Or, oh, what did I remember to tell it?
+
+See, this is now I forgot to say, I'm going to ask you the questions one at a time. So what I can do is hit stop. Then I could actually go in here and change the prompt. I'm going to put my cursor back there. The role I want you to play is as a business management consultant and as one who works with startups and people who move very quickly to raise money and to move fast and break things. The task is to come up with three ideas of what the business is that could put us out of business and how DMOs could start to build that business first.
+
+And for the interrogate part of the prompt I want you to ask me three questions, one at a time, in order to gain more context from me before you start to answer this question.
+
+All right now.
+
+Oh. We accept the engagement. They're locked and loaded. Question number one.
+
+Ooh,
+
+that's interesting. DMOs are not necessarily exposed to information like real-time hotel inventory but things like permit approvals, like working with local government, that is something where DMOs typically can, they're very plugged into that kind of schema. So I would say that's probably the unfair advantage.
+
+Typically, we're finding out about event schedules as the same time as anyone else, and if we learn about it earlier, it's probably embargoed until it's released. So I would say our proprietary play here is the relationships that DMOs frequently have with local or state government.
+
+I also want to be clear that, because I did all of these exercises earlier today in case the live bit didn't work, and everything that you are seeing is completely different than when I did it earlier today. This has been really interesting. All right. We have a gatekeeper advantage. I have to look at how money changes hands.
+
+DMOs rely on attribution.
+
+To be honest, I have no idea what that product would be because that's antithetical to how DMO have worked in the past. Some DMOs will sell things like advertising on their website in order to change funds. Some DMOs will have affiliate links on their websites to sell hotel inventory or tickets and receive payment that way.
+
+But honestly, most DMOs don't do that because we are concerned about disrupting either our relationships with third party travel suppliers in the B2B space, or those affiliate relationships typically are through third parties that take a cut of the ultimate revenue that goes to the member or the local business.
+
+Coming up with something that is bypassing public funding or public tax funding, which are two separate things. Not all DMO are funded specifically through a tax.
+
+I, I would like some ideas from you on this. I don't have a great answer for it.
+
+All right we'll see what it comes back with and hopefully that didn't distract it. It will come up with one final question to ask me. And again, I didn't have to come up with a perfect answer there, right? That's, that was a honest and spitballing answer.
+
+Final question.
+
+The answer to that question is going to be different for every single destination. Like in New York City, that could be securing space for a large convention at the Javits Center. For many business events, it could be getting funding to offset the costs of hosting a large convention or meeting in a specific destination.
+
+Film production doesn't necessarily always live with the DMO, so that's not always our concern. So I'm going to need you to provide some input on this question as well.
+
+All right. And with just a couple of minutes left, and I didn't give it full and complete answers, did I? So let's see what it comes back with.
+
+Oh, a clear picture of my vulnerability and latent power. Geez. All right. Political capital relationships and regulatory access we're hesitant to monetize directly. So we are dependent on our declining traffic models. And yes, high value pain points are securing funding and navigating bureaucracy. All right.
+
+The marketing era of the DMO is over. If you don't pivot to management and orchestration, you will be replaced by software that does it faster and cheaper. Here are the three DMO killers: BidCity, the FinTech disruption. So it's a startup for meeting planners, update, upload their event specs. The AI calculates the economic impact of that event and then invites destinations to bid on it in real time.
+
+Interesting. But we could build the instant grant machine that assumes that you have money with which to provide grants, but that is interesting. Permit AI. Oh, interesting. The startup automates the bureaucracy of hosting an event in your city. I'm not worried about that either because permitting is as much about if it were only about following the letter of the law, that would be great, but it's not, is it?
+
+And you could create a city as a service platform, monetize the friction. Interesting. And then the Trust Oracle, a global AI company, decides that UGC is too noisy. They need a source of truth. Also. 1000000000%. Like I want this, they start paying a private company to physically verify local businesses.
+
+This is something I absolutely want to do at Brand USA, the official verification, API, where we are certifying, I'm less concerned about businesses. I think Google owns that, but certifying that events are real. Yes. I think in an age where we do not know what truth is, that's going to be very important.
+
+All of these ideas move us from being a publisher to a platform. We provide the tools to operate within the city.
+
+I couldn't agree more with that.
+
+Alright, great. Thank you all so much and I hope you have a wonderful rest of your week.`,
+    keyTakeaways: [
+      'The CRIT framework (Context, Role, Interview, Task) transforms AI from a simple Q&A tool into a strategic thought partner by structuring how you provide information and receive outputs',
+      'Voice dictation tools like Monologue and Wispr Flow enable richer prompts by removing typing constraints, allowing you to provide more context naturally through speech',
+      'The "Interview" component is the secret sauce—instructing AI to ask you clarifying questions (e.g., "ask me three questions, one at a time") draws out information you might not think to include',
+      'Different AI models have different strengths: ChatGPT for general tasks, Gemini for strategic planning, and Claude for emotional intelligence and nuanced conversations',
+      'AI with persistent memory (like Claude) becomes exponentially more useful over time as it learns your context, transforming from an intern into a true thought partner'
+    ],
+    topics: [
+      'CRIT Framework',
+      'AI Prompting',
+      'Prompt Engineering',
+      'Voice Dictation',
+      'ChatGPT',
+      'Google Gemini',
+      'Claude',
+      'Monologue',
+      'Wispr Flow',
+      'AI for DMOs',
+      'Educational Strategy',
+      'Board Communications',
+      'SEO and Generative Search',
+      'Strategic Planning',
+      'AI Thought Partnership',
+      'Tourism Industry AI',
+      'Brand USA',
+      'Train the Trainer',
+      'MCP Servers',
+      'AI Model Selection'
+    ],
+    targetAudience: {
+      primary: 'Tourism and destination marketing professionals seeking to move beyond basic AI usage to strategic thought partnership',
+      secondary: 'Business professionals who want practical, hands-on training in advanced prompting techniques across multiple AI platforms',
+      tertiary: 'Anyone interested in using voice dictation and structured frameworks to get better results from AI tools'
+    },
+    learningOutcomes: [
+      'Apply the CRIT framework (Context, Role, Interview, Task) to structure prompts that produce actionable, high-quality AI outputs',
+      'Use voice dictation tools to provide richer context and overcome typing limitations when working with AI',
+      'Instruct AI to interview you with clarifying questions, drawing out information that improves response quality',
+      'Select the appropriate AI model (ChatGPT, Gemini, Claude) based on the type of task and desired output',
+      'Transform AI interactions from simple queries into strategic planning sessions across use cases like educational strategy, stakeholder communications, and business planning'
+    ],
+    relatedResources: [
+      { name: 'The AI Driven Leader by Geoff Woods', description: 'Book introducing the CRIT framework', url: 'https://aileadership.com' },
+      { name: 'AI Leadership Thought Partner GPT', description: 'Custom GPT for CRIT framework prompting', url: 'https://aileadership.com/thought-partner' },
+      { name: 'ChatGPT', description: 'OpenAI model used for demonstrations', url: 'https://chat.openai.com' },
+      { name: 'Google Gemini', description: 'Google AI model for strategic planning', url: 'https://gemini.google.com' },
+      { name: 'Claude', description: 'Anthropic AI model with persistent memory', url: 'https://claude.ai' },
+      { name: 'Monologue', description: 'Local voice-to-text tool from Every.to', url: 'https://monologue.app' },
+      { name: 'Wispr Flow', description: 'Gold standard voice dictation service', url: 'https://www.wispr.ai' },
+      { name: 'Every.to', description: 'AI media company and Monologue provider', url: 'https://every.to' },
+      { name: 'MAICON Conference', description: 'Marketing AI Institute Conference', url: 'https://www.marketingaiinstitute.com/maicon' }
+    ],
+    chapters: [
+      { time: 0, title: 'Introduction to the CRIT Prompting Framework' },
+      { time: 60, title: 'What is a Framework? (Five Ws, SWOT Analysis examples)' },
+      { time: 120, title: 'Credit to Geoff Woods and The AI Driven Leader' },
+      { time: 180, title: 'Why Voice Dictation Matters for Prompting' },
+      { time: 240, title: 'Breaking Down CRIT: Context, Role, Interview, Task' },
+      { time: 360, title: 'The Interview Component: The Key Differentiator' },
+      { time: 420, title: 'Voice Dictation Tools: Mac Dictation, Wispr Flow, Monologue' },
+      { time: 540, title: 'Example 1: Getting AI Starter Ideas with ChatGPT' },
+      { time: 720, title: 'ChatGPT Response: Three High-Impact AI Use Cases' },
+      { time: 900, title: 'Example 2: Educational Strategy Planning with Gemini' },
+      { time: 1080, title: 'Gemini Response: Train the Trainer and Cascading Capability Model' },
+      { time: 1260, title: 'Example 3: Board Meeting Prep with Claude' },
+      { time: 1440, title: 'Claude Response: SEO Talking Points and Stakeholder Management' },
+      { time: 1620, title: 'Example 4: Partnership Pitch Development' },
+      { time: 1800, title: 'Example 5: Strategic Business Planning - What Could Disrupt DMOs?' },
+      { time: 2100, title: 'Gemini Response: Three DMO Killers and Platform Thinking' },
+      { time: 2400, title: 'Wrap-up and Key Takeaways' },
+    ],
+  },
   'clueless-packing-app': {
     id: 'clueless-packing-app',
     title: 'Building a "Clueless"-Inspired AI Packing App Using Claude Artifacts',
@@ -2087,6 +2392,13 @@ export default function WebinarPage({ params }: { params: Promise<{ id: string }
     'crit-framework': [
       { '@type': 'SoftwareApplication', name: 'ChatGPT', applicationCategory: 'AI Assistant', url: 'https://chatgpt.com' },
       { '@type': 'SoftwareApplication', name: 'Claude', applicationCategory: 'AI Assistant', url: 'https://claude.ai' },
+    ],
+    'crit-framework-workshop': [
+      { '@type': 'SoftwareApplication', name: 'ChatGPT', applicationCategory: 'AI Assistant', url: 'https://chatgpt.com' },
+      { '@type': 'SoftwareApplication', name: 'Google Gemini', applicationCategory: 'AI Assistant', url: 'https://gemini.google.com' },
+      { '@type': 'SoftwareApplication', name: 'Claude', applicationCategory: 'AI Assistant', url: 'https://claude.ai' },
+      { '@type': 'SoftwareApplication', name: 'Monologue', applicationCategory: 'Voice Dictation', url: 'https://monologue.app' },
+      { '@type': 'SoftwareApplication', name: 'Wispr Flow', applicationCategory: 'Voice Dictation', url: 'https://www.wispr.ai' },
     ],
     'model-context-protocol': [
       { '@type': 'SoftwareApplication', name: 'Claude', applicationCategory: 'AI Assistant', url: 'https://claude.ai' },
