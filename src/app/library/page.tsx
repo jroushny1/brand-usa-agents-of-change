@@ -37,6 +37,16 @@ const resources = [
     category: 'Conversations on AI in Tourism',
     items: [
       {
+        id: 'fandom-unpacked-ai-live-entertainment',
+        title: 'Fandom Unpacked – "AI\'s Impact on Live Entertainment: Unpacking the Business Effects on Sports, Arts, and Ticketed Events"',
+        description: 'Discussion on how AI is transforming live entertainment discovery and fan experiences, covering AI-powered recommendations, tools like ChatGPT and Claude, and best practices for marketers integrating AI safely while maintaining authenticity.',
+        url: '/podcast/fandom-unpacked-ai-live-entertainment',
+        externalUrl: 'https://www.buzzsprout.com/2449648/episodes/17030825-ai-s-impact-on-live-entertainment-unpacking-the-business-effects-on-sports-arts-and-ticketed-events',
+        icon: Podcast,
+        date: 'April 23, 2025',
+        isInternal: true,
+      },
+      {
         title: 'Destination Discourse – "What Happens When AI Becomes the Primary Interface for Travel?"',
         description: 'Stuart and Adam are joined by Brand USA\'s Janette Roush for a provocative exploration of the question no one in tourism wants to ask out loud: what happens to DMOs when AI becomes the primary interface for travel inspiration, planning, and booking?',
         url: 'https://www.youtube.com/watch?v=gvCOpVNtvHY&t=2729s',
@@ -536,9 +546,9 @@ export default function LibraryPage() {
                       </h2>
                     </div>
 
-                    {/* Podcast Layout - Grid of Small Cards with Logos */}
+                    {/* Podcast Layout - Improved Cards with Full Text */}
                     {isPodcast ? (
-                      <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 list-none">
+                      <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 list-none">
                         {category.items.map((item, itemIndex) => {
                           const Icon = item.icon
                           // Extract podcast name and episode title from the title
@@ -546,53 +556,60 @@ export default function LibraryPage() {
                             ? item.title.split('–').map(s => s.trim())
                             : [item.title, '']
 
+                          const isInternalLink = (item as any).isInternal
+                          const targetUrl = item.url
+
                           return (
                             <li key={itemIndex}>
-                              <a
-                                href={item.url}
-                                target="_blank"
-                                rel="noopener noreferrer"
+                              <Link
+                                href={targetUrl}
+                                target={isInternalLink ? undefined : "_blank"}
+                                rel={isInternalLink ? undefined : "noopener noreferrer"}
                                 aria-label={`Listen to ${item.title}${(item as any).date ? ` from ${(item as any).date}` : ''}`}
-                                className="group bg-white rounded-lg border border-gray-200 p-3 sm:p-4 hover:shadow-lg hover:border-brand-blue hover:-translate-y-0.5 transition-all duration-200 flex flex-col h-full"
+                                className="group bg-white rounded-xl border border-gray-200 p-5 sm:p-6 hover:shadow-xl hover:border-brand-blue hover:-translate-y-1 transition-all duration-300 flex flex-col min-h-[240px]"
                               >
-                                {/* Podcast Icon & Name */}
-                                <div className="flex items-start gap-2 sm:gap-3 mb-2">
-                                  <div className="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 rounded-lg bg-gradient-to-br from-brand-blue to-brand-navy flex items-center justify-center">
-                                    <Icon className="h-5 w-5 sm:h-6 sm:w-6 text-white" aria-hidden="true" />
+                                {/* Podcast Icon & Name - Larger */}
+                                <div className="flex items-start gap-3 mb-4">
+                                  <div className="w-14 h-14 flex-shrink-0 rounded-xl bg-gradient-to-br from-brand-blue to-brand-navy flex items-center justify-center group-hover:scale-105 transition-transform">
+                                    <Icon className="h-7 w-7 text-white" aria-hidden="true" />
                                   </div>
                                   {/* Podcast Name & Date */}
-                                  <div className="flex-1 pt-0.5">
-                                    <div className="text-xs font-semibold text-brand-blue leading-tight">
+                                  <div className="flex-1">
+                                    <div className="text-base font-bold text-brand-blue leading-tight mb-1">
                                       {podcastName}
                                     </div>
                                     {(item as any).date && (
-                                      <div className="text-xs text-gray-500 mt-0.5">
+                                      <div className="text-sm text-gray-500">
                                         {(item as any).date}
                                       </div>
                                     )}
                                   </div>
                                 </div>
 
-                                {/* Episode Title */}
+                                {/* Episode Title - No Truncation */}
                                 {episodeTitle && (
-                                  <h3 className="text-sm sm:text-base font-bold text-brand-navy mb-1.5 sm:mb-2 group-hover:text-brand-cyan transition-colors line-clamp-2">
+                                  <h3 className="text-base sm:text-lg font-bold text-brand-navy mb-3 group-hover:text-brand-cyan transition-colors leading-snug">
                                     {episodeTitle}
                                   </h3>
                                 )}
 
-                                {/* Description */}
-                                <p className="text-xs sm:text-sm text-gray-600 leading-relaxed line-clamp-2 sm:line-clamp-3 mb-2">
+                                {/* Description - More Visible */}
+                                <p className="text-sm text-gray-600 leading-relaxed mb-4 line-clamp-4 flex-grow">
                                   {item.description}
                                 </p>
 
-                                {/* Listen Link */}
-                                <div className="mt-auto pt-1.5 sm:pt-2 border-t border-gray-100">
-                                  <span className="text-xs font-semibold text-brand-blue group-hover:text-brand-cyan inline-flex items-center gap-1">
-                                    Listen Now
-                                    <ExternalLink className="h-3 w-3" aria-hidden="true" />
+                                {/* Action Link */}
+                                <div className="mt-auto pt-3 border-t border-gray-100">
+                                  <span className="text-sm font-semibold text-brand-blue group-hover:text-brand-cyan inline-flex items-center gap-2 group-hover:gap-3 transition-all">
+                                    {isInternalLink ? 'View Full Episode' : 'Listen Now'}
+                                    {isInternalLink ? (
+                                      <span className="text-lg" aria-hidden="true">→</span>
+                                    ) : (
+                                      <ExternalLink className="h-4 w-4" aria-hidden="true" />
+                                    )}
                                   </span>
                                 </div>
-                              </a>
+                              </Link>
                             </li>
                           )
                         })}
