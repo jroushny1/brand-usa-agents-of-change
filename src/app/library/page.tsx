@@ -37,21 +37,18 @@ const resources = [
     category: 'Conversations on AI in Tourism',
     items: [
       {
-        id: 'fandom-unpacked-ai-live-entertainment',
-        title: 'Fandom Unpacked – "AI\'s Impact on Live Entertainment: Unpacking the Business Effects on Sports, Arts, and Ticketed Events"',
-        description: 'Discussion on how AI is transforming live entertainment discovery and fan experiences, covering AI-powered recommendations, tools like ChatGPT and Claude, and best practices for marketers integrating AI safely while maintaining authenticity.',
-        url: '/podcast/fandom-unpacked-ai-live-entertainment',
-        externalUrl: 'https://www.buzzsprout.com/2449648/episodes/17030825-ai-s-impact-on-live-entertainment-unpacking-the-business-effects-on-sports-arts-and-ticketed-events',
-        icon: Podcast,
-        date: 'April 23, 2025',
-        isInternal: true,
-      },
-      {
         title: 'Destination Discourse – "What Happens When AI Becomes the Primary Interface for Travel?"',
         description: 'Stuart and Adam are joined by Brand USA\'s Janette Roush for a provocative exploration of the question no one in tourism wants to ask out loud: what happens to DMOs when AI becomes the primary interface for travel inspiration, planning, and booking?',
         url: 'https://www.youtube.com/watch?v=gvCOpVNtvHY&t=2729s',
         icon: Podcast,
         date: 'Nov 20, 2025',
+      },
+      {
+        title: 'Fandom Unpacked – "AI\'s Impact on Live Entertainment: Unpacking the Business Effects on Sports, Arts, and Ticketed Events"',
+        description: 'Discussion on how AI is transforming live entertainment discovery and fan experiences, covering AI-powered recommendations, tools like ChatGPT and Claude, and best practices for marketers integrating AI safely while maintaining authenticity.',
+        url: 'https://www.buzzsprout.com/2449648/episodes/17030825',
+        icon: Podcast,
+        date: 'April 23, 2025',
       },
       {
         title: 'Travel Trends – "The Impact of AI on Destination Marketing"',
