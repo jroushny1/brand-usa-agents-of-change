@@ -44,13 +44,6 @@ const resources = [
         date: 'Nov 20, 2025',
       },
       {
-        title: 'Fandom Unpacked – "AI\'s Impact on Live Entertainment: Unpacking the Business Effects on Sports, Arts, and Ticketed Events"',
-        description: 'Discussion on how AI is transforming live entertainment discovery and fan experiences, covering AI-powered recommendations, tools like ChatGPT and Claude, and best practices for marketers integrating AI safely while maintaining authenticity.',
-        url: 'https://www.buzzsprout.com/2449648/episodes/17030825',
-        icon: Podcast,
-        date: 'April 23, 2025',
-      },
-      {
         title: 'Travel Trends – "The Impact of AI on Destination Marketing"',
         description: 'Dan Christian kicks off an AI-focused mini-series discussing how destination marketing is evolving as trip planning shifts from traditional search to chatbots and AI itineraries.',
         url: 'https://www.listennotes.com/podcasts/travel-trends-with/the-impact-of-ai-on-9G8EexwrySJ/',
@@ -84,6 +77,13 @@ const resources = [
         url: 'https://mytourismiq.com/posts/31-is-there-a-right-way-to-roll-out-ai-janette-roush-vimal-vyas',
         icon: Podcast,
         date: 'May 22, 2025',
+      },
+      {
+        title: 'Fandom Unpacked – "AI\'s Impact on Live Entertainment: Unpacking the Business Effects on Sports, Arts, and Ticketed Events"',
+        description: 'Discussion on how AI is transforming live entertainment discovery and fan experiences, covering AI-powered recommendations, tools like ChatGPT and Claude, and best practices for marketers integrating AI safely while maintaining authenticity.',
+        url: 'https://www.buzzsprout.com/2449648/episodes/17030825',
+        icon: Podcast,
+        date: 'April 23, 2025',
       },
       {
         title: 'Brand USA Talks Travel – "AI for DMOs"',
