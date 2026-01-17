@@ -518,8 +518,8 @@ export default function LibraryPage() {
             {/* Resource Categories */}
             <div className="space-y-6 sm:space-y-10 md:space-y-12">
               {resources.map((category, categoryIndex) => {
-                const isPodcast = category.category.includes('Podcast')
-                const isTools = category.category.includes('AI') && !category.category.includes('Podcast')
+                const isPodcast = category.category.includes('Podcast') || category.category === 'Conversations on AI in Tourism'
+                const isTools = category.category.includes('AI') && !category.category.includes('Podcast') && category.category !== 'Conversations on AI in Tourism'
 
                 // Define gradient colors by category
                 const getCategoryGradient = () => {
