@@ -1605,7 +1605,7 @@ I want to thank Gabe so much again. Thank you, Visit Orlando, for sharing Gabe w
     title: 'CRIT Prompting Framework Workshop',
     description: 'A comprehensive hands-on workshop on the CRIT (Context, Role, Interview, Task) prompting framework. Janette demonstrates live prompting across ChatGPT, Gemini, and Claude with five real-world use cases: getting AI starter ideas, planning educational strategy, handling difficult board conversations, creating partnership pitches, and strategic business planning. Learn how voice dictation tools like Monologue can dramatically improve your prompting.',
     duration: '42 min',
-    muxPlaybackId: '2ZX01y15p3KHi2ZCG01sMTStnn01HcvhFKMAQeetJ2Zd8o',
+    muxPlaybackId: 'aKLdc9rK00v6pXvaCk01x02FBzfWOsUFodgvtn6sla5jks',
     instructor: 'Janette Roush',
     instructorTitle: 'Chief AI Officer, Brand USA',
     transcript: `My name is Janette Roush. I am the SVP of Innovation and Chief AI Officer for Brand USA. And cross your fingers because there's going to be some live demoing. Today we are doing a prompting workshop, learning the CRIT framework for prompting. So if you are accustomed to using tools like ChatGPT, either as fancy Google, or as the thing that makes my emails sound nicer than I really am, this is what's going to help you move from that level of prompting into actually using AI as your thought partner.
