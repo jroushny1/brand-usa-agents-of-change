@@ -74,8 +74,8 @@ const webinars = [
     title: 'CRIT Prompting Framework Workshop',
     description: 'A comprehensive hands-on workshop on the CRIT (Context, Role, Interview, Task) prompting framework. Janette demonstrates live prompting across ChatGPT, Gemini, and Claude with five real-world use cases: getting AI starter ideas, planning educational strategy, handling difficult board conversations, creating partnership pitches, and strategic business planning. Learn how voice dictation tools like Monologue can dramatically improve your prompting.',
     duration: '42 min',
-    muxPlaybackId: '01Lh8IQKfXnLGM8TGHUdP82iau8yKvkbgzdzG6g4hqH8',
-    thumbnail: 'https://image.mux.com/01Lh8IQKfXnLGM8TGHUdP82iau8yKvkbgzdzG6g4hqH8/thumbnail.png?width=800&height=450&time=10',
+    muxPlaybackId: 'aKLdc9rK00v6pXvaCk01x02FBzfWOsUFodgvtn6sla5jks',
+    thumbnail: 'https://image.mux.com/aKLdc9rK00v6pXvaCk01x02FBzfWOsUFodgvtn6sla5jks/thumbnail.png?width=800&height=450&time=10',
     level: 'Tactical',
   },
   {
