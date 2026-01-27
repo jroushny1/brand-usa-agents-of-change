@@ -2354,6 +2354,28 @@ To wrap up, this is the QR code for today's presentation if you would like to do
       { time: 2370, title: 'Conclusion & Resources' },
     ],
   },
+  'minnesota-ai-tourism': {
+    id: 'minnesota-ai-tourism',
+    title: 'Generative AI and Tourism: Practical Applications for Minnesota\'s Global Future',
+    description: 'Conference presentation exploring how generative AI is transforming destination marketing and tourism, with practical applications and strategies for leveraging AI in the travel industry. Recorded at a Minnesota tourism conference.',
+    duration: '45 min',
+    muxPlaybackId: 'xGN0100YGsU5iwW1No4uPfcBDPhxSgz4r2AN5jRH13oK00',
+    instructor: 'Janette Roush',
+    instructorTitle: 'Chief AI Officer, Brand USA',
+    isConferenceTalk: true,
+    chapters: [],
+  },
+  'ai-ideas-exchange': {
+    id: 'ai-ideas-exchange',
+    title: 'AI Ideas Exchange',
+    description: 'Interactive conference session sharing innovative AI ideas and strategies for the tourism and destination marketing industry. A collaborative exchange of practical AI applications and emerging trends.',
+    duration: '30 min',
+    muxPlaybackId: 'gmEb026oFyIlXVv9jeB5jnXBD5dgjXpdJRrMX2TxzMJY',
+    instructor: 'Janette Roush',
+    instructorTitle: 'Chief AI Officer, Brand USA',
+    isConferenceTalk: true,
+    chapters: [],
+  },
 }
 
 export default function WebinarPage({ params }: { params: Promise<{ id: string }> }) {
@@ -2423,6 +2445,15 @@ export default function WebinarPage({ params }: { params: Promise<{ id: string }
       { '@type': 'SoftwareApplication', name: 'ChatGPT Enterprise', applicationCategory: 'AI Assistant', url: 'https://openai.com/chatgpt/enterprise' },
       { '@type': 'SoftwareApplication', name: 'Claude for Enterprise', applicationCategory: 'AI Assistant', url: 'https://www.anthropic.com/claude' },
       { '@type': 'SoftwareApplication', name: 'Microsoft Copilot', applicationCategory: 'AI Assistant', url: 'https://copilot.microsoft.com' },
+    ],
+    'minnesota-ai-tourism': [
+      { '@type': 'SoftwareApplication', name: 'ChatGPT', applicationCategory: 'AI Assistant', url: 'https://chatgpt.com' },
+      { '@type': 'SoftwareApplication', name: 'Claude', applicationCategory: 'AI Assistant', url: 'https://claude.ai' },
+      { '@type': 'SoftwareApplication', name: 'Google Gemini', applicationCategory: 'AI Assistant', url: 'https://gemini.google.com' },
+    ],
+    'ai-ideas-exchange': [
+      { '@type': 'SoftwareApplication', name: 'ChatGPT', applicationCategory: 'AI Assistant', url: 'https://chatgpt.com' },
+      { '@type': 'SoftwareApplication', name: 'Claude', applicationCategory: 'AI Assistant', url: 'https://claude.ai' },
     ],
   }
 

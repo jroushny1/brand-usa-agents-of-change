@@ -163,6 +163,27 @@ const resources = [
     ]
   },
   {
+    category: 'Conference Talks',
+    items: [
+      {
+        title: 'Generative AI and Tourism: Practical Applications for Minnesota\'s Global Future',
+        description: 'Conference presentation exploring how generative AI is transforming destination marketing and tourism, with practical applications and strategies for leveraging AI in the travel industry.',
+        url: '/webinar/minnesota-ai-tourism',
+        icon: Video,
+        date: 'Feb 19, 2025',
+        isInternal: true,
+      },
+      {
+        title: 'AI Ideas Exchange',
+        description: 'Interactive conference session sharing innovative AI ideas and strategies for the tourism and destination marketing industry.',
+        url: '/webinar/ai-ideas-exchange',
+        icon: Video,
+        date: 'Feb 19, 2025',
+        isInternal: true,
+      },
+    ]
+  },
+  {
     category: 'Tourism Voices in AI',
     items: [
       {
