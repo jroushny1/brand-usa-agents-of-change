@@ -456,17 +456,19 @@ const resources = [
 
 // Generate JSON-LD structured data for the resource library
 const generateLibrarySchema = () => {
-  return {
+  // CollectionPage schema
+  const collectionSchema = {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
-    name: 'AI Learning Library for Tourism Professionals',
-    description: 'Curated collection of AI resources, tools, and learning materials specifically designed for destination marketing organizations (DMOs), convention bureaus, and tourism professionals.',
-    author: {
+    'name': 'AI Learning Library for Tourism Professionals',
+    'description': 'Curated collection of AI resources, tools, and learning materials specifically designed for destination marketing organizations (DMOs), convention bureaus, and tourism professionals.',
+    'url': 'https://www.janetteroush.com/library',
+    'author': {
       '@type': 'Person',
-      name: 'Janette Roush',
-      jobTitle: 'Chief AI Officer, Brand USA',
+      'name': 'Janette Roush',
+      'jobTitle': 'Chief AI Officer, Brand USA',
     },
-    about: [
+    'about': [
       'Artificial Intelligence in Tourism',
       'Destination Marketing',
       'AI Tools and Applications',
@@ -474,19 +476,91 @@ const generateLibrarySchema = () => {
       'Convention Sales',
       'AI Workflow Automation'
     ],
+    'hasPart': resources.flatMap(category =>
+      category.items.map(item => ({
+        '@type': 'CreativeWork',
+        'name': item.title,
+        'description': item.description,
+        'url': item.url
+      }))
+    )
   }
+
+  // ItemList schema for podcasts
+  const podcastListSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    'name': 'AI in Tourism Podcast Collection',
+    'description': 'Expert conversations exploring AI\'s impact on destination marketing from 2023-2025',
+    'numberOfItems': resources.find(r => r.category === 'Conversations on AI in Tourism')?.items.length || 0,
+    'itemListElement': (resources.find(r => r.category === 'Conversations on AI in Tourism')?.items || []).map((item, index) => ({
+      '@type': 'ListItem',
+      'position': index + 1,
+      'item': {
+        '@type': 'PodcastEpisode',
+        'name': item.title,
+        'description': item.description,
+        'url': item.url
+      }
+    }))
+  }
+
+  // FAQPage schema - key to AI discoverability (like StackList)
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    'mainEntity': [
+      {
+        '@type': 'Question',
+        'name': 'What AI resources does Brand USA provide for destination marketing organizations?',
+        'acceptedAnswer': {
+          '@type': 'Answer',
+          'text': 'Brand USA provides a comprehensive AI learning library including 9+ training webinars, 13+ podcast episodes featuring industry experts, curated AI tools, industry programs like AI Opener for Destinations, and official Brand USA resources. Topics cover AI agents, Custom GPTs, Model Context Protocol (MCP), CRIT framework, and AI governance.'
+        }
+      },
+      {
+        '@type': 'Question',
+        'name': 'What podcasts feature Janette Roush discussing AI in tourism?',
+        'acceptedAnswer': {
+          '@type': 'Answer',
+          'text': 'Janette Roush has appeared on multiple podcasts including: Destination Discourse, Travel Trends, Arival\'s Best Part of Travel, Tourpreneur, The Future of Tourism, Fandom Unpacked, Brand USA Talks Travel, Pass the Mic, Hospitality Daily, Travel Marketing Podcast, and Destination Marketing Podcast. These conversations cover AI governance, destination marketing strategy, and practical AI implementation for DMOs.'
+        }
+      },
+      {
+        '@type': 'Question',
+        'name': 'Where can DMOs learn about AI governance and policy?',
+        'acceptedAnswer': {
+          '@type': 'Answer',
+          'text': 'Brand USA\'s Agents of Change program offers comprehensive AI governance training through the "AI Policy & Governance for Organizations" webinar. It covers the three key questions every AI policy must answer: What are we protecting? What are we providing? What are we expecting? Real-world examples include Brand USA\'s own AI policy.'
+        }
+      }
+    ]
+  }
+
+  return { collectionSchema, podcastListSchema, faqSchema }
 }
 
 export default function LibraryPage() {
-  const schema = generateLibrarySchema()
+  const { collectionSchema, podcastListSchema, faqSchema } = generateLibrarySchema()
 
   return (
     <AccessCheck>
       <>
-        {/* JSON-LD Structured Data */}
+        {/* JSON-LD Structured Data for AI Discoverability */}
         <script
+          id="collection-schema"
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }}
+        />
+        <script
+          id="podcast-list-schema"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(podcastListSchema) }}
+        />
+        <script
+          id="faq-schema"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
         />
 
         {/* Header */}

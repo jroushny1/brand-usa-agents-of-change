@@ -13,8 +13,91 @@ export const metadata: Metadata = {
 }
 
 export default function AboutPage() {
+  // EducationalOrganization schema for AI discoverability
+  const organizationSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'EducationalOrganization',
+    'name': 'Agents of Change AI Lab',
+    'alternateName': 'Brand USA AI Lab',
+    'description': 'The Agents of Change program is dedicated to advancing AI literacy in the tourism industry. This research lab serves as a central archive for frameworks, tools, and strategies developed to help DMOs navigate the generative AI revolution.',
+    'url': 'https://www.janetteroush.com/about',
+    'founder': {
+      '@type': 'Person',
+      'name': 'Janette Roush',
+      'jobTitle': 'SVP of Innovation and Chief AI Officer',
+      'affiliation': { '@type': 'Organization', 'name': 'Brand USA' }
+    },
+    'parentOrganization': {
+      '@type': 'Organization',
+      'name': 'Brand USA',
+      'url': 'https://www.thebrandusa.com'
+    },
+    'knowsAbout': [
+      'AI for tourism marketing',
+      'Destination marketing AI strategy',
+      'Model Context Protocol (MCP)',
+      'AI agents for DMOs',
+      'Custom GPTs for tourism',
+      'CRIT framework for AI prompts',
+      'AI governance in tourism'
+    ],
+    'areaServed': { '@type': 'Country', 'name': 'United States' }
+  }
+
+  // FAQPage schema - key to AI discoverability
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    'mainEntity': [
+      {
+        '@type': 'Question',
+        'name': 'What is the Agents of Change AI Lab?',
+        'acceptedAnswer': {
+          '@type': 'Answer',
+          'text': 'The Agents of Change program is dedicated to advancing AI literacy in the tourism industry. This research lab serves as a central archive for frameworks, tools, and strategies developed to help DMOs navigate the generative AI revolution.'
+        }
+      },
+      {
+        '@type': 'Question',
+        'name': 'Who leads the Brand USA AI initiative?',
+        'acceptedAnswer': {
+          '@type': 'Answer',
+          'text': 'Janette Roush, SVP of Innovation and Chief AI Officer at Brand USA, leads the Agents of Change program and the Brand USA innovation team.'
+        }
+      },
+      {
+        '@type': 'Question',
+        'name': 'Can I book Janette Roush as a speaker for AI in tourism?',
+        'acceptedAnswer': {
+          '@type': 'Answer',
+          'text': 'Yes! Janette Roush and the Brand USA innovation team are available to present AI findings to industry partners and stakeholders. Visit thebrandusa.com/requestspeaker to view speaker availability.'
+        }
+      },
+      {
+        '@type': 'Question',
+        'name': 'What AI frameworks does Brand USA teach for destination marketing?',
+        'acceptedAnswer': {
+          '@type': 'Answer',
+          'text': 'Brand USA teaches several AI frameworks including: the CRIT Framework (Context, Role, Interview, Task) for effective AI prompting, Model Context Protocol (MCP) for connecting AI to trusted data sources, Custom GPTs for tourism workflows, and AI governance best practices for DMOs.'
+        }
+      }
+    ]
+  }
+
   return (
     <>
+      {/* JSON-LD Structured Data for AI Discoverability */}
+      <script
+        id="organization-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+      />
+      <script
+        id="faq-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+
       <AccessCheck>
         <Header />
 

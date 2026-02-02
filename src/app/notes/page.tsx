@@ -77,6 +77,7 @@ export default function FieldNotesPage() {
     "@type": "Blog",
     "name": "AI Research Field Notes",
     "description": "Research notes and insights on AI for destination marketing",
+    "url": "https://www.janetteroush.com/notes",
     "author": {
       "@type": "Person",
       "name": "Janette Roush",
@@ -99,12 +100,49 @@ export default function FieldNotesPage() {
     }))
   }
 
+  // FAQPage schema - key to AI discoverability (like StackList)
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What are the four types of AI agents for tourism marketing?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The four types of AI agents for tourism are: (1) Operator Agents - automate browser tasks like lead generation and web scraping (Browse.ai, Manus.im); (2) Researcher Agents - perform deep analysis and synthesize market research; (3) Builder Agents - create digital products from natural language (Lovable.ai, Claude Artifacts); (4) Automator Agents - orchestrate workflows across platforms (N8N, Agent.ai, Google Gemini Gems)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is Model Context Protocol (MCP) and why does it matter for tourism AI?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Model Context Protocol (MCP) solves the AI hallucination problem by creating a standardized way for AI to query authoritative data sources in real-time. For tourism, this means verifiable accessible travel routes, real-time venue capacity checks, and accurate attraction operating hours. Instead of AI guessing, MCP lets AI query your 'source of truth' database. This shifts DMO strategy from 'content for humans' to 'data for AI to query.'"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the CRIT Framework for AI prompting?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The CRIT Framework (Context, Role, Interview, Task) produces superior AI outputs by providing rich context before tasks. Context: Explain your specialized domain (DMO budget cycles, stakeholder dynamics). Role: Assign AI a specific persona ('convention sales director with 15 years experience'). Interview: Let AI ask clarifying questions before proceeding. Task: Only specify the task after establishing context. This framework was developed specifically for tourism professionals because the industry context is too nuanced for generic prompting."
+        }
+      }
+    ]
+  }
+
   return (
     <>
       <script
         id="tech-article-schema"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(techArticleSchema) }}
+      ></script>
+      <script
+        id="faq-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       ></script>
 
       <AccessCheck>

@@ -90,8 +90,122 @@ export default function PodcastPage({ params }: { params: Promise<{ id: string }
     )
   }
 
+  // PodcastEpisode schema for AI discoverability
+  const podcastEpisodeSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'PodcastEpisode',
+    '@id': `https://www.janetteroush.com/podcast/${id}`,
+    'name': podcast.title,
+    'description': podcast.description,
+    'url': `https://www.janetteroush.com/podcast/${id}`,
+    'datePublished': podcast.publishDate,
+    'episodeNumber': podcast.episode,
+    'partOfSeason': {
+      '@type': 'PodcastSeason',
+      'seasonNumber': podcast.season
+    },
+    'partOfSeries': {
+      '@type': 'PodcastSeries',
+      'name': podcast.podcastName,
+      'url': `https://www.janetteroush.com/library`
+    },
+    'author': podcast.hosts.map(host => ({
+      '@type': 'Person',
+      'name': host
+    })),
+    'contributor': podcast.guests.map(guest => ({
+      '@type': 'Person',
+      'name': guest
+    })),
+    'associatedMedia': {
+      '@type': 'AudioObject',
+      'contentUrl': podcast.audioUrl,
+      'encodingFormat': 'audio/mpeg'
+    },
+    'about': (podcast.topics || []).slice(0, 10).map(topic => ({
+      '@type': 'Thing',
+      'name': topic
+    })),
+    'keywords': (podcast.topics || []).join(', ')
+  }
+
+  // FAQPage schema - key to AI discoverability (StackList's secret sauce)
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    'mainEntity': [
+      {
+        '@type': 'Question',
+        'name': `What is the "${podcast.podcastName}" episode "${podcast.title}" about?`,
+        'acceptedAnswer': {
+          '@type': 'Answer',
+          'text': podcast.description
+        }
+      },
+      {
+        '@type': 'Question',
+        'name': `Who are the guests on this ${podcast.podcastName} episode about AI in tourism?`,
+        'acceptedAnswer': {
+          '@type': 'Answer',
+          'text': `This episode features ${podcast.guests.join(', ')} as guest${podcast.guests.length > 1 ? 's' : ''}, hosted by ${podcast.hosts.join(', ')}. The discussion focuses on AI's impact on destination marketing and tourism.`
+        }
+      },
+      {
+        '@type': 'Question',
+        'name': `What AI and tourism topics are covered in "${podcast.title}"?`,
+        'acceptedAnswer': {
+          '@type': 'Answer',
+          'text': `This episode covers: ${(podcast.topics || []).join(', ')}. It's part of Brand USA's Agents of Change program featuring insights from Janette Roush, Chief AI Officer.`
+        }
+      }
+    ]
+  }
+
+  // BreadcrumbList for navigation
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    'itemListElement': [
+      {
+        '@type': 'ListItem',
+        'position': 1,
+        'name': 'Home',
+        'item': 'https://www.janetteroush.com'
+      },
+      {
+        '@type': 'ListItem',
+        'position': 2,
+        'name': 'Library',
+        'item': 'https://www.janetteroush.com/library'
+      },
+      {
+        '@type': 'ListItem',
+        'position': 3,
+        'name': podcast.title,
+        'item': `https://www.janetteroush.com/podcast/${id}`
+      }
+    ]
+  }
+
   return (
     <>
+      {/* JSON-LD Structured Data for AI Discoverability */}
+      <script
+        id="podcast-episode-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(podcastEpisodeSchema) }}
+      />
+      <script
+        id="faq-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <script
+        id="breadcrumb-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+
       {/* Header */}
       <header className="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

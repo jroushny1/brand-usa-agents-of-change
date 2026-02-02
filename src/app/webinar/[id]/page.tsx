@@ -2557,6 +2557,59 @@ export default function WebinarPage({ params }: { params: Promise<{ id: string }
     ]
   }
 
+  // FAQPage schema - the key to AI discoverability (like StackList's "AI Discoverability" feature)
+  // Transforms key takeaways into Q&A pairs that AI crawlers can easily parse
+  const faqSchema = (webinar as any).keyTakeaways && (webinar as any).keyTakeaways.length > 0 ? {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    'mainEntity': (webinar as any).keyTakeaways.map((takeaway: string, index: number) => {
+      // Generate contextual questions based on webinar content
+      const questions = [
+        `What are the main concepts covered in "${webinar.title}"?`,
+        `What practical tools are demonstrated in this ${(webinar as any).level === 'Strategic' ? 'strategic' : 'tactical'} webinar?`,
+        `What are the key risks or limitations discussed in "${webinar.title}"?`,
+        `How does this webinar envision the future of AI in destination marketing?`,
+        `What security or governance considerations are covered?`
+      ]
+      return {
+        '@type': 'Question',
+        'name': questions[index] || `What is key insight #${index + 1} from "${webinar.title}"?`,
+        'acceptedAnswer': {
+          '@type': 'Answer',
+          'text': takeaway
+        }
+      }
+    })
+  } : null
+
+  // Course schema for educational content
+  const courseSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Course',
+    'name': webinar.title,
+    'description': webinar.description,
+    'url': `https://www.janetteroush.com/webinar/${id}`,
+    'provider': {
+      '@type': 'Organization',
+      'name': 'Brand USA Agents of Change',
+      'url': 'https://www.janetteroush.com'
+    },
+    'instructor': {
+      '@type': 'Person',
+      'name': webinar.instructor,
+      'jobTitle': webinar.instructorTitle
+    },
+    'educationalLevel': 'Professional',
+    'audience': {
+      '@type': 'EducationalAudience',
+      'audienceType': 'tourism professionals',
+      'educationalRole': 'destination marketing organization staff'
+    },
+    'teaches': (webinar as any).learningOutcomes || [],
+    'isAccessibleForFree': true,
+    'inLanguage': 'en-US'
+  }
+
   return (
     <>
       {/* JSON-LD Structured Data for AI Discoverability - Server-Rendered OUTSIDE client components */}
@@ -2570,6 +2623,18 @@ export default function WebinarPage({ params }: { params: Promise<{ id: string }
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       ></script>
+      <script
+        id="course-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(courseSchema) }}
+      ></script>
+      {faqSchema && (
+        <script
+          id="faq-schema"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        ></script>
+      )}
 
       {/* Header */}
       <header className="border-b border-gray-200 bg-white sticky top-0 z-50">

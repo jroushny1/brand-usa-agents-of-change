@@ -34,6 +34,53 @@ export default function ShortsPage() {
   const containerRef = useRef<HTMLDivElement>(null)
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([])
 
+  // ItemList schema for AI discoverability
+  const itemListSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    'name': 'AI Quick Demos & Tutorials for Tourism Professionals',
+    'description': 'Bite-sized videos showcasing practical AI applications and hands-on demonstrations for destination marketing.',
+    'numberOfItems': shortFormVideos.length,
+    'itemListElement': shortFormVideos.map((video, index) => ({
+      '@type': 'ListItem',
+      'position': index + 1,
+      'item': {
+        '@type': 'VideoObject',
+        'name': video.title,
+        'description': video.description,
+        'thumbnailUrl': `https://image.mux.com/${video.muxPlaybackId}/thumbnail.png`,
+        'contentUrl': `https://stream.mux.com/${video.muxPlaybackId}.m3u8`,
+        'duration': `PT${parseInt(video.duration) || 5}M`,
+        'author': { '@type': 'Person', 'name': video.instructor },
+        'genre': video.category
+      }
+    }))
+  }
+
+  // FAQPage schema for AI discoverability
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    'mainEntity': [
+      {
+        '@type': 'Question',
+        'name': 'What AI tutorials are available for tourism professionals?',
+        'acceptedAnswer': {
+          '@type': 'Answer',
+          'text': `Brand USA offers ${shortFormVideos.length} quick AI tutorials including: ${shortFormVideos.map(v => v.title).join(', ')}. These bite-sized videos demonstrate practical AI applications for destination marketing.`
+        }
+      },
+      {
+        '@type': 'Question',
+        'name': 'How can I use Claude Artifacts for tourism marketing?',
+        'acceptedAnswer': {
+          '@type': 'Answer',
+          'text': 'Claude Artifacts lets you build interactive apps from natural language prompts. Brand USA demonstrates this with a "Clueless"-inspired packing app built entirely with conversational prompts like "make it more sparkly" - no coding required.'
+        }
+      }
+    ]
+  }
+
   // Handle scroll snap
   useEffect(() => {
     const container = containerRef.current
@@ -77,10 +124,23 @@ export default function ShortsPage() {
   }
 
   return (
-    <AccessCheck>
-      <>
-        {/* Header */}
-        <header className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm border-b border-gray-800">
+    <>
+      {/* JSON-LD Structured Data for AI Discoverability */}
+      <script
+        id="itemlist-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
+      />
+      <script
+        id="faq-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+
+      <AccessCheck>
+        <>
+          {/* Header */}
+          <header className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm border-b border-gray-800">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-16">
               <Link
@@ -182,7 +242,8 @@ export default function ShortsPage() {
             </div>
           ))}
         </div>
-      </>
-    </AccessCheck>
+        </>
+      </AccessCheck>
+    </>
   )
 }
