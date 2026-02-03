@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { ArrowLeft, ChevronDown, ChevronUp, BookOpen, HelpCircle } from 'lucide-react'
+import { ArrowLeft, ChevronDown, ChevronUp, BookOpen, HelpCircle, Lightbulb } from 'lucide-react'
 import AccessCheck from '@/components/AccessCheck'
 
 const terms = [
@@ -76,9 +76,46 @@ const faqs = [
   }
 ]
 
+// Questions you didn't know to ask (long-tail queries from actual webinar Q&As)
+const unexpectedQuestions = [
+  {
+    question: "Can my competitor see what I upload to ChatGPT?",
+    answer: "No—if you turn off model training in your settings. The fear that competitors could somehow extract your uploaded advertising plans or strategy documents is based on a misunderstanding. When model training is disabled, your conversations are not used to improve the AI and cannot be accessed by other users. Enterprise plans (ChatGPT Team, ChatGPT Enterprise) have this off by default. For free accounts, go to Settings → Data Controls → turn off 'Improve the model for everyone.'"
+  },
+  {
+    question: "Why did ChatGPT make up a fake LinkedIn profile when I asked for leads?",
+    answer: "Because LLMs predict plausible-sounding text—they don't verify facts. In a live demo, ChatGPT was asked to find 20 corporate meeting planners at Fortune 500 pharma companies with LinkedIn URLs. It returned convincing results, but when the links were clicked, many led to completely different people or didn't exist. The AI hallucinated names like 'Alicia Grant at Eli Lilly' with fake URLs. This is why operator agents must be connected to verified data sources using Model Context Protocol (MCP)."
+  },
+  {
+    question: "What's the difference between a Custom GPT and a ChatGPT Project?",
+    answer: "Projects organize YOUR conversations; Custom GPTs are tools for your TEAM. A Project is a folder where you can group related chats—like all conversations about a specific campaign. A Custom GPT is a configured assistant with specific instructions and knowledge that can be shared with colleagues. If you're building something just for yourself to organize work, use a Project. If you're building something your team should use, create a Custom GPT."
+  },
+  {
+    question: "Why does Claude sometimes refuse to continue even when I'm paying for it?",
+    answer: "Claude has aggressive rate limits—even on paid plans. As Janette puts it: 'Claude is a real jerk about rate limits.' The tool will frequently run out of credits mid-conversation and tell you to wait, even with a paid subscription. This is a known limitation. Workarounds include breaking tasks into smaller chunks, switching to ChatGPT for high-volume work, or using Claude's API directly with higher limits."
+  },
+  {
+    question: "Should I type or talk to AI?",
+    answer: "Talk. Voice is becoming the primary way to interact with AI because typing takes too long and limits the detail you provide. Using voice-to-text tools like Monologue (from Every.to) allows you to provide much richer, more natural context than you would ever type. The CRIT framework specifically recommends 'talking' your prompts because the quality of AI output is directly proportional to the context you provide—and people naturally give more detail when speaking."
+  },
+  {
+    question: "What if ChatGPT writes a bio for me that's completely made up?",
+    answer: "This happens constantly. In a real example, ChatGPT was asked to write a conference bio and returned impressive text claiming awards and accomplishments that never happened. The AI doesn't know what's true—it predicts what sounds plausible. Always fact-check AI-generated biographical content, and consider 'priming the prompt' by uploading your actual resume or LinkedIn profile as a source of truth."
+  },
+  {
+    question: "What's the difference between 'agentic AI' and 'AI agents'?",
+    answer: "Nothing. They mean the exact same thing. As Janette explains: 'Agentic is a made-up word. It sounds fancier than just agent, but it means the same exact thing. Somebody was trying to make a regular word sound fancier.' Both refer to AI systems that can autonomously plan and execute multi-step tasks to achieve a goal."
+  },
+  {
+    question: "Who owns AI policy at a DMO—IT, Legal, or Marketing?",
+    answer: "It's a blend. AI governance doesn't fit neatly into one department. Typically it involves: the COO or operations lead (overall accountability), IT (security and systems), Legal (compliance and contracts), and HR (employee guidelines and training). The key is having clear ownership of the three core questions: What are we protecting? What are we providing to employees? What are we expecting from them?"
+  }
+]
+
 export default function GlossaryClient() {
   const [expandedTerm, setExpandedTerm] = useState<string | null>(null)
   const [expandedFaq, setExpandedFaq] = useState<string | null>(null)
+  const [expandedUnexpected, setExpandedUnexpected] = useState<string | null>(null)
 
   return (
     <AccessCheck>
@@ -162,7 +199,7 @@ export default function GlossaryClient() {
             </section>
 
             {/* FAQ Section */}
-            <section>
+            <section className="mb-16">
               <div className="flex items-center mb-8">
                 <HelpCircle className="h-8 w-8 text-brand-cyan mr-3" />
                 <h2 className="text-3xl font-bold text-brand-navy font-display">Frequently Asked Questions</h2>
@@ -188,6 +225,43 @@ export default function GlossaryClient() {
                     {expandedFaq === faq.question && (
                       <div className="px-6 pb-6">
                         <p className="text-gray-700 leading-relaxed">{faq.answer}</p>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            {/* Questions You Didn't Know to Ask */}
+            <section>
+              <div className="flex items-center mb-4">
+                <Lightbulb className="h-8 w-8 text-amber-500 mr-3" />
+                <h2 className="text-3xl font-bold text-brand-navy font-display">Questions You Didn&apos;t Know to Ask</h2>
+              </div>
+              <p className="text-gray-600 mb-8">
+                Real questions from our webinar Q&As—the things people discover only after they start using AI.
+              </p>
+
+              <div className="space-y-4">
+                {unexpectedQuestions.map((q, index) => (
+                  <div
+                    key={index}
+                    className="bg-gradient-to-r from-amber-50 to-white rounded-xl border border-amber-200 shadow-sm hover:shadow-md transition-shadow"
+                  >
+                    <button
+                      onClick={() => setExpandedUnexpected(expandedUnexpected === q.question ? null : q.question)}
+                      className="w-full flex items-center justify-between p-6 text-left hover:bg-amber-50/50 transition"
+                    >
+                      <h3 className="text-lg font-semibold text-brand-navy pr-4">{q.question}</h3>
+                      {expandedUnexpected === q.question ? (
+                        <ChevronUp className="h-6 w-6 text-amber-600 flex-shrink-0" />
+                      ) : (
+                        <ChevronDown className="h-6 w-6 text-amber-600 flex-shrink-0" />
+                      )}
+                    </button>
+                    {expandedUnexpected === q.question && (
+                      <div className="px-6 pb-6">
+                        <p className="text-gray-700 leading-relaxed">{q.answer}</p>
                       </div>
                     )}
                   </div>

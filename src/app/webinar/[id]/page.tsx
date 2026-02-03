@@ -16,11 +16,12 @@ const webinarData = {
   'intro-ai-agents': {
     id: 'intro-ai-agents',
     title: 'Introduction to AI Agents',
-    description: 'Learn how AI agents can transform your DMO operations with practical examples and implementation strategies. This comprehensive introduction covers the four types of AI agents (Operator, Researcher, Builder, and Automator), demonstrates real-world tools, and explores the future of agentic AI in destination marketing.',
+    description: 'The four types of AI agents—Operator, Researcher, Builder, and Automator—explained with live demos. Warning: "agentic" is just a fancy made-up word that means the same thing as "agent." Learn why ChatGPT still hallucinates fake LinkedIn profiles when doing lead research, and how Model Context Protocol fixes this trust problem.',
     duration: '38 min',
     muxPlaybackId: '3TPl1Jgmg01b9BdEXU4WVtJbz4DSetOA7TsyHGvjxJQs',
     instructor: 'Janette Roush',
     instructorTitle: 'Chief AI Officer, Brand USA',
+    publishDate: '2024-02-01',
     // Transcript (server-rendered as static HTML)
     transcript: `Hello and welcome to this session on Introduction to Agents. My name is Janette Roush, and I'm the Chief AI Officer for Brand USA. Today, we're going to be talking about AI agents. And AI agents are one of the hottest topics right now when it comes to how AI is evolving as a technology and what it means for work specifically.
 
@@ -239,11 +240,12 @@ So thank you so much for joining me for this session on Introduction to Agents. 
   'ai-101': {
     id: 'ai-101',
     title: 'AI 101',
-    description: 'Foundation concepts of AI for tourism professionals. This comprehensive introduction covers how Large Language Models work, practical prompting strategies, campaign strategy development, AI governance and security, and hands-on ChatGPT setup. Perfect for beginners looking to understand AI fundamentals and start using AI tools professionally.',
+    description: 'LLMs predict the next word—they don\'t check Wikipedia. That\'s why they hallucinate. Learn the step-by-step prompting method (don\'t ask for a 6-page paper at once) and how to "prime the prompt" with your own research to avoid AI making things up. Includes why ChatGPT once wrote a fake bio claiming Janette won awards she never received.',
     duration: '45 min',
     muxPlaybackId: 'ue02eduy5uif9Do00iXI6jG02u02O600tu00FauvIOLX2Ayg8',
     instructor: 'Janette Roush',
     instructorTitle: 'Chief AI Officer, Brand USA',
+    publishDate: '2024-01-15',
     // Enhanced metadata for AI discoverability
     keyTakeaways: [
       'AI is a creative partner, not a fact database. Large Language Models (LLMs) are math-based algorithms that predict the next word; they are not "checking Wikipedia." This means they will "hallucinate" (make things up) and users are responsible for fact-checking.',
@@ -492,6 +494,7 @@ Thank you so much for your time today. I'm really excited to see how all of you 
     muxPlaybackId: 'H6B01F00lAc4PGT8Ick32jTwVa7LVA8Y5yqTq8xyD6DzA',
     instructor: 'Janette Roush',
     instructorTitle: 'Chief AI Officer, Brand USA',
+    publishDate: '2024-03-01',
     // Enhanced metadata for AI discoverability
     keyTakeaways: [
       'Start with a "Frontier Model" as your base. Instead of chasing dozens of small tools, professionals should get a paid subscription to a core model like ChatGPT, Claude, or Gemini. ChatGPT is the best all-rounder, while Claude is a superior writer and "thought partner."',
@@ -821,6 +824,7 @@ I really appreciate you joining. Thanks so much.`
     muxPlaybackId: 'NQACe9aTXRuntXd4r7eHWsXVDFVhaUUwyotE8RF5SQE',
     instructor: 'Janette Roush',
     instructorTitle: 'Chief AI Officer, Brand USA',
+    publishDate: '2024-04-15',
     // Transcript (server-rendered as static HTML)
     transcript: `Thank you so much for logging in. My name is Janette Roush. I am the SVP of Innovation and Chief AI Officer for brand USA. If you're not familiar with us, we are the destination marketing organization for the United States. And we focus on driving international inbound visitation to the US.
 
@@ -1138,6 +1142,7 @@ There's a number of other great companies doing that work, and I could see that 
     muxPlaybackId: 'aYcGzhmJnP8jdz2o92EPP00JgmRWd2jLNcChaUgytgG8',
     instructor: 'Janette Roush',
     instructorTitle: 'Chief AI Officer, Brand USA',
+    publishDate: '2024-05-01',
     // Enhanced metadata for AI discoverability
     keyTakeaways: [
       'A Custom GPT is a reusable prompt that bundles specific instructions, "Knowledge" (like uploaded PDF files), and capabilities (like web browsing) to create a specialized AI assistant that can be used repeatedly.',
@@ -1330,6 +1335,7 @@ All right, so that is a really quick overview of Custom GPTs. I hope that gives 
     muxPlaybackId: '5xZnY5oJP5nlS5wQsEGv00U00gsf201r00aF00Y902ug26K9o',
     instructor: 'Janette Roush',
     instructorTitle: 'Chief AI Officer, Brand USA',
+    publishDate: '2024-06-01',
     // Transcript (server-rendered as static HTML)
     transcript: `My name is Janette Roush. I am the SVP of Innovation and Chief AI Officer for Brand USA, and today we are going to talk about AI for convention sales.
 
@@ -1538,6 +1544,7 @@ I want to thank Gabe so much again. Thank you, Visit Orlando, for sharing Gabe w
     muxPlaybackId: 'OC72C8icortMHMBjS87615i9PRYu3C2dGt7XA22JlWU',
     instructor: 'Janette Roush',
     instructorTitle: 'Chief AI Officer, Brand USA',
+    publishDate: '2024-07-01',
     // Enhanced metadata for AI discoverability
     keyTakeaways: [
       'The CRIT framework (Context, Role, Interview, Task) is a structured method for providing comprehensive details to an AI, which leads to significantly more useful and interesting responses',
@@ -1603,11 +1610,12 @@ I want to thank Gabe so much again. Thank you, Visit Orlando, for sharing Gabe w
   'crit-framework-workshop': {
     id: 'crit-framework-workshop',
     title: 'CRIT Prompting Framework Workshop',
-    description: 'A comprehensive hands-on workshop on the CRIT (Context, Role, Interview, Task) prompting framework. Janette demonstrates live prompting across ChatGPT, Gemini, and Claude with five real-world use cases: getting AI starter ideas, planning educational strategy, handling difficult board conversations, creating partnership pitches, and strategic business planning. Learn how voice dictation tools like Monologue can dramatically improve your prompting.',
+    description: 'Live demos across ChatGPT, Gemini, and Claude using the CRIT (Context, Role, Interview, Task) framework from Geoff Woods\' "AI Driven Leader." Five real use cases: starter ideas, educational strategy, difficult board conversations, partnership pitches, and strategic planning. Voice-to-text is the future—typing takes too long. Claude is a "real jerk about rate limits" but the best thought partner.',
     duration: '42 min',
     muxPlaybackId: 'aKLdc9rK00v6pXvaCk01x02FBzfWOsUFodgvtn6sla5jks',
     instructor: 'Janette Roush',
     instructorTitle: 'Chief AI Officer, Brand USA',
+    publishDate: '2024-08-15',
     transcript: `My name is Janette Roush. I am the SVP of Innovation and Chief AI Officer for Brand USA. And cross your fingers because there's going to be some live demoing. Today we are doing a prompting workshop, learning the CRIT framework for prompting. So if you are accustomed to using tools like ChatGPT, either as fancy Google, or as the thing that makes my emails sound nicer than I really am, this is what's going to help you move from that level of prompting into actually using AI as your thought partner.
 
 What do when I say prompting framework? It sounds fancy and hard and like a lot of work.
@@ -1913,17 +1921,19 @@ Alright, great. Thank you all so much and I hope you have a wonderful rest of yo
     muxPlaybackId: 'O7pzzrithO55xsLb6p02GCgtmGyXTO1C7rSztJDl0002Bo',
     instructor: 'Janette Roush',
     instructorTitle: 'Chief AI Officer, Brand USA',
+    publishDate: '2024-09-01',
     isShortForm: true, // Flag for vertical player layout
     chapters: [], // No chapters for short-form content
   },
   'model-context-protocol': {
     id: 'model-context-protocol',
     title: 'Model Context Protocol',
-    description: 'This presentation introduces the Model Context Protocol (MCP) as a technical breakthrough designed to solve AI\'s trustworthiness problem in travel planning by acting as a "source of truth." Janette explains how this technology allows personal AIs to reliably connect with real-time data, demonstrates practical applications for tourism, and outlines the strategic shift for destination marketing organizations.',
+    description: '91% of travelers are excited about AI for trip planning, but only 6% fully trust it. MCP is the "source of truth" that fixes this—a universal connector that lets ChatGPT plug into real-time data from Booking.com, venue finders, and accessibility databases instead of hallucinating. The decisions you make in the next 6-12 months will shape your DMO\'s future.',
     duration: '27 min',
     muxPlaybackId: 'V1DanWAF02sOwwIFov4BXNaTzwT3Kn41TnUWdcyNZfZk',
     instructor: 'Janette Roush',
     instructorTitle: 'Chief AI Officer, Brand USA',
+    publishDate: '2024-10-15',
     // Enhanced metadata for AI discoverability
     keyTakeaways: [
       'Travelers are increasingly using AI for planning (62% have tried it), but low trust is a major barrier, with only 6% "fully trusting" AI solutions due to hallucinations and outdated data',
@@ -2079,11 +2089,12 @@ Thank you so much for your time today. I hope this was helpful. And I'm excited 
   'ai-policy-governance': {
     id: 'ai-policy-governance',
     title: 'AI Policy & Governance for Organizations',
-    description: 'Comprehensive guide to building effective AI policies for your organization. Learn the three key questions every AI policy must answer: What are we protecting? What are we providing? What are we expecting? This session covers data security, privacy considerations, content integrity, vendor management, and practical implementation strategies with real-world examples including Brand USA\'s AI policy.',
+    description: 'Three questions every AI policy must answer: What are we protecting? What are we providing? What are we expecting? Covers the real fear about uploading company info to ChatGPT (spoiler: you can turn model training off), plus the AIGP certification path from IAPP. Includes Brand USA\'s actual AI policy and 12+ hours of governance coursework distilled into 40 minutes.',
     duration: '40 min',
     muxPlaybackId: 'MIs97m4ZKNZZJwNPP35c02VDqDqIgkZKgmnWhUtzi1s4',
     instructor: 'Janette Roush',
     instructorTitle: 'Chief AI Officer, Brand USA',
+    publishDate: '2024-11-01',
     // Transcript (server-rendered as static HTML)
     transcript: `Today we are going to talk about creating an AI policy for your tourism organization.
 
@@ -2362,6 +2373,7 @@ To wrap up, this is the QR code for today's presentation if you would like to do
     muxPlaybackId: 'xGN0100YGsU5iwW1No4uPfcBDPhxSgz4r2AN5jRH13oK00',
     instructor: 'Janette Roush',
     instructorTitle: 'Chief AI Officer, Brand USA',
+    publishDate: '2024-12-01',
     isConferenceTalk: true,
     chapters: [],
   },
@@ -2373,6 +2385,7 @@ To wrap up, this is the QR code for today's presentation if you would like to do
     muxPlaybackId: 'gmEb026oFyIlXVv9jeB5jnXBD5dgjXpdJRrMX2TxzMJY',
     instructor: 'Janette Roush',
     instructorTitle: 'Chief AI Officer, Brand USA',
+    publishDate: '2024-12-15',
     isConferenceTalk: true,
     chapters: [],
   },
@@ -2466,9 +2479,18 @@ export default function WebinarPage({ params }: { params: Promise<{ id: string }
     duration: webinar.duration,
     thumbnailUrl: `https://image.mux.com/${webinar.muxPlaybackId}/thumbnail.png`,
     contentUrl: `https://stream.mux.com/${webinar.muxPlaybackId}.m3u8`,
-    uploadDate: '2024-01-01',
+    uploadDate: (webinar as any).publishDate || '2024-01-01',
     inLanguage: 'en-US',
     isAccessibleForFree: true,
+    contentLocation: {
+      '@type': 'Place',
+      name: 'United States',
+      geo: {
+        '@type': 'GeoCoordinates',
+        latitude: 37.0902,
+        longitude: -95.7129
+      }
+    },
     creator: {
       '@type': 'Person',
       name: webinar.instructor,

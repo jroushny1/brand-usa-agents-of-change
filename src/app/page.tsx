@@ -9,7 +9,7 @@ const webinars = [
   {
     id: 'ai-101',
     title: 'AI 101',
-    description: 'Foundation concepts of AI for tourism professionals. Start here to build your AI knowledge base.',
+    description: 'LLMs predict the next word—they don\'t check facts. Why ChatGPT hallucinated a fake bio with awards Janette never won.',
     duration: '45 min',
     muxPlaybackId: 'ue02eduy5uif9Do00iXI6jG02u02O600tu00FauvIOLX2Ayg8',
     thumbnail: 'https://image.mux.com/ue02eduy5uif9Do00iXI6jG02u02O600tu00FauvIOLX2Ayg8/thumbnail.png?width=800&height=450&time=10',
@@ -18,7 +18,7 @@ const webinars = [
   {
     id: 'intro-ai-agents',
     title: 'Introduction to AI Agents',
-    description: 'Learn how AI agents can transform your DMO operations with practical examples and implementation strategies.',
+    description: 'Four agent types: Operator, Researcher, Builder, Automator. "Agentic" is just a made-up fancy word for the same thing.',
     duration: '38 min',
     muxPlaybackId: '3TPl1Jgmg01b9BdEXU4WVtJbz4DSetOA7TsyHGvjxJQs',
     thumbnail: 'https://image.mux.com/3TPl1Jgmg01b9BdEXU4WVtJbz4DSetOA7TsyHGvjxJQs/thumbnail.png?width=800&height=450&time=10',
@@ -72,7 +72,7 @@ const webinars = [
   {
     id: 'crit-framework-workshop',
     title: 'CRIT Prompting Framework Workshop',
-    description: 'A comprehensive hands-on workshop on the CRIT (Context, Role, Interview, Task) prompting framework. Janette demonstrates live prompting across ChatGPT, Gemini, and Claude with five real-world use cases: getting AI starter ideas, planning educational strategy, handling difficult board conversations, creating partnership pitches, and strategic business planning. Learn how voice dictation tools like Monologue can dramatically improve your prompting.',
+    description: 'Live demos across ChatGPT, Gemini, Claude. Voice-to-text is the future—typing takes too long. Claude is "a real jerk about rate limits."',
     duration: '42 min',
     muxPlaybackId: 'aKLdc9rK00v6pXvaCk01x02FBzfWOsUFodgvtn6sla5jks',
     thumbnail: 'https://image.mux.com/aKLdc9rK00v6pXvaCk01x02FBzfWOsUFodgvtn6sla5jks/thumbnail.png?width=800&height=450&time=10',
@@ -81,7 +81,7 @@ const webinars = [
   {
     id: 'model-context-protocol',
     title: 'Model Context Protocol',
-    description: 'This presentation introduces the Model Context Protocol (MCP) as a technical breakthrough designed to solve AI\'s trustworthiness problem in travel planning by acting as a "source of truth." Janette explains how this technology allows personal AIs to reliably connect with real-time data, demonstrates practical applications for tourism, and outlines the strategic shift for destination marketing organizations.',
+    description: '91% of travelers excited about AI, but only 6% trust it. MCP is the "source of truth" that fixes the hallucination problem.',
     duration: '27 min',
     muxPlaybackId: 'V1DanWAF02sOwwIFov4BXNaTzwT3Kn41TnUWdcyNZfZk',
     thumbnail: 'https://image.mux.com/V1DanWAF02sOwwIFov4BXNaTzwT3Kn41TnUWdcyNZfZk/thumbnail.png?width=800&height=450&time=10',
@@ -90,7 +90,7 @@ const webinars = [
   {
     id: 'ai-policy-governance',
     title: 'AI Policy & Governance for Organizations',
-    description: 'Comprehensive guide to building effective AI policies for your organization. Learn the three key questions every AI policy must answer: What are we protecting? What are we providing? What are we expecting? This session covers data security, privacy considerations, content integrity, vendor management, and practical implementation strategies with real-world examples including Brand USA\'s AI policy.',
+    description: 'Three questions every AI policy must answer: What are we protecting? What are we providing? What are we expecting? Includes Brand USA\'s actual policy.',
     duration: '40 min',
     muxPlaybackId: 'MIs97m4ZKNZZJwNPP35c02VDqDqIgkZKgmnWhUtzi1s4',
     thumbnail: 'https://image.mux.com/MIs97m4ZKNZZJwNPP35c02VDqDqIgkZKgmnWhUtzi1s4/thumbnail.png?width=800&height=450&time=10',
@@ -158,7 +158,16 @@ export default function HomePage() {
       "AI governance in tourism industry",
       "Claude Artifacts for DMO operations",
       "Tourism industry automation"
-    ]
+    ],
+    "areaServed": {
+      "@type": "Place",
+      "name": "United States",
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 37.0902,
+        "longitude": -95.7129
+      }
+    }
   }
 
   // Course Schema (with teaches and audience)
@@ -215,7 +224,16 @@ export default function HomePage() {
     ],
     "numberOfCredits": 8,
     "isAccessibleForFree": true,
-    "inLanguage": "en-US"
+    "inLanguage": "en-US",
+    "contentLocation": {
+      "@type": "Place",
+      "name": "United States",
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 37.0902,
+        "longitude": -95.7129
+      }
+    }
   }
 
   // WebSite Schema
