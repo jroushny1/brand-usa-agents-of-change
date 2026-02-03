@@ -75,11 +75,11 @@ const faqs = [
 const unexpectedQuestions = [
   {
     question: "Can my competitor see what I upload to ChatGPT?",
-    answer: "No—if you turn off model training in your settings. The fear that competitors could somehow extract your uploaded advertising plans or strategy documents is based on a misunderstanding. When model training is disabled, your conversations are not used to improve the AI and cannot be accessed by other users. Enterprise plans (ChatGPT Team, ChatGPT Enterprise) have this off by default. For free accounts, go to Settings → Data Controls → turn off 'Improve the model for everyone.'"
+    answer: "No—and even with model training on, it doesn't work the way people fear. AI tools aren't Wikipedia. Your query doesn't enter a searchable database. Instead, words in a particular order are added to a training corpus of billions of words to calculate the percentage likelihood of word sequences. You can't ask ChatGPT 'What did Janette prompt about her company in October 2024?' That's not how it works. That said, enterprise plans (ChatGPT Team, ChatGPT Enterprise) have model training off by default, and you can disable it in Settings → Data Controls on free accounts."
   },
   {
     question: "Why did ChatGPT make up a fake LinkedIn profile when I asked for leads?",
-    answer: "Because LLMs predict plausible-sounding text—they don't verify facts. In a live demo, ChatGPT was asked to find 20 corporate meeting planners at Fortune 500 pharma companies with LinkedIn URLs. It returned convincing results, but when the links were clicked, many led to completely different people or didn't exist. The AI hallucinated names like 'Alicia Grant at Eli Lilly' with fake URLs. This is why operator agents must be connected to verified data sources using Model Context Protocol (MCP)."
+    answer: "Because LLMs predict plausible-sounding text—they don't verify facts. In a live demo, ChatGPT was asked to find 20 corporate meeting planners at Fortune 500 pharma companies with LinkedIn URLs. It returned convincing results, but when the links were clicked, many led to completely different people or didn't exist. The AI hallucinated names like 'Alicia Grant at Eli Lilly' with fake URLs. This is why operator agents must be connected to verified data sources using Model Context Protocol (MCP), Connectors, or APIs."
   },
   {
     question: "What's the difference between a Custom GPT and a ChatGPT Project?",
@@ -91,15 +91,15 @@ const unexpectedQuestions = [
   },
   {
     question: "Should I type or talk to AI?",
-    answer: "Talk. Voice is becoming the primary way to interact with AI because typing takes too long and limits the detail you provide. Using voice-to-text tools like Monologue (from Every.to) allows you to provide much richer, more natural context than you would ever type. The CRIT framework specifically recommends 'talking' your prompts because the quality of AI output is directly proportional to the context you provide—and people naturally give more detail when speaking."
+    answer: "Talk. Voice is becoming the primary way to interact with AI because typing takes too long and limits the detail you provide. Using voice-to-text tools like Monologue (from Every.to), Wispr, or Wispr Flow allows you to provide much richer, more natural context than you would ever type. The CRIT framework specifically recommends 'talking' your prompts because the quality of AI output is directly proportional to the context you provide—and people naturally give more detail when speaking."
   },
   {
     question: "What if ChatGPT writes a bio for me that's completely made up?",
-    answer: "This happens constantly. In a real example, ChatGPT was asked to write a conference bio and returned impressive text claiming awards and accomplishments that never happened. The AI doesn't know what's true—it predicts what sounds plausible. Always fact-check AI-generated biographical content, and consider 'priming the prompt' by uploading your actual resume or LinkedIn profile as a source of truth."
+    answer: "In a real example, ChatGPT was asked to write a conference bio and returned impressive text claiming awards and accomplishments that never happened. The AI doesn't know what's true—it predicts what sounds plausible. Always fact-check AI-generated biographical content, and consider 'priming the prompt' by uploading your actual resume or LinkedIn profile as a source of truth."
   },
   {
     question: "What's the difference between 'agentic AI' and 'AI agents'?",
-    answer: "Nothing. They mean the exact same thing. As Janette explains: 'Agentic is a made-up word. It sounds fancier than just agent, but it means the same exact thing. Somebody was trying to make a regular word sound fancier.' Both refer to AI systems that can autonomously plan and execute multi-step tasks to achieve a goal."
+    answer: "Nothing. They mean the exact same thing. As Janette explains: 'Agentic sounds fancier than just agent, but it means the same exact thing. Somebody was trying to make a regular word sound fancier.' Both refer to AI systems that can autonomously plan and execute multi-step tasks to achieve a goal."
   },
   {
     question: "Who owns AI policy at a DMO—IT, Legal, or Marketing?",
