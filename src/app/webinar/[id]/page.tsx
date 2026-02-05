@@ -592,7 +592,7 @@ Thank you so much for your time today. I'm really excited to see how all of you 
       { time: 1423, title: 'Q&A: The future of AI Agent "Swarms"' },
       { time: 1501, title: 'Q&A: Privacy risks of meeting recorders (Granola, Plaud.ai)' },
     ],
-    transcript: `My name is Janette Roush and I am the SVP of Innovation and the Chief AI Officer for Brand USA, which is the destination marketing organization for the United States.
+    transcript: `My name is Janette Roush and I am the SVP, Innovation and Chief AI Officer for Brand USA, which is the destination marketing organization for the United States.
 
 And today I am very excited, to share with you AI tool playground. So I'm going to walk through both kind of the tech stack that we use for AI here at Brand USA -different tools that I use personally, tools, in some cases that I don't use that much personally, but I know are important for other folks.
 
@@ -826,7 +826,7 @@ I really appreciate you joining. Thanks so much.`
     instructorTitle: 'Chief AI Officer, Brand USA',
     publishDate: '2024-04-15',
     // Transcript (server-rendered as static HTML)
-    transcript: `Thank you so much for logging in. My name is Janette Roush. I am the SVP of Innovation and Chief AI Officer for brand USA. If you're not familiar with us, we are the destination marketing organization for the United States. And we focus on driving international inbound visitation to the US.
+    transcript: `Thank you so much for logging in. My name is Janette Roush. I am the SVP, Innovation and Chief AI Officer for brand USA. If you're not familiar with us, we are the destination marketing organization for the United States. And we focus on driving international inbound visitation to the US.
 
 So first of all, I want to assuage any fears that you have that this might be dry or not useful. I'm including the image that you see of the Play-Doh version of Janette getting squished because I have seen a lot of AI presentations, and I know a lot of them are just a list of all the little tricks and tips that you can do, but you don't actually see anything useful that you can then take back to your office and actually use for work. So while I think the fun stuff is fun, and if you wanna make one of these on your own, it is free at pika.art. But for the rest of the presentation, going to be more on practical use cases.
 
@@ -1337,7 +1337,7 @@ All right, so that is a really quick overview of Custom GPTs. I hope that gives 
     instructorTitle: 'Chief AI Officer, Brand USA',
     publishDate: '2024-06-01',
     // Transcript (server-rendered as static HTML)
-    transcript: `My name is Janette Roush. I am the SVP of Innovation and Chief AI Officer for Brand USA, and today we are going to talk about AI for convention sales.
+    transcript: `My name is Janette Roush. I am the SVP, Innovation and Chief AI Officer for Brand USA, and today we are going to talk about AI for convention sales.
 
 So as a quick reminder of my role here at Brand USA, I am looking at how we can transform the promotion of business events across the United States using AI through three tranches of work. The first is operational excellence and how can we upskill what we are doing internally with the assistance of AI. The second piece, that's what this webinar is right now, industry empowerment. How are we able to increase the capacity of the US tourism industry to do this work? And then the third piece is planner and delegate experience enhancement. How can we use AI to improve the discoverability and bookability of the United States?
 
@@ -1616,7 +1616,7 @@ I want to thank Gabe so much again. Thank you, Visit Orlando, for sharing Gabe w
     instructor: 'Janette Roush',
     instructorTitle: 'Chief AI Officer, Brand USA',
     publishDate: '2024-08-15',
-    transcript: `My name is Janette Roush. I am the SVP of Innovation and Chief AI Officer for Brand USA. And cross your fingers because there's going to be some live demoing. Today we are doing a prompting workshop, learning the CRIT framework for prompting. So if you are accustomed to using tools like ChatGPT, either as fancy Google, or as the thing that makes my emails sound nicer than I really am, this is what's going to help you move from that level of prompting into actually using AI as your thought partner.
+    transcript: `My name is Janette Roush. I am the SVP, Innovation and Chief AI Officer for Brand USA. And cross your fingers because there's going to be some live demoing. Today we are doing a prompting workshop, learning the CRIT framework for prompting. So if you are accustomed to using tools like ChatGPT, either as fancy Google, or as the thing that makes my emails sound nicer than I really am, this is what's going to help you move from that level of prompting into actually using AI as your thought partner.
 
 What do when I say prompting framework? It sounds fancy and hard and like a lot of work.
 

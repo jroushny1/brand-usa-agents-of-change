@@ -3,7 +3,7 @@
 **Date**: April 23, 2025
 **Season**: 1, Episode 9
 **Hosts**: Damian Bazadona, Peter Yagecic, Maureen Andersen
-**Guest**: Janette Roush, Chief AI Officer and SVP of Innovation at Brand USA
+**Guest**: Janette Roush, SVP, Innovation and Chief AI Officer at Brand USA
 
 ## Episode Description
 

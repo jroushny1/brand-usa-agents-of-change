@@ -20,13 +20,13 @@ export const metadata: Metadata = {
     default: 'Agents of Change | AI Research & Innovation by Janette Roush',
     template: '%s | Agents of Change',
   },
-  description: 'Janette Roush is the SVP of Innovation & Chief AI Officer at Brand USA. A LinkedIn Top Voice and Broadway veteran, she specializes in Generative AI strategy for travel and marketing.',
+  description: 'Janette Roush is the SVP, Innovation and Chief AI Officer at Brand USA. A LinkedIn Top Voice and Broadway veteran, she specializes in Generative AI strategy for travel and marketing.',
   alternates: {
     canonical: 'https://www.janetteroush.com',
   },
   openGraph: {
     title: 'Agents of Change | AI Research & Innovation by Janette Roush',
-    description: 'Janette Roush is the SVP of Innovation & Chief AI Officer at Brand USA. A LinkedIn Top Voice and Broadway veteran, she specializes in Generative AI strategy for travel and marketing.',
+    description: 'Janette Roush is the SVP, Innovation and Chief AI Officer at Brand USA. A LinkedIn Top Voice and Broadway veteran, she specializes in Generative AI strategy for travel and marketing.',
     images: ['/og-image.png'],
     url: 'https://www.janetteroush.com',
     siteName: 'Agents of Change | AI Research & Innovation by Janette Roush',
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Agents of Change | AI Research & Innovation by Janette Roush',
-    description: 'Janette Roush is the SVP of Innovation & Chief AI Officer at Brand USA. A LinkedIn Top Voice and Broadway veteran, she specializes in Generative AI strategy for travel and marketing.',
+    description: 'Janette Roush is the SVP, Innovation and Chief AI Officer at Brand USA. A LinkedIn Top Voice and Broadway veteran, she specializes in Generative AI strategy for travel and marketing.',
     creator: '@janetteroush',
     images: ['/og-image.png'],
   },
@@ -52,7 +52,7 @@ export default function RootLayout({
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Janette Roush",
-    "jobTitle": "SVP of Innovation and Chief AI Officer",
+    "jobTitle": "SVP, Innovation and Chief AI Officer",
     "affiliation": {
       "@type": "Organization",
       "name": "Brand USA"

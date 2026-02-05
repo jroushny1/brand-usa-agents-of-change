@@ -24,7 +24,7 @@ export default function AboutPage() {
     'founder': {
       '@type': 'Person',
       'name': 'Janette Roush',
-      'jobTitle': 'SVP of Innovation and Chief AI Officer',
+      'jobTitle': 'SVP, Innovation and Chief AI Officer',
       'affiliation': { '@type': 'Organization', 'name': 'Brand USA' }
     },
     'parentOrganization': {
@@ -62,7 +62,7 @@ export default function AboutPage() {
         'name': 'Who leads the Brand USA AI initiative?',
         'acceptedAnswer': {
           '@type': 'Answer',
-          'text': 'Janette Roush, SVP of Innovation and Chief AI Officer at Brand USA, leads the Agents of Change program and the Brand USA innovation team.'
+          'text': 'Janette Roush, SVP, Innovation and Chief AI Officer at Brand USA, leads the Agents of Change program and the Brand USA innovation team.'
         }
       },
       {

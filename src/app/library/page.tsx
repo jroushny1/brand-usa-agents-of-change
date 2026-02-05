@@ -94,7 +94,7 @@ const resources = [
       },
       {
         title: 'Pass the Mic – "Get Comfortable With Being Uncomfortable"',
-        description: 'SVP of Innovation and Chief AI Officer at Brand USA Janette Roush discusses with Laura Fernandez how embracing discomfort drives professional growth, learning, and workplace positivity. Topics include stepping beyond comfort zones, expanding professional horizons, taking strategic risks, and creating your own career trajectory.',
+        description: 'SVP, Innovation and Chief AI Officer at Brand USA Janette Roush discusses with Laura Fernandez how embracing discomfort drives professional growth, learning, and workplace positivity. Topics include stepping beyond comfort zones, expanding professional horizons, taking strategic risks, and creating your own career trajectory.',
         url: 'https://www.siriusxmmedia.com/insights/get-comfortable-with-being-uncomfortable-janette-roush-from-brand-usa?tag=pass-the-mic',
         icon: Podcast,
         date: 'Jan 24, 2025',
