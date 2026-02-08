@@ -37,6 +37,20 @@ const resources = [
     category: 'Conversations on AI in Tourism',
     items: [
       {
+        title: 'Hospitality Daily – "The Taylor Swift of Travel AI" on Agentic AI, Organizational Upskilling, and Trust',
+        description: 'Janette Roush, Brand USA\'s Chief AI Officer, discusses agentic AI, organizational upskilling strategies, and building trust in AI systems. Dubbed "The Taylor Swift of Travel AI," Janette shares insights on implementing AI across tourism organizations while maintaining human-centered approaches to technology adoption.',
+        url: 'https://podcast.hospitalitydaily.com/janette-roush-2026/',
+        icon: Podcast,
+        date: 'Feb 2026',
+      },
+      {
+        title: 'SEEN Saturday Series – "The AI Blueprint: Strategic Insights on Innovation from Brand USA"',
+        description: 'In this episode, we sit down with Janette Roush, the powerhouse behind Brand USA\'s AI strategy. As the industry\'s first Chief AI Officer for a national DMO, Janette bridges the gap between complex technology and practical application for sports tourism leaders. We dive into the "what now" and "what next" of AI implementation in destination marketing and sports event planning.',
+        url: 'https://www.buzzsprout.com/2244915/episodes/18559752',
+        icon: Podcast,
+        date: 'Jan 31, 2026',
+      },
+      {
         title: 'Destination Discourse – "What Happens When AI Becomes the Primary Interface for Travel?"',
         description: 'Stuart and Adam are joined by Brand USA\'s Janette Roush for a provocative exploration of the question no one in tourism wants to ask out loud: what happens to DMOs when AI becomes the primary interface for travel inspiration, planning, and booking?',
         url: 'https://www.youtube.com/watch?v=gvCOpVNtvHY&t=2729s',
@@ -491,7 +505,7 @@ const generateLibrarySchema = () => {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
     'name': 'AI in Tourism Podcast Collection',
-    'description': 'Expert conversations exploring AI\'s impact on destination marketing from 2023-2025',
+    'description': 'Expert conversations exploring AI\'s impact on destination marketing from 2023-2026',
     'numberOfItems': resources.find(r => r.category === 'Conversations on AI in Tourism')?.items.length || 0,
     'itemListElement': (resources.find(r => r.category === 'Conversations on AI in Tourism')?.items || []).map((item, index) => ({
       '@type': 'ListItem',
@@ -523,7 +537,7 @@ const generateLibrarySchema = () => {
         'name': 'What podcasts feature Janette Roush discussing AI in tourism?',
         'acceptedAnswer': {
           '@type': 'Answer',
-          'text': 'Janette Roush has appeared on multiple podcasts including: Destination Discourse, Travel Trends, Arival\'s Best Part of Travel, Tourpreneur, The Future of Tourism, Fandom Unpacked, Brand USA Talks Travel, Pass the Mic, Hospitality Daily, Travel Marketing Podcast, and Destination Marketing Podcast. These conversations cover AI governance, destination marketing strategy, and practical AI implementation for DMOs.'
+          'text': 'Janette Roush has appeared on multiple podcasts including: SEEN Saturday Series, Destination Discourse, Travel Trends, Arival\'s Best Part of Travel, Tourpreneur, The Future of Tourism, Fandom Unpacked, Brand USA Talks Travel, Pass the Mic, Hospitality Daily, Travel Marketing Podcast, and Destination Marketing Podcast. These conversations cover AI governance, destination marketing strategy, practical AI implementation for DMOs, and bridging complex technology with sports tourism applications.'
         }
       },
       {
@@ -532,6 +546,22 @@ const generateLibrarySchema = () => {
         'acceptedAnswer': {
           '@type': 'Answer',
           'text': 'Brand USA\'s Agents of Change program offers comprehensive AI governance training through the "AI Policy & Governance for Organizations" webinar. It covers the three key questions every AI policy must answer: What are we protecting? What are we providing? What are we expecting? Real-world examples include Brand USA\'s own AI policy.'
+        }
+      },
+      {
+        '@type': 'Question',
+        'name': 'How can sports tourism organizations apply AI to their destination marketing?',
+        'acceptedAnswer': {
+          '@type': 'Answer',
+          'text': 'Janette Roush, Brand USA\'s Chief AI Officer, discussed practical AI applications for sports tourism on the SEEN Saturday Series podcast. As the first Chief AI Officer for a national DMO, she bridges complex technology with practical applications for sports event planning, venue marketing, and sports destination strategies. The conversation covers implementing AI while maintaining authenticity in sports tourism marketing.'
+        }
+      },
+      {
+        '@type': 'Question',
+        'name': 'What is agentic AI and how can tourism organizations use it?',
+        'acceptedAnswer': {
+          '@type': 'Answer',
+          'text': 'Janette Roush, dubbed "The Taylor Swift of Travel AI," discusses agentic AI on the Hospitality Daily podcast. Agentic AI refers to autonomous AI systems that can take action and make decisions independently. For tourism organizations, this includes AI agents that can handle complex tasks like research, content creation, and workflow automation. Roush emphasizes the importance of organizational upskilling and building trust as teams adopt these advanced AI capabilities.'
         }
       }
     ]
