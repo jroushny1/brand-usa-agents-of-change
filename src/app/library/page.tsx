@@ -42,6 +42,8 @@ const resources = [
         url: 'https://podcast.hospitalitydaily.com/janette-roush-2026/',
         icon: Podcast,
         date: 'Feb 2026',
+        status: 'recorded',
+        recordedDate: '2026-02-01',
       },
       {
         title: 'SEEN Saturday Series – "The AI Blueprint: Strategic Insights on Innovation from Brand USA"',
@@ -49,6 +51,8 @@ const resources = [
         url: 'https://www.buzzsprout.com/2244915/episodes/18559752',
         icon: Podcast,
         date: 'Jan 31, 2026',
+        status: 'recorded',
+        recordedDate: '2026-01-31',
       },
       {
         title: 'Destination Discourse – "What Happens When AI Becomes the Primary Interface for Travel?"',
@@ -507,16 +511,36 @@ const generateLibrarySchema = () => {
     'name': 'AI in Tourism Podcast Collection',
     'description': 'Expert conversations exploring AI\'s impact on destination marketing from 2023-2026',
     'numberOfItems': resources.find(r => r.category === 'Conversations on AI in Tourism')?.items.length || 0,
-    'itemListElement': (resources.find(r => r.category === 'Conversations on AI in Tourism')?.items || []).map((item, index) => ({
-      '@type': 'ListItem',
-      'position': index + 1,
-      'item': {
+    'itemListElement': (resources.find(r => r.category === 'Conversations on AI in Tourism')?.items || []).map((item, index) => {
+      const podcastItem: any = {
         '@type': 'PodcastEpisode',
         'name': item.title,
         'description': item.description,
         'url': item.url
       }
-    }))
+
+      // Add Event schema if status and recordedDate exist
+      if ((item as any).status === 'recorded' && (item as any).recordedDate) {
+        podcastItem.recordingOf = {
+          '@type': 'Event',
+          'name': item.title,
+          'eventStatus': 'https://schema.org/EventScheduled',
+          'eventAttendanceMode': 'https://schema.org/OnlineEventAttendanceMode',
+          'startDate': (item as any).recordedDate,
+          'endDate': (item as any).recordedDate,
+          'location': {
+            '@type': 'VirtualLocation',
+            'url': 'https://brand-usa-agents-of-change.vercel.app'
+          }
+        }
+      }
+
+      return {
+        '@type': 'ListItem',
+        'position': index + 1,
+        'item': podcastItem
+      }
+    })
   }
 
   // FAQPage schema - key to AI discoverability (like StackList)
@@ -700,11 +724,23 @@ export default function LibraryPage() {
                                     <div className="text-base font-bold text-brand-blue leading-tight mb-1">
                                       {podcastName}
                                     </div>
-                                    {(item as any).date && (
-                                      <div className="text-sm text-gray-500">
-                                        {(item as any).date}
-                                      </div>
-                                    )}
+                                    <div className="flex items-center gap-2">
+                                      {(item as any).date && (
+                                        <div className="text-sm text-gray-500">
+                                          {(item as any).date}
+                                        </div>
+                                      )}
+                                      {(item as any).status === 'recorded' && (
+                                        <span className="inline-flex items-center px-2 py-0.5 text-xs font-semibold rounded-full bg-blue-100 text-blue-700">
+                                          RECORDED
+                                        </span>
+                                      )}
+                                      {(item as any).status === 'upcoming' && (
+                                        <span className="inline-flex items-center px-2 py-0.5 text-xs font-semibold rounded-full bg-green-100 text-green-700">
+                                          UPCOMING
+                                        </span>
+                                      )}
+                                    </div>
                                   </div>
                                 </div>
 
