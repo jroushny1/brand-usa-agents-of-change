@@ -205,22 +205,22 @@ const resources = [
     category: 'Tourism Voices in AI',
     items: [
       {
-        title: 'Travel Trends Podcast with Dan Christian',
-        description: 'Tourism industry podcast exploring AI trends, destination marketing innovation, and technology adoption in travel.',
-        url: 'https://www.traveltrendspodcast.com/',
-        icon: Podcast,
-      },
-      {
         title: 'Destination Discourse',
         description: 'A robust discussion show featuring some of the smartest minds in the destination marketing industry. If you\'re a destination marketer or supplier this show will challenge you to think outside of the constraints of everyday marketing tactics and will encourage you to challenge the status quo.',
         url: 'https://www.youtube.com/@DestinationDiscourse',
         icon: Podcast,
       },
       {
-        title: 'Everything AI in Travel by Tony Carne',
-        description: 'Newsletter covering artificial intelligence applications, trends, and innovations specifically for the travel and tourism industry.',
-        url: 'https://everythingaiintravel.beehiiv.com/',
-        icon: FileText,
+        title: 'Every Podcast',
+        description: 'Weekly conversations about AI, business, and technology with writers, founders, and researchers. Deep dives on AI applications, agent workflows, and the future of work.',
+        url: 'https://every.to/chain-of-thought',
+        icon: Podcast,
+      },
+      {
+        title: 'Hard Fork',
+        description: 'New York Times podcast covering the latest in tech, AI breakthroughs, and Silicon Valley news. Hosted by Kevin Roose and Casey Newton, exploring AI\'s impact on society and business.',
+        url: 'https://www.nytimes.com/column/hard-fork',
+        icon: Podcast,
       },
       {
         title: 'Kara Franker - AI in Tourism',
@@ -358,6 +358,12 @@ const resources = [
         url: 'https://www.napkin.ai',
         icon: Code,
       },
+      {
+        title: 'Gamma',
+        description: 'AI-powered presentation tool that generates beautiful slides, docs, and webpages from a single prompt. Create polished presentations with smart layouts, images, and content in minutes.',
+        url: 'https://gamma.app',
+        icon: Code,
+      },
     ]
   },
   {
@@ -384,17 +390,6 @@ const resources = [
     ]
   },
   {
-    category: 'Copywriting & Content',
-    items: [
-      {
-        title: 'Jasper',
-        description: 'AI writing assistant specialized in marketing copy, blog posts, and long-form content creation with brand voice customization.',
-        url: 'https://www.jasper.ai',
-        icon: Code,
-      },
-    ]
-  },
-  {
     category: 'AI Agents & Automation',
     items: [
       {
@@ -408,13 +403,6 @@ const resources = [
         description: 'Open-source workflow automation platform that connects AI models with apps and services for complex automation workflows.',
         url: 'https://n8n.io',
         icon: Code,
-      },
-      {
-        title: 'Supabase',
-        description: 'Open-source Firebase alternative with PostgreSQL database, authentication, and real-time subscriptions for building AI applications.',
-        url: 'https://supabase.com',
-        icon: Code,
-        logo: 'https://supabase.com/favicon/favicon-96x96.png',
       },
     ]
   },
@@ -448,12 +436,6 @@ const resources = [
         title: 'Dr. David Privacy',
         description: 'Expert insights on privacy, data protection, and AI governance frameworks for organizations navigating compliance and ethical AI implementation.',
         url: 'https://drdavidprivacy.com',
-        icon: FileText,
-      },
-      {
-        title: 'Luiza\'s Newsletter',
-        description: 'In-depth analysis and practical guidance on AI policy, governance frameworks, and regulatory developments affecting organizations.',
-        url: 'https://luizasnewsletter.com',
         icon: FileText,
       },
       {
