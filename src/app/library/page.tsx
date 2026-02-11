@@ -240,6 +240,18 @@ const resources = [
         url: 'https://www.linkedin.com/in/janetteroush/',
         icon: FileText,
       },
+      {
+        title: 'How I AI with Claire Vo',
+        description: 'Podcast featuring practical AI implementation stories from operators and builders. Claire Vo interviews practitioners about real-world AI applications, workflows, and tools they use daily.',
+        url: 'https://www.howiai.com/',
+        icon: Podcast,
+      },
+      {
+        title: 'Marketing Against the Grain',
+        description: 'Marketing podcast exploring unconventional strategies, AI tools, and growth tactics. Hosted by Kipp Bodnar (HubSpot CMO) and Kieran Flanagan (HubSpot SVP), featuring practical insights on modern marketing and AI adoption.',
+        url: 'https://www.marketingagainstthegrain.com/',
+        icon: Podcast,
+      },
     ]
   },
   {
@@ -413,12 +425,6 @@ const resources = [
         title: 'AI Marketing Institute',
         description: 'Professional AI training and certification programs for marketers, offering courses on AI strategy and implementation.',
         url: 'https://www.marketingaiinstitute.com',
-        icon: BookOpen,
-      },
-      {
-        title: 'Allie K. Miller - AI Learning',
-        description: 'AI educator and advisor sharing practical guidance on AI adoption, strategy, and implementation for business leaders.',
-        url: 'https://www.alliekmiller.com',
         icon: BookOpen,
       },
       {
