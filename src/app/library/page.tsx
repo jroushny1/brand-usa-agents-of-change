@@ -1,10 +1,27 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { ArrowLeft, BookOpen, ExternalLink, FileText, Video, Podcast, Code } from 'lucide-react'
+import { ArrowLeft, BookOpen, ExternalLink, FileText, Video, Podcast, Code, Wrench } from 'lucide-react'
 import AccessCheck from '@/components/AccessCheck'
 
 // External resources and links
 const resources = [
+  {
+    category: 'Personal OS Guides',
+    items: [
+      {
+        title: 'Set Up Your Personal OS for Claude Code',
+        description: 'Start here. A simple file system that helps AI understand your work and become a true productivity partner. Covers folder structure, CLAUDE.md, task schema, and your first two slash commands.',
+        url: '/personal-os',
+        icon: Wrench,
+      },
+      {
+        title: 'Level Up Your Personal OS (2.0)',
+        description: 'For week-2+ users. Covers memory files, the People directory, writing profiles, advanced slash commands (/call, /review, /insights, /remember), MCP servers, and the weekly review workflow.',
+        url: '/personal-os-2',
+        icon: Wrench,
+      },
+    ]
+  },
   {
     category: 'Official Brand USA Resources',
     items: [
