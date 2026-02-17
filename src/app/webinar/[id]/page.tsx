@@ -2388,6 +2388,324 @@ To wrap up, this is the QR code for today's presentation if you would like to do
     isConferenceTalk: true,
     chapters: [],
   },
+  'ai-for-presentations': {
+    id: 'ai-for-presentations',
+    title: 'AI for Presentations',
+    description: 'Beautiful.ai can generate a full deck in seconds—but it won\'t match your brand templates. Learn the practical workflow instead: use ChatGPT Projects to organize research, Deep Research for sourced evidence, and AI frameworks to structure your narrative arc. Chelsea Benitez demos how AI pressure-tests data cuts, designs better charts, and writes insight-led slide titles. Plus: Gemini Nano Banana for fun images, video rehearsal coaching, and Claude Cowork for building HTML presentations with your brand guidelines.',
+    duration: '44 min',
+    muxPlaybackId: 'VUzs9CRk01QRfTtkuo5SD02PQ5uqPMszeo5GaehJ74EzE',
+    instructor: 'Janette Roush & Chelsea Benitez',
+    instructorTitle: 'Chief AI Officer & Head of Research, Brand USA',
+    publishDate: '2026-02-12',
+    keyTakeaways: [
+      'AI can generate entire presentations (Beautiful.ai demo), but corporate decks require brand templates, specific formats (PowerPoint/Google Slides for conference export), and narrative structure that auto-generated decks lack. The practical workflow starts with organizing research in ChatGPT or Claude Projects, then using Deep Research for sourced evidence, and asking AI for frameworks to structure your story.',
+      'For research-led presentations, AI excels at pressure-testing whether a data cut is worth including, suggesting better chart types (slope charts vs. bar charts), and writing insight-led slide titles that hook audience attention. Chelsea Benitez demonstrated how AI helped her distill dense survey data across multiple regions into clear, defensible takeaways.',
+      'Gemini\'s Nano Banana model is currently the best for creating presentation images with simple prompts. Key tips: match your source image aspect ratio to your desired output, start new chats quickly when results go sideways, and lean into obviously AI-generated images (like cartoon headshots) rather than trying to fake real photography.',
+      'Claude Code and Claude Cowork can build branded HTML presentations directly from scripts, using your saved brand guidelines (fonts, colors, logos). This represents a shift from pasting into chatbots to AI tools that read and write files on your computer—the capability that\'s driving rapid change in how we work.',
+      'Organizations should provide paid AI platform subscriptions ($20-30/person/month) for SOC 2 compliance, the ability to disable model training on company data, and enterprise controls. Without this, employees use personal accounts (shadow AI), and if they leave, they take your data with them.'
+    ],
+    topics: [
+      'AI for Presentations',
+      'Beautiful.ai',
+      'ChatGPT Projects',
+      'Deep Research',
+      'Gemini Nano Banana',
+      'Image Generation',
+      'Claude Code',
+      'Claude Cowork',
+      'PowerPoint',
+      'Google Slides',
+      'Descript',
+      'Video Editing',
+      'AI Speaking Coach',
+      'Data Visualization',
+      'Slide Design',
+      'Narrative Structure',
+      'Presentation Frameworks',
+      'Research Presentations',
+      'SOC 2 Compliance',
+      'Shadow AI',
+      'AI in Tourism',
+      'Destination Marketing Organization (DMO)'
+    ],
+    targetAudience: {
+      primary: 'Destination Marketing Organization (DMO) professionals',
+      secondary: 'Tourism, travel, and hospitality marketing teams, Researchers and data analysts who present findings, Non-technical professionals who give presentations regularly',
+      tertiary: 'Conference speakers and corporate communications professionals'
+    },
+    learningOutcomes: [
+      'Set up a ChatGPT or Claude Project to organize research files and conversation threads for a presentation, keeping context organized across multiple exploration paths.',
+      'Use Deep Research to generate sourced evidence reports that reduce hallucination risk and provide clickable citations for fact-checking.',
+      'Ask AI for a "framework" (rather than an outline) to structure presentation narratives with clear storytelling arcs that build idea upon idea.',
+      'Apply AI to research-led presentations: pressure-test data cuts, identify outliers, choose optimal chart types, and write insight-led slide titles.',
+      'Use Gemini Nano Banana to create fun, obviously-AI-generated presentation images with simple prompts, matching aspect ratios for consistent output.',
+      'Understand the emerging capability of Claude Code/Cowork to build HTML presentations from brand guidelines stored on your computer.',
+      'Explain why organizations need paid AI subscriptions for SOC 2 compliance and to prevent shadow AI risks.'
+    ],
+    relatedResources: [
+      { name: 'Beautiful.ai', description: 'AI-powered presentation platform with brand templates', url: 'https://www.beautiful.ai' },
+      { name: 'ChatGPT (by OpenAI)', description: 'AI assistant with Projects feature for organizing research', url: 'https://chatgpt.com' },
+      { name: 'Claude (by Anthropic)', description: 'AI assistant with Code and Cowork modes for file-based work', url: 'https://claude.ai' },
+      { name: 'Google Gemini', description: 'AI with Nano Banana image generation and video analysis', url: 'https://gemini.google.com' },
+      { name: 'Descript', description: 'AI video editor that lets you edit video by editing the transcript', url: 'https://www.descript.com' },
+      { name: 'Visual Studio Code', description: 'Code editor used as interface for Claude Code', url: 'https://code.visualstudio.com' },
+    ],
+    chapters: [
+      { time: 0, title: 'Introduction: Can AI Just Build My Presentation?' },
+      { time: 60, title: 'Beautiful.ai Demo: AI generates a full deck' },
+      { time: 120, title: 'Reality Check: Corporate presentations need templates' },
+      { time: 180, title: 'Case Study: Building the "Leading With Wonder" keynote' },
+      { time: 240, title: 'ChatGPT Projects: Organizing research in one place' },
+      { time: 360, title: 'Bouncing Between AI Platforms for Fresh Perspectives' },
+      { time: 420, title: 'Deep Research: Sourced evidence in 11 minutes' },
+      { time: 540, title: 'Asking AI for Frameworks (better than outlines)' },
+      { time: 660, title: 'Fighting AI Sycophancy: Push back on your ideas' },
+      { time: 720, title: 'Fun Images with Gemini Nano Banana' },
+      { time: 840, title: 'Gemini Tips: Aspect ratios and starting over fast' },
+      { time: 960, title: 'Using Claude Code to Organize AI-Generated Images' },
+      { time: 1020, title: 'Video Rehearsals: Gemini as a TED Talk Coach' },
+      { time: 1080, title: 'Chelsea\'s Case Study: Research-Led Presentations' },
+      { time: 1140, title: 'Pressure-Testing Data Cuts with AI' },
+      { time: 1200, title: 'Chart Design: Let the insight lead, not the data set' },
+      { time: 1260, title: 'Insight-Led Slide Titles vs. Descriptive Ones' },
+      { time: 1320, title: 'Validating Narrative Flow and Checking Timing' },
+      { time: 1380, title: 'Adapting Presentations for Different Audiences' },
+      { time: 1440, title: 'AI as a Virtual Sounding Board' },
+      { time: 1500, title: 'Key Findings Creation: When You\'re Exhausted' },
+      { time: 1560, title: '"Is AI Making Us Dumber?" — It depends on engagement' },
+      { time: 1620, title: 'Claude Code/Cowork: HTML Presentations with Brand Guidelines' },
+      { time: 1860, title: 'Self-Critiquing AI Output: Rating your own deck' },
+      { time: 1980, title: 'Q&A: Passing projects between models (just copy-paste)' },
+      { time: 2040, title: 'Q&A: Which AI tool should I learn first?' },
+      { time: 2160, title: 'Specialty Tools: Descript for video editing' },
+      { time: 2280, title: 'Q&A: Corporate safety concerns and SOC 2' },
+      { time: 2460, title: 'Q&A: How will AI change tourism?' },
+      { time: 2580, title: 'Closing: Data organization as the future of DMOs' },
+    ],
+    transcript: `Today I'm going to be joined by our head of research, Chelsea Benitez, to talk about using AI for your presentations. AI is of course changing rapidly. Some of the things that even six weeks ago when Chelsea and I first did this presentation for the staff at Brand USA, there were things that weren't possible then that are possible today with AI. So I'm looking forward to exploring that with everybody on the call.
+
+So, can we just use AI to build my presentation? This is a screen recording of me using the tool that I'm actually presenting in right now. It is an AI platform called Beautiful.ai. And you can see here I'm asking it just to build a presentation for me. How can AI be a tool to help make presentations? I mean, just overall using AI to help improve, rehearse, create images for a presentation. Here I'm selecting what I want the design to be for the deck. We have designs pre-built into Beautiful.ai that if you've seen other presentations that I've done, they all have a consistent look that matches the Brand USA branding.
+
+Beautiful.ai's AI tool is using its own AI powers to come up with this entire presentation, and it made all of the images in this presentation for how you would use AI to improve presentations that you do. Tools for audience engagement. We have a conclusion with graphics. We have a summary.
+
+It leaves us with this question of, all right, great. AI can do this. Now what's left for me to do? But don't worry. That approach was very templated, even though I had selected a template for it to use, it doesn't look like the rest of the Brand USA presentations that we do using Beautiful.ai.
+
+Most corporate presentations, you can't just say, hey, go write something for me. You're following a templated approach, whether you're talking about a board meeting, reporting something to your members or your partners, doing a presentation at a conference or an event. A lot of times, my personal challenge with working with Beautiful.ai is that if I'm doing a keynote somewhere, I need to provide the conference organizers with a PowerPoint presentation and you have to have a special piece of software in order to play the Beautiful.ai slides.
+
+So you have to export them as PowerPoints or Google Slides to use them at a conference. And then you lose a lot of the functionality that makes Beautiful.ai look nice when you are using it. So on this call, we're going to be focusing more on the tools that we are using regularly for presentations, which is going to be PowerPoint and Google Slides.
+
+Knowing all of this, where does this leave us?
+
+I'm going to take you through a case study and then I'm going to turn it over to Chelsea to walk us through another case study.
+
+The way that I like to get started if I am using a tool like ChatGPT or Claude, is creating a project. If you're not familiar with projects, you can see over here on the left rail of ChatGPT that you have the opportunity to create a new project. There's a little folder icon.
+
+And you see here Leading With Wonder. This is the name of a keynote that I did at the Marketing AI Institute conference back in October. It's different than a lot of the keynotes that I give because it was less about practical ways to use AI, and it was more about how can we let people feel how cool these tools are as a way to get them engaged with playing with AI.
+
+And I knew that I wanted this to be led with research about what encourages people to learn new things, what makes an organization feel comfortable experimenting with new things, because we know that's difficult, right? So by creating this folder or this project inside of ChatGPT or Claude, you can take all of your resources and save them in one place.
+
+So you see over here we have five files saved. That's my research on things that I was learning about Wonder as a mechanism for learning. And then here inside of the folder are all of the different chats that I had with ChatGPT. So sometimes I don't want just one long chat. I want to explore different ideas without the context window getting too full.
+
+And so I'm going to explore one thread here, and then I'm going to start fresh with a different thread. But they're all organized in one place. If you want to create project files, these were the five files that were saved in the project. So here, this was a keynote that I had delivered at Brand USA Travel Week the year before.
+
+These were copies of LinkedIn posts from the other folks that I thought was interesting that would lean into this idea of wonder as a tool for exploration. When I'm doing this work, building a story or trying to decide what my angle is, don't feel constrained to only working with one AI. I will start a conversation in one tool, and sometimes you hit the point where the answers start to feel circular, like the AI starts to repeat itself. You're not getting any fresh thinking. So sometimes I will copy that conversation and drop it into a different tool and say, why don't you give me your perspective? And you can do the same thing without changing tools. If you only have a subscription to one of these tools, open up a new chat window and say, I was having this conversation about this idea, but I want to take the conversation in a different direction. What do you think about that?
+
+I find bouncing back and forth between platforms, like don't do it in a way where you become overwhelmed with too much information. You need to make sure you're not just outsourcing everything in your brain and constantly bouncing around to different platforms for different ideas.
+
+But if you need a fresh start in a new perspective, I think being able to switch is a huge benefit because all of these models were trained slightly differently, so you're going to get different responses from them.
+
+As I was putting together my ideas around this keynote, I wanted to make sure it was rooted in research on how the human brain works and how we learn things and about organizational practices that make new learning stick. I used a tool inside all of the major chat models called Deep Research to do this.
+
+Here you see an example of a deep research report from ChatGPT. It doesn't take any fancy prompting, it's just a button that you click when you are using the tool. So in ChatGPT I told it what research I was looking for. It is going to ask you one clarifying question, you answer the question, and then here it says, I'm going to start the report.
+
+If I were to scroll down further, I would be able to see and open up that report. It took 11 minutes and 115 different searches to pull together the information. This is really helpful if you are trying to reduce hallucinations in AI, which is when AI makes something up because it's trying to make you happy.
+
+Deep research is going to give you links to all of the sources that it is using in its report, so you can then go through and read those original sources like you were doing a regular Google search. And when I was doing this, I did multiple deep research reports, going down the rabbit holes that were brought up from that initial thread.
+
+So here I wanted to go deeper into the idea of delight and how does delight make us want to engage more deeply with learning something.
+
+When I have a lot of information gathered, but it's still kind of a mess in my brain, I like to ask for a framework of how to assemble this information and this idea. Asking for a framework even instead of an outline, I use this type of a prompt multiple times a week.
+
+"Based on everything that we've discussed, give me some options for a framework for how I want to organize this information." Whether you are putting together an outline for a board meeting, whether it's this kind of keynote, which is meant to be inspirational, whether it's I'm doing a keynote that's meant to be more educational, part of speaking is giving people this thread of ideas that each idea builds on the previous idea, so that when you get to the end of the thread, you realize you've been taken on a journey of some sort. So it's basic storytelling principles.
+
+As tourism marketers, I think everybody on this call are the best storytellers in the world, right? Like, this is our bread and butter. So to apply those principles to every single meeting or presentation that we have is going to make that presentation stronger and more memorable. And what I like about asking for frameworks is like, here it says, great option one, we're going to do a narrative arc, we'll talk about the crisis of imagination, moments of breakthrough, and then coming to the Wonder Playbook. So how can you bring all of this together? It gave me several other options and I was able to say, can I take a little bit from option one and a little bit from option three?
+
+How does that come together in a new framework? It allows you to take the big task of write and memorize a 45 minute speech into blocks of a story. This is going to be one seven minute block and this is going to be a five minute block, and this is the order in which they make the most sense.
+
+That helps you with your delivery and it helps the audience remember what you are talking about. If I am putting together a framework like this, particularly for a new speech, something I hadn't done before, I wanted to make sure the ideas I was thinking through were sound.
+
+I took these ideas from ChatGPT, I put them into Claude. I'm like, okay, can you verify what I am thinking. Do you have any new ideas to add to this?
+
+I make sure that when I'm using AI, you can't just take what it tells you at face value. We know that AI can be very sycophantic, that it's going to tell you, oh, that was a great idea. Oh, you were so smart to think of that. And sycophancy doesn't necessarily help us when we are trying to make our thoughts crisp.
+
+We can use AI to push back on our ideas or interrogate why MIT said 95% of generative AI pilots at companies were failing. I found research from a researcher named Erik Brynjolfsson, who is a professor at MIT and he has done research going back decades that says when employees are learning a new technology, looking at steam engine, the internet, the organization will reap the benefits. So I didn't understand why the same institution that sponsors Erik Brynjolfsson is also saying that these generative AI pilots were failing. This was an opportunity for me to dive more deeply into why MIT might have done this so that I could be confident that I wasn't talking out of both sides of my mouth.
+
+Let's say we have a great structure set up now for this presentation, and something that I really like to do with my presentations is to make it more fun by adding some fun images. So how do we do that? In my case, part of my brand is being a nerd and sticking my headshot into everything.
+
+I use Gemini's Nano Banana model, I think Nano Banana is the best model right now for creating images, and if I were an actual visual designer, which I am not, I'm sure there are other tools like working within Photoshop with more knowhow, I could do more precise editing, but I'm more of a word person than a visual person. To be able to use words to make the images that I'm looking for is a gift. As destination marketers, we don't want to use fake images of our destinations, which is why I like to lean into the fake images of myself because I think a great use of AI images is if something is obviously fake and that takes away the stigma.
+
+Even looking for something simple like a USB-C cable, make it look sleek and attractive. You don't have to over prompt. That is a challenge that I have with using a tool like Midjourney, you have to know what you are doing to be able to prompt well with Midjourney.
+
+For graphic designers and people who are great at that, they are able to make some beautiful stuff with those tools. Generally I'm looking for something that will kind of provoke a laugh if I'm doing a presentation. And so for that use case, Gemini, without overthinking it is going to work great.
+
+I was trying to get this inspirational image of me looking at a night sky and, like, this image, this ain't it. Three months ago, if you got a bad result out of Gemini, just close the chat and start over. It is very difficult to prompt Gemini to improve that image.
+
+That is changing a little bit.
+
+Give it one more shot within the same prompt thread. If you don't get the result that you wanted, open up a new prompt and type in that same prompt that you used before. You're going to get a completely different result. If you need to start over from scratch, be fast to start over from scratch.
+
+Gemini doesn't do a great job of following instructions about the dimensions of the images that you use. I have two different crops of my headshot. If I want this aspect ratio for an image, then I give it a source image with the same aspect ratio. I have a crop that's square. I use that version of my headshot if I want to get a square output. So Gemini is better now than it used to be at following your requests, but it's pretty foolproof if you just give it source material that matches the aspect ratio that you would like.
+
+When I'm trying to get ideas for the images that I use in a presentation, if you're using something like Midjourney, a lot of people support meta prompting, which is going into ChatGPT or another tool and saying, well, you write this Midjourney prompt for me. I find that doesn't work very well in Gemini because it needs to be simple.
+
+I go into Gemini and say, give me some ideas for what an image could be that would be funny for this particular use case. It'll give me a few different ideas. If I don't like any of the ideas, I will ask for more, or I will start a new prompt and ask for ideas again so that I get outside of the idea rut that some of these tools can get in.
+
+Got a question from Sarah asking if I save my image prompts anywhere so I can refer back to them later? I have to say I don't because I don't really overthink the prompts. What I will do is save the images themselves. I will save the actual file of the image in a file on my desktop.
+
+And if you are starting to get involved with Claude Code or Claude Cowork, which has become, if you spend any time online in AI communities, the rage, this is turning into the new way that we're doing work. Those tools can go into your downloads folder, find every single image that was created by Gemini, put it into a separate folder, and then rename all of the images with a descriptive title to make it easier to find those images in the future.
+
+I did that a couple of weeks ago and it has made it much faster and easier for me to find the images that I'm looking for.
+
+Now let's talk about video rehearsals.
+
+If you have Google Workspace, you already have Gemini access through that. Gemini is the only model right now that can read a video. You can give it a YouTube link or you can upload a video file and then ask for notes on everything.
+
+It can hear your voice, analyze your pauses and your script. It can see what you look like delivering this speech, and it will give you any kind of feedback that you request from it. Like with a lot of AI prompting, you get a better response if you give it a role to play. Here I gave it the role of a TED Talk style speaking coach, and said, can you guide me through the steps of how I can rehearse this speech in a way that it will be better.
+
+I am going to turn the microphone over to my colleague Chelsea Benitez, to share with us a research-led presentation using an actual presentation that she delivered to the industry back in the fall.
+
+Thank you Janette. I do not sit in the dark cave, but it's great to be with you all today. I'm a big fan of using AI to improve presentations, and it's something I personally turn to often. Last fall when I was working on a presentation for Brand USA's UK and Europe Travel Week, I shared with Janette some of the ways I was using AI. That conversation led us to talking about this topic with all of you today. So for my portion of the webinar, I'm going to walk you through practical use cases of how I used AI to help finalize and strengthen a presentation, including screenshots of all my actual prompts.
+
+And for this case study, I want to show you how AI can support a research-led presentation by strengthening how we interpret data and design slides. So as a researcher, one of my core roles is digging into the numbers and gleaning insights. A great presentation is a curated, insight-led narrative.
+
+So in this case, I started with survey data that lived in an Excel file with thousands of rows. My goal was to make sure I was highlighting the right things. So in several cases, I used AI to help pressure test whether a particular question or cut of data was even worth including. I was working with a dense perception data set across multiple regions, lots of attributes, relatively small differences between the countries, and no headline at first glance.
+
+My prompts were strategic. Are there meaningful differences here? What are the outliers? What are comparisons that actually matter for this audience? This is where AI adds value, helping surface patterns and validate instincts before a single chart is built. In several cases, AI confirmed my take and then helped me fine tune exactly what to highlight. Another way AI can help is with slide and chart design.
+
+Even if you're not using charts or graphs in your presentation, AI can be a helpful sounding board to confirm whether a slide layout feels clear or overloaded.
+
+And if you are working with charts, AI can help determine the best way to display that data, even generate visual examples, step-by-step guidance, on how to build those charts directly in PowerPoint.
+
+In this example the original slide tried to do too much. It had too many bars, too many data callouts. AI suggested alternative visual approaches like slope charts for comparisons or simplified highlights, so the insight could land in seconds. The key takeaway here is that design decisions should serve the insight, and this is where AI helped me do that.
+
+In my opinion, one of the most impactful, and the easiest ways AI can improve presentations is slide titling. A slide title is often the first thing your audience reads, and in many cases, it's the hook for their attention.
+
+Insight-led titles are more effective than purely descriptive ones.
+
+I had already had the data and the takeaway on the slide, but I wanted to strengthen the title. Instead of "Trip Purpose Across Europe's Leading Source Markets," I asked ChatGPT to help me generate more insight-driven options. It gave me several strong alternatives. I went with option two which immediately made the slide clearer and more compelling.
+
+AI is incredibly helpful when it comes to refining messy, run-on thinking into sharp insights. Research rarely starts clean. It usually begins with ideas, observations, and conclusions, all competing for space. Here, AI was used to distill a long thread of thinking into three clear insights that the audience could actually absorb.
+
+So, as we know, all great presentations are narrative led. With a clear beginning, middle and end, and AI is especially helpful here. I often use it as a sounding board to validate whether the order of my slides make sense, the story flows, and if there's anything missing.
+
+I find this valuable when I'm comparing my final deck to a session description or agenda. I want to make sure the presentation I'm delivering matches what the audience expects and that I'm fulfilling that promise with the cohesive story. This is especially important for webinars where attention is fragile and clarity matters more.
+
+So if you're still with me, I always like to ask AI how I can make it stronger. I always want ways to improve. You can use AI to identify gaps, suggest enhancements, or review your deck slide by slide. Think of it as asking what can make this better. AI works well here as an intelligent second set of eyes.
+
+Nobody enjoys a presentation that runs long. AI is a great way to gut check your timing, estimating how long it will realistically take to deliver a deck.
+
+AI helps ensure your presentation is tight, focused, and respectful of your audience's time. I had to give a short presentation and then transition to a panel, so I wanted to make sure that I was using the best use of my time and maximizing it. AI helped me and I ended the session bang on time, so it really did help here.
+
+Another powerful use case is adapting presentations that already exist for different audiences. My approach changes significantly depending on whether I'm presenting internally, at an industry-wide conference, or to a board of directors. Each audience requires a different framing of the same information.
+
+By giving AI context about your audience, it can help reframe the emphasis, or validate whether a deck meets the mark.
+
+So lastly, AI is incredibly helpful in creating key findings. It's easy to end a presentation with too much information. So AI helps me ask what are the few things this audience should remember and act on? The result is a concise set of executive-ready key findings, a focused set of takeaways aligned to the audience and the objective.
+
+So I love building and delivering presentations. I found a lot of value in using AI as a virtual sounding board, whether I'm brainstorming, refining my insights, or pressure testing. I think the key takeaway on my side is that AI amplifies what I'm doing and makes my presentations even stronger.
+
+I totally agree with everything that you've shared, Chelsea. I feel less like I'm working by myself doing a presentation when I'm working with these tools. Is that your experience? Yes. Usually I feel like I am alone trying to hope that what I'm putting on a slide is interesting to other people, and I find that AI really helps me. So it's a validation tool to make sure that I'm on the right track, but also streamline, especially when you're looking at data, it's very easy to go on tangents or share too much information. And it helps me make sure that I have my audience's focus. My personal goal is to try to never have a boring presentation. And I think AI just really helps ensure that goal. You have never had a boring presentation that I have ever seen, but yeah, like it's easy for it to be overwhelming, right? When you're talking about data. And honestly too, even with key finding creation, and I think this is so important.
+
+Like oftentimes by the time I'm done with my presentation, I'm exhausted and I don't want to have to think to go back into key findings. So I have really found that this is a way to just be like, I'm tired, I'm done. Tell me what the key findings are. And also if I'm reading key findings for my own presentation and I don't agree with them, or I feel like they're missing something, that's a sign to me that maybe a point I was trying to make really didn't land.
+
+So I need to go back into my full deck and make sure that I'm adding emphasis for certain parts. Yeah, I totally agree. I was with Fred at IITA in Niagara on Monday, and we had a question from the audience when I was talking about AI, about whether AI is making us dumber. If we outsource too much of our thinking to these models, what does that mean for our cognitive ability in the future?
+
+My answer was that it depends on the way that you are engaging with AI. Because if you're doing it like a thought partner, right? If we're talking just about data, if I have a spreadsheet, there is an art to putting a narrative to numbers. And I've found that sometimes the way that AI will create a key finding or actually write up how to analyze data helps me strengthen my language. That in and of itself is an art.
+
+For work, in terms of how I use it for presentations, I think I'm still doing a lot of the work. AI is helping. Yeah, I completely agree.
+
+So now for the last little bit of this presentation, I'll invite Chelsea back on to answer some of those questions at the end, but I'm going to dive into a new tool called Claude Cowork. I am figuring out how these tools work at the same time all of you are.
+
+And this is when you are reading online, the overdramatic talk right now about how fast AI tools are advancing. They're talking about tools like this because we are going from pasting things into ChatGPT and asking for advice to these tools being able to read the files on our computer and give us input.
+
+So you can now use a tool like Claude Code or Claude Cowork to write PowerPoint or HTML presentations for you.
+
+So here I was at a conference on Tuesday of this week, sponsored by the organization Charter, and it was about AI in the workplace. So this is a copy of my Claude Code instance.
+
+So I think a lot of people, particularly those of us who don't have a tech background—that includes me, I was a theater major—I am a little intimidated by working in the terminal. It's the black box. It looks scary. This is an interface for your terminal on your computer called Visual Studio Code or VS Code. It's friendlier because you can see your files on the left and at the top, these are different chats. Just like if you had different chat threads in ChatGPT or Claude or whichever AI tool you use.
+
+But what makes working with your terminal different is that it's accessing your files, which I have saved here. It is rewriting those files and it's building upon those files to make something new.
+
+So we are in Claude Cowork. If you have a paid Claude account, you will see this at the top of your screen. You have the ability to chat like normal, or you can work in Cowork or Code, which are essentially the same thing. But Cowork is less technical, it feels more accessible if you are really turned off by the idea of something being called Code. Here I have given it access to a folder on my laptop. Here it's like, Hey, Janette ready when you are. What are we working on? I'm like, well, I'm creating a folder where I can safely do public demos and I want to show how we can make a branded presentation in HTML for an audience so I can share our design files.
+
+Let me know how to set this up. It's like, ah, great project. Thank you, Claude. Here's what we need. So you can drop these into the folder or you can upload them here, and I will save them in the right place. So already this is a little bit different than working with standard ChatGPT.
+
+I gave it a script that I wanted it to turn into a presentation. It created a presentation in HTML, and you can see very faintly here that there's, you know, four words and backwards arrows. So now instead of using PowerPoint or Google Slides, you can work directly with something like Claude Code or Claude Cowork to make an HTML interface for what you are working on.
+
+If you want to edit the slides, those three points on page seven are too low. It lifts them up a little bit.
+
+It did the entire presentation, and I didn't love it. Boring. Can you rewrite please? I give it a four out of 10. It agreed with me. Here's why you think it's four out of 10. Seven, half of the slides are using the same split layout. The text is too tiny. There's too many words. First slide. There's no visuals. So let me rewrite this.
+
+Here is a screen recording of the actual presentation. The takeaways from this Charter conference that I went to on Tuesday, I asked Claude to write an outline for a presentation with the key takeaways. I pasted that outline into Claude Cowork and said "make a presentation for me with this", and it's using Brand USA fonts. It is using Brand USA colors because I have a folder saved on my computer that has our fonts and our colors and how to use them, and when we use which version of our logos and the logo files all saved in one place.
+
+This is something that I am still working on how to describe in a webinar. I'm still learning this myself and it's shocking. We're starting to see big changes in what AI tools are able to do. But it's really exciting. I'm looking forward to being able to share more of these ideas with the industry.
+
+We're entering a phase where AI can do useful work for us, and you're going to be best equipped to take advantage of that if you've been starting small and keeping up as we've gone along. It's not too late to roll up your sleeves. You're already here at this presentation to learn how we can use AI in little ways so that we're more comfortable moving into the AI doing real work for us.
+
+Welcome back, Chelsea. Billy's asking how do we pass projects between different models when we're working on an outline and need to move to different models?
+
+Just copy and paste. I'll hit command A, select all the text and then move that into a different model and say, review this and tell me what you think. I'm not really overthinking that kind of prompt.
+
+What was the last platform where I entered in my brand guidelines? That is Claude Code.
+
+Do we recommend getting deeper into ChatGPT, Claude, or learning a variety of different tools? So what is the better use of time and focus, for presentations and in general?
+
+So what are your thoughts on that, Chelsea? Like, what are the tools you use for your work? So I will say that I have really been a one trick pony for a while. ChatGPT was just the first one that I used and it was kind of the predominant one that I'm using. I'm now since working with Janette getting deeper into Claude Code and trying Claude differences. I'm trying to do a test case of giving both the same prompt and seeing which one has an output that matches what I'm trying to do, my style, my narrative.
+
+But I think it's probably a good idea to learn as many as you can or at least be somewhat familiar. But like I said, this is something I'm learning on my own currently because I've really just been in ChatGPT a while.
+
+Don't try to boil the whole ocean at once. It's very easy to get overwhelmed by these tools. Pick one and dive in really deeply. You're not going to go wrong if you are in Claude, Gemini or ChatGPT or Copilot, if that is what your organization allows, to go deeply into that one.
+
+There's not that big a difference between these different models. For a long time I was very hyped on ChatGPT. That was my absolute number one for everything. I feel like they've flagged a little bit and fallen a little bit behind in the grand scheme of things. All these companies are playing leapfrog. ChatGPT will release something that's incredibly helpful. In two months that will be much better than what the other models are doing. If your job isn't AI, don't feel like you have to chase whatever the latest thing is. I do think it's really important to be in one of those foundation models though, rather than in wrappers on these tools.
+
+An example would be if you're a lawyer, a lot of lawyers use a tool called Harvey, which is a language model, probably OpenAI's model with ChatGPT and they fine tuned it on legal writing so that you can get better answers for your legal questions out of that tool.
+
+If you're a lawyer, I'm sure there's a number of ways where that's a really great use case, but also, just use one of the frontier models. You can do that exact same thing in Chat, Claude or Gemini. And it will make you better at prompting because somebody didn't go in and pre-write it for you. Now, I think there are some specialty tools that can be very useful. For me the main one is a tool called Descript. I use that to edit these webinars before we put them up on our websites, and that tool, like that's something I would not be able to do inside of a tool like ChatGPT. So I can drop in this recording when we're done. We record separately the video element from the screen share element. So I can do the cool little trick where, oh, and we're sharing the screen, then our faces move small to the end. Just like those little transitions that look really slick.
+
+I am not a video person, I don't know anything about video editing. And this tool allows you just to edit the words and the transcript in order to edit the video itself. And it's a bit of a learning curve, but it's awful to learn how to add captions. You can, for multilingual things, and this is something that we are starting to use at Brand USA, Lisa Tejeda in our tourism development team, she's working to take our partners delivering a presentation that's going to be shown in Latin America. She will have it translated into Spanish and she will put Spanish captions on that video, and you can use your own voice speaking Spanish, or you can use a prerecorded option to speak Spanish and then you're able to reach a market in-language that you couldn't before.
+
+Some of these specialty tools are very interesting, but don't get hung up on them if you feel overwhelmed.
+
+Do we think that companies are going to stop or censor employees from accessing these platforms due to safety concerns? Should there be fear about sensitive information leaking?
+
+No, thank you. All of these questions are all you, Janette. I'm just nodding along. I think it is really important to offer a paid platform to your employees because then you have enterprise controls with your technology team over that platform and you are able to do things like make sure that the platform is SOC 2 compliant.
+
+Which is why you need to pay for access to that. These subscriptions are typically 20 to 30 dollars per person per month. Paying allows for that SOC 2 compliance, which keeps your data safe when it is traveling to the cloud and while it is at rest in the cloud.
+
+You are also able to turn off the model's ability to train on the information you put into it if you are paying. That's something that can be controlled at the enterprise level and that is how you can keep your information safe because otherwise you are at risk of BYO AI or shadow AI where the employee, if they separate from your company, but they were using their personal ChatGPT account to manipulate your data and your information, well then they get to keep it.
+
+Because that was on their personal account. We wouldn't let an employee do that with email, right? So we shouldn't let them do this with AI. There's definitely restrictions around what you would upload. If we were talking to business event planners, they frequently will have their own on-site in-house models that they use specifically to make sure that client information never leaves the walls of their organization.
+
+So if you have truly confidential data that you are working with, there are ways to do that with AI. Like, we wouldn't want to put payroll information, our banking information. None of that goes into AI tools. But my thoughts about wonder and delight, I feel very comfortable sharing with these models. That's part of why education is so important, because we want staff to understand what the distinction is and why those distinctions exist. SOC 2 compliance, right? Why do we care about something like that?
+
+What makes that different than HIPAA compliance? There are HIPAA compliant models. The tools exist to make these models safe to use, but we need to understand those nuances to take advantage of it. Now we have a question from Isabel. One of her students is asking whether AI will change the tourism industry, and if so, how?
+
+What do you think Chelsea? That's a very big question that I'm not sure that Janette or I could answer in four minutes. But I think the time we've spent together so far in this webinar are some examples of how it is already.
+
+I think often, people are concerned from a workforce issue if that change will be from displacing folks from their jobs. And I think we're showing how that extends to the broader tourism industry. I'm sure hotels, restaurants, attractions, all of those, have different ways to utilize AI. I may not know those specifically as I'm not on-site, but thinking about the DMO space, it changes what we're doing.
+
+It has changed what we're doing. What I'm doing now versus what I'm doing 12 months ago is drastically different because of AI and finding its place for it. But the larger philosophical changes, that's where I'll leave Janette. But even small tangential ways, we're already noticing that it's changing the industry.
+
+I like to think about AI as AI could be the car and AI could be the driver. So the way that the driver, meaning how do we do our jobs? Like how is it helping all of us at work? And I think that's a universal question of how it changes us as the workforce. But then there's the car part, how does it change discoverability for destinations and tourism products? How do we use AI to make the United States more discoverable and more bookable for people who are using AI to research destinations.
+
+And ultimately as they continue down the funnel to ending up in market. And so those are the changes we see with decline in organic search, Google's AI overviews mean that most searches are now zero click where you get the answer that you need in Google itself without ever coming to a website.
+
+How do we market in a universe where people are doing their searches inside of ChatGPT or another tool or on Google, but without clicking through? How does that change our role? I think that the change is about data and the organization of data. It's going to be less about "make top 10 listicle for the website" and it is going to be more about "organize the information about our destinations in a way that Google can digest it, ChatGPT can digest it" or that this meeting planner I referred to earlier who have their own on-premise model that they need to bring outside information that's accurate inside of their own model.
+
+I think we create the databases of factual information that is useful for those businesses. So truly interesting, rich information about our destinations and making that portable so that you can plug into that no matter what AI tool you're using.
+
+And with that note, it is the end of the hour. I want to thank everybody for logging in today.`,
+  },
 }
 
 export default function WebinarPage({ params }: { params: Promise<{ id: string }> }) {
@@ -2466,6 +2784,15 @@ export default function WebinarPage({ params }: { params: Promise<{ id: string }
     'ai-ideas-exchange': [
       { '@type': 'SoftwareApplication', name: 'ChatGPT', applicationCategory: 'AI Assistant', url: 'https://chatgpt.com' },
       { '@type': 'SoftwareApplication', name: 'Claude', applicationCategory: 'AI Assistant', url: 'https://claude.ai' },
+    ],
+    'ai-for-presentations': [
+      { '@type': 'SoftwareApplication', name: 'Beautiful.ai', applicationCategory: 'Presentation Platform', url: 'https://www.beautiful.ai' },
+      { '@type': 'SoftwareApplication', name: 'ChatGPT', applicationCategory: 'AI Assistant', url: 'https://chatgpt.com' },
+      { '@type': 'SoftwareApplication', name: 'Claude', applicationCategory: 'AI Assistant', url: 'https://claude.ai' },
+      { '@type': 'SoftwareApplication', name: 'Claude Code', applicationCategory: 'AI Development Tool', url: 'https://claude.ai' },
+      { '@type': 'SoftwareApplication', name: 'Google Gemini', applicationCategory: 'AI Assistant', url: 'https://gemini.google.com' },
+      { '@type': 'SoftwareApplication', name: 'Descript', applicationCategory: 'Video Editor', url: 'https://www.descript.com' },
+      { '@type': 'SoftwareApplication', name: 'Midjourney', applicationCategory: 'Image Generation', url: 'https://www.midjourney.com' },
     ],
   }
 
