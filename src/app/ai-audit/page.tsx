@@ -36,44 +36,63 @@ export default function AIAuditPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [fetchError, setFetchError] = useState<string | null>(null);
 
-  // Sample HTML for demo
+  // Sample HTML for demo — realistic European DMO homepage
   const demoHTML = `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>The Future of Artificial Intelligence - TechDaily</title>
-    <meta name="description" content="An in-depth look at how neural networks are reshaping industries.">
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Article",
-      "headline": "The Future of AI",
-      "author": { "@type": "Person", "name": "Sarah Connor" }
-    }
-    </script>
+    <title>Visit Coastal Algarve - Sun, Sea & Culture in Southern Portugal</title>
+    <meta name="description" content="Plan your trip to the Algarve. Explore golden beaches, historic villages, world-class golf, and fresh seafood along Portugal's stunning southern coast.">
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/news">News</a></li>
-        </ul>
-    </nav>
-    <main>
-        <article>
-            <h1>The Future of Artificial Intelligence</h1>
-            <img src="robot.jpg" alt="A humanoid robot shaking hands with a human engineer" />
-            <p><strong>Artificial Intelligence (AI)</strong> is evolving rapidly. Large Language Models (LLMs) are changing how we process information.</p>
-            <h2>Key Challenges</h2>
-            <ul>
-                <li>Compute Costs</li>
-                <li>Data Privacy</li>
-            </ul>
-            <div class="ad-banner"><span>Buy our new AI Coffee Maker! Only $99.99</span></div>
-            <p>Contact us for more info.</p>
-        </article>
-    </main>
-    <footer><p>&copy; 2024 TechDaily.</p></footer>
+    <div class="top-bar">
+        <a href="/">Home</a>
+        <a href="/things-to-do">Things to Do</a>
+        <a href="/beaches">Beaches</a>
+        <a href="/events">Events</a>
+        <a href="/plan-your-trip">Plan Your Trip</a>
+        <a href="/about">About</a>
+    </div>
+    <div class="hero-banner">
+        <h1>Discover the Algarve</h1>
+        <p>Where golden cliffs meet the Atlantic</p>
+        <img src="hero-algarve.jpg" />
+        <img src="beach-sunset.jpg" />
+    </div>
+    <div class="content-area">
+        <h2>Things to Do</h2>
+        <div class="card">
+            <img src="kayak-caves.jpg" alt="Sea kayaking through the Benagil caves" />
+            <h3>Benagil Cave Tours</h3>
+            <p>Paddle through the iconic sea cave with its natural skylight. Tours depart daily from Benagil Beach, April through October.</p>
+        </div>
+        <div class="card">
+            <img src="golf.jpg" />
+            <h3>World-Class Golf</h3>
+            <p>The Algarve hosts over 40 golf courses, including 5 ranked in Europe's top 100. Green fees from \u20ac50 in low season.</p>
+        </div>
+        <div class="card">
+            <img src="old-town.jpg" alt="Cobblestone streets in the historic center of Faro" />
+            <h3>Historic Faro Old Town</h3>
+            <p>Walk the medieval walls, visit the 13th-century cathedral, and explore the charming Cidade Velha district.</p>
+        </div>
+        <div class="card">
+            <img src="seafood-platter.jpg" />
+            <h3>Fresh Seafood & Local Wine</h3>
+            <p>From cataplana stew to grilled sardines, the Algarve's culinary scene is built on fresh Atlantic catch and regional wines.</p>
+        </div>
+        <h2>Upcoming Events</h2>
+        <p>Festival Med Loul\u00e9 \u2014 June 27\u201330, 2026. World music, art, and gastronomy in the streets of Loul\u00e9.</p>
+        <p>Algarve Nature Week \u2014 October 5\u201312, 2026. Birdwatching, hiking, and eco-tourism experiences across the region.</p>
+        <h2>Plan Your Trip</h2>
+        <p>Faro Airport (FAO) connects to over 60 European cities. Peak season: June\u2013September. Best value: March\u2013May and October.</p>
+        <p>Average hotel rate: \u20ac120/night (4-star). Budget options from \u20ac45/night.</p>
+    </div>
+    <div class="cookie-banner">We use cookies to improve your experience. <a href="/privacy">Learn more</a></div>
+    <div class="footer-links">
+        <p>\u00a9 2026 Visit Coastal Algarve. All rights reserved.</p>
+        <a href="/privacy">Privacy Policy</a> | <a href="/contact">Contact Us</a>
+    </div>
 </body>
 </html>`;
 
@@ -367,7 +386,7 @@ export default function AIAuditPage() {
           onClick={loadDemo}
           className="text-sm bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-md transition-colors"
         >
-          Load Demo Content
+          Load Sample DMO Site
         </button>
       </header>
 
@@ -507,6 +526,61 @@ export default function AIAuditPage() {
                             ))}
                         </div>
                     </div>
+
+                    {/* What This Means — plain-English interpretation */}
+                    <div className={`p-5 rounded-lg border ${analysis.semanticScore >= 80 ? 'bg-green-50 border-green-200' : analysis.semanticScore >= 50 ? 'bg-yellow-50 border-yellow-200' : 'bg-red-50 border-red-200'}`}>
+                        <h4 className="text-sm font-bold text-gray-900 mb-2 font-display flex items-center">
+                            <Zap size={16} className="mr-2" />
+                            What This Means for AI Discovery
+                        </h4>
+                        <p className="text-sm text-gray-700 leading-relaxed">
+                            {analysis.semanticScore >= 80
+                                ? "This site is well-structured for AI. Travel planners like ChatGPT and Perplexity can easily identify the main content, understand the page hierarchy, and extract useful facts. Structured data gives AI systems high-confidence answers about this destination."
+                                : analysis.semanticScore >= 50
+                                ? "An AI travel planner can extract some useful content from this site, but key signals are missing. Without clear landmarks or structured data, AI systems have to guess which content matters \u2014 and they often guess wrong. The fixes above would make a measurable difference in how often this destination surfaces in AI-generated travel plans."
+                                : "An AI travel planner would struggle with this site. The core content \u2014 events, attractions, hours, recommendations \u2014 is buried in unstructured markup that AI systems have difficulty parsing. When a traveler asks an AI to plan a trip here, the AI is likely pulling from third-party sources instead of this official site."
+                            }
+                        </p>
+                    </div>
+
+                    {/* Image Audit */}
+                    {analysis.images.length > 0 && (
+                    <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                        <div className="flex items-center justify-between mb-4">
+                            <h3 className="text-lg font-bold text-brand-navy font-display flex items-center">
+                                <ImageIcon size={20} className="mr-2" />
+                                Image Audit
+                            </h3>
+                            <div className="flex items-center space-x-3">
+                                <span className="text-sm text-gray-500">{analysis.images.length} images found</span>
+                                {(() => {
+                                    const missing = analysis.images.filter((img: any) => !img.hasAlt).length;
+                                    return missing > 0 ? (
+                                        <span className="px-2 py-1 rounded text-xs font-bold bg-red-100 text-red-700">{missing} missing alt text</span>
+                                    ) : (
+                                        <span className="px-2 py-1 rounded text-xs font-bold bg-green-100 text-green-700">All have alt text</span>
+                                    );
+                                })()}
+                            </div>
+                        </div>
+                        <p className="text-sm text-gray-500 mb-4">Alt text is how AI &ldquo;sees&rdquo; your images. Missing alt text means AI travel planners skip these visuals entirely.</p>
+                        <div className="space-y-2">
+                            {analysis.images.map((img: any, i: number) => (
+                                <div key={i} className={`flex items-start p-3 rounded border text-sm ${img.hasAlt ? 'bg-gray-50 border-gray-100' : 'bg-red-50 border-red-100'}`}>
+                                    <div className={`mr-3 mt-0.5 flex-shrink-0 ${img.hasAlt ? 'text-green-600' : 'text-red-500'}`}>
+                                        {img.hasAlt ? <CheckCircle size={16} /> : <AlertTriangle size={16} />}
+                                    </div>
+                                    <div className="min-w-0">
+                                        <p className="font-mono text-xs text-gray-400 truncate">{img.src}</p>
+                                        <p className={`font-medium ${img.hasAlt ? 'text-gray-800' : 'text-red-700'}`}>
+                                            {img.alt}
+                                        </p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                    )}
                   </div>
                 )}
 
