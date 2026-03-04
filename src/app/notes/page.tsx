@@ -25,9 +25,9 @@ Here's what happened next: I took that transcript and fed it into Claude Code. W
 
 **The workflow was three steps:**
 
-**Step 1: Record with Plaud.** I set the device on the podium and let it capture the full 60-minute session. Plaud generates a transcript with speaker identification, which gave me a clean text version of everything I said — including the Q&A.
+**Step 1: Record with Plaud.** I clipped the device to my outfit and let it capture the full 60-minute session. Plaud generated a raw transcript — no speaker labels, just a continuous stream of text — which gave me a starting point for everything I said, including the Q&A.
 
-**Step 2: Build with Claude Code.** I gave Claude Code the transcript, my presentation slides, and Brand USA's design system (colors, fonts, logo specs). Claude Code read through the transcript, matched content to slides, and generated a complete HTML page with 68 embedded slide images, responsive layout, and proper Open Graph tags for social sharing. The entire build happened in conversation — I described what I wanted, reviewed iterations, and refined the design through dialogue.
+**Step 2: Build with Claude Code.** I gave Claude Code the transcript, my presentation slides, and Brand USA's design system (colors, fonts, logo specs). Claude Code read through the transcript, matched content to slides, and generated a complete HTML page with embedded slide imagery, responsive layout, and proper Open Graph tags for social sharing. The entire build happened in conversation — I described what I wanted, reviewed iterations, and refined the design through dialogue.
 
 **Step 3: Deploy to Vercel.** One push to Bitbucket, connected to Vercel, and the site was live. Total time from raw recording to public URL: one working session.
 
@@ -37,9 +37,9 @@ This workflow eliminates the gap between "event happened" and "content published
 
 The Wyoming recap page serves multiple purposes: it's a reference for the 300 attendees who were in the room, a portfolio piece for future speaking engagements, and a discoverable resource for anyone searching for AI applications in tourism. One recording, three outcomes.
 
-**Tools used:** Plaud (recording and transcript), Claude Code (website generation), Vercel (hosting), Bitbucket (version control). Total cost beyond the tools I already subscribe to: zero.
+**Tools used:** Plaud (recording and transcript — one-time device cost plus subscription), Claude Code (website generation), Vercel (hosting), Bitbucket (version control).
 
-See the live result: https://wyoming-keynote-recap.vercel.app`,
+See the live result: <a href="https://wyoming-keynote-recap.vercel.app" target="_blank" rel="noopener noreferrer">wyoming-keynote-recap.vercel.app</a>`,
   },
   {
     id: 'ai-agents-taxonomy',
@@ -259,21 +259,17 @@ export default function FieldNotesPage() {
                   {/* Content */}
                   <div className="prose prose-lg max-w-none">
                     {note.content.split('\n\n').map((paragraph, idx) => {
-                      // Handle bold markdown **text**
-                      if (paragraph.startsWith('**')) {
-                        const parts = paragraph.split('**')
-                        return (
-                          <p key={idx} className="text-gray-700 leading-relaxed mb-4">
-                            {parts.map((part, i) =>
-                              i % 2 === 1 ? <strong key={i} className="text-brand-navy font-semibold">{part}</strong> : part
-                            )}
-                          </p>
-                        )
-                      }
+                      // Convert **bold** to <strong> tags
+                      const html = paragraph.replace(
+                        /\*\*(.+?)\*\*/g,
+                        '<strong class="text-brand-navy font-semibold">$1</strong>'
+                      )
                       return (
-                        <p key={idx} className="text-gray-700 leading-relaxed mb-4">
-                          {paragraph}
-                        </p>
+                        <p
+                          key={idx}
+                          className="text-gray-700 leading-relaxed mb-4"
+                          dangerouslySetInnerHTML={{ __html: html }}
+                        />
                       )
                     })}
                   </div>
