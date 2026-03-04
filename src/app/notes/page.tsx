@@ -15,6 +15,33 @@ export const metadata: Metadata = {
 // Field notes data - will expand this over time
 const fieldNotes = [
   {
+    id: 'plaud-to-website',
+    title: 'From Voice Recording to Live Website: How I Built the Wyoming Keynote Recap',
+    date: '2026-03-04',
+    tags: ['Claude Code', 'Plaud', 'Workflow', 'Case Study'],
+    content: `I gave a keynote at the Wyoming Governor's Conference on Tourism in February 2026. The talk covered AI's dual impact on tourism — how it's changing traveler behavior and how it's changing the way we work. I recorded the entire session on my Plaud device, a pocket-sized AI recorder that generates transcripts automatically.
+
+Here's what happened next: I took that transcript and fed it into Claude Code. Within a single working session, Claude Code turned a raw voice recording into a fully designed, responsive website — complete with slide imagery, Brand USA typography, structured sections, and social sharing metadata. The result is live at wyoming-keynote-recap.vercel.app.
+
+**The workflow was three steps:**
+
+**Step 1: Record with Plaud.** I set the device on the podium and let it capture the full 60-minute session. Plaud generates a transcript with speaker identification, which gave me a clean text version of everything I said — including the Q&A.
+
+**Step 2: Build with Claude Code.** I gave Claude Code the transcript, my presentation slides, and Brand USA's design system (colors, fonts, logo specs). Claude Code read through the transcript, matched content to slides, and generated a complete HTML page with 68 embedded slide images, responsive layout, and proper Open Graph tags for social sharing. The entire build happened in conversation — I described what I wanted, reviewed iterations, and refined the design through dialogue.
+
+**Step 3: Deploy to Vercel.** One push to Bitbucket, connected to Vercel, and the site was live. Total time from raw recording to public URL: one working session.
+
+**Why this matters for tourism professionals:**
+
+This workflow eliminates the gap between "event happened" and "content published." Every conference keynote, panel discussion, or stakeholder meeting generates valuable content that typically dies in a notebook or recording app. With a voice recorder and an AI coding tool, that content becomes a shareable, searchable, branded digital asset — the same day.
+
+The Wyoming recap page serves multiple purposes: it's a reference for the 300 attendees who were in the room, a portfolio piece for future speaking engagements, and a discoverable resource for anyone searching for AI applications in tourism. One recording, three outcomes.
+
+**Tools used:** Plaud (recording and transcript), Claude Code (website generation), Vercel (hosting), Bitbucket (version control). Total cost beyond the tools I already subscribe to: zero.
+
+See the live result: https://wyoming-keynote-recap.vercel.app`,
+  },
+  {
     id: 'ai-agents-taxonomy',
     title: 'AI Agents Taxonomy: Four Types That Matter for Tourism',
     date: '2025-01-15',
@@ -105,6 +132,14 @@ export default function FieldNotesPage() {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How can tourism professionals turn a voice recording into a website using AI?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Record your event with a Plaud device to get an automatic transcript, then use Claude Code to generate a fully designed responsive website from that transcript and your slides. Deploy via Vercel for a live URL. This three-step workflow (record, build, deploy) turns any keynote, panel, or meeting into a branded, searchable digital asset in a single working session."
+        }
+      },
       {
         "@type": "Question",
         "name": "What are the four types of AI agents for tourism marketing?",
