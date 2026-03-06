@@ -3,6 +3,13 @@ import { NextResponse } from 'next/server'
 // Field notes data - keep in sync with page.tsx
 const fieldNotes = [
   {
+    id: 'dmo-ai-strategy-framework',
+    title: 'Building Your DMO\'s AI Strategy: The Two-Priority Framework',
+    date: '2026-03-06',
+    tags: ['AI Strategy', 'DMO', 'Framework', 'Source of Truth', 'GEO'],
+    content: `Every DMO needs an AI strategy. The question is what goes in it. After working with destination organizations across the country, a clear framework has emerged: your AI strategy has two priorities, and both are required. Priority One: Source of Truth — your destination's information needs to be accurate wherever someone encounters it. Priority Two: AI-Capable — every function in your organization uses AI fluently. These two priorities reinforce each other. Start with the AI Audit: ask ChatGPT, Perplexity, and Google AI Overviews about your destination, check what's wrong, and run your key pages through Google's Rich Results Test. Build the Source of Truth with schema markup, GEO-optimized content, structured data feeds, and authoritative citations. Become AI-Capable by embedding AI fluency into marketing, research, partner services, and operations — then stand up governance with an AI use policy, departmental AI champions, and a steering committee.`,
+  },
+  {
     id: 'ai-agents-taxonomy',
     title: 'AI Agents Taxonomy: Four Types That Matter for Tourism',
     date: '2025-01-15',
