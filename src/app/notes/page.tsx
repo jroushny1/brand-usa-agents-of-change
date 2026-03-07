@@ -105,68 +105,6 @@ This is a narrower, more focused adoption path than "give everyone ChatGPT licen
 The chatbot era gave us an important proof of concept: AI can do useful work. The Personal OS era delivers on the actual promise: **AI can do the work where it lives, under human supervision, with compounding context that gets smarter every session.** For teams that haven't yet committed to the middle step, the question isn't whether to leapfrog—it's whether you can afford not to.`,
   },
   {
-    id: 'ai-adoption-tips-linkedin',
-    title: 'AI Adoption Tips for DMOs: A 5-Post LinkedIn Series',
-    date: '2026-03-07',
-    tags: ['LinkedIn', 'AI Strategy', 'DMO Leadership', 'Content Strategy', 'Personal OS'],
-    content: `This is a five-part LinkedIn series designed for DMO leaders who want to share what AI adoption actually looks like—not hype, not vendor pitches, but the real operational shift. Each post stands alone but builds a cumulative argument: the teams that skip the chatbot phase and go straight to agentic AI will have a structural advantage.
-
-**Post 1: The Pattern**
-
-In the early 2000s, Kenya skipped landlines and went straight to mobile. Then skipped bank branches for M-Pesa. Estonia skipped paper government for digital-first services. The pattern is always the same: when a transitional technology arrives alongside a more advanced alternative, the teams that skip the middle step win.
-
-This is happening right now in AI adoption. The transitional technology is the chatbot workflow—copy a prompt into ChatGPT, read the output, paste it somewhere else, repeat. The advanced alternative is agentic AI: tools that operate directly in your files and systems, complete real tasks, and submit work for your review.
-
-I'm not a developer. I'm a Chief AI Officer. And I do all my work inside a code editor—not because I learned to code, but because that's where the AI lives. The question for DMO leaders isn't "should we get ChatGPT licenses?" It's "should we skip that step entirely?"
-
-**Post 2: The Review-First Model**
-
-The biggest misconception about AI adoption is that everyone on your team needs to learn prompt engineering. That's like saying everyone needs to learn to code before you can modernize your website.
-
-Here's the reframe: the critical skill isn't prompting. It's reviewing. In my workflow, I describe what I need at a high level. Claude reads my context files, does the work across multiple files and systems, and presents me with changes to approve. My job is to review and accept—the same skill I've used for twenty years reviewing creative briefs, campaign strategies, and vendor proposals.
-
-A destination marketing director, a convention sales lead, a communications VP—they all have deep expertise in evaluating whether work product meets the standard. That expertise transfers directly to reviewing AI output. No new skill required. The barrier to value drops from "everyone learns prompting" to "leadership can review work," which is already true on day one.
-
-**Post 3: The Persistence Problem**
-
-Every DMO leader I talk to has the same complaint about AI: "We tried it, some people loved it, but nothing stuck." Here's why.
-
-Chatbot conversations reset every time. You close the tab, the context is gone. Tomorrow you're re-explaining your brand voice, your audience segments, your campaign calendar. The value never compounds. It's a treadmill.
-
-The fix is embarrassingly simple: markdown files. I keep a folder of plain text files that give AI persistent context about my work. A file called CLAUDE.md tells the AI its role, where my files live, and how to behave. Each project has a process_notes.md that logs decisions, progress, and what's pending. When I start a session tomorrow, the AI reads those files and picks up exactly where we left off.
-
-These aren't just notes. They're instructions. My PODCAST_GUIDE.md doesn't just document how to publish an episode—it teaches the AI the exact steps. I write the guide once, the AI executes that workflow forever. This is the difference between a chatbot and an operating system. One answers questions. The other runs your operations.
-
-**Post 4: The Trust Architecture**
-
-"We're not ready to let AI make changes to our systems." I hear this from every cautious DMO leader. Good instinct, wrong conclusion.
-
-The answer isn't to avoid AI agency. It's to build trust infrastructure. My setup gives AI agency (it can do work) but not autonomy (nothing ships without my approval). The layers are simple:
-
-- Version control tracks every change. Every edit is reversible.
-- Branch isolation means AI works on a copy. Changes only go live after I review and merge.
-- Process notes create a transparent audit trail of what the AI did and why.
-- Guardrail files set boundaries upfront: don't touch the archives, always confirm before deleting.
-
-This isn't exotic technology. It's the same system software teams have used for decades. What's new is that a non-developer—a strategist—can use it because the AI handles the technical mechanics while you handle the judgment.
-
-**Post 5: The Late-Mover Advantage**
-
-Here's the part nobody talks about: if your DMO hasn't fully committed to AI yet, you might actually be in a better position than the early adopters.
-
-Teams that invested early in chatbot workflows now have institutional habits built around copy-paste, prompt libraries, and human-mediated processes. Those habits create inertia. The team that "knows how to use ChatGPT" may resist the shift to agentic AI because it invalidates their hard-won expertise.
-
-Your team has no habits to unlearn. You can go directly to the more advanced paradigm—the same way a startup today would choose cloud infrastructure over on-premise servers.
-
-The starting point is concrete: set up a Personal OS (a folder of markdown files with context about your work). Pick one workflow that's currently manual—website updates, event listings, content publishing. Write a simple guide that teaches AI how that process works. Then let the AI do the work while you review the output.
-
-This is a narrower, more focused path than "give everyone ChatGPT licenses and see what happens." It produces measurable results faster. And it builds toward the paradigm that's clearly winning.
-
-**How to Use This Series**
-
-Post one per week over five weeks. Each post works as a standalone insight but the series builds a complete argument. Encourage comments by ending each post with a direct question to your network. Reshare the series as a PDF or blog post after the five weeks are complete.`,
-  },
-  {
     id: 'dmo-ai-strategy-framework',
     title: 'Building Your DMO\'s AI Strategy: The Two-Priority Framework',
     date: '2026-03-06',
@@ -365,14 +303,6 @@ export default function FieldNotesPage() {
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "The CRIT Framework (Context, Role, Interview, Task) produces superior AI outputs by providing rich context before tasks. Context: Explain your specialized domain (DMO budget cycles, stakeholder dynamics). Role: Assign AI a specific persona ('convention sales director with 15 years experience'). Interview: Let AI ask clarifying questions before proceeding. Task: Only specify the task after establishing context. This framework was developed specifically for tourism professionals because the industry context is too nuanced for generic prompting."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "How should DMO leaders talk about AI adoption on LinkedIn?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "DMO leaders can use a 5-post LinkedIn series covering the core shifts in AI adoption: (1) The Pattern - why teams should leapfrog chatbot workflows for agentic AI, (2) The Review-First Model - the critical skill is reviewing AI output, not prompt engineering, (3) The Persistence Problem - markdown files give AI persistent context so value compounds across sessions, (4) The Trust Architecture - version control, branch isolation, and guardrail files let AI work without unsupervised autonomy, (5) The Late-Mover Advantage - teams without chatbot habits can skip directly to the advanced paradigm. Post one per week for five weeks."
         }
       }
     ]

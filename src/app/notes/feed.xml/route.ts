@@ -10,13 +10,6 @@ const fieldNotes = [
     content: `In the early 2000s, entire regions of sub-Saharan Africa skipped landline telephone infrastructure and went directly to mobile phones. Banking in Kenya skipped branch networks for M-Pesa. The pattern is always the same: when a transitional technology arrives alongside a more advanced alternative, the organizations that skip the middle step gain a structural advantage. I believe we are watching this pattern play out right now in AI adoption. The transitional technology is the chatbot workflow. The more advanced alternative is agentic AI—a setup where AI operates directly in your files and systems, completes actual tasks, and submits its work for your review. The leapfrog path: set up a Personal OS, pick one manual workflow, write a markdown guide that teaches the AI how it works, then let the AI do the work while you review the output.`,
   },
   {
-    id: 'ai-adoption-tips-linkedin',
-    title: 'AI Adoption Tips for DMOs: A 5-Post LinkedIn Series',
-    date: '2026-03-07',
-    tags: ['LinkedIn', 'AI Strategy', 'DMO Leadership', 'Content Strategy', 'Personal OS'],
-    content: `A five-part LinkedIn series for DMO leaders on what AI adoption actually looks like. Post 1: The Pattern — why teams should leapfrog chatbot workflows for agentic AI. Post 2: The Review-First Model — the critical skill is reviewing AI output, not prompt engineering. Post 3: The Persistence Problem — markdown files give AI persistent context so value compounds. Post 4: The Trust Architecture — version control, branch isolation, and guardrail files. Post 5: The Late-Mover Advantage — teams without chatbot habits can skip directly to the advanced paradigm.`,
-  },
-  {
     id: 'dmo-ai-strategy-framework',
     title: 'Building Your DMO\'s AI Strategy: The Two-Priority Framework',
     date: '2026-03-06',
