@@ -23,7 +23,7 @@ const fieldNotes = [
 
 I believe we are watching this pattern play out right now in AI adoption. The transitional technology is the chatbot workflow—ChatGPT, Copilot, Gemini—where a human types a prompt, reads the output, copies it somewhere else, and manually verifies the result. The more advanced alternative is what I use every day: a setup where AI operates directly in my files and systems, completes actual tasks, and submits its work for my review.
 
-I am not a developer. I am a marketing executive. And I do all my work inside a code editor—not because I learned to code, but because **that's where the AI lives.**
+I am not a developer. I am a Chief AI Officer. And I do all my work inside a code editor—not because I learned to code, but because **that's where the AI lives.**
 
 **What My Actual Workflow Looks Like**
 
@@ -34,6 +34,8 @@ At the root sits a file called CLAUDE.md. Claude reads this automatically every 
 Here is what a typical work session looks like: I open VS Code, type /today, and Claude scans all my project folders for tasks with due dates, checks what's overdue, and creates a daily agenda in my Inbox. Then I start working. "Add the new podcast episode to the site." Claude reads my PODCAST_GUIDE.md—a markdown file I wrote that teaches it exactly how to update the three files involved—then makes the changes across the codebase, and presents me with a clean diff to review. I approve. The site deploys automatically.
 
 I didn't write a single line of code. I didn't copy-paste anything. I didn't translate between a chat window and my actual systems. **I described the work, reviewed the output, and approved it.** The same way I'd review work from any team member.
+
+And it's not just website work. When I'm preparing for a keynote, the same system applies. I tell Claude I'm building a 30-minute talk for a specific audience—say, state tourism directors who've never used AI tools. Claude reads my context files, pulls from my field notes on frameworks I've developed, and drafts a narrative arc with section beats. I reshape it, ask for a tighter opening, swap in a better example. Each round, Claude updates the working draft in my project folder. By the time I'm rehearsing, I have a complete outline, speaker notes, and supporting data points—all built iteratively in my files, not copied from a chat window. The process looks exactly like working with a speechwriter, except the speechwriter read my entire body of work before the first draft.
 
 **Why the Chatbot Phase Stalls**
 
