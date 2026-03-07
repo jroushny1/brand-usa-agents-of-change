@@ -1,18 +1,20 @@
 import type { Metadata } from 'next'
-import { Montserrat, Oswald } from 'next/font/google'
+import localFont from 'next/font/local'
 import './globals.css'
 import Script from 'next/script'
 
-const montserrat = Montserrat({
-  subsets: ['latin'],
+const montserrat = localFont({
+  src: '../fonts/montserrat-variable.woff2',
   variable: '--font-montserrat',
   display: 'swap',
+  weight: '100 900',
 })
 
-const oswald = Oswald({
-  subsets: ['latin'],
+const oswald = localFont({
+  src: '../fonts/oswald-variable.woff2',
   variable: '--font-oswald',
   display: 'swap',
+  weight: '200 700',
 })
 
 export const metadata: Metadata = {
