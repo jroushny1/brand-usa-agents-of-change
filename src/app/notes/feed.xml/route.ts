@@ -3,25 +3,11 @@ import { NextResponse } from 'next/server'
 // Field notes data - keep in sync with page.tsx
 const fieldNotes = [
   {
-    id: 'leapfrog-thesis',
-    title: 'The Leapfrog Thesis: Why Some Teams Should Skip Chatbots Entirely',
-    date: '2026-03-07',
-    tags: ['AI Strategy', 'Agentic AI', 'Digital Leapfrogging', 'Personal OS'],
-    content: `In the early 2000s, entire regions of sub-Saharan Africa skipped landline telephone infrastructure and went directly to mobile phones. Banking in Kenya skipped branch networks for M-Pesa. The pattern is always the same: when a transitional technology arrives alongside a more advanced alternative, the organizations that skip the middle step gain a structural advantage.
-
-I believe we are watching this pattern play out right now in AI adoption. The transitional technology is the chatbot workflow—ChatGPT, Copilot, Gemini—where a human types a prompt, reads the output, copies it somewhere else, and manually verifies the result. The more advanced alternative is what I use every day: a setup where AI operates directly in my files and systems, completes actual tasks, and submits its work for my review.
-
-I am not a developer. I am a marketing executive. And I do all my work inside a code editor—not because I learned to code, but because that's where the AI lives.
-
-What My Actual Workflow Looks Like: My entire work life runs through a Personal OS—a folder of markdown files on my local machine. At the root sits CLAUDE.md, which Claude reads automatically every session. It tells Claude its role, where my files live, and how to behave. Every project folder has its own CLAUDE.md with project-specific instructions and process_notes.md that logs session history. When I say "add the new podcast episode," Claude reads my PODCAST_GUIDE.md—a markdown file I wrote that teaches it the exact steps—then makes changes across multiple files and presents me with a clean diff to review. I approve. The site deploys automatically. I didn't write a single line of code.
-
-Why Markdown Files Change Everything: The Personal OS solves the persistence problem. Every session builds on the last through process notes and context files. But the deeper insight: the markdown files aren't just notes—they're instructions. My PODCAST_GUIDE.md doesn't just document how to add a podcast, it teaches Claude the exact workflow. When I write a guide once, Claude can execute that workflow forever. I'm not prompting anymore. I'm building systems. The value compounds instead of resetting.
-
-The Review-First Model: The critical skill for working with AI isn't prompting—it's reviewing. I describe what I need at a high level. Claude reads the context files, does the work, and presents changes to approve. Reviewing work is something experienced professionals already know how to do. A marketing director who has reviewed hundreds of creative briefs already has the core competency. The barrier drops from "everyone learns prompting" to "leadership can review work."
-
-Trust Through Transparency: Claude has agency (it can do work) but not autonomy (nothing ships without approval). Version control tracks every change. Branch isolation keeps production safe. Process notes create transparent audit trails. CLAUDE.md guardrails set boundaries upfront. This is the same infrastructure software teams have used for decades—but now a non-developer can use it just as effectively, because Claude handles the technical mechanics while I handle the judgment.
-
-The leapfrog path is concrete: set up a Personal OS, pick one manual workflow, write a markdown guide that teaches Claude how it works, then let Claude do the work while you review. For teams that haven't committed to the chatbot phase, the question isn't whether to leapfrog—it's whether you can afford not to.`,
+    id: 'dmo-ai-strategy-framework',
+    title: 'Building Your DMO\'s AI Strategy: The Two-Priority Framework',
+    date: '2026-03-06',
+    tags: ['AI Strategy', 'DMO', 'Framework', 'Source of Truth', 'GEO'],
+    content: `Every DMO needs an AI strategy. The question is what goes in it. After working with destination organizations across the country, a clear framework has emerged: your AI strategy has two priorities, and both are required. Priority One: Source of Truth — your destination's information needs to be accurate wherever someone encounters it. Priority Two: AI-Capable — every function in your organization uses AI fluently. These two priorities reinforce each other. Start with the AI Audit: ask ChatGPT, Perplexity, and Google AI Overviews about your destination, check what's wrong, and run your key pages through Google's Rich Results Test. Build the Source of Truth with schema markup, GEO-optimized content, structured data feeds, and authoritative citations. Become AI-Capable by embedding AI fluency into marketing, research, partner services, and operations — then stand up governance with an AI use policy, departmental AI champions, and a steering committee.`,
   },
   {
     id: 'ai-agents-taxonomy',

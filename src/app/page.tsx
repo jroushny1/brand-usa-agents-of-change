@@ -96,6 +96,15 @@ const webinars = [
     thumbnail: 'https://image.mux.com/MIs97m4ZKNZZJwNPP35c02VDqDqIgkZKgmnWhUtzi1s4/thumbnail.png?width=800&height=450&time=10',
     level: 'Strategic',
   },
+  {
+    id: 'ai-for-presentations',
+    title: 'AI for Presentations',
+    description: 'Beautiful.ai can generate a full deck—but it won\'t match your brand. Learn the practical workflow: ChatGPT Projects, Deep Research, Gemini images, and Claude Cowork for HTML decks.',
+    duration: '44 min',
+    muxPlaybackId: 'VUzs9CRk01QRfTtkuo5SD02PQ5uqPMszeo5GaehJ74EzE',
+    thumbnail: 'https://image.mux.com/VUzs9CRk01QRfTtkuo5SD02PQ5uqPMszeo5GaehJ74EzE/thumbnail.png?width=800&height=450&time=10',
+    level: 'Tactical',
+  },
 ]
 
 // Short-form video content - demos, quick tutorials, and bite-sized learning
@@ -264,7 +273,7 @@ export default function HomePage() {
       {
         "@type": "Course",
         "name": "AI Fundamentals Webinar Series",
-        "description": "9 comprehensive webinars covering AI fundamentals, strategy, and implementation for tourism marketing",
+        "description": "10 comprehensive webinars covering AI fundamentals, strategy, and implementation for tourism marketing",
         "numberOfCredits": 9,
         "provider": {
           "@type": "Organization",
@@ -340,6 +349,9 @@ export default function HomePage() {
             <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight tracking-tight">
               The AI Lab for Travel Innovation
             </h1>
+            <div className="text-xs text-gray-400 mb-4">
+              Last Updated: {new Date().toISOString().split('T')[0]}
+            </div>
             <p className="text-xl md:text-2xl mb-10 text-white/90 max-w-3xl mx-auto leading-relaxed">
               A strategic toolkit and research library for the Agents of Change program.
             </p>
@@ -389,7 +401,7 @@ export default function HomePage() {
                 AI Training Videos
               </h3>
               <p className="text-gray-600 mb-6 leading-relaxed">
-                9 comprehensive webinars covering AI fundamentals, strategy, and implementation for tourism marketing
+                10 comprehensive webinars covering AI fundamentals, strategy, and implementation for tourism marketing
               </p>
               <div className="inline-flex items-center text-brand-cyan font-semibold group-hover:gap-2 transition-all">
                 Watch Now

@@ -22,107 +22,9 @@ import {
   AlertOctagon,
   List,
   Layout,
-  BarChart,
-  Clock,
-  Scissors
+  BarChart
 } from 'lucide-react';
 import Link from 'next/link';
-
-// --- Constants for heading specificity check ---
-const GENERIC_HEADINGS = new Set([
-  'overview', 'introduction', 'summary', 'conclusion', 'details',
-  'benefits', 'features', 'resources', 'more', 'faq', 'about',
-  'contact', 'info', 'information', 'background', 'results',
-  'discussion', 'methods', 'methodology', 'approach', 'solution',
-  'problem', 'challenges', 'next steps', 'updates', 'news',
-  'services', 'products', 'pricing', 'team', 'history', 'mission',
-  'vision', 'values', 'goals', 'strategy', 'process', 'tools'
-]);
-
-// --- Dangling reference patterns ---
-const DANGLING_PATTERNS = [
-  /^this\s/i, /^these\s/i, /^that\s/i, /^those\s/i,
-  /^it\s/i, /^its\s/i,
-  /^as mentioned/i, /^as noted/i, /^as discussed/i,
-  /^as we saw/i, /^as described/i, /^as outlined/i,
-  /^building on/i, /^continuing from/i,
-  /^the above/i, /^the following/i
-];
-
-function checkGenericHeading(heading: string): boolean {
-  const normalized = heading.trim().toLowerCase();
-  if (!normalized) return false;
-  if (GENERIC_HEADINGS.has(normalized)) return true;
-  const words = normalized.split(/\s+/);
-  if (words.length === 1 && normalized.length > 0) return true;
-  return false;
-}
-
-function checkDanglingReference(text: string): boolean {
-  if (!text || text.length < 10) return false;
-  const firstSentence = text.split(/[.!?]/)[0].trim();
-  return DANGLING_PATTERNS.some(p => p.test(firstSentence));
-}
-
-// --- Section extraction via DOM tree walk ---
-interface ContentSection {
-  heading: string;
-  tag: string;
-  text: string;
-  tokenCount: number;
-  isGeneric: boolean;
-  hasDangling: boolean;
-}
-
-function extractSections(root: Element): ContentSection[] {
-  const sections: ContentSection[] = [];
-  let currentHeading = '';
-  let currentTag = 'NONE';
-  let currentTexts: string[] = [];
-
-  function finalizeSection() {
-    const text = currentTexts.join(' ').replace(/\s+/g, ' ').trim();
-    if (text.length > 0 || (currentHeading && currentTag !== 'NONE')) {
-      sections.push({
-        heading: currentHeading || '(Content before first heading)',
-        tag: currentTag,
-        text,
-        tokenCount: Math.ceil(text.length / 4),
-        isGeneric: currentHeading ? checkGenericHeading(currentHeading) : false,
-        hasDangling: checkDanglingReference(text)
-      });
-    }
-  }
-
-  function walk(node: Node) {
-    if (node.nodeType === Node.ELEMENT_NODE) {
-      const el = node as Element;
-      if (/^H[1-6]$/.test(el.tagName)) {
-        finalizeSection();
-        currentHeading = el.textContent?.trim() || '';
-        currentTag = el.tagName;
-        currentTexts = [];
-        return;
-      }
-      // Skip noise elements during walk
-      if (['NAV', 'FOOTER', 'HEADER', 'SCRIPT', 'STYLE', 'NOSCRIPT', 'IFRAME', 'SVG'].includes(el.tagName)) return;
-      if (el.classList.contains('ad-banner') || el.classList.contains('cookie-banner')) return;
-    }
-    if (node.nodeType === Node.TEXT_NODE) {
-      const text = node.textContent?.trim();
-      if (text) currentTexts.push(text);
-      return;
-    }
-    for (const child of Array.from(node.childNodes)) {
-      walk(child);
-    }
-  }
-
-  walk(root);
-  finalizeSection();
-
-  return sections;
-}
 
 export default function AIAuditPage() {
   const [activeTab, setActiveTab] = useState('audit');
@@ -134,52 +36,63 @@ export default function AIAuditPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [fetchError, setFetchError] = useState<string | null>(null);
 
-  // Sample HTML for demo — exercises both passing and failing checks
+  // Sample HTML for demo — realistic European DMO homepage
   const demoHTML = `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>The Future of Artificial Intelligence - TechDaily</title>
-    <meta name="description" content="An in-depth look at how neural networks are reshaping industries.">
-    <meta property="article:published_time" content="2025-01-15T08:00:00Z">
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Article",
-      "headline": "The Future of AI",
-      "author": { "@type": "Person", "name": "Sarah Connor" },
-      "datePublished": "2025-01-15",
-      "dateModified": "2025-06-20"
-    }
-    </script>
+    <title>Visit Coastal Algarve - Sun, Sea & Culture in Southern Portugal</title>
+    <meta name="description" content="Plan your trip to the Algarve. Explore golden beaches, historic villages, world-class golf, and fresh seafood along Portugal's stunning southern coast.">
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/news">News</a></li>
-        </ul>
-    </nav>
-    <main>
-        <article>
-            <h1>The Future of Artificial Intelligence</h1>
-            <img src="robot.jpg" alt="A humanoid robot shaking hands with a human engineer" />
-            <p><strong>Artificial Intelligence (AI)</strong> is evolving rapidly. Large Language Models (LLMs) are changing how we process information across every industry.</p>
-            <h2>Benefits</h2>
-            <p>There are many benefits to using AI in business today. Companies report significant gains in productivity, content creation, and data analysis.</p>
-            <h2>How Retrieval-Augmented Generation Changes AI Search</h2>
-            <p>This builds on what we discussed earlier. RAG systems work by breaking your content into chunks, storing them as vector embeddings, and retrieving the most relevant pieces when a user asks a question.</p>
-            <h2>Key Challenges Facing AI Adoption in 2025</h2>
-            <ul>
-                <li>Compute Costs and Infrastructure</li>
-                <li>Data Privacy and Regulatory Compliance</li>
-                <li>Content Integrity and Hallucination</li>
-            </ul>
-            <div class="ad-banner"><span>Buy our new AI Coffee Maker! Only $99.99</span></div>
-            <p>Contact us for more info.</p>
-        </article>
-    </main>
-    <footer><p>&copy; 2025 TechDaily.</p></footer>
+    <div class="top-bar">
+        <a href="/">Home</a>
+        <a href="/things-to-do">Things to Do</a>
+        <a href="/beaches">Beaches</a>
+        <a href="/events">Events</a>
+        <a href="/plan-your-trip">Plan Your Trip</a>
+        <a href="/about">About</a>
+    </div>
+    <div class="hero-banner">
+        <h1>Discover the Algarve</h1>
+        <p>Where golden cliffs meet the Atlantic</p>
+        <img src="hero-algarve.jpg" />
+        <img src="beach-sunset.jpg" />
+    </div>
+    <div class="content-area">
+        <h2>Things to Do</h2>
+        <div class="card">
+            <img src="kayak-caves.jpg" alt="Sea kayaking through the Benagil caves" />
+            <h3>Benagil Cave Tours</h3>
+            <p>Paddle through the iconic sea cave with its natural skylight. Tours depart daily from Benagil Beach, April through October.</p>
+        </div>
+        <div class="card">
+            <img src="golf.jpg" />
+            <h3>World-Class Golf</h3>
+            <p>The Algarve hosts over 40 golf courses, including 5 ranked in Europe's top 100. Green fees from \u20ac50 in low season.</p>
+        </div>
+        <div class="card">
+            <img src="old-town.jpg" alt="Cobblestone streets in the historic center of Faro" />
+            <h3>Historic Faro Old Town</h3>
+            <p>Walk the medieval walls, visit the 13th-century cathedral, and explore the charming Cidade Velha district.</p>
+        </div>
+        <div class="card">
+            <img src="seafood-platter.jpg" />
+            <h3>Fresh Seafood & Local Wine</h3>
+            <p>From cataplana stew to grilled sardines, the Algarve's culinary scene is built on fresh Atlantic catch and regional wines.</p>
+        </div>
+        <h2>Upcoming Events</h2>
+        <p>Festival Med Loul\u00e9 \u2014 June 27\u201330, 2026. World music, art, and gastronomy in the streets of Loul\u00e9.</p>
+        <p>Algarve Nature Week \u2014 October 5\u201312, 2026. Birdwatching, hiking, and eco-tourism experiences across the region.</p>
+        <h2>Plan Your Trip</h2>
+        <p>Faro Airport (FAO) connects to over 60 European cities. Peak season: June\u2013September. Best value: March\u2013May and October.</p>
+        <p>Average hotel rate: \u20ac120/night (4-star). Budget options from \u20ac45/night.</p>
+    </div>
+    <div class="cookie-banner">We use cookies to improve your experience. <a href="/privacy">Learn more</a></div>
+    <div class="footer-links">
+        <p>\u00a9 2026 Visit Coastal Algarve. All rights reserved.</p>
+        <a href="/privacy">Privacy Policy</a> | <a href="/contact">Contact Us</a>
+    </div>
 </body>
 </html>`;
 
@@ -217,7 +130,7 @@ export default function AIAuditPage() {
         // --- SEMANTIC HEALTH CHECK (The "Gold" Test) ---
         let semanticPoints = 0;
         let totalSemanticChecks = 0;
-        const auditLog: Array<{ pass: boolean; msg: string; why: string }> = [];
+        const auditLog: Array<{ pass: boolean; msg: string }> = [];
 
         // Check 1: Landmarks
         const hasMain = doc.querySelector('main');
@@ -228,12 +141,12 @@ export default function AIAuditPage() {
 
         if (landmarkCount >= 3) {
             semanticPoints += 20;
-            auditLog.push({ pass: true, msg: "Excellent use of Landmarks (<main>, <nav>, etc.)", why: "Landmarks tell AI where your real content lives. Without <main>, an AI scraper has to guess which text on the page matters and which is navigation, ads, or boilerplate." });
+            auditLog.push({ pass: true, msg: "Excellent use of Landmarks (<main>, <nav>, etc.)" });
         } else if (landmarkCount > 0) {
             semanticPoints += 10;
-            auditLog.push({ pass: true, msg: "Some Landmarks found, but could be better.", why: "Landmarks tell AI where your real content lives. Without <main>, an AI scraper has to guess which text on the page matters and which is navigation, ads, or boilerplate." });
+            auditLog.push({ pass: true, msg: "Some Landmarks found, but could be better." });
         } else {
-            auditLog.push({ pass: false, msg: "Missing Landmarks (AI struggles to find the main content).", why: "Landmarks tell AI where your real content lives. Without <main>, an AI scraper has to guess which text on the page matters and which is navigation, ads, or boilerplate." });
+            auditLog.push({ pass: false, msg: "Missing Landmarks (AI struggles to find the main content)." });
         }
         totalSemanticChecks += 20;
 
@@ -241,12 +154,12 @@ export default function AIAuditPage() {
         const h1 = doc.querySelectorAll('h1').length;
         if (h1 === 1) {
             semanticPoints += 20;
-            auditLog.push({ pass: true, msg: "Perfect Heading Structure (One H1).", why: "A single H1 tells AI the definitive topic of the page. Multiple H1s create ambiguity about what the page is really about, weakening how AI indexes and retrieves it." });
+            auditLog.push({ pass: true, msg: "Perfect Heading Structure (One H1)." });
         } else if (h1 > 1) {
             semanticPoints += 10;
-            auditLog.push({ pass: false, msg: "Multiple H1 tags found (Confusing for AI).", why: "A single H1 tells AI the definitive topic of the page. Multiple H1s create ambiguity about what the page is really about, weakening how AI indexes and retrieves it." });
+            auditLog.push({ pass: false, msg: "Multiple H1 tags found (Confusing for AI)." });
         } else {
-            auditLog.push({ pass: false, msg: "No H1 tag found.", why: "A single H1 tells AI the definitive topic of the page. Without one, AI has no clear signal about the primary topic of your content." });
+            auditLog.push({ pass: false, msg: "No H1 tag found." });
         }
         totalSemanticChecks += 20;
 
@@ -260,13 +173,13 @@ export default function AIAuditPage() {
 
         if (listRatio > 0.8) {
             semanticPoints += 20;
-            auditLog.push({ pass: true, msg: "Navigation links are correctly structured in Lists.", why: "When links are in <ul><li> tags, AI recognizes them as navigation and filters them out. Links floating in <div> tags look like content, adding noise to what AI reads." });
+            auditLog.push({ pass: true, msg: "Navigation links are correctly structured in Lists." });
         } else if (listRatio > 0.3) {
             semanticPoints += 10;
-            auditLog.push({ pass: false, msg: "Some nav links are missing List structure (<ul><li>).", why: "When links are in <ul><li> tags, AI recognizes them as navigation and filters them out. Links floating in <div> tags look like content, adding noise to what AI reads." });
+            auditLog.push({ pass: false, msg: "Some nav links are missing List structure (<ul><li>)." });
         } else {
             if (navLinks.length > 0) {
-                auditLog.push({ pass: false, msg: "Navigation links found floating in Divs (Div Soup).", why: "When links are in <ul><li> tags, AI recognizes them as navigation and filters them out. Links floating in <div> tags look like content, adding noise to what AI reads." });
+                auditLog.push({ pass: false, msg: "Navigation links found floating in Divs (Div Soup)." });
             } else {
                 semanticPoints += 20;
             }
@@ -283,10 +196,10 @@ export default function AIAuditPage() {
 
         if (altRatio > 0.9) {
             semanticPoints += 20;
-            auditLog.push({ pass: true, msg: "Images have Alt Text (High Accessibility).", why: "Alt text is the only way AI understands images. Without it, every image is invisible to language models and won't appear in AI-generated descriptions of your page." });
+            auditLog.push({ pass: true, msg: "Images have Alt Text (High Accessibility)." });
         } else {
             semanticPoints += Math.round(altRatio * 20);
-            auditLog.push({ pass: false, msg: `${images.length - imagesWithAlt.length} images missing Alt Text.`, why: "Alt text is the only way AI understands images. Without it, every image is invisible to language models and won't appear in AI-generated descriptions of your page." });
+            auditLog.push({ pass: false, msg: `${images.length - imagesWithAlt.length} images missing Alt Text.` });
         }
         totalSemanticChecks += 20;
 
@@ -294,9 +207,9 @@ export default function AIAuditPage() {
         const schemas = doc.querySelectorAll('script[type="application/ld+json"]');
         if (schemas.length > 0) {
             semanticPoints += 20;
-            auditLog.push({ pass: true, msg: "Schema.org Structured Data detected.", why: "Structured data gives AI verified facts (authors, dates, events) it can trust completely, rather than having to extract and guess from your prose." });
+            auditLog.push({ pass: true, msg: "Schema.org Structured Data detected." });
         } else {
-            auditLog.push({ pass: false, msg: "No Structured Data (Knowledge Graph) found.", why: "Structured data gives AI verified facts (authors, dates, events) it can trust completely, rather than having to extract and guess from your prose." });
+            auditLog.push({ pass: false, msg: "No Structured Data (Knowledge Graph) found." });
         }
         totalSemanticChecks += 20;
 
@@ -386,100 +299,6 @@ export default function AIAuditPage() {
         const metaTitle = doc.querySelector('title')?.textContent;
         const metaDesc = doc.querySelector('meta[name="description"]')?.getAttribute('content');
 
-        // --- SECTION-LEVEL ANALYSIS ---
-        const contentRoot = doc.querySelector('main article') || doc.querySelector('main') || doc.body;
-        const sections = contentRoot ? extractSections(contentRoot) : [];
-
-        // --- FRESHNESS SIGNALS ---
-        const freshnessSignals: { dates: Array<{type: string, value: string}>, hasFreshness: boolean } = { dates: [], hasFreshness: false };
-
-        jsonLd.forEach((schema: any) => {
-            if (typeof schema === 'object' && schema !== null) {
-                if (schema.datePublished) freshnessSignals.dates.push({ type: 'datePublished (Schema.org)', value: schema.datePublished });
-                if (schema.dateModified) freshnessSignals.dates.push({ type: 'dateModified (Schema.org)', value: schema.dateModified });
-                if (schema.dateCreated) freshnessSignals.dates.push({ type: 'dateCreated (Schema.org)', value: schema.dateCreated });
-            }
-        });
-
-        const timeElements = doc.querySelectorAll('time[datetime]');
-        timeElements.forEach(t => {
-            const dt = t.getAttribute('datetime');
-            if (dt) freshnessSignals.dates.push({ type: '<time> element', value: dt });
-        });
-
-        const ogPublished = doc.querySelector('meta[property="article:published_time"]');
-        const ogModified = doc.querySelector('meta[property="article:modified_time"]');
-        if (ogPublished) freshnessSignals.dates.push({ type: 'article:published_time (Open Graph)', value: ogPublished.getAttribute('content') || '' });
-        if (ogModified) freshnessSignals.dates.push({ type: 'article:modified_time (Open Graph)', value: ogModified.getAttribute('content') || '' });
-
-        freshnessSignals.hasFreshness = freshnessSignals.dates.length > 0;
-
-        // --- CHUNK READINESS SCORE ---
-        let chunkPoints = 0;
-        const chunkLog: Array<{ pass: boolean; msg: string; why: string }> = [];
-        const headedSections = sections.filter(s => s.tag !== 'NONE');
-
-        // Check 6: Section Token Length
-        if (headedSections.length === 0) {
-            chunkLog.push({ pass: false, msg: "No heading-based sections found to evaluate.", why: "AI retrieval systems split your content at heading boundaries. Without headings, your content gets cut at arbitrary points, often breaking ideas mid-sentence." });
-        } else {
-            const longSections = headedSections.filter(s => s.tokenCount > 800);
-            if (longSections.length === 0) {
-                chunkPoints += 25;
-                chunkLog.push({ pass: true, msg: `All ${headedSections.length} sections are under 800 tokens — good chunk size.`, why: "AI retrieval systems split pages into chunks. Sections over ~800 tokens get cut at unpredictable points, breaking ideas mid-thought. Compact sections survive chunking intact." });
-            } else {
-                const ratio = 1 - (longSections.length / headedSections.length);
-                chunkPoints += Math.round(ratio * 25);
-                chunkLog.push({ pass: false, msg: `${longSections.length} of ${headedSections.length} sections exceed 800 tokens.`, why: "AI retrieval systems split pages into chunks. Sections over ~800 tokens get cut at unpredictable points, breaking ideas mid-thought. Consider splitting long sections with sub-headings." });
-            }
-        }
-
-        // Check 7: Heading Specificity
-        if (headedSections.length === 0) {
-            chunkLog.push({ pass: false, msg: "No headings to evaluate for specificity.", why: "AI systems prepend headings to chunks before creating embeddings. Specific, descriptive headings help AI match your content to the right user queries." });
-        } else {
-            const genericSections = headedSections.filter(s => s.isGeneric);
-            if (genericSections.length === 0) {
-                chunkPoints += 25;
-                chunkLog.push({ pass: true, msg: "All headings are descriptive and specific.", why: "AI systems prepend headings to chunks before creating embeddings. Specific headings like 'How RAG Changes AI Search' create strong, targeted embeddings that match user queries well." });
-            } else {
-                const ratio = 1 - (genericSections.length / headedSections.length);
-                chunkPoints += Math.round(ratio * 25);
-                const examples = genericSections.slice(0, 2).map(s => `"${s.heading}"`).join(', ');
-                chunkLog.push({ pass: false, msg: `${genericSections.length} headings are generic: ${examples}.`, why: "AI systems prepend headings to chunks before creating embeddings. A heading like 'Benefits' produces a weak, ambiguous embedding. Try 'Key Benefits of Semantic Markup for AI Retrieval' instead." });
-            }
-        }
-
-        // Check 8: Freshness Signals
-        const hasDateModified = freshnessSignals.dates.some(d => d.type.includes('dateModified') || d.type.includes('modified_time'));
-        if (hasDateModified) {
-            chunkPoints += 25;
-            chunkLog.push({ pass: true, msg: "Machine-readable dateModified found — AI knows your content is current.", why: "AI retrieval systems use timestamps to rank and filter results. dateModified is especially valuable: it tells AI your content is actively maintained, not abandoned." });
-        } else if (freshnessSignals.hasFreshness) {
-            chunkPoints += 15;
-            chunkLog.push({ pass: true, msg: "Some date signals found, but no dateModified.", why: "AI retrieval systems use timestamps to rank and filter results. You have publish dates, but adding dateModified tells AI your content is actively maintained and up-to-date." });
-        } else {
-            chunkLog.push({ pass: false, msg: "No machine-readable dates found.", why: "AI retrieval systems use timestamps to rank and filter results. Without dates in Schema.org, <time> tags, or Open Graph meta, AI cannot tell if your content is current or years outdated." });
-        }
-
-        // Check 9: Self-Containment
-        if (headedSections.length === 0) {
-            chunkLog.push({ pass: false, msg: "No sections to check for self-containment.", why: "When AI retrieves a chunk, it appears without surrounding context. Each section should open with enough context to make sense on its own." });
-        } else {
-            const danglingSections = headedSections.filter(s => s.hasDangling);
-            if (danglingSections.length === 0) {
-                chunkPoints += 25;
-                chunkLog.push({ pass: true, msg: "All sections are self-contained — no dangling references.", why: "When AI retrieves a chunk, it appears without the rest of your page. Sections that stand alone (no 'This approach...' or 'As mentioned above...') make sense when retrieved independently." });
-            } else {
-                const ratio = 1 - (danglingSections.length / headedSections.length);
-                chunkPoints += Math.round(ratio * 25);
-                const examples = danglingSections.slice(0, 2).map(s => `"${s.heading}"`).join(', ');
-                chunkLog.push({ pass: false, msg: `${danglingSections.length} sections start with dangling references: ${examples}.`, why: "When AI retrieves a chunk, it appears without the rest of your page. If a section opens with 'This approach...' or 'As mentioned above...', the retrieved chunk won't make sense on its own." });
-            }
-        }
-
-        const chunkScore = headedSections.length > 0 ? Math.round(chunkPoints) : 0;
-
         return {
             tokenCount,
             charCount,
@@ -495,11 +314,7 @@ export default function AIAuditPage() {
             framework: detectedFramework,
             isLikelyCSR,
             semanticScore,
-            auditLog,
-            sections,
-            freshnessSignals,
-            chunkScore,
-            chunkLog
+            auditLog
         };
     } catch (error) {
         console.error(error);
@@ -571,7 +386,7 @@ export default function AIAuditPage() {
           onClick={loadDemo}
           className="text-sm bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-md transition-colors"
         >
-          Load Demo Content
+          Load Sample DMO Site
         </button>
       </header>
 
@@ -682,22 +497,9 @@ export default function AIAuditPage() {
             ) : (
               <div className="max-w-4xl mx-auto space-y-6">
 
-                {/* TAB 1: SEMANTIC AUDIT */}
+                {/* TAB 1: SEMANTIC AUDIT (NEW) */}
                 {activeTab === 'audit' && (
                   <div className="space-y-6">
-
-                    {/* Educational intro */}
-                    <div className="bg-blue-50 p-4 rounded-lg border border-blue-100 flex items-start">
-                        <Info className="flex-shrink-0 text-blue-500 mr-3 mt-0.5" size={18} />
-                        <div>
-                            <h4 className="text-sm font-bold text-blue-900 mb-1 font-display">How AI Reads Your Page</h4>
-                            <p className="text-xs text-blue-800 leading-relaxed">
-                                AI systems don&apos;t see your website like humans do. They parse HTML structure to find content, extract text, split it into chunks, and store those chunks for retrieval. These checks evaluate whether your markup and content are optimized for that process.
-                            </p>
-                        </div>
-                    </div>
-
-                    {/* Semantic Health Score */}
                     <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
                         <div className="flex items-center justify-between mb-6">
                             <div>
@@ -712,54 +514,73 @@ export default function AIAuditPage() {
                         <div className="space-y-3">
                             {analysis.auditLog.map((item: any, i: number) => (
                                 <div key={i} className={`flex items-start p-3 rounded border ${item.pass ? 'bg-green-50 border-green-100' : 'bg-red-50 border-red-100'}`}>
-                                    <div className={`mr-3 mt-0.5 flex-shrink-0 ${item.pass ? 'text-green-600' : 'text-red-600'}`}>
+                                    <div className={`mr-3 mt-0.5 ${item.pass ? 'text-green-600' : 'text-red-600'}`}>
                                         {item.pass ? <CheckCircle size={18} /> : <AlertTriangle size={18} />}
                                     </div>
                                     <div>
                                         <p className={`text-sm font-medium ${item.pass ? 'text-green-900' : 'text-red-900'}`}>
                                             {item.msg}
                                         </p>
-                                        <p className="text-xs text-gray-500 mt-1 leading-relaxed">{item.why}</p>
                                     </div>
                                 </div>
                             ))}
                         </div>
                     </div>
 
-                    {/* Chunk Readiness Score */}
-                    <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-                        <div className="flex items-center justify-between mb-2">
-                            <div>
-                                <h3 className="text-xl font-bold text-brand-navy font-display flex items-center">
-                                    <Scissors className="mr-2 text-brand-cyan" size={22} />
-                                    Chunk Readiness Score
-                                </h3>
-                                <p className="text-sm text-gray-500">Will your content survive AI chunking intact?</p>
-                            </div>
-                            <div className={`text-4xl font-extrabold ${analysis.chunkScore >= 75 ? 'text-green-600' : analysis.chunkScore >= 40 ? 'text-yellow-500' : 'text-red-500'}`}>
-                                {analysis.chunkScore}/100
-                            </div>
-                        </div>
-                        <p className="text-xs text-gray-400 mb-6">
-                            Beyond structure, AI systems break your content into retrievable chunks. These checks evaluate whether your content will survive that chunking process with meaning intact.
+                    {/* What This Means — plain-English interpretation */}
+                    <div className={`p-5 rounded-lg border ${analysis.semanticScore >= 80 ? 'bg-green-50 border-green-200' : analysis.semanticScore >= 50 ? 'bg-yellow-50 border-yellow-200' : 'bg-red-50 border-red-200'}`}>
+                        <h4 className="text-sm font-bold text-gray-900 mb-2 font-display flex items-center">
+                            <Zap size={16} className="mr-2" />
+                            What This Means for AI Discovery
+                        </h4>
+                        <p className="text-sm text-gray-700 leading-relaxed">
+                            {analysis.semanticScore >= 80
+                                ? "This site is well-structured for AI. Travel planners like ChatGPT and Perplexity can easily identify the main content, understand the page hierarchy, and extract useful facts. Structured data gives AI systems high-confidence answers about this destination."
+                                : analysis.semanticScore >= 50
+                                ? "An AI travel planner can extract some useful content from this site, but key signals are missing. Without clear landmarks or structured data, AI systems have to guess which content matters \u2014 and they often guess wrong. The fixes above would make a measurable difference in how often this destination surfaces in AI-generated travel plans."
+                                : "An AI travel planner would struggle with this site. The core content \u2014 events, attractions, hours, recommendations \u2014 is buried in unstructured markup that AI systems have difficulty parsing. When a traveler asks an AI to plan a trip here, the AI is likely pulling from third-party sources instead of this official site."
+                            }
                         </p>
+                    </div>
 
-                        <div className="space-y-3">
-                            {analysis.chunkLog.map((item: any, i: number) => (
-                                <div key={i} className={`flex items-start p-3 rounded border ${item.pass ? 'bg-green-50 border-green-100' : 'bg-red-50 border-red-100'}`}>
-                                    <div className={`mr-3 mt-0.5 flex-shrink-0 ${item.pass ? 'text-green-600' : 'text-red-600'}`}>
-                                        {item.pass ? <CheckCircle size={18} /> : <AlertTriangle size={18} />}
+                    {/* Image Audit */}
+                    {analysis.images.length > 0 && (
+                    <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                        <div className="flex items-center justify-between mb-4">
+                            <h3 className="text-lg font-bold text-brand-navy font-display flex items-center">
+                                <ImageIcon size={20} className="mr-2" />
+                                Image Audit
+                            </h3>
+                            <div className="flex items-center space-x-3">
+                                <span className="text-sm text-gray-500">{analysis.images.length} images found</span>
+                                {(() => {
+                                    const missing = analysis.images.filter((img: any) => !img.hasAlt).length;
+                                    return missing > 0 ? (
+                                        <span className="px-2 py-1 rounded text-xs font-bold bg-red-100 text-red-700">{missing} missing alt text</span>
+                                    ) : (
+                                        <span className="px-2 py-1 rounded text-xs font-bold bg-green-100 text-green-700">All have alt text</span>
+                                    );
+                                })()}
+                            </div>
+                        </div>
+                        <p className="text-sm text-gray-500 mb-4">Alt text is how AI &ldquo;sees&rdquo; your images. Missing alt text means AI travel planners skip these visuals entirely.</p>
+                        <div className="space-y-2">
+                            {analysis.images.map((img: any, i: number) => (
+                                <div key={i} className={`flex items-start p-3 rounded border text-sm ${img.hasAlt ? 'bg-gray-50 border-gray-100' : 'bg-red-50 border-red-100'}`}>
+                                    <div className={`mr-3 mt-0.5 flex-shrink-0 ${img.hasAlt ? 'text-green-600' : 'text-red-500'}`}>
+                                        {img.hasAlt ? <CheckCircle size={16} /> : <AlertTriangle size={16} />}
                                     </div>
-                                    <div>
-                                        <p className={`text-sm font-medium ${item.pass ? 'text-green-900' : 'text-red-900'}`}>
-                                            {item.msg}
+                                    <div className="min-w-0">
+                                        <p className="font-mono text-xs text-gray-400 truncate">{img.src}</p>
+                                        <p className={`font-medium ${img.hasAlt ? 'text-gray-800' : 'text-red-700'}`}>
+                                            {img.alt}
                                         </p>
-                                        <p className="text-xs text-gray-500 mt-1 leading-relaxed">{item.why}</p>
                                     </div>
                                 </div>
                             ))}
                         </div>
                     </div>
+                    )}
                   </div>
                 )}
 
@@ -771,48 +592,11 @@ export default function AIAuditPage() {
                         <div>
                             <h3 className="text-sm font-bold text-blue-900 mb-1 font-display">Knowledge Layer</h3>
                             <p className="text-sm text-blue-800 leading-relaxed">
-                                Structured Data (Schema.org) confirms facts like <strong>Events and Authors</strong> with 100% confidence. This is the highest-fidelity data source for AI — no extraction or guessing required.
+                                Structured Data (Schema.org) confirms facts like <strong>Events and Authors</strong> with 100% confidence.
                             </p>
                         </div>
                     </div>
 
-                    {/* Freshness Signals */}
-                    <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-                        <div className="flex justify-between items-center mb-4">
-                            <h3 className="text-lg font-semibold text-brand-navy font-display flex items-center">
-                                <Clock className="mr-2 text-brand-cyan" size={20} />
-                                Freshness Signals
-                            </h3>
-                            <span className={`px-2 py-1 rounded text-xs font-bold uppercase ${analysis.freshnessSignals.hasFreshness ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
-                                {analysis.freshnessSignals.dates.length} Found
-                            </span>
-                        </div>
-
-                        <p className="text-xs text-gray-500 mb-4">
-                            AI retrieval systems use timestamps to decide if content is current. Without machine-readable dates, your content competes without a &quot;freshness&quot; advantage.
-                        </p>
-
-                        {analysis.freshnessSignals.dates.length > 0 ? (
-                            <div className="space-y-2">
-                                {analysis.freshnessSignals.dates.map((d: any, i: number) => (
-                                    <div key={i} className="flex items-center justify-between p-3 bg-gray-50 rounded border">
-                                        <div>
-                                            <span className="text-xs font-mono text-gray-500">{d.type}</span>
-                                        </div>
-                                        <span className="text-sm font-semibold text-gray-800 font-mono">{d.value}</span>
-                                    </div>
-                                ))}
-                            </div>
-                        ) : (
-                            <div className="text-center p-6 text-gray-400 bg-gray-50 rounded border border-dashed border-gray-300">
-                                <Clock size={24} className="mx-auto mb-2 opacity-50" />
-                                <p className="text-sm">No machine-readable dates found.</p>
-                                <p className="text-xs mt-1">Add <code className="bg-gray-200 px-1 rounded">datePublished</code> and <code className="bg-gray-200 px-1 rounded">dateModified</code> to your Schema.org markup.</p>
-                            </div>
-                        )}
-                    </div>
-
-                    {/* JSON-LD Objects */}
                     <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
                         <div className="flex justify-between items-center mb-4">
                             <h3 className="text-lg font-semibold text-brand-navy font-display">JSON-LD Objects</h3>
@@ -820,10 +604,6 @@ export default function AIAuditPage() {
                                 {analysis.jsonLd.length} Found
                             </span>
                         </div>
-
-                        <p className="text-xs text-gray-500 mb-4">
-                            JSON-LD is the preferred format for embedding structured data. Each object below represents a &quot;fact card&quot; that AI can read with 100% confidence — no parsing or guessing needed.
-                        </p>
 
                         {analysis.jsonLd.length > 0 ? (
                             analysis.jsonLd.map((data: any, i: number) => (
@@ -844,19 +624,6 @@ export default function AIAuditPage() {
                 {/* TAB 3: STRUCTURE */}
                 {activeTab === 'structure' && (
                   <div className="space-y-6">
-
-                    {/* Educational intro */}
-                    <div className="bg-blue-50 p-4 rounded-lg border border-blue-100 flex items-start">
-                        <Info className="flex-shrink-0 text-blue-500 mr-3 mt-0.5" size={18} />
-                        <div>
-                            <h4 className="text-sm font-bold text-blue-900 mb-1 font-display">Sections as Retrieval Units</h4>
-                            <p className="text-xs text-blue-800 leading-relaxed">
-                                AI retrieval systems (RAG) break your content into chunks, typically at heading boundaries. Each chunk becomes an independent unit that can be retrieved and shown to an AI without any surrounding context. This view shows how your content would likely be split.
-                            </p>
-                        </div>
-                    </div>
-
-                    {/* Header Outline */}
                     <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
                         <h3 className="text-lg font-semibold mb-4 text-brand-navy font-display">Header Outline</h3>
                         <div className="space-y-2">
@@ -872,82 +639,12 @@ export default function AIAuditPage() {
                             )}
                         </div>
                     </div>
-
-                    {/* Section-by-Section Analysis */}
-                    <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-                        <h3 className="text-lg font-semibold mb-2 text-brand-navy font-display flex items-center">
-                            <Scissors className="mr-2 text-brand-cyan" size={20} />
-                            Section-by-Section Chunk Analysis
-                        </h3>
-                        <p className="text-xs text-gray-500 mb-4">
-                            Each card below represents one chunk as an AI retrieval system would see it. Flags indicate potential problems when this chunk is retrieved on its own.
-                        </p>
-
-                        {analysis.sections.length > 0 ? (
-                            <div className="space-y-3">
-                                {analysis.sections.map((section: ContentSection, i: number) => (
-                                    <div key={i} className={`border rounded-lg p-4 ${section.isGeneric || section.hasDangling || section.tokenCount > 800 ? 'border-yellow-300 bg-yellow-50/30' : 'border-gray-200'}`}>
-                                        <div className="flex items-center justify-between mb-2">
-                                            <div className="flex items-center min-w-0">
-                                                {section.tag !== 'NONE' && (
-                                                    <span className="text-xs font-bold uppercase w-10 text-gray-400 flex-shrink-0">{section.tag}</span>
-                                                )}
-                                                <span className="font-medium text-gray-800 truncate">{section.heading}</span>
-                                            </div>
-                                            <span className={`text-sm font-mono flex-shrink-0 ml-3 ${section.tokenCount > 800 ? 'text-red-600 font-bold' : section.tokenCount > 500 ? 'text-yellow-600' : 'text-gray-500'}`}>
-                                                {section.tokenCount} tokens
-                                            </span>
-                                        </div>
-
-                                        {/* Flags */}
-                                        <div className="flex flex-wrap gap-2 mb-2">
-                                            {section.tokenCount > 800 && (
-                                                <span className="text-xs text-red-700 bg-red-50 border border-red-200 px-2 py-0.5 rounded">
-                                                    Long section — may be split unpredictably
-                                                </span>
-                                            )}
-                                            {section.isGeneric && (
-                                                <span className="text-xs text-yellow-700 bg-yellow-50 border border-yellow-200 px-2 py-0.5 rounded">
-                                                    Generic heading — weak embedding signal
-                                                </span>
-                                            )}
-                                            {section.hasDangling && (
-                                                <span className="text-xs text-orange-700 bg-orange-50 border border-orange-200 px-2 py-0.5 rounded">
-                                                    Dangling reference — won&apos;t stand alone
-                                                </span>
-                                            )}
-                                        </div>
-
-                                        {/* Text preview */}
-                                        {section.text && (
-                                            <p className="text-xs text-gray-400 truncate">{section.text.substring(0, 180)}{section.text.length > 180 ? '...' : ''}</p>
-                                        )}
-                                    </div>
-                                ))}
-                            </div>
-                        ) : (
-                            <div className="text-center p-8 text-gray-400">
-                                <p>No content sections detected.</p>
-                            </div>
-                        )}
-                    </div>
                   </div>
                 )}
 
                 {/* TAB 4: TOKEN STREAM */}
                 {activeTab === 'stream' && (
                   <div className="space-y-6">
-
-                     {/* Educational intro */}
-                     <div className="bg-blue-50 p-4 rounded-lg border border-blue-100 flex items-start">
-                        <Info className="flex-shrink-0 text-blue-500 mr-3 mt-0.5" size={18} />
-                        <div>
-                            <h4 className="text-sm font-bold text-blue-900 mb-1 font-display">What Are Tokens?</h4>
-                            <p className="text-xs text-blue-800 leading-relaxed">
-                                AI models don&apos;t read words — they read <strong>tokens</strong>, which are roughly 4 characters or 3/4 of a word. Every token costs money to process. The &quot;noise ratio&quot; measures how much of your page&apos;s token budget is wasted on navigation, ads, and boilerplate instead of your actual content.
-                            </p>
-                        </div>
-                     </div>
 
                      {/* FRAMEWORK ALERT */}
                      {analysis.framework && (
@@ -1002,21 +699,16 @@ export default function AIAuditPage() {
                              <div>
                                 <div className="text-xs text-gray-500 uppercase">Total Tokens</div>
                                 <div className="text-xl font-semibold text-gray-800">{analysis.tokenCount.toLocaleString()}</div>
-                                <div className="text-xs text-gray-400 mt-1">~{Math.ceil(analysis.charCount / 4)} characters &divide; 4</div>
                              </div>
                              <div>
                                 <div className="text-xs text-gray-500 uppercase">Est. AI Cost</div>
                                 <div className="text-xl font-semibold text-gray-800">${((analysis.tokenCount / 1000) * 0.03).toFixed(4)}</div>
-                                <div className="text-xs text-gray-400 mt-1">At $0.03 / 1K tokens (GPT-4 rate)</div>
                              </div>
                         </div>
                      </div>
 
                      <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-                        <h3 className="text-lg font-semibold mb-2 font-display">Token Visualization</h3>
-                        <p className="text-xs text-gray-500 mb-3">
-                            Each highlighted word below approximates one or more tokens. This is the cleaned text that an AI actually processes after stripping navigation, ads, and boilerplate.
-                        </p>
+                        <h3 className="text-lg font-semibold mb-3 font-display">Token Visualization</h3>
                         <div className="font-mono text-sm leading-relaxed bg-gray-50 p-4 rounded border text-gray-700 break-words max-h-96 overflow-y-auto">
                             {analysis.ragText.split(' ').map((word: string, i: number) => (
                                 <span key={i} className={`inline-block mr-1 px-1 rounded ${i % 2 === 0 ? 'bg-blue-50 text-blue-900' : 'bg-green-50 text-green-900'}`}>
@@ -1031,18 +723,6 @@ export default function AIAuditPage() {
                 {/* TAB 5: RAG CONTEXT */}
                 {activeTab === 'rag' && (
                   <div className="space-y-6">
-
-                    {/* Educational intro */}
-                    <div className="bg-blue-50 p-4 rounded-lg border border-blue-100 flex items-start">
-                        <Info className="flex-shrink-0 text-blue-500 mr-3 mt-0.5" size={18} />
-                        <div>
-                            <h4 className="text-sm font-bold text-blue-900 mb-1 font-display">What Is RAG?</h4>
-                            <p className="text-xs text-blue-800 leading-relaxed">
-                                <strong>Retrieval-Augmented Generation (RAG)</strong> is how AI search engines like Perplexity, ChatGPT search, and Google AI Overviews work. They scrape your page, strip away everything except the core text, split it into chunks, and store those chunks for retrieval. This preview shows the &quot;clean text&quot; that survives that stripping process.
-                            </p>
-                        </div>
-                    </div>
-
                     <div className="bg-white p-8 rounded-lg shadow-sm border border-gray-200 max-w-3xl">
                         <h3 className="text-lg font-semibold mb-4 text-brand-navy border-b pb-2 font-display">
                             Clean Context Preview
@@ -1058,7 +738,7 @@ export default function AIAuditPage() {
                                         <AlertOctagon size={48} className="text-orange-500 mb-4" />
                                         <h4 className="text-lg font-bold text-gray-900 font-display">Hidden Content (CSR)</h4>
                                         <p className="text-sm text-gray-600 max-w-md mt-2">
-                                            Your content is hidden inside JavaScript. Basic AI crawlers cannot see this. This is called Client-Side Rendering (CSR) — the HTML sent from the server is mostly empty, and JavaScript fills in the content after the page loads. Most AI crawlers don&apos;t execute JavaScript.
+                                            Your content is hidden inside JavaScript. Basic AI crawlers cannot see this.
                                         </p>
                                     </>
                                 ) : (

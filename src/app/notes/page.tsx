@@ -15,6 +15,49 @@ export const metadata: Metadata = {
 // Field notes data - will expand this over time
 const fieldNotes = [
   {
+    id: 'dmo-ai-strategy-framework',
+    title: 'Building Your DMO\'s AI Strategy: The Two-Priority Framework',
+    date: '2026-03-06',
+    tags: ['AI Strategy', 'DMO', 'Framework', 'Source of Truth', 'GEO'],
+    content: `Every DMO needs an AI strategy. The question is what goes in it. After working with destination organizations across the country, a clear framework has emerged: your AI strategy has two priorities, and both are required.
+
+**Priority One: Source of Truth.** Your destination's information needs to be accurate wherever someone encounters it — your website, ChatGPT, Google AI Overviews, Perplexity, Gemini, or any third-party platform. Managing the destination narrative has always been the DMO's core job. AI added new channels to the same mandate.
+
+**Priority Two: AI-Capable.** Every function in your organization uses AI fluently — marketing, research, partner services, operations. Team-wide capability with clear protocols. The value of AI compounds when the whole team uses it.
+
+These two priorities reinforce each other. A strong Source of Truth makes your team's AI work more effective, and a capable team builds better data.
+
+**Start with the AI Audit.** Before you build anything, you need to know where you stand. Three steps to do today:
+
+1. Open ChatGPT, Perplexity, and Google AI Overviews. Ask each about your destination. Write down what's wrong, outdated, or missing. That list is your work order.
+2. Search your top three visitor experiences. Does AI cite your website as the source — or someone else's?
+3. Do your key pages have schema markup? Run them through Google's Rich Results Test. The answer will tell you where you are.
+
+**What Source of Truth Requires:**
+
+Schema Markup (JSON-LD) — structured tags on your attractions, events, and accommodations. This is how AI crawlers understand your content as data, not just web text.
+
+GEO-Optimized Content — Generative Engine Optimization means writing long-form, authoritative content that directly answers the questions AI tools are trained to respond to.
+
+Structured Data Feeds — machine-readable feeds for your key assets. AI platforms ingest structured data. Unstructured content gets ignored or misquoted.
+
+Authoritative Citations — AI systems favor sources that credible third parties reference. Earned media, strong backlinks, and verified profiles all reinforce your standing.
+
+**The Two-Year Roadmap.** The content layer has to exist before the integration layer can work. Year One focuses on the content layer: AI visibility audit, schema markup, GEO-optimized content, verified profiles on AI-indexed directories, and a content freshness protocol (AI values recency). Year Two builds the integration layer: real-time partner data feeds, dynamic content, API partnerships with AI travel platforms, a destination AI assistant for owned channels, and analytics tracking AI-sourced discovery traffic.
+
+**Becoming AI-Capable Across the Organization.** The second priority means AI fluency in every department. In marketing: audience analysis and targeting — using AI to identify emerging feeder markets, synthesize visitor research, and sharpen campaign targeting. In research: rapid insight synthesis — analyzing visitor surveys, competitive landscapes, and trend reports in hours. In partner services: personalized outreach — tailoring communications, co-op proposals, and grant summaries to each recipient. In operations: board prep and reporting — summarizing monthly metrics and building briefing documents in a fraction of the time.
+
+**Build the Governance.** Without structure, AI adoption stalls at the enthusiasts and risk exposure grows quietly. Three things to stand up: an AI use policy (set guardrails before tools proliferate — short and actionable beats comprehensive and ignored), an AI champion per department (one designated advocate per function who shares wins, surfaces blockers, and keeps their team moving), and an AI steering committee (cross-functional, meets quarterly, evaluates tools, tracks ROI, and aligns AI investment with strategic priorities).
+
+**Your First Three Moves:**
+
+1. Run the AI audit. Ask ChatGPT, Perplexity, and Google AI Overviews about your destination today. Document the gaps.
+2. Check your schema markup. Use Google's Rich Results Test on your five most important pages.
+3. Name one AI champion per department. That's your governance structure, started.
+
+A state DMO, city DMO, and national tourism organization face different constraints. The strategic categories translate — the specifics are yours to define.`,
+  },
+  {
     id: 'leapfrog-thesis',
     title: 'The Leapfrog Thesis: Why Some Teams Should Skip Chatbots Entirely',
     date: '2026-03-07',
@@ -167,6 +210,33 @@ This is a narrower, more focused path than "give everyone ChatGPT licenses and s
 Post one per week over five weeks. Each post works as a standalone insight but the series builds a complete argument. Encourage comments by ending each post with a direct question to your network. Reshare the series as a PDF or blog post after the five weeks are complete.`,
   },
   {
+    id: 'plaud-to-website',
+    title: 'From Voice Recording to Live Website: How I Built the Wyoming Keynote Recap',
+    date: '2026-03-04',
+    tags: ['Claude Code', 'Plaud', 'Workflow', 'Case Study'],
+    content: `I gave a keynote at the Wyoming Governor's Conference on Tourism in February 2026. The talk covered AI's dual impact on tourism — how it's changing traveler behavior and how it's changing the way we work. I recorded the entire session on my Plaud device, a pocket-sized AI recorder that generates transcripts automatically.
+
+Here's what happened next: I took that transcript and fed it into Claude Code. Within a single working session, Claude Code turned a raw voice recording into a fully designed, responsive website — complete with slide imagery, Brand USA typography, structured sections, and social sharing metadata. The result is live at wyoming-keynote-recap.vercel.app.
+
+**The workflow was three steps:**
+
+**Step 1: Record with Plaud.** I clipped the device to my outfit and let it capture the full 60-minute session. Plaud generated a raw transcript — no speaker labels, just a continuous stream of text — which gave me a starting point for everything I said, including the Q&A.
+
+**Step 2: Build with Claude Code.** I gave Claude Code the transcript, my presentation slides, and Brand USA's design system (colors, fonts, logo specs). Claude Code read through the transcript, matched content to slides, and generated a complete HTML page with embedded slide imagery, responsive layout, and proper Open Graph tags for social sharing. The entire build happened in conversation — I described what I wanted, reviewed iterations, and refined the design through dialogue.
+
+**Step 3: Deploy to Vercel.** One push to Bitbucket, connected to Vercel, and the site was live. Total time from raw recording to public URL: one working session.
+
+**Why this matters for tourism professionals:**
+
+This workflow eliminates the gap between "event happened" and "content published." Every conference keynote, panel discussion, or stakeholder meeting generates valuable content that typically dies in a notebook or recording app. With a voice recorder and an AI coding tool, that content becomes a shareable, searchable, branded digital asset — the same day.
+
+The Wyoming recap page serves multiple purposes: it's a reference for the 300 attendees who were in the room, a portfolio piece for future speaking engagements, and a discoverable resource for anyone searching for AI applications in tourism. One recording, three outcomes.
+
+**Tools used:** Plaud (recording and transcript — one-time device cost plus subscription), Claude Code (website generation), Vercel (hosting), Bitbucket (version control).
+
+See the live result: <a href="https://wyoming-keynote-recap.vercel.app" target="_blank" rel="noopener noreferrer">wyoming-keynote-recap.vercel.app</a>`,
+  },
+  {
     id: 'ai-agents-taxonomy',
     title: 'AI Agents Taxonomy: Four Types That Matter for Tourism',
     date: '2025-01-15',
@@ -259,10 +329,18 @@ export default function FieldNotesPage() {
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "What is digital leapfrogging in AI adoption for destination marketing?",
+        "name": "What should a DMO's AI strategy include?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Digital leapfrogging means skipping the chatbot workflow phase (ChatGPT, Copilot, Gemini copy-paste workflows) and going directly to agentic AI tools like Claude Code paired with a Personal OS—a folder of local markdown files that give AI persistent context about your work. Instead of learning prompt engineering, teams use a review-first model where AI does the work and experienced professionals review the output. The Personal OS approach compounds value across sessions through CLAUDE.md instruction files and process notes, unlike chatbot conversations that reset every time."
+          "text": "A DMO's AI strategy has two priorities: (1) Source of Truth — ensuring your destination's information is accurate across your website, ChatGPT, Google AI Overviews, Perplexity, and third-party platforms through schema markup (JSON-LD), GEO-optimized content, structured data feeds, and authoritative citations; (2) AI-Capable — building team-wide AI fluency across marketing, research, partner services, and operations with governance structures including an AI use policy, departmental AI champions, and a steering committee. Start by running an AI audit: ask major AI platforms about your destination and document the gaps."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How can tourism professionals turn a voice recording into a website using AI?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Record your event with a Plaud device to get an automatic transcript, then use Claude Code to generate a fully designed responsive website from that transcript and your slides. Deploy via Vercel for a live URL. This three-step workflow (record, build, deploy) turns any keynote, panel, or meeting into a branded, searchable digital asset in a single working session."
         }
       },
       {
@@ -392,37 +470,17 @@ export default function FieldNotesPage() {
                   {/* Content */}
                   <div className="prose prose-lg max-w-none">
                     {note.content.split('\n\n').map((paragraph, idx) => {
-                      // Helper: render **bold** markdown within any text
-                      const renderBold = (text: string) => {
-                        if (!text.includes('**')) return text
-                        const parts = text.split('**')
-                        return parts.map((part: string, i: number) =>
-                          i % 2 === 1 ? <strong key={i} className="text-brand-navy font-semibold">{part}</strong> : part
-                        )
-                      }
-
-                      // Handle bullet point lists (lines starting with "- ")
-                      const lines = paragraph.split('\n')
-                      const bulletLines = lines.filter(l => l.startsWith('- '))
-                      if (bulletLines.length > 1) {
-                        const intro = lines.filter(l => !l.startsWith('- ')).join(' ').trim()
-                        return (
-                          <div key={idx} className="mb-4">
-                            {intro && <p className="text-gray-700 leading-relaxed mb-2">{renderBold(intro)}</p>}
-                            <ul className="list-disc list-outside ml-6 space-y-1 text-gray-700 leading-relaxed">
-                              {bulletLines.map((line, li) => (
-                                <li key={li}>{renderBold(line.substring(2))}</li>
-                              ))}
-                            </ul>
-                          </div>
-                        )
-                      }
-
-                      // Regular paragraph with bold support
+                      // Convert **bold** to <strong> tags
+                      const html = paragraph.replace(
+                        /\*\*(.+?)\*\*/g,
+                        '<strong class="text-brand-navy font-semibold">$1</strong>'
+                      )
                       return (
-                        <p key={idx} className="text-gray-700 leading-relaxed mb-4">
-                          {renderBold(paragraph)}
-                        </p>
+                        <p
+                          key={idx}
+                          className="text-gray-700 leading-relaxed mb-4"
+                          dangerouslySetInnerHTML={{ __html: html }}
+                        />
                       )
                     })}
                   </div>

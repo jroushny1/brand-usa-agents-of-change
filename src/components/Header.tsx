@@ -42,9 +42,6 @@ export default function Header() {
             <Link href="/library" className="text-base font-medium text-brand-navy hover:text-brand-cyan transition-colors">
               Resources
             </Link>
-            <Link href="/personal-os" className="text-base font-medium text-brand-navy hover:text-brand-cyan transition-colors">
-              Personal OS
-            </Link>
             <Link href="/ai-audit" className="text-base font-medium text-brand-navy hover:text-brand-cyan transition-colors">
               AI Audit
             </Link>
@@ -104,13 +101,6 @@ export default function Header() {
               onClick={() => setMobileMenuOpen(false)}
             >
               Resources
-            </Link>
-            <Link
-              href="/personal-os"
-              className="block px-3 py-2 rounded-md text-base font-medium text-brand-navy hover:text-brand-cyan hover:bg-gray-50 transition-colors"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Personal OS
             </Link>
             <Link
               href="/ai-audit"
