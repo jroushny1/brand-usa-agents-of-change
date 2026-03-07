@@ -3,6 +3,13 @@ import { NextResponse } from 'next/server'
 // Field notes data - keep in sync with page.tsx
 const fieldNotes = [
   {
+    id: 'leapfrog-thesis',
+    title: 'The Leapfrog Thesis: Why Some Teams Should Skip Chatbots Entirely',
+    date: '2026-03-07',
+    tags: ['AI Strategy', 'Agentic AI', 'Digital Leapfrogging', 'Personal OS'],
+    content: `In the early 2000s, entire regions of sub-Saharan Africa skipped landline telephone infrastructure and went directly to mobile phones. Banking in Kenya skipped branch networks for M-Pesa. The pattern is always the same: when a transitional technology arrives alongside a more advanced alternative, the organizations that skip the middle step gain a structural advantage. I believe we are watching this pattern play out right now in AI adoption. The transitional technology is the chatbot workflow. The more advanced alternative is agentic AI—a setup where AI operates directly in your files and systems, completes actual tasks, and submits its work for your review. The leapfrog path: set up a Personal OS, pick one manual workflow, write a markdown guide that teaches the AI how it works, then let the AI do the work while you review the output.`,
+  },
+  {
     id: 'dmo-ai-strategy-framework',
     title: 'Building Your DMO\'s AI Strategy: The Two-Priority Framework',
     date: '2026-03-06',
