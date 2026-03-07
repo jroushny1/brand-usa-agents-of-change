@@ -288,7 +288,7 @@ export default function FieldNotesPage() {
           "@type": "Answer",
           "text": "The CRIT Framework (Context, Role, Interview, Task) produces superior AI outputs by providing rich context before tasks. Context: Explain your specialized domain (DMO budget cycles, stakeholder dynamics). Role: Assign AI a specific persona ('convention sales director with 15 years experience'). Interview: Let AI ask clarifying questions before proceeding. Task: Only specify the task after establishing context. This framework was developed specifically for tourism professionals because the industry context is too nuanced for generic prompting."
         }
-      }
+      },
       {
         "@type": "Question",
         "name": "How should DMO leaders talk about AI adoption on LinkedIn?",
