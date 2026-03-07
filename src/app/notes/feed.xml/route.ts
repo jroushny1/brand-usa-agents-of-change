@@ -3,6 +3,27 @@ import { NextResponse } from 'next/server'
 // Field notes data - keep in sync with page.tsx
 const fieldNotes = [
   {
+    id: 'leapfrog-thesis',
+    title: 'The Leapfrog Thesis: Why Some Teams Should Skip Chatbots Entirely',
+    date: '2026-03-07',
+    tags: ['AI Strategy', 'Agentic AI', 'Digital Leapfrogging', 'DMO Leadership'],
+    content: `In the early 2000s, entire regions of sub-Saharan Africa skipped landline telephone infrastructure and went directly to mobile phones. Banking in Kenya skipped branch networks for M-Pesa. Estonia skipped paper government for digital-first citizen services. The pattern is always the same: when a transitional technology arrives alongside a more advanced alternative, the organizations that skip the middle step gain a structural advantage.
+
+We are watching this same pattern emerge in AI adoption for destination marketing. The transitional technology is the chatbot workflow—ChatGPT, Copilot, Gemini—where a human types a prompt, reads the output, copies it somewhere else, and manually verifies the result. The more advanced alternative is supervised agentic AI: tools that operate directly in your systems, complete actual tasks, and submit their work for human review.
+
+Most DMOs are currently stuck in the chatbot phase. Many haven't even arrived there yet. The conventional wisdom says they need to "get comfortable with AI" before advancing. The leapfrog thesis says the opposite: the chatbot phase is optional, and skipping it may actually be the faster path to real value.
+
+Why the Chatbot Phase Stalls: The chatbot adoption playbook looks something like this: buy enterprise licenses, train the team on prompting, designate "AI champions," build a prompt library, create an acceptable use policy, and wait for adoption to spread organically. Here is what actually happens: 20% of the team uses it regularly, 30% tried it and stopped, and 50% never logged in. The AI champions burn out. The prompt library becomes stale. Leadership asks for ROI metrics and gets anecdotes. This isn't a failure of the people. It's a failure of the paradigm. The chatbot workflow requires every individual on the team to develop a new skill—prompt engineering—before any organizational value is created.
+
+The Review-First Model: The alternative is a model where AI does the work and humans review it. In this model, you describe what you need at a high level. The agent reads your codebase, understands the existing patterns, writes the code, runs the tests, and presents you with a complete set of changes to review. Your job is to review and approve, not to operate. Reviewing work is something experienced professionals already know how to do. The barrier to value drops from "everyone learns prompting" to "leadership can review work."
+
+The Trust Architecture: Version control means every change AI makes is tracked, diffable, and reversible. Branch isolation means AI works on a separate branch, never touching production directly. Automated testing catches obvious errors before a human ever sees them. Audit trails log every action the agent took. This is the same infrastructure software teams have used for decades.
+
+What Gets Leapfrogged: The leapfrog applies to operational AI adoption, not all AI use. Brainstorming and exploratory research still benefit from chatbot interaction. What gets leapfrogged is the institutional investment in chatbot-as-workflow: prompt libraries, copy-paste pipelines, and processes where a human mediates every interaction between AI and actual systems.
+
+The leapfrog path: identify one technical workflow that's currently manual. Set up an agentic tool with proper version control and review processes. Train the team lead to review AI-generated work, not to operate AI tools. Measure the output and expand from there. For teams that haven't yet committed to the middle step, the question isn't whether to leapfrog—it's whether you can afford not to.`,
+  },
+  {
     id: 'ai-agents-taxonomy',
     title: 'AI Agents Taxonomy: Four Types That Matter for Tourism',
     date: '2025-01-15',
