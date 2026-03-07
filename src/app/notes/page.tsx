@@ -15,49 +15,6 @@ export const metadata: Metadata = {
 // Field notes data - will expand this over time
 const fieldNotes = [
   {
-    id: 'dmo-ai-strategy-framework',
-    title: 'Building Your DMO\'s AI Strategy: The Two-Priority Framework',
-    date: '2026-03-06',
-    tags: ['AI Strategy', 'DMO', 'Framework', 'Source of Truth', 'GEO'],
-    content: `Every DMO needs an AI strategy. The question is what goes in it. After working with destination organizations across the country, a clear framework has emerged: your AI strategy has two priorities, and both are required.
-
-**Priority One: Source of Truth.** Your destination's information needs to be accurate wherever someone encounters it — your website, ChatGPT, Google AI Overviews, Perplexity, Gemini, or any third-party platform. Managing the destination narrative has always been the DMO's core job. AI added new channels to the same mandate.
-
-**Priority Two: AI-Capable.** Every function in your organization uses AI fluently — marketing, research, partner services, operations. Team-wide capability with clear protocols. The value of AI compounds when the whole team uses it.
-
-These two priorities reinforce each other. A strong Source of Truth makes your team's AI work more effective, and a capable team builds better data.
-
-**Start with the AI Audit.** Before you build anything, you need to know where you stand. Three steps to do today:
-
-1. Open ChatGPT, Perplexity, and Google AI Overviews. Ask each about your destination. Write down what's wrong, outdated, or missing. That list is your work order.
-2. Search your top three visitor experiences. Does AI cite your website as the source — or someone else's?
-3. Do your key pages have schema markup? Run them through Google's Rich Results Test. The answer will tell you where you are.
-
-**What Source of Truth Requires:**
-
-Schema Markup (JSON-LD) — structured tags on your attractions, events, and accommodations. This is how AI crawlers understand your content as data, not just web text.
-
-GEO-Optimized Content — Generative Engine Optimization means writing long-form, authoritative content that directly answers the questions AI tools are trained to respond to.
-
-Structured Data Feeds — machine-readable feeds for your key assets. AI platforms ingest structured data. Unstructured content gets ignored or misquoted.
-
-Authoritative Citations — AI systems favor sources that credible third parties reference. Earned media, strong backlinks, and verified profiles all reinforce your standing.
-
-**The Two-Year Roadmap.** The content layer has to exist before the integration layer can work. Year One focuses on the content layer: AI visibility audit, schema markup, GEO-optimized content, verified profiles on AI-indexed directories, and a content freshness protocol (AI values recency). Year Two builds the integration layer: real-time partner data feeds, dynamic content, API partnerships with AI travel platforms, a destination AI assistant for owned channels, and analytics tracking AI-sourced discovery traffic.
-
-**Becoming AI-Capable Across the Organization.** The second priority means AI fluency in every department. In marketing: audience analysis and targeting — using AI to identify emerging feeder markets, synthesize visitor research, and sharpen campaign targeting. In research: rapid insight synthesis — analyzing visitor surveys, competitive landscapes, and trend reports in hours. In partner services: personalized outreach — tailoring communications, co-op proposals, and grant summaries to each recipient. In operations: board prep and reporting — summarizing monthly metrics and building briefing documents in a fraction of the time.
-
-**Build the Governance.** Without structure, AI adoption stalls at the enthusiasts and risk exposure grows quietly. Three things to stand up: an AI use policy (set guardrails before tools proliferate — short and actionable beats comprehensive and ignored), an AI champion per department (one designated advocate per function who shares wins, surfaces blockers, and keeps their team moving), and an AI steering committee (cross-functional, meets quarterly, evaluates tools, tracks ROI, and aligns AI investment with strategic priorities).
-
-**Your First Three Moves:**
-
-1. Run the AI audit. Ask ChatGPT, Perplexity, and Google AI Overviews about your destination today. Document the gaps.
-2. Check your schema markup. Use Google's Rich Results Test on your five most important pages.
-3. Name one AI champion per department. That's your governance structure, started.
-
-A state DMO, city DMO, and national tourism organization face different constraints. The strategic categories translate — the specifics are yours to define.`,
-  },
-  {
     id: 'leapfrog-thesis',
     title: 'The Leapfrog Thesis: Why Some Teams Should Skip Chatbots Entirely',
     date: '2026-03-07',
@@ -208,6 +165,49 @@ This is a narrower, more focused path than "give everyone ChatGPT licenses and s
 **How to Use This Series**
 
 Post one per week over five weeks. Each post works as a standalone insight but the series builds a complete argument. Encourage comments by ending each post with a direct question to your network. Reshare the series as a PDF or blog post after the five weeks are complete.`,
+  },
+  {
+    id: 'dmo-ai-strategy-framework',
+    title: 'Building Your DMO\'s AI Strategy: The Two-Priority Framework',
+    date: '2026-03-06',
+    tags: ['AI Strategy', 'DMO', 'Framework', 'Source of Truth', 'GEO'],
+    content: `Every DMO needs an AI strategy. The question is what goes in it. After working with destination organizations across the country, a clear framework has emerged: your AI strategy has two priorities, and both are required.
+
+**Priority One: Source of Truth.** Your destination's information needs to be accurate wherever someone encounters it — your website, ChatGPT, Google AI Overviews, Perplexity, Gemini, or any third-party platform. Managing the destination narrative has always been the DMO's core job. AI added new channels to the same mandate.
+
+**Priority Two: AI-Capable.** Every function in your organization uses AI fluently — marketing, research, partner services, operations. Team-wide capability with clear protocols. The value of AI compounds when the whole team uses it.
+
+These two priorities reinforce each other. A strong Source of Truth makes your team's AI work more effective, and a capable team builds better data.
+
+**Start with the AI Audit.** Before you build anything, you need to know where you stand. Three steps to do today:
+
+1. Open ChatGPT, Perplexity, and Google AI Overviews. Ask each about your destination. Write down what's wrong, outdated, or missing. That list is your work order.
+2. Search your top three visitor experiences. Does AI cite your website as the source — or someone else's?
+3. Do your key pages have schema markup? Run them through Google's Rich Results Test. The answer will tell you where you are.
+
+**What Source of Truth Requires:**
+
+Schema Markup (JSON-LD) — structured tags on your attractions, events, and accommodations. This is how AI crawlers understand your content as data, not just web text.
+
+GEO-Optimized Content — Generative Engine Optimization means writing long-form, authoritative content that directly answers the questions AI tools are trained to respond to.
+
+Structured Data Feeds — machine-readable feeds for your key assets. AI platforms ingest structured data. Unstructured content gets ignored or misquoted.
+
+Authoritative Citations — AI systems favor sources that credible third parties reference. Earned media, strong backlinks, and verified profiles all reinforce your standing.
+
+**The Two-Year Roadmap.** The content layer has to exist before the integration layer can work. Year One focuses on the content layer: AI visibility audit, schema markup, GEO-optimized content, verified profiles on AI-indexed directories, and a content freshness protocol (AI values recency). Year Two builds the integration layer: real-time partner data feeds, dynamic content, API partnerships with AI travel platforms, a destination AI assistant for owned channels, and analytics tracking AI-sourced discovery traffic.
+
+**Becoming AI-Capable Across the Organization.** The second priority means AI fluency in every department. In marketing: audience analysis and targeting — using AI to identify emerging feeder markets, synthesize visitor research, and sharpen campaign targeting. In research: rapid insight synthesis — analyzing visitor surveys, competitive landscapes, and trend reports in hours. In partner services: personalized outreach — tailoring communications, co-op proposals, and grant summaries to each recipient. In operations: board prep and reporting — summarizing monthly metrics and building briefing documents in a fraction of the time.
+
+**Build the Governance.** Without structure, AI adoption stalls at the enthusiasts and risk exposure grows quietly. Three things to stand up: an AI use policy (set guardrails before tools proliferate — short and actionable beats comprehensive and ignored), an AI champion per department (one designated advocate per function who shares wins, surfaces blockers, and keeps their team moving), and an AI steering committee (cross-functional, meets quarterly, evaluates tools, tracks ROI, and aligns AI investment with strategic priorities).
+
+**Your First Three Moves:**
+
+1. Run the AI audit. Ask ChatGPT, Perplexity, and Google AI Overviews about your destination today. Document the gaps.
+2. Check your schema markup. Use Google's Rich Results Test on your five most important pages.
+3. Name one AI champion per department. That's your governance structure, started.
+
+A state DMO, city DMO, and national tourism organization face different constraints. The strategic categories translate — the specifics are yours to define.`,
   },
   {
     id: 'plaud-to-website',
