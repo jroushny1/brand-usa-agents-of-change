@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Script from 'next/script'
 
 export const metadata: Metadata = {
   title: 'Building a Personal Operating System | Video Walkthrough',
@@ -467,7 +468,7 @@ export default function WalkthroughPage() {
       `}} />
 
       {/* Mux Player Script */}
-      <script src="https://cdn.jsdelivr.net/npm/@mux/mux-player@3/dist/mux-player.mjs" type="module" />
+      <Script src="https://cdn.jsdelivr.net/npm/@mux/mux-player@3/dist/mux-player.mjs" type="module" strategy="beforeInteractive" />
 
       {/* Back Link */}
       <Link href="/personal-os" className="wt-back">
