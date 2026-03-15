@@ -107,6 +107,15 @@ const webinars = [
   },
 ]
 
+// Featured walkthrough
+const featuredWalkthrough = {
+  title: 'Building a Personal Operating System',
+  description: 'A live walkthrough of Claude Code + VS Code + the PARA method. See how a local file-based system gives AI full context about your work, your brand, and your projects — from folder structure to API automations.',
+  duration: '65 min',
+  href: '/personal-os/walkthrough',
+  thumbnail: 'https://image.mux.com/kFK1tI42m01NNgSm02ZVjzlZLZ01kWPwH7La7ICRrABz8g/thumbnail.png?width=800&height=450&time=5',
+}
+
 // Short-form video content - demos, quick tutorials, and bite-sized learning
 const shortFormVideos = [
   {
@@ -510,6 +519,58 @@ export default function HomePage() {
                 </div>
               </Link>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Walkthrough */}
+      <section className="py-16 lg:py-24 bg-gradient-to-b from-brand-navy to-[#1a2d4a]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <div className="text-xs tracking-widest text-brand-cyan uppercase mb-4 font-semibold">
+                Video Walkthrough
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 font-display">
+                {featuredWalkthrough.title}
+              </h2>
+              <p className="text-lg text-gray-300 mb-6 leading-relaxed">
+                {featuredWalkthrough.description}
+              </p>
+              <div className="flex items-center gap-6 mb-8">
+                <span className="flex items-center text-gray-400 text-sm">
+                  <Clock className="h-4 w-4 mr-1" />
+                  {featuredWalkthrough.duration}
+                </span>
+                <span className="text-sm font-medium px-3 py-1 rounded-full bg-brand-cyan/20 text-brand-cyan">
+                  9 focused clips
+                </span>
+              </div>
+              <Link
+                href={featuredWalkthrough.href}
+                className="inline-flex items-center bg-brand-cyan text-brand-navy px-6 py-3 rounded-lg font-semibold hover:bg-white transition"
+              >
+                Watch the Walkthrough
+                <Play className="ml-2 h-5 w-5" />
+              </Link>
+            </div>
+            <Link href={featuredWalkthrough.href} className="group relative rounded-xl overflow-hidden shadow-2xl">
+              <div className="aspect-video relative overflow-hidden bg-gray-900">
+                <Image
+                  src={featuredWalkthrough.thumbnail}
+                  alt={featuredWalkthrough.title}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-300 opacity-80"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-16 h-16 rounded-full bg-brand-cyan/90 flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <Play className="h-8 w-8 text-white" fill="white" />
+                  </div>
+                </div>
+              </div>
+            </Link>
           </div>
         </div>
       </section>
