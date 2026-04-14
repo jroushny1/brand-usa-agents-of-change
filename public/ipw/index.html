@@ -44,7 +44,7 @@ body { font-family: 'Montserrat', sans-serif; color: var(--slate); background: #
 
 /* Page header */
 .page-header {
-  padding: 2.5rem 2rem 1rem;
+  padding: 2.5rem 2rem 1.5rem;
   max-width: 1000px;
   margin: 0 auto;
 }
@@ -56,40 +56,36 @@ body { font-family: 'Montserrat', sans-serif; color: var(--slate); background: #
   text-transform: uppercase;
   letter-spacing: .02em;
 }
-.page-header .event-title {
+.page-header .event-subtitle {
   font-family: 'Oswald', sans-serif;
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   font-weight: 400;
   color: var(--slate);
-  margin-top: .5rem;
-}
-.page-header .event-location {
-  font-size: .9rem;
-  color: var(--pond);
-  margin-top: .25rem;
+  margin-top: .35rem;
 }
 
-/* Hero image */
-.hero-image {
+/* Hero image — large, event-page style */
+.hero-wrap {
   position: relative;
   max-width: 1000px;
-  margin: 1.5rem auto 0;
+  margin: 0 auto;
   padding: 0 2rem;
 }
-.hero-image img {
+.hero-wrap img {
   width: 100%;
-  height: 320px;
+  height: 440px;
   object-fit: cover;
+  object-position: center;
   border-radius: 2px;
   display: block;
 }
-.hero-image .date-card {
+.date-card {
   position: absolute;
   bottom: 1.5rem;
   left: 3rem;
   background: rgba(16, 31, 54, .92);
   color: #fff;
-  padding: 1rem 1.5rem;
+  padding: 1.1rem 1.6rem;
   border-radius: 2px;
 }
 .date-card .month {
@@ -121,34 +117,37 @@ body { font-family: 'Montserrat', sans-serif; color: var(--slate); background: #
   letter-spacing: .04em;
 }
 
-/* Intro text */
+/* Intro — spacious, minimal */
 .intro {
   max-width: 1000px;
   margin: 0 auto;
-  padding: 2rem 2rem 1rem;
+  padding: 2.5rem 2rem 1rem;
 }
 .intro p {
-  font-size: .95rem;
-  line-height: 1.8;
+  font-size: 1rem;
+  line-height: 1.9;
   color: var(--slate);
-  max-width: 780px;
+  max-width: 760px;
 }
-.intro p strong { color: var(--navy); }
+.intro a { color: var(--cyan); text-decoration: none; }
+.intro a:hover { text-decoration: underline; }
 
-/* Day section */
-.day-section {
+/* Schedule section */
+.schedule {
   max-width: 1000px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 2rem 3rem;
 }
+
+/* Day header */
 .day-header {
-  padding: 2.5rem 0 1.25rem;
+  padding: 2rem 0 1rem;
   border-bottom: 2px solid var(--cream);
-  margin-bottom: 1.5rem;
+  margin-bottom: 0;
 }
 .day-header h2 {
   font-family: 'Oswald', sans-serif;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   font-weight: 600;
   color: var(--navy);
   text-transform: uppercase;
@@ -156,71 +155,90 @@ body { font-family: 'Montserrat', sans-serif; color: var(--slate); background: #
 }
 .day-header .day-theme {
   font-family: 'Montserrat', sans-serif;
-  font-size: .85rem;
+  font-size: .78rem;
   font-weight: 600;
   color: var(--cyan);
   text-transform: uppercase;
   letter-spacing: .08em;
-  margin-top: .25rem;
+  margin-top: .2rem;
 }
 
-/* Session */
-.session {
-  padding: 1.25rem 0 1.75rem;
+/* Session row — compact grid */
+.session-row {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 0 1.25rem;
+  padding: 1.1rem 0;
   border-bottom: 1px solid #eee;
+  align-items: baseline;
 }
-.session:last-child { border-bottom: none; }
-.session .time {
+.session-row:last-child { border-bottom: none; }
+
+.session-time {
   font-family: 'Montserrat', sans-serif;
-  font-size: .8rem;
+  font-size: .78rem;
   font-weight: 600;
   color: var(--pond);
   text-transform: uppercase;
-  letter-spacing: .04em;
+  letter-spacing: .03em;
+  padding-top: .1rem;
 }
-.session h3 {
+
+.session-content h3 {
   font-family: 'Oswald', sans-serif;
-  font-size: 1.35rem;
+  font-size: 1.15rem;
   font-weight: 600;
   color: var(--navy);
-  margin: .25rem 0 .5rem;
+  line-height: 1.3;
 }
-.session p {
-  font-size: .92rem;
-  color: var(--slate);
-  max-width: 780px;
+.session-content .teaser {
+  font-size: .85rem;
+  color: var(--pond);
+  margin-top: .15rem;
+  line-height: 1.5;
 }
-.session.happy-hour h3 { color: var(--cyan); }
-.session.happy-hour .time-label {
+
+/* Happy hour accent */
+.session-row.happy-hour .session-content h3 {
+  color: var(--cyan);
+}
+.happy-hour-badge {
   display: inline-block;
   background: var(--cyan);
   color: #fff;
-  font-size: .7rem;
+  font-size: .65rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: .06em;
-  padding: .2rem .5rem;
+  padding: .15rem .45rem;
   border-radius: 2px;
   margin-left: .5rem;
   vertical-align: middle;
+  position: relative;
+  top: -1px;
 }
+
+/* Laptop badge */
 .laptop-badge {
   display: inline-block;
   background: var(--navy);
   color: #fff;
-  font-size: .7rem;
+  font-size: .65rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: .06em;
-  padding: .25rem .6rem;
+  padding: .15rem .45rem;
   border-radius: 2px;
-  margin-top: .6rem;
+  margin-left: .5rem;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
 }
 
 /* Footer */
 footer {
   background: var(--navy);
-  margin-top: 3rem;
+  margin-top: 1rem;
   padding: 2.5rem 2rem;
 }
 .footer-inner {
@@ -268,22 +286,21 @@ footer {
   margin-left: 1.5rem;
 }
 .footer-bottom a:hover { color: #fff; }
-.footer-logo { height: 32px; opacity: .6; }
 
 @media (max-width: 700px) {
   .topnav { padding: .75rem 1rem; }
   .topnav-links { display: none; }
   .page-header { padding: 1.5rem 1rem .75rem; }
   .page-header h1 { font-size: 1.8rem; }
-  .page-header .event-title { font-size: 1.2rem; }
-  .hero-image { padding: 0 1rem; }
-  .hero-image img { height: 200px; }
-  .hero-image .date-card { left: 1.5rem; bottom: 1rem; padding: .75rem 1rem; }
+  .page-header .event-subtitle { font-size: 1.1rem; }
+  .hero-wrap { padding: 0 1rem; }
+  .hero-wrap img { height: 260px; }
+  .date-card { left: 1.5rem; bottom: 1rem; padding: .75rem 1rem; }
   .date-card .month, .date-card .days { font-size: 1.2rem; }
   .intro { padding: 1.5rem 1rem 1rem; }
-  .day-section { padding: 0 1rem; }
-  .day-header h2 { font-size: 1.4rem; }
-  .session h3 { font-size: 1.15rem; }
+  .schedule { padding: 0 1rem 2rem; }
+  .day-header h2 { font-size: 1.3rem; }
+  .session-row { grid-template-columns: 80px 1fr; gap: 0 .75rem; }
   footer { padding: 2rem 1rem; }
   .footer-inner { flex-direction: column; }
   .footer-bottom { flex-direction: column; gap: .75rem; text-align: center; }
@@ -311,12 +328,11 @@ footer {
 <!-- Page Header -->
 <div class="page-header">
   <h1>AI Meetup at IPW 2026</h1>
-  <div class="event-title">Brand USA Booth &mdash; Greater Fort Lauderdale</div>
-  <div class="event-location">Broward County Convention Center, West Building, Exhibit Hall</div>
+  <div class="event-subtitle">Brand USA Booth &mdash; Greater Fort Lauderdale</div>
 </div>
 
 <!-- Hero Image -->
-<div class="hero-image">
+<div class="hero-wrap">
   <img src="/ipw/hero.jpg" alt="Janette Roush presenting at Brand USA's AI Theatre at IPW">
   <div class="date-card">
     <div class="month">May</div>
@@ -328,81 +344,94 @@ footer {
 
 <!-- Intro -->
 <div class="intro">
-  <p>Visit <strong>Brand USA Booth</strong> for daily <strong>AI Sessions</strong> and the <strong>AI Confessional Happy Hour</strong> &mdash; hands-on experiences designed for tourism leaders and practitioners exploring how AI is shaping travel marketing. Full session details, times, and registration info below. For full event details, visit <a href="https://www.ipw.com" style="color: var(--cyan);">ipw.com</a>.</p>
+  <p>Three days of AI sessions, hands-on workshops, and the AI Confessional Happy Hour &mdash; all inside the Brand USA Booth at Broward County Convention Center. Built for tourism leaders and practitioners exploring how AI is shaping travel marketing. <a href="https://www.ipw.com">ipw.com</a></p>
 </div>
 
-<!-- TUESDAY -->
-<div class="day-section">
+<!-- Schedule -->
+<div class="schedule">
+
+  <!-- TUESDAY -->
   <div class="day-header">
     <h2>Tuesday, May 19</h2>
     <div class="day-theme">Leadership Day</div>
   </div>
 
-  <div class="session">
-    <div class="time">10:20 AM</div>
-    <h3>AI Traveler Intelligence</h3>
-    <p>Brand USA embedded an AI trip planner on AmericaTheBeautiful.com &mdash; and thousands of international travelers told it exactly where they want to go, who they're traveling with, and what they care about. In this session, Brand USA's Chief AI Officer Janette Roush and Sr. Director of Research &amp; Analytics Chelsea Benitez share first-look findings from a custom analytics pipeline that connects AI conversations to advertising performance &mdash; a capability unique in destination marketing. Learn which markets are planning trips the traditional data misses and how AI engagement is rewriting what we know about high-intent visitors.</p>
+  <div class="session-row">
+    <div class="session-time">10:20 AM</div>
+    <div class="session-content">
+      <h3>AI Traveler Intelligence</h3>
+      <div class="teaser">First-look findings from Brand USA's AI trip planner &mdash; connecting conversations to advertising performance.</div>
+    </div>
   </div>
 
-  <div class="session">
-    <div class="time">12:45 PM</div>
-    <h3>AI for Leadership</h3>
-    <p>Your board wants an AI strategy. Your vendors are pitching AI everything. Your team is already using it whether you know it or not. This session cuts through the noise for destination CEOs, CMOs, and senior leaders. Brand USA's Chief AI Officer shares what's working, what failed, and the three investments that actually move the needle for a destination organization.</p>
+  <div class="session-row">
+    <div class="session-time">12:45 PM</div>
+    <div class="session-content">
+      <h3>AI for Leadership</h3>
+      <div class="teaser">Cutting through the noise for destination CEOs and CMOs &mdash; what's working, what failed, and three investments that move the needle.</div>
+    </div>
   </div>
 
-  <div class="session happy-hour">
-    <div class="time">4:15 PM <span class="time-label">Happy Hour</span></div>
-    <h3>AI Confessional Happy Hour</h3>
-    <p>We know you're using AI. Come tell us about it. Grab a drink, join the circle, and share the AI shortcut you haven't told your team about yet. Whether you automated your expense reports or had AI rewrite your boss's deck at midnight, this is a judgment-free zone for tourism professionals who are figuring it out in real time. Plus: a hands-on Claude skills help desk for anyone who wants to go deeper.</p>
+  <div class="session-row happy-hour">
+    <div class="session-time">4:15 PM</div>
+    <div class="session-content">
+      <h3>AI Confessional <span class="happy-hour-badge">Happy Hour</span></h3>
+      <div class="teaser">Grab a drink and share the AI shortcut you haven't told your team about yet. Judgment-free zone + Claude skills help desk.</div>
+    </div>
   </div>
-</div>
 
-<!-- WEDNESDAY -->
-<div class="day-section">
-  <div class="day-header">
+  <!-- WEDNESDAY -->
+  <div class="day-header" style="margin-top: 1.5rem;">
     <h2>Wednesday, May 20</h2>
     <div class="day-theme">Practitioner Day</div>
   </div>
 
-  <div class="session">
-    <div class="time">10:20 AM</div>
-    <h3>How to Be Your Organization's AI Champion</h3>
-    <p>You've been experimenting with AI. Now your CEO wants a plan and your team wants training. This session is for the person in the middle &mdash; the one who sees the potential and needs to bring everyone else along. Learn how to pick the right first use case, get leadership buy-in without overpromising, and build a culture where experimentation is the norm. Hear how Brand USA's Agents of Change program will scale AI adoption across the industry.</p>
+  <div class="session-row">
+    <div class="session-time">10:20 AM</div>
+    <div class="session-content">
+      <h3>How to Be Your Organization's AI Champion</h3>
+      <div class="teaser">For the person in the middle &mdash; pick the right first use case, get buy-in, and build a culture of experimentation.</div>
+    </div>
   </div>
 
-  <div class="session">
-    <div class="time">12:45 PM</div>
-    <h3>AI for Sales</h3>
-    <p>You have 15 minutes between appointments. AI can research your next buyer, draft a personalized talking point, and outline your follow-up email before you sit down. This session is built for the travel trade &mdash; sales teams, business development leads, and product managers who want to prep faster and follow up smarter.</p>
+  <div class="session-row">
+    <div class="session-time">12:45 PM</div>
+    <div class="session-content">
+      <h3>AI for Sales</h3>
+      <div class="teaser">Research buyers, draft talking points, and outline follow-up emails &mdash; all in the 15 minutes between appointments.</div>
+    </div>
   </div>
 
-  <div class="session happy-hour">
-    <div class="time">4:15 PM <span class="time-label">Happy Hour</span></div>
-    <h3>AI Confessional Happy Hour</h3>
-    <p>We know you're using AI. Come tell us about it. Grab a drink, join the circle, and share the AI shortcut you haven't told your team about yet. Whether you automated your expense reports or had AI rewrite your boss's deck at midnight, this is a judgment-free zone for tourism professionals who are figuring it out in real time. Plus: a hands-on Claude skills help desk for anyone who wants to go deeper.</p>
+  <div class="session-row happy-hour">
+    <div class="session-time">4:15 PM</div>
+    <div class="session-content">
+      <h3>AI Confessional <span class="happy-hour-badge">Happy Hour</span></h3>
+      <div class="teaser">Round two. Same energy, fresh confessions, plus hands-on Claude skills help desk.</div>
+    </div>
   </div>
-</div>
 
-<!-- THURSDAY -->
-<div class="day-section">
-  <div class="day-header">
+  <!-- THURSDAY -->
+  <div class="day-header" style="margin-top: 1.5rem;">
     <h2>Thursday, May 21</h2>
     <div class="day-theme">Workshop Day</div>
   </div>
 
-  <div class="session">
-    <div class="time">10:20 AM</div>
-    <h3>Intro to Building a Personal OS in Claude Code</h3>
-    <p>What if AI managed your tasks, organized your notes, and prepped you for every meeting &mdash; automatically? In this hands-on workshop, build the foundation of your own personal operating system powered by Claude Code. Walk away with a working system you can extend on your own.</p>
-    <div class="laptop-badge">Bring Your Laptop</div>
+  <div class="session-row">
+    <div class="session-time">10:20 AM</div>
+    <div class="session-content">
+      <h3>Building a Personal OS in Claude Code <span class="laptop-badge">Bring Your Laptop</span></h3>
+      <div class="teaser">Hands-on workshop &mdash; build an AI system that manages your tasks, organizes notes, and preps you for every meeting.</div>
+    </div>
   </div>
 
-  <div class="session">
-    <div class="time">12:45 PM</div>
-    <h3>Turn This Week Into Next Week</h3>
-    <p>You've collected business cards, scribbled meeting notes, and made promises you're already forgetting. Before you leave Fort Lauderdale, bring your IPW notes to this hands-on session and use AI to turn them into a structured follow-up plan. Leave with prioritized action items, drafted emails, and a Monday morning that feels manageable.</p>
-    <div class="laptop-badge">Bring Your Laptop</div>
+  <div class="session-row">
+    <div class="session-time">12:45 PM</div>
+    <div class="session-content">
+      <h3>Turn This Week Into Next Week <span class="laptop-badge">Bring Your Laptop</span></h3>
+      <div class="teaser">Bring your IPW notes and leave with prioritized action items, drafted emails, and a Monday that feels manageable.</div>
+    </div>
   </div>
+
 </div>
 
 <!-- Footer -->
