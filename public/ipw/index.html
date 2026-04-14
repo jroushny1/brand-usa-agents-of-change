@@ -287,6 +287,39 @@ footer {
 }
 .footer-bottom a:hover { color: #fff; }
 
+.cal-link {
+  font-size: .72rem;
+  font-weight: 600;
+  color: var(--cyan);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  margin-top: .35rem;
+  display: inline-block;
+}
+.cal-link:hover { text-decoration: underline; }
+
+.rsvp-bar {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 1.5rem 2rem 0;
+}
+.rsvp-btn {
+  display: inline-block;
+  background: var(--cyan);
+  color: #fff;
+  font-family: 'Oswald', sans-serif;
+  font-size: .95rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  text-decoration: none;
+  padding: .65rem 2rem;
+  border-radius: 4px;
+  transition: background .2s;
+}
+.rsvp-btn:hover { background: var(--usa-blue); }
+
 @media (max-width: 700px) {
   .topnav { padding: .75rem 1rem; }
   .topnav-links { display: none; }
@@ -347,6 +380,10 @@ footer {
   <p>Three days of AI sessions, hands-on workshops, and the AI Confessional Happy Hour &mdash; all inside the Brand USA Booth at Broward County Convention Center. Built for tourism leaders and practitioners exploring how AI is shaping travel marketing. <a href="https://www.ipw.com">ipw.com</a></p>
 </div>
 
+<div class="rsvp-bar">
+  <a href="/ipw/rsvp" class="rsvp-btn">Reserve Your Spot</a>
+</div>
+
 <!-- Schedule -->
 <div class="schedule">
 
@@ -361,6 +398,7 @@ footer {
     <div class="session-content">
       <h3>AI for Leadership</h3>
       <div class="teaser">Cutting through the noise for destination CEOs and CMOs &mdash; what's working, what failed, and three investments that move the needle.</div>
+      <a href="/ipw/cal/tues-leadership.ics" class="cal-link">+ Add to Calendar</a>
     </div>
   </div>
 
@@ -369,6 +407,7 @@ footer {
     <div class="session-content">
       <h3>AI Traveler Intelligence</h3>
       <div class="teaser">First-look findings from Brand USA's AI trip planner &mdash; connecting conversations to advertising performance.</div>
+      <a href="/ipw/cal/tues-traveler-intel.ics" class="cal-link">+ Add to Calendar</a>
     </div>
   </div>
 
@@ -377,6 +416,7 @@ footer {
     <div class="session-content">
       <h3>AI Confessional <span class="happy-hour-badge">Happy Hour</span></h3>
       <div class="teaser">Grab a drink and share the AI shortcut you haven't told your team about yet. Judgment-free zone + Claude skills help desk.</div>
+      <a href="/ipw/cal/tues-happy-hour.ics" class="cal-link">+ Add to Calendar</a>
     </div>
   </div>
 
@@ -391,6 +431,7 @@ footer {
     <div class="session-content">
       <h3>AI for Sales</h3>
       <div class="teaser">Research buyers, draft talking points, and outline follow-up emails &mdash; all in the 15 minutes between appointments.</div>
+      <a href="/ipw/cal/wed-sales.ics" class="cal-link">+ Add to Calendar</a>
     </div>
   </div>
 
@@ -399,6 +440,7 @@ footer {
     <div class="session-content">
       <h3>How to Be Your Organization's AI Champion</h3>
       <div class="teaser">For the person in the middle &mdash; pick the right first use case, get buy-in, and build a culture of experimentation.</div>
+      <a href="/ipw/cal/wed-champion.ics" class="cal-link">+ Add to Calendar</a>
     </div>
   </div>
 
@@ -407,6 +449,7 @@ footer {
     <div class="session-content">
       <h3>AI Confessional <span class="happy-hour-badge">Happy Hour</span></h3>
       <div class="teaser">Round two. Same energy, fresh confessions, plus hands-on Claude skills help desk.</div>
+      <a href="/ipw/cal/wed-happy-hour.ics" class="cal-link">+ Add to Calendar</a>
     </div>
   </div>
 
@@ -421,6 +464,7 @@ footer {
     <div class="session-content">
       <h3>Building a Personal OS in Claude Code <span class="laptop-badge">Bring Your Laptop</span></h3>
       <div class="teaser">Hands-on workshop &mdash; build an AI system that manages your tasks, organizes notes, and preps you for every meeting.</div>
+      <a href="/ipw/cal/thu-personal-os.ics" class="cal-link">+ Add to Calendar</a>
     </div>
   </div>
 
@@ -429,6 +473,7 @@ footer {
     <div class="session-content">
       <h3>Turn This Week Into Next Week <span class="laptop-badge">Bring Your Laptop</span></h3>
       <div class="teaser">Bring your IPW notes and leave with prioritized action items, drafted emails, and a Monday that feels manageable.</div>
+      <a href="/ipw/cal/thu-next-week.ics" class="cal-link">+ Add to Calendar</a>
     </div>
   </div>
 

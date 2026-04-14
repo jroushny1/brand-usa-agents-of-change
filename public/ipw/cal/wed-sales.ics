@@ -1,0 +1,11 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Brand USA//AI Meetup IPW 2026//EN
+BEGIN:VEVENT
+DTSTART:20260520T142000Z
+DTEND:20260520T145000Z
+SUMMARY:AI for Sales — Brand USA AI Meetup
+DESCRIPTION:Research buyers\, draft talking points\, and outline follow-up emails — all in the 15 minutes between appointments.\n\nBrand USA Booth\, IPW 2026
+LOCATION:Brand USA Booth\, Broward County Convention Center\, Fort Lauderdale FL
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,11 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Brand USA//AI Meetup IPW 2026//EN
+BEGIN:VEVENT
+DTSTART:20260519T142000Z
+DTEND:20260519T145000Z
+SUMMARY:AI for Leadership — Brand USA AI Meetup
+DESCRIPTION:Cutting through the noise for destination CEOs and CMOs — what's working\, what failed\, and three investments that move the needle.\n\nBrand USA Booth\, IPW 2026
+LOCATION:Brand USA Booth\, Broward County Convention Center\, Fort Lauderdale FL
+END:VEVENT
+END:VCALENDAR

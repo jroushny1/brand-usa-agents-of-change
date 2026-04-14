@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RSVP — AI Meetup at IPW 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cyan: #00A9E0;
+  --usa-blue: #00549F;
+  --navy: #101F36;
+  --slate: #4C5768;
+  --pond: #878F9A;
+  --cream: #F4EFE3;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Montserrat', sans-serif; color: var(--slate); background: #fff; line-height: 1.6; }
+
+.topbar { background: var(--navy); padding: .75rem 2rem; }
+.topbar a { color: #fff; text-decoration: none; font-size: .85rem; font-weight: 600; }
+.topbar a:hover { color: var(--cyan); }
+.accent-bar { height: 4px; background: var(--cyan); }
+
+.container { max-width: 640px; margin: 0 auto; padding: 2.5rem 2rem 4rem; }
+
+h1 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--navy);
+  text-transform: uppercase;
+  margin-bottom: .5rem;
+}
+.subtitle { font-size: .95rem; color: var(--pond); margin-bottom: 2rem; }
+
+label { display: block; font-size: .85rem; font-weight: 600; color: var(--navy); margin-bottom: .35rem; }
+.required::after { content: ' *'; color: var(--cyan); }
+
+input[type="text"],
+input[type="email"],
+textarea {
+  width: 100%;
+  padding: .65rem .85rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: .9rem;
+  color: var(--slate);
+  margin-bottom: 1.25rem;
+  transition: border-color .2s;
+}
+input:focus, textarea:focus { outline: none; border-color: var(--cyan); }
+textarea { resize: vertical; min-height: 80px; }
+
+.field-group { margin-bottom: 1.5rem; }
+.field-group legend {
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: .5rem;
+  display: block;
+}
+
+.checkbox-list { list-style: none; }
+.checkbox-list li { margin-bottom: .5rem; }
+.checkbox-list label {
+  display: flex;
+  align-items: flex-start;
+  gap: .5rem;
+  font-weight: 400;
+  color: var(--slate);
+  cursor: pointer;
+  line-height: 1.4;
+}
+.checkbox-list input[type="checkbox"] {
+  margin-top: .2rem;
+  accent-color: var(--cyan);
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.day-label {
+  font-family: 'Oswald', sans-serif;
+  font-size: .75rem;
+  font-weight: 600;
+  color: var(--pond);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  margin-top: .75rem;
+  margin-bottom: .35rem;
+}
+.day-label:first-child { margin-top: 0; }
+
+.session-name { font-weight: 600; color: var(--navy); }
+.session-time { color: var(--pond); font-size: .82rem; }
+.session-note { font-size: .78rem; color: var(--cyan); font-weight: 600; }
+
+.submit-btn {
+  display: inline-block;
+  background: var(--cyan);
+  color: #fff;
+  font-family: 'Oswald', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  border: none;
+  padding: .75rem 2.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background .2s;
+  margin-top: .5rem;
+}
+.submit-btn:hover { background: var(--usa-blue); }
+
+.back-link {
+  display: inline-block;
+  margin-top: 1.5rem;
+  font-size: .85rem;
+  color: var(--cyan);
+  text-decoration: none;
+}
+.back-link:hover { text-decoration: underline; }
+
+.success-msg {
+  display: none;
+  background: var(--cream);
+  border-left: 4px solid var(--cyan);
+  padding: 1.5rem;
+  border-radius: 4px;
+  margin-top: 1rem;
+}
+.success-msg h2 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.3rem;
+  color: var(--navy);
+  margin-bottom: .5rem;
+}
+
+@media (max-width: 600px) {
+  .container { padding: 1.5rem 1rem 3rem; }
+  h1 { font-size: 1.6rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="/ipw">&larr; Back to AI Meetup Schedule</a>
+</div>
+<div class="accent-bar"></div>
+
+<div class="container">
+  <h1>RSVP &mdash; AI Meetup at IPW 2026</h1>
+  <div class="subtitle">Reserve your spot. Brand USA Booth, Broward County Convention Center, May 19&ndash;21.</div>
+
+  <form id="rsvp-form">
+    <label class="required" for="name">Full Name</label>
+    <input type="text" id="name" name="name" required>
+
+    <label class="required" for="email">Email</label>
+    <input type="email" id="email" name="email" required>
+
+    <label class="required" for="org">Organization</label>
+    <input type="text" id="org" name="organization" required>
+
+    <label for="role">Title / Role</label>
+    <input type="text" id="role" name="role">
+
+    <fieldset class="field-group" style="border:none; padding:0;">
+      <legend class="required">Which sessions are you interested in?</legend>
+
+      <div class="day-label">Tuesday, May 19 &mdash; Leadership Day</div>
+      <ul class="checkbox-list">
+        <li>
+          <label>
+            <input type="checkbox" name="sessions" value="tues-leadership">
+            <span><span class="session-name">AI for Leadership</span><br><span class="session-time">10:20 &ndash; 10:50 AM</span></span>
+          </label>
+        </li>
+        <li>
+          <label>
+            <input type="checkbox" name="sessions" value="tues-traveler-intel">
+            <span><span class="session-name">AI Traveler Intelligence</span><br><span class="session-time">12:45 &ndash; 1:15 PM</span></span>
+          </label>
+        </li>
+        <li>
+          <label>
+            <input type="checkbox" name="sessions" value="tues-happy-hour">
+            <span><span class="session-name">AI Confessional Happy Hour</span><br><span class="session-time">4:15 &ndash; 5:15 PM</span></span>
+          </label>
+        </li>
+      </ul>
+
+      <div class="day-label">Wednesday, May 20 &mdash; Practitioner Day</div>
+      <ul class="checkbox-list">
+        <li>
+          <label>
+            <input type="checkbox" name="sessions" value="wed-sales">
+            <span><span class="session-name">AI for Sales</span><br><span class="session-time">10:20 &ndash; 10:50 AM</span></span>
+          </label>
+        </li>
+        <li>
+          <label>
+            <input type="checkbox" name="sessions" value="wed-champion">
+            <span><span class="session-name">How to Be Your Organization's AI Champion</span><br><span class="session-time">12:45 &ndash; 1:15 PM</span></span>
+          </label>
+        </li>
+        <li>
+          <label>
+            <input type="checkbox" name="sessions" value="wed-happy-hour">
+            <span><span class="session-name">AI Confessional Happy Hour</span><br><span class="session-time">4:15 &ndash; 5:15 PM</span></span>
+          </label>
+        </li>
+      </ul>
+
+      <div class="day-label">Thursday, May 21 &mdash; Workshop Day</div>
+      <ul class="checkbox-list">
+        <li>
+          <label>
+            <input type="checkbox" name="sessions" value="thu-personal-os">
+            <span><span class="session-name">Building a Personal OS in Claude Code</span><br><span class="session-time">10:20 &ndash; 11:00 AM</span> &nbsp;<span class="session-note">12 seats &mdash; bring your laptop</span></span>
+          </label>
+        </li>
+        <li>
+          <label>
+            <input type="checkbox" name="sessions" value="thu-next-week">
+            <span><span class="session-name">Turn This Week Into Next Week</span><br><span class="session-time">12:45 &ndash; 1:30 PM</span> &nbsp;<span class="session-note">12 seats &mdash; bring your laptop</span></span>
+          </label>
+        </li>
+      </ul>
+    </fieldset>
+
+    <label for="questions">Anything you'd like to ask or discuss?</label>
+    <textarea id="questions" name="questions" placeholder="Optional"></textarea>
+
+    <button type="submit" class="submit-btn">Reserve My Spot</button>
+  </form>
+
+  <div class="success-msg" id="success">
+    <h2>You're on the list!</h2>
+    <p>We'll follow up with session details and calendar invites before IPW. See you at the Brand USA Booth.</p>
+    <a href="/ipw" class="back-link">&larr; Back to schedule</a>
+  </div>
+
+  <a href="/ipw" class="back-link">&larr; Back to schedule</a>
+</div>
+
+<script>
+// Submits to a Google Form via hidden iframe (no-cors POST)
+// Replace FORM_ID and entry.XXXXX values after creating the Google Form
+const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/FORM_ID_HERE/formResponse';
+
+document.getElementById('rsvp-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const form = e.target;
+  const sessions = Array.from(form.querySelectorAll('input[name="sessions"]:checked')).map(cb => cb.value);
+
+  // Build FormData for Google Form
+  // After creating the Google Form, inspect it to get entry.XXXXX IDs
+  // Then map: entry.111 = name, entry.222 = email, etc.
+  const data = new URLSearchParams();
+  data.append('entry.REPLACE_NAME', form.name.value);
+  data.append('entry.REPLACE_EMAIL', form.email.value);
+  data.append('entry.REPLACE_ORG', form.organization.value);
+  data.append('entry.REPLACE_ROLE', form.role.value);
+  sessions.forEach(s => data.append('entry.REPLACE_SESSIONS', s));
+  data.append('entry.REPLACE_QUESTIONS', form.questions.value);
+
+  // POST via hidden iframe (same pattern as Ambassador Application)
+  fetch(GOOGLE_FORM_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: data.toString()
+  });
+
+  // Show success (can't verify no-cors response, so show immediately)
+  form.style.display = 'none';
+  document.getElementById('success').style.display = 'block';
+});
+</script>
+
+</body>
+</html>

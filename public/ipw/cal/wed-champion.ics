@@ -1,0 +1,11 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Brand USA//AI Meetup IPW 2026//EN
+BEGIN:VEVENT
+DTSTART:20260520T164500Z
+DTEND:20260520T171500Z
+SUMMARY:How to Be Your Organization's AI Champion — Brand USA AI Meetup
+DESCRIPTION:Pick the right first use case\, get buy-in\, and build a culture of experimentation.\n\nBrand USA Booth\, IPW 2026
+LOCATION:Brand USA Booth\, Broward County Convention Center\, Fort Lauderdale FL
+END:VEVENT
+END:VCALENDAR

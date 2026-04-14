@@ -1,0 +1,11 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Brand USA//AI Meetup IPW 2026//EN
+BEGIN:VEVENT
+DTSTART:20260521T164500Z
+DTEND:20260521T173000Z
+SUMMARY:Turn This Week Into Next Week — Brand USA AI Meetup
+DESCRIPTION:Bring your IPW notes and leave with prioritized action items\, drafted emails\, and a Monday that feels manageable. Bring your laptop!\n\n12 seats. Brand USA Booth\, IPW 2026
+LOCATION:Brand USA Booth\, Broward County Convention Center\, Fort Lauderdale FL
+END:VEVENT
+END:VCALENDAR
