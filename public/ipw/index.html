@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Meetup at IPW 2026 — Brand USA</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cyan: #00A9E0;
+  --usa-blue: #00549F;
+  --navy: #101F36;
+  --slate: #4C5768;
+  --pond: #878F9A;
+  --cream: #F4EFE3;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Montserrat', sans-serif; color: var(--slate); background: #fff; line-height: 1.7; }
+
+/* Top nav bar */
+.topnav {
+  background: var(--navy);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .75rem 2rem;
+}
+.topnav-logo { height: 38px; }
+.topnav-links { display: flex; gap: 2rem; align-items: center; }
+.topnav-links a {
+  font-family: 'Montserrat', sans-serif;
+  font-size: .8rem;
+  font-weight: 600;
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+.topnav-links a:hover { color: var(--cyan); }
+.topnav-links a.active { color: var(--cyan); }
+
+/* Cyan accent bar */
+.accent-bar { height: 4px; background: var(--cyan); }
+
+/* Page header */
+.page-header {
+  padding: 2.5rem 2rem 1rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.page-header h1 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 2.6rem;
+  font-weight: 600;
+  color: var(--navy);
+  text-transform: uppercase;
+  letter-spacing: .02em;
+}
+.page-header .event-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: var(--slate);
+  margin-top: .5rem;
+}
+.page-header .event-location {
+  font-size: .9rem;
+  color: var(--pond);
+  margin-top: .25rem;
+}
+
+/* Hero image */
+.hero-image {
+  position: relative;
+  max-width: 1000px;
+  margin: 1.5rem auto 0;
+  padding: 0 2rem;
+}
+.hero-image img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  border-radius: 2px;
+  display: block;
+}
+.hero-image .date-card {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 3rem;
+  background: rgba(16, 31, 54, .92);
+  color: #fff;
+  padding: 1rem 1.5rem;
+  border-radius: 2px;
+}
+.date-card .month {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 600;
+  line-height: 1.1;
+}
+.date-card .days {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--cyan);
+  line-height: 1.1;
+}
+.date-card .year {
+  font-family: 'Montserrat', sans-serif;
+  font-size: .8rem;
+  color: var(--pond);
+  margin-top: .25rem;
+}
+.date-card .booth {
+  font-family: 'Montserrat', sans-serif;
+  font-size: .75rem;
+  font-weight: 600;
+  color: var(--cyan);
+  margin-top: .5rem;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+/* Intro text */
+.intro {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 2rem 1rem;
+}
+.intro p {
+  font-size: .95rem;
+  line-height: 1.8;
+  color: var(--slate);
+  max-width: 780px;
+}
+.intro p strong { color: var(--navy); }
+
+/* Day section */
+.day-section {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+.day-header {
+  padding: 2.5rem 0 1.25rem;
+  border-bottom: 2px solid var(--cream);
+  margin-bottom: 1.5rem;
+}
+.day-header h2 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--navy);
+  text-transform: uppercase;
+  letter-spacing: .03em;
+}
+.day-header .day-theme {
+  font-family: 'Montserrat', sans-serif;
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--cyan);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  margin-top: .25rem;
+}
+
+/* Session */
+.session {
+  padding: 1.25rem 0 1.75rem;
+  border-bottom: 1px solid #eee;
+}
+.session:last-child { border-bottom: none; }
+.session .time {
+  font-family: 'Montserrat', sans-serif;
+  font-size: .8rem;
+  font-weight: 600;
+  color: var(--pond);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+.session h3 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--navy);
+  margin: .25rem 0 .5rem;
+}
+.session p {
+  font-size: .92rem;
+  color: var(--slate);
+  max-width: 780px;
+}
+.session.happy-hour h3 { color: var(--cyan); }
+.session.happy-hour .time-label {
+  display: inline-block;
+  background: var(--cyan);
+  color: #fff;
+  font-size: .7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  padding: .2rem .5rem;
+  border-radius: 2px;
+  margin-left: .5rem;
+  vertical-align: middle;
+}
+.laptop-badge {
+  display: inline-block;
+  background: var(--navy);
+  color: #fff;
+  font-size: .7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  padding: .25rem .6rem;
+  border-radius: 2px;
+  margin-top: .6rem;
+}
+
+/* Footer */
+footer {
+  background: var(--navy);
+  margin-top: 3rem;
+  padding: 2.5rem 2rem;
+}
+.footer-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+.footer-col h4 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  color: var(--pond);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  margin-bottom: .75rem;
+}
+.footer-col p, .footer-col a {
+  font-size: .85rem;
+  color: #fff;
+  text-decoration: none;
+  line-height: 1.8;
+}
+.footer-col a:hover { color: var(--cyan); }
+.footer-bottom {
+  max-width: 1000px;
+  margin: 2rem auto 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255,255,255,.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-bottom p {
+  font-size: .75rem;
+  color: var(--pond);
+}
+.footer-bottom a {
+  font-size: .75rem;
+  color: var(--pond);
+  text-decoration: none;
+  margin-left: 1.5rem;
+}
+.footer-bottom a:hover { color: #fff; }
+.footer-logo { height: 32px; opacity: .6; }
+
+@media (max-width: 700px) {
+  .topnav { padding: .75rem 1rem; }
+  .topnav-links { display: none; }
+  .page-header { padding: 1.5rem 1rem .75rem; }
+  .page-header h1 { font-size: 1.8rem; }
+  .page-header .event-title { font-size: 1.2rem; }
+  .hero-image { padding: 0 1rem; }
+  .hero-image img { height: 200px; }
+  .hero-image .date-card { left: 1.5rem; bottom: 1rem; padding: .75rem 1rem; }
+  .date-card .month, .date-card .days { font-size: 1.2rem; }
+  .intro { padding: 1.5rem 1rem 1rem; }
+  .day-section { padding: 0 1rem; }
+  .day-header h2 { font-size: 1.4rem; }
+  .session h3 { font-size: 1.15rem; }
+  footer { padding: 2rem 1rem; }
+  .footer-inner { flex-direction: column; }
+  .footer-bottom { flex-direction: column; gap: .75rem; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- Top Navigation -->
+<nav class="topnav">
+  <svg class="topnav-logo" viewBox="0 0 415.12 296.38" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Brand USA">
+    <defs><style>.lu1{fill:#fff;stroke-width:0}.lu2{fill:#00a9e0;stroke-width:0}</style></defs>
+    <g><g><path class="lu1" d="M88.18,170.68v-48.75h25.5v48.13c0,11.32,5.47,18.16,15.55,18.16s15.55-6.84,15.55-18.16v-48.13h25.5v48.75c0,25.12-14.05,39.43-41.04,39.43s-41.04-14.3-41.04-39.43Z"/><path class="lu1" d="M295.47,121.42h-31.22l-15.22,42.79c2.77,4.63,4.17,10.2,4.17,16.67,0,12.02-5.04,21.52-14.03,27.61h19.11l5.47-16.29h31.96l5.47,16.29h25.75l-31.47-87.06ZM270.34,172.29l9.33-27.74,9.33,27.74h-18.66Z"/></g><path class="lu1" d="M213.15,120.31c-22.76,0-37.19,10.07-37.19,28.11,0,34.2,46.02,22.14,46.02,34.82,0,4.1-3.23,6.47-12.06,6.47-9.57,0-18.89-2.86-26.97-8.45l-7.46,21.03c9,5.03,20.32,7.81,34.44,7.81,23.51,0,36.94-11.19,36.94-29.23,0-34.58-46.02-22.64-46.02-34.2,0-3.98,3.98-5.97,12.44-5.97s16.12,2.47,21.47,6.31l7.21-20.32c-7.42-3.81-17.46-6.39-28.81-6.39Z"/></g>
+    <g><path class="lu2" d="M88.13,88.47h11.74c2.91,0,5.12.75,6.61,2.23,1.16,1.15,1.73,2.58,1.73,4.29v.07c0,.72-.09,1.36-.27,1.91-.18.55-.42,1.05-.72,1.5-.3.44-.65.84-1.05,1.17-.4.34-.83.62-1.28.87,1.47.55,2.62,1.31,3.47,2.26.84.95,1.26,2.27,1.26,3.96v.07c0,1.16-.22,2.17-.67,3.04-.45.87-1.08,1.59-1.91,2.17-.83.58-1.83,1.01-3,1.3-1.17.29-2.46.43-3.88.43h-12.03v-25.28ZM102.68,95.93c0-.84-.31-1.48-.94-1.92-.63-.44-1.53-.66-2.71-.66h-5.49v5.31h5.13c1.23,0,2.2-.21,2.93-.63.72-.42,1.08-1.09,1.08-2.03v-.07ZM104.09,106.06c0-.84-.33-1.51-.97-2-.65-.49-1.7-.74-3.14-.74h-6.43v5.56h6.61c1.23,0,2.19-.22,2.89-.67.7-.44,1.05-1.14,1.05-2.08v-.07Z"/><path class="lu2" d="M114.2,88.47h11.56c3.2,0,5.66.85,7.37,2.56,1.44,1.44,2.17,3.37,2.17,5.78v.07c0,2.05-.5,3.71-1.5,5-1,1.29-2.31,2.23-3.92,2.83l6.18,9.03h-6.5l-5.42-8.09h-4.37v8.09h-5.56v-25.28ZM125.4,100.75c1.37,0,2.42-.32,3.16-.97.73-.65,1.1-1.51,1.1-2.59v-.07c0-1.2-.39-2.1-1.16-2.69-.77-.6-1.84-.9-3.21-.9h-5.53v7.22h5.63Z"/><path class="lu2" d="M148.98,88.29h5.13l10.83,25.46h-5.81l-2.31-5.67h-10.69l-2.31,5.67h-5.67l10.83-25.46ZM154.83,103.17l-3.36-8.2-3.36,8.2h6.72Z"/><path class="lu2" d="M168.12,88.47h5.13l11.85,15.56v-15.56h5.49v25.28h-4.73l-12.24-16.07v16.07h-5.49v-25.28Z"/><path class="lu2" d="M196.65,88.47h9.86c1.97,0,3.79.32,5.43.96,1.65.64,3.07,1.52,4.26,2.65,1.19,1.13,2.11,2.46,2.76,3.99.65,1.53.97,3.18.97,4.97v.07c0,1.78-.33,3.44-.97,4.98-.65,1.54-1.57,2.88-2.76,4.01-1.19,1.13-2.61,2.02-4.26,2.67-1.65.65-3.46.98-5.43.98h-9.86v-25.28ZM202.21,93.53v15.17h4.3c1.13,0,2.17-.18,3.11-.54.94-.36,1.74-.87,2.4-1.55s1.18-1.46,1.55-2.37.56-1.93.56-3.06v-.07c0-1.1-.19-2.12-.56-3.05s-.89-1.74-1.55-2.41-1.46-1.19-2.4-1.56c-.94-.37-1.97-.56-3.11-.56h-4.3Z"/></g>
+  </svg>
+  <div class="topnav-links">
+    <a href="https://www.thebrandusa.com/about">About</a>
+    <a href="https://www.thebrandusa.com/partners">Partners</a>
+    <a href="#" class="active">Events</a>
+    <a href="https://www.thebrandusa.com/resources">Resources</a>
+  </div>
+</nav>
+<div class="accent-bar"></div>
+
+<!-- Page Header -->
+<div class="page-header">
+  <h1>AI Meetup at IPW 2026</h1>
+  <div class="event-title">Brand USA Booth &mdash; Greater Fort Lauderdale</div>
+  <div class="event-location">Broward County Convention Center, West Building, Exhibit Hall</div>
+</div>
+
+<!-- Date Card -->
+<div style="max-width: 1000px; margin: 1.5rem auto 0; padding: 0 2rem;">
+  <div style="display: inline-block; background: var(--navy); color: #fff; padding: 1rem 1.5rem; border-radius: 2px;">
+    <div class="date-card">
+      <div class="month">May</div>
+      <div class="days">19 &ndash; 21</div>
+      <div class="year">2026</div>
+      <div class="booth">Brand USA Booth</div>
+    </div>
+  </div>
+</div>
+
+<!-- Intro -->
+<div class="intro">
+  <p>Visit <strong>Brand USA Booth</strong> for daily <strong>AI Sessions</strong> and the <strong>AI Confessional Happy Hour</strong> &mdash; hands-on experiences designed for tourism leaders and practitioners exploring how AI is shaping travel marketing. Full session details, times, and registration info below. For full event details, visit <a href="https://www.ipw.com" style="color: var(--cyan);">ipw.com</a>.</p>
+</div>
+
+<!-- TUESDAY -->
+<div class="day-section">
+  <div class="day-header">
+    <h2>Tuesday, May 19</h2>
+    <div class="day-theme">Leadership Day</div>
+  </div>
+
+  <div class="session">
+    <div class="time">10:20 AM</div>
+    <h3>AI Traveler Intelligence</h3>
+    <p>Brand USA embedded an AI trip planner on AmericaTheBeautiful.com &mdash; and thousands of international travelers told it exactly where they want to go, who they're traveling with, and what they care about. In this session, Brand USA's Chief AI Officer Janette Roush and Sr. Director of Research &amp; Analytics Chelsea Benitez share first-look findings from a custom analytics pipeline that connects AI conversations to advertising performance &mdash; a capability unique in destination marketing. Learn which markets are planning trips the traditional data misses and how AI engagement is rewriting what we know about high-intent visitors.</p>
+  </div>
+
+  <div class="session">
+    <div class="time">12:45 PM</div>
+    <h3>AI for Leadership</h3>
+    <p>Your board wants an AI strategy. Your vendors are pitching AI everything. Your team is already using it whether you know it or not. This session cuts through the noise for destination CEOs, CMOs, and senior leaders. Brand USA's Chief AI Officer shares what's working, what failed, and the three investments that actually move the needle for a destination organization.</p>
+  </div>
+
+  <div class="session happy-hour">
+    <div class="time">4:15 PM <span class="time-label">Happy Hour</span></div>
+    <h3>AI Confessional Happy Hour</h3>
+    <p>We know you're using AI. Come tell us about it. Grab a drink, join the circle, and share the AI shortcut you haven't told your team about yet. Whether you automated your expense reports or had AI rewrite your boss's deck at midnight, this is a judgment-free zone for tourism professionals who are figuring it out in real time. Plus: a hands-on Claude skills help desk for anyone who wants to go deeper.</p>
+  </div>
+</div>
+
+<!-- WEDNESDAY -->
+<div class="day-section">
+  <div class="day-header">
+    <h2>Wednesday, May 20</h2>
+    <div class="day-theme">Practitioner Day</div>
+  </div>
+
+  <div class="session">
+    <div class="time">10:20 AM</div>
+    <h3>How to Be Your Organization's AI Champion</h3>
+    <p>You've been experimenting with AI. Now your CEO wants a plan and your team wants training. This session is for the person in the middle &mdash; the one who sees the potential and needs to bring everyone else along. Learn how to pick the right first use case, get leadership buy-in without overpromising, and build a culture where experimentation is the norm. Hear how Brand USA's Agents of Change program will scale AI adoption across the industry.</p>
+  </div>
+
+  <div class="session">
+    <div class="time">12:45 PM</div>
+    <h3>AI for Sales</h3>
+    <p>You have 15 minutes between appointments. AI can research your next buyer, draft a personalized talking point, and outline your follow-up email before you sit down. This session is built for the travel trade &mdash; sales teams, business development leads, and product managers who want to prep faster and follow up smarter.</p>
+  </div>
+
+  <div class="session happy-hour">
+    <div class="time">4:15 PM <span class="time-label">Happy Hour</span></div>
+    <h3>AI Confessional Happy Hour</h3>
+    <p>We know you're using AI. Come tell us about it. Grab a drink, join the circle, and share the AI shortcut you haven't told your team about yet. Whether you automated your expense reports or had AI rewrite your boss's deck at midnight, this is a judgment-free zone for tourism professionals who are figuring it out in real time. Plus: a hands-on Claude skills help desk for anyone who wants to go deeper.</p>
+  </div>
+</div>
+
+<!-- THURSDAY -->
+<div class="day-section">
+  <div class="day-header">
+    <h2>Thursday, May 21</h2>
+    <div class="day-theme">Workshop Day</div>
+  </div>
+
+  <div class="session">
+    <div class="time">10:20 AM</div>
+    <h3>Intro to Building a Personal OS in Claude Code</h3>
+    <p>What if AI managed your tasks, organized your notes, and prepped you for every meeting &mdash; automatically? In this hands-on workshop, build the foundation of your own personal operating system powered by Claude Code. Walk away with a working system you can extend on your own.</p>
+    <div class="laptop-badge">Bring Your Laptop</div>
+  </div>
+
+  <div class="session">
+    <div class="time">12:45 PM</div>
+    <h3>Turn This Week Into Next Week</h3>
+    <p>You've collected business cards, scribbled meeting notes, and made promises you're already forgetting. Before you leave Fort Lauderdale, bring your IPW notes to this hands-on session and use AI to turn them into a structured follow-up plan. Leave with prioritized action items, drafted emails, and a Monday morning that feels manageable.</p>
+    <div class="laptop-badge">Bring Your Laptop</div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <p><a href="mailto:jroush@thebrandusa.com">jroush@thebrandusa.com</a></p>
+      <p>Janette Roush</p>
+      <p>SVP, Innovation &amp; Chief AI Officer</p>
+    </div>
+    <div class="footer-col">
+      <h4>Resources</h4>
+      <p><a href="https://www.ipw.com">IPW 2026 Official Site</a></p>
+      <p><a href="https://www.thebrandusa.com">TheBrandUSA.com</a></p>
+      <p><a href="https://www.americathebeautiful.com">AmericaTheBeautiful.com</a></p>
+    </div>
+    <div class="footer-col">
+      <h4>Event Details</h4>
+      <p>Broward County Convention Center</p>
+      <p>Fort Lauderdale, FL</p>
+      <p>May 19&ndash;21, 2026</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 Brand USA</p>
+    <div>
+      <a href="https://www.thebrandusa.com/privacy-policy">Privacy Policy</a>
+      <a href="https://www.thebrandusa.com/terms-of-use">Terms of Use</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
