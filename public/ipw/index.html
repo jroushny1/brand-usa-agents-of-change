@@ -19,28 +19,29 @@ body { font-family: 'Montserrat', sans-serif; color: var(--slate); background: #
 
 /* Top nav bar */
 .topnav {
-  background: var(--navy);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: .75rem 2rem;
+  background: #fff;
+  padding: 1.25rem 2rem;
 }
-.topnav-logo { height: 38px; }
-.topnav-links { display: flex; gap: 2rem; align-items: center; }
-.topnav-links a {
-  font-family: 'Montserrat', sans-serif;
-  font-size: .8rem;
-  font-weight: 600;
-  color: #fff;
-  text-decoration: none;
-  text-transform: uppercase;
-  letter-spacing: .06em;
-}
-.topnav-links a:hover { color: var(--cyan); }
-.topnav-links a.active { color: var(--cyan); }
+.topnav-logo { height: 90px; display: block; }
 
 /* Cyan accent bar */
 .accent-bar { height: 4px; background: var(--cyan); }
+
+/* Section banner — mirrors Brand USA event listing pages */
+.section-banner {
+  background: var(--navy);
+  padding: 2.5rem 2rem 2rem;
+}
+.section-banner h2 {
+  max-width: 1000px;
+  margin: 0 auto;
+  font-family: 'Oswald', sans-serif;
+  font-size: 3.2rem;
+  font-weight: 600;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
 
 /* Page header */
 .page-header {
@@ -50,18 +51,18 @@ body { font-family: 'Montserrat', sans-serif; color: var(--slate); background: #
 }
 .page-header h1 {
   font-family: 'Oswald', sans-serif;
-  font-size: 2.6rem;
-  font-weight: 600;
+  font-size: 2.8rem;
+  font-weight: 400;
   color: var(--navy);
-  text-transform: uppercase;
-  letter-spacing: .02em;
+  letter-spacing: .01em;
+  line-height: 1.2;
 }
 .page-header .event-subtitle {
-  font-family: 'Oswald', sans-serif;
-  font-size: 1.4rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: .95rem;
   font-weight: 400;
   color: var(--slate);
-  margin-top: .35rem;
+  margin-top: .4rem;
 }
 
 /* Hero image — large, event-page style */
@@ -76,46 +77,49 @@ body { font-family: 'Montserrat', sans-serif; color: var(--slate); background: #
   height: 440px;
   object-fit: cover;
   object-position: center;
-  border-radius: 2px;
   display: block;
 }
 .date-card {
   position: absolute;
-  bottom: 1.5rem;
-  left: 3rem;
-  background: rgba(16, 31, 54, .92);
+  top: 0;
+  left: 0;
+  background: rgba(76, 87, 104, .88);
   color: #fff;
-  padding: 1.1rem 1.6rem;
-  border-radius: 2px;
+  padding: 1.5rem 2rem 1.2rem;
+  border-radius: 0;
 }
 .date-card .month {
-  font-family: 'Oswald', sans-serif;
-  font-size: 1.6rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.3rem;
   font-weight: 600;
-  line-height: 1.1;
+  line-height: 1.2;
 }
 .date-card .days {
-  font-family: 'Oswald', sans-serif;
-  font-size: 1.6rem;
-  font-weight: 600;
-  color: var(--cyan);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
   line-height: 1.1;
 }
 .date-card .year {
   font-family: 'Montserrat', sans-serif;
-  font-size: .8rem;
-  color: var(--pond);
+  font-size: .85rem;
+  font-weight: 600;
+  color: #fff;
   margin-top: .25rem;
 }
-.date-card .booth {
+.date-card .add-cal {
   font-family: 'Montserrat', sans-serif;
-  font-size: .75rem;
-  font-weight: 600;
-  color: var(--cyan);
-  margin-top: .5rem;
-  text-transform: uppercase;
-  letter-spacing: .04em;
+  font-size: .8rem;
+  font-weight: 500;
+  color: #fff;
+  text-decoration: none;
+  margin-top: .75rem;
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
 }
+.date-card .add-cal:hover { text-decoration: underline; }
 
 /* Intro — spacious, minimal */
 .intro {
@@ -299,6 +303,107 @@ footer {
 }
 .cal-link:hover { text-decoration: underline; }
 
+/* RSVP CTA buttons */
+.rsvp-cta {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 1.25rem 2rem;
+}
+.rsvp-cta a {
+  display: inline-block;
+  background: var(--cyan);
+  color: #fff;
+  font-family: 'Oswald', sans-serif;
+  font-size: .95rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  text-decoration: none;
+  padding: .65rem 2rem;
+  border-radius: 4px;
+  transition: background .2s;
+}
+.rsvp-cta a:hover { background: var(--usa-blue); }
+
+/* Pre-event Zoom callout */
+.zoom-callout {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 2rem 1.5rem;
+}
+.zoom-callout-inner {
+  background: var(--navy);
+  padding: 1.5rem 1.75rem;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.zoom-callout-inner .zoom-text h3 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #fff;
+  text-transform: uppercase;
+  margin-bottom: .35rem;
+}
+.zoom-callout-inner .zoom-text p {
+  font-size: .88rem;
+  color: var(--pond);
+  line-height: 1.6;
+  max-width: 640px;
+}
+.zoom-callout-inner .zoom-text .zoom-date {
+  font-size: .8rem;
+  font-weight: 600;
+  color: var(--cyan);
+  margin-top: .4rem;
+}
+.zoom-callout-inner .zoom-btn {
+  display: inline-block;
+  background: var(--cyan);
+  color: #fff;
+  font-family: 'Oswald', sans-serif;
+  font-size: .85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  text-decoration: none;
+  padding: .55rem 1.5rem;
+  border-radius: 4px;
+  transition: background .2s;
+  white-space: nowrap;
+}
+.zoom-callout-inner .zoom-btn:hover { background: var(--usa-blue); }
+
+/* Booth training callout */
+.booth-callout {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 2rem 1rem;
+}
+.booth-callout-inner {
+  background: var(--cream);
+  border-left: 4px solid var(--cyan);
+  padding: 1.25rem 1.5rem;
+  border-radius: 2px;
+}
+.booth-callout-inner h3 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--navy);
+  text-transform: uppercase;
+  margin-bottom: .35rem;
+}
+.booth-callout-inner p {
+  font-size: .9rem;
+  color: var(--slate);
+  line-height: 1.6;
+}
+
 .rsvp-bar {
   max-width: 1000px;
   margin: 0 auto;
@@ -344,44 +449,53 @@ footer {
 
 <!-- Top Navigation -->
 <nav class="topnav">
-  <svg class="topnav-logo" viewBox="0 0 415.12 296.38" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Brand USA">
-    <defs><style>.lu1{fill:#fff;stroke-width:0}.lu2{fill:#00a9e0;stroke-width:0}</style></defs>
-    <g><g><path class="lu1" d="M88.18,170.68v-48.75h25.5v48.13c0,11.32,5.47,18.16,15.55,18.16s15.55-6.84,15.55-18.16v-48.13h25.5v48.75c0,25.12-14.05,39.43-41.04,39.43s-41.04-14.3-41.04-39.43Z"/><path class="lu1" d="M295.47,121.42h-31.22l-15.22,42.79c2.77,4.63,4.17,10.2,4.17,16.67,0,12.02-5.04,21.52-14.03,27.61h19.11l5.47-16.29h31.96l5.47,16.29h25.75l-31.47-87.06ZM270.34,172.29l9.33-27.74,9.33,27.74h-18.66Z"/></g><path class="lu1" d="M213.15,120.31c-22.76,0-37.19,10.07-37.19,28.11,0,34.2,46.02,22.14,46.02,34.82,0,4.1-3.23,6.47-12.06,6.47-9.57,0-18.89-2.86-26.97-8.45l-7.46,21.03c9,5.03,20.32,7.81,34.44,7.81,23.51,0,36.94-11.19,36.94-29.23,0-34.58-46.02-22.64-46.02-34.2,0-3.98,3.98-5.97,12.44-5.97s16.12,2.47,21.47,6.31l7.21-20.32c-7.42-3.81-17.46-6.39-28.81-6.39Z"/></g>
-    <g><path class="lu2" d="M88.13,88.47h11.74c2.91,0,5.12.75,6.61,2.23,1.16,1.15,1.73,2.58,1.73,4.29v.07c0,.72-.09,1.36-.27,1.91-.18.55-.42,1.05-.72,1.5-.3.44-.65.84-1.05,1.17-.4.34-.83.62-1.28.87,1.47.55,2.62,1.31,3.47,2.26.84.95,1.26,2.27,1.26,3.96v.07c0,1.16-.22,2.17-.67,3.04-.45.87-1.08,1.59-1.91,2.17-.83.58-1.83,1.01-3,1.3-1.17.29-2.46.43-3.88.43h-12.03v-25.28ZM102.68,95.93c0-.84-.31-1.48-.94-1.92-.63-.44-1.53-.66-2.71-.66h-5.49v5.31h5.13c1.23,0,2.2-.21,2.93-.63.72-.42,1.08-1.09,1.08-2.03v-.07ZM104.09,106.06c0-.84-.33-1.51-.97-2-.65-.49-1.7-.74-3.14-.74h-6.43v5.56h6.61c1.23,0,2.19-.22,2.89-.67.7-.44,1.05-1.14,1.05-2.08v-.07Z"/><path class="lu2" d="M114.2,88.47h11.56c3.2,0,5.66.85,7.37,2.56,1.44,1.44,2.17,3.37,2.17,5.78v.07c0,2.05-.5,3.71-1.5,5-1,1.29-2.31,2.23-3.92,2.83l6.18,9.03h-6.5l-5.42-8.09h-4.37v8.09h-5.56v-25.28ZM125.4,100.75c1.37,0,2.42-.32,3.16-.97.73-.65,1.1-1.51,1.1-2.59v-.07c0-1.2-.39-2.1-1.16-2.69-.77-.6-1.84-.9-3.21-.9h-5.53v7.22h5.63Z"/><path class="lu2" d="M148.98,88.29h5.13l10.83,25.46h-5.81l-2.31-5.67h-10.69l-2.31,5.67h-5.67l10.83-25.46ZM154.83,103.17l-3.36-8.2-3.36,8.2h6.72Z"/><path class="lu2" d="M168.12,88.47h5.13l11.85,15.56v-15.56h5.49v25.28h-4.73l-12.24-16.07v16.07h-5.49v-25.28Z"/><path class="lu2" d="M196.65,88.47h9.86c1.97,0,3.79.32,5.43.96,1.65.64,3.07,1.52,4.26,2.65,1.19,1.13,2.11,2.46,2.76,3.99.65,1.53.97,3.18.97,4.97v.07c0,1.78-.33,3.44-.97,4.98-.65,1.54-1.57,2.88-2.76,4.01-1.19,1.13-2.61,2.02-4.26,2.67-1.65.65-3.46.98-5.43.98h-9.86v-25.28ZM202.21,93.53v15.17h4.3c1.13,0,2.17-.18,3.11-.54.94-.36,1.74-.87,2.4-1.55s1.18-1.46,1.55-2.37.56-1.93.56-3.06v-.07c0-1.1-.19-2.12-.56-3.05s-.89-1.74-1.55-2.41-1.46-1.19-2.4-1.56c-.94-.37-1.97-.56-3.11-.56h-4.3Z"/></g>
-  </svg>
-  <div class="topnav-links">
-    <a href="https://www.thebrandusa.com/about">About</a>
-    <a href="https://www.thebrandusa.com/partners">Partners</a>
-    <a href="#" class="active">Events</a>
-    <a href="https://www.thebrandusa.com/resources">Resources</a>
-  </div>
+  <a href="https://www.thebrandusa.com">
+    <svg class="topnav-logo" viewBox="0 0 415.12 296.38" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Brand USA">
+      <defs><style>.lu1{fill:#00549F;stroke-width:0}.lu2{fill:#00a9e0;stroke-width:0}</style></defs>
+      <g><g><path class="lu1" d="M88.18,170.68v-48.75h25.5v48.13c0,11.32,5.47,18.16,15.55,18.16s15.55-6.84,15.55-18.16v-48.13h25.5v48.75c0,25.12-14.05,39.43-41.04,39.43s-41.04-14.3-41.04-39.43Z"/><path class="lu1" d="M295.47,121.42h-31.22l-15.22,42.79c2.77,4.63,4.17,10.2,4.17,16.67,0,12.02-5.04,21.52-14.03,27.61h19.11l5.47-16.29h31.96l5.47,16.29h25.75l-31.47-87.06ZM270.34,172.29l9.33-27.74,9.33,27.74h-18.66Z"/></g><path class="lu1" d="M213.15,120.31c-22.76,0-37.19,10.07-37.19,28.11,0,34.2,46.02,22.14,46.02,34.82,0,4.1-3.23,6.47-12.06,6.47-9.57,0-18.89-2.86-26.97-8.45l-7.46,21.03c9,5.03,20.32,7.81,34.44,7.81,23.51,0,36.94-11.19,36.94-29.23,0-34.58-46.02-22.64-46.02-34.2,0-3.98,3.98-5.97,12.44-5.97s16.12,2.47,21.47,6.31l7.21-20.32c-7.42-3.81-17.46-6.39-28.81-6.39Z"/></g>
+      <g><path class="lu2" d="M88.13,88.47h11.74c2.91,0,5.12.75,6.61,2.23,1.16,1.15,1.73,2.58,1.73,4.29v.07c0,.72-.09,1.36-.27,1.91-.18.55-.42,1.05-.72,1.5-.3.44-.65.84-1.05,1.17-.4.34-.83.62-1.28.87,1.47.55,2.62,1.31,3.47,2.26.84.95,1.26,2.27,1.26,3.96v.07c0,1.16-.22,2.17-.67,3.04-.45.87-1.08,1.59-1.91,2.17-.83.58-1.83,1.01-3,1.3-1.17.29-2.46.43-3.88.43h-12.03v-25.28ZM102.68,95.93c0-.84-.31-1.48-.94-1.92-.63-.44-1.53-.66-2.71-.66h-5.49v5.31h5.13c1.23,0,2.2-.21,2.93-.63.72-.42,1.08-1.09,1.08-2.03v-.07ZM104.09,106.06c0-.84-.33-1.51-.97-2-.65-.49-1.7-.74-3.14-.74h-6.43v5.56h6.61c1.23,0,2.19-.22,2.89-.67.7-.44,1.05-1.14,1.05-2.08v-.07Z"/><path class="lu2" d="M114.2,88.47h11.56c3.2,0,5.66.85,7.37,2.56,1.44,1.44,2.17,3.37,2.17,5.78v.07c0,2.05-.5,3.71-1.5,5-1,1.29-2.31,2.23-3.92,2.83l6.18,9.03h-6.5l-5.42-8.09h-4.37v8.09h-5.56v-25.28ZM125.4,100.75c1.37,0,2.42-.32,3.16-.97.73-.65,1.1-1.51,1.1-2.59v-.07c0-1.2-.39-2.1-1.16-2.69-.77-.6-1.84-.9-3.21-.9h-5.53v7.22h5.63Z"/><path class="lu2" d="M148.98,88.29h5.13l10.83,25.46h-5.81l-2.31-5.67h-10.69l-2.31,5.67h-5.67l10.83-25.46ZM154.83,103.17l-3.36-8.2-3.36,8.2h6.72Z"/><path class="lu2" d="M168.12,88.47h5.13l11.85,15.56v-15.56h5.49v25.28h-4.73l-12.24-16.07v16.07h-5.49v-25.28Z"/><path class="lu2" d="M196.65,88.47h9.86c1.97,0,3.79.32,5.43.96,1.65.64,3.07,1.52,4.26,2.65,1.19,1.13,2.11,2.46,2.76,3.99.65,1.53.97,3.18.97,4.97v.07c0,1.78-.33,3.44-.97,4.98-.65,1.54-1.57,2.88-2.76,4.01-1.19,1.13-2.61,2.02-4.26,2.67-1.65.65-3.46.98-5.43.98h-9.86v-25.28ZM202.21,93.53v15.17h4.3c1.13,0,2.17-.18,3.11-.54.94-.36,1.74-.87,2.4-1.55s1.18-1.46,1.55-2.37.56-1.93.56-3.06v-.07c0-1.1-.19-2.12-.56-3.05s-.89-1.74-1.55-2.41-1.46-1.19-2.4-1.56c-.94-.37-1.97-.56-3.11-.56h-4.3Z"/></g>
+    </svg>
+  </a>
 </nav>
-<div class="accent-bar"></div>
+<!-- Section Banner -->
+<div class="section-banner">
+  <h2>Upcoming Industry Events</h2>
+</div>
 
 <!-- Page Header -->
 <div class="page-header">
-  <h1>AI Meetup at IPW 2026</h1>
-  <div class="event-subtitle">Brand USA Booth &mdash; Greater Fort Lauderdale</div>
+  <h1>AI Meetup at IPW 2026 &mdash; Greater Fort Lauderdale</h1>
+  <div class="event-subtitle">Fort Lauderdale, FL, United States &middot; Booth #1148</div>
 </div>
 
 <!-- Hero Image -->
 <div class="hero-wrap">
-  <img src="/ipw-hero.jpg" alt="Janette Roush presenting at Brand USA's AI Theatre at IPW">
+  <img src="../ipw-hero.jpg" alt="Janette Roush presenting at Brand USA's AI Theatre at IPW">
   <div class="date-card">
     <div class="month">May</div>
     <div class="days">19 &ndash; 21</div>
     <div class="year">2026</div>
-    <div class="booth">Brand USA Booth</div>
   </div>
 </div>
 
 <!-- Intro -->
 <div class="intro">
-  <p>Three days of AI sessions, hands-on workshops, and the AI Confessional Happy Hour &mdash; all inside the Brand USA Booth at Broward County Convention Center. Built for tourism leaders and practitioners exploring how AI is shaping travel marketing. <a href="https://www.ipw.com">ipw.com</a></p>
+  <p>Three days of AI sessions, hands-on workshops, and the AI Confessional Happy Hour &mdash; all inside the Brand USA Booth (#1148) at Broward County Convention Center. Built for tourism leaders and practitioners exploring how AI is shaping travel marketing.</p>
 </div>
 
-<div class="rsvp-bar">
-  <a href="/ipw/rsvp" class="rsvp-btn">Reserve Your Spot</a>
+<div class="zoom-callout">
+  <div class="zoom-callout-inner">
+    <div class="zoom-text">
+      <h3>Pre-IPW Prep: Turn Every Meeting Into a Follow-Up Machine</h3>
+      <p>Join us the week before IPW to learn how to record your meetings on the show floor and use AI-generated transcripts to draft personalized follow-up emails, track commitments, and brief your team &mdash; all before you leave Fort Lauderdale.</p>
+      <div class="zoom-date">Monday, May 11 &middot; 1:30 PM ET &middot; Zoom</div>
+    </div>
+    <a href="https://thebrandusa.zoom.us/meeting/register/rA_uAJdxQ7WQPaHfbhzbag" class="zoom-btn" target="_blank">Register for Prep Call</a>
+  </div>
+</div>
+
+<div class="rsvp-cta">
+  <a href="rsvp/index.html">Register for Sessions</a>
 </div>
 
 <!-- Schedule -->
@@ -390,24 +504,22 @@ footer {
   <!-- TUESDAY -->
   <div class="day-header">
     <h2>Tuesday, May 19</h2>
-    <div class="day-theme">Leadership Day</div>
   </div>
 
   <div class="session-row">
     <div class="session-time">10:20 &ndash; 10:50 AM</div>
     <div class="session-content">
-      <h3>AI for Leadership</h3>
-      <div class="teaser">Cutting through the noise for destination CEOs and CMOs &mdash; what's working, what failed, and three investments that move the needle.</div>
-      <a href="/ipw/cal/tues-leadership.ics" class="cal-link">+ Add to Calendar</a>
+      <h3>AI Traveler Intelligence</h3>
+      <div class="teaser">First-look findings from Brand USA's AI trip planner &mdash; connecting conversations to advertising performance.</div>
+
     </div>
   </div>
 
   <div class="session-row">
     <div class="session-time">12:45 &ndash; 1:15 PM</div>
     <div class="session-content">
-      <h3>AI Traveler Intelligence</h3>
-      <div class="teaser">First-look findings from Brand USA's AI trip planner &mdash; connecting conversations to advertising performance.</div>
-      <a href="/ipw/cal/tues-traveler-intel.ics" class="cal-link">+ Add to Calendar</a>
+      <h3>AI for Sales</h3>
+      <div class="teaser">Research buyers, draft talking points, and outline follow-up emails &mdash; all in the 15 minutes between appointments.</div>
     </div>
   </div>
 
@@ -416,22 +528,19 @@ footer {
     <div class="session-content">
       <h3>AI Confessional <span class="happy-hour-badge">Happy Hour</span></h3>
       <div class="teaser">Grab a drink and share the AI shortcut you haven't told your team about yet. Judgment-free zone + Claude skills help desk.</div>
-      <a href="/ipw/cal/tues-happy-hour.ics" class="cal-link">+ Add to Calendar</a>
     </div>
   </div>
 
   <!-- WEDNESDAY -->
   <div class="day-header" style="margin-top: 1.5rem;">
     <h2>Wednesday, May 20</h2>
-    <div class="day-theme">Practitioner Day</div>
   </div>
 
   <div class="session-row">
     <div class="session-time">10:20 &ndash; 10:50 AM</div>
     <div class="session-content">
-      <h3>AI for Sales</h3>
-      <div class="teaser">Research buyers, draft talking points, and outline follow-up emails &mdash; all in the 15 minutes between appointments.</div>
-      <a href="/ipw/cal/wed-sales.ics" class="cal-link">+ Add to Calendar</a>
+      <h3>AI for Leadership</h3>
+      <div class="teaser">Cutting through the noise for CEOs and CMOs &mdash; what's working, what failed, and three investments that move the needle.</div>
     </div>
   </div>
 
@@ -440,7 +549,6 @@ footer {
     <div class="session-content">
       <h3>How to Be Your Organization's AI Champion</h3>
       <div class="teaser">For the person in the middle &mdash; pick the right first use case, get buy-in, and build a culture of experimentation.</div>
-      <a href="/ipw/cal/wed-champion.ics" class="cal-link">+ Add to Calendar</a>
     </div>
   </div>
 
@@ -449,34 +557,42 @@ footer {
     <div class="session-content">
       <h3>AI Confessional <span class="happy-hour-badge">Happy Hour</span></h3>
       <div class="teaser">Round two. Same energy, fresh confessions, plus hands-on Claude skills help desk.</div>
-      <a href="/ipw/cal/wed-happy-hour.ics" class="cal-link">+ Add to Calendar</a>
     </div>
   </div>
 
   <!-- THURSDAY -->
   <div class="day-header" style="margin-top: 1.5rem;">
     <h2>Thursday, May 21</h2>
-    <div class="day-theme">Workshop Day</div>
   </div>
 
   <div class="session-row">
-    <div class="session-time">10:20 &ndash; 11:00 AM</div>
+    <div class="session-time">10:20 &ndash; 10:50 AM</div>
     <div class="session-content">
-      <h3>Building a Personal OS in Claude Code <span class="laptop-badge">Bring Your Laptop</span></h3>
+      <h3>Building a Personal OS in Claude Code</h3>
       <div class="teaser">Hands-on workshop &mdash; build an AI system that manages your tasks, organizes notes, and preps you for every meeting.</div>
-      <a href="/ipw/cal/thu-personal-os.ics" class="cal-link">+ Add to Calendar</a>
     </div>
   </div>
 
   <div class="session-row">
-    <div class="session-time">12:45 &ndash; 1:30 PM</div>
+    <div class="session-time">12:45 &ndash; 1:15 PM</div>
     <div class="session-content">
-      <h3>Turn This Week Into Next Week <span class="laptop-badge">Bring Your Laptop</span></h3>
+      <h3>Turn This Week Into Next Week</h3>
       <div class="teaser">Bring your IPW notes and leave with prioritized action items, drafted emails, and a Monday that feels manageable.</div>
-      <a href="/ipw/cal/thu-next-week.ics" class="cal-link">+ Add to Calendar</a>
     </div>
   </div>
 
+</div>
+
+<div class="booth-callout">
+  <div class="booth-callout-inner">
+    <h3>AI Support at the Booth (#1148)</h3>
+    <p>Want one-on-one AI help? <a href="rsvp/index.html" style="color: var(--cyan);">Register in advance</a> to set up time for troubleshooting a tool, refining a prompt, or exploring what's possible.</p>
+    <p style="margin-top: .75rem;">Have an open appointment slot? We'll bring a hands-on AI training session to your booth or host your full team at ours &mdash; tailored to your organization's goals, tools, and questions. <a href="rsvp/index.html" style="color: var(--cyan);">Register</a> and let us know when you're available so we can set up a time.</p>
+  </div>
+</div>
+
+<div class="rsvp-cta" style="padding-bottom: 2rem;">
+  <a href="rsvp/index.html">Register for Sessions</a>
 </div>
 
 <!-- Footer -->
