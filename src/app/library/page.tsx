@@ -295,7 +295,7 @@ const resources = [
         description: 'Anthropic\'s frontier language model with extended context windows, Artifacts for rapid prototyping, and advanced analysis.',
         url: 'https://claude.ai',
         icon: Code,
-        logo: 'https://claude.ai/images/claude_app_icon.png',
+        logo: 'https://www.google.com/s2/favicons?domain=claude.ai&sz=128',
       },
       {
         title: 'Gemini',
