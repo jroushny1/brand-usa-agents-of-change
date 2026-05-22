@@ -54,6 +54,15 @@ const resources = [
     category: 'Conversations on AI in Tourism',
     items: [
       {
+        title: 'Destination Discourse – "What Should DMOs Actually Be Doing With AI Right Now?" (with Dan Holowack)',
+        description: 'Stuart Butler and Adam Stoker sit down with Janette Roush and Dan Holowack for a no-fluff conversation on where AI is actually going for DMOs. The shift from "using AI" to "working inside AI," why every DMO needs an AI champion now, building organization-wide master context, and why doing nothing is the biggest risk.',
+        url: 'https://www.youtube.com/watch?v=xxO4Sh0un1Q',
+        icon: Podcast,
+        date: 'May 21, 2026',
+        status: 'recorded',
+        recordedDate: '2026-05-21',
+      },
+      {
         title: 'Hospitality Daily – "The Taylor Swift of Travel AI" on Agentic AI, Organizational Upskilling, and Trust',
         description: 'Janette Roush, Brand USA\'s Chief AI Officer, discusses agentic AI, organizational upskilling strategies, and building trust in AI systems. Dubbed "The Taylor Swift of Travel AI," Janette shares insights on implementing AI across tourism organizations while maintaining human-centered approaches to technology adoption.',
         url: 'https://podcast.hospitalitydaily.com/janette-roush-2026/',
@@ -317,7 +326,7 @@ const resources = [
         description: 'Collaborative browser-based IDE with AI code generation for building and deploying applications entirely with natural language.',
         url: 'https://replit.com',
         icon: Code,
-        logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/New_Replit_Logo.svg/1200px-New_Replit_Logo.svg.png',
+        logo: 'https://www.google.com/s2/favicons?domain=replit.com&sz=128',
       },
     ]
   },
@@ -341,14 +350,14 @@ const resources = [
         description: 'Privacy-focused local voice-to-text transcription that runs entirely on your device for creating detailed AI prompts.',
         url: 'https://monologue.app',
         icon: Code,
-        logo: 'https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/f5/85/cd/f585cd02-26c7-0c20-5f86-6b3f7d4ee0f5/AppIcon-0-0-1x_U007epad-0-0-0-85-220.png/460x0w.webp',
+        logo: 'https://www.monologueapp.com/i/Icon-web.png',
       },
       {
         title: 'Wispr Flow',
         description: 'Real-time voice-to-text dictation software optimized for natural speech patterns and creating detailed AI prompts.',
         url: 'https://www.wispr.ai',
         icon: Code,
-        logo: 'https://framerusercontent.com/images/ORiXlZ8KPRSH3F3ZVcGEa99kRLM.png',
+        logo: 'https://www.google.com/s2/favicons?domain=wispr.ai&sz=128',
       },
     ]
   },
@@ -360,14 +369,14 @@ const resources = [
         description: 'AI-powered presentation software that automatically designs professional slides with smart templates and layouts.',
         url: 'https://www.beautiful.ai',
         icon: Code,
-        logo: 'https://assets-global.website-files.com/5f3ebf5c3dcbf4601c9d53cd/632e95db3dcbf40e6b4f71f5_Beautiful.ai%20logo%20square.png',
+        logo: 'https://www.google.com/s2/favicons?domain=beautiful.ai&sz=128',
       },
       {
         title: 'Descript',
         description: 'AI-powered video and podcast editor with text-based editing, transcription, voice cloning, and studio sound enhancement.',
         url: 'https://www.descript.com',
         icon: Code,
-        logo: 'https://cdn.prod.website-files.com/6009ec8cda7f305645c9d91b/6408f6907936855c20961f84_descript-logo.png',
+        logo: 'https://www.google.com/s2/favicons?domain=descript.com&sz=128',
       },
       {
         title: 'Napkin.ai',
