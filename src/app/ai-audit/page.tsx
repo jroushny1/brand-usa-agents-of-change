@@ -22,9 +22,131 @@ import {
   AlertOctagon,
   List,
   Layout,
-  BarChart
+  BarChart,
+  ExternalLink,
+  FlaskConical,
+  Bot,
+  XCircle,
+  HelpCircle
 } from 'lucide-react';
 import Link from 'next/link';
+
+// --- AI Bot definitions for robots.txt audit ---
+type BotType = 'training' | 'retrieval' | 'general';
+
+interface AIBotDef {
+  name: string;
+  type: BotType;
+  vendor: string;
+  purpose: string;
+}
+
+const AI_BOTS: AIBotDef[] = [
+  // OpenAI
+  { name: 'GPTBot', type: 'training', vendor: 'OpenAI', purpose: 'Trains GPT models on your content.' },
+  { name: 'OAI-SearchBot', type: 'retrieval', vendor: 'OpenAI', purpose: 'Indexes content for ChatGPT Search live results.' },
+  { name: 'ChatGPT-User', type: 'retrieval', vendor: 'OpenAI', purpose: 'On-demand fetch when a user asks ChatGPT about a URL.' },
+  // Anthropic (three-bot split — most sites still have one stale rule)
+  { name: 'ClaudeBot', type: 'training', vendor: 'Anthropic', purpose: 'Trains Claude models on your content.' },
+  { name: 'Claude-SearchBot', type: 'retrieval', vendor: 'Anthropic', purpose: 'Indexing for Claude search features.' },
+  { name: 'Claude-User', type: 'retrieval', vendor: 'Anthropic', purpose: 'On-demand fetch when a Claude user asks about a URL.' },
+  { name: 'anthropic-ai', type: 'training', vendor: 'Anthropic', purpose: 'Legacy Anthropic crawler.' },
+  // Perplexity
+  { name: 'PerplexityBot', type: 'retrieval', vendor: 'Perplexity', purpose: 'Indexes content for Perplexity citations.' },
+  // Google
+  { name: 'Google-Extended', type: 'training', vendor: 'Google', purpose: 'Opt-out for Gemini / Vertex AI training.' },
+  { name: 'Googlebot', type: 'general', vendor: 'Google', purpose: 'Main Google Search crawler (also powers AI Overview).' },
+  // Other major training crawlers
+  { name: 'CCBot', type: 'training', vendor: 'Common Crawl', purpose: 'Common Crawl dataset, used to train many AI models.' },
+  { name: 'Bytespider', type: 'training', vendor: 'ByteDance', purpose: 'TikTok / Doubao training crawler.' },
+  { name: 'Applebot-Extended', type: 'training', vendor: 'Apple', purpose: 'Opt-out for Apple Intelligence training.' },
+  { name: 'Meta-ExternalAgent', type: 'training', vendor: 'Meta', purpose: 'Meta AI / Llama training.' },
+];
+
+type BotStatus = 'allowed' | 'blocked' | 'partial' | 'blocked-by-wildcard' | 'not-mentioned';
+
+interface AgentRule {
+  allow: string[];
+  disallow: string[];
+}
+
+interface BotResult extends AIBotDef {
+  status: BotStatus;
+  source: 'specific' | 'wildcard';
+  rules: AgentRule;
+}
+
+interface RobotsAnalysis {
+  url: string;
+  found: boolean;
+  raw: string;
+  error?: string;
+  bots: BotResult[];
+}
+
+function parseRobotsTxt(text: string): Record<string, AgentRule> {
+  const agentRules: Record<string, AgentRule> = {};
+  let currentAgents: string[] = [];
+  let lastWasRule = false;
+
+  text.split(/\r?\n/).forEach((rawLine) => {
+    const line = rawLine.split('#')[0].trim();
+    if (!line) return;
+
+    const colonIdx = line.indexOf(':');
+    if (colonIdx === -1) return;
+
+    const field = line.substring(0, colonIdx).trim().toLowerCase();
+    const value = line.substring(colonIdx + 1).trim();
+
+    if (field === 'user-agent') {
+      if (lastWasRule) {
+        currentAgents = [];
+        lastWasRule = false;
+      }
+      currentAgents.push(value);
+      if (!agentRules[value]) agentRules[value] = { allow: [], disallow: [] };
+    } else if (field === 'allow' || field === 'disallow') {
+      currentAgents.forEach((agent) => {
+        if (!agentRules[agent]) agentRules[agent] = { allow: [], disallow: [] };
+        agentRules[agent][field as 'allow' | 'disallow'].push(value);
+      });
+      lastWasRule = true;
+    }
+  });
+
+  return agentRules;
+}
+
+function evaluateBot(bot: AIBotDef, agentRules: Record<string, AgentRule>): BotResult {
+  const wildcardEntry = Object.entries(agentRules).find(([name]) => name === '*');
+  const wildcardRules: AgentRule = wildcardEntry ? wildcardEntry[1] : { allow: [], disallow: [] };
+
+  const specificEntry = Object.entries(agentRules).find(
+    ([name]) => name.toLowerCase() === bot.name.toLowerCase()
+  );
+
+  if (specificEntry) {
+    const rules = specificEntry[1];
+    if (rules.disallow.some((p) => p === '/' || p === '')) {
+      // Disallow: / blocks everything; empty Disallow: actually means "allow everything" per spec
+      const hasFullBlock = rules.disallow.includes('/');
+      if (hasFullBlock) {
+        return { ...bot, status: 'blocked', source: 'specific', rules };
+      }
+    }
+    if (rules.disallow.length > 0 && !rules.disallow.every((p) => p === '')) {
+      return { ...bot, status: 'partial', source: 'specific', rules };
+    }
+    return { ...bot, status: 'allowed', source: 'specific', rules };
+  }
+
+  // Bot not specifically mentioned — falls under wildcard rules
+  if (wildcardRules.disallow.includes('/')) {
+    return { ...bot, status: 'blocked-by-wildcard', source: 'wildcard', rules: wildcardRules };
+  }
+  return { ...bot, status: 'not-mentioned', source: 'wildcard', rules: wildcardRules };
+}
 
 export default function AIAuditPage() {
   const [activeTab, setActiveTab] = useState('audit');
@@ -35,6 +157,7 @@ export default function AIAuditPage() {
   const [analysis, setAnalysis] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [fetchError, setFetchError] = useState<string | null>(null);
+  const [robotsAnalysis, setRobotsAnalysis] = useState<RobotsAnalysis | null>(null);
 
   // Sample HTML for demo — realistic European DMO homepage
   const demoHTML = `<!DOCTYPE html>
@@ -322,12 +445,50 @@ export default function AIAuditPage() {
     }
   };
 
+  const fetchRobotsTxt = async (pageUrl: string): Promise<RobotsAnalysis> => {
+    try {
+      const origin = new URL(pageUrl).origin;
+      const robotsUrl = `${origin}/robots.txt`;
+      const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(robotsUrl)}`);
+      const data = await response.json();
+
+      if (!data.contents || data.contents.toLowerCase().includes('<html')) {
+        return {
+          url: robotsUrl,
+          found: false,
+          raw: '',
+          error: 'No robots.txt found (or the server returned an HTML error page). Without a robots.txt, all crawlers — AI and otherwise — default to allowed.',
+          bots: AI_BOTS.map((bot) => ({ ...bot, status: 'not-mentioned', source: 'wildcard', rules: { allow: [], disallow: [] } })),
+        };
+      }
+
+      const agentRules = parseRobotsTxt(data.contents);
+      const bots = AI_BOTS.map((bot) => evaluateBot(bot, agentRules));
+
+      return {
+        url: robotsUrl,
+        found: true,
+        raw: data.contents,
+        bots,
+      };
+    } catch (err) {
+      return {
+        url: '',
+        found: false,
+        raw: '',
+        error: 'Could not fetch robots.txt (network error or CORS).',
+        bots: AI_BOTS.map((bot) => ({ ...bot, status: 'not-mentioned', source: 'wildcard', rules: { allow: [], disallow: [] } })),
+      };
+    }
+  };
+
   const handleUrlFetch = async () => {
     if (!urlInput) return;
 
     setIsLoading(true);
     setFetchError(null);
     setAnalysis(null);
+    setRobotsAnalysis(null);
     setActiveTab('audit'); // Default to Audit view
 
     try {
@@ -338,6 +499,9 @@ export default function AIAuditPage() {
             setInputText(data.contents);
             const result = parseContent(data.contents, urlInput);
             setAnalysis(result);
+
+            // Fetch robots.txt in parallel (don't block on it)
+            fetchRobotsTxt(urlInput).then(setRobotsAnalysis);
         } else {
             throw new Error("Could not retrieve content. The site might block proxies.");
         }
@@ -476,6 +640,7 @@ export default function AIAuditPage() {
           <div className="bg-white border-b flex overflow-x-auto">
             <TabButton id="audit" icon={ShieldCheck} label="Semantic Audit" />
             <TabButton id="knowledge" icon={Database} label="Schema" />
+            <TabButton id="crawlers" icon={Bot} label="AI Crawlers" />
             <TabButton id="structure" icon={Layout} label="Structure" />
             <TabButton id="stream" icon={Activity} label="Token Stream" />
             <TabButton id="rag" icon={FileText} label="RAG Context" />
@@ -597,6 +762,32 @@ export default function AIAuditPage() {
                         </div>
                     </div>
 
+                    {analysis.url && (
+                      <div className="bg-white p-6 rounded-lg shadow-sm border-2 border-brand-cyan">
+                        <div className="flex items-start mb-4">
+                          <FlaskConical className="flex-shrink-0 text-brand-cyan mr-3 mt-1" size={24} />
+                          <div className="flex-1">
+                            <h3 className="text-lg font-semibold text-brand-navy mb-2 font-display">Validate with Google&apos;s Rich Results Test</h3>
+                            <p className="text-sm text-gray-700 leading-relaxed mb-2">
+                              Google&apos;s Rich Results Test confirms whether your structured data qualifies for rich snippets, AI Overview, and AI Mode extraction. It validates required fields and surfaces errors the audit above can&apos;t catch from raw JSON alone.
+                            </p>
+                            <p className="text-xs text-gray-500 leading-relaxed">
+                              Opens in a new tab on Google&apos;s servers. Tests the live URL, not the HTML in this audit.
+                            </p>
+                          </div>
+                        </div>
+                        <a
+                          href={`https://search.google.com/test/rich-results?url=${encodeURIComponent(analysis.url)}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center px-4 py-2 bg-brand-cyan text-white text-sm font-semibold rounded-lg hover:bg-brand-blue transition-colors"
+                        >
+                          Test {(() => { try { return new URL(analysis.url).hostname; } catch { return 'this URL'; } })()} in Google Rich Results Test
+                          <ExternalLink className="ml-2" size={16} />
+                        </a>
+                      </div>
+                    )}
+
                     <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
                         <div className="flex justify-between items-center mb-4">
                             <h3 className="text-lg font-semibold text-brand-navy font-display">JSON-LD Objects</h3>
@@ -618,6 +809,115 @@ export default function AIAuditPage() {
                             <div className="text-center p-8 text-gray-400">No Schema Markup Found</div>
                         )}
                     </div>
+                  </div>
+                )}
+
+                {/* TAB: AI CRAWLERS */}
+                {activeTab === 'crawlers' && (
+                  <div className="space-y-6">
+                    <div className="bg-blue-50 p-6 rounded-lg border border-blue-100 flex items-start">
+                      <Info className="flex-shrink-0 text-blue-500 mr-3 mt-1" size={20} />
+                      <div>
+                        <h3 className="text-sm font-bold text-blue-900 mb-1 font-display">AI Crawler Policy</h3>
+                        <p className="text-sm text-blue-800 leading-relaxed">
+                          Your <code className="bg-blue-100 px-1 rounded">robots.txt</code> tells AI bots whether they can read your site. <strong>Training bots</strong> (GPTBot, ClaudeBot, Google-Extended) learn from your content. <strong>Retrieval bots</strong> (ChatGPT-User, Claude-User, PerplexityBot) fetch live when a user asks the AI about you. Blocking retrieval bots means zero chance of being cited in live AI answers.
+                        </p>
+                      </div>
+                    </div>
+
+                    {!analysis.url ? (
+                      <div className="bg-amber-50 p-6 rounded-lg border border-amber-200 flex items-start">
+                        <AlertTriangle className="flex-shrink-0 text-amber-500 mr-3 mt-1" size={20} />
+                        <div>
+                          <h3 className="text-sm font-bold text-amber-900 mb-1 font-display">URL required</h3>
+                          <p className="text-sm text-amber-800 leading-relaxed">Switch to URL input above to audit the site&apos;s robots.txt. This check needs a live domain.</p>
+                        </div>
+                      </div>
+                    ) : !robotsAnalysis ? (
+                      <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 flex items-center text-gray-500">
+                        <Loader size={20} className="animate-spin mr-3" />
+                        Fetching robots.txt...
+                      </div>
+                    ) : (
+                      <>
+                        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                          <div className="flex justify-between items-center mb-4">
+                            <h3 className="text-lg font-semibold text-brand-navy font-display">Bot-by-bot status</h3>
+                            {robotsAnalysis.url && (
+                              <a
+                                href={robotsAnalysis.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-xs text-brand-cyan hover:text-brand-blue inline-flex items-center"
+                              >
+                                View raw robots.txt
+                                <ExternalLink className="ml-1" size={12} />
+                              </a>
+                            )}
+                          </div>
+
+                          {robotsAnalysis.error && (
+                            <div className="mb-4 p-3 bg-amber-50 border border-amber-200 rounded text-sm text-amber-900">
+                              {robotsAnalysis.error}
+                            </div>
+                          )}
+
+                          <div className="overflow-x-auto">
+                            <table className="min-w-full text-sm">
+                              <thead>
+                                <tr className="text-left text-xs font-semibold text-gray-500 uppercase border-b border-gray-200">
+                                  <th className="py-2 pr-4">Bot</th>
+                                  <th className="py-2 pr-4">Vendor</th>
+                                  <th className="py-2 pr-4">Type</th>
+                                  <th className="py-2 pr-4">Status</th>
+                                  <th className="py-2">What it does</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {robotsAnalysis.bots.map((bot) => {
+                                  const statusConfig = {
+                                    allowed: { icon: CheckCircle, color: 'text-green-600', bg: 'bg-green-50', label: 'Allowed (explicit)' },
+                                    blocked: { icon: XCircle, color: 'text-red-600', bg: 'bg-red-50', label: 'Blocked (explicit)' },
+                                    partial: { icon: AlertTriangle, color: 'text-amber-600', bg: 'bg-amber-50', label: 'Partial restrictions' },
+                                    'blocked-by-wildcard': { icon: XCircle, color: 'text-red-600', bg: 'bg-red-50', label: 'Blocked (via *)' },
+                                    'not-mentioned': { icon: HelpCircle, color: 'text-gray-400', bg: 'bg-gray-50', label: 'Not mentioned (allowed)' },
+                                  }[bot.status];
+                                  const StatusIcon = statusConfig.icon;
+                                  const typeColor = bot.type === 'training' ? 'bg-purple-100 text-purple-700' : bot.type === 'retrieval' ? 'bg-blue-100 text-blue-700' : 'bg-gray-100 text-gray-700';
+                                  return (
+                                    <tr key={bot.name} className="border-b border-gray-100">
+                                      <td className="py-3 pr-4 font-mono text-xs text-brand-navy">{bot.name}</td>
+                                      <td className="py-3 pr-4 text-gray-600">{bot.vendor}</td>
+                                      <td className="py-3 pr-4">
+                                        <span className={`inline-block px-2 py-0.5 rounded text-xs font-medium ${typeColor}`}>
+                                          {bot.type}
+                                        </span>
+                                      </td>
+                                      <td className="py-3 pr-4">
+                                        <div className={`inline-flex items-center px-2 py-1 rounded ${statusConfig.bg}`}>
+                                          <StatusIcon size={14} className={`${statusConfig.color} mr-1.5`} />
+                                          <span className={`text-xs font-medium ${statusConfig.color}`}>{statusConfig.label}</span>
+                                        </div>
+                                      </td>
+                                      <td className="py-3 text-gray-600 text-xs">{bot.purpose}</td>
+                                    </tr>
+                                  );
+                                })}
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+
+                        {robotsAnalysis.found && robotsAnalysis.raw && (
+                          <details className="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
+                            <summary className="cursor-pointer text-sm font-semibold text-brand-navy">Raw robots.txt</summary>
+                            <pre className="mt-3 bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-xs font-mono whitespace-pre-wrap">
+                              {robotsAnalysis.raw}
+                            </pre>
+                          </details>
+                        )}
+                      </>
+                    )}
                   </div>
                 )}
 
