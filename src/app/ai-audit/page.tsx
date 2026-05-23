@@ -35,7 +35,9 @@ import {
   Link2,
   HelpCircle as Question,
   TrendingUp,
-  ArrowRight
+  ArrowRight,
+  Copy,
+  Check
 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -843,6 +845,181 @@ async function fetchHygieneChecks(pageUrl: string): Promise<HygieneCheck[]> {
   return checks;
 }
 
+// --- Markdown report generator ---
+function generateMarkdownReport(analysis: any, robotsAnalysis: RobotsAnalysis | null): string {
+  const url = analysis.url || '(HTML paste)';
+  const auditDate = new Date().toISOString().split('T')[0];
+  const lines: string[] = [];
+
+  lines.push(`# AI Audit Report: ${url}`);
+  lines.push('');
+  lines.push(`**Audited:** ${auditDate}`);
+  lines.push(`**Tool:** janetteroush.com/ai-audit`);
+  lines.push('');
+
+  // Compute summary statuses
+  type Status = 'Strong' | 'Needs work' | 'Critical' | 'Unknown';
+
+  const entities: DiscoveredEntity[] = analysis.entities || [];
+  const grouped = deduplicateEntities(entities);
+  const authCount = grouped.reduce((sum, e) => sum + e.sameAs.filter((s) => s.isAuthoritative).length, 0);
+  const entityStatus: Status = authCount >= 3 ? 'Strong' : authCount >= 1 ? 'Needs work' : 'Critical';
+
+  const sc: SchemaTypeCoverage | undefined = analysis.schemaCoverage;
+  const presentCount = sc?.presentTypes.length || 0;
+  const criticalMissing = (sc?.missingRecommended || []).filter((r) => r.priority === 'critical').length;
+  const schemaStatus: Status = presentCount === 0 ? 'Critical' : criticalMissing >= 3 ? 'Needs work' : presentCount >= 3 ? 'Strong' : 'Needs work';
+
+  let crawlerStatus: Status = 'Unknown';
+  let crawlerFinding = 'URL audit needed to check robots.txt';
+  if (robotsAnalysis) {
+    const retrievalBlocked = robotsAnalysis.bots.filter((b) => b.type === 'retrieval' && (b.status === 'blocked' || b.status === 'blocked-by-wildcard')).length;
+    const totalBlocked = robotsAnalysis.bots.filter((b) => b.status === 'blocked' || b.status === 'blocked-by-wildcard').length;
+    if (retrievalBlocked > 0) {
+      crawlerStatus = 'Critical';
+      crawlerFinding = `${retrievalBlocked} retrieval bot(s) blocked — invisible in live AI answers`;
+    } else if (totalBlocked > 0) {
+      crawlerStatus = 'Needs work';
+      crawlerFinding = `${totalBlocked} training bot(s) blocked`;
+    } else {
+      crawlerStatus = 'Strong';
+      crawlerFinding = 'All AI crawlers allowed';
+    }
+  }
+
+  const fresh: FreshnessAnalysis | undefined = analysis.freshness;
+  let freshStatus: Status = 'Unknown';
+  let freshFinding = 'No date signals on the page';
+  if (fresh) {
+    const modDays = daysSince(fresh.mostRecentModified?.parsed || null);
+    if (modDays === null) {
+      freshStatus = 'Critical';
+      freshFinding = 'No dateModified found';
+    } else if (modDays <= 30) {
+      freshStatus = 'Strong';
+      freshFinding = `Last modified ${modDays === 0 ? 'today' : modDays + ' days ago'}`;
+    } else if (modDays <= 180) {
+      freshStatus = 'Needs work';
+      freshFinding = `Last modified ${Math.round(modDays / 30)} months ago`;
+    } else {
+      freshStatus = 'Critical';
+      freshFinding = `Last modified ${(modDays / 365).toFixed(1)} years ago`;
+    }
+  }
+
+  const cp: ContentPatterns | undefined = analysis.contentPatterns;
+  let patternStatus: Status = 'Unknown';
+  let patternFinding = 'No body content';
+  if (cp && cp.wordCount > 0) {
+    const strongCount = [
+      cp.citationsPer1000 >= 5,
+      cp.statisticsPer1000 >= 10,
+      cp.quotationsPer1000 >= 3,
+      cp.questionHeadingPercent >= 30,
+    ].filter(Boolean).length;
+    patternStatus = strongCount >= 3 ? 'Strong' : strongCount >= 1 ? 'Needs work' : 'Critical';
+    patternFinding = `${strongCount} of 4 patterns at strong density`;
+  }
+
+  const hyg: HygieneAnalysis | undefined = analysis.hygiene;
+  let hygieneStatus: Status = 'Unknown';
+  let hygieneFinding = 'No hygiene data';
+  if (hyg) {
+    const allChecks = [...hyg.htmlChecks, ...(hyg.fetchChecks || [])];
+    const failCount = allChecks.filter((c) => c.status === 'fail').length;
+    const warnCount = allChecks.filter((c) => c.status === 'warn').length;
+    const passCount = allChecks.filter((c) => c.status === 'pass').length;
+    if (failCount > 0) {
+      hygieneStatus = 'Critical';
+      hygieneFinding = `${failCount} check(s) failed (${passCount} pass, ${warnCount} warn)`;
+    } else if (warnCount > 1) {
+      hygieneStatus = 'Needs work';
+      hygieneFinding = `${warnCount} warnings (${passCount} pass)`;
+    } else {
+      hygieneStatus = 'Strong';
+      hygieneFinding = `${passCount} checks pass${warnCount > 0 ? `, ${warnCount} warn` : ''}`;
+    }
+  }
+
+  // Summary table
+  lines.push('## Summary');
+  lines.push('');
+  lines.push('| Category | Status | Finding |');
+  lines.push('|---|---|---|');
+  lines.push(`| Entity Graph | ${entityStatus} | ${grouped.length === 0 ? 'No entities found in structured data' : `${authCount} authoritative sameAs across ${grouped.length} ${grouped.length === 1 ? 'entity' : 'entities'}`} |`);
+  lines.push(`| Schema Coverage | ${schemaStatus} | ${presentCount === 0 ? 'No structured data on this page' : `${presentCount} types present${criticalMissing > 0 ? `, ${criticalMissing} critical missing` : ''}`} |`);
+  lines.push(`| AI Crawler Policy | ${crawlerStatus} | ${crawlerFinding} |`);
+  lines.push(`| Freshness | ${freshStatus} | ${freshFinding} |`);
+  lines.push(`| Content Patterns | ${patternStatus} | ${patternFinding} |`);
+  lines.push(`| Site Hygiene | ${hygieneStatus} | ${hygieneFinding} |`);
+  lines.push('');
+
+  // Top priorities
+  lines.push('## Top priorities');
+  lines.push('');
+  const priorities: string[] = [];
+  if (entityStatus === 'Critical') priorities.push('Add Wikipedia, Wikidata, and LinkedIn URLs to a `sameAs` array on your Organization schema. Without these, AI engines cannot confidently identify your organization.');
+  if (schemaStatus === 'Critical') priorities.push('Add structured data (JSON-LD) to your page, starting with `Organization` and `WebSite` schemas. AI engines extract facts from this layer.');
+  if (crawlerStatus === 'Critical') priorities.push('Unblock AI retrieval bots in your `robots.txt`. With them blocked, your site is invisible in live AI answers from ChatGPT Search, Perplexity, and Claude.');
+  if (freshStatus === 'Critical') priorities.push('Add `dateModified` to your structured data. AI engines weight content freshness; without this field, your page reads as ageless or stale.');
+  if (patternStatus === 'Critical') priorities.push('Add direct quotes, statistics, and links to authoritative sources (Wikipedia, .gov, .edu, established news). Princeton GEO research found these patterns lift AI citation by 30-41%.');
+  if (hygieneStatus === 'Critical') priorities.push('Fix the hygiene checks marked "fail" — likely missing canonical, noindex set, or missing Open Graph tags. See Site Hygiene tab for specifics.');
+  if (priorities.length === 0) {
+    lines.push('No critical issues. See the detail sections below for warnings and nice-to-have improvements.');
+  } else {
+    priorities.forEach((p, i) => lines.push(`${i + 1}. ${p}`));
+  }
+  lines.push('');
+
+  // Detail sections
+  if (sc) {
+    lines.push('## Schema Coverage detail');
+    lines.push('');
+    if (sc.presentTypes.length > 0) {
+      lines.push('**Present types:**');
+      sc.presentTypes.forEach((t) => lines.push(`- \`${t.type}\`${t.count > 1 ? ` ×${t.count}` : ''}`));
+      lines.push('');
+    }
+    const missingCritical = sc.missingRecommended.filter((r) => r.priority === 'critical');
+    if (missingCritical.length > 0) {
+      lines.push('**Critical types missing:**');
+      missingCritical.forEach((r) => lines.push(`- \`${r.type}\` — ${r.description}`));
+      lines.push('');
+    }
+  }
+
+  if (robotsAnalysis) {
+    lines.push('## AI Crawler detail');
+    lines.push('');
+    const blocked = robotsAnalysis.bots.filter((b) => b.status === 'blocked' || b.status === 'blocked-by-wildcard');
+    if (blocked.length > 0) {
+      lines.push('**Blocked bots:**');
+      blocked.forEach((b) => lines.push(`- \`${b.name}\` (${b.vendor}, ${b.type}) — ${b.purpose}`));
+      lines.push('');
+    } else {
+      lines.push('No AI crawlers are blocked in your robots.txt.');
+      lines.push('');
+    }
+  }
+
+  if (hyg) {
+    const allHygiene = [...hyg.htmlChecks, ...(hyg.fetchChecks || [])];
+    const failedHyg = allHygiene.filter((c) => c.status === 'fail');
+    if (failedHyg.length > 0) {
+      lines.push('## Site Hygiene failures');
+      lines.push('');
+      failedHyg.forEach((c) => lines.push(`- **${c.name}:** ${c.detail}`));
+      lines.push('');
+    }
+  }
+
+  lines.push('---');
+  lines.push('');
+  lines.push(`*Generated by the AI audit tool at janetteroush.com/ai-audit.*`);
+
+  return lines.join('\n');
+}
+
 function analyzeSchemaCoverage(jsonLdArray: any[]): SchemaTypeCoverage {
   const counts = extractAllSchemaTypes(jsonLdArray);
   const presentTypes = Array.from(counts.entries())
@@ -1051,6 +1228,7 @@ export default function AIAuditPage() {
   const [isCheckingRobots, setIsCheckingRobots] = useState(false);
   const [richResultsUrl, setRichResultsUrl] = useState('');
   const [manualRobotsTxt, setManualRobotsTxt] = useState('');
+  const [reportCopied, setReportCopied] = useState(false);
 
   // Sample HTML for demo — realistic European DMO homepage
   const demoHTML = `<!DOCTYPE html>
@@ -1551,14 +1729,35 @@ export default function AIAuditPage() {
                 {/* TAB: SUMMARY (default view) */}
                 {activeTab === 'summary' && (
                   <div className="space-y-6">
-                    <div className="bg-blue-50 p-6 rounded-lg border border-blue-100 flex items-start">
-                      <Info className="flex-shrink-0 text-blue-500 mr-3 mt-1" size={20} />
-                      <div>
-                        <h3 className="text-sm font-bold text-blue-900 mb-1 font-display">AI Readiness Summary</h3>
-                        <p className="text-sm text-blue-800 leading-relaxed">
-                          A quick read on how AI engines like ChatGPT, Claude, Perplexity, and Google AI Overview see your page. Each card shows one category &mdash; click through to the detail tab to see exactly what&apos;s going on.
-                        </p>
+                    <div className="bg-blue-50 p-6 rounded-lg border border-blue-100 flex items-start justify-between gap-4">
+                      <div className="flex items-start flex-1">
+                        <Info className="flex-shrink-0 text-blue-500 mr-3 mt-1" size={20} />
+                        <div>
+                          <h3 className="text-sm font-bold text-blue-900 mb-1 font-display">AI Readiness Summary</h3>
+                          <p className="text-sm text-blue-800 leading-relaxed">
+                            A quick read on how AI engines like ChatGPT, Claude, Perplexity, and Google AI Overview see your page. Each card shows one category &mdash; click through to the detail tab to see exactly what&apos;s going on.
+                          </p>
+                        </div>
                       </div>
+                      <button
+                        onClick={async () => {
+                          try {
+                            const md = generateMarkdownReport(analysis, robotsAnalysis);
+                            await navigator.clipboard.writeText(md);
+                            setReportCopied(true);
+                            setTimeout(() => setReportCopied(false), 2500);
+                          } catch (err) {
+                            console.error('Copy failed:', err);
+                          }
+                        }}
+                        className="flex-shrink-0 inline-flex items-center px-3 py-2 bg-white border border-brand-cyan text-brand-cyan text-xs font-semibold rounded-lg hover:bg-brand-cyan hover:text-white transition-colors whitespace-nowrap"
+                      >
+                        {reportCopied ? (
+                          <><Check size={14} className="mr-1.5" />Copied!</>
+                        ) : (
+                          <><Copy size={14} className="mr-1.5" />Copy report</>
+                        )}
+                      </button>
                     </div>
 
                     {(() => {
