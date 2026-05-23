@@ -392,6 +392,7 @@ interface SchemaRecommendation {
   priority: 'critical' | 'recommended' | 'nice-to-have';
   description: string;
   whyMatters: string;
+  starter: string;  // copy-paste JSON-LD starter
 }
 
 interface SchemaTypeCoverage {
@@ -401,27 +402,217 @@ interface SchemaTypeCoverage {
 
 const SCHEMA_LIBRARY: SchemaRecommendation[] = [
   // Foundational
-  { type: 'Organization', category: 'foundational', priority: 'critical', description: 'Identifies your org with name, logo, sameAs links', whyMatters: 'Every site needs this. AI uses it to know who you are.' },
-  { type: 'WebSite', category: 'foundational', priority: 'critical', description: 'Anchors the site as a whole entity', whyMatters: 'Gives AI a stable home reference for everything else on the domain.' },
-  { type: 'BreadcrumbList', category: 'foundational', priority: 'recommended', description: 'Breadcrumb navigation as structured data', whyMatters: 'Helps AI understand page hierarchy and which pages are top-level vs deep.' },
-  { type: 'Person', category: 'foundational', priority: 'recommended', description: 'Staff bios, authors, leadership', whyMatters: 'Personal credibility is the foundation of E-E-A-T. Author Person schemas with sameAs anchors get cited far more than anonymous content.' },
+  { type: 'Organization', category: 'foundational', priority: 'critical', description: 'Identifies your org with name, logo, sameAs links', whyMatters: 'Every site needs this. AI uses it to know who you are.', starter: `{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Your Organization",
+  "url": "https://yourdomain.com",
+  "logo": "https://yourdomain.com/logo.png",
+  "sameAs": [
+    "https://en.wikipedia.org/wiki/Your_Organization",
+    "https://www.wikidata.org/wiki/QXXXXXX",
+    "https://www.linkedin.com/company/your-org"
+  ]
+}` },
+  { type: 'WebSite', category: 'foundational', priority: 'critical', description: 'Anchors the site as a whole entity', whyMatters: 'Gives AI a stable home reference for everything else on the domain.', starter: `{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Your Site Name",
+  "url": "https://yourdomain.com",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://yourdomain.com/search?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}` },
+  { type: 'BreadcrumbList', category: 'foundational', priority: 'recommended', description: 'Breadcrumb navigation as structured data', whyMatters: 'Helps AI understand page hierarchy and which pages are top-level vs deep.', starter: `{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://yourdomain.com"},
+    {"@type": "ListItem", "position": 2, "name": "Category", "item": "https://yourdomain.com/category"},
+    {"@type": "ListItem", "position": 3, "name": "Current Page"}
+  ]
+}` },
+  { type: 'Person', category: 'foundational', priority: 'recommended', description: 'Staff bios, authors, leadership', whyMatters: 'Personal credibility is the foundation of E-E-A-T. Author Person schemas with sameAs anchors get cited far more than anonymous content.', starter: `{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Person Name",
+  "jobTitle": "Their Title",
+  "url": "https://yourdomain.com/about",
+  "sameAs": [
+    "https://www.linkedin.com/in/handle",
+    "https://en.wikipedia.org/wiki/Their_Name"
+  ]
+}` },
 
   // DMO / Tourism
-  { type: 'TouristAttraction', category: 'dmo', priority: 'critical', description: 'Each attraction page (museums, landmarks, parks)', whyMatters: 'Foundational for tourism sites. AI maps queries like "things to do in X" directly to TouristAttraction entries.' },
-  { type: 'TouristDestination', category: 'dmo', priority: 'recommended', description: 'City / region / area pages', whyMatters: 'Tells AI this page describes a destination as a whole, with attractions, places, and events nested.' },
-  { type: 'Event', category: 'dmo', priority: 'critical', description: 'Festivals, performances, scheduled experiences', whyMatters: 'The only way AI Overview answers "what is happening in [city] this weekend." Without Event schema, your events are invisible to AI.' },
-  { type: 'Place', category: 'dmo', priority: 'recommended', description: 'Physical locations with geo coordinates', whyMatters: 'Lets AI place your content on a map. Especially powerful when paired with Wikidata Place IDs in sameAs.' },
-  { type: 'LocalBusiness', category: 'dmo', priority: 'recommended', description: 'Hotels, restaurants, shops in your destination', whyMatters: 'If you list local businesses (hotel directory, restaurant guide), LocalBusiness gives AI structured hours, prices, contact info.' },
+  { type: 'TouristAttraction', category: 'dmo', priority: 'critical', description: 'Each attraction page (museums, landmarks, parks)', whyMatters: 'Foundational for tourism sites. AI maps queries like "things to do in X" directly to TouristAttraction entries.', starter: `{
+  "@context": "https://schema.org",
+  "@type": "TouristAttraction",
+  "name": "Attraction Name",
+  "description": "Brief description of the attraction",
+  "image": "https://yourdomain.com/attraction.jpg",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "City",
+    "addressRegion": "State",
+    "addressCountry": "US"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 0,
+    "longitude": 0
+  }
+}` },
+  { type: 'TouristDestination', category: 'dmo', priority: 'recommended', description: 'City / region / area pages', whyMatters: 'Tells AI this page describes a destination as a whole, with attractions, places, and events nested.', starter: `{
+  "@context": "https://schema.org",
+  "@type": "TouristDestination",
+  "name": "Destination Name",
+  "description": "What makes this destination distinctive",
+  "url": "https://yourdomain.com/destination",
+  "includesAttraction": [
+    {"@type": "TouristAttraction", "name": "Featured Attraction 1"},
+    {"@type": "TouristAttraction", "name": "Featured Attraction 2"}
+  ]
+}` },
+  { type: 'Event', category: 'dmo', priority: 'critical', description: 'Festivals, performances, scheduled experiences', whyMatters: 'The only way AI Overview answers "what is happening in [city] this weekend." Without Event schema, your events are invisible to AI.', starter: `{
+  "@context": "https://schema.org",
+  "@type": "Event",
+  "name": "Event Name",
+  "startDate": "2026-06-15T19:00",
+  "endDate": "2026-06-15T22:00",
+  "eventStatus": "https://schema.org/EventScheduled",
+  "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+  "location": {
+    "@type": "Place",
+    "name": "Venue Name",
+    "address": "Venue Address"
+  },
+  "image": "https://yourdomain.com/event.jpg",
+  "description": "Brief event description",
+  "organizer": {
+    "@type": "Organization",
+    "name": "Organizer Name",
+    "url": "https://yourdomain.com"
+  }
+}` },
+  { type: 'Place', category: 'dmo', priority: 'recommended', description: 'Physical locations with geo coordinates', whyMatters: 'Lets AI place your content on a map. Especially powerful when paired with Wikidata Place IDs in sameAs.', starter: `{
+  "@context": "https://schema.org",
+  "@type": "Place",
+  "name": "Place Name",
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 0,
+    "longitude": 0
+  },
+  "sameAs": [
+    "https://en.wikipedia.org/wiki/Place_Name",
+    "https://www.wikidata.org/wiki/QXXXXXX"
+  ]
+}` },
+  { type: 'LocalBusiness', category: 'dmo', priority: 'recommended', description: 'Hotels, restaurants, shops in your destination', whyMatters: 'If you list local businesses (hotel directory, restaurant guide), LocalBusiness gives AI structured hours, prices, contact info.', starter: `{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Business Name",
+  "image": "https://yourdomain.com/photo.jpg",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "123 Main St",
+    "addressLocality": "City",
+    "addressRegion": "ST",
+    "postalCode": "00000"
+  },
+  "telephone": "+1-555-555-5555",
+  "openingHours": "Mo-Fr 09:00-17:00",
+  "priceRange": "$$"
+}` },
 
   // Content
-  { type: 'Article', category: 'content', priority: 'recommended', description: 'Editorial content, blog posts, guides', whyMatters: 'Article schema gives AI the headline, author, date, and image. Pages with Article schema get cited 2-3x more often than plain HTML.' },
-  { type: 'VideoObject', category: 'content', priority: 'recommended', description: 'Videos with thumbnail, duration, transcript reference', whyMatters: 'AI Mode increasingly surfaces video. VideoObject schema is the difference between your video appearing or being invisible.' },
-  { type: 'Course', category: 'content', priority: 'nice-to-have', description: 'Educational programs, training, certifications', whyMatters: 'Useful for organizations with training content. AI can answer "courses about X" queries directly.' },
+  { type: 'Article', category: 'content', priority: 'recommended', description: 'Editorial content, blog posts, guides', whyMatters: 'Article schema gives AI the headline, author, date, and image. Pages with Article schema get cited 2-3x more often than plain HTML.', starter: `{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Article Title",
+  "image": "https://yourdomain.com/image.jpg",
+  "datePublished": "2026-05-23T08:00:00+00:00",
+  "dateModified": "2026-05-23T08:00:00+00:00",
+  "author": {
+    "@type": "Person",
+    "name": "Author Name",
+    "url": "https://yourdomain.com/about/author"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Publisher Name",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://yourdomain.com/logo.png"
+    }
+  }
+}` },
+  { type: 'VideoObject', category: 'content', priority: 'recommended', description: 'Videos with thumbnail, duration, transcript reference', whyMatters: 'AI Mode increasingly surfaces video. VideoObject schema is the difference between your video appearing or being invisible.', starter: `{
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "name": "Video Title",
+  "description": "Brief description",
+  "thumbnailUrl": "https://yourdomain.com/thumbnail.jpg",
+  "uploadDate": "2026-05-23",
+  "duration": "PT5M30S",
+  "contentUrl": "https://yourdomain.com/video.mp4"
+}` },
+  { type: 'Course', category: 'content', priority: 'nice-to-have', description: 'Educational programs, training, certifications', whyMatters: 'Useful for organizations with training content. AI can answer "courses about X" queries directly.', starter: `{
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "name": "Course Name",
+  "description": "What students will learn",
+  "provider": {
+    "@type": "Organization",
+    "name": "Provider Name",
+    "url": "https://yourdomain.com"
+  }
+}` },
 
   // Discovery
-  { type: 'FAQPage', category: 'discovery', priority: 'recommended', description: 'Question + answer pairs', whyMatters: 'AI engines pull FAQ schema heavily for direct answers. Google dropped FAQ rich results from search in 2023, but the schema is still a strong AI extraction signal.' },
-  { type: 'HowTo', category: 'discovery', priority: 'nice-to-have', description: 'Step-by-step instructions', whyMatters: 'For guides like "how to plan a trip to X" or "how to host a meeting." AI surfaces HowTo in instructional queries.' },
-  { type: 'Speakable', category: 'discovery', priority: 'nice-to-have', description: 'Marks which page sections are voice-readable', whyMatters: 'Voice assistants and read-aloud features use this. Still in beta but useful for accessibility-forward sites.' },
+  { type: 'FAQPage', category: 'discovery', priority: 'recommended', description: 'Question + answer pairs', whyMatters: 'AI engines pull FAQ schema heavily for direct answers. Google dropped FAQ rich results from search in 2023, but the schema is still a strong AI extraction signal.', starter: `{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the question?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The answer text."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Another question?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Another answer."
+      }
+    }
+  ]
+}` },
+  { type: 'HowTo', category: 'discovery', priority: 'nice-to-have', description: 'Step-by-step instructions', whyMatters: 'For guides like "how to plan a trip to X" or "how to host a meeting." AI surfaces HowTo in instructional queries.', starter: `{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to do something",
+  "description": "Brief overview",
+  "step": [
+    {"@type": "HowToStep", "name": "Step 1", "text": "First step instruction"},
+    {"@type": "HowToStep", "name": "Step 2", "text": "Second step instruction"}
+  ]
+}` },
+  { type: 'Speakable', category: 'discovery', priority: 'nice-to-have', description: 'Marks which page sections are voice-readable', whyMatters: 'Voice assistants and read-aloud features use this. Still in beta but useful for accessibility-forward sites.', starter: `{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "speakable": {
+    "@type": "SpeakableSpecification",
+    "cssSelector": ["h1", ".summary", ".speakable"]
+  }
+}` },
 ];
 
 function extractAllSchemaTypes(jsonLdArray: any[]): Map<string, number> {
@@ -453,6 +644,7 @@ interface HygieneCheck {
   status: HygieneStatus;
   detail: string;
   why: string;
+  fix?: string;  // HTML snippet or file content to add
 }
 
 interface HygieneAnalysis {
@@ -471,6 +663,7 @@ function extractHtmlHygiene(doc: Document, pageUrl: string): HygieneCheck[] {
       status: 'fail',
       detail: 'Missing',
       why: 'Without a canonical tag, AI crawlers and search engines treat each URL variant as a separate page. This dilutes signal and creates duplicate content problems.',
+      fix: `<link rel="canonical" href="${pageUrl || 'https://yourdomain.com/this-page'}">`,
     });
   } else {
     let canonicalMatches = false;
@@ -544,6 +737,16 @@ function extractHtmlHygiene(doc: Document, pageUrl: string): HygieneCheck[] {
       ? `All 5 core tags present (${ogTags.join(', ')})`
       : `Missing: ${ogMissing.join(', ')}`,
     why: 'OG tags control how your page renders when shared on LinkedIn, Slack, iMessage, etc. AI crawlers also use og:title and og:description as fallback when other signals are weak.',
+    fix: ogMissing.length === 0 ? undefined : ogMissing.map((tag) => {
+      const placeholders: Record<string, string> = {
+        'og:title': 'Your Page Title',
+        'og:description': 'A 1-2 sentence description of this page',
+        'og:image': 'https://yourdomain.com/share-image.jpg',
+        'og:type': 'website',
+        'og:url': pageUrl || 'https://yourdomain.com/this-page',
+      };
+      return `<meta property="${tag}" content="${placeholders[tag]}">`;
+    }).join('\n'),
   });
 
   // Twitter Card
@@ -554,6 +757,7 @@ function extractHtmlHygiene(doc: Document, pageUrl: string): HygieneCheck[] {
       status: 'warn',
       detail: 'Missing twitter:card meta',
       why: 'Without this, X/Twitter previews fall back to OG tags or generic rendering. Adding `twitter:card` = `summary_large_image` gives you a proper card preview.',
+      fix: `<meta name="twitter:card" content="summary_large_image">\n<meta name="twitter:title" content="Your Page Title">\n<meta name="twitter:description" content="A 1-2 sentence description">\n<meta name="twitter:image" content="https://yourdomain.com/share-image.jpg">`,
     });
   } else {
     checks.push({
@@ -2210,7 +2414,15 @@ export default function AIAuditPage() {
                                               </span>
                                             </div>
                                             <p className="text-xs text-gray-600 mb-2">{rec.description}</p>
-                                            <p className="text-xs text-gray-700 leading-relaxed">{rec.whyMatters}</p>
+                                            <p className="text-xs text-gray-700 leading-relaxed mb-2">{rec.whyMatters}</p>
+                                            <details>
+                                              <summary className="cursor-pointer text-xs font-semibold text-brand-cyan hover:text-brand-blue inline-flex items-center">
+                                                <Code size={11} className="mr-1" />
+                                                Show starter JSON-LD
+                                              </summary>
+                                              <pre className="mt-2 bg-gray-900 text-green-400 p-3 rounded text-xs font-mono overflow-x-auto whitespace-pre">{`<script type="application/ld+json">\n${rec.starter}\n</script>`}</pre>
+                                              <p className="text-xs text-gray-500 mt-1 italic">Drop into your page&apos;s <code className="bg-gray-100 px-1 rounded">&lt;head&gt;</code>. Replace placeholder values with real content.</p>
+                                            </details>
                                           </div>
                                         );
                                       })}
@@ -2268,6 +2480,16 @@ export default function AIAuditPage() {
                                 </div>
                                 <p className="text-xs font-mono text-gray-700 break-all mb-2">{check.detail}</p>
                                 <p className="text-xs text-gray-600 leading-relaxed">{check.why}</p>
+                                {check.fix && (check.status === 'fail' || check.status === 'warn') && (
+                                  <details className="mt-2">
+                                    <summary className="cursor-pointer text-xs font-semibold text-brand-cyan hover:text-brand-blue inline-flex items-center">
+                                      <Code size={11} className="mr-1" />
+                                      Show fix
+                                    </summary>
+                                    <pre className="mt-2 bg-gray-900 text-green-400 p-3 rounded text-xs font-mono overflow-x-auto whitespace-pre">{check.fix}</pre>
+                                    <p className="text-xs text-gray-500 mt-1 italic">Add to your page&apos;s <code className="bg-gray-100 px-1 rounded">&lt;head&gt;</code>. Replace placeholder values with real content.</p>
+                                  </details>
+                                )}
                               </div>
                             </div>
                           </div>
