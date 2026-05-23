@@ -706,7 +706,7 @@ export default function AIAuditPage() {
           </div>
           <div>
             <h1 className="text-xl font-bold text-brand-navy font-display">AI Vision Simulator</h1>
-            <p className="text-xs text-gray-500">See your content through the eyes of an LLM</p>
+            <p className="text-xs text-gray-500">See what ChatGPT, Claude, and Perplexity see on your site</p>
           </div>
         </div>
         <button
@@ -742,6 +742,17 @@ export default function AIAuditPage() {
                     <Type size={14} className="mr-1" /> Text
                 </button>
             </div>
+
+            <details className="mt-3 group">
+              <summary className="cursor-pointer text-xs text-brand-cyan hover:text-brand-blue font-medium">
+                When do I use URL vs. HTML?
+              </summary>
+              <div className="mt-3 text-xs text-gray-700 leading-relaxed space-y-2 pl-1">
+                <p><strong className="text-gray-900">URL</strong> is the easy path. Type your address and I&apos;ll fetch your page and run every check on it.</p>
+                <p><strong className="text-gray-900">HTML</strong> is for when my fetch can&apos;t reach your site. That happens with Cloudflare protection, login walls, or sites with strict bot rules. Open your site in your browser, right-click and choose <em>View Page Source</em>, copy all of it, and paste it here. The same checks work.</p>
+                <p><strong className="text-gray-900">Two tabs always need a URL</strong> no matter which mode you&apos;re in: AI Crawlers (reads your <code className="bg-gray-100 px-1 rounded">robots.txt</code> file) and Google&apos;s Rich Results Test (Google tests your live page on its own servers). Both have their own URL field inside the tab, so they work even when the main fetch fails.</p>
+              </div>
+            </details>
           </div>
 
           <div className="flex-1 flex flex-col relative">
@@ -783,13 +794,16 @@ export default function AIAuditPage() {
                         <div className="bg-red-100 p-3 rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-3 text-red-600">
                             <AlertTriangle size={24} />
                         </div>
-                        <h3 className="text-gray-900 font-bold mb-1">Fetch Failed</h3>
+                        <h3 className="text-gray-900 font-bold mb-1">Couldn&apos;t reach your site</h3>
                         <p className="text-sm text-gray-600 mb-4">{fetchError}</p>
+                        <p className="text-xs text-gray-500 mb-4 leading-relaxed">
+                          This usually means Cloudflare, a login wall, or strict bot rules are blocking my fetch. Workaround: open your site, View Page Source, copy the HTML, paste it into the HTML tab.
+                        </p>
                         <button
                             onClick={() => setFetchError(null)}
                             className="text-sm text-brand-cyan hover:text-brand-blue font-medium underline"
                         >
-                            Try again or switch to HTML Input
+                            Try again or switch to HTML
                         </button>
                     </div>
                 </div>
@@ -834,7 +848,7 @@ export default function AIAuditPage() {
                       <div>
                         <h3 className="text-sm font-bold text-blue-900 mb-1 font-display">Entity Graph</h3>
                         <p className="text-sm text-blue-800 leading-relaxed">
-                          AI engines disambiguate names through <code className="bg-blue-100 px-1 rounded">sameAs</code> links in structured data &mdash; Wikipedia, Wikidata, LinkedIn, Crunchbase, ORCID. Without these, your organization or people are ambiguous in the knowledge graph and AI engines have nothing to anchor citations to. This is the strongest defensible E-E-A-T signal.
+                          When AI mentions your organization in an answer, it needs to know exactly who you are. <code className="bg-blue-100 px-1 rounded">sameAs</code> links in your structured data point to your authoritative profiles &mdash; Wikipedia, LinkedIn, Wikidata, Crunchbase. With them, AI cites you with confidence. Without them, AI has to guess whether you&apos;re the right Brand USA or someone else with a similar name.
                         </p>
                       </div>
                     </div>
@@ -963,9 +977,9 @@ export default function AIAuditPage() {
                     <div className="bg-blue-50 p-6 rounded-lg border border-blue-100 flex items-start">
                         <Info className="flex-shrink-0 text-blue-500 mr-3 mt-1" size={20} />
                         <div>
-                            <h3 className="text-sm font-bold text-blue-900 mb-1 font-display">Knowledge Layer</h3>
+                            <h3 className="text-sm font-bold text-blue-900 mb-1 font-display">Structured Data</h3>
                             <p className="text-sm text-blue-800 leading-relaxed">
-                                Structured Data (Schema.org) confirms facts like <strong>Events and Authors</strong> with 100% confidence.
+                                Structured data is the invisible code that tells AI exactly what&apos;s on your page. With it, AI knows that &ldquo;June 27&rdquo; is an event date and not a publish date, that &ldquo;Brand USA&rdquo; is the organization and not the campaign name. Without it, AI has to guess.
                             </p>
                         </div>
                     </div>
@@ -976,10 +990,10 @@ export default function AIAuditPage() {
                         <div className="flex-1">
                           <h3 className="text-lg font-semibold text-brand-navy mb-2 font-display">Validate with Google&apos;s Rich Results Test</h3>
                           <p className="text-sm text-gray-700 leading-relaxed mb-2">
-                            Google&apos;s Rich Results Test confirms whether your structured data qualifies for rich snippets, AI Overview, and AI Mode extraction. It validates required fields and surfaces errors the audit above can&apos;t catch from raw JSON alone.
+                            Google has its own tool that checks whether your structured data qualifies for AI Overview, AI Mode, and rich snippets in search. It catches errors I can&apos;t see from raw JSON alone, like a required field that&apos;s technically present but empty.
                           </p>
                           <p className="text-xs text-gray-500 leading-relaxed">
-                            Opens in a new tab on Google&apos;s servers. Tests the live URL — independent of any HTML you pasted above.
+                            Opens in a new tab. Google tests your live URL directly on its own servers, so paste won&apos;t help here. Always needs a URL.
                           </p>
                         </div>
                       </div>
@@ -1036,7 +1050,7 @@ export default function AIAuditPage() {
                       <div>
                         <h3 className="text-sm font-bold text-blue-900 mb-1 font-display">AI Crawler Policy</h3>
                         <p className="text-sm text-blue-800 leading-relaxed">
-                          Your <code className="bg-blue-100 px-1 rounded">robots.txt</code> tells AI bots whether they can read your site. <strong>Training bots</strong> (GPTBot, ClaudeBot, Google-Extended) learn from your content. <strong>Retrieval bots</strong> (ChatGPT-User, Claude-User, PerplexityBot) fetch live when a user asks the AI about you. Blocking retrieval bots means zero chance of being cited in live AI answers.
+                          <code className="bg-blue-100 px-1 rounded">robots.txt</code> is the file at your domain where you tell AI bots whether they can read your site. Two kinds visit: <strong>training bots</strong> like GPTBot and ClaudeBot use your content to train future AI models. <strong>Retrieval bots</strong> like ChatGPT-User and PerplexityBot fetch your site live when a user asks an AI a question about you. If you block retrieval bots, you don&apos;t show up in live AI answers.
                         </p>
                       </div>
                     </div>
@@ -1201,7 +1215,7 @@ export default function AIAuditPage() {
                       <div>
                         <h3 className="text-sm font-bold text-blue-900 mb-1 font-display">Content Freshness</h3>
                         <p className="text-sm text-blue-800 leading-relaxed">
-                          AI engines cite recently-updated content more often than stale pages. The signal lives in <code className="bg-blue-100 px-1 rounded">dateModified</code> on your structured data, <code className="bg-blue-100 px-1 rounded">article:modified_time</code> in meta tags, and <code className="bg-blue-100 px-1 rounded">&lt;time&gt;</code> elements. Most CMSes set these incorrectly or never &mdash; cheapest competitive edge to fix.
+                          AI engines cite recent content more often than old content. The freshness signal lives in <code className="bg-blue-100 px-1 rounded">dateModified</code> on your structured data, <code className="bg-blue-100 px-1 rounded">article:modified_time</code> in meta tags, and <code className="bg-blue-100 px-1 rounded">&lt;time&gt;</code> elements on the page. Most content management systems set these wrong or never set them at all. Fixing them is some of the easiest work you can do to show up more in AI answers.
                         </p>
                       </div>
                     </div>
