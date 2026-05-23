@@ -443,6 +443,200 @@ function extractAllSchemaTypes(jsonLdArray: any[]): Map<string, number> {
   return counts;
 }
 
+// --- Site Hygiene (canonical, robots, OG, Twitter, hreflang, sitemap, llms.txt) ---
+type HygieneStatus = 'pass' | 'warn' | 'fail' | 'unknown';
+
+interface HygieneCheck {
+  name: string;
+  status: HygieneStatus;
+  detail: string;
+  why: string;
+}
+
+interface HygieneAnalysis {
+  htmlChecks: HygieneCheck[];
+  fetchChecks: HygieneCheck[] | null;  // null until async fetches complete
+}
+
+function extractHtmlHygiene(doc: Document, pageUrl: string): HygieneCheck[] {
+  const checks: HygieneCheck[] = [];
+
+  // Canonical
+  const canonical = doc.querySelector('link[rel="canonical"]')?.getAttribute('href');
+  if (!canonical) {
+    checks.push({
+      name: 'Canonical tag',
+      status: 'fail',
+      detail: 'Missing',
+      why: 'Without a canonical tag, AI crawlers and search engines treat each URL variant as a separate page. This dilutes signal and creates duplicate content problems.',
+    });
+  } else {
+    let canonicalMatches = false;
+    try {
+      const canonicalUrl = new URL(canonical, pageUrl).toString();
+      canonicalMatches = canonicalUrl === pageUrl || canonicalUrl.replace(/\/$/, '') === pageUrl.replace(/\/$/, '');
+    } catch { /* ignore */ }
+    checks.push({
+      name: 'Canonical tag',
+      status: canonicalMatches ? 'pass' : 'warn',
+      detail: canonicalMatches ? canonical : `Present but points elsewhere: ${canonical}`,
+      why: canonicalMatches
+        ? 'Self-referential canonical — tells AI this is the authoritative URL.'
+        : 'Canonical points to a different URL. Intentional if this is a duplicate page; broken if not.',
+    });
+  }
+
+  // Robots meta
+  const robotsMeta = doc.querySelector('meta[name="robots"]')?.getAttribute('content') || '';
+  const robotsLower = robotsMeta.toLowerCase();
+  if (robotsLower.includes('noindex')) {
+    checks.push({
+      name: 'Robots meta',
+      status: 'fail',
+      detail: `noindex set: "${robotsMeta}"`,
+      why: 'This page tells search engines and AI crawlers not to index it. If unintentional, your page is invisible to AI Overview, ChatGPT Search, and every other surface that respects this.',
+    });
+  } else if (robotsLower.includes('nofollow')) {
+    checks.push({
+      name: 'Robots meta',
+      status: 'warn',
+      detail: `nofollow set: "${robotsMeta}"`,
+      why: 'Links on this page will not pass authority to other pages. Usually fine for paid links or untrusted content, problematic on your own editorial pages.',
+    });
+  } else {
+    checks.push({
+      name: 'Robots meta',
+      status: 'pass',
+      detail: robotsMeta || 'No restrictions (default index, follow)',
+      why: 'AI crawlers and search engines can index this page and follow its links.',
+    });
+  }
+
+  // hreflang
+  const hreflangs = Array.from(doc.querySelectorAll('link[rel="alternate"][hreflang]'));
+  if (hreflangs.length === 0) {
+    checks.push({
+      name: 'hreflang tags',
+      status: 'unknown',
+      detail: 'None present',
+      why: 'Only needed for multi-language sites. If your site is English-only, this is fine. If you publish in multiple languages, hreflang tells AI which version to surface for which user.',
+    });
+  } else {
+    const langs = hreflangs.map((l) => l.getAttribute('hreflang')).filter(Boolean).join(', ');
+    checks.push({
+      name: 'hreflang tags',
+      status: 'pass',
+      detail: `${hreflangs.length} found: ${langs}`,
+      why: 'Multi-language signals to AI are in place.',
+    });
+  }
+
+  // Open Graph
+  const ogTags = ['og:title', 'og:description', 'og:image', 'og:type', 'og:url'];
+  const ogPresent = ogTags.filter((tag) => doc.querySelector(`meta[property="${tag}"]`)?.getAttribute('content'));
+  const ogMissing = ogTags.filter((tag) => !doc.querySelector(`meta[property="${tag}"]`)?.getAttribute('content'));
+  checks.push({
+    name: 'Open Graph',
+    status: ogMissing.length === 0 ? 'pass' : ogMissing.length <= 2 ? 'warn' : 'fail',
+    detail: ogMissing.length === 0
+      ? `All 5 core tags present (${ogTags.join(', ')})`
+      : `Missing: ${ogMissing.join(', ')}`,
+    why: 'OG tags control how your page renders when shared on LinkedIn, Slack, iMessage, etc. AI crawlers also use og:title and og:description as fallback when other signals are weak.',
+  });
+
+  // Twitter Card
+  const twitterCard = doc.querySelector('meta[name="twitter:card"]')?.getAttribute('content');
+  if (!twitterCard) {
+    checks.push({
+      name: 'Twitter Card',
+      status: 'warn',
+      detail: 'Missing twitter:card meta',
+      why: 'Without this, X/Twitter previews fall back to OG tags or generic rendering. Adding `twitter:card` = `summary_large_image` gives you a proper card preview.',
+    });
+  } else {
+    checks.push({
+      name: 'Twitter Card',
+      status: 'pass',
+      detail: `twitter:card = "${twitterCard}"`,
+      why: 'X/Twitter will render proper preview cards when this page is shared.',
+    });
+  }
+
+  return checks;
+}
+
+async function fetchHygieneChecks(pageUrl: string): Promise<HygieneCheck[]> {
+  const checks: HygieneCheck[] = [];
+  let origin = '';
+  try {
+    origin = new URL(pageUrl).origin;
+  } catch {
+    return checks;
+  }
+
+  // Sitemap
+  try {
+    const sitemapUrl = `${origin}/sitemap.xml`;
+    const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(sitemapUrl)}`);
+    const data = await response.json();
+    if (data.contents && (data.contents.includes('<urlset') || data.contents.includes('<sitemapindex'))) {
+      checks.push({
+        name: 'sitemap.xml',
+        status: 'pass',
+        detail: `Reachable at ${sitemapUrl}`,
+        why: 'Sitemap tells crawlers what pages exist and when they last changed. AI training crawlers and search engines use it to discover new content faster.',
+      });
+    } else {
+      checks.push({
+        name: 'sitemap.xml',
+        status: 'fail',
+        detail: `Not found at ${sitemapUrl}`,
+        why: 'No sitemap means crawlers have to discover pages via internal links only. Slower indexing and missed pages.',
+      });
+    }
+  } catch {
+    checks.push({
+      name: 'sitemap.xml',
+      status: 'unknown',
+      detail: 'Could not check (network or CORS issue)',
+      why: 'Manual check: try opening /sitemap.xml in your browser.',
+    });
+  }
+
+  // llms.txt
+  for (const filename of ['llms.txt', 'llms-full.txt']) {
+    try {
+      const url = `${origin}/${filename}`;
+      const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`);
+      const data = await response.json();
+      if (data.contents && !data.contents.toLowerCase().includes('<html') && data.contents.trim().startsWith('#')) {
+        checks.push({
+          name: filename,
+          status: 'pass',
+          detail: `Found at ${url}`,
+          why: 'Optional file proposed by Answer.AI (Sept 2024). No major AI vendor has officially committed to reading it yet, but Anthropic ships one on their docs. Low-cost optionality if you have it.',
+        });
+      } else {
+        checks.push({
+          name: filename,
+          status: 'unknown',
+          detail: 'Not found',
+          why: 'Optional. The llms.txt standard is a community proposal, not adopted by major AI vendors yet. Skip unless you specifically want to provide curated context for LLMs that DO read it (Anthropic ships one on docs.anthropic.com).',
+        });
+      }
+    } catch {
+      checks.push({
+        name: filename,
+        status: 'unknown',
+        detail: 'Could not check',
+        why: 'Optional file. Network or CORS issue blocked the check.',
+      });
+    }
+  }
+
+  return checks;
+}
+
 function analyzeSchemaCoverage(jsonLdArray: any[]): SchemaTypeCoverage {
   const counts = extractAllSchemaTypes(jsonLdArray);
   const presentTypes = Array.from(counts.entries())
@@ -838,7 +1032,13 @@ export default function AIAuditPage() {
         // 9. Schema Type Coverage
         const schemaCoverage = analyzeSchemaCoverage(jsonLd.filter((x) => typeof x === 'object'));
 
-        // 10. Meta Extraction
+        // 10. Site Hygiene (HTML-derivable checks; fetch-based ones run async)
+        const hygiene: HygieneAnalysis = {
+          htmlChecks: extractHtmlHygiene(doc, sourceUrl),
+          fetchChecks: null,
+        };
+
+        // 11. Meta Extraction
         const metaTitle = doc.querySelector('title')?.textContent;
         const metaDesc = doc.querySelector('meta[name="description"]')?.getAttribute('content');
 
@@ -856,6 +1056,7 @@ export default function AIAuditPage() {
             freshness,
             contentPatterns,
             schemaCoverage,
+            hygiene,
             rawHtml: content,
             url: sourceUrl,
             framework: detectedFramework,
@@ -958,6 +1159,10 @@ export default function AIAuditPage() {
 
             // Fetch robots.txt in parallel (don't block on it)
             fetchRobotsTxt(urlInput).then(setRobotsAnalysis);
+            // Fetch hygiene checks (sitemap, llms.txt) in parallel
+            fetchHygieneChecks(urlInput).then((fetchChecks) => {
+              setAnalysis((prev: any) => prev ? { ...prev, hygiene: { ...prev.hygiene, fetchChecks } } : prev);
+            });
         } else {
             throw new Error("Could not retrieve content. The site might block proxies.");
         }
@@ -1114,6 +1319,7 @@ export default function AIAuditPage() {
             <TabButton id="freshness" icon={Clock} label="Freshness" />
             <TabButton id="patterns" icon={BookOpen} label="Content Patterns" />
             <TabButton id="coverage" icon={List} label="Schema Coverage" />
+            <TabButton id="hygiene" icon={ShieldCheck} label="Site Hygiene" />
             <TabButton id="structure" icon={Layout} label="Structure" />
             <TabButton id="stream" icon={Activity} label="Token Stream" />
             <TabButton id="rag" icon={FileText} label="RAG Context" />
@@ -1846,6 +2052,77 @@ export default function AIAuditPage() {
 
                           <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 text-xs text-gray-600 leading-relaxed">
                             <strong>About the recommendations:</strong> &ldquo;Worth adding&rdquo; assumes the schema type would apply to your content. If you don&apos;t have events, you don&apos;t need Event schema. The DMO-specific recommendations are most useful if your site is a destination, CVB, or tourism platform. Foundational types (Organization, WebSite) belong on every site.
+                          </div>
+                        </>
+                      );
+                    })()}
+                  </div>
+                )}
+
+                {/* TAB: SITE HYGIENE */}
+                {activeTab === 'hygiene' && (
+                  <div className="space-y-6">
+                    <div className="bg-blue-50 p-6 rounded-lg border border-blue-100 flex items-start">
+                      <Info className="flex-shrink-0 text-blue-500 mr-3 mt-1" size={20} />
+                      <div>
+                        <h3 className="text-sm font-bold text-blue-900 mb-1 font-display">Site Hygiene</h3>
+                        <p className="text-sm text-blue-800 leading-relaxed">
+                          The plumbing checks that AI crawlers and search engines rely on before they even start reading your content. Most of these are quick yes/no signals: is your page indexable, do shares render properly, can crawlers find your sitemap.
+                        </p>
+                      </div>
+                    </div>
+
+                    {(() => {
+                      const hyg: HygieneAnalysis | undefined = analysis.hygiene;
+                      if (!hyg) return null;
+
+                      const statusConfig = {
+                        pass: { icon: CheckCircle, color: 'text-green-600', bg: 'bg-green-50', border: 'border-green-200' },
+                        warn: { icon: AlertTriangle, color: 'text-amber-600', bg: 'bg-amber-50', border: 'border-amber-200' },
+                        fail: { icon: XCircle, color: 'text-red-600', bg: 'bg-red-50', border: 'border-red-200' },
+                        unknown: { icon: HelpCircle, color: 'text-gray-500', bg: 'bg-gray-50', border: 'border-gray-200' },
+                      };
+
+                      const renderCheck = (check: HygieneCheck, i: number) => {
+                        const cfg = statusConfig[check.status];
+                        const StatusIcon = cfg.icon;
+                        return (
+                          <div key={i} className={`p-4 rounded-lg border ${cfg.bg} ${cfg.border}`}>
+                            <div className="flex items-start mb-2">
+                              <StatusIcon className={`flex-shrink-0 ${cfg.color} mr-3 mt-0.5`} size={18} />
+                              <div className="flex-1 min-w-0">
+                                <div className="flex items-center justify-between gap-2 mb-1">
+                                  <h4 className="text-sm font-semibold text-brand-navy">{check.name}</h4>
+                                  <span className={`text-xs font-medium uppercase ${cfg.color}`}>{check.status}</span>
+                                </div>
+                                <p className="text-xs font-mono text-gray-700 break-all mb-2">{check.detail}</p>
+                                <p className="text-xs text-gray-600 leading-relaxed">{check.why}</p>
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      };
+
+                      return (
+                        <>
+                          <div className="space-y-3">
+                            <h3 className="text-base font-semibold text-brand-navy font-display">On-page checks</h3>
+                            {hyg.htmlChecks.map(renderCheck)}
+                          </div>
+
+                          <div className="space-y-3">
+                            <h3 className="text-base font-semibold text-brand-navy font-display">External file checks</h3>
+                            {hyg.fetchChecks === null ? (
+                              <div className="bg-white p-4 rounded-lg border border-gray-200 flex items-center text-sm text-gray-500">
+                                {analysis.url ? (
+                                  <><Loader size={16} className="animate-spin mr-2" />Checking sitemap.xml and llms.txt&hellip;</>
+                                ) : (
+                                  <>External file checks need a URL audit. Switch to URL mode and re-run to check sitemap + llms.txt.</>
+                                )}
+                              </div>
+                            ) : (
+                              hyg.fetchChecks.map(renderCheck)
+                            )}
                           </div>
                         </>
                       );
