@@ -383,6 +383,75 @@ function countQuotations(text: string): number {
   return matches.length;
 }
 
+// --- Schema Type Coverage ---
+interface SchemaRecommendation {
+  type: string;
+  category: 'foundational' | 'dmo' | 'content' | 'discovery';
+  priority: 'critical' | 'recommended' | 'nice-to-have';
+  description: string;
+  whyMatters: string;
+}
+
+interface SchemaTypeCoverage {
+  presentTypes: { type: string; count: number }[];
+  missingRecommended: SchemaRecommendation[];
+}
+
+const SCHEMA_LIBRARY: SchemaRecommendation[] = [
+  // Foundational
+  { type: 'Organization', category: 'foundational', priority: 'critical', description: 'Identifies your org with name, logo, sameAs links', whyMatters: 'Every site needs this. AI uses it to know who you are.' },
+  { type: 'WebSite', category: 'foundational', priority: 'critical', description: 'Anchors the site as a whole entity', whyMatters: 'Gives AI a stable home reference for everything else on the domain.' },
+  { type: 'BreadcrumbList', category: 'foundational', priority: 'recommended', description: 'Breadcrumb navigation as structured data', whyMatters: 'Helps AI understand page hierarchy and which pages are top-level vs deep.' },
+  { type: 'Person', category: 'foundational', priority: 'recommended', description: 'Staff bios, authors, leadership', whyMatters: 'Personal credibility is the foundation of E-E-A-T. Author Person schemas with sameAs anchors get cited far more than anonymous content.' },
+
+  // DMO / Tourism
+  { type: 'TouristAttraction', category: 'dmo', priority: 'critical', description: 'Each attraction page (museums, landmarks, parks)', whyMatters: 'Foundational for tourism sites. AI maps queries like "things to do in X" directly to TouristAttraction entries.' },
+  { type: 'TouristDestination', category: 'dmo', priority: 'recommended', description: 'City / region / area pages', whyMatters: 'Tells AI this page describes a destination as a whole, with attractions, places, and events nested.' },
+  { type: 'Event', category: 'dmo', priority: 'critical', description: 'Festivals, performances, scheduled experiences', whyMatters: 'The only way AI Overview answers "what is happening in [city] this weekend." Without Event schema, your events are invisible to AI.' },
+  { type: 'Place', category: 'dmo', priority: 'recommended', description: 'Physical locations with geo coordinates', whyMatters: 'Lets AI place your content on a map. Especially powerful when paired with Wikidata Place IDs in sameAs.' },
+  { type: 'LocalBusiness', category: 'dmo', priority: 'recommended', description: 'Hotels, restaurants, shops in your destination', whyMatters: 'If you list local businesses (hotel directory, restaurant guide), LocalBusiness gives AI structured hours, prices, contact info.' },
+
+  // Content
+  { type: 'Article', category: 'content', priority: 'recommended', description: 'Editorial content, blog posts, guides', whyMatters: 'Article schema gives AI the headline, author, date, and image. Pages with Article schema get cited 2-3x more often than plain HTML.' },
+  { type: 'VideoObject', category: 'content', priority: 'recommended', description: 'Videos with thumbnail, duration, transcript reference', whyMatters: 'AI Mode increasingly surfaces video. VideoObject schema is the difference between your video appearing or being invisible.' },
+  { type: 'Course', category: 'content', priority: 'nice-to-have', description: 'Educational programs, training, certifications', whyMatters: 'Useful for organizations with training content. AI can answer "courses about X" queries directly.' },
+
+  // Discovery
+  { type: 'FAQPage', category: 'discovery', priority: 'recommended', description: 'Question + answer pairs', whyMatters: 'AI engines pull FAQ schema heavily for direct answers. Google dropped FAQ rich results from search in 2023, but the schema is still a strong AI extraction signal.' },
+  { type: 'HowTo', category: 'discovery', priority: 'nice-to-have', description: 'Step-by-step instructions', whyMatters: 'For guides like "how to plan a trip to X" or "how to host a meeting." AI surfaces HowTo in instructional queries.' },
+  { type: 'Speakable', category: 'discovery', priority: 'nice-to-have', description: 'Marks which page sections are voice-readable', whyMatters: 'Voice assistants and read-aloud features use this. Still in beta but useful for accessibility-forward sites.' },
+];
+
+function extractAllSchemaTypes(jsonLdArray: any[]): Map<string, number> {
+  const counts = new Map<string, number>();
+  const walk = (obj: any) => {
+    if (!obj || typeof obj !== 'object') return;
+    if (Array.isArray(obj)) {
+      obj.forEach(walk);
+      return;
+    }
+    const type = obj['@type'];
+    if (type) {
+      const types = Array.isArray(type) ? type : [type];
+      types.forEach((t: any) => {
+        if (typeof t === 'string') counts.set(t, (counts.get(t) || 0) + 1);
+      });
+    }
+    Object.values(obj).forEach(walk);
+  };
+  jsonLdArray.forEach(walk);
+  return counts;
+}
+
+function analyzeSchemaCoverage(jsonLdArray: any[]): SchemaTypeCoverage {
+  const counts = extractAllSchemaTypes(jsonLdArray);
+  const presentTypes = Array.from(counts.entries())
+    .map(([type, count]) => ({ type, count }))
+    .sort((a, b) => b.count - a.count);
+  const missingRecommended = SCHEMA_LIBRARY.filter((rec) => !counts.has(rec.type));
+  return { presentTypes, missingRecommended };
+}
+
 function extractContentPatterns(doc: Document, ragText: string, pageUrl: string): ContentPatterns {
   const wordCount = ragText.split(/\s+/).filter((w) => w.length > 0).length;
   const pageOrigin = (() => {
@@ -766,7 +835,10 @@ export default function AIAuditPage() {
         // 8. GEO Content Patterns
         const contentPatterns = extractContentPatterns(doc, ragTextClean, sourceUrl);
 
-        // 9. Meta Extraction
+        // 9. Schema Type Coverage
+        const schemaCoverage = analyzeSchemaCoverage(jsonLd.filter((x) => typeof x === 'object'));
+
+        // 10. Meta Extraction
         const metaTitle = doc.querySelector('title')?.textContent;
         const metaDesc = doc.querySelector('meta[name="description"]')?.getAttribute('content');
 
@@ -783,6 +855,7 @@ export default function AIAuditPage() {
             entities,
             freshness,
             contentPatterns,
+            schemaCoverage,
             rawHtml: content,
             url: sourceUrl,
             framework: detectedFramework,
@@ -1040,6 +1113,7 @@ export default function AIAuditPage() {
             <TabButton id="crawlers" icon={Bot} label="AI Crawlers" />
             <TabButton id="freshness" icon={Clock} label="Freshness" />
             <TabButton id="patterns" icon={BookOpen} label="Content Patterns" />
+            <TabButton id="coverage" icon={List} label="Schema Coverage" />
             <TabButton id="structure" icon={Layout} label="Structure" />
             <TabButton id="stream" icon={Activity} label="Token Stream" />
             <TabButton id="rag" icon={FileText} label="RAG Context" />
@@ -1668,6 +1742,110 @@ export default function AIAuditPage() {
 
                           <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 text-xs text-gray-600 leading-relaxed">
                             <strong>About these labels:</strong> Strong / Medium / Weak are rough guesses based on common ranges. The Princeton study measured what helped, leaving exact targets open. Aim for &ldquo;enough of each&rdquo; &mdash; your interview quotes, your real stats, your real source links &mdash; and the lift compounds. Made-up content to game the audit backfires; AI engines get sharper at spotting it every quarter.
+                          </div>
+                        </>
+                      );
+                    })()}
+                  </div>
+                )}
+
+                {/* TAB: SCHEMA COVERAGE */}
+                {activeTab === 'coverage' && (
+                  <div className="space-y-6">
+                    <div className="bg-blue-50 p-6 rounded-lg border border-blue-100 flex items-start">
+                      <Info className="flex-shrink-0 text-blue-500 mr-3 mt-1" size={20} />
+                      <div>
+                        <h3 className="text-sm font-bold text-blue-900 mb-1 font-display">Schema Type Coverage</h3>
+                        <p className="text-sm text-blue-800 leading-relaxed">
+                          The Schema tab shows the raw JSON-LD on your page. This one shows the bigger picture: which schema types you have, which ones you should consider adding, and why each matters for AI discovery. DMO-specific schemas (TouristAttraction, Event, Place) get top billing &mdash; they answer the queries travelers actually ask AI.
+                        </p>
+                      </div>
+                    </div>
+
+                    {(() => {
+                      const sc: SchemaTypeCoverage | undefined = analysis.schemaCoverage;
+                      if (!sc) {
+                        return <div className="text-sm text-gray-500">No schema coverage data.</div>;
+                      }
+
+                      const categoryConfig = {
+                        foundational: { label: 'Foundational', color: 'text-brand-navy', bg: 'bg-gray-50', border: 'border-gray-200' },
+                        dmo: { label: 'DMO / Tourism', color: 'text-brand-blue', bg: 'bg-blue-50', border: 'border-blue-200' },
+                        content: { label: 'Content', color: 'text-purple-700', bg: 'bg-purple-50', border: 'border-purple-200' },
+                        discovery: { label: 'AI Discovery', color: 'text-green-700', bg: 'bg-green-50', border: 'border-green-200' },
+                      };
+
+                      const priorityBadge = {
+                        critical: { label: 'Critical', class: 'bg-red-100 text-red-700' },
+                        recommended: { label: 'Recommended', class: 'bg-amber-100 text-amber-700' },
+                        'nice-to-have': { label: 'Nice to have', class: 'bg-gray-100 text-gray-600' },
+                      };
+
+                      const groupedMissing: { [key: string]: SchemaRecommendation[] } = {};
+                      sc.missingRecommended.forEach((rec) => {
+                        if (!groupedMissing[rec.category]) groupedMissing[rec.category] = [];
+                        groupedMissing[rec.category].push(rec);
+                      });
+
+                      return (
+                        <>
+                          {/* What you have */}
+                          <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                            <div className="flex items-center justify-between mb-4">
+                              <h3 className="text-lg font-semibold text-brand-navy font-display">What you have</h3>
+                              <span className="text-xs text-gray-500">{sc.presentTypes.length} unique types</span>
+                            </div>
+                            {sc.presentTypes.length === 0 ? (
+                              <p className="text-sm text-gray-500 italic">No structured data detected on this page.</p>
+                            ) : (
+                              <div className="flex flex-wrap gap-2">
+                                {sc.presentTypes.map((t, i) => (
+                                  <span key={i} className="inline-flex items-center px-3 py-1.5 rounded bg-green-50 border border-green-200 text-xs font-medium text-green-800">
+                                    <CheckCircle size={12} className="mr-1.5" />
+                                    {t.type}
+                                    {t.count > 1 && <span className="ml-1.5 text-green-600 font-mono">&times;{t.count}</span>}
+                                  </span>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+
+                          {/* Worth adding */}
+                          {sc.missingRecommended.length > 0 && (
+                            <div className="space-y-4">
+                              <h3 className="text-lg font-semibold text-brand-navy font-display">Worth adding</h3>
+                              {(['foundational', 'dmo', 'content', 'discovery'] as const).map((cat) => {
+                                const recs = groupedMissing[cat];
+                                if (!recs || recs.length === 0) return null;
+                                const cfg = categoryConfig[cat];
+                                return (
+                                  <div key={cat} className={`p-5 rounded-lg border ${cfg.bg} ${cfg.border}`}>
+                                    <h4 className={`text-sm font-bold mb-3 font-display ${cfg.color}`}>{cfg.label}</h4>
+                                    <div className="space-y-3">
+                                      {recs.map((rec, i) => {
+                                        const badge = priorityBadge[rec.priority];
+                                        return (
+                                          <div key={i} className="bg-white p-3 rounded border border-gray-200">
+                                            <div className="flex items-start justify-between mb-1">
+                                              <code className="text-sm font-mono font-semibold text-brand-navy">{rec.type}</code>
+                                              <span className={`text-xs px-2 py-0.5 rounded font-medium whitespace-nowrap ${badge.class}`}>
+                                                {badge.label}
+                                              </span>
+                                            </div>
+                                            <p className="text-xs text-gray-600 mb-2">{rec.description}</p>
+                                            <p className="text-xs text-gray-700 leading-relaxed">{rec.whyMatters}</p>
+                                          </div>
+                                        );
+                                      })}
+                                    </div>
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          )}
+
+                          <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 text-xs text-gray-600 leading-relaxed">
+                            <strong>About the recommendations:</strong> &ldquo;Worth adding&rdquo; assumes the schema type would apply to your content. If you don&apos;t have events, you don&apos;t need Event schema. The DMO-specific recommendations are most useful if your site is a destination, CVB, or tourism platform. Foundational types (Organization, WebSite) belong on every site.
                           </div>
                         </>
                       );
