@@ -139,6 +139,33 @@ const shortFormVideos = [
 ]
 
 
+// Shared sameAs anchors — used across every entity reference below so AI engines
+// resolve our org / people / place to the same canonical knowledge-graph nodes.
+const BRAND_USA_SAMEAS = [
+  "https://en.wikipedia.org/wiki/Brand_USA",
+  "https://www.wikidata.org/wiki/Q52556956",
+  "https://www.linkedin.com/company/brand-usa",
+  "https://www.thebrandusa.com",
+  "https://x.com/VisitTheUSA",
+  "https://www.instagram.com/visittheusa",
+  "https://www.facebook.com/VisitTheUSA"
+]
+
+const BRAND_USA_AOC_SAMEAS = [
+  "https://www.thebrandusa.com",
+  "https://www.janetteroush.com"
+]
+
+const JANETTE_SAMEAS = [
+  "https://www.linkedin.com/in/janetteroush/",
+  "https://www.janetteroush.com"
+]
+
+const UNITED_STATES_SAMEAS = [
+  "https://en.wikipedia.org/wiki/United_States",
+  "https://www.wikidata.org/wiki/Q30"
+]
+
 export default function HomePage() {
   // Organization Schema (clean, no teaches/audience)
   const organizationSchema = {
@@ -148,21 +175,22 @@ export default function HomePage() {
     "alternateName": "Agents of Change",
     "description": "Official AI learning platform for U.S. destination marketing organizations and tourism professionals. Provides comprehensive training on AI agents, Custom GPTs, Model Context Protocol, and AI governance for the tourism industry.",
     "url": "https://brand-usa-agents-of-change.vercel.app",
-    "sameAs": [
-      "https://www.thebrandusa.com"
-    ],
+    "sameAs": BRAND_USA_AOC_SAMEAS,
     "parentOrganization": {
       "@type": "Organization",
       "name": "Brand USA",
-      "description": "The destination marketing organization for the United States"
+      "description": "The destination marketing organization for the United States",
+      "sameAs": BRAND_USA_SAMEAS
     },
     "founder": {
       "@type": "Person",
       "name": "Janette Roush",
       "jobTitle": "Chief AI Officer, SVP Innovation",
+      "sameAs": JANETTE_SAMEAS,
       "affiliation": {
         "@type": "Organization",
-        "name": "Brand USA"
+        "name": "Brand USA",
+        "sameAs": BRAND_USA_SAMEAS
       }
     },
     "knowsAbout": [
@@ -180,6 +208,7 @@ export default function HomePage() {
     "areaServed": {
       "@type": "Place",
       "name": "United States",
+      "sameAs": UNITED_STATES_SAMEAS,
       "geo": {
         "@type": "GeoCoordinates",
         "latitude": 37.0902,
@@ -196,7 +225,8 @@ export default function HomePage() {
     "description": "Comprehensive training program covering AI fundamentals, strategy, and implementation for tourism marketing professionals",
     "provider": {
       "@type": "Organization",
-      "name": "Brand USA Agents of Change"
+      "name": "Brand USA Agents of Change",
+      "sameAs": BRAND_USA_AOC_SAMEAS
     },
     "audience": {
       "@type": "EducationalAudience",
@@ -246,6 +276,7 @@ export default function HomePage() {
     "contentLocation": {
       "@type": "Place",
       "name": "United States",
+      "sameAs": UNITED_STATES_SAMEAS,
       "geo": {
         "@type": "GeoCoordinates",
         "latitude": 37.0902,
@@ -268,7 +299,8 @@ export default function HomePage() {
     },
     "publisher": {
       "@type": "Organization",
-      "name": "Brand USA"
+      "name": "Brand USA",
+      "sameAs": BRAND_USA_SAMEAS
     }
   }
 
@@ -286,7 +318,8 @@ export default function HomePage() {
         "numberOfCredits": 9,
         "provider": {
           "@type": "Organization",
-          "name": "Brand USA Agents of Change"
+          "name": "Brand USA Agents of Change",
+          "sameAs": BRAND_USA_AOC_SAMEAS
         },
         "teaches": [
           "AI agent taxonomy and categorization",

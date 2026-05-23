@@ -50,6 +50,16 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const BRAND_USA_SAMEAS = [
+    "https://en.wikipedia.org/wiki/Brand_USA",
+    "https://www.wikidata.org/wiki/Q52556956",
+    "https://www.linkedin.com/company/brand-usa",
+    "https://www.thebrandusa.com",
+    "https://x.com/VisitTheUSA",
+    "https://www.instagram.com/visittheusa",
+    "https://www.facebook.com/VisitTheUSA"
+  ]
+
   const personSchema = {
     "@context": "https://schema.org",
     "@type": "Person",
@@ -57,11 +67,13 @@ export default function RootLayout({
     "jobTitle": "SVP, Innovation and Chief AI Officer",
     "affiliation": {
       "@type": "Organization",
-      "name": "Brand USA"
+      "name": "Brand USA",
+      "sameAs": BRAND_USA_SAMEAS
     },
     "url": "https://www.janetteroush.com",
     "sameAs": [
-      "https://www.linkedin.com/in/janetteroush/"
+      "https://www.linkedin.com/in/janetteroush/",
+      "https://www.janetteroush.com"
     ],
     "knowsAbout": [
       "Artificial Intelligence",
