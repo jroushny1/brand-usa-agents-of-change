@@ -1600,9 +1600,9 @@ export default function AIAuditPage() {
                     <div className="bg-blue-50 p-6 rounded-lg border border-blue-100 flex items-start">
                       <Info className="flex-shrink-0 text-blue-500 mr-3 mt-1" size={20} />
                       <div>
-                        <h3 className="text-sm font-bold text-blue-900 mb-1 font-display">GEO Content Patterns</h3>
+                        <h3 className="text-sm font-bold text-blue-900 mb-1 font-display">Content Patterns</h3>
                         <p className="text-sm text-blue-800 leading-relaxed">
-                          Princeton&apos;s 2023 Generative Engine Optimization study (Aggarwal et al.) is the only peer-reviewed work on what content patterns AI engines actually prefer when citing sources. They measured lifts of <strong>+41% from quotations</strong>, <strong>+32% from statistics</strong>, and <strong>+30% from citations to authoritative sources</strong>. Question-format headings and answer-first structures also performed well. These are directional signals, not absolute thresholds &mdash; treat the numbers below as heuristic.
+                          Researchers at Princeton studied what makes AI engines like ChatGPT and Perplexity cite a web page. Three patterns helped most: <strong>direct quotes (+41%)</strong>, <strong>statistics (+32%)</strong>, and <strong>links to authoritative sources like Wikipedia, .gov, and established news (+30%)</strong>. Question-format headings also performed well. The numbers below show where your page stands.
                         </p>
                       </div>
                     </div>
@@ -1667,7 +1667,7 @@ export default function AIAuditPage() {
                           })}
 
                           <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 text-xs text-gray-600 leading-relaxed">
-                            <strong>Threshold note:</strong> Strong/Medium/Weak labels above are heuristic guesses, not from the Princeton paper. The paper measured directional lifts, not specific densities to hit. Treat these as &ldquo;more is better up to a point&rdquo; signals, not pass/fail tests. Stuffing pages with synthetic quotes or statistics to game the score will backfire.
+                            <strong>About these labels:</strong> Strong / Medium / Weak are rough guesses based on common ranges. The Princeton study measured what helped, leaving exact targets open. Aim for &ldquo;enough of each&rdquo; &mdash; your interview quotes, your real stats, your real source links &mdash; and the lift compounds. Made-up content to game the audit backfires; AI engines get sharper at spotting it every quarter.
                           </div>
                         </>
                       );
