@@ -118,6 +118,86 @@ function parseRobotsTxt(text: string): Record<string, AgentRule> {
   return agentRules;
 }
 
+// --- Entity Graph (sameAs) audit ---
+interface SameAsLink {
+  url: string;
+  platform: string;
+  isAuthoritative: boolean;
+}
+
+interface DiscoveredEntity {
+  type: string;
+  name: string;
+  sameAs: SameAsLink[];
+}
+
+const SAMEAS_PATTERNS: Array<{ name: string; pattern: RegExp; authoritative: boolean }> = [
+  { name: 'Wikipedia', pattern: /wikipedia\.org/i, authoritative: true },
+  { name: 'Wikidata', pattern: /wikidata\.org/i, authoritative: true },
+  { name: 'LinkedIn', pattern: /linkedin\.com/i, authoritative: true },
+  { name: 'Crunchbase', pattern: /crunchbase\.com/i, authoritative: true },
+  { name: 'ORCID', pattern: /orcid\.org/i, authoritative: true },
+  { name: '.gov / official', pattern: /\.gov(\/|$)/i, authoritative: true },
+  { name: 'GitHub', pattern: /github\.com/i, authoritative: false },
+  { name: 'X / Twitter', pattern: /(twitter|x)\.com/i, authoritative: false },
+  { name: 'Instagram', pattern: /instagram\.com/i, authoritative: false },
+  { name: 'Facebook', pattern: /facebook\.com/i, authoritative: false },
+  { name: 'YouTube', pattern: /youtube\.com/i, authoritative: false },
+  { name: 'TikTok', pattern: /tiktok\.com/i, authoritative: false },
+  { name: 'TripAdvisor', pattern: /tripadvisor\.com/i, authoritative: false },
+];
+
+const ENTITY_TYPES = new Set([
+  'Person', 'Organization', 'LocalBusiness', 'Corporation', 'NGO',
+  'GovernmentOrganization', 'TouristAttraction', 'TouristDestination',
+  'Place', 'EducationalOrganization', 'NewsMediaOrganization',
+]);
+
+function extractEntities(jsonLdArray: any[]): DiscoveredEntity[] {
+  const entities: DiscoveredEntity[] = [];
+
+  const walk = (obj: any) => {
+    if (!obj || typeof obj !== 'object') return;
+    if (Array.isArray(obj)) {
+      obj.forEach(walk);
+      return;
+    }
+
+    const typeRaw = obj['@type'];
+    if (typeRaw) {
+      const types: string[] = Array.isArray(typeRaw) ? typeRaw : [typeRaw];
+      const matchedTypes = types.filter((t) => typeof t === 'string' && ENTITY_TYPES.has(t));
+
+      if (matchedTypes.length > 0) {
+        const sameAsRaw = obj.sameAs;
+        const sameAsArr: string[] = Array.isArray(sameAsRaw)
+          ? sameAsRaw.filter((s: any) => typeof s === 'string')
+          : (typeof sameAsRaw === 'string' ? [sameAsRaw] : []);
+
+        const classified: SameAsLink[] = sameAsArr.map((url) => {
+          const match = SAMEAS_PATTERNS.find((p) => p.pattern.test(url));
+          return {
+            url,
+            platform: match?.name || 'Other',
+            isAuthoritative: match?.authoritative || false,
+          };
+        });
+
+        entities.push({
+          type: matchedTypes.join(', '),
+          name: obj.name || obj.legalName || obj.headline || '(unnamed entity)',
+          sameAs: classified,
+        });
+      }
+    }
+
+    Object.values(obj).forEach(walk);
+  };
+
+  jsonLdArray.forEach(walk);
+  return entities;
+}
+
 function evaluateBot(bot: AIBotDef, agentRules: Record<string, AgentRule>): BotResult {
   const wildcardEntry = Object.entries(agentRules).find(([name]) => name === '*');
   const wildcardRules: AgentRule = wildcardEntry ? wildcardEntry[1] : { allow: [], disallow: [] };
@@ -158,6 +238,10 @@ export default function AIAuditPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [fetchError, setFetchError] = useState<string | null>(null);
   const [robotsAnalysis, setRobotsAnalysis] = useState<RobotsAnalysis | null>(null);
+  const [crawlerCheckUrl, setCrawlerCheckUrl] = useState('');
+  const [isCheckingRobots, setIsCheckingRobots] = useState(false);
+  const [richResultsUrl, setRichResultsUrl] = useState('');
+  const [manualRobotsTxt, setManualRobotsTxt] = useState('');
 
   // Sample HTML for demo — realistic European DMO homepage
   const demoHTML = `<!DOCTYPE html>
@@ -250,93 +334,8 @@ export default function AIAuditPage() {
         else if (doc.getElementById('___gatsby')) { detectedFramework = 'Gatsby'; }
         else if (doc.getElementById('__nuxt')) { detectedFramework = 'Nuxt.js'; }
 
-        // --- SEMANTIC HEALTH CHECK (The "Gold" Test) ---
-        let semanticPoints = 0;
-        let totalSemanticChecks = 0;
-        const auditLog: Array<{ pass: boolean; msg: string }> = [];
-
-        // Check 1: Landmarks
-        const hasMain = doc.querySelector('main');
-        const hasNav = doc.querySelector('nav');
-        const hasHeader = doc.querySelector('header');
-        const hasFooter = doc.querySelector('footer');
-        const landmarkCount = [hasMain, hasNav, hasHeader, hasFooter].filter(Boolean).length;
-
-        if (landmarkCount >= 3) {
-            semanticPoints += 20;
-            auditLog.push({ pass: true, msg: "Excellent use of Landmarks (<main>, <nav>, etc.)" });
-        } else if (landmarkCount > 0) {
-            semanticPoints += 10;
-            auditLog.push({ pass: true, msg: "Some Landmarks found, but could be better." });
-        } else {
-            auditLog.push({ pass: false, msg: "Missing Landmarks (AI struggles to find the main content)." });
-        }
-        totalSemanticChecks += 20;
-
-        // Check 2: Heading Hierarchy
-        const h1 = doc.querySelectorAll('h1').length;
-        if (h1 === 1) {
-            semanticPoints += 20;
-            auditLog.push({ pass: true, msg: "Perfect Heading Structure (One H1)." });
-        } else if (h1 > 1) {
-            semanticPoints += 10;
-            auditLog.push({ pass: false, msg: "Multiple H1 tags found (Confusing for AI)." });
-        } else {
-            auditLog.push({ pass: false, msg: "No H1 tag found." });
-        }
-        totalSemanticChecks += 20;
-
-        // Check 3: List Usage for Links
-        const navLinks = doc.querySelectorAll('nav a, header a, footer a');
-        let linksInLists = 0;
-        navLinks.forEach(a => {
-            if (a.closest('li')) linksInLists++;
-        });
-        const listRatio = navLinks.length > 0 ? linksInLists / navLinks.length : 1;
-
-        if (listRatio > 0.8) {
-            semanticPoints += 20;
-            auditLog.push({ pass: true, msg: "Navigation links are correctly structured in Lists." });
-        } else if (listRatio > 0.3) {
-            semanticPoints += 10;
-            auditLog.push({ pass: false, msg: "Some nav links are missing List structure (<ul><li>)." });
-        } else {
-            if (navLinks.length > 0) {
-                auditLog.push({ pass: false, msg: "Navigation links found floating in Divs (Div Soup)." });
-            } else {
-                semanticPoints += 20;
-            }
-        }
-        totalSemanticChecks += 20;
-
-        // Check 4: Accessibility/Aria
-        const images = Array.from(doc.querySelectorAll('img'));
-        const imagesWithAlt = images.filter(img => {
-            const alt = img.getAttribute('alt');
-            return alt !== null && alt.trim() !== "";
-        });
-        const altRatio = images.length > 0 ? imagesWithAlt.length / images.length : 1;
-
-        if (altRatio > 0.9) {
-            semanticPoints += 20;
-            auditLog.push({ pass: true, msg: "Images have Alt Text (High Accessibility)." });
-        } else {
-            semanticPoints += Math.round(altRatio * 20);
-            auditLog.push({ pass: false, msg: `${images.length - imagesWithAlt.length} images missing Alt Text.` });
-        }
-        totalSemanticChecks += 20;
-
-        // Check 5: Schema
+        // Schema detection (used downstream by JSON-LD extraction)
         const schemas = doc.querySelectorAll('script[type="application/ld+json"]');
-        if (schemas.length > 0) {
-            semanticPoints += 20;
-            auditLog.push({ pass: true, msg: "Schema.org Structured Data detected." });
-        } else {
-            auditLog.push({ pass: false, msg: "No Structured Data (Knowledge Graph) found." });
-        }
-        totalSemanticChecks += 20;
-
-        const semanticScore = Math.round((semanticPoints / totalSemanticChecks) * 100);
 
 
         // --- SCORING CLEANUP (Framework Aware) ---
@@ -418,7 +417,10 @@ export default function AIAuditPage() {
             try { return JSON.parse(s.textContent || ''); } catch (e) { return "Invalid JSON-LD"; }
         });
 
-        // 6. Meta Extraction
+        // 6. Entity Graph (sameAs) Extraction
+        const entities = extractEntities(jsonLd.filter((x) => typeof x === 'object'));
+
+        // 7. Meta Extraction
         const metaTitle = doc.querySelector('title')?.textContent;
         const metaDesc = doc.querySelector('meta[name="description"]')?.getAttribute('content');
 
@@ -432,12 +434,11 @@ export default function AIAuditPage() {
             images: imgAnalysis,
             meta: { title: metaTitle, description: metaDesc },
             jsonLd,
+            entities,
             rawHtml: content,
             url: sourceUrl,
             framework: detectedFramework,
             isLikelyCSR,
-            semanticScore,
-            auditLog
         };
     } catch (error) {
         console.error(error);
@@ -445,10 +446,52 @@ export default function AIAuditPage() {
     }
   };
 
+  const normalizeUrl = (input: string): string | null => {
+    const trimmed = input.trim();
+    if (!trimmed) return null;
+    try {
+      const withProtocol = /^https?:\/\//i.test(trimmed) ? trimmed : `https://${trimmed}`;
+      return new URL(withProtocol).toString();
+    } catch {
+      return null;
+    }
+  };
+
+  const analyzeRobotsContent = (content: string, sourceUrl: string): RobotsAnalysis => {
+    const agentRules = parseRobotsTxt(content);
+    const bots = AI_BOTS.map((bot) => evaluateBot(bot, agentRules));
+    return { url: sourceUrl, found: true, raw: content, bots };
+  };
+
+  const handleManualRobotsSubmit = () => {
+    if (!manualRobotsTxt.trim()) return;
+    const url = normalizeUrl(crawlerCheckUrl) || '(manual paste)';
+    setRobotsAnalysis(analyzeRobotsContent(manualRobotsTxt, url));
+  };
+
+  const handleCrawlerCheck = async () => {
+    const normalized = normalizeUrl(crawlerCheckUrl);
+    if (!normalized) return;
+    setIsCheckingRobots(true);
+    setRobotsAnalysis(null);
+    const result = await fetchRobotsTxt(normalized);
+    setRobotsAnalysis(result);
+    setIsCheckingRobots(false);
+  };
+
+  // Auto-sync the crawler / rich-results URL fields when a content audit succeeds
+  useEffect(() => {
+    if (analysis?.url) {
+      setCrawlerCheckUrl((prev) => prev || analysis.url);
+      setRichResultsUrl((prev) => prev || analysis.url);
+    }
+  }, [analysis?.url]);
+
   const fetchRobotsTxt = async (pageUrl: string): Promise<RobotsAnalysis> => {
+    let robotsUrl = '';
     try {
       const origin = new URL(pageUrl).origin;
-      const robotsUrl = `${origin}/robots.txt`;
+      robotsUrl = `${origin}/robots.txt`;
       const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(robotsUrl)}`);
       const data = await response.json();
 
@@ -457,26 +500,18 @@ export default function AIAuditPage() {
           url: robotsUrl,
           found: false,
           raw: '',
-          error: 'No robots.txt found (or the server returned an HTML error page). Without a robots.txt, all crawlers — AI and otherwise — default to allowed.',
+          error: `No robots.txt found at ${robotsUrl}. Without a robots.txt, all crawlers — AI and otherwise — default to allowed.`,
           bots: AI_BOTS.map((bot) => ({ ...bot, status: 'not-mentioned', source: 'wildcard', rules: { allow: [], disallow: [] } })),
         };
       }
 
-      const agentRules = parseRobotsTxt(data.contents);
-      const bots = AI_BOTS.map((bot) => evaluateBot(bot, agentRules));
-
-      return {
-        url: robotsUrl,
-        found: true,
-        raw: data.contents,
-        bots,
-      };
+      return analyzeRobotsContent(data.contents, robotsUrl);
     } catch (err) {
       return {
-        url: '',
+        url: robotsUrl,
         found: false,
         raw: '',
-        error: 'Could not fetch robots.txt (network error or CORS).',
+        error: `Could not fetch ${robotsUrl || 'robots.txt'} through the proxy (network error or CORS). Try opening it directly in a new tab, or paste the contents below.`,
         bots: AI_BOTS.map((bot) => ({ ...bot, status: 'not-mentioned', source: 'wildcard', rules: { allow: [], disallow: [] } })),
       };
     }
@@ -638,7 +673,7 @@ export default function AIAuditPage() {
         <div className="flex-1 flex flex-col bg-gray-50 overflow-hidden">
           {/* Tabs */}
           <div className="bg-white border-b flex overflow-x-auto">
-            <TabButton id="audit" icon={ShieldCheck} label="Semantic Audit" />
+            <TabButton id="audit" icon={Layers} label="Entity Graph" />
             <TabButton id="knowledge" icon={Database} label="Schema" />
             <TabButton id="crawlers" icon={Bot} label="AI Crawlers" />
             <TabButton id="structure" icon={Layout} label="Structure" />
@@ -662,51 +697,95 @@ export default function AIAuditPage() {
             ) : (
               <div className="max-w-4xl mx-auto space-y-6">
 
-                {/* TAB 1: SEMANTIC AUDIT (NEW) */}
+                {/* TAB 1: ENTITY GRAPH */}
                 {activeTab === 'audit' && (
                   <div className="space-y-6">
-                    <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-                        <div className="flex items-center justify-between mb-6">
-                            <div>
-                                <h3 className="text-xl font-bold text-brand-navy font-display">Semantic Health Score</h3>
-                                <p className="text-sm text-gray-500">Does an AI truly understand your site&apos;s layout?</p>
-                            </div>
-                            <div className={`text-4xl font-extrabold ${analysis.semanticScore >= 80 ? 'text-green-600' : analysis.semanticScore >= 50 ? 'text-yellow-500' : 'text-red-500'}`}>
-                                {analysis.semanticScore}/100
-                            </div>
-                        </div>
-
-                        <div className="space-y-3">
-                            {analysis.auditLog.map((item: any, i: number) => (
-                                <div key={i} className={`flex items-start p-3 rounded border ${item.pass ? 'bg-green-50 border-green-100' : 'bg-red-50 border-red-100'}`}>
-                                    <div className={`mr-3 mt-0.5 ${item.pass ? 'text-green-600' : 'text-red-600'}`}>
-                                        {item.pass ? <CheckCircle size={18} /> : <AlertTriangle size={18} />}
-                                    </div>
-                                    <div>
-                                        <p className={`text-sm font-medium ${item.pass ? 'text-green-900' : 'text-red-900'}`}>
-                                            {item.msg}
-                                        </p>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-
-                    {/* What This Means — plain-English interpretation */}
-                    <div className={`p-5 rounded-lg border ${analysis.semanticScore >= 80 ? 'bg-green-50 border-green-200' : analysis.semanticScore >= 50 ? 'bg-yellow-50 border-yellow-200' : 'bg-red-50 border-red-200'}`}>
-                        <h4 className="text-sm font-bold text-gray-900 mb-2 font-display flex items-center">
-                            <Zap size={16} className="mr-2" />
-                            What This Means for AI Discovery
-                        </h4>
-                        <p className="text-sm text-gray-700 leading-relaxed">
-                            {analysis.semanticScore >= 80
-                                ? "This site is well-structured for AI. Travel planners like ChatGPT and Perplexity can easily identify the main content, understand the page hierarchy, and extract useful facts. Structured data gives AI systems high-confidence answers about this destination."
-                                : analysis.semanticScore >= 50
-                                ? "An AI travel planner can extract some useful content from this site, but key signals are missing. Without clear landmarks or structured data, AI systems have to guess which content matters \u2014 and they often guess wrong. The fixes above would make a measurable difference in how often this destination surfaces in AI-generated travel plans."
-                                : "An AI travel planner would struggle with this site. The core content \u2014 events, attractions, hours, recommendations \u2014 is buried in unstructured markup that AI systems have difficulty parsing. When a traveler asks an AI to plan a trip here, the AI is likely pulling from third-party sources instead of this official site."
-                            }
+                    <div className="bg-blue-50 p-6 rounded-lg border border-blue-100 flex items-start">
+                      <Info className="flex-shrink-0 text-blue-500 mr-3 mt-1" size={20} />
+                      <div>
+                        <h3 className="text-sm font-bold text-blue-900 mb-1 font-display">Entity Graph</h3>
+                        <p className="text-sm text-blue-800 leading-relaxed">
+                          AI engines disambiguate names through <code className="bg-blue-100 px-1 rounded">sameAs</code> links in structured data &mdash; Wikipedia, Wikidata, LinkedIn, Crunchbase, ORCID. Without these, your organization or people are ambiguous in the knowledge graph and AI engines have nothing to anchor citations to. This is the strongest defensible E-E-A-T signal.
                         </p>
+                      </div>
                     </div>
+
+                    {(() => {
+                      const entities: DiscoveredEntity[] = analysis.entities || [];
+                      const totalSameAs = entities.reduce((sum: number, e: DiscoveredEntity) => sum + e.sameAs.length, 0);
+                      const authoritativeCount = entities.reduce((sum: number, e: DiscoveredEntity) => sum + e.sameAs.filter((s) => s.isAuthoritative).length, 0);
+                      const strength = authoritativeCount >= 3 ? 'strong' : authoritativeCount >= 1 ? 'medium' : 'weak';
+                      const strengthConfig = {
+                        strong: { label: 'Strong', color: 'text-green-700', bg: 'bg-green-50', border: 'border-green-200', desc: 'Multiple authoritative sources resolve your entities. AI engines have high confidence when citing you.' },
+                        medium: { label: 'Medium', color: 'text-amber-700', bg: 'bg-amber-50', border: 'border-amber-200', desc: 'Some authoritative anchors exist. Adding Wikipedia, Wikidata, or LinkedIn would strengthen entity disambiguation.' },
+                        weak: { label: 'Weak', color: 'text-red-700', bg: 'bg-red-50', border: 'border-red-200', desc: 'No or few authoritative anchors. AI engines struggle to confidently identify your organization or people. Adding sameAs links to Wikipedia, LinkedIn, or official entity sources should be a priority.' },
+                      }[strength];
+
+                      return (
+                        <>
+                          <div className={`p-6 rounded-lg border-2 ${strengthConfig.bg} ${strengthConfig.border}`}>
+                            <div className="flex items-center justify-between mb-3">
+                              <div>
+                                <h3 className="text-lg font-bold text-brand-navy font-display">Entity Confidence</h3>
+                                <p className="text-sm text-gray-600">Across {entities.length} {entities.length === 1 ? 'entity' : 'entities'}, {totalSameAs} total sameAs link{totalSameAs === 1 ? '' : 's'}, {authoritativeCount} authoritative.</p>
+                              </div>
+                              <div className={`px-3 py-1 rounded-full text-sm font-bold ${strengthConfig.color} ${strengthConfig.bg} border ${strengthConfig.border}`}>
+                                {strengthConfig.label}
+                              </div>
+                            </div>
+                            <p className={`text-sm leading-relaxed ${strengthConfig.color}`}>
+                              {strengthConfig.desc}
+                            </p>
+                          </div>
+
+                          {entities.length === 0 ? (
+                            <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 text-center">
+                              <AlertOctagon className="mx-auto text-amber-500 mb-3" size={32} />
+                              <h4 className="text-base font-semibold text-brand-navy mb-2">No entities found in structured data</h4>
+                              <p className="text-sm text-gray-600 max-w-md mx-auto">
+                                The page has no Organization, Person, LocalBusiness, or TouristAttraction schema with identifiable entities. Add at minimum an Organization block with <code className="bg-gray-100 px-1 rounded text-xs">@type</code>, <code className="bg-gray-100 px-1 rounded text-xs">name</code>, and a <code className="bg-gray-100 px-1 rounded text-xs">sameAs</code> array linking to Wikipedia, LinkedIn, and your other canonical profiles.
+                              </p>
+                            </div>
+                          ) : (
+                            <div className="space-y-3">
+                              {entities.map((entity, i) => (
+                                <div key={i} className="bg-white p-5 rounded-lg shadow-sm border border-gray-200">
+                                  <div className="flex items-start justify-between mb-3">
+                                    <div>
+                                      <h4 className="text-base font-semibold text-brand-navy">{entity.name}</h4>
+                                      <p className="text-xs text-gray-500 font-mono">{entity.type}</p>
+                                    </div>
+                                    <span className={`text-xs px-2 py-1 rounded font-medium ${entity.sameAs.length === 0 ? 'bg-red-100 text-red-700' : entity.sameAs.some((s) => s.isAuthoritative) ? 'bg-green-100 text-green-700' : 'bg-amber-100 text-amber-700'}`}>
+                                      {entity.sameAs.length} sameAs
+                                    </span>
+                                  </div>
+                                  {entity.sameAs.length === 0 ? (
+                                    <p className="text-sm text-gray-500 italic">No sameAs links &mdash; entity has no anchor in the knowledge graph.</p>
+                                  ) : (
+                                    <div className="flex flex-wrap gap-2">
+                                      {entity.sameAs.map((link, j) => (
+                                        <a
+                                          key={j}
+                                          href={link.url}
+                                          target="_blank"
+                                          rel="noopener noreferrer"
+                                          className={`inline-flex items-center px-2.5 py-1 rounded text-xs font-medium border transition-colors ${link.isAuthoritative ? 'bg-green-50 border-green-200 text-green-800 hover:bg-green-100' : 'bg-gray-50 border-gray-200 text-gray-700 hover:bg-gray-100'}`}
+                                        >
+                                          {link.isAuthoritative && <CheckCircle size={12} className="mr-1" />}
+                                          {link.platform}
+                                          <ExternalLink size={10} className="ml-1 opacity-60" />
+                                        </a>
+                                      ))}
+                                    </div>
+                                  )}
+                                </div>
+                              ))}
+                            </div>
+                          )}
+                        </>
+                      );
+                    })()}
+
 
                     {/* Image Audit */}
                     {analysis.images.length > 0 && (
@@ -762,31 +841,39 @@ export default function AIAuditPage() {
                         </div>
                     </div>
 
-                    {analysis.url && (
-                      <div className="bg-white p-6 rounded-lg shadow-sm border-2 border-brand-cyan">
-                        <div className="flex items-start mb-4">
-                          <FlaskConical className="flex-shrink-0 text-brand-cyan mr-3 mt-1" size={24} />
-                          <div className="flex-1">
-                            <h3 className="text-lg font-semibold text-brand-navy mb-2 font-display">Validate with Google&apos;s Rich Results Test</h3>
-                            <p className="text-sm text-gray-700 leading-relaxed mb-2">
-                              Google&apos;s Rich Results Test confirms whether your structured data qualifies for rich snippets, AI Overview, and AI Mode extraction. It validates required fields and surfaces errors the audit above can&apos;t catch from raw JSON alone.
-                            </p>
-                            <p className="text-xs text-gray-500 leading-relaxed">
-                              Opens in a new tab on Google&apos;s servers. Tests the live URL, not the HTML in this audit.
-                            </p>
-                          </div>
+                    <div className="bg-white p-6 rounded-lg shadow-sm border-2 border-brand-cyan">
+                      <div className="flex items-start mb-4">
+                        <FlaskConical className="flex-shrink-0 text-brand-cyan mr-3 mt-1" size={24} />
+                        <div className="flex-1">
+                          <h3 className="text-lg font-semibold text-brand-navy mb-2 font-display">Validate with Google&apos;s Rich Results Test</h3>
+                          <p className="text-sm text-gray-700 leading-relaxed mb-2">
+                            Google&apos;s Rich Results Test confirms whether your structured data qualifies for rich snippets, AI Overview, and AI Mode extraction. It validates required fields and surfaces errors the audit above can&apos;t catch from raw JSON alone.
+                          </p>
+                          <p className="text-xs text-gray-500 leading-relaxed">
+                            Opens in a new tab on Google&apos;s servers. Tests the live URL — independent of any HTML you pasted above.
+                          </p>
                         </div>
+                      </div>
+                      <div className="flex flex-col sm:flex-row gap-2">
+                        <input
+                          type="url"
+                          value={richResultsUrl}
+                          onChange={(e) => setRichResultsUrl(e.target.value)}
+                          placeholder="https://www.yourdmo.com"
+                          className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-cyan"
+                        />
                         <a
-                          href={`https://search.google.com/test/rich-results?url=${encodeURIComponent(analysis.url)}`}
+                          href={normalizeUrl(richResultsUrl) ? `https://search.google.com/test/rich-results?url=${encodeURIComponent(normalizeUrl(richResultsUrl)!)}` : '#'}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center px-4 py-2 bg-brand-cyan text-white text-sm font-semibold rounded-lg hover:bg-brand-blue transition-colors"
+                          onClick={(e) => { if (!normalizeUrl(richResultsUrl)) e.preventDefault(); }}
+                          className={`inline-flex items-center justify-center px-4 py-2 text-sm font-semibold rounded-lg transition-colors ${normalizeUrl(richResultsUrl) ? 'bg-brand-cyan text-white hover:bg-brand-blue' : 'bg-gray-200 text-gray-400 cursor-not-allowed'}`}
                         >
-                          Test {(() => { try { return new URL(analysis.url).hostname; } catch { return 'this URL'; } })()} in Google Rich Results Test
+                          Test in Google
                           <ExternalLink className="ml-2" size={16} />
                         </a>
                       </div>
-                    )}
+                    </div>
 
                     <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
                         <div className="flex justify-between items-center mb-4">
@@ -825,25 +912,48 @@ export default function AIAuditPage() {
                       </div>
                     </div>
 
-                    {!analysis.url ? (
-                      <div className="bg-amber-50 p-6 rounded-lg border border-amber-200 flex items-start">
-                        <AlertTriangle className="flex-shrink-0 text-amber-500 mr-3 mt-1" size={20} />
-                        <div>
-                          <h3 className="text-sm font-bold text-amber-900 mb-1 font-display">URL required</h3>
-                          <p className="text-sm text-amber-800 leading-relaxed">Switch to URL input above to audit the site&apos;s robots.txt. This check needs a live domain.</p>
-                        </div>
+                    {/* URL input form — works independently of the main content audit */}
+                    <div className="bg-white p-6 rounded-lg shadow-sm border-2 border-brand-cyan">
+                      <h3 className="text-lg font-semibold text-brand-navy mb-2 font-display">Check a site&apos;s robots.txt</h3>
+                      <p className="text-sm text-gray-600 mb-4">
+                        Enter any live URL. We&apos;ll fetch <code className="bg-gray-100 px-1 rounded text-xs">/robots.txt</code> from that domain and parse it for AI crawler rules. Works independently of any HTML you pasted in the sidebar.
+                      </p>
+                      <div className="flex flex-col sm:flex-row gap-2">
+                        <input
+                          type="url"
+                          value={crawlerCheckUrl}
+                          onChange={(e) => setCrawlerCheckUrl(e.target.value)}
+                          onKeyDown={(e) => { if (e.key === 'Enter' && !isCheckingRobots) handleCrawlerCheck(); }}
+                          placeholder="https://www.yourdmo.com"
+                          className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-cyan"
+                          disabled={isCheckingRobots}
+                        />
+                        <button
+                          onClick={handleCrawlerCheck}
+                          disabled={!normalizeUrl(crawlerCheckUrl) || isCheckingRobots}
+                          className="inline-flex items-center justify-center px-4 py-2 bg-brand-cyan text-white text-sm font-semibold rounded-lg hover:bg-brand-blue transition-colors disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed"
+                        >
+                          {isCheckingRobots ? (
+                            <><Loader size={16} className="animate-spin mr-2" />Checking...</>
+                          ) : (
+                            <>Check robots.txt</>
+                          )}
+                        </button>
                       </div>
-                    ) : !robotsAnalysis ? (
-                      <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 flex items-center text-gray-500">
-                        <Loader size={20} className="animate-spin mr-3" />
-                        Fetching robots.txt...
+                    </div>
+
+                    {!robotsAnalysis && !isCheckingRobots && (
+                      <div className="bg-gray-50 p-6 rounded-lg border border-gray-200 text-center text-sm text-gray-500">
+                        Enter a URL above and we&apos;ll show which AI crawlers can read the site.
                       </div>
-                    ) : (
+                    )}
+
+                    {robotsAnalysis && (
                       <>
                         <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
                           <div className="flex justify-between items-center mb-4">
                             <h3 className="text-lg font-semibold text-brand-navy font-display">Bot-by-bot status</h3>
-                            {robotsAnalysis.url && (
+                            {robotsAnalysis.url && robotsAnalysis.url !== '(manual paste)' && (
                               <a
                                 href={robotsAnalysis.url}
                                 target="_blank"
@@ -858,7 +968,18 @@ export default function AIAuditPage() {
 
                           {robotsAnalysis.error && (
                             <div className="mb-4 p-3 bg-amber-50 border border-amber-200 rounded text-sm text-amber-900">
-                              {robotsAnalysis.error}
+                              <p>{robotsAnalysis.error}</p>
+                              {robotsAnalysis.url && robotsAnalysis.url !== '(manual paste)' && (
+                                <a
+                                  href={robotsAnalysis.url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="inline-flex items-center mt-2 text-brand-cyan hover:text-brand-blue text-xs font-medium"
+                                >
+                                  Open {robotsAnalysis.url} in a new tab
+                                  <ExternalLink className="ml-1" size={12} />
+                                </a>
+                              )}
                             </div>
                           )}
 
@@ -914,6 +1035,28 @@ export default function AIAuditPage() {
                             <pre className="mt-3 bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-xs font-mono whitespace-pre-wrap">
                               {robotsAnalysis.raw}
                             </pre>
+                          </details>
+                        )}
+
+                        {!robotsAnalysis.found && (
+                          <details className="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
+                            <summary className="cursor-pointer text-sm font-semibold text-brand-navy">Paste robots.txt manually</summary>
+                            <p className="mt-3 text-xs text-gray-600 mb-2">
+                              If the fetch failed (some sites block our proxy), open the robots.txt URL in your browser, copy its contents, and paste here.
+                            </p>
+                            <textarea
+                              value={manualRobotsTxt}
+                              onChange={(e) => setManualRobotsTxt(e.target.value)}
+                              placeholder="User-agent: *&#10;Allow: /&#10;&#10;User-agent: GPTBot&#10;Allow: /"
+                              className="w-full h-32 px-3 py-2 border border-gray-300 rounded-lg text-xs font-mono focus:outline-none focus:ring-2 focus:ring-brand-cyan"
+                            />
+                            <button
+                              onClick={handleManualRobotsSubmit}
+                              disabled={!manualRobotsTxt.trim()}
+                              className="mt-2 px-4 py-2 bg-brand-cyan text-white text-sm font-semibold rounded-lg hover:bg-brand-blue transition-colors disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed"
+                            >
+                              Analyze pasted robots.txt
+                            </button>
                           </details>
                         )}
                       </>
