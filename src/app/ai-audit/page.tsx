@@ -322,6 +322,126 @@ function daysSince(d: Date | null): number | null {
   return Math.floor((Date.now() - d.getTime()) / (1000 * 60 * 60 * 24));
 }
 
+// --- Entity grouping + suggested sameAs ---
+interface GroupedEntity {
+  name: string;
+  type: string;
+  count: number;
+  sameAs: SameAsLink[];
+}
+
+function deduplicateEntities(entities: DiscoveredEntity[]): GroupedEntity[] {
+  const groups = new Map<string, GroupedEntity>();
+  entities.forEach((e) => {
+    const key = `${e.name}|${e.type}`;
+    const existing = groups.get(key);
+    if (existing) {
+      existing.count++;
+      e.sameAs.forEach((link) => {
+        if (!existing.sameAs.find((s) => s.url === link.url)) {
+          existing.sameAs.push(link);
+        }
+      });
+    } else {
+      groups.set(key, { name: e.name, type: e.type, count: 1, sameAs: [...e.sameAs] });
+    }
+  });
+  return Array.from(groups.values());
+}
+
+interface SuggestedLink {
+  platform: string;
+  example: string;
+  note: string;
+}
+
+function getSuggestedSameAs(entity: GroupedEntity): SuggestedLink[] {
+  const suggestions: SuggestedLink[] = [];
+  const hasPlat = (name: string) => entity.sameAs.some((s) => s.platform === name);
+  const slug = entity.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  const slugUnder = entity.name.replace(/\s+/g, '_');
+  const isPerson = entity.type.includes('Person');
+  const isOrg = entity.type.includes('Organization') || entity.type.includes('Corporation') || entity.type.includes('LocalBusiness') || entity.type.includes('NGO');
+  const isPlace = entity.type.includes('Place') || entity.type.includes('TouristAttraction') || entity.type.includes('TouristDestination');
+
+  if (!hasPlat('Wikipedia')) {
+    suggestions.push({
+      platform: 'Wikipedia',
+      example: `https://en.wikipedia.org/wiki/${slugUnder}`,
+      note: 'Highest-authority anchor. Only add if a Wikipedia page actually exists.',
+    });
+  }
+  if (!hasPlat('Wikidata')) {
+    suggestions.push({
+      platform: 'Wikidata',
+      example: `https://www.wikidata.org/wiki/QXXXXXX`,
+      note: `Search wikidata.org for "${entity.name}" to find the real Q-number.`,
+    });
+  }
+  if (!hasPlat('LinkedIn')) {
+    suggestions.push({
+      platform: 'LinkedIn',
+      example: isPerson ? `https://www.linkedin.com/in/${slug}` : `https://www.linkedin.com/company/${slug}`,
+      note: isPerson ? 'Person profile.' : 'Organization page.',
+    });
+  }
+  if (isOrg && !hasPlat('Crunchbase')) {
+    suggestions.push({
+      platform: 'Crunchbase',
+      example: `https://www.crunchbase.com/organization/${slug}`,
+      note: 'Useful for companies; less critical for DMOs / non-profits.',
+    });
+  }
+  if (!hasPlat('X / Twitter')) {
+    suggestions.push({
+      platform: 'X / Twitter',
+      example: isPerson ? `https://x.com/${slug}` : `https://x.com/${slug}`,
+      note: 'Replace the handle with your actual one.',
+    });
+  }
+  if (isOrg && !hasPlat('Instagram')) {
+    suggestions.push({
+      platform: 'Instagram',
+      example: `https://www.instagram.com/${slug}`,
+      note: 'Use your actual handle.',
+    });
+  }
+  if (isOrg && !hasPlat('Facebook')) {
+    suggestions.push({
+      platform: 'Facebook',
+      example: `https://www.facebook.com/${slug}`,
+      note: 'Use your actual page slug.',
+    });
+  }
+  if (isPlace && !hasPlat('Wikidata')) {
+    // Wikidata is especially important for Place entities
+    // Already added above if not present
+  }
+  return suggestions;
+}
+
+function getDisplayPlatform(link: SameAsLink): string {
+  if (link.platform !== 'Other') return link.platform;
+  try {
+    return new URL(link.url).hostname.replace(/^www\./, '');
+  } catch {
+    return 'Other';
+  }
+}
+
+function buildSameAsJsonSnippet(entity: GroupedEntity, suggestions: SuggestedLink[]): string {
+  const existingUrls = entity.sameAs.map((s) => s.url);
+  const suggestionUrls = suggestions.map((s) => s.example);
+  const allUrls = [...existingUrls, ...suggestionUrls];
+  const firstType = entity.type.split(',')[0].trim();
+  return JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': firstType,
+    name: entity.name,
+    sameAs: allUrls,
+  }, null, 2);
+}
+
 function evaluateBot(bot: AIBotDef, agentRules: Record<string, AgentRule>): BotResult {
   const wildcardEntry = Object.entries(agentRules).find(([name]) => name === '*');
   const wildcardRules: AgentRule = wildcardEntry ? wildcardEntry[1] : { allow: [], disallow: [] };
@@ -854,14 +974,17 @@ export default function AIAuditPage() {
                     </div>
 
                     {(() => {
-                      const entities: DiscoveredEntity[] = analysis.entities || [];
-                      const totalSameAs = entities.reduce((sum: number, e: DiscoveredEntity) => sum + e.sameAs.length, 0);
-                      const authoritativeCount = entities.reduce((sum: number, e: DiscoveredEntity) => sum + e.sameAs.filter((s) => s.isAuthoritative).length, 0);
+                      const rawEntities: DiscoveredEntity[] = analysis.entities || [];
+                      const groupedEntities = deduplicateEntities(rawEntities);
+                      const totalDeclarations = rawEntities.length;
+                      const uniqueCount = groupedEntities.length;
+                      const totalSameAs = groupedEntities.reduce((sum, e) => sum + e.sameAs.length, 0);
+                      const authoritativeCount = groupedEntities.reduce((sum, e) => sum + e.sameAs.filter((s) => s.isAuthoritative).length, 0);
                       const strength = authoritativeCount >= 3 ? 'strong' : authoritativeCount >= 1 ? 'medium' : 'weak';
                       const strengthConfig = {
-                        strong: { label: 'Strong', color: 'text-green-700', bg: 'bg-green-50', border: 'border-green-200', desc: 'Multiple authoritative sources resolve your entities. AI engines have high confidence when citing you.' },
-                        medium: { label: 'Medium', color: 'text-amber-700', bg: 'bg-amber-50', border: 'border-amber-200', desc: 'Some authoritative anchors exist. Adding Wikipedia, Wikidata, or LinkedIn would strengthen entity disambiguation.' },
-                        weak: { label: 'Weak', color: 'text-red-700', bg: 'bg-red-50', border: 'border-red-200', desc: 'No or few authoritative anchors. AI engines struggle to confidently identify your organization or people. Adding sameAs links to Wikipedia, LinkedIn, or official entity sources should be a priority.' },
+                        strong: { label: 'Strong', color: 'text-green-700', bg: 'bg-green-50', border: 'border-green-200', desc: 'Multiple authoritative sources resolve your entities. AI cites you with confidence.' },
+                        medium: { label: 'Medium', color: 'text-amber-700', bg: 'bg-amber-50', border: 'border-amber-200', desc: 'Some authoritative anchors exist. Adding Wikipedia, Wikidata, or LinkedIn to the rest of your entities would close the gap.' },
+                        weak: { label: 'Weak', color: 'text-red-700', bg: 'bg-red-50', border: 'border-red-200', desc: 'Few or no authoritative anchors. AI cannot confidently tell whether your organization is the right Brand USA or someone else with a similar name. Adding sameAs links should be a priority.' },
                       }[strength];
 
                       return (
@@ -870,7 +993,11 @@ export default function AIAuditPage() {
                             <div className="flex items-center justify-between mb-3">
                               <div>
                                 <h3 className="text-lg font-bold text-brand-navy font-display">Entity Confidence</h3>
-                                <p className="text-sm text-gray-600">Across {entities.length} {entities.length === 1 ? 'entity' : 'entities'}, {totalSameAs} total sameAs link{totalSameAs === 1 ? '' : 's'}, {authoritativeCount} authoritative.</p>
+                                <p className="text-sm text-gray-600">
+                                  {uniqueCount} unique {uniqueCount === 1 ? 'entity' : 'entities'}
+                                  {totalDeclarations !== uniqueCount && <span className="text-gray-400"> ({totalDeclarations} total declarations &mdash; some entities are declared more than once)</span>},
+                                  {' '}{totalSameAs} sameAs link{totalSameAs === 1 ? '' : 's'}, {authoritativeCount} authoritative.
+                                </p>
                               </div>
                               <div className={`px-3 py-1 rounded-full text-sm font-bold ${strengthConfig.color} ${strengthConfig.bg} border ${strengthConfig.border}`}>
                                 {strengthConfig.label}
@@ -881,7 +1008,7 @@ export default function AIAuditPage() {
                             </p>
                           </div>
 
-                          {entities.length === 0 ? (
+                          {groupedEntities.length === 0 ? (
                             <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 text-center">
                               <AlertOctagon className="mx-auto text-amber-500 mb-3" size={32} />
                               <h4 className="text-base font-semibold text-brand-navy mb-2">No entities found in structured data</h4>
@@ -891,38 +1018,72 @@ export default function AIAuditPage() {
                             </div>
                           ) : (
                             <div className="space-y-3">
-                              {entities.map((entity, i) => (
-                                <div key={i} className="bg-white p-5 rounded-lg shadow-sm border border-gray-200">
-                                  <div className="flex items-start justify-between mb-3">
-                                    <div>
-                                      <h4 className="text-base font-semibold text-brand-navy">{entity.name}</h4>
-                                      <p className="text-xs text-gray-500 font-mono">{entity.type}</p>
+                              {groupedEntities.map((entity, i) => {
+                                const suggestions = getSuggestedSameAs(entity);
+                                return (
+                                  <div key={i} className="bg-white p-5 rounded-lg shadow-sm border border-gray-200">
+                                    <div className="flex items-start justify-between mb-3">
+                                      <div>
+                                        <h4 className="text-base font-semibold text-brand-navy">{entity.name}</h4>
+                                        <p className="text-xs text-gray-500 font-mono">{entity.type}</p>
+                                        {entity.count > 1 && (
+                                          <p className="text-xs text-gray-400 mt-0.5 italic">Declared {entity.count} times on this page</p>
+                                        )}
+                                      </div>
+                                      <span className={`text-xs px-2 py-1 rounded font-medium whitespace-nowrap ${entity.sameAs.length === 0 ? 'bg-red-100 text-red-700' : entity.sameAs.some((s) => s.isAuthoritative) ? 'bg-green-100 text-green-700' : 'bg-amber-100 text-amber-700'}`}>
+                                        {entity.sameAs.length} sameAs
+                                      </span>
                                     </div>
-                                    <span className={`text-xs px-2 py-1 rounded font-medium ${entity.sameAs.length === 0 ? 'bg-red-100 text-red-700' : entity.sameAs.some((s) => s.isAuthoritative) ? 'bg-green-100 text-green-700' : 'bg-amber-100 text-amber-700'}`}>
-                                      {entity.sameAs.length} sameAs
-                                    </span>
+                                    {entity.sameAs.length === 0 ? (
+                                      <p className="text-sm text-gray-500 italic mb-3">No sameAs links &mdash; AI has nothing to anchor this entity to.</p>
+                                    ) : (
+                                      <div className="flex flex-wrap gap-2 mb-3">
+                                        {entity.sameAs.map((link, j) => (
+                                          <a
+                                            key={j}
+                                            href={link.url}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            title={link.url}
+                                            className={`inline-flex items-center px-2.5 py-1 rounded text-xs font-medium border transition-colors ${link.isAuthoritative ? 'bg-green-50 border-green-200 text-green-800 hover:bg-green-100' : 'bg-gray-50 border-gray-200 text-gray-700 hover:bg-gray-100'}`}
+                                          >
+                                            {link.isAuthoritative && <CheckCircle size={12} className="mr-1" />}
+                                            {getDisplayPlatform(link)}
+                                            <ExternalLink size={10} className="ml-1 opacity-60" />
+                                          </a>
+                                        ))}
+                                      </div>
+                                    )}
+
+                                    {suggestions.length > 0 && (
+                                      <details className="mt-2 group">
+                                        <summary className="cursor-pointer text-xs font-semibold text-brand-cyan hover:text-brand-blue inline-flex items-center">
+                                          <Zap size={12} className="mr-1" />
+                                          Suggested sameAs to add ({suggestions.length})
+                                        </summary>
+                                        <div className="mt-3 space-y-2">
+                                          {suggestions.map((s, k) => (
+                                            <div key={k} className="flex items-start text-xs bg-gray-50 rounded p-2 border border-gray-100">
+                                              <div className="flex-1 min-w-0">
+                                                <div className="font-semibold text-brand-navy">{s.platform}</div>
+                                                <div className="font-mono text-gray-600 break-all">{s.example}</div>
+                                                <div className="text-gray-500 mt-0.5">{s.note}</div>
+                                              </div>
+                                            </div>
+                                          ))}
+                                          <details className="mt-2">
+                                            <summary className="cursor-pointer text-xs text-gray-600 hover:text-brand-navy">Show JSON-LD snippet to paste into your schema</summary>
+                                            <pre className="mt-2 bg-gray-900 text-green-400 p-3 rounded text-xs font-mono overflow-x-auto whitespace-pre-wrap">{buildSameAsJsonSnippet(entity, suggestions)}</pre>
+                                            <p className="text-xs text-gray-500 mt-2 italic">
+                                              Replace the placeholder URLs with your actual profiles before pasting. The Wikidata Q-number and Wikipedia slug need to be looked up &mdash; don&apos;t use the guesses verbatim.
+                                            </p>
+                                          </details>
+                                        </div>
+                                      </details>
+                                    )}
                                   </div>
-                                  {entity.sameAs.length === 0 ? (
-                                    <p className="text-sm text-gray-500 italic">No sameAs links &mdash; entity has no anchor in the knowledge graph.</p>
-                                  ) : (
-                                    <div className="flex flex-wrap gap-2">
-                                      {entity.sameAs.map((link, j) => (
-                                        <a
-                                          key={j}
-                                          href={link.url}
-                                          target="_blank"
-                                          rel="noopener noreferrer"
-                                          className={`inline-flex items-center px-2.5 py-1 rounded text-xs font-medium border transition-colors ${link.isAuthoritative ? 'bg-green-50 border-green-200 text-green-800 hover:bg-green-100' : 'bg-gray-50 border-gray-200 text-gray-700 hover:bg-gray-100'}`}
-                                        >
-                                          {link.isAuthoritative && <CheckCircle size={12} className="mr-1" />}
-                                          {link.platform}
-                                          <ExternalLink size={10} className="ml-1 opacity-60" />
-                                        </a>
-                                      ))}
-                                    </div>
-                                  )}
-                                </div>
-                              ))}
+                                );
+                              })}
                             </div>
                           )}
                         </>
