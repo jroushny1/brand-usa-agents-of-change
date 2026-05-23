@@ -27,7 +27,9 @@ import {
   FlaskConical,
   Bot,
   XCircle,
-  HelpCircle
+  HelpCircle,
+  Clock,
+  Calendar
 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -196,6 +198,128 @@ function extractEntities(jsonLdArray: any[]): DiscoveredEntity[] {
 
   jsonLdArray.forEach(walk);
   return entities;
+}
+
+// --- Content Freshness audit ---
+interface DateSignal {
+  source: string;
+  type: 'published' | 'modified';
+  value: string;
+  parsed: Date | null;
+  schemaType?: string;
+}
+
+interface FreshnessAnalysis {
+  dates: DateSignal[];
+  mostRecentModified: DateSignal | null;
+  earliestPublished: DateSignal | null;
+  hasModified: boolean;
+  hasPublished: boolean;
+  modifiedEqualsPublished: boolean;
+}
+
+function parseDate(s: string): Date | null {
+  if (!s) return null;
+  const d = new Date(s);
+  return isNaN(d.getTime()) ? null : d;
+}
+
+function extractDates(doc: Document, jsonLdArray: any[]): FreshnessAnalysis {
+  const dates: DateSignal[] = [];
+
+  // 1. JSON-LD dates (walk recursively for nested @graph etc.)
+  const walkForDates = (obj: any) => {
+    if (!obj || typeof obj !== 'object') return;
+    if (Array.isArray(obj)) {
+      obj.forEach(walkForDates);
+      return;
+    }
+    const type = obj['@type'];
+    const typeName = Array.isArray(type) ? type.join('/') : type;
+
+    const dateFields: Array<{ key: string; type: 'published' | 'modified' }> = [
+      { key: 'datePublished', type: 'published' },
+      { key: 'dateCreated', type: 'published' },
+      { key: 'dateModified', type: 'modified' },
+      { key: 'dateUpdated', type: 'modified' },
+    ];
+    dateFields.forEach(({ key, type: dateType }) => {
+      const value = obj[key];
+      if (typeof value === 'string' && value.length > 0) {
+        dates.push({
+          source: `JSON-LD ${typeName || 'object'}.${key}`,
+          type: dateType,
+          value,
+          parsed: parseDate(value),
+          schemaType: typeName,
+        });
+      }
+    });
+    Object.values(obj).forEach(walkForDates);
+  };
+  jsonLdArray.forEach(walkForDates);
+
+  // 2. Meta tags
+  const metaSelectors: Array<{ selector: string; label: string; type: 'published' | 'modified' }> = [
+    { selector: 'meta[property="article:published_time"]', label: 'meta property="article:published_time"', type: 'published' },
+    { selector: 'meta[property="article:modified_time"]', label: 'meta property="article:modified_time"', type: 'modified' },
+    { selector: 'meta[property="og:updated_time"]', label: 'meta property="og:updated_time"', type: 'modified' },
+    { selector: 'meta[name="pubdate"]', label: 'meta name="pubdate"', type: 'published' },
+    { selector: 'meta[name="lastmod"]', label: 'meta name="lastmod"', type: 'modified' },
+    { selector: 'meta[name="date"]', label: 'meta name="date"', type: 'published' },
+    { selector: 'meta[name="last-modified"]', label: 'meta name="last-modified"', type: 'modified' },
+  ];
+  metaSelectors.forEach(({ selector, label, type }) => {
+    const el = doc.querySelector(selector);
+    const value = el?.getAttribute('content');
+    if (value) {
+      dates.push({ source: label, type, value, parsed: parseDate(value) });
+    }
+  });
+
+  // 3. <time datetime="..."> elements (cap to avoid noise)
+  const timeElements = Array.from(doc.querySelectorAll('time[datetime]')).slice(0, 5);
+  timeElements.forEach((el) => {
+    const value = el.getAttribute('datetime');
+    if (value) {
+      dates.push({
+        source: `<time datetime>`,
+        type: 'modified',
+        value,
+        parsed: parseDate(value),
+      });
+    }
+  });
+
+  const modifiedDates = dates.filter((d) => d.type === 'modified' && d.parsed);
+  const publishedDates = dates.filter((d) => d.type === 'published' && d.parsed);
+
+  const mostRecentModified = modifiedDates.length > 0
+    ? modifiedDates.reduce((a, b) => (a.parsed!.getTime() > b.parsed!.getTime() ? a : b))
+    : null;
+  const earliestPublished = publishedDates.length > 0
+    ? publishedDates.reduce((a, b) => (a.parsed!.getTime() < b.parsed!.getTime() ? a : b))
+    : null;
+
+  const modifiedEqualsPublished = !!(
+    mostRecentModified?.parsed &&
+    earliestPublished?.parsed &&
+    Math.abs(mostRecentModified.parsed.getTime() - earliestPublished.parsed.getTime()) < 60000
+  );
+
+  return {
+    dates,
+    mostRecentModified,
+    earliestPublished,
+    hasModified: modifiedDates.length > 0,
+    hasPublished: publishedDates.length > 0,
+    modifiedEqualsPublished,
+  };
+}
+
+function daysSince(d: Date | null): number | null {
+  if (!d) return null;
+  return Math.floor((Date.now() - d.getTime()) / (1000 * 60 * 60 * 24));
 }
 
 function evaluateBot(bot: AIBotDef, agentRules: Record<string, AgentRule>): BotResult {
@@ -420,7 +544,10 @@ export default function AIAuditPage() {
         // 6. Entity Graph (sameAs) Extraction
         const entities = extractEntities(jsonLd.filter((x) => typeof x === 'object'));
 
-        // 7. Meta Extraction
+        // 7. Content Freshness Extraction
+        const freshness = extractDates(doc, jsonLd.filter((x) => typeof x === 'object'));
+
+        // 8. Meta Extraction
         const metaTitle = doc.querySelector('title')?.textContent;
         const metaDesc = doc.querySelector('meta[name="description"]')?.getAttribute('content');
 
@@ -435,6 +562,7 @@ export default function AIAuditPage() {
             meta: { title: metaTitle, description: metaDesc },
             jsonLd,
             entities,
+            freshness,
             rawHtml: content,
             url: sourceUrl,
             framework: detectedFramework,
@@ -676,6 +804,7 @@ export default function AIAuditPage() {
             <TabButton id="audit" icon={Layers} label="Entity Graph" />
             <TabButton id="knowledge" icon={Database} label="Schema" />
             <TabButton id="crawlers" icon={Bot} label="AI Crawlers" />
+            <TabButton id="freshness" icon={Clock} label="Freshness" />
             <TabButton id="structure" icon={Layout} label="Structure" />
             <TabButton id="stream" icon={Activity} label="Token Stream" />
             <TabButton id="rag" icon={FileText} label="RAG Context" />
@@ -1061,6 +1190,131 @@ export default function AIAuditPage() {
                         )}
                       </>
                     )}
+                  </div>
+                )}
+
+                {/* TAB: FRESHNESS */}
+                {activeTab === 'freshness' && (
+                  <div className="space-y-6">
+                    <div className="bg-blue-50 p-6 rounded-lg border border-blue-100 flex items-start">
+                      <Info className="flex-shrink-0 text-blue-500 mr-3 mt-1" size={20} />
+                      <div>
+                        <h3 className="text-sm font-bold text-blue-900 mb-1 font-display">Content Freshness</h3>
+                        <p className="text-sm text-blue-800 leading-relaxed">
+                          AI engines cite recently-updated content more often than stale pages. The signal lives in <code className="bg-blue-100 px-1 rounded">dateModified</code> on your structured data, <code className="bg-blue-100 px-1 rounded">article:modified_time</code> in meta tags, and <code className="bg-blue-100 px-1 rounded">&lt;time&gt;</code> elements. Most CMSes set these incorrectly or never &mdash; cheapest competitive edge to fix.
+                        </p>
+                      </div>
+                    </div>
+
+                    {(() => {
+                      const freshness: FreshnessAnalysis = analysis.freshness || { dates: [], mostRecentModified: null, earliestPublished: null, hasModified: false, hasPublished: false, modifiedEqualsPublished: false };
+                      const modDays = daysSince(freshness.mostRecentModified?.parsed || null);
+                      const pubDays = daysSince(freshness.earliestPublished?.parsed || null);
+
+                      const getFreshnessConfig = (days: number | null) => {
+                        if (days === null) return { label: 'Unknown', color: 'text-gray-600', bg: 'bg-gray-50', border: 'border-gray-200' };
+                        if (days <= 30) return { label: 'Fresh', color: 'text-green-700', bg: 'bg-green-50', border: 'border-green-200' };
+                        if (days <= 180) return { label: 'Aging', color: 'text-amber-700', bg: 'bg-amber-50', border: 'border-amber-200' };
+                        return { label: 'Stale', color: 'text-red-700', bg: 'bg-red-50', border: 'border-red-200' };
+                      };
+
+                      const modCfg = getFreshnessConfig(modDays);
+
+                      const formatDays = (d: number | null) => {
+                        if (d === null) return 'unknown';
+                        if (d === 0) return 'today';
+                        if (d === 1) return 'yesterday';
+                        if (d < 30) return `${d} days ago`;
+                        if (d < 365) return `${Math.round(d / 30)} months ago`;
+                        return `${(d / 365).toFixed(1)} years ago`;
+                      };
+
+                      return (
+                        <>
+                          <div className={`p-6 rounded-lg border-2 ${modCfg.bg} ${modCfg.border}`}>
+                            <div className="flex items-center justify-between mb-3">
+                              <div>
+                                <h3 className="text-lg font-bold text-brand-navy font-display">Last Modified</h3>
+                                <p className="text-sm text-gray-600">
+                                  {freshness.mostRecentModified
+                                    ? `${formatDays(modDays)} (${freshness.mostRecentModified.value})`
+                                    : 'No dateModified, article:modified_time, or <time> element found.'}
+                                </p>
+                              </div>
+                              <div className={`px-3 py-1 rounded-full text-sm font-bold ${modCfg.color} ${modCfg.bg} border ${modCfg.border}`}>
+                                {modCfg.label}
+                              </div>
+                            </div>
+                            {freshness.modifiedEqualsPublished && (
+                              <div className="mt-3 p-3 bg-amber-100 border border-amber-300 rounded text-sm text-amber-900">
+                                <AlertTriangle className="inline-block mr-2 -mt-0.5" size={14} />
+                                <strong>Modified date equals published date.</strong> This usually means the CMS auto-sets <code className="bg-amber-200 px-1 rounded text-xs">dateModified</code> at creation and never updates it &mdash; the freshness signal is broken.
+                              </div>
+                            )}
+                            {!freshness.hasModified && freshness.hasPublished && (
+                              <div className="mt-3 p-3 bg-amber-100 border border-amber-300 rounded text-sm text-amber-900">
+                                <AlertTriangle className="inline-block mr-2 -mt-0.5" size={14} />
+                                Page has <code className="bg-amber-200 px-1 rounded text-xs">datePublished</code> but no <code className="bg-amber-200 px-1 rounded text-xs">dateModified</code>. AI engines treat absence as "never updated."
+                              </div>
+                            )}
+                            {!freshness.hasModified && !freshness.hasPublished && (
+                              <div className="mt-3 p-3 bg-red-100 border border-red-300 rounded text-sm text-red-900">
+                                <AlertOctagon className="inline-block mr-2 -mt-0.5" size={14} />
+                                <strong>No date signals at all.</strong> AI engines cannot evaluate this page's freshness. Add <code className="bg-red-200 px-1 rounded text-xs">datePublished</code> and <code className="bg-red-200 px-1 rounded text-xs">dateModified</code> to your Article / WebPage / Event schema.
+                              </div>
+                            )}
+                          </div>
+
+                          {freshness.earliestPublished && (
+                            <div className="bg-white p-5 rounded-lg shadow-sm border border-gray-200">
+                              <div className="flex items-center justify-between">
+                                <div>
+                                  <h4 className="text-sm font-semibold text-brand-navy">First Published</h4>
+                                  <p className="text-sm text-gray-600">{formatDays(pubDays)} &mdash; {freshness.earliestPublished.value}</p>
+                                </div>
+                                <Calendar className="text-gray-400" size={20} />
+                              </div>
+                            </div>
+                          )}
+
+                          {freshness.dates.length > 0 && (
+                            <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                              <h3 className="text-lg font-semibold text-brand-navy mb-4 font-display">All date signals found</h3>
+                              <div className="overflow-x-auto">
+                                <table className="min-w-full text-sm">
+                                  <thead>
+                                    <tr className="text-left text-xs font-semibold text-gray-500 uppercase border-b border-gray-200">
+                                      <th className="py-2 pr-4">Source</th>
+                                      <th className="py-2 pr-4">Type</th>
+                                      <th className="py-2 pr-4">Value</th>
+                                      <th className="py-2">When</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    {freshness.dates.map((d, i) => {
+                                      const days = daysSince(d.parsed);
+                                      const typeColor = d.type === 'modified' ? 'bg-blue-100 text-blue-700' : 'bg-purple-100 text-purple-700';
+                                      return (
+                                        <tr key={i} className="border-b border-gray-100">
+                                          <td className="py-2 pr-4 font-mono text-xs text-gray-700">{d.source}</td>
+                                          <td className="py-2 pr-4">
+                                            <span className={`inline-block px-2 py-0.5 rounded text-xs font-medium ${typeColor}`}>
+                                              {d.type}
+                                            </span>
+                                          </td>
+                                          <td className="py-2 pr-4 font-mono text-xs text-gray-600">{d.value}</td>
+                                          <td className="py-2 text-xs text-gray-600">{days === null ? 'unparseable' : formatDays(days)}</td>
+                                        </tr>
+                                      );
+                                    })}
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                          )}
+                        </>
+                      );
+                    })()}
                   </div>
                 )}
 
