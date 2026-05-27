@@ -105,6 +105,24 @@ const webinars = [
     thumbnail: 'https://image.mux.com/VUzs9CRk01QRfTtkuo5SD02PQ5uqPMszeo5GaehJ74EzE/thumbnail.png?width=800&height=450&time=10',
     level: 'Tactical',
   },
+  {
+    id: 'introduction-to-vibe-coding',
+    title: 'Introduction to Vibe Coding',
+    description: 'Build software by describing what you want in plain language\u2014no code required. Janette demos a baseball road-trip planner, a Global Ambassador application form, an RFP tracker, and fam-trip itinerary sites live, using Lovable.dev, Claude Code, and Claude Cowork.',
+    duration: '47 min',
+    muxPlaybackId: 'aJlL3OprpVNj02gW6rXiMhXQg1RoiT89qM95nuViRQeE',
+    thumbnail: 'https://image.mux.com/aJlL3OprpVNj02gW6rXiMhXQg1RoiT89qM95nuViRQeE/thumbnail.png?width=800&height=450&time=10',
+    level: 'Tactical',
+  },
+  {
+    id: 'managing-the-rfp-process',
+    title: 'Using AI to Manage the RFP Process',
+    description: 'Janette Roush and Skyler Clark demo a transparent, auditable system for evaluating RFP responses: one shared AI project, a single evaluation prompt, each proposal scored in a fresh chat, and a Claude-built scorecard that aggregates committee scores\u2014with humans keeping the vote.',
+    duration: '43 min',
+    muxPlaybackId: '6HkljWWXiQm01iHgqz02tz2RFa1902jls7nguDNfrgNFqc',
+    thumbnail: 'https://image.mux.com/6HkljWWXiQm01iHgqz02tz2RFa1902jls7nguDNfrgNFqc/thumbnail.png?width=800&height=450&time=10',
+    level: 'Tactical',
+  },
 ]
 
 // Featured walkthrough
@@ -314,7 +332,7 @@ export default function HomePage() {
       {
         "@type": "Course",
         "name": "AI Fundamentals Webinar Series",
-        "description": "10 comprehensive webinars covering AI fundamentals, strategy, and implementation for tourism marketing",
+        "description": "12 comprehensive webinars covering AI fundamentals, strategy, and implementation for tourism marketing",
         "numberOfCredits": 9,
         "provider": {
           "@type": "Organization",
@@ -443,7 +461,7 @@ export default function HomePage() {
                 AI Training Videos
               </h3>
               <p className="text-gray-600 mb-6 leading-relaxed">
-                10 comprehensive webinars covering AI fundamentals, strategy, and implementation for tourism marketing
+                12 comprehensive webinars covering AI fundamentals, strategy, and implementation for tourism marketing
               </p>
               <div className="inline-flex items-center text-brand-cyan font-semibold group-hover:gap-2 transition-all">
                 Watch Now

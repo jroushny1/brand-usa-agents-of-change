@@ -2706,6 +2706,596 @@ I think we create the databases of factual information that is useful for those 
 
 And with that note, it is the end of the hour. I want to thank everybody for logging in today.`,
   },
+  'introduction-to-vibe-coding': {
+    id: 'introduction-to-vibe-coding',
+    title: 'Introduction to Vibe Coding',
+    description: `Vibe coding means building software by describing what you want in plain language—no programming required. Janette Roush demos the full range live: a Minor League Baseball road trip planner, a Global Ambassador application form wired to a Google Apps Script, an RFP tracker, a strategy recap site built from Plaud meeting recordings, and fam-trip itinerary websites. See how Lovable.dev gets you started and how Claude Code and Claude Cowork take you further, plus how to share sites securely with GitHub, Bitbucket, and Vercel.`,
+    duration: '47 min',
+    muxPlaybackId: 'aJlL3OprpVNj02gW6rXiMhXQg1RoiT89qM95nuViRQeE',
+    instructor: 'Janette Roush',
+    instructorTitle: 'Chief AI Officer, Brand USA',
+    publishDate: '2026-05-11',
+    keyTakeaways: [
+      `Vibe coding means describing what you want in plain language—typed or spoken—to get a usable app or website, without knowing a programming language. Andrej Karpathy coined the term about a year ago.`,
+      `Lovable.dev is the friendliest on-ramp: a freemium platform where you build entirely through plain-language prompts. Janette started there and moved her work into Claude Code and Claude Cowork, which let you give the AI more granular direction and edit the underlying code directly.`,
+      `The session walks through real DMO use cases, all built with AI: a Global Ambassador application form (a branded front end on a Google Form backend, with a Google Apps Script that auto-emails each application to the right market), an RFP project tracker, a strategy recap site built from Plaud meeting recordings, fam-trip itinerary sites, and interactive keynote recap websites.`,
+      `Free tools come with a tradeoff: keep confidential information out of them, because when a tool is free, you are the product. To share sites externally and track versions, host the code on GitHub or Bitbucket and deploy through Vercel with password protection—a step where your technology team should be involved.`,
+      `The future of software is bespoke tools built for one person or one team that never need to scale. These tools come together by iterating through back-and-forth with the AI—letting it cook while you work across many chats at once.`,
+    ],
+    topics: [
+      `Vibe Coding`,
+      `Lovable.dev`,
+      `Replit`,
+      `Claude Code`,
+      `Claude Cowork`,
+      `Supabase`,
+      `Google Apps Script`,
+      `Vercel`,
+      `GitHub`,
+      `Bitbucket`,
+      `Plaud`,
+      `Monologue`,
+      `Google Gemini`,
+      `No-Code Development`,
+      `AI Image Generation`,
+      `RFP Tracker`,
+      `Fam Trip Itinerary`,
+      `Personal Operating System`,
+      `Model Selection`,
+      `Token Costs`,
+      `AI in Tourism`,
+      `Destination Marketing Organization (DMO)`,
+    ],
+    targetAudience: {
+      primary: `Destination Marketing Organization (DMO) professionals`,
+      secondary: `Tourism, travel, and hospitality marketing teams, Non-technical professionals curious about building their own tools, DMO technology and operations staff`,
+      tertiary: `Anyone exploring no-code and vibe coding tools for the first time`
+    },
+    learningOutcomes: [
+      `Define vibe coding and explain how plain-language prompting replaces knowing a programming language.`,
+      `Build a first website or app in Lovable.dev using a free account, and recognize when to graduate to Claude Code or Claude Cowork for more control.`,
+      `Point Claude Cowork at a local folder of brand guidelines and source files so it has the context to build on-brand tools.`,
+      `Build practical DMO tools end to end: an RFP tracker, a strategy recap site, a fam-trip itinerary, and an application intake form.`,
+      `Turn Plaud meeting recordings and keynote transcripts into living websites.`,
+      `Share vibe-coded sites externally and safely using GitHub or Bitbucket plus Vercel with password protection.`,
+      `Manage AI cost and rate limits by choosing the right model (Haiku, Sonnet, or Opus) for the task.`,
+    ],
+    relatedResources: [
+      { name: `Lovable.dev`, description: `Freemium platform for building websites and apps from plain-language prompts`, url: `https://lovable.dev` },
+      { name: `Replit`, description: `Popular alternative platform for AI-assisted app building`, url: `https://replit.com` },
+      { name: `Claude (by Anthropic)`, description: `AI assistant with Code and Cowork modes for file-based building`, url: `https://claude.ai` },
+      { name: `Supabase`, description: `Database backend Claude can set up for vibe-coded apps`, url: `https://supabase.com` },
+      { name: `Vercel`, description: `Hosting service for deploying and password-protecting sites`, url: `https://vercel.com` },
+      { name: `Plaud`, description: `Voice recorder whose transcripts become source material for sites`, url: `https://www.plaud.ai` },
+      { name: `Monologue`, description: `Voice dictation tool for talking to AI instead of typing`, url: `https://monologue.app` },
+      { name: `janetteroush.com`, description: `Janette's vibe-coded personal site and learning library`, url: `https://janetteroush.com` },
+    ],
+    chapters: [
+      { time: 0, title: `Welcome & What Vibe Coding Means (Andrej Karpathy)` },
+      { time: 60, title: `Example: janetteroush.com as a Free Learning Platform` },
+      { time: 180, title: `Example: Minor League Baseball Road Trip Planner` },
+      { time: 300, title: `Example: Brand USA FY27 Strategy Site from Plaud Recordings` },
+      { time: 420, title: `Getting Started in Lovable.dev` },
+      { time: 480, title: `Lovable Demo: DC Visitor Readiness Scorecard` },
+      { time: 600, title: `Building a National Parks Trip Planner Live` },
+      { time: 720, title: `Q: Why Lovable Instead of Claude Code or Codex?` },
+      { time: 780, title: `Global Ambassador Application Form (Claude Code + Google Apps Script)` },
+      { time: 1020, title: `Talk to AI Instead of Typing (Monologue)` },
+      { time: 1050, title: `An Oregon Trail Game to Teach Claude Cowork` },
+      { time: 1260, title: `Moving to Claude Cowork: Visit Beige County` },
+      { time: 1320, title: `Setting Up a Folder as Your Operating System` },
+      { time: 1380, title: `Building an RFP Project Tracker` },
+      { time: 1500, title: `A Strategy Recap Website for Visit Beige County` },
+      { time: 1620, title: `RFP Tracker Results: Scoring, Evaluation, Decision Log` },
+      { time: 1740, title: `Integrating the Real Proposal Files` },
+      { time: 1800, title: `Working Across 12 Chats — Let the AI Cook` },
+      { time: 1860, title: `Turning Keynotes into Interactive Websites (Wyoming, Maine)` },
+      { time: 1980, title: `Brand Guidelines & Google's AI Brand Schema` },
+      { time: 2040, title: `Turning a Project into a Reusable Skill` },
+      { time: 2100, title: `The Fam Trip Itinerary Website` },
+      { time: 2280, title: `Sharing Externally: GitHub, Bitbucket, Vercel, Password Protection` },
+      { time: 2340, title: `Free vs. Paid & Bespoke Personal Apps` },
+      { time: 2400, title: `Q&A: Token Costs, Rate Limits & Model Selection` },
+      { time: 2580, title: `Q&A: Version Control & Managing Many Sites` },
+      { time: 2760, title: `Closing: The Fam Trip Site Reveal` },
+    ],
+    transcript: `Thanks everybody for joining today. we are here for the May Agents of Change Webinar Series from Brand USA, and today will be a lot of live demoing, so let's cross our fingers that I don't hit any session limits and that everything goes smoothly. My name is Janette Roush. I am the SVP of Innovation and the Chief AI Officer for Brand USA
+
+I want to introduce us to the idea of vibe coding, which is a term that Andrej Karpathy coined about a year ago now, saying that we no longer need to code by knowing or understanding a coding language.
+
+We can just now code with vibes or really with text, by either talking or typing to our computers and being able to describe very clearly what we want in order to get a usable output. What kinds of things can we actually do with vibe coding? This is an example of something that I have vibe coded, and it's my own personal website.
+
+If you are looking for a starting place, maybe for something outside of work, just to understand better how does AI work and how do these vibe coding platforms, how can you use them? The QR code takes you to this website. You can find it yourself at janetteroush.com. And there's a lot of assets in this website.
+
+I use this as my personal playground to understand what works and doesn't work when you're using AI. but primarily, I use it to host all of the videos, and all the video content that I create as part of the Agents of Change series. So this is a, a learning system like this, you could expect to pay twenty thousand dollars a year, right?
+
+If you have something that's a truly integrated learning system. This lacks some of the bells and whistles of those types of systems, but for our use, it's free. And so to be able to create and host this, other than the hosting fees for janetteroush.com, everything else that's part of this website was done absolutely free of charge.
+
+If you're playing around with it on your second screen right now, you'll see not only does the homepage have links to all of the videos, when you click through, it includes a full transcript of the video. It includes a description of all the resources that I talk about in the video. That's not something I even told the AI to do when I was building these web pages.
+
+I gave it the video link that is hosted, with a free service called Mux. It looked at the videos and read the transcripts and came up with a number of other things for these landing pages that it thought, "Oh, this is what other learning websites have on their landing pages," and really made it this great, robust experience.
+
+Part of the fun of the vibe coding process is that you don't have to be the only one coming up with ideas. AI will help you come up with those ideas.
+
+The next example, this is another website that I vibe coded, and it is a Minor League Baseball road trip planner. I made this for personal use, so feel free to scan the QR code and play with it yourself. The idea behind this was my husband wanted an easy way to plan a road trip, with his oldest son this summer.
+
+They wanted to either pick a destination and start a road trip from the destination or look at a number of weekends and see which weekends and which starting place would give you access to the most number of home games played by a Minor League team. And that's something that doesn't really easily exist today, because there are a number of home games happening at any given time. There's not really one place you can go to for all of this information. I had Claude go out and find schedules for every Minor League team and put it into a database that it set up by itself using a system called Supabase.
+
+And it then created this overlay, this map, to show, all right, these are where we know of every stadium in North America. And it allows you, as you can see on the left, you either know where you want to start or you know the dates that you want to travel. And this will allow you to map out a plan that will pack in as many games as possible.
+
+Again, I don't know anything about coding. I just did a good job of describing what we were looking for, and Claude made this as the output
+
+And then finally, for a work-based example, we'll walk through actually building a replica of this shortly. This is a strategy website for Brand USA. So I-- many DMOs or many other organizations I know when it comes time for strategic planning, a lot of that is going to happen in a PowerPoint deck because I think many of us live our lives inside of PowerPoint decks.
+
+But PowerPoint isn't always the best way to articulate and then track your strategy, or your plan in this case for, fiscal twenty-seven. And so I took a recording device called Plaud, P-L-A-U-D, and recorded meetings that we had with our agencies where we were discussing our strategic plan for the next year and a half.
+
+I could then upload that transcript into Plaud and say: "Would you look at this and help us organize it into what our strategy will look like for the next year and a half?" And it created this, this website that we have password-protected that allows you to scroll through pages to understand what is each pillar of our strategy, what are the ideas and tactics behind it, have a running list of what do we need to do and what has already been achieved.
+
+And it takes the strategy from just being a flat file that nobody looks at again into a living document that we can use for every meeting moving forward. So we'll walk through that as a use case shortly. And then finally, I'll have an upcoming session on this, and so I'll have a registration link for that at, the end of this webinar.
+
+But when we get to the June webinar, we'll be talking about how you can use Claude Code as your personal operating system. And so this is what that could look like So let's get started with the vibe coding piece here. We are going to start with a tool called Lovable.dev. And so now I am coming over for the live portion of this.
+
+So you can find it, obviously, just Google Lovable. You'll see when you do that, that there are a number of, competitors to Lovable. Replit is a popular competitor.
+
+And once you log in, this is a freemium platform. So as a new user you can have a certain number of free prompts every day. But if you want to be able to use it repeatedly, you'll want to have a paid account. The few things that I have done in Lovable, I have entirely done using a free account, and I will show you an example of one of those, which is a DC visitor readiness website.
+
+And I have this open, so you can just see how does this work. This is something clearly I created last summer, and I just said, "Build a visitor readiness scorecard for Washington, DC." clearly this was a prompt I got from somewhere else because I didn't know personally that these things existed.
+
+But I'm like, great, this is the name of an API for pulling in live weather. We know that the transit system in DC has their own API that's publicly accessible, and you can also find wait times for the Smithsonian Museums, and there's a service called Twilio that will have a text to me feature. Lovable thought about this a little bit, and this is very much a standard chatbot interface, and it's great, I'll make a beautiful visitor readiness scorecard with live data integration.
+
+We'll give it a government civic feel. So it built everything out, and then it gave me some options for how I could refine and customize this website. So I added in a couple of other things. I'm like, "Great, why don't we get the status of, cherry blossoms?" Which, oh, we missed it, guys. That was last month.
+
+but we could also feature TSA, wait times and hotel rates near the National Mall. And here we see the hotel rates have real-time simulated data. So if I were going to continue to iterate on this, I would want to find an actual live feed, of hotel rates so that Lovable could not just make up information to put in this particular dashboard.
+
+But now we have the opportunity to build our own app inside of Lovable. And so let me find... I have a sample of what I wanted to make, which is a national parks trip planner
+
+So this is the prompt that, actually Claude wrote for me. And so that's a helpful way to approach how are you going to put this together, right? You don't have to have every idea yourself. You can ask AI to give you ideas. But I will say because there are only a limited number of prompts that you get to use with Lovable, unless you're a paid subscriber.
+
+I tend to do myideation inside of another tool, and then I come over to Lovable, and I use one of my five free prompts a day or whatever the limit is right now to have Lovable do the generation. And here you see that Claude knows some ideas for APIs that can bring live information into this website, without needing an account
+
+And so now we're going to start building, and this is going to be the boring part and why it's scary to do this live on a webinar, right? Because now we have to sit and wait for Lovable to figure out what it is actually going to build for us. Uh-oh, and now it wants us to have, this actual API key, which I don't have.
+
+I might save this for a later time. But again, like don't-- if something needs an API key, that's not necessarily a blocker here. We just need to jump through the hoops in order to get this API key. And if you don't know how to do it, you can ask AI what do you need to do?
+
+I'm going to come back over and just say, use dummy data. Uh, so Billy Kolber is asking, "Why are we building this dashboard in Lovable instead of Claude Code or, ChatGPT's Codex?" We're actually going to move on in the next examples we are going to do in Claude Code. Uh, I'm just showing this really as a more user-friendly way of doing this work.
+
+Uh, oh, here we go. We're making good mock data. So there's multiple ways to build and design these websites. This is just one example of one service that does it. I got started with vibe coding using Lovable because it is so user-friendly, and I very quickly graduated from Lovable and moved all of my work into Claude.
+
+Many developers prefer Codex over Claude or a tool like Lovable. So this is just to illustrate that there are many different tools that do this work, and if you don't have a subscription to Claude, this is a great one to try out. I would not put confidential information into a tool that you are using for free, because remember, when it's free, you are the product.
+
+This is going to be thinking for a few minutes. I'm going to take that opportunity to move back over here and show you a few other things that I have built, using these tools. So one example is this application process for the Global Ambassador Program that Brand USA is currently recruiting for. 
+
+This is a global program where members of the travel industry who have some kind of online following can become one of our two hundred and fifty global ambassadors in celebration of America250. Originally, the trade team wanted to make this a Google Form, but the thing about Google Forms is all Google Forms look alike, and you can customize the inputs, but you can't really customize what the experience is of filling out that form. I was able to work with Claude Code and tell it all of the things that we were looking for. And it built this front end for a form.
+
+And then on the back end of this form, it's actually, it's still just a Google form. When you fill it out, it is populating a spreadsheet like this. I'm showing this because this is test and dummy data in our offices testing out how it worked.
+
+You will also see that the code engine built out on its own a separate RSVP page here, or tab inside of the Google sheet to show who were the applicants from each of these markets. The part that I like best about this is that it wrote code for something called an Apps Script.
+
+To access it, you go to Extensions and Apps Script. And if you were like me, you didn't even know this existed, much less feel comfortable writing an Apps Script for this project. But what it has done is written an Apps Script, if we go through here, that when it collects the input from the applicant, it not only adds it to this Google sheet, but it emails the application to the correct person in the correct market so that they have a copy of the application.
+
+They can do a double check by coming here and clicking on the tab for their market and making sure that nobody fell through the cracks, but they're going to get an email with every single application that comes in. And that's something that without AI, there would be somebody, at home office, at Brand USA who is receiving every single one of the applications and then forwarding it to the correct person.
+
+This removes that game of telephone. And now we're going to come over and see what Lovable has made for us. It's added dummy data to these pages.
+
+You can see that it's a little imperfect, right? Like this image at the top is now overlapping some of the real information that we want. But we get a description of the park. We get information about active alerts and closures, the entrance fee, featured activities. Again, it reminds us this is not live information.
+
+This is all dummy information, so that we don't forget and then distribute this website. Now we could come down here, and I could say-- And I'm actually going to take my own advice, and I'm bad about remembering to do this, but anytime you can talk to AI instead of typing, it's going to be better because we speak faster than we type.
+
+So we're going to give more information to the tool when we remember to speak to it. I am using a tool called Monologue to do this. And I want you to look carefully at the header image because it is overlapping and cutting off part of the first text box that has the name of the park and the weather in it
+
+And here you see it pasted in my text, and we're going to ask it to build that
+
+And so now while it is thinking about that, we're going to look at something else that I built using Claude Code, and this is-- I haven't finished it yet, but this is an interactive game to help the Brand USA staff learn how to use Claude CoWork, with a copy of The Oregon Trail for all of my Gen X friends who remember The Oregon Trail.
+
+So here we see, yes, I'm a Brand USA employee. I've been doing things manually like it's 1849, and a rumor reaches you that there is a better land out there, and it is called CoWork.
+
+It has little inside jokes about AI.
+
+And then it takes you to just like you were playing The Oregon Trail where you have to actually answer a question. I need to create a presentation for the Travel Week Europe team. Do I want to start from a blank PowerPoint? No. Do I want to email the design team? I may end up doing that actually, but let's see what Cowork can do for us because we have PowerPoint presentations built as a skill inside of PowerPoint-- inside of Claude Code to help us with this.
+
+Uh, and the build for this, I'm going to answer Cyrus live, is that I just went to Claude and said, "Would you build an interactive app for me that is a a takeoff of The Oregon Trail that would teach my team how to use Claude Cowork?" Like, that was it. So building these things does not have to be very hard.
+
+This was pretty stupidly simple. What I would want to iterate on and why I haven't distributed it to the staff yet is that there's not that many options in it, and so you can play the game twice, and then it gets a little samey. That's something that's on my to-do list. I will also say the reason that it knows about Brand USA examples to put in here is because I have set up my own internal memory inside of Claude, where I have a ton of files saved on my computer, that are markdown files that are part of my personal operating system.
+
+And because Claude is pointed at that folder, it knows that I have things like the Travel Week PowerPoint presentation skill. It already has all of our brand guidelines. It can see the things that we have that would benefit our staff to know about. I didn't have to come up with those ideas.
+
+Claude came up with the ideas of how to populate this game for me. So now let's come back over to Lovable, and it actually made it worse. So that is... What it probably needed to do was decrease hero padding and not increase the hero padding. So that is, that is pretty funny. I'm just going to go back one more time and say
+
+You actually made it worse, and I think by increasing the padding, you increased how much of the top s- screen you are overlapping with the image. Maybe you need to try decreasing the padding or increasing the white space between the end of the image and the start of the text on the screen
+
+And we'll give it that, and we'll see how it goes. I will say this is part of what I don't like about Lovable and why I don't continue to build with it. because it is really the only way that you can change what it's doing is through plain language. And Claude, I find in the setup that I have, you're able to get more granular, and you can actually give it code in order to update its code, which I find helpful.
+
+We are now going to come over to Claude. So if you want to be building in Claude, you're going to want to have the desktop app downloaded on your computer. Here you see we have our traditional chat, but we also have Cowork and Code at the top of the Claude screen.
+
+So Cowork is really just a nicer consumer interface for Claude Code. For these demos, I'm going to be working with Claude Cowork because typically when I'm using these tools, I'm inside of VS Code, and I am using Claude Code in a coding terminal. So here in the desktop app, what I've done is create a fake DMO that we call Visit Beige County. And you want to get started in Claude Cowork by just if you go to your computer, you can click here, and you can pick any file in order to have Claude write to files on your computer.
+
+So I have created, and you see here personal operating system. This is where I do most of my work, so everything is organized inside of that system. For Visit Beige County, I have made now a new operating system.
+
+Screenshots are a great way to troubleshoot. We are now inside of Visit Beige County, and I want to make a project tracker for an RFP that Visit Beige County has out. So if you were at last month's webinar, you might remember that Skyler Clark was with me, and we talked about using Claude and ChatGPT to manage an RFP process.
+
+But let's say we want to create a visual tracker.
+
+This is clearly, it is a prompt that I had AI write for me. I find that to be an easier way to start the ball rolling when you want to create an app or a website.
+
+You'll see here when you are inside of CoWork, again, these things are a little slow, so it's going to take some time to prepare this session. You are also able to see, like here, Visit Beige County. This is a folder on my computer. So we can see the files in this folder by clicking on that folder button.
+
+And here we have Visit Beige County. These are the RFP files that I actually created for last month's webinar. I am doing a separate training on how people who are attending IPW can use AI tools for their follow-up by recording what they're doing, so we have some fake materials for that project. We have Visit Beige County's brand guidelines and a fake fam trip itinerary. So those are all of the files, all of the context that this tool has access to. And another thing that I like about this tool is that you can work in multiple chats at the same time.
+
+So here I have already started a conversation with it earlier today about just like this, the webpage for the Brand USA strategy I was showing you. I want to make a webpage showing Visit Beige County's strategy. So it's "Okay, great." So it's a fictional DMO. We need to understand the purpose.
+
+I'm asking it if you can see the files in my folder. It's telling me, "Oh, I don't see your brand guidelines." So I renamed one of the files And it's "Oh, okay, looks like the file got renamed. Let me peek inside. Okay, good. We have a demo-ready design system like Muddy Fork Brown and River Trail Sage as Visit Beige County's brand colors."
+
+For the webpage, since we have the brand guidelines in hand, we want to understand the audience and the scope. So this is... And once again, I forget to talk to it. The audience will be the staff of Visit Beige County and their agencies. So it's not public facing. It is a working document to help the stakeholders who are in the middle of this strategy process keep track of their conversations and understand what decisions they've made and what decisions they still need to make.
+
+For the scope, I would like a full recap site that has one page for each of the strategy blocks. I'd also like a list of next steps from this meeting and a list of action items.
+
+And we're hitting go on that, and now that's going to cook for a little while. So it's, over here it's going to think about what it's doing. We can go back to the first task
+
+And we have the opportunity to see what they built. So now we're back to the RFP portion of the demo. We see that this is an active process, that scoring is in progress.
+
+We see that there is a six-month evaluation period here. I am working in Claude Cowork, and when it finished and it made this file for me to look at, I was able to click this, and it opened up the file in Google Chrome for me. This is all based on materials that I've already written and that Claude has access to.
+
+If I come back over to this folder, this is what Claude is reading in order to do this work.
+
+So we see here, this is the document that Claude Cowork is reading to create this website. You see I wrote this back in March, so this was for an earlier webinar, and it put out this RFP. These are the things that visit Beige County needs as part of the new agency that they would like to hire
+
+I had AI write every bit of this, and I would not be able to do these demos with fake information if AI couldn't write all the materials for me. It's been a huge help. That's what Claude Cowork is looking at. It created fake names for the members of the Visit Beige County board who are part of this process or their staff.
+
+We see the finalists for the actual RFP, and it's tracking the evaluation criteria and the decision log. Now, I'll say, looking at the names of the finalists, it actually didn't look at the real names in the Drive, so I need to be a little more specific with it. I see, let me go back to talking, that you made this using dummy data.
+
+But if you look at the folder that is titled RFP, all of the actual proposal responses are saved in that folder. Can you integrate the real information here?
+
+Now it's going to take some time to cook on this particular project, and that gives us a chance to come back to the strategy webpage And here
+
+It's running commands, and it says it's still working on it. AI is terrific for people with a little bit of ADD because it allows you to jump around all of the time rather than if we were sitting here waiting on this one project, to finish, the webinar would get boring pretty quickly, right?
+
+So this is what my day looks like now, is that I'm jumping back and forth between 12 different chats at any given time, moving projects forward and then sitting back and letting the AI cook while it determines what the next step is that it needs input from me about So that is cooking
+
+This is cooking. Let's come back over. Oh, it looks like Lovable finally figured out our space in here So this is just a sign that when something isn't exactly what you want initially, it's going to take some back and forth before it understands what you are looking for and is able to reproduce it.
+
+And that back and forth is part of the process. So it's completely okay. You don't need to get impatient with the tool
+
+So now we're still thinking here
+
+Let's see And we're still thinking there. I'll have one more demo to show you. A big way that I have been using these little micro sites recently is that when I do a speaking engagement, so this is from, the Wyoming Governor's Conference, I also did one recently for Maine.
+
+I record myself when I am doing my talk, and I can upload the transcript of my speech along with a copy of the actual presentation that I gave to Claude. And I will say, honestly, nothing fancier than just here is, a speech that I want you to turn into an interactive website. And here you could see that as we go through this information from Maine, like it really did make it a little bit interactive.
+
+So we just saw that as we scrolled down, it was ticking up to the sixty-two percent
+
+We have some quotes from the Q&A in the main website. It's describing some of the ideas that I shared. And you can see here, I wonder if these are actually links. They're not. So it makes it look like they're clickable links. That's something I could go back and say, "Would you link out, in these places where you have this little bit of interactivity?"
+
+It took the questions that were asked in the Q&A, and it organized them by topic. It really delivered on the brief of how do you make an interactive website out of, a 60-minute keynote
+
+Billy is asking what kind of background files and skills needed to be in my operating system before that prompt worked. I have it built out as a skill now, but when I was first starting, I just said, "I want you to turn this into a website," and the only files that it had access to that would be relevant were the brand guidelines for Brand USA.
+
+And I will show you what the brand guidelines look like for Visit Beige County. Brand guidelines, and you'll see I had AI write this, but it Google came out with a schema for how they say brands should list their brand guidelines in order to work best with AI. Because what a number of these organizations want to do moving forward is make this easier for all of us by just having one schema, one set of how does this work, so that every AI system knows this is what you look for when you are looking for this information.
+
+And so when I tell it, "Use Brand USA's brand guidelines," or in the case of the project we're working on now, the Visit Beige County's, brand guidelines, this is what it means. Billy is asking, "The skill is just the accumulation of knowledge and guidance from my back and forth to create this website?"
+
+And the answer is yes, ex-except that at the end of the project, I say, "This is perfect. Would you turn this into a skill for me?" And then the AI will take all of this information, everything that it learned from doing the back and forth about what I like and don't like, and it used that information to create in Claude what is called a skill, which is...
+
+It's essentially you could think of it as an agent. it's a prompt that has access to tools, and so those tools are what allows it to build a website So let's go back over to Claude and see. All right, so we are still working on the strategy meeting
+
+And we now have a real tracker. Okay, so now we have the engagement budget. That is correct
+
+I didn't offer a review committee ever, so that would be made up. And these are the real... The- these are the actual files in the system. So it's gone through and seen the actual files And I think it may have actually evaluated the files because you can see here they're named like AI when it created these fake proposals, it gave them a specific name, to be funny.
+
+So Redline & Associates was meant to be the worst proposal, and you see here that it had the lowest score and was disqualified from proceeding with the RFP
+
+And it's still like the decision log, it made this up, it's placeholder. But, it's crossed off what steps we've done and what our next steps are. And so thank you. That's a pretty good way forward for the Visit Beige County, RFP process. So let's come back over and see
+
+We are still digesting what to do over here.
+
+And you can see here, okay, the fam itinerary website. This is the third thing that I wanted to build. And again, this is an image that for the last webinar that I did, Gemini, Google Gemini created this image for me. So let's talk about fams, right? I'm going to make a new task still in this Visit Beige County page.
+
+And right now I know a lot of folks when they are preparing for a fam trip, we're making a PDF file that has the full itinerary on it, right? that's hard to read on a phone. it makes it more difficult to make updates and changes to an itinerary in real time. So let's see if we can take a static itinerary and turn it into an actual interactive website for the people attending this fam.
+
+I would like to make a interactive website that, shares the itinerary for the upcoming familiarization trip to Visit Beige County. there is an itinerary file saved in your drive. Could you find that and turn it into a website using the Visit Beige County brand guidelines?
+
+It's going to think through that process and come up with a fam trip website. Now, the next step here after these websites get created is that you're going to need a way to share those websites externally. So websites like this one, you can see here because of the way the URL looks, the server is pointed at a folder that is saved on my computer.
+
+But that's not going to be the easiest way to actually share this kind of information externally. And so what you would want to do for the next step here, and this is something where you're going to need to engage with your technology team, is that all of the information, all of this code needs to be hosted online.
+
+And so a popular service for that you may have heard of is called GitHub. GitHub is actually already integrated into Claude Code. So once you have an account set up, it can automatically push your code to be hosted on the server. And then the next step is that there needs to be a hosting service to point that website at.
+
+the one that Claude seems to recommend the most that I've been using is called Vercel, and I think it's V-E-R-C-E-L.app. we also at Brand USA have a paid account with Vercel so that we can make these ty-- these mini websites, and then we can put password protection on them so that they can't be accessed outside of the people who need to see it.
+
+So there are secure ways to set that up. There's also completely free ways to set all of this up if you are just exploring using personal information for your own use, and I think that is a great way to get started. One of the first things that I built, was a fitness tracker because I was tired of logging in on my phone to a Google Sheet and then tracking what I was doing in Google.
+
+And now I just have a cute app on my phone that is only for me, and nobody else has access to it, and it has everything exactly the way I like it. And that's the future of software, is that we are going to be able to easily create customized tools that are only for the use of one person or one team, and they don't have to be scalable.
+
+We don't have to think about is this the SaaS solution for something. It can be very person to person in terms of a solution. Let me come back over. Oh, okay. So-- Oh, nope, that was the agency evaluation. What's going on with the website? All right, so it is still, building here. So I am going to take a moment while these tools are still building, to look at the Q&A quickly.
+
+ Uh, oh, great. I actually already answered this question. Cyrus has also asked what are my thoughts on token cost with Claude? what's the best way to scale without running into a paywall? And in terms-- that's, that can be difficult, right? Because Claude has limits on how much you can use it before it tells you need to take a break.
+
+and you can see what those limits are, and that's probably a good thing to check on. If I come down to my settings and usage, you could see here I have used twenty-four percent of the tokens that I am allotted for the time period that we are in right now. This is something that Claude doubled their usage limits last week, so ideally it's easier to do this now than it used to be, in terms of coding without hitting limits.
+
+But if you find that you are working in Claude and you are hitting these limits a lot, you have the option of upping your subscription, so going from the Pro plan, which is twenty dollars a month, to the Max plan, which is a hundred dollars a month. It starts there, and I think it scales up to two hundred.
+
+You could change to API use, which allows you to continue to build, but you are paying at a per token cost. You can get really good at watching when does your current session say, "You know what? you're being too thirsty with the tokens, and we're going to rate limit you," by using a slower model.
+
+So if we come back to the tasks we've been working on, down here that it says Opus 4.7. This is the most compute-heavy model. And honestly, when we are doing thought work, we want to use the smartest model, but you're going to run through your tokens more quickly. So if you were just making a quickie update to this, maybe you wouldn't need the Opus 4.7 model.
+
+And you have the option, in Claude, it's all named after poetry, so the most simple model is named Haiku, the intermediate model is Sonnet, and then Opus is the most advanced model. So you can try out Sonnet and see if it does the work you need it to do at a similar quality because that's going to allow you to continue working with the tool longer.
+
+I'm going to go back and see if we're still, we're still ideating on everything. So these are links I might have to share with everybody when the webinar, in the follow-up materials from the webinar, if they're not done in the next five minutes. I have some other questions here. Jose, as you are working a number of projects at the same time with different versions, how do you handle the final versions?
+
+so what I find is that there is, there-- I'm not saving on my computer anywhere the iterations. So if I were uploading something to GitHub, the way that GitHub works is that it will... You can roll back to earlier versions, and that's the way we should probably think about coding projects. So as it's building this HTML file, it's just upgrading the same file.
+
+It is not saving ten different HTML files where, you know how we're now accustomed to in knowledge work where it's like final, final one, use this one as your file name. It's just going to be one file for the most part. But if I were to connect one of these websites to GitHub, or the tool we actually use is called Bitbucket, it tracks your changes over time, and it actually, it tracks them by collaborator because these tools were built for writing code, which is what we're doing.
+
+And so you are able to roll back one of your commits, and commit is just the coder term for saving your work. So you can go back to any point in time, and you will see a description of this is what changed when this person committed this update. And you can see the person who did it and what files were changed as part of that.
+
+So that allows you to track if something breaks on your website, you can roll back to an earlier version of that website where the functionality wasn't broken. But it is like keeping track of this is a larger conversation we have been having at Brand USA that I will tell you we haven't quite figured out yet.
+
+if we start making itineraries for, fam trips, at what point, who is in charge of going to a web-- going into Vercel and/or going into Bitbucket and saying, "We have 300 fam trip itinerary websites saved in here. Which ones can we get rid of?" And that is something that, Kat, who's actually watching this webinar with me from the technology team, so she's, she's hidden off camera right now.
+
+this is something that she has brought up that I do not have a great answer for yet. So if you have a good answer, please let me know because that would be very helpful. Mark is asking, "It seems like Claude is my preferred platform, and why is that?" And that is because it has just made en- enormous bounds in what it is able to do since about November of last year.
+
+So it has what you would call, both, I think, a stronger language model, but Claude code as what they call a harness for the language model, just meaning the instructions that it uses when it's working. It's just better. It's incredible. oh, now we can view my fam trip website. I hope it's good. Oh, so this is, I'm going to guess, yes, it has responsive design, so if one of the media attending this tour, needs to resize it on their website or on their phone, they can do that.
+
+We have arrivals and departures. cute itinerary that you can click out to learn more contacts for when you are on site I, I didn't even ask it for a packing checklist, right? We have information about Visit Beige County down here, what's included, what's not included. I am very happy with that output.
+
+I want to thank everybody so much, for joining the webinar. you can go to thebrandusa.com, /events, and that will have, registration links for upcoming webinars.`,
+  },
+  'managing-the-rfp-process': {
+    id: 'managing-the-rfp-process',
+    title: 'Using AI to Manage the RFP Process',
+    description: `Reviewing RFP responses is slow and inconsistent, especially with a multi-person committee reading 25-page proposals from ten agencies. Janette Roush and Skyler Clark demo a transparent, auditable system: one shared AI project, a single evaluation prompt the AI writes from your actual RFP, each proposal scored in its own fresh chat, and a Claude-built scorecard artifact that aggregates committee scores in one place. Humans stay in the loop for cultural fit, trust, and the final vote—and the same pattern works for vendor reviews, grants, and hiring.`,
+    duration: '43 min',
+    muxPlaybackId: '6HkljWWXiQm01iHgqz02tz2RFa1902jls7nguDNfrgNFqc',
+    instructor: 'Janette Roush & Skyler Clark',
+    instructorTitle: 'Chief AI Officer & Senior Director, Partner Strategy, Brand USA',
+    publishDate: '2026-04-09',
+    keyTakeaways: [
+      `Evaluating RFPs is heavy and inconsistent: a 25-page proposal times ten responses times a five-person committee is enormous staff time, and every reviewer brings a different homemade rubric. A shared AI system gives the whole committee one standardized, auditable way to read every response.`,
+      `AI helps counter human bias as much as its own. Recency and primacy bias lead reviewers to over-weight the proposals they read first and last; running each proposal through the same prompt applies the criteria evenly and catches compliance errors and budget math mistakes on the eighth response as carefully as the first.`,
+      `The Brand USA system is transparent by design: one shared ChatGPT project the whole committee can access, the RFP and scorecard uploaded once as sources, and a single evaluation prompt the AI writes by reading your actual RFP. Each proposal goes into its own fresh chat to sidestep memory and ordering effects.`,
+      `Skyler Clark built a scorecard artifact in Claude Code with plain-language back-and-forth and no programming. It gives committee members a mini-site: compliance checklist, red-flag check, weighted scoring, the full proposal one click away, and aggregated committee scores exportable to CSV. One person sets it up once and the whole committee benefits.`,
+      `Humans stay in the loop and keep the vote. AI reads, summarizes, checks compliance, and builds the scoring tools; people judge cultural fit, trust, strategic alignment, and risk tolerance. The same pattern extends to vendor reviews, grant applications, and hiring (with legal guidance)—anytime you score multiple options against one consistent set of criteria.`,
+    ],
+    topics: [
+      `RFP Evaluation`,
+      `Proposal Scoring`,
+      `ChatGPT Projects`,
+      `Claude Code`,
+      `Claude Artifacts`,
+      `Evaluation Rubric`,
+      `Compliance Review`,
+      `Committee Collaboration`,
+      `Bias Mitigation`,
+      `Human in the Loop`,
+      `Vendor Selection`,
+      `Grant Applications`,
+      `Hiring`,
+      `AI Governance`,
+      `Partner Strategy`,
+      `AI in Tourism`,
+      `Destination Marketing Organization (DMO)`,
+    ],
+    targetAudience: {
+      primary: `Destination Marketing Organization (DMO) professionals`,
+      secondary: `Procurement, partnerships, and partner strategy teams, RFP committee members and administrators, Tourism and travel marketing leaders`,
+      tertiary: `Anyone who evaluates proposals, vendors, grants, or candidates against set criteria`
+    },
+    learningOutcomes: [
+      `Explain why manual RFP review is slow and inconsistent, and how recency and primacy bias affect human reviewers.`,
+      `Set up one shared ChatGPT or Claude project that the whole evaluation committee can access.`,
+      `Upload the RFP and scorecard as shared sources, and have AI write a single evaluation prompt from your actual RFP.`,
+      `Score each proposal in its own fresh chat to keep the playing field level across all responses.`,
+      `Build a scorecard artifact in Claude Code—compliance checklist, red flags, weighted scoring, aggregated results—using plain language only.`,
+      `Keep humans in the loop: use AI for reading, summarizing, and compliance, and reserve cultural fit, trust, and the final vote for people.`,
+      `Apply the same scoring system to adjacent processes like vendor reviews, grant applications, and hiring (with legal guidance).`,
+    ],
+    relatedResources: [
+      { name: `ChatGPT (by OpenAI)`, description: `Projects feature for a shared, organized evaluation workspace`, url: `https://chatgpt.com` },
+      { name: `Claude (by Anthropic)`, description: `Code and Artifacts for building scorecard tools in plain language`, url: `https://claude.ai` },
+      { name: `Claude Artifacts`, description: `Interactive tools built from plain-language prompts`, url: `https://claude.ai` },
+      { name: `Google Drive`, description: `Shared storage for RFP responses and scorecards`, url: `https://drive.google.com` },
+    ],
+    chapters: [
+      { time: 0, title: `Welcome & Why AI for RFP Evaluation (Janette & Skyler Clark)` },
+      { time: 75, title: `Brand USA's AI Strategy in Brief` },
+      { time: 150, title: `The Challenge: 25 Pages x 10 Responses x 5 Reviewers` },
+      { time: 228, title: `No One Goes to RFP School — Inconsistent Rubrics` },
+      { time: 288, title: `Human Bias: Recency, Primacy & Compliance Errors` },
+      { time: 375, title: `Building an Auditable, Apples-to-Apples System` },
+      { time: 450, title: `One Shared Project vs. Everyone's Private Prompts` },
+      { time: 510, title: `Keeping the Human in the Loop — AI Doesn't Get a Vote` },
+      { time: 600, title: `The Demo Setup: A Fake RFP for Meet Beige County` },
+      { time: 675, title: `Step 1: Create a Shared ChatGPT Project` },
+      { time: 765, title: `Inviting Committee Members to the Shared Project` },
+      { time: 831, title: `Uploading the Sources: the RFP and the Scorecard` },
+      { time: 940, title: `Why RFP Writing Is a Good Fit for AI` },
+      { time: 1008, title: `Writing the Master Evaluation Prompt` },
+      { time: 1095, title: `A Fresh Chat per Proposal (Beating Memory Limits)` },
+      { time: 1188, title: `Reading the Prompt Like You'd Train an Intern` },
+      { time: 1290, title: `Scoring Section by Section, Out of Five` },
+      { time: 1395, title: `One Person Runs It, the Whole Committee Reads It` },
+      { time: 1480, title: `Skyler's Scorecard Artifact: the Human's Tool` },
+      { time: 1560, title: `The Committee Homepage & Scoring Definitions` },
+      { time: 1650, title: `Scoring a Proposal in the Artifact` },
+      { time: 1750, title: `Aggregating Committee Scores & Exporting to CSV` },
+      { time: 1830, title: `How Skyler Built the Artifact in Claude Code` },
+      { time: 1920, title: `Iterating with Claude — Trimming the Compliance Checklist` },
+      { time: 2010, title: `Sharing the Artifact by Link` },
+      { time: 2080, title: `Life Before: Colliding Excel Sheets` },
+      { time: 2180, title: `A Better Experience for Admins & Committee Members` },
+      { time: 2260, title: `What the Humans Still Do: Cultural Fit, Trust, Judgment` },
+      { time: 2380, title: `Build the Template Once, Reuse It for Every RFP` },
+      { time: 2450, title: `Extending the Pattern: Hiring, Vendor Reviews, Grants` },
+      { time: 2520, title: `Q&A: AI Disclosure in Grant Applications` },
+      { time: 2580, title: `Closing Thoughts: AI as a Helpful Resource for the Team` },
+    ],
+    transcript: `All right. My name is Janette Roush. I'm the SVP of Innovation and the Chief AI Officer for Brand USA. I'm joined here by my colleague, Skyler Clark. Hi, everyone. Skyler Clark Senior Director, Partner Strategy at Brand USA. We are thrilled that you could join us today, and we're going to be talking about how you can use AI to help you evaluate responses to your RFPs.
+
+And I'm particularly excited about this one because I think it is really broadly useful to all of us. I know going through RFP responses could be very challenging, particularly if you have a large number of responses. And this is a way that people are already starting to use AI. But I think there's systems we can put in place to help us do it better in a regimented, auditable way.
+
+And I'm also excited about this because this particular presentation, it's not in PowerPoint, I've used a Claude Code to build out a HTML file that has all of the content for the webinar. I am seeing a move in AI where it is becoming easier to use it for creating presentations. And I know that is something we all do a lot of. As I show you different things in here, I'll also point out ways that AI helped with actually building this presentation.
+
+To kick us off, this is a quick reminder of the AI strategy at brand USA. Our goal is to lead global destination marketing into the AI era by using intelligent systems to connect the world to the people, stories, and places across the United States. So we're going to make discovery personal, inspiration, effortless, and travel decisions frictionless. And I'm doing that through three areas of work.
+
+So the first is empowering our staff to be more fluent in using AI. The second is taking what we're learning internally and sharing that with the US industry to keep us competitive on the global market. And the third piece is to reimagine discovery. So how are we making the United States more discoverable and more bookable with AI tools?
+
+And today we are focusing strictly on this internal use case with RFPs. So what is the challenge when it comes to evaluating RFPs? We know that those proposals that come in when you issue an RFP can be very long, like they could be 25 pages or more. And you might get five or 10 responses to your RFP, whether you're looking for somebody to create a website for you.
+
+If you are looking for a sponsorship agency, if you are looking for a company to work with you on a new brand campaign, that can bring a ton of responses into your inbox. And that can take a long time to weed through. And then it becomes even more things to weed through. If you have multiple people as part of your RFP committee, which is how we operate RFPs at brand USA.
+
+So multiply 25 pages by 10 responses and five people on a committee. And that is a lot of human staff time going to reviewing these responses. We don't exactly go to RFP school to learn what are all of the things you need to take into account. And that means that people who, you know, came up at different organizations or not in a position to look at an RFP at all, you're creating your own systems for how do you evaluate an RFP.
+
+And so it means if you have a five or a 10 person committee, every single person is taking a different point of view when it comes to looking at the proposals that are coming in. So it's good to help give people a standardized way to approach that process. We also know that you are reviewing the ninth RFP with different eyes than you did the first RFP. And people talk a lot about bias in AI systems as we absolutely should.
+
+But we have to remember there are also biases in the human system. So if you talk about recency bias or primacy bias that you remember or feel have stronger affection or the thing that you read first or the thing that you read last, and all of those RFPs that you read in the middle, maybe that just becomes part of a little bit of brain mush. So having a system in place where AI is assisting you can help to remove some of those biases that come from either recency or primacy. And it helps you also to catch the little mistakes, like the little errors and compliance with the rules you set out in your RFP.
+
+It's going to help apply those consistently across all of the responses that you receive. And then finally, it helps give you, if you have AI evaluate RFPs alongside your humans, that gives you an apples to apples way of evaluating what the responses are. And I've seen this myself because people will provide those responses in all kinds of different formats. But when it comes down to the actual context of what we are judging, you don't want to be thrown off by, oh, this was a prettier presentation.
+
+Or that they had a foreword that the other RFPs didn't include. And that helped set it up for me so I understand it better. Ultimately, like, yes, presentation counts. But you need to be able to cleanly evaluate the actual meat of those proposals without getting trapped in the actual artifice of the process. And so that's another place where AI can be very helpful.
+
+If you're going to bring in AI to be a co-pilot with you in the evaluation process, what we want to do is create a system for this. So we want every RFP to be applied to the same prompt that is evaluating it so that every-- so it creates this equality across all of the responses. We have a system at brand USA that's very transparent. So I have talked to many companies that are using AI for evaluating RFPs, but it involves each person uploading those responses into their AI tool of choice.
+
+And then they come up with a set of prompts or a way to have AI help them. And it might be different for every single person on your evaluation committee. So what we have done is create a system where it's one shared project that everybody has access to. Everybody or the one person will upload each RFP into that project against a specific prompt that AI wrote by looking at the actual RFP that you created.
+
+And then that is used for everybody to read the same responses from the AI. So we're taking that black box piece out of it. And then, of course, it is still human-led. And so when people say you keep the human in the loop, this is exactly what we mean. You can use AI and read those summaries. And it's thought on how would you score the RFP against particular criteria.
+
+But the AI doesn't get a vote in the process. You are the people who are the humans on the committee. They're the ones who get to vote. And so the goal here is to create an even a level playing field for all of the participants in your RFP so that they are all receiving the same level of care when it comes to having their response being evaluated.
+
+For this project, we made a fake RFP. And yes, I used Claude to make this. And I will say it was an absolute godsend because I can't imagine how much time it would take the right fake RFPs and fake responses to the RFPs. So Claude did all of the work for me. And that project is going to be an RFP for Meet Beige County who is looking for an integrated destination marketing campaign.
+
+So their current slogan is Beige County. We are here, too. And they are looking to upgrade their branding and their slogan as part of this RFP response. And then what Claude wrote for us were responses from eight agencies for this RFP. And Claude happened to write in different mistakes and different points of view so that every RFP, every response won't be evaluated the same.
+
+So step one in this process is to create a shared AI workspace. And so here in this screenshot, this is using chat GPT. You can see kind of ghosted out here that it says 5.2 thinking. So when you are doing work like evaluating an RFP, you want to use the very best version of the model that's available. So this isn't where you want to save computing power or save money.
+
+You want to use the most recent model that has been released. And you have the ability when you're in chat GPT. And here I'm actually going to-- you know what? I could do it right here. This is this project inside of chat GPT. So over here on the left, you can see where you have custom GPTs. And then right here, you have projects.
+
+And so to get started, you want to just create a new project. And then if you want to access again, you just click on that beige county RFP. And then up here, what makes this really useful at an organization level is that this is the brand USA chat GPT account. And so we can access shared projects together. And the way that you do that is you hit this share button in the corner.
+
+And then I can type in a name. It will bring up email addresses of other people who are on our shared chat GPT account. And so this is how I was able to invite Skyler to be part of this process with me. And she has the ability to chat and edit in this project. And then I can share this with her by copying the link and sending it over to her.
+
+And then after she accesses it from the link, it will start to show up in Skyler's sidebar. And then what you were able to do next, once you are in this chat environment in this project environment, is to go to sources and you want to upload the sources that shared assets that you want to use in this project. Which here is a copy of the RFP and a copy of the scorecard. So I'm going to show you both of those assets now.
+
+This is something that I had on code right for us. This is the original RFP for visit Beige County. Somebody get information about Beige County. What are their key assets, like neutral coffee grounds, the big school. The scope of work for this project. What their budget is and how it's divided out over different stages of the campaign.
+
+They spell out that the proposals should be shorter than 25 pages. All of the elements that should be part of that proposal. And then what the evaluation criteria would be, along with the submission guidelines. And then you need to provide insurance and talk about your privacy and security. Terms and conditions of the RFP.
+
+And then we've provided some additional materials as background for the agencies. So 11 pages, Claude wrote all of it. And it also wrote the actual evaluation scorecard. So these two pieces are what I have uploaded. And here we're explaining exactly what do we mean by each of these items. So that the human evaluators don't have to guess.
+
+And the AI evaluator doesn't have to guess. And of course, I use Claude code to write all of this because this is all fake. But I'll tell you, RFP writing is the kind of formulaic writing that AI is really good at. So when we talk about using AI is not cheating at work. I mean for writing stuff like this specifically. Now, when it comes to writing content for your website, I really think content you like humans to read should be written by humans.
+
+Honestly, the people on the other end of this RFP, they're using AI to help them read and understand it as well. So to have it be AI created doesn't strike me as a moral crisis. So now back over here in this actual document, the next step of what we need is going to be an actual prompt that we can use to evaluate each of our proposals. And so inside of this project, I asked chat GPT write a prompt that brand USA staff can use to evaluate and score each proposal as it's submitted.
+
+And that we will submit each proposal as a fresh chat inside the project. So that piece is really important because that helps us overcome the recency versus the primacy bias. Just like humans remember what they saw first and last the most. So does AI. So you don't want to do one long chat and you upload every single one of the RFPs into the same chat because they still have memory constraints.
+
+And you're not you're putting yourself at risk of not getting the best possible output if you do that. But if you put in one at a time and give it the same prompt every single time, you're creating more of a level playing field. So here it's confirming, yes, you should start a new chat for each proposal. And then it gave me a prompt that we could copy and paste into each chat.
+
+And again, you want to keep the human in the loop here. So we were doing this for a real RFP. I want to read through this carefully and say, if I were training an intern on what to do with the intern under and this is the smartest intern in the world, but you know, they don't live inside my head. They don't know what it is, you know, brand USA does or a DMO does.
+
+Is this enough information to help that intern evaluate each response fairly? And it's spelling out very specifically, like how the compliance review works. And you have to see, you know, go through point by point and mark if they met or didn't meet the compliance review, go through for red flags. These are the weight that you assign to each criteria.
+
+Then you're going to total everything up. You're going to select one overall recommendation option. If you just qualify them, spell out why. And then say, what are the human next steps here? Because again, AI can help us keep a human in the loop. And this isn't, they're not using this process to say, oh, great. Put all eight responses into AI and then humans only have to read the best too.
+
+The idea is that we still have to read all of them. But we're doing it alongside the scorecard that might show us what to look for. And then it's spelling out some best practices for us. And then also some ideas on how we can use this project to collaborate. Where everybody scores a proposal and then meets to align on what middle, better best, looks like for each section.
+
+We have independent scoring. You then have a committee meeting to talk through everything. And then you come up with an interview plan so that for the next step of the proposals that that includes live interviews, that you are given good questions that you can then take to the interview process. And then here you can see I took that prompt and one at a time I uploaded each of the responses.
+
+You can see that file here. And then this is the prompt that was given to us. And I gave that same prompt to each one of those eight responses independently. And then it's thought you can see here that it went through it for a minute and three seconds. It's evaluating based on compliance. It's looking to see if there are any red flags.
+
+And then it's going through section by section and it's calling out examples from the RFP of why did it. So it's not just the number that you are understanding the thought process of why did it answer the way that it answered. And then you're saying section by section, what was the score. And then if you scroll down to the bottom, you see that it's checking itself to make sure that it included all of the components and what that total score is out of five.
+
+And then it's telling us its score, its recommendation, the justification for that. Some questions that we could ask either in a follow-up email or a follow-up interview. How is this going to tie back in reporting to our stated goals? And so like giving you a really solid platform to move forward on. But this doesn't, as I said before, absolve us from having the human in the loop.
+
+So I'm going to, these essentially, you will get a copy of this as a PDF file at the end of the webinar. But there's a screen shots of everything that I just walked you through. So because everybody's sharing one project, we don't have people doing those eight or 10 different times. It's one person who is doing it. And then they are sharing that project with everybody on the committee so that you are all able to see and read what did this AI prompt say about the responses.
+
+We're going to upload those source documents, creating the master evaluation prompt. And as you can see here, we want one prompt for our proposals. We're going to evaluate each response separately. The AI is going to create that evaluation framework. And then this allows every vendor to get an isolated, unbiased evaluation of their response to your proposal.
+
+And then any committee member at any time can go in and read the response. We see here we have the compliance check and red flags. So you don't get exhausted by the time you're reading the eighth RFP response and forget to check for something. We get the scoring bisection that scores summary with the suggested next steps for the human evaluator and preparation for the human work that needs to happen.
+
+So I would say before we get to this step where we are comparing the responses, we want to bring that actual human evaluator into the loop. And that's why Skyler is here today because she is the human to my robot. So she is going to be the human in the loop showing us how she built an artifact and Claude Code to help the person running the process do all of the measurement and evaluation. That's right.
+
+And I know like being RFP admin for various RFPs, it can be sometimes an added responsibility to your normal day to day. So keeping that in mind to, I think, as we were going through and testing how AI can help streamline workflows, we felt like this is a really good example of exactly that. So I will share a screen to one that uses the exact same example of the greater beige county that Janette has shared of what we did in terms of a scoring setup that we've created for both helpful for the RFP admin, but then also those who are part of the committee. So this is showing screen two was the output, and then I'll go more so that behind the scenes version of how we got here.
+
+But basically, similar to the exercise that Janette shared at the top, what are what's the R FP for? Are we here to do? I'm really making sure the committee is grounded in exactly what we 're asking. So, in the very beginning on the homepage that we've created, almost like a mini site in some ways, the giving instructions of what is the process that we want the committee to actually perform.
+
+So setting up exactly where the sets that we have defined, the category waiting, a little bit more definition behind the scaling scorecards we've created, whether it's very high in terms of a stellar response, very exceptional, where there might be elements of it. Maybe that's not so exceptional. All that's defined here for the committee member to really understand what they're rating. And then after going through a score, seeing what really would advance in terms of moving forward with the response that maybe comes into a next round human element of us all meeting, discussing what we liked and what we didn't like in a proposal, and versus others where maybe there were a lot of things that we weren't so sure of and wanted to discuss a little bit more before advancing.
+
+So that's the beginning homepage. And then going into the actual scoring, we've created a place where it can all be very accessible for the committee member, where everything can be in terms of in one place of who are the individual responses, along with a reminder of the checklist and go a little bit more into the scoring itself, but also keeping a high level view of the proposal. So what's the overview that AI has found of that came across in the proposal? Any key highlights or areas of concern?
+
+And then as a human element, looking through, actually clicking through one of the proposal responses and being able to access it from that same link. So everything's in one place. So you don't have to reference a bunch of different documents or folder structure. It's all here. So I'm going to go through as an RFP committee member, and I will do one form.
+
+We'll do Horizon Digital Partners. So I'm getting a sense of like, what is the overview here? Maybe I have opened exactly what Janette was sharing earlier, the chat GPT function as well and seeing what summaries came up to the top and just kind of going side by side of a screen share of what is really something I wanted to make sure I'm understanding in terms of the proposal. Here we have, again, a reminder of the steps that we had on that first homepage and then we identified what would be the part of the compliance checklist.
+
+So where are things that are must from a compliance standpoint that we need to keep an eye on? Now you'll notice here, this is pretty lengthy. So this is just me doing a first round with Claude to create the compliance checklist. But there are going to be things on here that are maybe more deafness in terms of things that we would usually look out for in terms of timeline, for example, team allocation.
+
+But there might be a few things on here that maybe aren't so relevant for us to have that are kind of look more just taking up screen areas like submitted by the deadline and that PDF format that may not be as necessary. Below that is also red flags. If a budget doesn't add up completely, if there's just noticeable things are missing from the RFP, this can all be checked. And then below actually getting to the scorecard that Janette actually shared through earlier and having that in here.
+
+So it does a lot of the waiting and a lot of the actual scoring taking on one place. So I'll go through and do a couple of tests rounds here. As you can see some of the various sections that might be have the higher weights versus others, like the creative capability being a little bit lower than the proposed approach and mythology to a couple of more in terms of measurement or reporting approach and the references as are a little bit lower on the right seats. So I do that to save evaluations.
+
+And I can actually see my safety evaluation that I just did. So if I click through an edit here, it will take me back to this page. And then I can go through and do the exact same for another response that were received like the copers age, for example. So that would all be stored at the bottom where I can see all of my various scores.
+
+Another area you can also see where the results will be are also up here. So we 've actually created where you can actually start aggregating. Let's say it's myself and Janette and maybe a couple others are part of our committee. All of these will be aggregated for as an RP admin for me to see and understand really which responses and proposals are really rising to the top versus ones that might be more of a discussion and can also export CSV file to and save it.
+
+And then the format that you would prefer for future reference. So going back, that is kind of the everything kind of housed in one place for the evaluation. Now what I did to get here, I started setting up what was called an artifact. So that's on the side screen here. You can see here, artifacts, they're almost second to last option.
+
+And that's where you will start seeing as well, like artifacts that either are more inspiration, that Claude just has set up or ones you can create your own. And so you would create your new artifact and that would create this page essentially of what are you looking to do. So I've done a couple of RFP. So I took instructions I've done for previous RFP.
+
+I was able to pop it in here along attaching files that Janette created, for example, of the RFP itself as a source of truth along with the scorecards. So they were able to see and get us ready for today's webinar and created a blueprint for our use. So knowing that what we wanted to create, I asked it to create almost like a dummy version of what they know from both the RFP instructions we were created along with setting up a blueprint structure that we could use for today. And so they went through and started creating the dummy version that we have.
+
+There are elements of it that weren't working at first. So I wanted to make sure that buttons were working. So sometimes there's a little bit of that back and forth dialogue that you would have with the artifact just to do some of those tweaks. You can do the same exact thing when it comes to like areas where, like I said, that compliance checklist was very long, like we can make that shorter.
+
+So it's more relevant and more top of mind for elements that you want to have the committee really keep a really focused eye on from making an element and then seeing other areas to have like how to hard code it in or I don't really want to hard code it in is another way we can have it work. So there are just some of that back and forth conversation with myself and Claude, when we'll all caps here on accident, by making sure that there's the right files are being added to it. And then you can see here just making sure that they're able to access from a Google Drive standpoint, accessing the right RFP responses that we also created as part of the dummy proposal responses. So this is a similar way of just from a conversation standpoint, just playing with Claude I think is really helpful too.
+
+You'll notice things either maybe not working immediately and that's where you start just kind of calling that out from a conversation standpoint with Claude to make sure it's working the way you need it to. So that's how we got to that RFP scorecard, almost mini sites, if you will, that can be accessible for the other committee members. Yeah. And then you just hit that share button on it in order to share it with other people participating.
+
+Yes, that's correct. I'll actually share screen real quick again. So you can see at the top here, I'm very happy with this last round. So I went ahead and you can share the artifact by clicking that share button and then copy link. And then that link will take you to this view. In the olden days, like a year ago, when you were doing evaluating RFPs as like an administrator on the project, how did you do, how did you co-late all of the scoring?
+
+So it usually would require multiple different Excel sheets, taking it all in and trying to aggregate it with either various Excel formulas or something set up for me manually actually setting up the what is coming up as average scores across all the responses. So if that's multiple proposals, for example, with multiple team members, that can be really time consuming. And this was great because it did it all for me. The other great feature about this that we've heard from previous committees of having this new setup working is the fact that everything is in one place.
+
+So it's easier to access one link versus multiple links of there's a box folder or some type of folder structure that you submit your proposal responses into. And then another box link to submit your scoring, for example, and just it can get a little lost, if you will, if there's various links to go into. So having it all in one place, I think it's been a really nice feature that a lot of the committee members that we've done this with really enjoying. Yeah, I will say as a RFP committee participant in the last few months, the ability to like it's just more fun to fill out a web form than it is to open up 10 different Excel sheet.
+
+And then remember, oh, what was the criteria for this particular item and go back to a separate document that is the scorecard that has that information. So it's like, it's more convenient and a better experience for you is the admin, but also for the participant, which feels like a bit with. Definitely. This is just spelling out that collaborative scoring process that Skyler just walked us through.
+
+So instead of five committee members using five individual Excel sheet, plus the admin manually compiling scores, which then creates a summary spreadsheet that doesn't have any transparency around it. Like this, you can set up transparency. So because the artifact, you are building it fresh every time just using and it 's no programming, right? Like essentially, Skyler's created a website, but she didn't have to be a programmer to do it.
+
+She just had to understand what the goal was and what she wanted that final outcome to be. And then just in plain language says, is this something you can help me achieve ? And the AI puts together piece by piece. And when it's not exactly what she's looking for, she's like, actually not that would you change this piece and do it this way instead.
+
+So that it could include allowing a committee member to see how other committee members scored someone or what comments did they write? Or if you didn't want to share that, you could hide it so that only the admin is seeing that information. So it's like it's completely flexible for the process, not just that your organization, but for that specific RFP and that is specific group of people at your organization so that it's completely customized every time you do the process. And so let's remember again, what do the humans do?
+
+So where the AI can help is reading and summarizing all of those proposals so that even if you read through every single one, I find that I'm not going to remember the ones I read in the middle. So to go back and get that quick. Oh, that was the one with this idea. Having these AI summaries can help you do that. It's a great way to quickly check compliance.
+
+So you're not the one doing it by yourself, catching budget math errors. Now again, we know AI isn't perfect at math either. It depends on whether or not it's writing a Python script to do the math. So still having another entity in the process to help with that is very useful. Seeing can it catch mistakes where it's just giving you a copy and paste response to your RFP that includes old client names in it.
+
+It can help to create those consistent comparisons and build the scoring tools and the dashboards for you. But humans need to look at the cultural fit. We need to look at the level of trust that we have because it's easier than ever these days for something to feel like it 's perfectly aligned on a artificial fake AI sense. But is there any real depth behind the work?
+
+That's what you have to understand as the human in the loop. You have to have that strategic judgment of is this approach right for our moment. You have to have the risk tolerance. So there's going to be that say you're looking at this specific RFP and they have instead of full service agency or they doing this as a one off project, which approach is going to be correct for your needs at this time.
+
+I think again, gut check, I wouldn't trust an AI scorecard all on its own to filter anything for you at this point because also the filter is only going to be good as the instructions that it wrote with you. And you don't always know that those instructions are actually perfect until you actually get in the process of reading through what did the AI say? What does the actual proposal say? And at the end of the day, like it's human beings who are going to be affected by the decision.
+
+So you want human beings making the decision. But a lot of the heavy lifting here, you only have to do once. So Skyler created one time the main template or the artifact that she uses. And then she can just go back and say, Hey, look at that artifact. And we want to tweak it a little bit for this new RFP, which is much faster than if you have an excel sheet system, you have to go back in and paste in all of the unique things for that particular excel sheet every single time you're starting from scratch.
+
+Like it says for a new RFP, you just point your plot account at a new set of document and you're ready to go. So it's one person setting everything up with the entire committee benefiting from that time investment. And I think what's really good to remember here is that we have many processes that could benefit from this same approach. So anytime that you're given multiple options and you have one set of consistent criteria, this is the approach that you can put into place.
+
+So from a hiring standpoint, again, this is something that you want to talk with your legal team before you proceed, but because people definitely will have guardrails around, oh, AI and firing. But think about having, you know, a transcript of an interview that you could compare to a scorecard that you are maintaining that you created with the hiring manager and the HR team to evaluate which criteria does a candidate meet for a particular position. And that's an area where if you rely too much on, you know, vibes or, you know, did we have a connection during the interview and you don't rely enough on the what were the actual things we are looking for to have this outside betting of that the transcript match the needs could be an interesting approach. Vendor reviews.
+
+So not just hiring new vendors, but when you're analyzing, you know, how their production has been over the past 12 months, this could create a repeatable system for you. And I think grant applications, particularly since I know there are DMOs and state tourism boards who've distributed grants, this is a great way to help give you a little more consistency across that process. And so if you wanted to get started today, they'd just decide what is the next RFP you will be doing where you want to align on this approach. Set up the project, you'll assign one person, probably the administrator for that particular RFP to build and upload the RFP, the scorecard, and to create that evaluation prompt.
+
+And then you're going to create the artifact that Skyler walked us through, invite your committee to share in that project. And then everybody is using the same baselines and the same set of roles to evaluate the responses. All right. So we have a question about AI use in grant applications. Some grants discourage AI usage in the applications.
+
+If we use it for assistance, can they tell? Is it best to disclose? How do we navigate this? So I will say, and I'm sure that anything that requires an application anymore is becoming tricky because just like people will say they put out a job posting and immediately get a thousand jobs because candidates can use AI to apply to jobs and to personalize their resumes and the right cover letters.
+
+And I'm sure it's the same thing with grants. Follow the roles of the grant. But also, I would hope that the grant application just doesn't say no AI. Like AI and what piece of the grant application, I don't use AI to write things that I write, but I will use it to help me put structure around what I'm writing. You know, it also comes down to does your AI tool have access to the information that you could use to respond to a grant application.
+
+If there are like some details and facts that live in a folder on your computer and you're using cloud Cowork, which can read folders on your computer, you can say, hey, pull out all of this information for me so that I have it in one place. Or I have to provide a narrative of how will I use this funding to benefit my community? Give me an outline for what would be really meaningful. And then you could go and write the actual narrative.
+
+There's a lot of ways that AI can be stilted or use negative constructions, things that like when I'm reading AI writing, I instantly know it is. But the person who used AI might not know because they only use AI once a month. So if you're not in it all the time, you won't know that you are setting yourself up for failure by using it to write. So I think if you're writing something for a human, we all have little quirks that makes our individual writing interesting and unique to read.
+
+An AI will also gravitate a little bit. It will kind of talk in a grandiose way. And then after you read it through a couple of times, you think, oh, it didn't, it didn't actually say anything. There wasn't really any substance there. And I bet grant applications are a place where that is a big problem. I'm sure there's a big problem with AI submissions and grant writing, using it for the grunt work, and then keeping your quirky individual self as the actual writer of the content, I think is the real wit.
+
+I'll also say that's an area where in RFPs, I don't care if you think I'm a good writer or not, like that in utilitarian work. I'm not here for anybody just to subscribe to my RFPs sub stack. All right. Skyler, did you have any final thoughts that you wanted to share on the RFP process and how using AI has kind of changed it for you?
+
+Yeah, it's definitely been really helpful and all the hours in the beginning and set up, but then also during when we're going to the scoring. And I always love that everything you say at the end is just like using AI for work is not cheating and just a great example of it's not cheating. It's been more of a really helpful resource and tool for our team. That's great.
+
+All right.`,
+  },
 }
 
 export default function WebinarPage({ params }: { params: Promise<{ id: string }> }) {
@@ -2722,6 +3312,23 @@ export default function WebinarPage({ params }: { params: Promise<{ id: string }
 
   // Map of AI tools mentioned in each webinar for schema.org mentions property
   const webinarMentions: Record<string, any[]> = {
+    'introduction-to-vibe-coding': [
+      { '@type': 'SoftwareApplication', name: 'Lovable.dev', applicationCategory: 'Website Builder', url: 'https://lovable.dev' },
+      { '@type': 'SoftwareApplication', name: 'Replit', applicationCategory: 'Website Builder', url: 'https://replit.com' },
+      { '@type': 'SoftwareApplication', name: 'Claude', applicationCategory: 'AI Assistant', url: 'https://claude.ai' },
+      { '@type': 'SoftwareApplication', name: 'Supabase', applicationCategory: 'Database', url: 'https://supabase.com' },
+      { '@type': 'SoftwareApplication', name: 'Vercel', applicationCategory: 'Hosting', url: 'https://vercel.com' },
+      { '@type': 'SoftwareApplication', name: 'GitHub', applicationCategory: 'Version Control', url: 'https://github.com' },
+      { '@type': 'SoftwareApplication', name: 'Plaud', applicationCategory: 'Voice Recorder', url: 'https://www.plaud.ai' },
+      { '@type': 'SoftwareApplication', name: 'Monologue', applicationCategory: 'Voice Dictation', url: 'https://monologue.app' },
+      { '@type': 'SoftwareApplication', name: 'Google Gemini', applicationCategory: 'AI Assistant', url: 'https://gemini.google.com' },
+    ],
+    'managing-the-rfp-process': [
+      { '@type': 'SoftwareApplication', name: 'ChatGPT', applicationCategory: 'AI Assistant', url: 'https://chatgpt.com' },
+      { '@type': 'SoftwareApplication', name: 'Claude', applicationCategory: 'AI Assistant', url: 'https://claude.ai' },
+      { '@type': 'SoftwareApplication', name: 'Claude Artifacts', applicationCategory: 'AI Builder', url: 'https://claude.ai' },
+      { '@type': 'SoftwareApplication', name: 'Google Drive', applicationCategory: 'Cloud Storage', url: 'https://drive.google.com' },
+    ],
     'intro-ai-agents': [
       { '@type': 'SoftwareApplication', name: 'ChatGPT', applicationCategory: 'AI Assistant', url: 'https://chatgpt.com' },
       { '@type': 'SoftwareApplication', name: 'Browse.ai', applicationCategory: 'Web Scraping', url: 'https://browse.ai' },
