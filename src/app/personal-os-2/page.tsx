@@ -987,7 +987,7 @@ zero information about my capacity to continue.
         </tr>
         <tr>
             <td><strong>Meeting capture</strong></td>
-            <td><code>/call</code> &middot; <code>/plaud</code> &middot; <code>/granola</code> &middot; <code>/brief</code> &middot; <code>/conference</code> &middot; <code>/conference-prep</code> &middot; <code>/attendee-brief</code> &middot; <code>/keynote</code></td>
+            <td><code>/call</code> &middot; <code>/granola</code> &middot; <code>/brief</code> &middot; <code>/conference</code> &middot; <code>/conference-prep</code> &middot; <code>/attendee-brief</code> &middot; <code>/keynote</code></td>
         </tr>
         <tr>
             <td><strong>Content production</strong></td>
@@ -1743,7 +1743,7 @@ flag it instead of filling the gap.</pre>
     <div class="folder-structure">
         <pre><span class="folder">Personal_OS/</span>
 │
-├── <span class="folder">00_Inbox/</span>                          <span class="comment"># Daily agendas, Plaud transcripts, captures</span>
+├── <span class="folder">00_Inbox/</span>                          <span class="comment"># Daily agendas, transcripts, captures</span>
 │
 ├── <span class="folder">10_Projects/</span>                       <span class="comment"># Active work, each with its own CLAUDE.md</span>
 │
@@ -1775,7 +1775,7 @@ flag it instead of filling the gap.</pre>
 │   │   ├── <span class="new">slide_playbook.md</span>          <span class="comment"># Deck design system (NEW)</span>
 │   │   └── <span class="new">recurring_meetings/</span>        <span class="comment"># Standing roster files (NEW)</span>
 │   ├── <span class="folder">Profiles/</span>
-│   ├── <span class="new">Scripts/</span>                       <span class="comment"># Plaud sync, cron jobs (NEW)</span>
+│   ├── <span class="new">Scripts/</span>                       <span class="comment"># Automation scripts and cron jobs (NEW)</span>
 │   └── <span class="file">claude_code_config.md</span>
 │
 ├── <span class="new">Apps/</span>                              <span class="comment"># Software projects deployed from here (NEW)</span>
