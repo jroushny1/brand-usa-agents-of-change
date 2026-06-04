@@ -43,6 +43,9 @@ export const metadata: Metadata = {
     images: ['/og-image.png'],
   },
   metadataBase: new URL('https://www.janetteroush.com'),
+  verification: {
+    google: 'kjR3px6l5eGFqgVwWwl8Gu1D3OVuDKC3NhP8cLPuPTs',
+  },
 }
 
 export default function RootLayout({
