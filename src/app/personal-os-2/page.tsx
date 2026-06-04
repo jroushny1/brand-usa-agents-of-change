@@ -1043,42 +1043,192 @@ Create a structured call note.
         <p>The skills I use most weren't planned. They came from noticing the third or fourth time I was repeating the same multi-step prompt. When that happens, ask Claude: "Turn this into a skill." Claude writes the SKILL.md, drops it in the right place, and the next time you need that workflow it's one trigger away.</p>
     </div>
 
+    <h3>Install the Core Five</h3>
+    <p>The first guide installed <code>/today</code> and <code>/shutdown</code>. Past those, these five do the most work in a typical week: meeting capture, pre-meeting prep, auto memory hygiene, Monday kickoff, and Friday wrap-up. Paste this into Claude to install all five at once.</p>
+
+    <div class="prompt-box">
+        <h4>Copy and paste into Claude:</h4>
+        <pre>Please install five skills for me. Each lives at ~/.claude/skills/&lt;name&gt;/SKILL.md.
+
+1. ~/.claude/skills/call/SKILL.md
+
+---
+name: call
+description: Create or update a structured call note in 20_Areas/Calls/. Auto-populates People and Companies entries.
+allowed-tools: Glob(*), Read(*), Write(*), Edit(*)
+---
+
+# /call
+
+Create a structured call note.
+
+## What to do
+
+1. Ask for the contact name and date (default today).
+2. Check 20_Areas/People/ for the contact. If found, read their profile for context. If not, create one from the template.
+3. Check 20_Areas/Companies/ for their company. If exists, update Engagement Timeline. If not, create from template.
+4. Create the call note at 20_Areas/Calls/YYYY-MM-DD_Contact-Name.md.
+5. Surface any prior notes with this contact.
+6. Append a Relationship History line to the person's profile.
+
+
+2. ~/.claude/skills/brief/SKILL.md
+
+---
+name: brief
+description: Generate a one-page pre-meeting brief for a person, company, or topic. Pulls vault context for a structured briefing.
+allowed-tools: Glob(*), Read(*), Write(*)
+---
+
+# /brief
+
+Generate a one-page brief.
+
+## What to do
+
+1. Ask what or who the brief is about.
+2. Search 20_Areas/People/, 20_Areas/Companies/, and 20_Areas/Calls/ for relevant context.
+3. Synthesize into a brief with: who/what, relationship history, open items, recommended angles for the meeting.
+4. Save to 00_Inbox/YYYY-MM-DD_Brief_Topic.md and tell me where it is.
+
+
+3. ~/.claude/skills/remember/SKILL.md
+
+---
+name: remember
+description: Review the current session and save durable learnings to auto memory.
+allowed-tools: Read(*), Write(*), Edit(*)
+---
+
+# /remember
+
+Review what happened in the session and propose memory updates.
+
+## What to do
+
+1. Scan the conversation for: corrections I gave, durable facts I shared, non-obvious choices that worked, patterns worth keeping.
+2. For each candidate, propose a memory file name and a one-line summary.
+3. Ask which to save; write the approved ones to ~/.claude/projects/&lt;this-project&gt;/memory/.
+4. Update MEMORY.md index with new entries.
+
+
+4. ~/.claude/skills/weekstart/SKILL.md
+
+---
+name: weekstart
+description: Monday kickoff. Daily agenda, overdue triage, project health, people follow-ups, weekly focus.
+allowed-tools: Bash(*), Read(*), Write(*)
+---
+
+# /weekstart
+
+Monday morning routine.
+
+## What to do
+
+1. Run the same scan as /today to build today's agenda.
+2. Scan 10_Projects/ for projects with no activity in 7+ days. Flag them.
+3. Scan 20_Areas/People/ for entries where last_contact is more than 14 days ago and follow_up is true.
+4. Ask me for a one-line focus for the week.
+5. Save everything as 00_Inbox/YYYY-MM-DD_Weekstart.md.
+
+
+5. ~/.claude/skills/weekend/SKILL.md
+
+---
+name: weekend
+description: Friday wrap-up. Weekly review, unresolved items, next week preview.
+allowed-tools: Bash(*), Read(*), Write(*)
+---
+
+# /weekend
+
+Friday wrap-up.
+
+## What to do
+
+1. Read this week's daily agenda files in 00_Inbox/.
+2. Summarize what moved, what stalled, and what got committed to.
+3. Pull open action items into a single list.
+4. Propose 3 priorities for next week.
+5. Save as 00_Inbox/YYYY-MM-DD_Weekend.md.
+
+
+Create all five now and confirm when done.</pre>
+    </div>
+
     <!-- SECTION: Capture -->
     <h2 id="capture">Capture Pipelines: The Input Layer</h2>
 
-    <p>The first guide treated the vault as a place you write into. The leverage move is to also make it a place that fills itself from your real life &mdash; transcripts from your wearable recorder, Zoom transcripts from Granola, idea dumps from your phone. By the time you sit down to ask Claude "what did I learn this week?", the raw material is already there.</p>
+    <p>The first guide treated the vault as a place you write into. The leverage move is to make it a place that fills itself from your real meetings. By the time you sit down to ask Claude "what did I learn this week?", the raw material is already there.</p>
 
-    <h3>The Pipelines That Matter</h3>
+    <p>The lowest-effort starting point is meeting transcripts, and the easiest path is Granola.</p>
 
-    <div class="why-grid">
-        <div class="why-card">
-            <h4>Wearable recorder &rarr; vault</h4>
-            <p>I wear a Plaud during meetings and field conversations. The Plaud app generates a transcript and a summary. A Zapier zap drops both into a Google Drive folder. A local cron job pulls new files to <code>00_Inbox/</code> every 30 minutes. A skill (<code>/plaud</code>) processes them into call notes, extracts action items, and cross-references projects.</p>
+    <h3>Granola for Meeting Capture</h3>
+    <p>Granola sits on top of Zoom, Google Meet, and Microsoft Teams and captures transcripts plus AI-generated summaries for every call. It ships with a built-in Claude connector, so once you connect it, Claude can pull recent meetings on demand without you copying anything.</p>
+
+    <p>Two parts to set up:</p>
+
+    <div class="workflow-box">
+        <h4>Connect Granola to Claude</h4>
+        <div class="workflow-item">
+            <div class="workflow-icon">1</div>
+            <div class="workflow-content">
+                <h5>Install Granola</h5>
+                <p>Download Granola at <a href="https://granola.ai" target="_blank">granola.ai</a>. Sit it on top of your next meeting; it will start producing transcripts automatically.</p>
+            </div>
         </div>
-        <div class="why-card">
-            <h4>Zoom &rarr; vault</h4>
-            <p>Granola sits on top of Zoom and captures transcripts plus AI-generated summaries. A skill (<code>/granola</code>) pulls recent meetings, applies skip rules (solo notes, routine ops), and files the rest into <code>20_Areas/Calls/</code> or <code>20_Areas/Keynotes/</code> based on whether I was speaking or attending.</p>
+        <div class="workflow-item">
+            <div class="workflow-icon">2</div>
+            <div class="workflow-content">
+                <h5>Enable the Granola connector in Claude</h5>
+                <p>In Claude.ai, open Settings &rarr; Connectors and enable Granola. In Claude Code, add the Granola MCP server per Granola's docs. Either way, Claude will then have tools like <code>list_meetings</code> and <code>get_meeting_transcript</code> available.</p>
+            </div>
         </div>
-        <div class="why-card">
-            <h4>Phone &rarr; vault (Slack)</h4>
-            <p>A dedicated Slack channel (<code>#janette-claude</code>) acts as a one-way idea inbox. I type or voice-message a thought from my phone; it lands in the vault as a captured note for later triage.</p>
-        </div>
-        <div class="why-card">
-            <h4>Phone &rarr; Claude (Telegram)</h4>
-            <p>A Telegram bot pipes messages directly to Claude. Useful for short asks ("what's on my schedule today?") and for forwarding images from my phone for Claude to look at.</p>
+        <div class="workflow-item">
+            <div class="workflow-icon">3</div>
+            <div class="workflow-content">
+                <h5>Install the <code>/granola</code> skill</h5>
+                <p>The skill below tells Claude how to use the connector to file meetings into the right vault folders. Paste the prompt to install it.</p>
+            </div>
         </div>
     </div>
 
-    <div class="explanation">
-        <strong>The principle:</strong> Capture should be effortless and continuous. Anything that requires me to manually file something is friction I'll skip when I'm busy. Pipelines mean the vault is current even when I haven't touched it in two days.
-    </div>
+    <div class="prompt-box">
+        <h4>Copy and paste into Claude:</h4>
+        <pre>Please install a Granola filing skill for me.
 
-    <h3>What This Looks Like in Practice</h3>
-    <p>A conference day: I record three coffee conversations on my Plaud, attend two panels (capturing in Granola), and dump a few late-night ideas into the Slack channel from my hotel room. The next morning, <code>/today</code> sees fresh material in the Inbox and proposes which transcripts to process. By the time I'm on the flight home, the entire day's learnings are filed into Calls, People profiles are updated, action items are tracked, and I have one consolidated debrief ready to share.</p>
+Save this as ~/.claude/skills/granola/SKILL.md:
+
+---
+name: granola
+description: Pull recent Granola meeting transcripts and file them into 20_Areas/Calls/ as structured call notes. Skip routine internal meetings and solo notes.
+allowed-tools: Read(*), Write(*), Edit(*), Glob(*)
+---
+
+# /granola
+
+File recent Granola meetings into the vault as call notes.
+
+## What to do
+
+1. Use the Granola connector to list meetings since the last run (default: past 7 days).
+2. For each meeting, decide whether to file or skip:
+   - SKIP: solo notes, recurring 1:1s with my manager, routine internal ops syncs, social events, held meetings with no transcript
+   - FILE: external calls, partner meetings, customer calls, new contacts, strategic discussions
+3. For each meeting to file:
+   - Pull the transcript and summary via the Granola connector
+   - Check 20_Areas/People/ for the participants; create or update profiles
+   - Check 20_Areas/Companies/ for their org; update Engagement Timeline
+   - Create a call note at 20_Areas/Calls/YYYY-MM-DD_Meeting-Name.md
+4. Report a summary: filed N, skipped M, and why each was skipped.
+
+Confirm when the skill is installed.</pre>
+    </div>
 
     <div class="tip-box">
-        <h4>Start with one</h4>
-        <p>You don't need all four pipelines. Pick the one that matches your highest-volume capture problem. For most people, that's meeting transcripts &mdash; Granola is the lowest-effort starting point. Add the recorder when you find yourself wishing you'd captured hallway conversations and field interviews too.</p>
+        <h4>Other capture sources</h4>
+        <p>If you use a wearable recorder, Otter, Fireflies, or any other source, the pattern is the same: a SKILL.md that knows where new transcripts arrive and how to file them. Tell Claude what you've got and ask it to scaffold a skill modeled on <code>/granola</code>.</p>
     </div>
 
     <!-- SECTION: Voice -->
@@ -1116,15 +1266,42 @@ Create a structured call note.
         <p>How I actually write to different audiences &mdash; C-suite, legal, internal team, external partners. Built from my own sent mail. The <code>/janette-voice</code> skill loads this file when drafting any email so the result sounds like me, not like Claude.</p>
     </div>
 
-    <h3>How Voice Files Get Built</h3>
-    <p>Two paths, and both work:</p>
-    <ul>
-        <li><strong>From transcripts.</strong> Feed Claude 10 webinar transcripts and ask it to extract recurring positions, rhetorical patterns, words I favor and avoid, and lines that earn audible reaction. This is how my voice files started.</li>
-        <li><strong>From feedback.</strong> Every time I edit a Claude-drafted email or rewrite a slide, the diff teaches the system. Periodically, I ask Claude to read recent edits and update the voice files. The system compounds.</li>
-    </ul>
+    <h3>Build Your Voice Files</h3>
+    <p>The most accurate source of your voice is your own sent mail. The prompt below tells Claude to use an email connector (Outlook, Gmail, or whatever you have wired up) to read your actual sent emails and produce the voice files from real evidence.</p>
+
+    <div class="prompt-box">
+        <h4>Copy and paste into Claude:</h4>
+        <pre>I want you to build my voice system in 99_System/Context_Library/.
+
+First: confirm you have access to an email connector (Outlook, Gmail, Microsoft 365, or similar). If no email connector is enabled in this Claude environment, tell me which one I should set up and walk me through enabling it. Do not proceed until email access is working.
+
+Once you have email access:
+
+1. Read 30 to 50 of my actual sent emails from the past 6 months. Prioritize emails I wrote from scratch over forwards or one-line replies. Include a mix of audiences: internal team, peers, external partners, vendors, and any leadership.
+
+2. Analyze the patterns. Look for:
+   - Voice and tone characteristics
+   - Sentence and paragraph rhythm
+   - Vocabulary I favor and vocabulary I avoid
+   - Punctuation habits (em-dashes, parentheses, exclamation marks)
+   - Salutations and closings I actually use
+   - How my tone shifts across audiences
+
+3. Create these four files in 99_System/Context_Library/:
+
+   - email_voice_guide.md: how I write emails. Tone, structure, salutations, closings, banned phrases. Include 2-3 short before/after examples showing how generic professional writing would get rewritten in my voice.
+
+   - speaking_positions.md: start with section headers for the topics that show up most in my outgoing mail (Strategy, Industry POV, Team Philosophy, etc.). Leave each section mostly empty with a one-line note that it will be filled in over time from calls and webinars.
+
+   - quotable_moments.md: start blank with a brief explanation of what belongs here (lines that landed, on stage or in writing).
+
+   - audience_delight_profile.md: start with what you can infer from my emails about how I show up with different audiences. Flag that this file will get richer once speaking transcripts are added.
+
+4. Report back: how many emails you analyzed, what patterns stood out, and the four files you created.</pre>
+    </div>
 
     <div class="explanation">
-        <strong>The compounding move:</strong> Every substantive call I have gets distilled into <code>speaking_positions.md</code>. Every great quote from a webinar lands in <code>quotable_moments.md</code>. Over time, the voice files become a richer source of my actual point of view than any single artifact I could produce on demand.
+        <strong>The compounding move:</strong> Once the files exist, every substantive call you have gets distilled into <code>speaking_positions.md</code>. Every great line from a webinar or panel lands in <code>quotable_moments.md</code>. Over time, the voice files become a richer source of your actual point of view than any single artifact Claude could produce on demand.
     </div>
 
     <!-- SECTION: Companies -->
@@ -1160,7 +1337,7 @@ last_contact: YYYY-MM-DD
 |------|------|---------|------|
 | [[Person-Name]] | [Role] | [email] | [one line] |
 
-## Brand USA Internal Counterparts
+## Internal Counterparts
 [Who on my side owns this relationship.]
 
 ## Products / Workstreams
@@ -1189,9 +1366,107 @@ last_contact: YYYY-MM-DD
         <li><strong>New Call note involving an external org</strong> &rarr; link to the Company in the call's Related section, and add the row to the Company's Engagement Timeline.</li>
     </ul>
 
+    <h3>Install the Templates</h3>
+    <p>The prompt below installs the three templates (People, Companies, Calls) and adds the filing conventions to your root CLAUDE.md so Claude enforces the cross-reference rules automatically.</p>
+
+    <div class="prompt-box">
+        <h4>Copy and paste into Claude:</h4>
+        <pre>I want to install the relationship-tracking pattern in my vault. Please:
+
+1. Create 20_Areas/People/_template_person.md with this frontmatter:
+
+---
+type: person
+name:
+company: "[[Company-Name]]"
+role:
+relationship: # client | colleague | partner | vendor
+first_contact:
+last_contact:
+follow_up: false
+tags: []
+---
+
+## Context
+&lt;!-- Role, how we met, what they care about --&gt;
+
+## Relationship History
+&lt;!-- Key interactions, auto-appended from calls --&gt;
+
+## Personal Details
+&lt;!-- Family, interests, preferences --&gt;
+
+## Open Items
+&lt;!-- Commitments made, questions to follow up on --&gt;
+
+
+2. Create 20_Areas/Companies/_template_company.md with this frontmatter and sections:
+
+---
+type: company
+name:
+website:
+industry:
+relationship: # strategic-partner | partner | vendor | press | other
+first_contact:
+last_contact:
+tags: []
+---
+
+## What They Do
+[One paragraph.]
+
+## Relationship Snapshot
+[Why this org matters to my work right now.]
+
+## Key People
+| Name | Role | Contact | Note |
+|------|------|---------|------|
+
+## Internal Counterparts
+[Who on my side owns this relationship.]
+
+## Products / Workstreams
+## Engagement Timeline
+| Date | Touchpoint | Call Note |
+|------|------------|-----------|
+
+## Strategic Fit
+## Open Items
+## Related
+
+
+3. Create 20_Areas/Calls/_template_call.md with:
+
+---
+type: call
+contact: "[[Person-Name]]"
+company: "[[Company-Name]]"
+date:
+tags: []
+---
+
+## Context
+## Discussion
+## Decisions
+## Action Items
+## Follow-up
+
+
+4. Add a "Filing Conventions" section to my root CLAUDE.md that explains:
+   - Companies are wiki entries; the canonical hub for an org.
+   - People link to their company via the company: frontmatter field.
+   - Calls link to both.
+   - When a new person is added at an existing company, also update that Company's Key People table.
+   - When a new company is added and People profiles already exist for that org, backfill the company: field on those People files.
+   - When a new call note is created, also update the Company's Engagement Timeline and append a line to the person's Relationship History.
+
+Create all three templates and the CLAUDE.md addition now.</pre>
+    </div>
+
     <div class="success-box">
         <h4>The payoff</h4>
-        <p>Before a meeting, I can say "prep me on [Company Name]." Claude opens the Company file, reads the Key People table, scans recent Engagement Timeline entries, surfaces open items, and gives me a brief with everything I need. The Company file is the single hub; everything else links into it.</p>
+        <p>Once installed, you can say "prep me on [Company Name]" and Claude opens the Company file, reads the Key People table, scans recent Engagement Timeline entries, surfaces open items, and gives you a brief with everything you need. The Company file is the single hub; everything else links into it.</p>
     </div>
 
     <!-- SECTION: Shipping -->
@@ -1223,9 +1498,32 @@ last_contact: YYYY-MM-DD
     <h3>Why Shipping Belongs in the Vault</h3>
     <p>Two reasons:</p>
     <ul>
-        <li><strong>Source material is already here.</strong> The transcript I want to turn into a webinar page is in <code>20_Areas/Keynotes/</code>. The Brand USA logo files are in <code>30_Resources/</code>. The voice that should narrate the page is in <code>99_System/Context_Library/</code>. Building elsewhere means dragging all that context to a new tool.</li>
-        <li><strong>Skills can compose.</strong> <code>/add-webinar</code> uses the voice system to draft the page copy, the brand resources for visuals, and the deploy infrastructure to ship. Each piece was built for a different reason; the skill stitches them together.</li>
+        <li><strong>Source material is already here.</strong> The transcript I want to turn into a webinar page is in <code>20_Areas/Keynotes/</code>. The brand logo files are in <code>30_Resources/</code>. The voice that should narrate the page is in <code>99_System/Context_Library/</code>. Building elsewhere means dragging all that context to a new tool.</li>
+        <li><strong>Skills can compose.</strong> A skill like <code>/add-webinar</code> uses the voice system to draft the page copy, the brand resources for visuals, and the deploy infrastructure to ship. Each piece was built for a different reason; the skill stitches them together.</li>
     </ul>
+
+    <h3>Build Your Own Shipping Skill</h3>
+    <p>Shipping skills are the most personal part of a Personal OS &mdash; they depend on what you publish, your brand, and your deploy infrastructure. The prompt below works for any recurring publishing workflow you've done manually two or three times.</p>
+
+    <div class="prompt-box">
+        <h4>Copy and paste into Claude:</h4>
+        <pre>I have a recurring publishing workflow I want to turn into a skill. Walk me through the build.
+
+Ask me these questions one at a time:
+
+1. What's the artifact I'm shipping? (one-pager, slide deck, webinar page, social post, branded PDF, etc.)
+2. Where does the source material live? (vault folder, Drive, transcript service, etc.)
+3. What does the artifact need from my voice or brand system? (writing voice, logos, colors, templates)
+4. Where does it get published? (Vercel, GitHub Pages, S3, LinkedIn, Drive, intranet, etc.)
+5. What manual steps do I currently do, in order?
+
+Once I've answered all five:
+
+1. Propose a skill name and short description.
+2. Draft a SKILL.md that orchestrates the full workflow: pulling sources, applying voice and brand, producing the artifact, deploying or filing it, confirming success.
+3. Flag any external setup I need (API keys, account access, MCP connectors).
+4. Save the skill to ~/.claude/skills/&lt;name&gt;/SKILL.md and tell me how to trigger it.</pre>
+    </div>
 
     <!-- SECTION: MCP -->
     <h2 id="mcp">MCP Servers: What's Actually Worth Connecting</h2>
