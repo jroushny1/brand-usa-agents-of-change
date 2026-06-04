@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Level Up Your Personal OS for Claude Code | Agents of Change',
-  description: 'Week-2+ guide for optimizing your Personal OS: memory files, slash commands, writing profiles, People directory, and advanced workflows.',
+  title: 'How a Personal OS Compounds Over Time | Agents of Change',
+  description: 'The leverage layer: memory, skills, capture pipelines, voice system, and shipping from the vault. What happens when a folder of markdown becomes a coworker.',
 }
 
 export default function PersonalOS2GuidePage() {
@@ -741,10 +741,10 @@ export default function PersonalOS2GuidePage() {
       ` }} />
       <div className="pos2-page" dangerouslySetInnerHTML={{ __html: `
 <section class="hero">
-    <span class="hero-badge">Guide 2.0</span>
-    <h1>Level Up Your<br>Personal OS</h1>
-    <p>You built the foundation. Here's how to turn it into the system that runs your work life.</p>
-    <a href="#optimize-claude-md" class="hero-cta">Jump to Optimizations</a>
+    <span class="hero-badge">The Long Game</span>
+    <h1>How a Personal OS<br>Compounds Over Time</h1>
+    <p>The leverage layer. Memory, skills, capture pipelines, voice, and shipping &mdash; the parts that turn a folder of markdown into a coworker who knows your work.</p>
+    <a href="#memory" class="hero-cta">Start With Auto Memory</a>
 </section>
 
 <main class="container">
@@ -752,1046 +752,760 @@ export default function PersonalOS2GuidePage() {
     <nav class="toc">
         <h3>What's in This Guide</h3>
         <ul>
-            <li><a href="#where-you-are">Where You Are Now</a></li>
-            <li><a href="#optimize-claude-md">Optimize Your CLAUDE.md</a></li>
-            <li><a href="#global-instructions">The Global CLAUDE.md (Your Second Brain)</a></li>
-            <li><a href="#memory">The Memory System</a></li>
-            <li><a href="#people-directory">Build a People Directory</a></li>
-            <li><a href="#call-notes">Call Notes & Meeting Capture</a></li>
-            <li><a href="#profiles">Profiles: Teaching Claude Your Voice</a></li>
-            <li><a href="#context-library">The Context Library</a></li>
-            <li><a href="#slash-commands-advanced">Slash Commands Beyond /today and /log</a></li>
-            <li><a href="#project-patterns">Real Project Patterns</a></li>
-            <li><a href="#mcp-servers">MCP Servers: Claude's App Store</a></li>
-            <li><a href="#writing-rules">Writing Rules & Guardrails</a></li>
-            <li><a href="#hard-lessons">Hard-Won Lessons</a></li>
-            <li><a href="#weekly-review">The Weekly Review</a></li>
+            <li><a href="#where-leverage">Where the Leverage Actually Is</a></li>
+            <li><a href="#memory">Auto Memory (How It Really Works)</a></li>
+            <li><a href="#skills">The Skills Ecosystem</a></li>
+            <li><a href="#capture">Capture Pipelines: The Input Layer</a></li>
+            <li><a href="#voice">The Voice System</a></li>
+            <li><a href="#companies">Companies as Wiki Entries</a></li>
+            <li><a href="#shipping">Shipping From the Vault</a></li>
+            <li><a href="#mcp">MCP Servers: What's Actually Worth Connecting</a></li>
+            <li><a href="#guardrails">Writing Rules &amp; Guardrails</a></li>
+            <li><a href="#lessons">Hard-Won Lessons</a></li>
+            <li><a href="#weekly">The Weekly Rhythm</a></li>
         </ul>
     </nav>
 
-    <div class="intro-box" id="where-you-are">
-        <h3>You've Had Your Personal OS for a Few Weeks. Now What?</h3>
-        <p>You set up the folders. You ran <code>/today</code> a few times. You created a project or two. It works&mdash;but it probably still feels like a fancy filing cabinet.</p>
-        <p>This guide covers the features that transform a Personal OS from "organized folder" into a genuine work partner. Every technique here comes from real usage patterns&mdash;weeks of daily work where Claude handles meeting prep, builds presentations, tracks contacts, writes in your voice, and remembers decisions from three weeks ago.</p>
-        <p style="margin-bottom: 0;">The audience for this guide is the same as the first: tourism marketing professionals (and anyone in a similar role) who use Claude as a productivity tool. You already have the basics. This is about depth.</p>
+    <div class="intro-box" id="where-leverage">
+        <h3>Where the Leverage Actually Is</h3>
+        <p>The first guide gets you to "useful filing system." Folders, a CLAUDE.md, two skills, a working daily rhythm.</p>
+        <p>This guide is about what happens after. The parts that took me six months to build and that I'd build again on day one if I were starting fresh: a memory system that persists across sessions, a skills library that automates real workflows, capture pipelines that fill the vault while I'm in meetings, a voice system that lets Claude draft in my actual cadence, and the realization that the vault is also a workshop where I ship things to the web.</p>
+        <p style="margin-bottom: 0;">Every section here describes something I use weekly. The audience is the same: working professionals who use Claude as a productivity tool and want the system to compound.</p>
     </div>
 
-    <h2>Week 1 vs. Week 3: What Changes</h2>
-    <p>The biggest shift is moving from <em>telling Claude what to do</em> to <em>Claude already knowing what to do</em>. Here's what that looks like in practice:</p>
+    <h2>Setup vs. Compounding: What Changes</h2>
+    <p>The biggest shift is moving from <em>telling Claude what to do</em> to <em>Claude already knowing what to do</em>. Here's what that looks like:</p>
 
     <div class="level-grid">
         <div class="level-card before">
             <h4>Week 1</h4>
             <ul>
-                <li>You explain your job and context each session</li>
-                <li>Two slash commands: <code>/today</code> and <code>/log</code></li>
-                <li>CLAUDE.md has basic role and architecture</li>
-                <li>Projects are folders with files</li>
-                <li>You manually describe your writing style</li>
+                <li>You explain your role each session</li>
+                <li>Two skills: <code>/today</code> and <code>/shutdown</code></li>
+                <li>CLAUDE.md has role and task schema</li>
+                <li>Projects are folders with notes</li>
+                <li>You write everything yourself</li>
+                <li>Capture is manual</li>
             </ul>
         </div>
         <div class="level-card after">
-            <h4>Week 3+</h4>
+            <h4>Month 6+</h4>
             <ul>
-                <li>Claude knows your role, team, current projects, and preferences</li>
-                <li>8+ slash commands for calls, keynotes, reviews, presentations</li>
-                <li>CLAUDE.md has task schemas, call schemas, people directory rules, deployment checklists</li>
-                <li>Projects have process notes, spec files, and auto-populated contacts</li>
-                <li>A writing profile teaches Claude your exact voice</li>
+                <li>Claude knows your role, team, projects, vendors, voice</li>
+                <li>30+ skills across daily rhythm, meetings, content, review, shipping</li>
+                <li>CLAUDE.md is short; details live in memory files Claude loads on demand</li>
+                <li>Companies are wiki entries; People link in; Calls update both</li>
+                <li>Claude drafts in your voice using your actual speaking positions</li>
+                <li>Recorder, Zoom transcripts, and phone-to-vault channels feed the system automatically</li>
             </ul>
         </div>
     </div>
 
-    <!-- SECTION: Optimize CLAUDE.md -->
-    <h2 id="optimize-claude-md">Optimize Your CLAUDE.md</h2>
-    <p>Your project-level CLAUDE.md probably started with a role description and basic guidelines. Here's how to evolve it into a genuinely useful operating manual.</p>
+    <!-- SECTION: Memory -->
+    <h2 id="memory">Auto Memory (How It Really Works)</h2>
 
-    <h3>Add a Task Schema</h3>
-    <p>When Claude creates tasks, it needs a consistent format. Define the schema once, and every task Claude creates will be scannable by <code>/today</code>:</p>
+    <p>This is the part most people miss. Claude Code has two complementary ways to carry knowledge across sessions: <strong>CLAUDE.md</strong> (instructions you write) and <strong>auto memory</strong> (notes Claude writes itself). The first guide covered CLAUDE.md. This section is about the second one &mdash; the layer that turns Claude into a coworker who learns from how you actually work.</p>
 
-    <div class="code-block">
-        <pre><span class="header">## Task Schema (Required)</span>
-
-\`\`\`yaml
-<span class="keyword">type:</span> <span class="string">task</span>
-<span class="keyword">status:</span> <span class="string">[todo, in-progress, done, waiting]</span>
-<span class="keyword">created:</span> <span class="string">YYYY-MM-DD</span>
-<span class="keyword">due_date:</span> <span class="string">YYYY-MM-DD</span>
-<span class="keyword">priority:</span> <span class="string">[high, medium, low]</span>
-<span class="keyword">tags:</span> <span class="string">[]</span>
-\`\`\`
-
-Default <span class="string">\`tags\`</span> to empty list <span class="string">\`[]\`</span> if none provided.</pre>
-    </div>
-
-    <div class="explanation">
-        <strong>Why this matters:</strong> Without a defined schema, Claude invents a different format every time. Then <code>/today</code> misses tasks because it's looking for <code>due_date</code> and Claude used <code>deadline</code> instead. Consistency here saves you from silent failures.
-    </div>
-
-    <h3>Add Action Rules</h3>
-    <p>The most useful additions to your CLAUDE.md are behavioral rules you discover through friction. Here are real examples that solve real annoyances:</p>
-
-    <div class="code-block">
-        <pre><span class="header">## General Rules</span>
-
-When I ask you to fix or change something, ALWAYS make
-the actual edit to the file. Apply the change directly.
-
-Before creating any new files or project structures,
-always ask me: 'Should this be (1) local to your vault,
-(2) shared via GitHub, or (3) deployed to a website?'
-Then set up accordingly.
-
-<span class="header">## Content Creation</span>
-
-When creating content intended for external audiences
-(partners, clients, industry contacts), always ask
-'Is this internal or external?' if unclear.
-
-<span class="header">## Data & Reports</span>
-
-Never fabricate or extrapolate data. If I provide 3
-months of data, do NOT create year-over-year comparisons.
-Always flag when source data is insufficient.</pre>
-    </div>
-
-    <div class="tip-box">
-        <h4>How to Discover Your Own Rules</h4>
-        <p>Every time Claude does something that makes you pause&mdash;explains instead of editing, creates a file in the wrong place, invents data you didn't provide&mdash;write a rule for it. Within two weeks, you'll have a set of instructions that eliminate 90% of the friction.</p>
-    </div>
-
-    <h3>Add Professional Context</h3>
-    <p>One line at the bottom of your CLAUDE.md that tells Claude who you are saves you from re-explaining your role in every session:</p>
-
-    <div class="code-block">
-        <pre><span class="header">## User Professional Context</span>
-
-[Your name] is [your title] at [your organization].
-[One sentence of relevant career history that shapes
-your perspective.]</pre>
-    </div>
-
-    <p>This line flows into every interaction. When Claude drafts an email, it knows your title. When it prepares talking points, it knows your background.</p>
-
-    <!-- SECTION: Global CLAUDE.md -->
-    <h2 id="global-instructions">The Global CLAUDE.md: Your Second Brain</h2>
-
-    <p>Here's something the first guide mentioned briefly but deserves its own section: Claude reads <em>two</em> CLAUDE.md files. Your project-level file (in your Personal OS folder) and a <strong>global file</strong> at <code>~/.claude/CLAUDE.md</code> that applies everywhere&mdash;across all projects, all folders, all sessions.</p>
-
-    <div class="explanation">
-        <strong>Where to find it:</strong> The global file lives at <code>~/.claude/CLAUDE.md</code> (the <code>~</code> means your home directory). You can edit it by asking Claude: "Edit my global CLAUDE.md file."
-    </div>
-
-    <h3>What Goes Global vs. What Stays in the Project?</h3>
+    <h3>CLAUDE.md vs. Auto Memory</h3>
 
     <table class="comparison-table">
         <tr>
-            <th>Global (~/.claude/CLAUDE.md)</th>
-            <th>Project (Personal_OS/CLAUDE.md)</th>
+            <th></th>
+            <th>CLAUDE.md</th>
+            <th>Auto Memory</th>
         </tr>
         <tr>
-            <td>Writing style rules that apply everywhere</td>
-            <td>Folder architecture and file locations</td>
+            <td><strong>Who writes it</strong></td>
+            <td>You</td>
+            <td>Claude</td>
         </tr>
         <tr>
-            <td>Communication tone preferences</td>
-            <td>Task schemas and frontmatter formats</td>
+            <td><strong>Contains</strong></td>
+            <td>Instructions and rules</td>
+            <td>Learnings and patterns</td>
         </tr>
         <tr>
-            <td>Tool-specific instructions (how to restart Claude Code, etc.)</td>
-            <td>Call note schemas and People directory rules</td>
+            <td><strong>Best for</strong></td>
+            <td>Architecture, conventions, "always do X" rules</td>
+            <td>Corrections, preferences Claude discovers, durable facts</td>
         </tr>
         <tr>
-            <td>"Read files before asking for context"</td>
-            <td>Project-specific context and deployment instructions</td>
-        </tr>
-        <tr>
-            <td>Environment details (Claude Code vs. Claude Desktop)</td>
-            <td>Brand resources and design asset locations</td>
+            <td><strong>Loaded into context</strong></td>
+            <td>Every session, in full</td>
+            <td>Every session (first 200 lines or 25KB of the index)</td>
         </tr>
     </table>
 
-    <h3>Real Example: Writing Style as a Global Rule</h3>
-    <p>If you have a strong writing style preference&mdash;say you prefer direct positive statements over negative constructions&mdash;put it in your global file so it applies to everything Claude writes, in any project:</p>
+    <p>Use CLAUDE.md when you want to instruct. Auto memory lets Claude take notes for itself based on your corrections, without you writing anything.</p>
 
-    <div class="code-block">
-        <pre><span class="header">## Writing Style</span>
-
-State what things ARE. Use direct positive statements.
-
-<span class="header">## Communication Guardrails</span>
-
-When drafting communications for internal audiences,
-keep AI framing practical and grounded. Focus on
-specific tools and wins. Flag if a draft leans too
-heavy on sweeping transformation language.</pre>
+    <div class="tip-box">
+        <h4>Requires Claude Code v2.1.59 or later</h4>
+        <p>Auto memory is on by default in current versions. Check yours with <code>claude --version</code>. To toggle it, run <code>/memory</code> in a session.</p>
     </div>
 
-    <!-- SECTION: Memory System -->
-    <h2 id="memory">The Memory System</h2>
+    <h3>Where Auto Memory Lives</h3>
+    <p>Each project gets its own auto memory directory:</p>
+    <div class="code-block">
+        <pre>~/.claude/projects/&lt;project&gt;/memory/</pre>
+    </div>
 
-    <p>Claude Code has a built-in memory feature that most users overlook. When you use the <code>/remember</code> command (or when Claude learns something important about your workflow), it stores notes in a memory file that persists across sessions.</p>
+    <p>The <code>&lt;project&gt;</code> path is derived from the git repository, so all worktrees and subdirectories within the same repo share one auto memory directory. Outside a git repo, the project root is used instead.</p>
 
-    <h3>Where Memory Lives</h3>
-    <p>Memory files are stored at: <code>~/.claude/projects/[project-path]/memory/MEMORY.md</code></p>
-
-    <p>Claude reads this file automatically at the start of every session. It's where Claude stores things like:</p>
-
+    <p>Inside that folder, two things matter:</p>
     <ul>
-        <li><strong>Project index:</strong> What you're building, where it lives, and how to deploy it</li>
-        <li><strong>Workflow patterns:</strong> Conference capture workflows, call note habits, deployment checklists</li>
-        <li><strong>Hard-won lessons:</strong> "Browser automation fails for diverse sites," "macOS grep works differently than Linux grep"</li>
-        <li><strong>Current state:</strong> "ComplianceTrack Phase 3 complete, service worker cache at v5"</li>
+        <li><strong>MEMORY.md</strong> &mdash; an index file. The first 200 lines or 25KB (whichever comes first) load into Claude's context at the start of every session.</li>
+        <li><strong>Topic files</strong> &mdash; additional markdown files Claude creates as memories accumulate. These are <em>lazy-loaded</em>: Claude reads them on demand when something in the current conversation makes them relevant.</li>
     </ul>
 
-    <div class="code-block">
-        <pre><span class="label">REAL MEMORY EXAMPLE</span>
-
-<span class="header"># Memory</span>
-
-<span class="header">## Project Index</span>
-<span class="bullet">-</span> <span class="keyword">NutriSnap</span> <span class="comment">— Personal calorie/macro tracking PWA.
-  Source in Apps/NutriSnap/, deployed to GitHub Pages.</span>
-<span class="bullet">-</span> <span class="keyword">DMO Newsletter Tracker</span> <span class="comment">— Subscribe to ~600
-  US DMO newsletters. Master CSV in
-  10_Projects/DMO_Newsletter_Tracker/</span>
-<span class="bullet">-</span> <span class="keyword">ComplianceTrack</span> <span class="comment">— ATS PWA for compliance
-  recruiting. Phase 3 complete. SW cache at v5.</span>
-
-<span class="header">## Automation Lessons</span>
-<span class="bullet">-</span> <span class="keyword">Browser automation fails for diverse sites.</span>
-  <span class="comment">agent-browser CLI across 600+ different websites
-  produced 0% real success across 3 iterations.</span>
-<span class="bullet">-</span> <span class="keyword">Rule of thumb:</span> <span class="comment">If a task involves >50 different
-  websites you don't control, skip automation and
-  optimize the manual workflow instead.</span></pre>
+    <div class="explanation">
+        <strong>Why this design works:</strong> The index is small enough that loading it every session is cheap. Topic files can be detailed without bloating Claude's context window. You get instant awareness of every rule and reference Claude has ever saved, plus deep detail on the ones that come up in the current conversation. Claude keeps <code>MEMORY.md</code> concise by moving longer notes into topic files.
     </div>
 
-    <div class="tip-box">
-        <h4>Feeding the Memory</h4>
-        <p>You can explicitly tell Claude to remember something: "Remember that the ComplianceTrack service worker is at cache v5." Or use <code>/remember</code> at the end of a session to let Claude review what it learned and update the memory file automatically.</p>
-    </div>
+    <h3>The <code>/memory</code> Command</h3>
+    <p>Run <code>/memory</code> in any Claude Code session to:</p>
+    <ul>
+        <li>See which CLAUDE.md and rules files are loaded in your current session</li>
+        <li>Toggle auto memory on or off</li>
+        <li>Open the auto memory folder in your editor to browse, edit, or delete files</li>
+    </ul>
 
-    <h3>Memory vs. Process Notes: What Goes Where?</h3>
+    <p>Auto memory is plain markdown. You can read and edit any file by hand &mdash; Claude treats your edits as the source of truth.</p>
+
+    <h3>How Auto Memory Gets Written</h3>
+    <p>Claude decides what's worth remembering based on whether the information would help in a future conversation. The common triggers:</p>
+    <ul>
+        <li><strong>You correct Claude.</strong> "Don't do that again" tends to become a durable note.</li>
+        <li><strong>You confirm a non-obvious choice was right.</strong> Worth saving so Claude doesn't second-guess the same call next month.</li>
+        <li><strong>You teach Claude a durable fact.</strong> Vendor relationships, process details, who handles what.</li>
+        <li><strong>You say "remember this."</strong> Direct trigger.</li>
+    </ul>
+
+    <p>When you see "Writing memory" or "Recalled memory" in the Claude Code interface, Claude is actively updating or reading from your auto memory folder.</p>
+
+    <h3>How I Organize Mine</h3>
+    <p>Anthropic doesn't prescribe a file structure or frontmatter format for auto memory &mdash; Claude writes whatever's useful. Over time I've settled on a convention that makes the index easier to scan:</p>
 
     <table class="comparison-table">
         <tr>
-            <th>Memory (MEMORY.md)</th>
-            <th>Process Notes (process_notes.md)</th>
+            <th>Prefix</th>
+            <th>What it holds</th>
+            <th>Example</th>
         </tr>
         <tr>
-            <td>Cross-session facts: project locations, deploy URLs, version numbers</td>
-            <td>Session-by-session history: what changed, what was decided</td>
+            <td><code>feedback_*</code></td>
+            <td>Rules about how Claude should behave, with the reason</td>
+            <td>"Never suggest stopping or pausing &mdash; I decide my own pace"</td>
         </tr>
         <tr>
-            <td>Lessons learned that apply going forward</td>
-            <td>Chronological log of work done</td>
+            <td><code>reference_*</code></td>
+            <td>Slow-moving facts about people, vendors, configs</td>
+            <td>"Wrike MCP is configured in three places; the active one is .mcp.json"</td>
         </tr>
         <tr>
-            <td>Claude reads this automatically every session</td>
-            <td>Claude reads this when working in that specific project</td>
-        </tr>
-        <tr>
-            <td>Short, factual, current-state</td>
-            <td>Detailed, narrative, historical</td>
+            <td><code>project_*</code></td>
+            <td>One-line pointers to active projects with current-state context</td>
+            <td>"FY27 Strategy site is internal, password-gated, lives at fy27-strategy.vercel.app"</td>
         </tr>
     </table>
 
-    <!-- SECTION: People Directory -->
-    <h2 id="people-directory">Build a People Directory</h2>
+    <p>The convention is mine, not the system's. Claude doesn't care what you name files &mdash; the prefixes just make the index easier to read at a glance.</p>
 
-    <p>This is one of the highest-value additions you can make to your Personal OS. A People directory in <code>20_Areas/People/</code> gives Claude a relationship memory that carries across sessions.</p>
-
-    <h3>How It Works</h3>
-    <p>Create a template file and tell Claude (in your CLAUDE.md) to auto-populate contacts from call notes:</p>
+    <h3>What a Real Auto Memory File Looks Like</h3>
+    <p>This is one of my feedback memories:</p>
 
     <div class="code-block">
-        <pre><span class="header">## People Directory</span>
-
-Contact profiles live in <span class="string">\`20_Areas/People/\`</span>.
-Auto-populated from Calls.
-
-<span class="header">### Individuals</span>
-<span class="bullet">-</span> <span class="keyword">Template:</span> <span class="string">\`_template_person.md\`</span>
-<span class="bullet">-</span> <span class="keyword">Schema:</span> type: person, name, company, role,
-  relationship, first_contact, last_contact, tags
-<span class="bullet">-</span> <span class="keyword">Relationship tags:</span> #client, #colleague, #partner,
-  #vendor, #stakeholder
-
-<span class="header">### Auto-population Rules</span>
-1. When creating a call note, check if person exists
-2. If not, create from template with available context
-3. If exists, update <span class="string">\`last_contact\`</span> and append to history
-4. Extract and preserve: personal details mentioned,
-   commitments made, open questions</pre>
-    </div>
-
-    <h3>The Person Template</h3>
-
-    <div class="code-block">
-        <pre>---
-<span class="keyword">type:</span> <span class="string">person</span>
-<span class="keyword">name:</span>
-<span class="keyword">company:</span>
-<span class="keyword">role:</span>
-<span class="keyword">relationship:</span> <span class="comment"># client | colleague | partner | vendor</span>
-<span class="keyword">first_contact:</span>
-<span class="keyword">last_contact:</span>
-<span class="keyword">tags:</span> <span class="string">[]</span>
----
-
-<span class="header">## Context</span>
-<span class="comment">&lt;!-- Role, how you met, what they care about --&gt;</span>
-
-<span class="header">## Relationship History</span>
-<span class="comment">&lt;!-- Key interactions, auto-updated from Calls --&gt;</span>
-
-<span class="header">## Personal Details</span>
-<span class="comment">&lt;!-- Family, interests, preferences --&gt;</span>
-
-<span class="header">## Open Items</span>
-<span class="comment">&lt;!-- Commitments made, questions to follow up on --&gt;</span></pre>
-    </div>
-
-    <h3>What This Looks Like in Practice</h3>
-    <p>After a few weeks, you have a contact file that reads like this:</p>
-
-    <div class="code-block">
-        <pre><span class="label">REAL CONTACT EXAMPLE</span>
+        <pre><span class="label">REAL AUTO MEMORY EXAMPLE</span>
 
 ---
-<span class="keyword">type:</span> <span class="string">person</span>
-<span class="keyword">name:</span> <span class="string">Kyle Hudson</span>
-<span class="keyword">company:</span> <span class="string">Stack (StackList)</span>
-<span class="keyword">role:</span> <span class="string">Founder</span>
-<span class="keyword">relationship:</span> <span class="string">partner</span>
-<span class="keyword">first_contact:</span> <span class="string">2026-01-28</span>
-<span class="keyword">last_contact:</span> <span class="string">2026-02-02</span>
-<span class="keyword">tags:</span> <span class="string">[partner, AI, structured-data]</span>
+<span class="keyword">name:</span> <span class="string">feedback-no-stopping-suggestions</span>
+<span class="keyword">description:</span> <span class="string">Never suggest stopping, pausing, or saving work for later.
+  She decides when to stop.</span>
+<span class="keyword">type:</span> <span class="string">feedback</span>
 ---
 
-<span class="header">## Context</span>
-Founder of Stack/StackList - browser extension for
-saving "cards" into shareable collections. Key value:
-content is highly discoverable by AI due to atomic
-structure and auto-generated metadata.
+Never suggest stopping, pausing, deferring, or "saving for later" &mdash;
+including soft framings like "clean stopping point," "pause here,"
+"call it for tonight," or "fresh eyes tomorrow."
 
-<span class="header">## Relationship History</span>
-<span class="bullet">-</span> <span class="keyword">2026-01-28:</span> Intro call. Discussed B2B use case,
-  analytics, AI discoverability features.
-<span class="bullet">-</span> <span class="keyword">2026-02-02:</span> Demo walkthrough. Saw AI
-  Discoverability button (generates FAQ data,
-  structured metadata, regenerates every 2 weeks).
+<span class="header">**Why:**</span> I flagged this directly after Claude repeatedly offered
+exit ramps during a productive Saturday session. The pattern was
+Claude pattern-matching on session length as a signal I should stop.
+That signal is wrong. Time of day and accumulated progress carry
+zero information about my capacity to continue.
 
-<span class="header">## Open Items</span>
-<span class="bullet">-</span> [ ] Play around with StackList extension
-<span class="bullet">-</span> [ ] Research FAQ schema for AI discoverability
-<span class="bullet">-</span> [ ] Follow up end of February</pre>
+<span class="header">**How to apply:**</span>
+<span class="bullet">-</span> Continue executing. When one piece finishes, offer the next concrete
+  option.
+<span class="bullet">-</span> If multiple options exist, present them as choices to make.
+<span class="bullet">-</span> If I want a break, I'll say so directly.</pre>
     </div>
-
-    <div class="success-box">
-        <h4>The Payoff</h4>
-        <p>Before your next call with this person, tell Claude: "I have a call with Kyle Hudson tomorrow. Prep me." Claude reads the contact file, pulls the relationship history, surfaces the open items, and gives you a brief with everything you need&mdash;automatically.</p>
-    </div>
-
-    <h3>Groups Too</h3>
-    <p>For recurring team meetings or external working groups, create a group template. Same auto-population rules apply. This is especially useful for standing meetings where you want Claude to track themes, decisions, and action items across weeks.</p>
-
-    <!-- SECTION: Call Notes -->
-    <h2 id="call-notes">Call Notes & Meeting Capture</h2>
-
-    <p>The <code>/call</code> command is one of the most-used skills in a mature Personal OS. It creates structured call notes that feed into the People directory and can be referenced in future sessions.</p>
-
-    <h3>The Call Schema</h3>
-    <p>Add this to your CLAUDE.md so every call note follows the same format:</p>
-
-    <div class="code-block">
-        <pre><span class="header">## Calls & Meeting Notes</span>
-
-Call transcripts live in <span class="string">\`20_Areas/Calls/\`</span>.
-Use <span class="string">\`/call\`</span> to create or update notes.
-
-<span class="bullet">-</span> <span class="keyword">Naming:</span> <span class="string">\`YYYY-MM-DD_Contact-Name.md\`</span>
-<span class="bullet">-</span> <span class="keyword">Schema:</span> type: call, contact, company, date,
-  tags, follow_up
-<span class="bullet">-</span> Before follow-up calls, search this folder by
-  contact name to surface prior context</pre>
-    </div>
-
-    <h3>Dictation Mode</h3>
-    <p>The real power is dictation. Add this instruction to your CLAUDE.md:</p>
-
-    <div class="code-block">
-        <pre><span class="header">### Call Notes / Dictation</span>
-
-When I dictate call notes or meeting content, capture
-everything immediately into a markdown file without
-asking clarifying questions. Append incrementally
-as I continue talking.</pre>
-    </div>
-
-    <p>This means you can talk to Claude during or right after a meeting&mdash;"Just had a call with the tech team, here's what happened..."&mdash;and Claude creates a properly formatted, searchable call note instantly. No forms, no prompts, no friction.</p>
 
     <div class="tip-box">
-        <h4>Call Prep Is Where It Gets Good</h4>
-        <p>Say "Prep me for my call with [name] tomorrow." Claude searches <code>20_Areas/Calls/</code> for past notes with that contact, reads their People directory entry, pulls open items, and gives you a brief. Two weeks of captured call notes creates a powerful relationship memory.</p>
+        <h4>The "Why" line is load-bearing</h4>
+        <p>A rule without a reason is brittle. The next time Claude faces an edge case, the reason is what tells it whether the rule applies. The headline ("never suggest stopping") is enough 95% of the time. The reason is what lets Claude judge the 5% intelligently.</p>
     </div>
 
-    <!-- SECTION: Profiles -->
-    <h2 id="profiles">Profiles: Teaching Claude Your Voice</h2>
+    <h3>What I Actually Have in Memory</h3>
+    <p>My auto memory folder right now has 60+ files. They cluster into:</p>
 
-    <p>Your <code>99_System/Profiles/</code> folder is where you store personality instructions that Claude loads on demand. The most immediately useful one is a <strong>writing profile</strong>.</p>
-
-    <h3>Why a Writing Profile Matters</h3>
-    <p>Without one, Claude writes in Generic Professional. With one, Claude writes in <em>your</em> voice&mdash;with your rhythm, your word choices, your structure preferences, and even your banned phrases.</p>
-
-    <h3>What a Real Writing Profile Contains</h3>
-
-    <div class="code-block">
-        <pre><span class="label">WRITING PROFILE EXAMPLE</span>
-
-<span class="header"># Writing Profile</span>
-
-<span class="header">## Voice in One Line</span>
-Pragmatic builder-teacher who makes AI feel usable,
-ethical, and a little fun&mdash;anchored in specifics,
-curiosity, and lived experimentation.
-
-<span class="header">## Core Qualities</span>
-<span class="bullet">-</span> <span class="keyword">Practical evangelist:</span> Build, test, translate.
-  Real examples always.
-<span class="bullet">-</span> <span class="keyword">Approachable expert:</span> Intelligence through
-  clarity, not terminology.
-<span class="bullet">-</span> <span class="keyword">Warm but direct:</span> Collegial without saccharine.
-
-<span class="header">## Structure Pattern</span>
-Most pieces follow:
-<span class="keyword">Hook &rarr; Context &rarr; Translation &rarr; Examples &rarr; Caveat &rarr; CTA</span>
-
-<span class="header">## Style Mechanics</span>
-<span class="bullet">-</span> Em dashes as primary transition tool&mdash;heavy user
-<span class="bullet">-</span> Short paragraphs with whitespace
-<span class="bullet">-</span> No semicolons. Parentheses for quick clarifications.
-<span class="bullet">-</span> Exclamation points used genuinely&mdash;1-2 per email max
-
-<span class="header">## Banned</span>
-Never use: "revolutionary," "game-changing," "paradigm
-shift," "stakeholders," "leverage," "synergy," "circle
-back," "low-hanging fruit," "Dear," "Sincerely,"
-"I hope this email finds you well"
-
-<span class="header">## Quick Test</span>
-Before finishing: Would this sound natural if read
-aloud by me on stage? Does it teach or demo something
-usable? Is there at least one specific example?</pre>
+    <div class="why-grid">
+        <div class="why-card">
+            <h4>Behavioral feedback (~40)</h4>
+            <p>Rules I've discovered through friction. Things like "fix only the phrase I flagged, don't rewrite adjacent content" or "speak up immediately when a tool fails."</p>
+        </div>
+        <div class="why-card">
+            <h4>Reference facts (~15)</h4>
+            <p>Who's at which company, how a workflow is configured, what filenames mean. Slow-moving facts that are tedious to re-explain.</p>
+        </div>
+        <div class="why-card">
+            <h4>Project pointers (~10)</h4>
+            <p>One line per active project pointing to where it lives, who's involved, and any current-state notes that don't belong in the project's CLAUDE.md.</p>
+        </div>
     </div>
 
-    <h3>How to Use It</h3>
-    <p>Tell Claude: "Load writing mode" or "Use my writing profile." Claude reads <code>99_System/Profiles/writing_profile.md</code> and adjusts its output accordingly. The key instruction in your CLAUDE.md is:</p>
-
-    <div class="code-block">
-        <pre><span class="header">## Context & Profiles</span>
-
-Load <span class="keyword">only</span> when explicitly requested:
-
-<span class="bullet">-</span> "Writing Mode" &rarr; <span class="string">\`Profiles/writing_profile.md\`</span>
-<span class="bullet">-</span> "Coding Mode" &rarr; <span class="string">\`Profiles/coding_profile.md\`</span>
-
-<span class="keyword">Do NOT preload profiles based on inferred task type.</span></pre>
+    <div class="warning-box">
+        <h4>Auto memory is point-in-time, not live state</h4>
+        <p>A memory file written six months ago about "the current deploy URL" may be wrong now. When Claude reads memory, it should treat it as "what was true last time we discussed it" &mdash; and verify before asserting if the answer matters. Claude Code even surfaces an age warning on older memories.</p>
+        <p>The implication: store stable patterns, durable rules, and slow-moving facts. Skip anything that changes weekly.</p>
     </div>
 
-    <div class="explanation">
-        <strong>Why "do NOT preload"?</strong> Because profiles consume context window space. If Claude loads your writing profile, coding profile, and three project specs at the start of every session, it runs out of room for the actual work. Load profiles on demand.
-    </div>
+    <!-- SECTION: Skills -->
+    <h2 id="skills">The Skills Ecosystem</h2>
 
-    <h3>Building Your Writing Profile</h3>
-    <p>The easiest way to build one from scratch:</p>
+    <p>The first guide showed two skills: <code>/today</code> and <code>/shutdown</code>. A mature Personal OS has 30+. Each one is a folder inside <code>~/.claude/skills/</code> with a <code>SKILL.md</code> file describing what it does and when to use it. Claude reads the descriptions and triggers automatically when a request matches. The <code>/</code> prefix is shorthand to force a specific skill to run.</p>
 
-    <div class="prompt-box">
-        <h4>Copy and paste this into Claude:</h4>
-        <pre>I want to create a writing profile so you can match my voice. Here are 3 examples of things I've written recently:
-
-[Paste 3 emails, LinkedIn posts, or other writing samples]
-
-Analyze these for: voice, structure patterns, word choices I favor, phrases I use, things I avoid, punctuation habits, and paragraph length. Create a writing_profile.md in 99_System/Profiles/ based on what you find.</pre>
-    </div>
-
-    <h3>A Coding Profile Too</h3>
-    <p>If you work with code (even occasionally, as a non-developer using AI tools to build things), a coding profile tells Claude your skill level and preferred explanations:</p>
-
-    <div class="code-block">
-        <pre><span class="label">CODING PROFILE EXAMPLE</span>
-
-<span class="header"># Coding Profile</span>
-
-<span class="header">## The Essential Truth</span>
-I'm an AI-fluent executive who occasionally needs to
-touch code. My goal is to be a capable <span class="keyword">user</span> of AI
-coding tools.
-
-<span class="header">## What This Means for Claude</span>
-<span class="bullet">-</span> Explain what commands do <span class="keyword">before</span> I run them
-<span class="bullet">-</span> Explain <span class="keyword">why</span> we're doing each step
-<span class="bullet">-</span> When something breaks, help me understand the error
-  before jumping to fixes
-<span class="bullet">-</span> Incremental wins&mdash;small working steps over big leaps
-  that might break</pre>
-    </div>
-
-    <!-- SECTION: Context Library -->
-    <h2 id="context-library">The Context Library</h2>
-
-    <p>Your <code>99_System/Context_Library/</code> is the reference shelf. It holds index files and detailed specs that Claude loads when you're working on specific topics.</p>
-
-    <h3>The Structure</h3>
-
-    <div class="folder-structure">
-        <pre><span class="folder">99_System/Context_Library/</span>
-│
-├── <span class="file">business_profile.md</span>       <span class="comment"># Index of work context</span>
-├── <span class="file">personal_profile.md</span>       <span class="comment"># Index of personal context</span>
-│
-├── <span class="folder">project_specs/</span>            <span class="comment"># Detailed project briefs</span>
-│   ├── <span class="file">keynote_spec.md</span>
-│   ├── <span class="file">social_automation.md</span>
-│   └── <span class="file">research_hub.md</span>
-│
-└── <span class="folder">personal_specs/</span>           <span class="comment"># Personal project briefs</span>
-    └── <span class="file">home_office.md</span></pre>
-    </div>
-
-    <h3>Business Profile: Your Work Index</h3>
-    <p>The business profile is a single file that lists your role, your organization, your active projects (with links to their spec files), and the tools you use. Claude reads this when you say "load business context" and immediately knows what you're working on:</p>
-
-    <div class="code-block">
-        <pre><span class="header"># Business Profile</span>
-
-<span class="header">## Current Role</span>
-[Your name] - [Title] at [Organization]
-
-<span class="header">## Organization</span>
-[One-paragraph description of what your org does]
-
-<span class="header">## Active Projects</span>
-Load the relevant spec from
-<span class="string">\`Context_Library/project_specs/\`</span> when working on these:
-
-| Project           | Spec File              | Status     |
-|-------------------|------------------------|------------|
-| Keynote Prep      | <span class="string">keynote_spec.md</span>       | Active     |
-| Social Automation | <span class="string">social_automation.md</span>  | Active     |
-| Research Hub      | <span class="string">research_hub.md</span>       | Long-term  |
-
-<span class="header">## Tools & Systems</span>
-<span class="bullet">-</span> [Project management tool]
-<span class="bullet">-</span> [CRM]
-<span class="bullet">-</span> [Social media platform]</pre>
-    </div>
-
-    <h3>Project Specs: Deep Context on Demand</h3>
-    <p>Each project spec is a detailed brief that Claude loads when you're actively working on that project. A keynote spec might include the event date, audience size, audience demographics, approved title and description, key themes, and research to incorporate.</p>
-
-    <div class="explanation">
-        <strong>The pattern:</strong> Business profile is the table of contents. Project specs are the chapters. Claude reads the table of contents frequently, and loads individual chapters when you're doing focused work on that project.
-    </div>
-
-    <!-- SECTION: Slash Commands Advanced -->
-    <h2 id="slash-commands-advanced">Slash Commands Beyond /today and /log</h2>
-
-    <p>The original guide covered <code>/today</code> and <code>/log</code>. A mature Personal OS has 8-10+ slash commands, each built for a specific workflow. Here's the full toolkit:</p>
+    <h3>What I Actually Run</h3>
+    <p>Here's how mine cluster, by job:</p>
 
     <table class="comparison-table">
         <tr>
-            <th>Command</th>
-            <th>What It Does</th>
+            <th>Category</th>
+            <th>Skills</th>
         </tr>
         <tr>
-            <td><code>/today</code></td>
-            <td>Scan vault for tasks due today, create daily agenda</td>
+            <td><strong>Daily rhythm</strong></td>
+            <td><code>/today</code> &middot; <code>/weekstart</code> &middot; <code>/shutdown</code> &middot; <code>/weekend</code> &middot; <code>/remember</code></td>
         </tr>
         <tr>
-            <td><code>/log</code></td>
-            <td>Append session summary to project's process_notes.md</td>
+            <td><strong>Meeting capture</strong></td>
+            <td><code>/call</code> &middot; <code>/plaud</code> &middot; <code>/granola</code> &middot; <code>/brief</code> &middot; <code>/conference</code> &middot; <code>/conference-prep</code> &middot; <code>/attendee-brief</code> &middot; <code>/keynote</code></td>
         </tr>
         <tr>
-            <td><code>/call</code></td>
-            <td>Create or update a call note, auto-populate People directory</td>
+            <td><strong>Content production</strong></td>
+            <td><code>/linkedin-carousel</code> &middot; <code>/build-pptx</code> &middot; <code>/brand-usa-gslides</code> &middot; <code>/keynote-writer</code> &middot; <code>/text-to-html</code> &middot; <code>/janette-voice</code> &middot; <code>/editorial-style</code></td>
         </tr>
         <tr>
-            <td><code>/remember</code></td>
-            <td>Review session learnings, update memory files</td>
+            <td><strong>Review &amp; research</strong></td>
+            <td><code>/brand-review</code> &middot; <code>/advisory</code> &middot; <code>/file-research</code> &middot; <code>/deep-research</code> &middot; <code>/review</code></td>
         </tr>
         <tr>
-            <td><code>/review</code></td>
-            <td>Generate weekly/monthly summaries of accomplishments, calls, and open items</td>
+            <td><strong>Shipping</strong></td>
+            <td><code>/deploy</code> &middot; <code>/single-use-site</code> &middot; <code>/add-webinar</code> &middot; <code>/site-audit</code></td>
         </tr>
         <tr>
-            <td><code>/keynote-writer</code></td>
-            <td>Generate keynote content from call notes and past presentations</td>
-        </tr>
-        <tr>
-            <td><code>/text-to-html</code></td>
-            <td>Convert plain text into email-safe inline HTML formatting</td>
-        </tr>
-        <tr>
-            <td><code>/brand-usa-pptx</code></td>
-            <td>Create branded presentations from ideas to polished PPTX</td>
-        </tr>
-        <tr>
-            <td><code>/insights</code></td>
-            <td>Analyze your last 30 days of chat sessions and generate an interactive HTML report (built into Claude Code)</td>
+            <td><strong>Ops &amp; automation</strong></td>
+            <td><code>/tent-cards</code> &middot; <code>/social-boosting</code> &middot; <code>/ingest</code></td>
         </tr>
     </table>
 
-    <div class="tip-box">
-        <h4>The /insights Command: Your Monthly Reality Check</h4>
-        <p><code>/insights</code> is built directly into Claude Code&mdash;you already have it. It analyzes your last 30 days of local chat sessions and generates an interactive HTML report showing how you actually use AI: which tools you rely on, what types of tasks dominate your sessions, and where you spend the most time.</p>
-        <p>This is powerful for Personal OS users because it reveals patterns you can act on. If you discover that 40% of your sessions involve call prep, that's a signal to invest in a richer <code>/callprep</code> skill. If you see repetitive tasks that could be automated, that's your cue to build a new slash command. Run <code>/insights</code> once a month to see how your system is actually performing versus how you think it's performing.</p>
+    <div class="explanation">
+        <strong>The pattern that emerged:</strong> Each skill replaces a 15-30 minute task that I used to do manually. Built up slowly &mdash; one or two a month &mdash; whenever I noticed myself repeating a workflow. The library is wide because the workflows are real, not because I went on a skill-building spree.
     </div>
 
-    <h3>Building Your Own Slash Commands</h3>
-    <p>Every slash command is a <code>SKILL.md</code> file in <code>~/.claude/skills/[name]/</code>. The format:</p>
+    <h3>How a Skill Is Structured</h3>
+    <p>A SKILL.md file looks like this:</p>
 
     <div class="code-block">
         <pre>---
 <span class="keyword">name:</span> <span class="string">call</span>
-<span class="keyword">description:</span> <span class="string">Create or update a call note</span>
+<span class="keyword">description:</span> <span class="string">Create or update a call note in 20_Areas/Calls/.
+  Auto-populates People and Companies directories.</span>
 <span class="keyword">allowed-tools:</span> <span class="string">Glob(*), Read(*), Write(*), Edit(*)</span>
 ---
 
-<span class="header"># /call - Meeting Note Creator</span>
+<span class="header"># /call</span>
 
-Create a call note in 20_Areas/Calls/.
+Create a structured call note.
 
-<span class="header">## What to Do</span>
+<span class="header">## What to do</span>
 
-1. Ask for the contact name and date (default today)
-2. Check if person/group exists in People/
-3. Create call note with proper schema
-4. Update the People directory entry
-5. Surface any prior notes with this contact</pre>
-    </div>
-
-    <div class="prompt-box">
-        <h4>Create a new slash command:</h4>
-        <pre>Create a new slash command called /[name] that [description of what it should do]. Save it to ~/.claude/skills/[name]/SKILL.md with the proper frontmatter format.</pre>
+1. Ask for contact name and date (default today).
+2. Check if the person exists in 20_Areas/People/. If yes, read their
+   profile for context. If no, create from the template.
+3. Check the contact's company in 20_Areas/Companies/. If exists,
+   update Engagement Timeline; if not, create from template.
+4. Create the call note in 20_Areas/Calls/YYYY-MM-DD_Contact-Name.md
+   using the call schema in CLAUDE.md.
+5. Surface any prior notes with this contact from past calls.</pre>
     </div>
 
     <div class="tip-box">
-        <h4>The /review Command: Surprisingly Useful</h4>
-        <p>Set up <code>/review</code> to scan your past week of call notes, process notes, and completed tasks, then generate a summary. This is invaluable for weekly reports, status updates, or prepping for a manager check-in. One command replaces 30 minutes of manual summary work.</p>
+        <h4>Build skills out of friction</h4>
+        <p>The skills I use most weren't planned. They came from noticing the third or fourth time I was repeating the same multi-step prompt. When that happens, ask Claude: "Turn this into a skill." Claude writes the SKILL.md, drops it in the right place, and the next time you need that workflow it's one trigger away.</p>
     </div>
 
-    <!-- SECTION: Project Patterns -->
-    <h2 id="project-patterns">Real Project Patterns</h2>
+    <h3>Skills vs. Project Commands</h3>
+    <p>One source of confusion: Claude Code supports both <strong>skills</strong> (in <code>~/.claude/skills/</code>) and <strong>commands</strong> (in <code>.claude/commands/</code> inside a project). Only skills are invocable via slash. Project commands are reference documentation only. If you created command files in a project folder and they don't trigger when you type the slash command, that's why &mdash; move them to skills.</p>
 
-    <p>After a few weeks, your projects develop a consistent internal structure. Here's the evolved pattern:</p>
+    <!-- SECTION: Capture -->
+    <h2 id="capture">Capture Pipelines: The Input Layer</h2>
 
-    <div class="folder-structure">
-        <pre><span class="folder">10_Projects/</span>
-│
-├── <span class="folder">Wyoming_Keynote/</span>
-│   ├── <span class="file">call_notes.md</span>          <span class="comment"># Planning call context</span>
-│   └── <span class="file">process_notes.md</span>       <span class="comment"># Session-by-session log</span>
-│
-├── <span class="folder">ComplianceTrack/</span>
-│   ├── <span class="file">process_notes.md</span>       <span class="comment"># Detailed build log</span>
-│   ├── <span class="folder">docs/</span>
-│   │   └── <span class="folder">plans/</span>              <span class="comment"># Architecture plans</span>
-│   ├── <span class="folder">css/</span>
-│   ├── <span class="folder">js/</span>
-│   └── <span class="file">index.html</span>
-│
-└── <span class="folder">Social_Boosting_Automation/</span>
-    └── <span class="file">process_notes.md</span></pre>
-    </div>
+    <p>The first guide treated the vault as a place you write into. The leverage move is to also make it a place that fills itself from your real life &mdash; transcripts from your wearable recorder, Zoom transcripts from Granola, idea dumps from your phone. By the time you sit down to ask Claude "what did I learn this week?", the raw material is already there.</p>
 
-    <h3>Process Notes: The Real Secret Weapon</h3>
-    <p>Process notes are where the compounding value lives. Every session logged with <code>/log</code> adds context that Claude can reference later. After 5-10 entries, Claude can:</p>
-
-    <ul>
-        <li>Pick up exactly where you left off, even after a week away</li>
-        <li>Reference decisions made in earlier sessions ("We decided to use CSS Grid over Flexbox because...")</li>
-        <li>Surface open items that haven't been addressed yet</li>
-        <li>Avoid repeating mistakes documented in earlier sessions</li>
-    </ul>
-
-    <div class="code-block">
-        <pre><span class="label">REAL PROCESS NOTES EXAMPLE</span>
-
-<span class="header">## 2026-02-13 - Phase 1 Build, Review, Deploy</span>
-
-<span class="keyword">Summary:</span>
-Built complete Phase 1 (Candidates MVP) from plan
-through two review cycles. Deployed to GitHub Pages.
-
-<span class="keyword">Decisions:</span>
-<span class="bullet">-</span> Vanilla HTML/CSS/JS with ES modules: zero build
-  tools, zero dependencies beyond PapaParse for CSV
-<span class="bullet">-</span> IndexedDB for all storage: offline-first
-
-<span class="keyword">Notes:</span>
-<span class="bullet">-</span> Two full review passes caught 14 total issues
-<span class="bullet">-</span> Lesson: be careful with replace_all on function
-  calls that share a name with definitions</pre>
-    </div>
-
-    <div class="explanation">
-        <strong>The "Notes" section is key.</strong> Lessons captured in process notes travel forward. The next time Claude encounters a similar situation, it remembers the lesson and avoids the same mistake.
-    </div>
-
-    <h3>Keynote Workflow: A Full-Lifecycle Example</h3>
-    <p>Here's how a mature Personal OS handles a real workflow end-to-end:</p>
-
-    <div class="workflow-box">
-        <h4>Keynote Preparation Lifecycle</h4>
-        <div class="workflow-item">
-            <div class="workflow-icon">1</div>
-            <div class="workflow-content">
-                <h5>Planning Call</h5>
-                <p>Use <code>/call</code> to capture the planning call. Claude creates the note, populates the contact in People/, and flags follow-up items.</p>
-            </div>
-        </div>
-        <div class="workflow-item">
-            <div class="workflow-icon">2</div>
-            <div class="workflow-content">
-                <h5>Project Spec</h5>
-                <p>Create a spec in <code>Context_Library/project_specs/</code> with audience, event details, themes, and deliverable checklist.</p>
-            </div>
-        </div>
-        <div class="workflow-item">
-            <div class="workflow-icon">3</div>
-            <div class="workflow-content">
-                <h5>Content Development</h5>
-                <p>Load writing profile + project spec. Use <code>/keynote-writer</code> to draft. Claude pulls from your archived keynotes and common talking points library.</p>
-            </div>
-        </div>
-        <div class="workflow-item">
-            <div class="workflow-icon">4</div>
-            <div class="workflow-content">
-                <h5>Deck Creation</h5>
-                <p>Use <code>/brand-usa-pptx</code> (or your equivalent) to generate a branded presentation file from the draft content.</p>
-            </div>
-        </div>
-        <div class="workflow-item">
-            <div class="workflow-icon">5</div>
-            <div class="workflow-content">
-                <h5>Post-Event Archive</h5>
-                <p>Export the final presentation as PDF. Create a markdown summary capturing stories that landed, data points that resonated, audience questions, and what you'd change.</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="success-box">
-        <h4>The Compounding Effect</h4>
-        <p>Each keynote you archive makes the next one easier. By your fourth or fifth archived presentation, Claude has a library of your proven stories, audience-tested data points, and structure patterns that it can adapt to any new audience.</p>
-    </div>
-
-    <!-- SECTION: MCP Servers -->
-    <h2 id="mcp-servers">MCP Servers: Claude's App Store</h2>
-
-    <p>MCP (Model Context Protocol) servers extend Claude's capabilities by connecting it to external tools and data sources. Think of them as apps that give Claude new abilities.</p>
-
-    <h3>What MCP Servers Can Do</h3>
+    <h3>The Pipelines That Matter</h3>
 
     <div class="why-grid">
         <div class="why-card">
-            <h4>Project Management</h4>
-            <p>Connect to Wrike, Asana, or similar tools. Claude can read tasks, update statuses, and sync deadlines with your <code>/today</code> agenda.</p>
+            <h4>Wearable recorder &rarr; vault</h4>
+            <p>I wear a Plaud during meetings and field conversations. The Plaud app generates a transcript and a summary. A Zapier zap drops both into a Google Drive folder. A local cron job pulls new files to <code>00_Inbox/</code> every 30 minutes. A skill (<code>/plaud</code>) processes them into call notes, extracts action items, and cross-references projects.</p>
         </div>
         <div class="why-card">
-            <h4>Web & Research</h4>
-            <p>Fetch live web content, access Google Maps data, or search specialized databases&mdash;all from within Claude.</p>
+            <h4>Zoom &rarr; vault</h4>
+            <p>Granola sits on top of Zoom and captures transcripts plus AI-generated summaries. A skill (<code>/granola</code>) pulls recent meetings, applies skip rules (solo notes, routine ops), and files the rest into <code>20_Areas/Calls/</code> or <code>20_Areas/Keynotes/</code> based on whether I was speaking or attending.</p>
         </div>
         <div class="why-card">
-            <h4>File Systems</h4>
-            <p>Access files on your Desktop or Downloads folder. Useful for processing reports or attachments without moving them to your vault.</p>
+            <h4>Phone &rarr; vault (Slack)</h4>
+            <p>A dedicated Slack channel (<code>#janette-claude</code>) acts as a one-way idea inbox. I type or voice-message a thought from my phone; it lands in the vault as a captured note for later triage.</p>
         </div>
         <div class="why-card">
-            <h4>Domain-Specific Tools</h4>
-            <p>Connect to budget tools (YNAB), health trackers (Whoop), or industry-specific APIs for your organization's data.</p>
+            <h4>Phone &rarr; Claude (Telegram)</h4>
+            <p>A Telegram bot pipes messages directly to Claude. Useful for short asks ("what's on my schedule today?") and for forwarding images from my phone for Claude to look at.</p>
         </div>
     </div>
 
-    <h3>Where MCP Servers Live</h3>
-    <p>MCP servers are configured differently depending on which Claude environment you use:</p>
+    <div class="explanation">
+        <strong>The principle:</strong> Capture should be effortless and continuous. Anything that requires me to manually file something is friction I'll skip when I'm busy. Pipelines mean the vault is current even when I haven't touched it in two days.
+    </div>
+
+    <h3>What This Looks Like in Practice</h3>
+    <p>A conference day: I record three coffee conversations on my Plaud, attend two panels (capturing in Granola), and dump a few late-night ideas into the Slack channel from my hotel room. The next morning, <code>/today</code> sees fresh material in the Inbox and proposes which transcripts to process. By the time I'm on the flight home, the entire day's learnings are filed into Calls, People profiles are updated, action items are tracked, and I have one consolidated debrief ready to share.</p>
+
+    <div class="tip-box">
+        <h4>Start with one</h4>
+        <p>You don't need all four pipelines. Pick the one that matches your highest-volume capture problem. For most people, that's meeting transcripts &mdash; Granola is the lowest-effort starting point. Add the recorder when you find yourself wishing you'd captured hallway conversations and field interviews too.</p>
+    </div>
+
+    <!-- SECTION: Voice -->
+    <h2 id="voice">The Voice System</h2>
+
+    <p>Without a voice system, Claude writes in Generic Professional. With one, Claude writes in <em>your</em> voice &mdash; with your cadence, your word choices, your structure preferences, even your banned phrases. This is the difference between Claude as a draft generator and Claude as a ghostwriter who actually sounds like you.</p>
+
+    <h3>Where Voice Lives</h3>
+    <p>My voice system sits in <code>99_System/Context_Library/</code> as a small set of files:</p>
+
+    <div class="folder-structure">
+        <pre><span class="folder">99_System/Context_Library/</span>
+│
+├── <span class="file">speaking_positions.md</span>     <span class="comment"># My actual positions on the topics I'm known for</span>
+├── <span class="file">quotable_moments.md</span>       <span class="comment"># Lines that landed on stage or in writing</span>
+├── <span class="file">email_voice_guide.md</span>      <span class="comment"># How I actually write emails (tone, structure)</span>
+├── <span class="file">audience_delight_profile.md</span> <span class="comment"># What I'm like as a speaker</span>
+└── <span class="file">slide_playbook.md</span>         <span class="comment"># Visual and verbal patterns for decks</span></pre>
+    </div>
+
+    <h3>The Files That Carry the Most Weight</h3>
+
+    <div class="skill-card">
+        <h4>speaking_positions.md</h4>
+        <p>The living synthesis of what I actually believe and say publicly on the topics I'm known for. Built up over time from calls, webinars, and stage moments. When I'm drafting a keynote, an op-ed, or a panel intro, this file is the source of truth for my point of view &mdash; not a generic LLM guess at what someone in my role would say.</p>
+    </div>
+
+    <div class="skill-card">
+        <h4>quotable_moments.md</h4>
+        <p>Lines that landed. Pulled from webinar transcripts, podcast appearances, and stage Q&amp;A. When Claude drafts content, it can reach for things I've already said well rather than inventing new phrasing.</p>
+    </div>
+
+    <div class="skill-card">
+        <h4>email_voice_guide.md</h4>
+        <p>How I actually write to different audiences &mdash; C-suite, legal, internal team, external partners. Built from my own sent mail. The <code>/janette-voice</code> skill loads this file when drafting any email so the result sounds like me, not like Claude.</p>
+    </div>
+
+    <h3>How Voice Files Get Built</h3>
+    <p>Two paths, and both work:</p>
+    <ul>
+        <li><strong>From transcripts.</strong> Feed Claude 10 webinar transcripts and ask it to extract recurring positions, rhetorical patterns, words I favor and avoid, and lines that earn audible reaction. This is how my voice files started.</li>
+        <li><strong>From feedback.</strong> Every time I edit a Claude-drafted email or rewrite a slide, the diff teaches the system. Periodically, I ask Claude to read recent edits and update the voice files. The system compounds.</li>
+    </ul>
+
+    <div class="explanation">
+        <strong>The compounding move:</strong> Every substantive call I have gets distilled into <code>speaking_positions.md</code>. Every great quote from a webinar lands in <code>quotable_moments.md</code>. Over time, the voice files become a richer source of my actual point of view than any single artifact I could produce on demand.
+    </div>
+
+    <!-- SECTION: Companies -->
+    <h2 id="companies">Companies as Wiki Entries</h2>
+
+    <p>This is an architectural decision the first guide didn't cover. In my vault, every external organization that touches my work gets a <strong>Company file</strong> in <code>20_Areas/Companies/</code>. That file is the canonical wiki entry for the org &mdash; the place that consolidates partnership context, products, history, and strategic fit. People files are individual profiles that link <em>into</em> the Company file.</p>
+
+    <h3>Why This Pattern</h3>
+    <p>People come and go. Companies persist. When someone changes employers, I update the <code>company:</code> field on their People file &mdash; their relationship history stays intact, but the wiki entry stays attached to the org. When someone new joins an existing partner, I just add a row to that Company's Key People table and they inherit all the context.</p>
+
+    <h3>What a Company File Looks Like</h3>
+
+    <div class="code-block">
+        <pre><span class="header">---
+type: company
+name: [Org Name]
+website: [domain]
+relationship: [strategic-partner | partner | vendor | press | other]
+first_contact: YYYY-MM-DD
+last_contact: YYYY-MM-DD
+---
+
+# [Org Name]
+
+## What They Do
+[One paragraph. Plain description.]
+
+## Relationship Snapshot
+[Why this org matters to my work right now.]
+
+## Key People
+| Name | Role | Contact | Note |
+|------|------|---------|------|
+| [[Person-Name]] | [Role] | [email] | [one line] |
+
+## Brand USA Internal Counterparts
+[Who on my side owns this relationship.]
+
+## Products / Workstreams
+[Concrete things in play.]
+
+## Engagement Timeline
+| Date | Touchpoint | Call Note |
+|------|------------|-----------|
+| 2026-05-20 | Intro call | [[2026-05-20_Org-Name]] |
+
+## Strategic Fit
+[How this org sits relative to competitors and our strategy.]
+
+## Open Items
+- [ ] [item] &mdash; @owner &mdash; due YYYY-MM-DD
+
+## Related
+[Wikilinks to projects, parallel companies, reference memories.]</span></pre>
+    </div>
+
+    <h3>The Compounding Rule</h3>
+    <p>Three cross-references happen automatically at creation time, enforced by my CLAUDE.md:</p>
+    <ul>
+        <li><strong>New person at an existing company</strong> &rarr; update that Company's Key People table in the same edit.</li>
+        <li><strong>New company that already has People profiles</strong> &rarr; backfill the <code>company:</code> field on every existing person who works there.</li>
+        <li><strong>New Call note involving an external org</strong> &rarr; link to the Company in the call's Related section, and add the row to the Company's Engagement Timeline.</li>
+    </ul>
+
+    <div class="success-box">
+        <h4>The payoff</h4>
+        <p>Before a meeting, I can say "prep me on [Company Name]." Claude opens the Company file, reads the Key People table, scans recent Engagement Timeline entries, surfaces open items, and gives me a brief with everything I need. The Company file is the single hub; everything else links into it.</p>
+    </div>
+
+    <!-- SECTION: Shipping -->
+    <h2 id="shipping">Shipping From the Vault</h2>
+
+    <p>The vault isn't just a filing system. It's also a workshop where I produce branded artifacts and deploy them to the web. This was a category the original guides missed entirely.</p>
+
+    <h3>What I Ship From Here</h3>
+
+    <div class="why-grid">
+        <div class="why-card">
+            <h4>Single-use sites</h4>
+            <p>A skill (<code>/single-use-site</code>) takes a recipient name and a purpose, scaffolds an HTML page using the right brand identity, adds favicon and logos, deploys to Vercel under the correct team, and disables SSO so the recipient can open it without a login. From "build me a walkthrough page for X" to a live URL takes about 90 seconds.</p>
+        </div>
+        <div class="why-card">
+            <h4>Webinar pages</h4>
+            <p>A skill (<code>/add-webinar</code>) takes a video file, uploads to Mux, auto-generates a transcript, drafts page metadata, adds a card to my homepage, rebuilds the site, and deploys. One command turns a recording into a public, searchable webinar page.</p>
+        </div>
+        <div class="why-card">
+            <h4>Branded presentations</h4>
+            <p>Skills for PPTX (<code>/build-pptx</code>) and Google Slides (<code>/brand-usa-gslides</code>) that handle brand detection, layout planning, color and typography application, and logo placement. I describe the deck, Claude produces a polished file.</p>
+        </div>
+        <div class="why-card">
+            <h4>LinkedIn carousels</h4>
+            <p>A skill (<code>/linkedin-carousel</code>) that takes source material (a transcript, a webinar, a call), pulls images from my image library, applies brand styling, and produces a print-ready PDF carousel. Learns my voice over time through a recursive improvement loop.</p>
+        </div>
+    </div>
+
+    <h3>Why Shipping Belongs in the Vault</h3>
+    <p>Two reasons:</p>
+    <ul>
+        <li><strong>Source material is already here.</strong> The transcript I want to turn into a webinar page is in <code>20_Areas/Keynotes/</code>. The Brand USA logo files are in <code>30_Resources/</code>. The voice that should narrate the page is in <code>99_System/Context_Library/</code>. Building elsewhere means dragging all that context to a new tool.</li>
+        <li><strong>Skills can compose.</strong> <code>/add-webinar</code> uses the voice system to draft the page copy, the brand resources for visuals, and the deploy infrastructure to ship. Each piece was built for a different reason; the skill stitches them together.</li>
+    </ul>
+
+    <div class="warning-box">
+        <h4>One non-negotiable</h4>
+        <p>Always confirm the deployment target before pushing. When deploying to Vercel, name the target team explicitly &mdash; deploying to a personal account when you meant your org's account is annoying to undo. I have this as a hard rule in my CLAUDE.md.</p>
+    </div>
+
+    <!-- SECTION: MCP -->
+    <h2 id="mcp">MCP Servers: What's Actually Worth Connecting</h2>
+
+    <p>MCP (Model Context Protocol) servers let Claude reach beyond your filesystem &mdash; into project management tools, calendars, CRMs, BigQuery, your inbox. Most guides treat MCP as a list of options. After months of use, only a few are load-bearing.</p>
+
+    <h3>What I Actually Use</h3>
 
     <table class="comparison-table">
         <tr>
-            <th>Claude Desktop</th>
-            <th>Claude Code (VS Code)</th>
+            <th>Server</th>
+            <th>What It Unlocks</th>
         </tr>
         <tr>
-            <td>Config at: <code>~/Library/Application Support/Claude/claude_desktop_config.json</code></td>
-            <td>Config at: <code>.claude/settings.local.json</code> in your project</td>
+            <td><strong>Project management (Wrike, Asana, Linear)</strong></td>
+            <td>Tasks, due dates, and team workload show up in <code>/today</code> alongside vault tasks. Replaces tab-switching between Claude and the PM tool.</td>
         </tr>
         <tr>
-            <td>Supports many MCP servers</td>
-            <td>Typically fewer servers needed (focused on file work)</td>
+            <td><strong>Slack</strong></td>
+            <td>Search past messages, post drafts to channels, read DMs Claude was @-mentioned in. Useful for context retrieval and async delivery.</td>
         </tr>
         <tr>
-            <td>Great for research, data analysis, browsing</td>
-            <td>Great for file editing, coding, vault management</td>
+            <td><strong>Meeting transcript service (Granola, Otter, etc.)</strong></td>
+            <td>Pull Zoom transcripts directly into the vault without manual download. Foundation for the capture pipeline.</td>
+        </tr>
+        <tr>
+            <td><strong>Calendar / email (Outlook, Google)</strong></td>
+            <td>Read inbox for meeting context, draft replies in voice. Note: usually limited to Claude Desktop.</td>
+        </tr>
+        <tr>
+            <td><strong>Data warehouse (BigQuery, Snowflake)</strong></td>
+            <td>Query your own org's data. High-leverage if you do any analysis work.</td>
+        </tr>
+        <tr>
+            <td><strong>Cloud storage (Drive, Box, SharePoint)</strong></td>
+            <td>Read files from team shared drives without downloading. Essential when collaborators store things outside your vault.</td>
         </tr>
     </table>
 
-    <div class="tip-box">
-        <h4>Start With One</h4>
-        <p>The most useful first MCP server for most people is <strong>fetch</strong>&mdash;it lets Claude retrieve web content. If you use a project management tool like Wrike or Asana, adding that server is a high-value second step. Ask Claude: "Help me set up the [tool name] MCP server."</p>
+    <h3>Two Environments, Two Configs</h3>
+    <p>If you use both Claude Code (in VS Code) and Claude Desktop, MCP servers are configured separately:</p>
+
+    <table class="comparison-table">
+        <tr>
+            <th>Claude Code</th>
+            <th>Claude Desktop</th>
+        </tr>
+        <tr>
+            <td>Config: <code>.claude/.mcp.json</code> in your project, plus <code>enabledMcpjsonServers</code> in settings</td>
+            <td>Config: <code>~/Library/Application Support/Claude/claude_desktop_config.json</code></td>
+        </tr>
+        <tr>
+            <td>Best for: file work, coding, vault management, batch automation</td>
+            <td>Best for: research, browsing, conversational use, email reading</td>
+        </tr>
+        <tr>
+            <td>Same servers can be enabled in both, but each needs its own setup</td>
+            <td>Some MCP servers only work in Desktop (e.g. Outlook integrations)</td>
+        </tr>
+    </table>
+
+    <div class="warning-box">
+        <h4>Two gotchas worth knowing</h4>
+        <p><strong>Claude Desktop overwrites its config on restart.</strong> If you're editing <code>claude_desktop_config.json</code>, quit Desktop first (Cmd+Q on Mac, not just close the window), then edit, then relaunch.</p>
+        <p><strong>MCP servers consume context.</strong> Each connected server adds its tool descriptions to Claude's context window. Don't connect everything. Connect the two or three that match your real workflow and turn the rest off.</p>
     </div>
 
-    <h3>Add an Environment Note to Your CLAUDE.md</h3>
-    <p>Since you might use both Claude Desktop and Claude Code, add this to your CLAUDE.md:</p>
-
-    <div class="code-block">
-        <pre><span class="header">## Environment</span>
-
-I work across two environments: Claude Code (terminal)
-AND Claude Desktop. When editing MCP configs or
-settings, always ask which environment I mean,
-or apply to both.</pre>
+    <div class="tip-box">
+        <h4>Start with your project management tool</h4>
+        <p>For most people, the highest-leverage first MCP server is whichever project management tool runs your day. Once Claude can see your tasks, deadlines, and assignments, <code>/today</code> becomes meaningfully better &mdash; it pulls from your vault and your PM tool in the same view.</p>
     </div>
 
     <!-- SECTION: Writing Rules -->
-    <h2 id="writing-rules">Writing Rules & Guardrails</h2>
+    <h2 id="guardrails">Writing Rules &amp; Guardrails</h2>
 
-    <p>Beyond the writing profile (which captures your voice), you can add specific rules that prevent Claude from producing content you'd have to heavily edit.</p>
+    <p>Beyond the voice system (which teaches Claude how you write), guardrails are rules that prevent Claude from producing content you'd have to heavily edit or that could embarrass you. These live in your CLAUDE.md or in feedback memories.</p>
 
     <h3>Communication Guardrails</h3>
-    <p>If you work in an industry where AI hype language is common, add guardrails:</p>
+    <p>If you work in an industry where AI hype language is common, write a rule that pulls drafts back to specifics:</p>
 
     <div class="code-block">
         <pre><span class="header">## Communication Guardrails</span>
 
-When drafting communications or presentations for
-internal audiences, keep AI framing practical and
-grounded. Focus on specific tools and wins.
-Flag if a draft leans too heavy on
-"AI is changing everything" messaging.</pre>
+When drafting communications, presentations, or talking points
+for internal audiences, keep AI framing practical and grounded.
+Focus on specific tools and wins. Flag if a draft leans too heavy
+on sweeping transformation language.</pre>
     </div>
 
-    <h3>Internal vs. External Content Rules</h3>
-    <p>This one catches a lot of people off guard. Claude can easily mix internal language (testing frameworks, reauthorization processes, internal tool names) into content meant for external audiences:</p>
+    <h3>Internal vs. External Content</h3>
+    <p>Claude can easily mix internal language (project codenames, partner pricing details, internal tool nicknames) into content meant for external audiences. The fix is a one-line rule:</p>
 
     <div class="code-block">
         <pre><span class="header">## Content Creation</span>
 
-When creating content intended for external audiences
-(partners, clients, industry contacts), always ask
-'Is this internal or external?' if unclear.</pre>
+When creating content for external audiences (partners, clients,
+press, industry contacts), always ask "Is this internal or external?"
+if it's unclear. Never include partner pricing, financial figures,
+internal program names, or compliance-sensitive language in external
+deliverables.</pre>
     </div>
 
-    <!-- SECTION: Hard Lessons -->
-    <h2 id="hard-lessons">Hard-Won Lessons</h2>
+    <h3>Data Honesty</h3>
+    <p>If Claude is helping you with reports, analytics, or research, this rule prevents quiet fabrication:</p>
 
-    <p>These come directly from weeks of daily usage. Each one represents a real problem that took time to diagnose.</p>
+    <div class="code-block">
+        <pre><span class="header">## Data &amp; Reports</span>
+
+Never fabricate or extrapolate data. If I provide three months
+of data, do NOT create year-over-year comparisons. Verify
+relationships, geography, numbers, and frameworks before writing
+them into scripts or briefings. When source data is insufficient,
+flag it instead of filling the gap.</pre>
+    </div>
+
+    <div class="tip-box">
+        <h4>The rule-writing habit</h4>
+        <p>Every time Claude produces something that makes you wince, write a rule for it. After two weeks, you'll have a tight set of guardrails that catch 90% of the recurring problems. Most rules are one or two lines.</p>
+    </div>
+
+    <!-- SECTION: Lessons -->
+    <h2 id="lessons">Hard-Won Lessons</h2>
+
+    <p>These come from months of daily use. Each one represents a problem that took time to diagnose.</p>
 
     <div class="step">
         <span class="step-number">1</span>
         <h3>Context Window Management</h3>
-        <p>Claude can only hold so much information at once. If you load your writing profile, coding profile, three project specs, and a full contact database at the start of every session, Claude has very little room left for the actual work. <strong>Load profiles and specs on demand</strong>, and tell Claude explicitly in your CLAUDE.md to avoid preloading.</p>
+        <p>Claude holds a finite amount of information at once. If your CLAUDE.md is bloated with profile files, project specs, and detailed context that loads on every session, Claude runs out of room for the actual work. Keep the root CLAUDE.md tight. Push detail into memory files and project-level CLAUDE.md files that load on demand.</p>
     </div>
 
     <div class="step">
         <span class="step-number">2</span>
-        <h3>Data Hallucination</h3>
-        <p>Claude will cheerfully create year-over-year comparisons from three months of data if you let it. Add an explicit "Never fabricate or extrapolate data" rule to your CLAUDE.md. This is especially important if you work with reports, analytics, or financial data.</p>
+        <h3>Write a Memory When Something Surprises You</h3>
+        <p>The highest-leverage habit. When Claude does something unexpectedly right, write a feedback memory confirming it. When it does something wrong, write one correcting it. Either way, the system compounds. Skip this step and you'll have the same correction conversation three times.</p>
     </div>
 
     <div class="step">
         <span class="step-number">3</span>
-        <h3>Automation Has Limits</h3>
-        <p>If a task involves interacting with 50+ different websites you do not control (filling out forms, clicking through diverse UIs), browser automation will fail. The better approach: have Claude build you a manual workflow tool (like an HTML checklist with copy-paste prefills) that optimizes the human steps instead.</p>
+        <h3>Capture Pipelines Are the Highest-Leverage Build</h3>
+        <p>One hour spent wiring a transcript pipeline saves you ten hours of manual filing over the next month. If you have a recorder, get the pipeline running first. If you take Zoom meetings, get Granola or equivalent connected first. Everything downstream &mdash; call notes, People profiles, debriefs &mdash; gets easier when capture is automatic.</p>
     </div>
 
     <div class="step">
         <span class="step-number">4</span>
-        <h3>Deployment Verification</h3>
-        <p>When asking Claude to deploy code to GitHub Pages, Vercel, or similar: always verify the repo exists, the build command works locally first, and confirm the deployment URL after push. Add this as a rule in your CLAUDE.md. Claude will assume deployment succeeded unless you tell it to check.</p>
+        <h3>Data Hallucination Is Real</h3>
+        <p>Claude will cheerfully invent year-over-year comparisons from three months of data, attribute quotes to the wrong person, or assert facts that sound right but aren't. Add explicit "never fabricate" rules to your CLAUDE.md, and for high-stakes content, always verify before publishing.</p>
     </div>
 
     <div class="step">
         <span class="step-number">5</span>
-        <h3>Skills vs. Legacy Commands</h3>
-        <p>Claude Code has two systems: <strong>skills</strong> (in <code>~/.claude/skills/</code>) and <strong>commands</strong> (in <code>.claude/commands/</code> inside your project). Only skills work as invocable slash commands. If you created command files in your project folder and they don't trigger when you type the slash command, move them to skills.</p>
+        <h3>Browser Automation Has Hard Limits</h3>
+        <p>If a task involves interacting with 50+ different websites you don't control &mdash; diverse UIs, varying forms, captchas &mdash; browser automation will fail. I learned this trying to subscribe to 600 DMO newsletters. The better approach: have Claude build you a manual workflow tool (an HTML checklist with copy-paste prefills) that optimizes the human steps instead.</p>
     </div>
 
     <div class="step">
         <span class="step-number">6</span>
-        <h3>PDF Processing</h3>
-        <p>Claude can read PDFs, but comparing multiple PDF reports works much better if you convert them to markdown first. Add a PDF processing rule to your CLAUDE.md with the conversion command, so Claude handles this automatically before starting any analysis.</p>
+        <h3>Always Verify Deployments</h3>
+        <p>When Claude pushes code to Vercel, GitHub Pages, or anywhere live, don't assume the deployment succeeded. Add a rule: always confirm the deployment URL after push, and check that the build actually worked. Claude will report "deployed" based on the push completing, not on the build succeeding.</p>
     </div>
 
-    <!-- SECTION: Weekly Review -->
-    <h2 id="weekly-review">The Weekly Review</h2>
+    <div class="step">
+        <span class="step-number">7</span>
+        <h3>Skills vs. Project Commands &mdash; Only Skills Run</h3>
+        <p>Files in <code>.claude/commands/</code> inside a project look like skills but aren't invocable via slash. Only files in <code>~/.claude/skills/&lt;name&gt;/SKILL.md</code> work as triggerable skills. If you wrote a "command" that won't run, that's why &mdash; move it to skills.</p>
+    </div>
 
-    <p>A mature Personal OS benefits from a weekly maintenance cycle. This takes about 15 minutes and keeps everything running smoothly.</p>
+    <div class="step">
+        <span class="step-number">8</span>
+        <h3>When Something Annoys You, Write the Rule Immediately</h3>
+        <p>The two-week version of "this would be a nice rule" never gets written. The in-the-moment version of "Claude, never do that again &mdash; save it" does. Capture friction at the moment of friction.</p>
+    </div>
+
+    <!-- SECTION: Weekly Rhythm -->
+    <h2 id="weekly">The Weekly Rhythm</h2>
+
+    <p>A mature system benefits from a weekly maintenance pass. About 15 minutes. Most of it runs through skills.</p>
 
     <div class="workflow-box">
-        <h4>Weekly Review Workflow</h4>
+        <h4>The Weekly Loop</h4>
         <div class="workflow-item">
             <div class="workflow-icon">1</div>
             <div class="workflow-content">
-                <h5>Run /review</h5>
-                <p>Get a summary of completed tasks, call notes from the week, and open items.</p>
+                <h5>Monday: <code>/weekstart</code></h5>
+                <p>Daily agenda, overdue triage, project health check, people follow-ups due, and a one-line focus for the week.</p>
             </div>
         </div>
         <div class="workflow-item">
             <div class="workflow-icon">2</div>
             <div class="workflow-content">
-                <h5>Check Open Items</h5>
-                <p>Review People directory entries for any follow-ups that are due. Scan call notes for action items you committed to.</p>
+                <h5>Daily: <code>/today</code> + <code>/shutdown</code></h5>
+                <p>Morning agenda, end-of-day capture. Built up across the week, these feed the Friday summary.</p>
             </div>
         </div>
         <div class="workflow-item">
             <div class="workflow-icon">3</div>
             <div class="workflow-content">
-                <h5>Archive Completed Projects</h5>
-                <p>Move anything finished to <code>40_Archives/</code>. Keep your <code>10_Projects/</code> folder lean&mdash;only active work lives there.</p>
+                <h5>Friday: <code>/weekend</code></h5>
+                <p>Weekly review, unresolved items, updates to process notes, and a one-page summary of what moved.</p>
             </div>
         </div>
         <div class="workflow-item">
             <div class="workflow-icon">4</div>
             <div class="workflow-content">
-                <h5>Update Memory</h5>
-                <p>Run <code>/remember</code> to let Claude update its memory with anything from the past week that matters going forward.</p>
+                <h5>Periodically: <code>/remember</code></h5>
+                <p>When a pattern emerges across the week, capture it as a memory. Friday is a natural moment for this &mdash; ask Claude to review the week's calls and decisions and propose what's worth saving.</p>
             </div>
         </div>
         <div class="workflow-item">
             <div class="workflow-icon">5</div>
             <div class="workflow-content">
-                <h5>Update Business Profile</h5>
-                <p>If project statuses changed (completed, paused, new ones started), update the active projects table in your business profile.</p>
+                <h5>Monthly: archive and prune</h5>
+                <p>Move completed projects to <code>40_Archives/</code>. Scan your skills folder for skills you haven't used in 60 days and decide whether to keep, fix, or delete.</p>
             </div>
         </div>
     </div>
 
-    <div class="prompt-box">
-        <h4>Weekly review prompt:</h4>
-        <pre>Run /review for this past week. Then check 20_Areas/People/ for any contacts where follow_up is true and last_contact was more than 2 weeks ago. List anything that needs attention.</pre>
-    </div>
+    <!-- SECTION: Evolved Structure -->
+    <h2>The Vault After Six Months</h2>
 
-    <!-- SECTION: Evolved Folder Structure -->
-    <h2>Your Evolved Folder Structure</h2>
-
-    <p>Here's what the full structure looks like after a few weeks of active use:</p>
+    <p>Here's what mine looks like now. Items in <span style="color: var(--brand-green); font-weight: 600;">green</span> are additions beyond the foundation setup. They all emerged from real workflows.</p>
 
     <div class="folder-structure">
         <pre><span class="folder">Personal_OS/</span>
 │
-├── <span class="folder">00_Inbox/</span>                     <span class="comment"># Daily agendas</span>
+├── <span class="folder">00_Inbox/</span>                          <span class="comment"># Daily agendas, Plaud transcripts, captures</span>
 │
-├── <span class="folder">10_Projects/</span>                  <span class="comment"># Active work</span>
-│   ├── <span class="folder">Keynote_Prep/</span>
-│   │   ├── <span class="file">process_notes.md</span>
-│   │   └── <span class="file">call_notes.md</span>
-│   └── <span class="folder">Newsletter_Tracker/</span>
-│       └── <span class="file">process_notes.md</span>
+├── <span class="folder">10_Projects/</span>                       <span class="comment"># Active work, each with its own CLAUDE.md</span>
 │
-├── <span class="folder">20_Areas/</span>                     <span class="comment"># Ongoing responsibilities</span>
-│   ├── <span class="new">Calls/</span>                    <span class="comment"># Meeting notes (NEW)</span>
-│   │   ├── <span class="file">2026-02-10_Contact.md</span>
-│   │   └── <span class="file">_index.md</span>
-│   ├── <span class="new">People/</span>                   <span class="comment"># Contact directory (NEW)</span>
-│   │   ├── <span class="file">_template_person.md</span>
-│   │   ├── <span class="file">_group_template.md</span>
-│   │   ├── <span class="file">People_Index.md</span>
-│   │   └── <span class="file">Kyle-Hudson.md</span>
-│   ├── <span class="new">Keynotes/</span>                 <span class="comment"># Presentation archive (NEW)</span>
-│   │   ├── <span class="file">_workflow_guide.md</span>
-│   │   ├── <span class="file">common_talking_points.md</span>
-│   │   └── <span class="file">2026-02-09_Event.pdf</span>
-│   └── <span class="file">Someday_Maybe.md</span>
+├── <span class="folder">20_Areas/</span>
+│   ├── <span class="folder">Calls/</span>                         <span class="comment"># Meeting notes (per call)</span>
+│   ├── <span class="new">Companies/</span>                     <span class="comment"># Wiki entry per external org (NEW)</span>
+│   ├── <span class="folder">People/</span>                        <span class="comment"># Individual profiles, linked to Companies</span>
+│   ├── <span class="new">Keynotes/</span>                      <span class="comment"># Speaking engagement archive (NEW)</span>
+│   ├── <span class="new">Events/</span>                        <span class="comment"># Conference session notes (audience-side) (NEW)</span>
+│   ├── <span class="new">Market_Research/</span>               <span class="comment"># Ongoing research area (NEW)</span>
+│   └── <span class="new">Press_Coverage/</span>                <span class="comment"># Media mentions log (NEW)</span>
 │
-├── <span class="folder">30_Resources/</span>                <span class="comment"># Reference materials</span>
+├── <span class="folder">30_Resources/</span>
+│   ├── <span class="new">Research/AI/</span>                   <span class="comment"># Sources, Digests, Stats_Library (NEW)</span>
+│   ├── <span class="new">Research/Tourism/</span>              <span class="comment"># Same structure, different domain (NEW)</span>
+│   ├── <span class="new">Webinar_Transcripts/</span>           <span class="comment"># With TOPIC_INDEX for voice retrieval (NEW)</span>
+│   ├── <span class="new">Brand_Resources/</span>               <span class="comment"># Logos, colors, fonts, usage rules (NEW)</span>
+│   └── <span class="new">AI_Generated_Images/</span>           <span class="comment"># Reusable image library (NEW)</span>
 │
-├── <span class="folder">40_Archives/</span>                 <span class="comment"># Completed items</span>
+├── <span class="folder">40_Archives/</span>
+│
+├── <span class="folder">50_Personal/</span>                       <span class="comment"># Personal projects, kept separate</span>
 │
 ├── <span class="folder">99_System/</span>
 │   ├── <span class="folder">Context_Library/</span>
-│   │   ├── <span class="file">business_profile.md</span>
-│   │   ├── <span class="file">personal_profile.md</span>
-│   │   ├── <span class="folder">project_specs/</span>
-│   │   └── <span class="new">personal_specs/</span>       <span class="comment"># Personal projects (NEW)</span>
+│   │   ├── <span class="new">speaking_positions.md</span>      <span class="comment"># Voice system (NEW)</span>
+│   │   ├── <span class="new">quotable_moments.md</span>        <span class="comment"># Voice system (NEW)</span>
+│   │   ├── <span class="new">email_voice_guide.md</span>       <span class="comment"># Voice system (NEW)</span>
+│   │   ├── <span class="new">slide_playbook.md</span>          <span class="comment"># Deck design system (NEW)</span>
+│   │   └── <span class="new">recurring_meetings/</span>        <span class="comment"># Standing roster files (NEW)</span>
 │   ├── <span class="folder">Profiles/</span>
-│   │   ├── <span class="file">writing_profile.md</span>
-│   │   ├── <span class="file">coding_profile.md</span>
-│   │   └── <span class="new">coding_reference.md</span>   <span class="comment"># Tech environment (NEW)</span>
-│   ├── <span class="folder">Scripts/</span>
-│   └── <span class="new">claude_code_config.md</span>     <span class="comment"># Skills reference (NEW)</span>
+│   ├── <span class="new">Scripts/</span>                       <span class="comment"># Plaud sync, cron jobs (NEW)</span>
+│   └── <span class="file">claude_code_config.md</span>
+│
+├── <span class="new">Apps/</span>                              <span class="comment"># Software projects deployed from here (NEW)</span>
 │
 └── <span class="file">CLAUDE.md</span></pre>
     </div>
 
-    <p>Items marked in <span style="color: var(--brand-green); font-weight: 600;">green</span> are additions beyond the original 1.0 setup. They emerge naturally from daily use&mdash;you build them as you need them.</p>
-
-    <!-- SECTION: Quick Reference -->
-    <h2>Quick Reference: The Full Optimization Checklist</h2>
-
-    <p>Use this as a checklist. You can tackle these in any order&mdash;each one is independent.</p>
-
-    <table class="comparison-table">
-        <tr>
-            <th>Optimization</th>
-            <th>Time to Set Up</th>
-            <th>Daily Value</th>
-        </tr>
-        <tr>
-            <td>Add task schema to CLAUDE.md</td>
-            <td>5 minutes</td>
-            <td>High&mdash;consistent task format for /today</td>
-        </tr>
-        <tr>
-            <td>Add action rules to CLAUDE.md</td>
-            <td>10 minutes</td>
-            <td>High&mdash;eliminates recurring friction</td>
-        </tr>
-        <tr>
-            <td>Create a writing profile</td>
-            <td>15 minutes</td>
-            <td>High&mdash;Claude writes in your voice</td>
-        </tr>
-        <tr>
-            <td>Set up People directory</td>
-            <td>10 minutes (template + CLAUDE.md rules)</td>
-            <td>High&mdash;relationship memory across sessions</td>
-        </tr>
-        <tr>
-            <td>Set up /call command</td>
-            <td>10 minutes</td>
-            <td>High&mdash;structured meeting notes in seconds</td>
-        </tr>
-        <tr>
-            <td>Create business profile</td>
-            <td>15 minutes</td>
-            <td>Medium&mdash;Claude knows your org context</td>
-        </tr>
-        <tr>
-            <td>Set up /review command</td>
-            <td>10 minutes</td>
-            <td>Medium&mdash;weekly summaries in one command</td>
-        </tr>
-        <tr>
-            <td>Create global CLAUDE.md</td>
-            <td>10 minutes</td>
-            <td>Medium&mdash;preferences apply everywhere</td>
-        </tr>
-        <tr>
-            <td>Set up first MCP server</td>
-            <td>15 minutes</td>
-            <td>Varies&mdash;depends on which tool you connect</td>
-        </tr>
-        <tr>
-            <td>Create Keynotes archive</td>
-            <td>20 minutes</td>
-            <td>Compounds&mdash;each presentation makes the next faster</td>
-        </tr>
-    </table>
+    <p>The structure isn't the system &mdash; the structure is the residue of the system. Folders appear because workflows need a home. Skills appear because patterns repeat. Memories appear because lessons stick. None of it was planned upfront. All of it was built one piece at a time.</p>
 
     <div class="cta-section">
-        <h2>Your Personal OS Grows With You</h2>
-        <p>These optimizations add up. The more context Claude has&mdash;your contacts, your decisions, your writing voice, your project history&mdash;the more it shifts from assistant to partner. Start with the highest-value items from the checklist above and add more as your workflow demands them.</p>
-        <a href="https://janetteroush.com" class="cta-button">Explore More at Agents of Change</a>
+        <h2>The System Grows With You</h2>
+        <p>None of this is a checklist. It's a direction. Start with one capture pipeline, write your first feedback memory the next time you correct Claude, ship one thing from the vault to prove it can be done, and add the rest as the friction calls for it. Six months from now, you'll have something nobody else has &mdash; an AI coworker who knows your work.</p>
+        <a href="https://janetteroush.com" class="cta-button">More From Agents of Change</a>
     </div>
 
 </main>

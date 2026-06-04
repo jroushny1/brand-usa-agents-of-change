@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Set Up Your Personal OS for Claude Code | Agents of Change',
-  description: 'A simple file system that helps AI understand your work and become a true productivity partner. Free guide for Claude Code users.',
+  title: 'The Shape of a Personal OS for Claude | Agents of Change',
+  description: 'A folder of markdown files that turns Claude from a chatbot into a coworker who knows your work. The foundation guide.',
 }
 
 export default function PersonalOSGuidePage() {
@@ -619,32 +619,31 @@ export default function PersonalOSGuidePage() {
 
       <div className="pos-page">
         <section className="hero">
-          <span className="hero-badge">Free Guide</span>
-          <h1>Set Up Your Personal OS<br />for Claude Code</h1>
-          <p>A simple file system that helps AI understand your work and become a true productivity partner.</p>
-          <a href="#step-by-step" className="hero-cta">Jump to Setup Instructions</a>
+          <span className="hero-badge">Foundation Guide</span>
+          <h1>The Shape of a<br />Personal OS for Claude</h1>
+          <p>A folder of markdown files that turns Claude from a chatbot into a coworker who knows your work.</p>
+          <a href="#setup" className="hero-cta">Jump to Setup</a>
         </section>
 
         <main className="container">
           <nav className="toc">
             <h3>What&apos;s in This Guide</h3>
             <ul>
-              <li><a href="#what-is">What is a Personal OS?</a></li>
+              <li><a href="#what-it-is">What a Personal OS Actually Is</a></li>
               <li><a href="#requirements">What You&apos;ll Need</a></li>
-              <li><a href="#why-matters">Why This Matters</a></li>
-              <li><a href="#folder-structure">The Folder Structure</a></li>
-              <li><a href="#claude-md">The CLAUDE.md File</a></li>
-              <li><a href="#tools">Obsidian + VS Code: How They Work Together</a></li>
-              <li><a href="#slash-commands">The Slash Commands (/today and /log)</a></li>
-              <li><a href="#step-by-step">Setup Instructions</a></li>
-              <li><a href="#tips">Tips for Success</a></li>
+              <li><a href="#why-structure">Why Structure Matters</a></li>
+              <li><a href="#folder-structure">The Folder Layout</a></li>
+              <li><a href="#claude-md">CLAUDE.md: The File Claude Reads First</a></li>
+              <li><a href="#setup">Day-1 Setup</a></li>
+              <li><a href="#daily-rhythm">Your Daily Rhythm</a></li>
+              <li><a href="#starting-rules">Rules I&apos;d Give Myself If Starting Over</a></li>
             </ul>
           </nav>
 
-          <div className="intro-box" id="what-is">
-            <h3>What is a Personal OS?</h3>
-            <p>A Personal OS is just a folder structure on your computer with a few special files that help Claude (or any AI assistant) understand who you are, what you&apos;re working on, and how you like to work.</p>
-            <p style={{ marginBottom: 0 }}>Think of it as giving Claude a map of your brain. Instead of explaining your projects and preferences every time, Claude already knows.</p>
+          <div className="intro-box" id="what-it-is">
+            <h3>What a Personal OS Actually Is</h3>
+            <p>A folder on your computer. Inside it, markdown files for your projects, your notes, your tasks. One special file at the root called <code style={{ background: 'rgba(255,255,255,0.15)', color: 'var(--brand-cyan)' }}>CLAUDE.md</code> that tells Claude how to behave when you open this folder.</p>
+            <p style={{ marginBottom: 0 }}>That&apos;s the whole system. The leverage comes from the fact that Claude reads your CLAUDE.md every time you start a session, so you stop re-explaining who you are and what you&apos;re working on. Claude already knows.</p>
           </div>
 
           <div className="requirements-box" id="requirements">
@@ -652,21 +651,26 @@ export default function PersonalOSGuidePage() {
             <div className="requirements-grid">
               <div className="requirement-item">
                 <h4>VS Code</h4>
-                <p>Free code editor where Claude Code runs.<br /><a href="https://code.visualstudio.com" target="_blank" rel="noopener noreferrer">Download here</a></p>
+                <p>Free editor. Claude Code runs inside it.<br /><a href="https://code.visualstudio.com" target="_blank" rel="noopener noreferrer">Download here</a></p>
               </div>
               <div className="requirement-item">
-                <h4>Claude Pro or Max Account</h4>
-                <p>Paid subscription required for Claude Code.<br /><a href="https://claude.ai" target="_blank" rel="noopener noreferrer">Subscribe here</a></p>
+                <h4>Claude Pro or Max</h4>
+                <p>The subscription that powers Claude Code.<br /><a href="https://claude.ai" target="_blank" rel="noopener noreferrer">Subscribe here</a></p>
               </div>
               <div className="requirement-item">
-                <h4>Obsidian</h4>
-                <p>Free note-taking app for viewing your files.<br /><a href="https://obsidian.md" target="_blank" rel="noopener noreferrer">Download here</a></p>
+                <h4>That&apos;s it</h4>
+                <p>No Obsidian, no notes app, no cloud sync. Markdown renders beautifully in VS Code&apos;s preview pane.</p>
               </div>
+            </div>
+
+            <div className="tool-box">
+              <h4>A note on viewing your notes</h4>
+              <p>When you want to read a markdown file like a document instead of editing it, hit <code>Cmd+Shift+V</code> (Mac) or <code>Ctrl+Shift+V</code> (Windows) in VS Code. It opens a preview pane with formatted headings, lists, and links. This is how I read my daily agenda every morning. A separate notes app would be doing the same thing twice.</p>
             </div>
 
             <div className="warning-box">
               <h4>Important: Keep Sensitive Information Out</h4>
-              <p>Claude can read any files in your Personal OS folder. <strong>Do not store:</strong></p>
+              <p>Claude can read any file in your Personal OS folder. <strong>Do not store:</strong></p>
               <ul>
                 <li>Passwords, API keys, or credentials</li>
                 <li>Social Security numbers or government IDs</li>
@@ -675,72 +679,77 @@ export default function PersonalOSGuidePage() {
                 <li>Confidential work documents your employer hasn&apos;t approved for AI use</li>
                 <li>Other people&apos;s personal information without consent</li>
               </ul>
-              <p style={{ marginTop: 12, marginBottom: 0 }}>If you need to reference sensitive projects, create a note that describes the project without including the actual sensitive data.</p>
+              <p style={{ marginTop: 12, marginBottom: 0 }}>If a sensitive project needs context, write a note describing the project without the sensitive data inside.</p>
             </div>
           </div>
 
-          <h2 id="why-matters">Why This Matters</h2>
-          <p>Without structure, every conversation with AI starts from scratch. You waste time re-explaining context. Claude gives generic advice because it doesn&apos;t know your situation.</p>
-          <p>With a Personal OS, everything changes:</p>
+          <h2 id="why-structure">Why Structure Matters</h2>
+          <p>Without it, every conversation with Claude starts from scratch. You re-explain your role, your projects, your preferences. Claude gives generic advice because it has no idea what you&apos;re actually doing.</p>
+          <p>With a Personal OS, the structure gives Claude memory:</p>
 
           <div className="why-grid">
             <div className="why-card">
-              <h4>Persistent Memory</h4>
-              <p>Claude reads your files at the start of each session. It remembers your projects, preferences, and history.</p>
+              <h4>Claude Reads Your Files</h4>
+              <p>The CLAUDE.md at the root loads automatically at the start of every session. Claude knows your role, your active projects, and your rules before you type a word.</p>
             </div>
             <div className="why-card">
-              <h4>Instant Context</h4>
-              <p>No more &quot;I&apos;m working on a presentation about...&quot; Just ask for help and Claude already knows what you&apos;re doing.</p>
+              <h4>Nested Context</h4>
+              <p>Each project can have its own CLAUDE.md. When you navigate into that folder, Claude inherits the project-specific instructions on top of the global ones.</p>
             </div>
             <div className="why-card">
-              <h4>Better Suggestions</h4>
-              <p>Because Claude understands your work patterns and goals, its suggestions fit your actual situation.</p>
+              <h4>Tasks That Travel</h4>
+              <p>Tasks live as markdown files with structured metadata. Skills like <code>/today</code> scan the whole vault and build a daily agenda automatically.</p>
             </div>
             <div className="why-card">
-              <h4>Task Tracking</h4>
-              <p>Built-in commands scan your files for tasks due today, creating automatic daily agendas.</p>
+              <h4>The System Grows</h4>
+              <p>Every time you correct Claude or teach it something, that lesson gets saved. Next week, Claude already knows. The system compounds.</p>
             </div>
           </div>
 
-          <h2 id="folder-structure">The Folder Structure</h2>
-          <p>Your Personal OS uses a numbered folder system based on the PARA method (Projects, Areas, Resources, Archives). The numbers keep things sorted in a logical order.</p>
+          <h2 id="folder-structure">The Folder Layout</h2>
+          <p>The vault uses a numbered folder system based on the PARA method (Projects, Areas, Resources, Archives). Numbers keep things in a stable order regardless of which file browser you use.</p>
 
           <div className="folder-structure">
             <pre><span className="folder">Personal_OS/</span>{`
 │
-├── `}<span className="folder">00_Inbox/</span>             <span className="comment"># Daily agendas and quick captures</span>{`
+├── `}<span className="folder">00_Inbox/</span>             <span className="comment"># Daily agendas, quick captures, unsorted</span>{`
 │
-├── `}<span className="folder">10_Projects/</span>          <span className="comment"># Active work with deadlines</span>{`
+├── `}<span className="folder">10_Projects/</span>          <span className="comment"># Active work with deadlines or outcomes</span>{`
 │
-├── `}<span className="folder">20_Areas/</span>             <span className="comment"># Ongoing responsibilities (no deadline)</span>{`
+├── `}<span className="folder">20_Areas/</span>             <span className="comment"># Ongoing responsibilities (no end date)</span>{`
+│   ├── `}<span className="folder">Calls/</span>            <span className="comment"># Meeting notes</span>{`
+│   ├── `}<span className="folder">People/</span>           <span className="comment"># Contact profiles</span>{`
+│   └── `}<span className="folder">Companies/</span>        <span className="comment"># Org wiki entries</span>{`
 │
-├── `}<span className="folder">30_Resources/</span>         <span className="comment"># Reference materials, templates</span>{`
+├── `}<span className="folder">30_Resources/</span>         <span className="comment"># Reference materials, research, templates</span>{`
 │
-├── `}<span className="folder">40_Archives/</span>          <span className="comment"># Completed or inactive items</span>{`
+├── `}<span className="folder">40_Archives/</span>          <span className="comment"># Completed projects, old work</span>{`
+│
+├── `}<span className="folder">50_Personal/</span>          <span className="comment"># Personal projects, kept separate from work</span>{`
 │
 ├── `}<span className="folder">99_System/</span>            <span className="comment"># Configuration, profiles, scripts</span>{`
 │   │
 │   ├── `}<span className="folder">Context_Library/</span>{`
 │   │   ├── `}<span className="file">business_profile.md</span>{`
-│   │   ├── `}<span className="file">personal_profile.md</span>{`
 │   │   └── `}<span className="folder">project_specs/</span>{`
 │   │
-│   ├── `}<span className="folder">Profiles/</span>{`
-│   │   ├── `}<span className="file">writing_profile.md</span>{`
-│   │   └── `}<span className="file">coding_profile.md</span>{`
-│   │
 │   └── `}<span className="folder">Scripts/</span>{`
-│       └── `}<span className="file">task_scanner.py</span>{`
 │
-└── `}<span className="file">CLAUDE.md</span>             <span className="comment"># The brain - Claude reads this first</span></pre>
+├── `}<span className="folder">Apps/</span>                 <span className="comment"># Software projects (peer of PARA, not nested)</span>{`
+│
+└── `}<span className="file">CLAUDE.md</span>             <span className="comment"># The brain — Claude reads this first</span></pre>
           </div>
 
           <div className="explanation">
-            <strong>Why numbered folders?</strong> They always sort in the same order, regardless of what file browser you use. 00 comes first (your inbox), 99 comes last (system files you rarely touch).
+            <strong>Why numbered folders?</strong> They always sort in the same order. <code>00</code> comes first (your inbox, where you capture things fast), <code>99</code> comes last (system files you rarely touch). PARA gives you a stable mental model: Projects have deadlines, Areas are ongoing, Resources are reference material, Archives are done.
           </div>
 
-          <h2 id="claude-md">The CLAUDE.md File</h2>
-          <p>This is the most important file in your system. Claude reads it automatically when you start working in this folder. It tells Claude who it is in your world and how to behave.</p>
+          <div className="explanation">
+            <strong>Why <code>Apps/</code> as a peer of PARA?</strong> If you build software inside your vault — websites, scripts, small tools — they need their own top-level folder. They don&apos;t fit cleanly into Projects (which assume markdown notes) and they shouldn&apos;t be buried in Resources. <code>Apps/</code> keeps them visible and easy to deploy.
+          </div>
+
+          <h2 id="claude-md">CLAUDE.md: The File Claude Reads First</h2>
+          <p>This is the most important file in your system. Claude reads it automatically when you start a session inside this folder. It tells Claude who it is in your world, where things live, and how to behave.</p>
 
           <div className="code-block">
             <pre><span className="header">## Role</span>{`
@@ -750,202 +759,90 @@ Manage tasks, organize information, facilitate research
 with precision and low friction.
 
 
+`}<span className="header">## Who I Am</span>{`
+
+[Your name] — [your title] at [your organization].
+[One sentence of context: industry, focus, what you care about.]
+
+
+`}<span className="header">## Core Behavior</span>{`
+
+`}<span className="bullet">-</span>{` When I ask for a change, ALWAYS edit the file directly.
+  Never just show me the fix.
+`}<span className="bullet">-</span>{` Keep changes minimal — touch only what's necessary.
+`}<span className="bullet">-</span>{` Read local files before asking for context.
+`}<span className="bullet">-</span>{` Confirm before deleting; edit freely if aligned.
+`}<span className="bullet">-</span>{` Concise responses — no lectures.
+
+
 `}<span className="header">## Architecture</span>{`
 
-`}<span className="bullet">-</span> <span className="keyword">Root:</span>{` Obsidian Vault
-`}<span className="bullet">-</span> <span className="keyword">Tasks:</span>{` Markdown files in `}<span className="string">`10_Projects/`</span>{` and `}<span className="string">`00_Inbox/`</span>{`
-`}<span className="bullet">-</span> <span className="keyword">Archive:</span>{` Never search/modify `}<span className="string">`40_Archives/`</span>{` unless explicitly asked
+PARA-based vault:
+`}<span className="bullet">-</span>{` `}<span className="string">`00_Inbox/`</span>{` capture and triage
+`}<span className="bullet">-</span>{` `}<span className="string">`10_Projects/`</span>{` active projects (each can have its own CLAUDE.md)
+`}<span className="bullet">-</span>{` `}<span className="string">`20_Areas/`</span>{` ongoing areas (Calls, People, Companies)
+`}<span className="bullet">-</span>{` `}<span className="string">`40_Archives/`</span>{` — never search or modify unless asked
 
 
-`}<span className="header">## Behavioral Guidelines</span>{`
+`}<span className="header">## Task Schema</span>{`
 
-1. Read local files before asking for context
-2. Concise, actionable responses - no lectures
-3. Confirm before deleting; edit freely if aligned with request
-4. Today is {{DATE}} - calculate relative dates accordingly
-
-
-`}<span className="header">## Context & Profiles</span>{`
-
-Profiles and project specs live in `}<span className="string">`99_System/`</span>{`.
-Load `}<span className="keyword">only</span>{` when explicitly requested:
-
-`}<span className="bullet">-</span>{` "Writing Mode" → `}<span className="string">`Profiles/writing_profile.md`</span>{`
-`}<span className="bullet">-</span>{` "Coding Mode" → `}<span className="string">`Profiles/coding_profile.md`</span>{`
-`}<span className="bullet">-</span>{` Project work → relevant spec in `}<span className="string">`Context_Library/project_specs/`</span>{`
-
-`}<span className="keyword">Do NOT preload profiles based on inferred task type.</span></pre>
+`}<span className="string">{'```yaml'}</span>{`
+`}<span className="keyword">type:</span>{` task
+`}<span className="keyword">status:</span>{` [todo, in-progress, done, waiting]
+`}<span className="keyword">created:</span>{` YYYY-MM-DD
+`}<span className="keyword">due_date:</span>{` YYYY-MM-DD
+`}<span className="keyword">priority:</span>{` [high, medium, low]
+`}<span className="keyword">tags:</span>{` []
+`}<span className="string">{'```'}</span></pre>
           </div>
 
           <div className="explanation">
-            <strong>Why this structure?</strong> The CLAUDE.md file gives Claude just enough context to be helpful without overloading it. It knows where your tasks live, what to avoid touching, and when to load additional context.
+            <strong>Why this works:</strong> Claude reads this once at the start of the session and behaves accordingly for the entire conversation. The task schema is especially load-bearing — every task Claude creates uses these exact field names, so skills like <code>/today</code> can find them reliably.
           </div>
 
           <h3>Nested CLAUDE.md Files</h3>
-          <p>Here&apos;s where it gets powerful: you can put CLAUDE.md files inside specific project folders too. Claude reads them hierarchically, from the root down to wherever you&apos;re working.</p>
+          <p>Each project can have its own CLAUDE.md. Claude reads them hierarchically — the root one always, then any project-specific one when you&apos;re working in that folder.</p>
 
           <div className="folder-structure">
             <pre><span className="folder">Personal_OS/</span>{`
 │
-├── `}<span className="file">CLAUDE.md</span>                        <span className="comment"># Global instructions</span>{`
+├── `}<span className="file">CLAUDE.md</span>                        <span className="comment"># Always loads</span>{`
 │
 └── `}<span className="folder">10_Projects/</span>{`
     │
-    └── `}<span className="folder">My_Website_Redesign/</span>{`
+    └── `}<span className="folder">Website_Redesign/</span>{`
         │
-        ├── `}<span className="file">CLAUDE.md</span>                <span className="comment"># Project-specific instructions</span>{`
-        ├── `}<span className="file">process_notes.md</span>        <span className="comment"># Session history</span>{`
-        └── `}<span className="file">Website_Redesign.md</span>     <span className="comment"># Project details</span></pre>
+        ├── `}<span className="file">CLAUDE.md</span>                <span className="comment"># Loads when working in this folder</span>{`
+        └── `}<span className="file">project_brief.md</span></pre>
           </div>
 
-          <p>The project-level CLAUDE.md might say things like:</p>
+          <p>The project-level file is where you put context that only matters for this project:</p>
           <ul>
-            <li>This is a React project - use TypeScript</li>
-            <li>The client prefers minimalist design</li>
-            <li>Always run tests before suggesting we&apos;re done</li>
+            <li>This is a React project — use TypeScript</li>
+            <li>The client prefers minimalist design, no gradients</li>
+            <li>Always run tests before declaring done</li>
             <li>Design files are in Figma at [link]</li>
+            <li>Deployment is GitHub Actions to AWS</li>
           </ul>
 
           <div className="explanation">
-            <strong>Why nested files?</strong> Different projects have different needs. A coding project needs different instructions than a writing project. Nested CLAUDE.md files let you customize Claude&apos;s behavior for each context.
+            <strong>The pattern that matters:</strong> Global behavior at the root, project-specific behavior in the project. Don&apos;t put project details in the root CLAUDE.md — they pollute every session. Don&apos;t put global rules in project CLAUDE.md files — they only apply when you&apos;re in that folder.
           </div>
 
-          <h3>Process Notes: Your Project Memory</h3>
-          <p>Each project can have a <code>process_notes.md</code> file that tracks what happened in each work session. This is how Claude remembers what you did yesterday, what decisions you made, and what&apos;s still pending.</p>
-
-          <div className="code-block">
-            <pre><span className="header"># Process Notes: Website Redesign</span>{`
-
-Session logs documenting decisions, progress, and context.
-
----
-
-`}<span className="header">## 2026-01-23 - Homepage Layout</span>{`
-
-`}<span className="keyword">Summary:</span>{`
-Finalized hero section design and implemented
-mobile responsive layout.
-
-`}<span className="keyword">Changes:</span>{`
-`}<span className="bullet">-</span>{` Updated Header.tsx with new navigation
-`}<span className="bullet">-</span>{` Created HeroSection component
-`}<span className="bullet">-</span>{` Added mobile breakpoints to global CSS
-
-`}<span className="keyword">Decisions:</span>{`
-`}<span className="bullet">-</span>{` Using CSS Grid instead of Flexbox for main layout
-`}<span className="bullet">-</span>{` Client approved blue color palette
-
-`}<span className="keyword">Open:</span>{`
-`}<span className="bullet">-</span>{` [ ] Add animation to hero section
-`}<span className="bullet">-</span>{` [ ] Get client feedback on footer design`}</pre>
-          </div>
-
-          <h2 id="tools">Obsidian + VS Code: How They Work Together</h2>
-          <p>These two tools serve different purposes in your workflow:</p>
-
-          <div className="workflow-box">
-            <h4>Your Daily Workflow</h4>
-            <div className="workflow-item">
-              <div className="workflow-icon">1</div>
-              <div className="workflow-content">
-                <h5>Obsidian = Viewing &amp; Navigating</h5>
-                <p>Use Obsidian to browse your notes, read project files, check your daily agenda, and navigate between linked documents. It&apos;s your &quot;reading&quot; interface.</p>
-              </div>
-            </div>
-            <div className="workflow-item">
-              <div className="workflow-icon">2</div>
-              <div className="workflow-content">
-                <h5>VS Code + Claude = Working &amp; Creating</h5>
-                <p>Use VS Code when you want Claude&apos;s help. This is where you run slash commands, ask Claude to write or edit files, create new projects, and do actual work.</p>
-              </div>
-            </div>
-            <div className="workflow-item">
-              <div className="workflow-icon">3</div>
-              <div className="workflow-content">
-                <h5>Both Open at Once</h5>
-                <p>Keep both apps open. Changes sync instantly because they&apos;re reading the same files on your computer.</p>
-              </div>
-            </div>
-          </div>
-
-          <h3>Why Obsidian?</h3>
-          <p>Obsidian is a free app for writing and organizing notes. It works with plain text files (Markdown) stored on your computer. Here&apos;s why it&apos;s perfect for a Personal OS:</p>
-
-          <div className="why-grid">
-            <div className="why-card">
-              <h4>Your Files, Your Computer</h4>
-              <p>Unlike Notion or Google Docs, your notes are just files on your hard drive. No internet required. You own them forever.</p>
-            </div>
-            <div className="why-card">
-              <h4>Complete Privacy</h4>
-              <p>Your notes never leave your computer unless you choose to share them. No cloud sync required. No company reading your data.</p>
-            </div>
-            <div className="why-card">
-              <h4>Plain Text = Future-Proof</h4>
-              <p>Markdown files work everywhere. If Obsidian disappears tomorrow, your files still open in any text editor.</p>
-            </div>
-            <div className="why-card">
-              <h4>Linking &amp; Backlinks</h4>
-              <p>Connect ideas across notes. See which notes link to each other. Build a web of your knowledge.</p>
-            </div>
-          </div>
-
-          <div className="tool-box">
-            <h4>Don&apos;t want to use Obsidian?</h4>
-            <p>That&apos;s fine! The Personal OS works with any folder of Markdown files. You can use Typora, iA Writer, or any Markdown editor you prefer for viewing. VS Code is still recommended for working with Claude.</p>
-          </div>
-
-          <h2 id="slash-commands">The Slash Commands</h2>
-          <p>Slash commands are shortcuts that trigger specific workflows. Here are two essential ones:</p>
-
-          <div className="skill-card">
-            <h4><code>/today</code> Daily Agenda Generator</h4>
-            <p>This command scans all your project folders for tasks with due dates, checks what&apos;s overdue, and creates a daily agenda file in your Inbox.</p>
-
-            <p><strong>What it does:</strong></p>
-            <ul>
-              <li>Scans all markdown files for tasks with due dates</li>
-              <li>Groups them by: Overdue, Due Today, Due This Week, Due Next Week</li>
-              <li>Creates a new file like <code>2026-01-25_Agenda.md</code></li>
-              <li>Includes sections for daily focus, notes, and someday/maybe items</li>
-            </ul>
-
-            <p><strong>How to use:</strong> Just type <code>/today</code> in VS Code when starting your work day.</p>
-          </div>
-
-          <div className="skill-card">
-            <h4><code>/log</code> Session Logger</h4>
-            <p>When you finish a work session, this command summarizes what you accomplished and appends it to your project&apos;s process_notes.md file.</p>
-
-            <p><strong>What it does:</strong></p>
-            <ul>
-              <li>Identifies which project you&apos;re working in</li>
-              <li>Creates a summary of the session (changes, decisions, open items)</li>
-              <li>Appends it to process_notes.md with today&apos;s date</li>
-              <li>Automatically compacts old entries to keep the file lean</li>
-            </ul>
-
-            <p><strong>How to use:</strong> Type <code>/log</code> in VS Code at the end of a work session.</p>
-          </div>
-
-          <div className="explanation">
-            <strong>Why slash commands?</strong> They turn multi-step workflows into single actions. Instead of manually scanning files and writing summaries, one command does it all.
-          </div>
-
-          <h2 id="step-by-step">Setup Instructions</h2>
-          <p>Good news: Claude will do most of the setup work for you. You just need to install the tools and paste a few prompts.</p>
+          <h2 id="setup">Day-1 Setup</h2>
+          <p>Claude does most of the work. You install the tools, create one empty folder, and paste a few prompts.</p>
 
           <div className="step">
             <span className="step-number">1</span>
             <h3>Install VS Code</h3>
-            <p>Download VS Code from <a href="https://code.visualstudio.com" target="_blank" rel="noopener noreferrer">code.visualstudio.com</a> and run the installer. Default settings are fine.</p>
+            <p>Download from <a href="https://code.visualstudio.com" target="_blank" rel="noopener noreferrer">code.visualstudio.com</a> and run the installer. Default settings are fine.</p>
           </div>
 
           <div className="step">
             <span className="step-number">2</span>
-            <h3>Install the Claude Extension</h3>
+            <h3>Install Claude Code</h3>
             <div className="substep">
-              <p>Open VS Code. Click the Extensions icon in the left sidebar (looks like four squares), or press <code>Cmd+Shift+X</code> (Mac) or <code>Ctrl+Shift+X</code> (Windows).</p>
+              <p>Open VS Code. Click the Extensions icon in the left sidebar, or press <code>Cmd+Shift+X</code> (Mac) / <code>Ctrl+Shift+X</code> (Windows).</p>
             </div>
             <div className="substep">
               <p>Search for &quot;Claude&quot; and install the official extension by Anthropic. Sign in with your Claude account when prompted.</p>
@@ -955,16 +852,16 @@ mobile responsive layout.
           <div className="step">
             <span className="step-number">3</span>
             <h3>Create Your Personal_OS Folder</h3>
-            <p>Create one empty folder on your computer. This is the only thing you need to do manually.</p>
+            <p>One empty folder. This is the only thing you need to do manually.</p>
 
             <h4>On Mac:</h4>
             <div className="substep">
-              <p>Open Finder → Go to Documents → Right-click → New Folder → Name it <code>Personal_OS</code></p>
+              <p>Finder → Documents → Right-click → New Folder → name it <code>Personal_OS</code></p>
             </div>
 
             <h4>On Windows:</h4>
             <div className="substep">
-              <p>Open File Explorer → Go to Documents → Right-click → New → Folder → Name it <code>Personal_OS</code></p>
+              <p>File Explorer → Documents → Right-click → New → Folder → name it <code>Personal_OS</code></p>
             </div>
           </div>
 
@@ -972,69 +869,65 @@ mobile responsive layout.
             <span className="step-number">4</span>
             <h3>Open the Folder in VS Code</h3>
             <div className="substep">
-              <p>In VS Code: File → Open Folder → Navigate to Documents → Select your <code>Personal_OS</code> folder → Click &quot;Open&quot;</p>
+              <p>VS Code: File → Open Folder → select your <code>Personal_OS</code> folder → Open.</p>
             </div>
             <div className="substep">
-              <p>If VS Code asks &quot;Do you trust the authors?&quot;, click &quot;Yes, I trust the authors&quot;</p>
+              <p>If VS Code asks &quot;Do you trust the authors?&quot;, click &quot;Yes.&quot;</p>
             </div>
           </div>
 
           <div className="step">
             <span className="step-number">5</span>
-            <h3>Have Claude Build Your System</h3>
-            <p>Open the Claude panel in VS Code (click the Claude icon in the sidebar or press <code>Cmd/Ctrl+Shift+P</code> and search for &quot;Claude&quot;). Then paste this prompt:</p>
+            <h3>Have Claude Build the Structure</h3>
+            <p>Open the Claude Code panel and paste this prompt:</p>
 
             <div className="prompt-box">
-              <h4>Copy and paste this into Claude:</h4>
-              <pre>{`Please set up a Personal OS folder structure for me. Create:
+              <h4>Copy and paste into Claude:</h4>
+              <pre>{`Please set up a Personal OS for me. Create:
 
 1. These folders:
    - 00_Inbox
    - 10_Projects
    - 20_Areas
+   - 20_Areas/Calls
+   - 20_Areas/People
+   - 20_Areas/Companies
    - 30_Resources
    - 40_Archives
-   - 99_System
-   - 99_System/Context_Library
+   - 50_Personal
    - 99_System/Context_Library/project_specs
-   - 99_System/Profiles
    - 99_System/Scripts
+   - Apps
 
-2. A CLAUDE.md file in the root with this content:
+2. A CLAUDE.md file at the root with:
+   - A "Role" section: you are my Chief of Staff for this vault
+   - A "Who I Am" section: [add my name, title, organization]
+   - A "Core Behavior" section: edit files directly, keep changes
+     minimal, read local files before asking, confirm before deleting,
+     concise responses
+   - An "Architecture" section describing the folders above
+   - A "Task Schema" section with the YAML format for tasks
+     (type, status, created, due_date, priority, tags)
 
-## Role
+3. A Someday_Maybe.md in 20_Areas/ with sections for Ideas,
+   Long-Term Projects, Things to Explore, Wishlist.
 
-Personal assistant for [my name]. Help me manage tasks, organize information, and stay productive.
-
-## Architecture
-
-- Tasks: Markdown files in \`10_Projects/\` and \`00_Inbox/\`
-- Archive: Never modify \`40_Archives/\` unless asked
-
-## Guidelines
-
-1. Read local files before asking for context
-2. Be concise - no unnecessary explanations
-3. Ask before deleting anything
-
-3. A Someday_Maybe.md file in 20_Areas with sections for Ideas, Long-Term Projects, Things to Explore, and Wishlist.
-
-Please create all of these now.`}</pre>
+Create everything now.`}</pre>
             </div>
 
-            <p>Claude will create all the folders and files for you. When it&apos;s done, you&apos;ll see the structure appear in VS Code&apos;s file explorer on the left.</p>
+            <p>Claude creates all the folders and files. You&apos;ll see them appear in VS Code&apos;s file explorer on the left.</p>
           </div>
 
           <div className="step">
             <span className="step-number">6</span>
-            <h3>Set Up the Slash Commands</h3>
-            <p>The /today and /log commands need to be installed in a special folder. Paste this prompt into Claude:</p>
+            <h3>Install Your First Two Skills</h3>
+            <p>Skills are folders inside <code>~/.claude/skills/</code> with a <code>SKILL.md</code> file describing what they do. Claude reads the descriptions and triggers them when relevant. The <code>/</code> prefix is shorthand to force a specific skill to run.</p>
+
+            <p>Paste this prompt into Claude:</p>
 
             <div className="prompt-box">
-              <h4>Copy and paste this into Claude:</h4>
-              <pre>{`Please create the /today and /log slash commands for me.
-
-Create these files:
+              <h4>Copy and paste into Claude:</h4>
+              <pre>{`Please create two skills for me.
 
 1. ~/.claude/skills/today/SKILL.md with this content:
 
@@ -1044,138 +937,84 @@ description: Scans the vault for tasks due today and creates a daily agenda.
 allowed-tools: Bash(*), Read(*), Write(*)
 ---
 
-# /today Command
+# /today
 
-Create a daily agenda by scanning for tasks with due dates.
+Build today's agenda by scanning all .md files in 10_Projects/ and
+00_Inbox/ for YAML frontmatter with a due_date field.
 
-## What to Do
+## What to do
 
-1. Search all .md files in 10_Projects/ and 00_Inbox/ for YAML frontmatter containing "due_date" fields
-
-2. Group tasks by:
-   - Overdue (due_date before today)
-   - Due Today
-   - Due This Week
-   - Due Next Week
-
-3. Create a new file in 00_Inbox/ named YYYY-MM-DD_Agenda.md with today's date
-
-4. Format the agenda with sections for each group, plus:
-   - Daily Focus (leave blank for user to fill)
-   - Quick Notes (leave blank)
-
-5. Tell the user: "Good morning! I've prepared your agenda: [filename]"
+1. Group tasks: Overdue, Due Today, Due This Week, Due Next Week
+2. Create a new file in 00_Inbox/ named YYYY-MM-DD_Agenda.md
+3. Format with sections for each group, plus Daily Focus and Quick Notes
+4. Tell me: "Your agenda is ready: [filename]"
 
 
-2. ~/.claude/skills/log/SKILL.md with this content:
+2. ~/.claude/skills/shutdown/SKILL.md with this content:
 
 ---
-name: log
-description: Log session notes to project's process_notes.md
-allowed-tools: Glob(*), Read(*), Write(*), Edit(*)
+name: shutdown
+description: End-of-day ritual — captures what moved, what didn't, and what's queued for tomorrow.
+allowed-tools: Bash(*), Read(*), Write(*), Edit(*)
 ---
 
-# /log - Session Logger
+# /shutdown
 
-Log the current session to the project's process_notes.md file.
+End-of-day capture.
 
-## What to Do
+## What to do
 
-1. Identify which project folder we're working in
+1. Review today's agenda in 00_Inbox/
+2. For each task: mark done, carry over, or mark as waiting
+3. Append a brief end-of-day summary to today's agenda file:
+   - What moved (3-5 lines max)
+   - What stalled and why
+   - Tomorrow's top 3 candidates
+4. Tell me: "Shutdown complete. Tomorrow's queue: [top 3]"
 
-2. Find or create process_notes.md in that folder
-
-3. Generate a session entry with this structure:
-
-   ## YYYY-MM-DD - [Brief Title]
-
-   **Summary:** 1-2 sentences max.
-
-   **Changes:** Bullet list of files modified.
-
-   **Decisions:** Only if meaningful choices were made.
-
-   **Open:** Remaining tasks (use - [ ] format).
-
-4. Append the entry at the end of the file
-
-5. Tell the user: "Entry added for [date]"
-
-
-Please create both of these skill files now.`}</pre>
+Create both skills now.`}</pre>
             </div>
           </div>
 
           <div className="step">
             <span className="step-number">7</span>
-            <h3>Install Obsidian</h3>
-            <div className="substep">
-              <p>Download Obsidian from <a href="https://obsidian.md" target="_blank" rel="noopener noreferrer">obsidian.md</a> and install it.</p>
-            </div>
-            <div className="substep">
-              <p>When Obsidian opens, click &quot;Open folder as vault&quot; and select your <code>Personal_OS</code> folder.</p>
-            </div>
-            <div className="substep">
-              <p>You&apos;ll see your new folder structure in the left sidebar. This is where you&apos;ll browse and read your notes.</p>
-            </div>
-          </div>
-
-          <div className="step">
-            <span className="step-number">8</span>
-            <h3>Test It!</h3>
-            <p>Go back to VS Code and type <code>/today</code> in the Claude chat. Claude should create your first daily agenda file. Check Obsidian - you&apos;ll see it appear in your 00_Inbox folder.</p>
+            <h3>Test It</h3>
+            <p>Type <code>/today</code> in the Claude chat. Claude creates your first daily agenda file in <code>00_Inbox/</code>. Open it in VS Code and hit <code>Cmd+Shift+V</code> to preview it formatted.</p>
 
             <div className="explanation">
-              <strong>That&apos;s it!</strong> Your Personal OS is ready. As you work with Claude, ask it to create new projects, add tasks, or set up additional features. It knows the structure now and will put things in the right places.
+              <strong>That&apos;s the whole foundation.</strong> A folder, a CLAUDE.md, two skills. Everything from here is iteration — adding skills as you find friction, evolving CLAUDE.md as you discover rules worth keeping.
             </div>
           </div>
 
-          <h2>Adding Your First Project</h2>
-          <p>Want to add a project? Just tell Claude:</p>
+          <h2 id="daily-rhythm">Your Daily Rhythm</h2>
+          <p>Two skills are enough to anchor a day. Here&apos;s what it looks like in practice:</p>
 
-          <div className="prompt-box">
-            <h4>Example prompt:</h4>
-            <pre>{`Create a new project called "Q1 Marketing Plan" with a due date of March 15. Include a project file, process_notes.md, and a few starter tasks.`}</pre>
+          <div className="skill-card">
+            <h4><code>/today</code> — Morning</h4>
+            <p>First thing, open VS Code, type <code>/today</code> in the Claude chat. Claude scans the vault for tasks with due dates, builds a grouped agenda (overdue, today, this week, next week), and writes it to <code>00_Inbox/YYYY-MM-DD_Agenda.md</code>.</p>
+            <p style={{ marginBottom: 0 }}><strong>Then:</strong> open the agenda file, hit <code>Cmd+Shift+V</code>, and you have a formatted to-do list next to your chat panel.</p>
           </div>
 
-          <p>Claude will create the folder structure, files, and properly formatted tasks that /today can find.</p>
-
-          <h2>Task Format (For Reference)</h2>
-          <p>When Claude creates tasks, it uses this format. You don&apos;t need to memorize this - just ask Claude to create tasks for you:</p>
-
-          <div className="code-block">
-            <pre>{`---
-`}<span className="keyword">type:</span> <span className="string">task</span>{`
-`}<span className="keyword">status:</span> <span className="string">todo</span>{`
-`}<span className="keyword">created:</span> <span className="string">2026-01-20</span>{`
-`}<span className="keyword">due_date:</span> <span className="string">2026-01-25</span>{`
-`}<span className="keyword">priority:</span> <span className="string">high</span>{`
-`}<span className="keyword">tags:</span> <span className="string">[]</span>{`
----
-
-`}<span className="header"># Task Title</span>{`
-
-Description of what needs to be done...`}</pre>
+          <div className="skill-card">
+            <h4><code>/shutdown</code> — End of Day</h4>
+            <p>Before closing your laptop, type <code>/shutdown</code>. Claude reviews today&apos;s agenda, asks what moved and what didn&apos;t, and writes a one-paragraph summary at the bottom of today&apos;s agenda file. Includes tomorrow&apos;s top 3 candidates.</p>
+            <p style={{ marginBottom: 0 }}><strong>The next morning</strong>, <code>/today</code> can read yesterday&apos;s shutdown notes and carry the queue forward.</p>
           </div>
 
-          <div className="explanation">
-            <strong>What&apos;s this block?</strong> It&apos;s called &quot;YAML frontmatter&quot; - a standard way to add metadata to Markdown files. The /today command scans for the <code>due_date</code> field to build your agenda.
-          </div>
-
-          <h2 id="tips">Tips for Success</h2>
+          <h2 id="starting-rules">Rules I&apos;d Give Myself If Starting Over</h2>
           <ul>
-            <li><strong>Let Claude do the work.</strong> Instead of manually creating files, just tell Claude what you want. &quot;Create a new task for reviewing the budget by Friday&quot; is all you need.</li>
-            <li><strong>Use the Inbox.</strong> When you&apos;re not sure where something goes, tell Claude to put it in 00_Inbox. You can organize it later.</li>
-            <li><strong>Run /log regularly.</strong> The more you log, the better your process notes become, and the more context Claude has for future sessions.</li>
-            <li><strong>Keep Obsidian open.</strong> Use it to browse and read your notes while VS Code + Claude handles the editing.</li>
-            <li><strong>Archive liberally.</strong> When a project is done, tell Claude to move it to 40_Archives. Keep your active spaces clean.</li>
-            <li><strong>Ask for help.</strong> If you&apos;re stuck, just ask Claude! &quot;How should I organize my consulting projects?&quot; or &quot;Create a template for client kickoff meetings.&quot;</li>
+            <li><strong>Let Claude file things.</strong> Don&apos;t manually create folders or move files. Just say &quot;create a new project for the Q1 marketing plan&quot; or &quot;file this transcript in the right place.&quot; Claude knows the structure.</li>
+            <li><strong>Use the Inbox liberally.</strong> When you don&apos;t know where something goes, drop it in <code>00_Inbox/</code> and ask Claude to triage it later.</li>
+            <li><strong>Don&apos;t preload context.</strong> Resist the urge to dump everything into the root CLAUDE.md. Claude reads what it needs. Profile files and project specs should load on demand, not automatically.</li>
+            <li><strong>When something annoys you, write a rule.</strong> If Claude does something that makes you pause — explains instead of editing, creates a file in the wrong place, fabricates a stat — turn it into a one-line rule in CLAUDE.md. Two weeks of this and 90% of the friction disappears.</li>
+            <li><strong>Archive aggressively.</strong> Done projects go to <code>40_Archives/</code>. Keep <code>10_Projects/</code> small enough that you can scan it in one glance.</li>
+            <li><strong>Ask Claude when you&apos;re stuck.</strong> &quot;How should I organize my consulting clients?&quot; or &quot;Build me a template for kickoff meetings.&quot; The system bends to your needs, not the other way around.</li>
           </ul>
 
           <div className="cta-section">
-            <h2>Ready to Get Started?</h2>
-            <p>Your Personal OS will grow with you. Start with the basics, and add more as you need it. The productivity gains compound over time as Claude learns your work patterns and preferences.</p>
-            <Link href="/" className="cta-button">Explore More at Agents of Change</Link>
+            <h2>That&apos;s the Foundation</h2>
+            <p>A folder, a CLAUDE.md, two skills. From here, the real leverage comes from how the system compounds — memory that persists, skills that automate your real workflows, capture pipelines that feed the vault while you sleep, and a voice system that lets Claude write like you.</p>
+            <Link href="/personal-os-2" className="cta-button">Read How It Compounds →</Link>
           </div>
         </main>
 
