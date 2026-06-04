@@ -744,7 +744,6 @@ export default function PersonalOS2GuidePage() {
     <span class="hero-badge">The Long Game</span>
     <h1>How a Personal OS<br>Compounds Over Time</h1>
     <p>The leverage layer. Memory, skills, capture pipelines, voice, and shipping &mdash; the parts that turn a folder of markdown into a coworker who knows your work.</p>
-    <a href="#memory" class="hero-cta">Start With Auto Memory</a>
 </section>
 
 <main class="container">
@@ -992,7 +991,7 @@ zero information about my capacity to continue.
         </tr>
         <tr>
             <td><strong>Content production</strong></td>
-            <td><code>/linkedin-carousel</code> &middot; <code>/build-pptx</code> &middot; <code>/brand-usa-gslides</code> &middot; <code>/keynote-writer</code> &middot; <code>/text-to-html</code> &middot; <code>/janette-voice</code> &middot; <code>/editorial-style</code></td>
+            <td><code>/linkedin-carousel</code> &middot; <code>/build-pptx</code> &middot; <code>/keynote-writer</code> &middot; <code>/text-to-html</code> &middot; <code>/janette-voice</code> &middot; <code>/editorial-style</code></td>
         </tr>
         <tr>
             <td><strong>Review &amp; research</strong></td>
@@ -1043,9 +1042,6 @@ Create a structured call note.
         <h4>Build skills out of friction</h4>
         <p>The skills I use most weren't planned. They came from noticing the third or fourth time I was repeating the same multi-step prompt. When that happens, ask Claude: "Turn this into a skill." Claude writes the SKILL.md, drops it in the right place, and the next time you need that workflow it's one trigger away.</p>
     </div>
-
-    <h3>Skills vs. Project Commands</h3>
-    <p>One source of confusion: Claude Code supports both <strong>skills</strong> (in <code>~/.claude/skills/</code>) and <strong>commands</strong> (in <code>.claude/commands/</code> inside a project). Only skills are invocable via slash. Project commands are reference documentation only. If you created command files in a project folder and they don't trigger when you type the slash command, that's why &mdash; move them to skills.</p>
 
     <!-- SECTION: Capture -->
     <h2 id="capture">Capture Pipelines: The Input Layer</h2>
@@ -1201,7 +1197,7 @@ last_contact: YYYY-MM-DD
     <!-- SECTION: Shipping -->
     <h2 id="shipping">Shipping From the Vault</h2>
 
-    <p>The vault isn't just a filing system. It's also a workshop where I produce branded artifacts and deploy them to the web. This was a category the original guides missed entirely.</p>
+    <p>The vault isn't just a filing system. It's also a workshop where I produce branded artifacts and deploy them to the web.</p>
 
     <h3>What I Ship From Here</h3>
 
@@ -1216,7 +1212,7 @@ last_contact: YYYY-MM-DD
         </div>
         <div class="why-card">
             <h4>Branded presentations</h4>
-            <p>Skills for PPTX (<code>/build-pptx</code>) and Google Slides (<code>/brand-usa-gslides</code>) that handle brand detection, layout planning, color and typography application, and logo placement. I describe the deck, Claude produces a polished file.</p>
+            <p>A skill (<code>/build-pptx</code>) that handles brand detection, layout planning, color and typography application, and logo placement. I describe the deck, Claude produces a polished PPTX.</p>
         </div>
         <div class="why-card">
             <h4>LinkedIn carousels</h4>
@@ -1231,15 +1227,10 @@ last_contact: YYYY-MM-DD
         <li><strong>Skills can compose.</strong> <code>/add-webinar</code> uses the voice system to draft the page copy, the brand resources for visuals, and the deploy infrastructure to ship. Each piece was built for a different reason; the skill stitches them together.</li>
     </ul>
 
-    <div class="warning-box">
-        <h4>One non-negotiable</h4>
-        <p>Always confirm the deployment target before pushing. When deploying to Vercel, name the target team explicitly &mdash; deploying to a personal account when you meant your org's account is annoying to undo. I have this as a hard rule in my CLAUDE.md.</p>
-    </div>
-
     <!-- SECTION: MCP -->
     <h2 id="mcp">MCP Servers: What's Actually Worth Connecting</h2>
 
-    <p>MCP (Model Context Protocol) servers let Claude reach beyond your filesystem &mdash; into project management tools, calendars, CRMs, BigQuery, your inbox. Most guides treat MCP as a list of options. After months of use, only a few are load-bearing.</p>
+    <p>MCP (Model Context Protocol) servers let Claude reach beyond your filesystem &mdash; into project management tools, calendars, CRMs, BigQuery, your inbox. After months of use, only a few are load-bearing.</p>
 
     <h3>What I Actually Use</h3>
 
@@ -1262,7 +1253,7 @@ last_contact: YYYY-MM-DD
         </tr>
         <tr>
             <td><strong>Calendar / email (Outlook, Google)</strong></td>
-            <td>Read inbox for meeting context, draft replies in voice. Note: usually limited to Claude Desktop.</td>
+            <td>Read inbox for meeting context, draft replies in voice.</td>
         </tr>
         <tr>
             <td><strong>Data warehouse (BigQuery, Snowflake)</strong></td>

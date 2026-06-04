@@ -980,10 +980,6 @@ Create both skills now.`}</pre>
             <span className="step-number">7</span>
             <h3>Test It</h3>
             <p>Type <code>/today</code> in the Claude chat. Claude creates your first daily agenda file in <code>00_Inbox/</code>. Open it in VS Code and hit <code>Cmd+Shift+V</code> to preview it formatted.</p>
-
-            <div className="explanation">
-              <strong>That&apos;s the whole foundation.</strong> A folder, a CLAUDE.md, two skills. Everything from here is iteration — adding skills as you find friction, evolving CLAUDE.md as you discover rules worth keeping.
-            </div>
           </div>
 
           <h2 id="daily-rhythm">Your Daily Rhythm</h2>
