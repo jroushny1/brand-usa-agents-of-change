@@ -657,10 +657,6 @@ export default function PersonalOSGuidePage() {
                 <h4>Claude Pro or Max</h4>
                 <p>The subscription that powers Claude Code.<br /><a href="https://claude.ai" target="_blank" rel="noopener noreferrer">Subscribe here</a></p>
               </div>
-              <div className="requirement-item">
-                <h4>That&apos;s it</h4>
-                <p>No Obsidian, no notes app, no cloud sync. Markdown renders beautifully in VS Code&apos;s preview pane.</p>
-              </div>
             </div>
 
             <div className="tool-box">

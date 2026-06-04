@@ -1389,12 +1389,6 @@ flag it instead of filling the gap.</pre>
 
     <div class="step">
         <span class="step-number">7</span>
-        <h3>Skills vs. Project Commands &mdash; Only Skills Run</h3>
-        <p>Files in <code>.claude/commands/</code> inside a project look like skills but aren't invocable via slash. Only files in <code>~/.claude/skills/&lt;name&gt;/SKILL.md</code> work as triggerable skills. If you wrote a "command" that won't run, that's why &mdash; move it to skills.</p>
-    </div>
-
-    <div class="step">
-        <span class="step-number">8</span>
         <h3>When Something Annoys You, Write the Rule Immediately</h3>
         <p>The two-week version of "this would be a nice rule" never gets written. The in-the-moment version of "Claude, never do that again &mdash; save it" does. Capture friction at the moment of friction.</p>
     </div>
