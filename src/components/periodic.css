@@ -1,0 +1,44 @@
+/* Periodic Table of Storytelling — chart layout.
+   Adapted from the original (James Harris / DawnPaladin, CC BY-NC 4.0).
+   All rules scoped under .ptos-root so they never leak into the rest of the site. */
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&family=Roboto+Condensed:wght@400;700&display=swap');
+
+.ptos-root #PToS { width: 1220px; transform-origin: top left; }
+.ptos-root #PToS::after { content: ''; display: block; clear: both; }
+
+.ptos-root .column { float: left; width: 61px; }
+.ptos-root .cell {
+  float: left; width: 60px; height: 94px; border: 1px;
+  border-style: dashed none none dashed; cursor: pointer; position: relative;
+  transition: filter 0.1s, transform 0.1s;
+}
+.ptos-root .cell:hover { filter: brightness(1.08) saturate(1.12); transform: translateY(-1px); z-index: 3; }
+.ptos-root .emptyCell, .ptos-root .emptyHalfCell { float: left; position: relative; width: 62px; height: 95px; }
+.ptos-root .emptyHalfCell { height: 45px; }
+.ptos-root .columnBottom { border-style: dashed none dashed dashed; }
+.ptos-root .columnRight { border-style: dashed dashed none dashed; width: 60px; }
+.ptos-root .columnBottomRight { border-style: dashed; width: 60px; }
+
+.ptos-root .tropeIdentifier { font-family: 'PT Sans', sans-serif; font-size: 25px; text-align: center; margin: 8px 0 0 0; clear: both; color: #1f1b14; }
+.ptos-root .tropeName { font-family: 'Roboto Condensed', sans-serif; font-size: 11px; text-align: center; margin: 0 2px; line-height: 13px; color: #1f1b14; }
+.ptos-root .tropePopularity { font-family: 'PT Sans', sans-serif; font-size: 9px; float: right; margin: 2px 3px; opacity: 0.6; color: #1f1b14; }
+.ptos-root .columnLabel { bottom: 5px; position: absolute; font-family: 'PT Sans', sans-serif; font-size: 12px; text-align: center; width: 100%; font-weight: 700; color: #4a4233; }
+.ptos-root .twoColumnLabel { left: 50%; }
+
+.ptos-root .category01 { background-color: #BCBEC0; border-color: #A4B0B3; }
+.ptos-root .category02 { background-color: #E4D1BA; border-color: #F3CC9E; }
+.ptos-root .category03 { background-color: #EFE5D8; border-color: #FCE8D1; }
+.ptos-root .category04 { background-color: #E6E7E8; border-color: #DAE4F4; }
+.ptos-root .category05 { background-color: #C6E8F0; border-color: #96D9F2; }
+.ptos-root .category06 { background-color: #CAE4B7; border-color: #B3D78A; }
+.ptos-root .category07 { background-color: #83C66F; border-color: #55B948; }
+.ptos-root .category08 { background-color: #FABBA3; border-color: #F6926A; }
+.ptos-root .category09 { background-color: #FCD7C8; border-color: #F89E72; }
+.ptos-root .category10 { background-color: #FBF7C1; border-color: #FCF18B; }
+.ptos-root .category11 { background-color: #FDBE68; border-color: #FBAD43; }
+.ptos-root .category12 { background-color: #F6ADCD; border-color: #F388A2; }
+
+/* Selection + X-ray highlight states */
+.ptos-root .cell.sel { outline: 3px solid #101F36; outline-offset: -2px; z-index: 4; box-shadow: 0 0 0 2px #fff inset, 0 6px 14px rgba(0,0,0,0.35); }
+.ptos-root .cell.sel::after { content: '✓'; position: absolute; top: -7px; right: -7px; width: 17px; height: 17px; background: #101F36; color: #fff; border-radius: 50%; font-size: 11px; line-height: 17px; text-align: center; z-index: 5; }
+.ptos-root.xray .cell:not(.sel) { opacity: 0.25; }

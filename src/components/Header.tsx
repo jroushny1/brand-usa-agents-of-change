@@ -48,6 +48,9 @@ export default function Header() {
             <Link href="/ai-audit" className="text-base font-medium text-brand-navy hover:text-brand-cyan transition-colors">
               AI Audit
             </Link>
+            <Link href="/storytelling" className="text-base font-medium text-brand-navy hover:text-brand-cyan transition-colors">
+              Storytelling
+            </Link>
           </nav>
 
           {/* Mobile menu button */}
@@ -118,6 +121,13 @@ export default function Header() {
               onClick={() => setMobileMenuOpen(false)}
             >
               AI Audit
+            </Link>
+            <Link
+              href="/storytelling"
+              className="block px-3 py-2 rounded-md text-base font-medium text-brand-navy hover:text-brand-cyan hover:bg-gray-50 transition-colors"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Storytelling
             </Link>
           </div>
         </div>
