@@ -39,13 +39,16 @@ export default function StorytellingLab() {
   const fit = useCallback(() => {
     const ptos = chartRef.current, vp = viewportRef.current
     if (!ptos || !vp) return
+    // Fit to WIDTH so tiles stay large and readable (never upscale past native).
+    // Height is allowed to flow — the periodic shape reads instantly and only the
+    // lower rows need a little scrolling.
     const availW = vp.clientWidth
-    const availH = window.innerHeight - vp.getBoundingClientRect().top - 24
-    const natH = ptos.offsetHeight || 1
-    const s = Math.max(0.22, Math.min(availW / 1220, availH / natH, 1))
-    ptos.style.transform = `scale(${s})`
-    ptos.style.marginLeft = Math.max(0, (availW - 1220 * s) / 2) + 'px'
-    vp.style.height = natH * s + 'px'
+    const s = Math.min(availW / 1220, 1)
+    const eff = Math.max(s, 0.6) // keep legible on narrow screens (allow horizontal scroll instead of shrinking to a thumbnail)
+    ptos.style.transform = `scale(${eff})`
+    ptos.style.marginLeft = Math.max(0, (availW - 1220 * eff) / 2) + 'px'
+    vp.style.height = ptos.offsetHeight * eff + 'px'
+    vp.style.overflowX = 1220 * eff > availW + 1 ? 'auto' : 'hidden'
   }, [])
 
   // Build registry from injected cells; wire fit-to-screen.
@@ -128,17 +131,17 @@ export default function StorytellingLab() {
 
   return (
     <div ref={rootRef} className={`ptos-root ${xray ? 'xray' : ''}`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-3">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-3 pb-2">
         {/* Two clear options, side by side */}
-        <div className="grid md:grid-cols-2 gap-4">
+        <div className="grid md:grid-cols-2 gap-3">
           {/* Option 1: X-ray a film */}
-          <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+          <div className="rounded-xl border border-gray-200 bg-white px-4 py-3 shadow-sm">
             <div className="flex items-center gap-2 text-brand-blue">
               <Film className="h-5 w-5" />
-              <h2 className="font-display text-lg font-bold text-brand-navy">1 · Scan a film&rsquo;s DNA</h2>
+              <h2 className="font-display text-base font-bold text-brand-navy">1 · Scan a film&rsquo;s DNA</h2>
             </div>
-            <p className="mt-1 text-sm text-gray-600">Type any movie. We pull its synopsis and highlight the storytelling elements it&rsquo;s built from.</p>
-            <div className="mt-3 flex gap-2">
+            <p className="mt-0.5 text-xs text-gray-600">Type any movie. We pull its synopsis and highlight the storytelling elements it&rsquo;s built from.</p>
+            <div className="mt-2 flex gap-2">
               <input
                 value={film}
                 onChange={(e) => setFilm(e.target.value)}
@@ -153,13 +156,13 @@ export default function StorytellingLab() {
           </div>
 
           {/* Option 2: Build your own */}
-          <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+          <div className="rounded-xl border border-gray-200 bg-white px-4 py-3 shadow-sm">
             <div className="flex items-center gap-2 text-brand-cyan">
               <FlaskConical className="h-5 w-5" />
-              <h2 className="font-display text-lg font-bold text-brand-navy">2 · Create your own story</h2>
+              <h2 className="font-display text-base font-bold text-brand-navy">2 · Create your own story</h2>
             </div>
-            <p className="mt-1 text-sm text-gray-600">Select any number of elements below, then synthesize an original concept that ticks every box.</p>
-            <div className="mt-3 flex items-center gap-2">
+            <p className="mt-0.5 text-xs text-gray-600">Select any number of elements below, then synthesize an original concept that ticks every box.</p>
+            <div className="mt-2 flex items-center gap-2">
               <span className="text-sm font-semibold text-brand-navy whitespace-nowrap">{selected.length} selected</span>
               <div className="flex-1 flex gap-1 overflow-x-auto py-0.5 min-h-[2rem]">
                 {selected.length === 0 && <span className="text-sm italic text-gray-400 self-center">Click tiles on the table…</span>}
@@ -181,7 +184,7 @@ export default function StorytellingLab() {
         </div>
 
         {/* Legend */}
-        <div className="mt-3 flex flex-wrap justify-center gap-x-4 gap-y-1 text-xs text-gray-600">
+        <div className="mt-2 flex flex-wrap justify-center gap-x-4 gap-y-1 text-xs text-gray-600">
           {LEGEND.map(([label, cat]) => (
             <span key={cat} className="whitespace-nowrap">
               <span className="inline-block h-3 w-3 rounded-sm border border-black/20 align-[-2px] mr-1" style={{ background: CAT_HEX[cat] }} />

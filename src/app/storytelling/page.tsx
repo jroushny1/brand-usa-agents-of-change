@@ -19,13 +19,10 @@ export default function StorytellingPage() {
     <AccessCheck>
       <Header />
       <main className="min-h-screen" style={{ backgroundColor: '#f4efe3' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 text-center">
-          <h1 className="font-display text-3xl md:text-4xl font-bold uppercase tracking-wide text-brand-navy">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 text-center">
+          <h1 className="font-display text-xl md:text-2xl font-bold uppercase tracking-wide text-brand-navy">
             The Periodic Table of Storytelling
           </h1>
-          <p className="mt-1 text-gray-600 max-w-2xl mx-auto">
-            Two ways to play: scan a film&rsquo;s storytelling DNA, or build your own story from the elements.
-          </p>
         </div>
         <StorytellingLab />
       </main>
