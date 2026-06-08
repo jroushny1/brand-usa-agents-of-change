@@ -12,6 +12,27 @@ export function posterUrl(path: string | null | undefined): string | null {
   return path ? `${TMDB_IMG}${path}` : null
 }
 
+const RATE_RE = /429|rate.?limit|quota|exhaust|resource_exhausted|503|unavailable|overloaded|too many requests/i
+
+export function isTransientAiError(e: unknown): boolean {
+  return RATE_RE.test(String((e as Error)?.message ?? e))
+}
+
+/** Retry a flaky AI/network call on transient (rate-limit / overloaded / 5xx) errors with backoff. */
+export async function withRetry<T>(fn: () => Promise<T>, tries = 3): Promise<T> {
+  let lastErr: unknown
+  for (let i = 0; i < tries; i++) {
+    try {
+      return await fn()
+    } catch (e) {
+      lastErr = e
+      if (i === tries - 1 || !isTransientAiError(e)) throw e
+      await new Promise((r) => setTimeout(r, 1200 * (i + 1) + Math.floor(Math.random() * 400)))
+    }
+  }
+  throw lastErr
+}
+
 /** Parse a model's text output as JSON, tolerating ```json fences / whitespace. Throws on empty or invalid. */
 export function parseModelJson<T = unknown>(text: string | null | undefined): T {
   let s = (text ?? '').trim()

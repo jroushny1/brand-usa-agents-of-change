@@ -78,11 +78,16 @@ export default function StorytellingLab() {
     return () => { window.removeEventListener('resize', fit); clearTimeout(t) }
   }, [fit])
 
-  // Reflect selection on the injected DOM.
+  // Reflect selection on the injected DOM. Query live cells each time — cached
+  // node refs can go stale (React re-creates the dangerouslySetInnerHTML subtree),
+  // which silently no-ops the highlight.
   useEffect(() => {
-    const reg = regRef.current
-    Object.values(reg).forEach((r) => r.el.classList.remove('sel'))
-    selected.forEach((k) => reg[k]?.el.classList.add('sel'))
+    const chart = chartRef.current
+    if (!chart) return
+    const set = new Set(selected)
+    chart.querySelectorAll<HTMLElement>('.cell').forEach((c) => {
+      c.classList.toggle('sel', set.has(c.dataset.key || ''))
+    })
   }, [selected])
 
   const onChartClick = (e: React.MouseEvent) => {

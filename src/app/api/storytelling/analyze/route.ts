@@ -1,4 +1,4 @@
-import { ai, tmdbSearchFirst, posterUrl, parseModelJson } from '@/lib/storytelling'
+import { ai, tmdbSearchFirst, posterUrl, parseModelJson, withRetry, isTransientAiError } from '@/lib/storytelling'
 
 export const runtime = 'nodejs'
 export const maxDuration = 60
@@ -28,7 +28,7 @@ export async function POST(req: Request) {
     const catalogue = elements.map((e) => `${e.id} = ${e.name}`).join('\n')
     const validIds = new Set(elements.map((e) => e.id))
 
-    const analyzerAI = await ai.models.generateContent({
+    const analyzerAI = await withRetry(() => ai.models.generateContent({
       model: 'gemini-2.5-flash',
       contents: `Analyze this film: ${movie.title}. Synopsis: "${movie.overview || '(no synopsis available)'}"\n\nValid storytelling element IDs (choose ONLY from this list, copy IDs verbatim):\n${catalogue}`,
       config: {
@@ -37,7 +37,7 @@ export async function POST(req: Request) {
         responseMimeType: 'application/json',
         temperature: 0.1,
       },
-    })
+    }))
 
     let payload: { identifiedElementIds?: unknown; analyses?: unknown }
     try {
@@ -64,6 +64,9 @@ export async function POST(req: Request) {
     })
   } catch (e) {
     console.error('[storytelling/analyze] error:', e)
+    if (isTransientAiError(e)) {
+      return Response.json({ error: 'The AI is busy right now — wait a few seconds and try again.' }, { status: 429 })
+    }
     return Response.json({ error: 'Request failed. Please try again.' }, { status: 500 })
   }
 }
