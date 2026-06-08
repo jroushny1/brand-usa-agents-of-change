@@ -14,7 +14,8 @@ const CAT_HEX: Record<string, string> = {
 }
 const LEGEND: [string, string][] = [
   ['Structure', 'category01'], ['Setting, Laws & Plots', 'category02'], ['Story Modifiers', 'category03'],
-  ['Plot Devices', 'category04'], ['Heroes', 'category06'], ['Archetypes', 'category08'],
+  ['Plot Devices', 'category04'], ['Heroes', 'category05'], ['Character Modifiers', 'category06'],
+  ['Archetypes', 'category07'], ['Villains', 'category08'], ['Metatropes', 'category10'],
   ['Production', 'category11'], ['Fandom & Audience', 'category12'],
 ]
 
@@ -25,16 +26,17 @@ type AnalyzeOut = { kind: 'analyze'; title: string; synopsis: string; poster: st
 type OutState = null | { kind: 'loading'; msg: string } | { kind: 'error'; msg: string } | GenOut | AnalyzeOut
 
 export default function StorytellingLab() {
-  const rootRef = useRef<HTMLDivElement>(null)
   const chartRef = useRef<HTMLDivElement>(null)
   const viewportRef = useRef<HTMLDivElement>(null)
   const regRef = useRef<Record<string, RegEntry>>({})
   const idToKeysRef = useRef<Record<string, string[]>>({})
+  const inflightRef = useRef<AbortController | null>(null)
 
   const [selected, setSelected] = useState<string[]>([])
   const [xray, setXray] = useState(false)
   const [film, setFilm] = useState('')
   const [out, setOut] = useState<OutState>(null)
+  const busy = out?.kind === 'loading'
 
   const fit = useCallback(() => {
     const ptos = chartRef.current, vp = viewportRef.current
@@ -66,7 +68,11 @@ export default function StorytellingLab() {
     regRef.current = reg
     idToKeysRef.current = idk
     fit()
-    const t = setTimeout(fit, 300) // after webfont settles
+    const t = setTimeout(fit, 300) // heuristic catch-up
+    // deterministic re-fit once the chart's webfonts have actually loaded
+    if (typeof document !== 'undefined' && 'fonts' in document) {
+      document.fonts.ready.then(fit).catch(() => {})
+    }
     window.addEventListener('resize', fit)
     return () => { window.removeEventListener('resize', fit); clearTimeout(t) }
   }, [fit])
@@ -89,17 +95,23 @@ export default function StorytellingLab() {
   const clearAll = () => { setSelected([]); setXray(false) }
 
   async function synthesize() {
+    if (selected.length === 0) return
     const reg = regRef.current
     const elements = selected.map((k) => ({ id: reg[k].id, name: reg[k].name }))
+    inflightRef.current?.abort()
+    const ctrl = new AbortController()
+    inflightRef.current = ctrl
     setOut({ kind: 'loading', msg: `Fusing ${elements.length} element${elements.length > 1 ? 's' : ''} into one plot…` })
     try {
       const r = await fetch('/api/storytelling/generate', {
-        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ elements }),
+        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ elements }), signal: ctrl.signal,
       })
       const d = await r.json()
+      if (ctrl.signal.aborted) return
       if (!r.ok) return setOut({ kind: 'error', msg: d.error || `Error ${r.status}` })
       setOut({ kind: 'gen', ...d })
-    } catch {
+    } catch (e) {
+      if ((e as Error)?.name === 'AbortError') return
       setOut({ kind: 'error', msg: 'Synthesis core error.' })
     }
   }
@@ -107,22 +119,28 @@ export default function StorytellingLab() {
   async function analyze() {
     const title = film.trim()
     if (!title) return
-    setOut({ kind: 'loading', msg: 'Pulling TMDB record & extracting tropes…' })
     const reg = regRef.current
     const catalogue = Object.values(reg).map((r) => ({ id: r.id, name: r.name }))
+    inflightRef.current?.abort()
+    const ctrl = new AbortController()
+    inflightRef.current = ctrl
+    setOut({ kind: 'loading', msg: 'Pulling TMDB record & extracting tropes…' })
     try {
       const r = await fetch('/api/storytelling/analyze', {
-        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ movieTitle: title, elements: catalogue }),
+        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ movieTitle: title, elements: catalogue }), signal: ctrl.signal,
       })
-      if (r.status === 444) return setOut({ kind: 'error', msg: 'No film found by that title.' })
+      if (ctrl.signal.aborted) return
+      if (r.status === 404) return setOut({ kind: 'error', msg: 'No film found by that title.' })
       const d = await r.json()
+      if (ctrl.signal.aborted) return
       if (!r.ok) return setOut({ kind: 'error', msg: d.error || `Error ${r.status}` })
       const keys: string[] = []
       ;(d.elementsFound || []).forEach((id: string) => (idToKeysRef.current[id] || []).forEach((k) => keys.push(k)))
       setSelected(keys)
-      setXray(true)
+      setXray(keys.length > 0) // only dim the table when something is actually highlighted
       setOut({ kind: 'analyze', ...d })
-    } catch {
+    } catch (e) {
+      if ((e as Error)?.name === 'AbortError') return
       setOut({ kind: 'error', msg: 'X-ray analysis failed.' })
     }
   }
@@ -130,7 +148,7 @@ export default function StorytellingLab() {
   const reg = regRef.current
 
   return (
-    <div ref={rootRef} className={`ptos-root ${xray ? 'xray' : ''}`}>
+    <div className={`ptos-root ${xray ? 'xray' : ''}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-3 pb-2">
         {/* Two clear options, side by side */}
         <div className="grid md:grid-cols-2 gap-3">
@@ -145,11 +163,11 @@ export default function StorytellingLab() {
               <input
                 value={film}
                 onChange={(e) => setFilm(e.target.value)}
-                onKeyDown={(e) => e.key === 'Enter' && analyze()}
+                onKeyDown={(e) => e.key === 'Enter' && !busy && analyze()}
                 placeholder="e.g. The Matrix, Shutter Island, Spirited Away"
                 className="flex-1 rounded-md border border-gray-300 px-3 py-2 text-sm outline-none focus:border-brand-cyan"
               />
-              <button onClick={analyze} className="flex items-center gap-1.5 rounded-md bg-brand-navy px-4 py-2 text-sm font-semibold text-white hover:bg-brand-blue transition-colors">
+              <button onClick={analyze} disabled={busy} className="flex items-center gap-1.5 rounded-md bg-brand-navy px-4 py-2 text-sm font-semibold text-white hover:bg-brand-blue disabled:bg-gray-300 disabled:text-gray-500 transition-colors">
                 <Sparkles className="h-4 w-4" /> Scan
               </button>
             </div>
@@ -176,7 +194,7 @@ export default function StorytellingLab() {
               {selected.length > 0 && (
                 <button onClick={clearAll} className="rounded-md border border-gray-300 px-2.5 py-2 text-xs font-medium text-gray-500 hover:bg-gray-50 whitespace-nowrap">Clear</button>
               )}
-              <button onClick={synthesize} disabled={selected.length === 0} className="flex items-center gap-1.5 rounded-md bg-brand-cyan px-4 py-2 text-sm font-semibold text-white hover:opacity-90 disabled:bg-gray-200 disabled:text-gray-400 transition-opacity whitespace-nowrap">
+              <button onClick={synthesize} disabled={selected.length === 0 || busy} className="flex items-center gap-1.5 rounded-md bg-brand-cyan px-4 py-2 text-sm font-semibold text-white hover:opacity-90 disabled:bg-gray-200 disabled:text-gray-400 transition-opacity whitespace-nowrap">
                 <FlaskConical className="h-4 w-4" /> Generate
               </button>
             </div>
@@ -221,7 +239,7 @@ export default function StorytellingLab() {
               <p className="mt-1 text-base italic text-gray-700 leading-relaxed">&ldquo;{out.logline}&rdquo;</p>
               <div className="mt-4 text-[0.7rem] font-bold uppercase tracking-wider text-gray-400">Real-world genetics — TMDB-verified</div>
               <div className="mt-1 space-y-1.5">
-                {out.realWorldExamples.map((ex, i) => (
+                {(out.realWorldExamples ?? []).map((ex, i) => (
                   <div key={i} className="flex gap-2 rounded border-l-[3px] border-brand-cyan bg-gray-50 p-2">
                     {ex.poster && <img src={ex.poster} alt="" className="w-11 rounded" />}
                     <div>
@@ -244,7 +262,7 @@ export default function StorytellingLab() {
               </div>
               <div className="mt-3 text-[0.7rem] font-bold uppercase tracking-wider text-gray-400">Tropes detected — highlighted on the table</div>
               <div className="mt-1 space-y-1.5">
-                {out.breakdowns.map((b, i) => {
+                {(out.breakdowns ?? []).map((b, i) => {
                   const ks = idToKeysRef.current[b.id] || []
                   const r0 = ks.length ? reg[ks[0]] : null
                   return (
