@@ -35,6 +35,7 @@ export default function StorytellingLab() {
   const [selected, setSelected] = useState<string[]>([])
   const [xray, setXray] = useState(false)
   const [film, setFilm] = useState('')
+  const [steer, setSteer] = useState('')
   const [out, setOut] = useState<OutState>(null)
   const busy = out?.kind === 'loading'
 
@@ -104,7 +105,7 @@ export default function StorytellingLab() {
     setOut({ kind: 'loading', msg: `Fusing ${elements.length} element${elements.length > 1 ? 's' : ''} into one plot…` })
     try {
       const r = await fetch('/api/storytelling/generate', {
-        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ elements }), signal: ctrl.signal,
+        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ elements, steer: steer.trim() }), signal: ctrl.signal,
       })
       const d = await r.json()
       if (ctrl.signal.aborted) return
@@ -173,31 +174,40 @@ export default function StorytellingLab() {
             </div>
           </div>
 
-          {/* Option 2: Build your own */}
+          {/* Option 2: The Beaker */}
           <div className="rounded-xl border border-gray-200 bg-white px-4 py-3 shadow-sm">
-            <div className="flex items-center gap-2 text-brand-cyan">
-              <FlaskConical className="h-5 w-5" />
-              <h2 className="font-display text-base font-bold text-brand-navy">2 · Create your own story</h2>
-            </div>
-            <p className="mt-0.5 text-xs text-gray-600">Select any number of elements below, then synthesize an original concept that ticks every box.</p>
-            <div className="mt-2 flex items-center gap-2">
-              <span className="text-sm font-semibold text-brand-navy whitespace-nowrap">{selected.length} selected</span>
-              <div className="flex-1 flex gap-1 overflow-x-auto py-0.5 min-h-[2rem]">
-                {selected.length === 0 && <span className="text-sm italic text-gray-400 self-center">Click tiles on the table…</span>}
-                {selected.map((k) => (
-                  <span key={k} className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-bold text-gray-900 whitespace-nowrap" style={{ background: CAT_HEX[reg[k]?.cat] || '#ddd' }}>
-                    {reg[k]?.id}
-                    <span className="cursor-pointer opacity-60 hover:opacity-100" onClick={() => setSelected((p) => p.filter((x) => x !== k))}>✕</span>
-                  </span>
-                ))}
+            <div className="flex items-center justify-between gap-2">
+              <div className="flex items-center gap-2 text-brand-cyan">
+                <FlaskConical className="h-5 w-5" />
+                <h2 className="font-display text-base font-bold text-brand-navy">2 · The Beaker</h2>
               </div>
-              {selected.length > 0 && (
-                <button onClick={clearAll} className="rounded-md border border-gray-300 px-2.5 py-2 text-xs font-medium text-gray-500 hover:bg-gray-50 whitespace-nowrap">Clear</button>
-              )}
-              <button onClick={synthesize} disabled={selected.length === 0 || busy} className="flex items-center gap-1.5 rounded-md bg-brand-cyan px-4 py-2 text-sm font-semibold text-white hover:opacity-90 disabled:bg-gray-200 disabled:text-gray-400 transition-opacity whitespace-nowrap">
-                <FlaskConical className="h-4 w-4" /> Generate
-              </button>
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-semibold text-brand-navy whitespace-nowrap">{selected.length} selected</span>
+                {selected.length > 0 && (
+                  <button onClick={clearAll} className="rounded-md border border-gray-300 px-2 py-0.5 text-xs font-medium text-gray-500 hover:bg-gray-50">Clear</button>
+                )}
+              </div>
             </div>
+            <p className="mt-0.5 text-xs text-gray-600">Click elements on the table to drop them in, then generate a one-line logline that ties them all together.</p>
+            <div className="mt-2 flex flex-wrap gap-1 min-h-[2.25rem] max-h-24 overflow-y-auto rounded-md border border-dashed border-gray-200 bg-gray-50/70 p-1.5">
+              {selected.length === 0 && <span className="self-center px-1 text-sm italic text-gray-400">Nothing in the beaker yet — click tiles on the table…</span>}
+              {selected.map((k) => (
+                <span key={k} className="inline-flex items-center gap-1 rounded-full border border-black/10 px-2 py-0.5 text-xs text-gray-900" style={{ background: CAT_HEX[reg[k]?.cat] || '#ddd' }}>
+                  <b>{reg[k]?.id}</b> {reg[k]?.name}
+                  <span className="cursor-pointer opacity-60 hover:opacity-100" onClick={() => setSelected((p) => p.filter((x) => x !== k))}>✕</span>
+                </span>
+              ))}
+            </div>
+            <input
+              value={steer}
+              onChange={(e) => setSteer(e.target.value)}
+              onKeyDown={(e) => e.key === 'Enter' && !busy && selected.length > 0 && synthesize()}
+              placeholder="Optional — steer it (e.g. about tourism, set in Japan, a comedy)"
+              className="mt-2 w-full rounded-md border border-gray-300 px-3 py-2 text-sm outline-none focus:border-brand-cyan"
+            />
+            <button onClick={synthesize} disabled={selected.length === 0 || busy} className="mt-2 flex w-full items-center justify-center gap-2 rounded-md bg-brand-cyan px-4 py-2.5 text-sm font-bold text-white hover:opacity-90 disabled:bg-gray-200 disabled:text-gray-400 transition-opacity">
+              <FlaskConical className="h-4 w-4" /> Generate Logline
+            </button>
           </div>
         </div>
 
@@ -236,12 +246,13 @@ export default function StorytellingLab() {
           {out.kind === 'gen' && (
             <div className="pr-5">
               <h3 className="font-display text-xl font-bold text-brand-navy">{out.title}</h3>
-              <p className="mt-1 text-base italic text-gray-700 leading-relaxed">&ldquo;{out.logline}&rdquo;</p>
+              <div className="mt-3 text-[0.7rem] font-bold uppercase tracking-wider text-gray-400">Logline</div>
+              <p className="mt-0.5 text-base italic text-gray-700 leading-relaxed">&ldquo;{out.logline}&rdquo;</p>
               <div className="mt-4 text-[0.7rem] font-bold uppercase tracking-wider text-gray-400">Real-world genetics — TMDB-verified</div>
               <div className="mt-1 space-y-1.5">
                 {(out.realWorldExamples ?? []).map((ex, i) => (
                   <div key={i} className="flex gap-2 rounded border-l-[3px] border-brand-cyan bg-gray-50 p-2">
-                    {ex.poster && <img src={ex.poster} alt="" className="w-11 rounded" />}
+                    {ex.poster && <img src={ex.poster} alt="" className="w-11 h-auto self-start shrink-0 rounded" />}
                     <div>
                       <div className="text-sm font-bold text-brand-navy">{ex.title} ({ex.year})</div>
                       <div className="text-xs text-gray-600">{ex.explanation}</div>
@@ -254,7 +265,7 @@ export default function StorytellingLab() {
           {out.kind === 'analyze' && (
             <div className="pr-5">
               <div className="flex gap-3">
-                {out.poster && <img src={out.poster} alt="" className="w-16 rounded" />}
+                {out.poster && <img src={out.poster} alt="" className="w-16 h-auto self-start shrink-0 rounded" />}
                 <div>
                   <h3 className="font-display text-lg font-bold text-brand-navy">{out.title}</h3>
                   <p className="text-xs text-gray-500">{out.synopsis}</p>

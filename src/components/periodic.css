@@ -39,6 +39,12 @@
 .ptos-root .category12 { background-color: #F6ADCD; border-color: #F388A2; }
 
 /* Selection + X-ray highlight states */
-.ptos-root .cell.sel { outline: 3px solid #101F36; outline-offset: -2px; z-index: 4; box-shadow: 0 0 0 2px #fff inset, 0 6px 14px rgba(0,0,0,0.35); }
-.ptos-root .cell.sel::after { content: '✓'; position: absolute; top: -7px; right: -7px; width: 17px; height: 17px; background: #101F36; color: #fff; border-radius: 50%; font-size: 11px; line-height: 17px; text-align: center; z-index: 5; }
+.ptos-root .cell.sel {
+  outline: 3px solid #101F36; outline-offset: -2px; z-index: 4;
+  filter: saturate(2) brightness(1.04);           /* pastel pops into a vivid, clearly-changed color */
+  box-shadow: 0 0 0 2px #fff inset, 0 5px 14px rgba(16,31,54,0.5);
+  transform: scale(1.03);
+}
+.ptos-root .cell.sel .tropeIdentifier { color: #101F36; font-weight: 700; }
+.ptos-root .cell.sel::after { content: '✓'; position: absolute; top: -7px; right: -7px; width: 18px; height: 18px; background: #00A9E0; color: #fff; border: 1.5px solid #fff; border-radius: 50%; font-size: 11px; line-height: 16px; text-align: center; z-index: 5; box-shadow: 0 1px 3px rgba(0,0,0,0.4); }
 .ptos-root.xray .cell:not(.sel) { opacity: 0.25; }

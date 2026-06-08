@@ -9,7 +9,7 @@ type Verified = { title: string; year: string; poster: string | null; explanatio
 
 export async function POST(req: Request) {
   try {
-    let body: { elements?: Element[] }
+    let body: { elements?: Element[]; steer?: unknown }
     try {
       body = await req.json()
     } catch {
@@ -19,14 +19,17 @@ export async function POST(req: Request) {
     if (!Array.isArray(elements) || elements.length === 0) {
       return Response.json({ error: 'Missing elements' }, { status: 400 })
     }
+    // Optional freeform creative direction (e.g. "about tourism"). Capped to bound prompt size.
+    const steer = typeof body.steer === 'string' ? body.steer.trim().slice(0, 200) : ''
 
     const elementNames = elements.map((e) => e.name).join(', ')
     const elementContext = elements.map((e) => (e.desc ? `[${e.name}]: ${e.desc}` : `- ${e.name}`)).join('\n')
+    const steerLine = steer ? `\n\nAdditional creative direction (the concept MUST honor this): ${steer}` : ''
 
     // Stage 1: title + one-line strapline (must use every element).
     const creativeAI = await ai.models.generateContent({
       model: 'gemini-2.5-flash',
-      contents: `Devise one original story concept that fuses ALL of the following storytelling elements into a single premise. Every element listed must be reflected in the premise — do not drop any:\n${elementContext}`,
+      contents: `Devise one original story concept that fuses ALL of the following storytelling elements into a single premise. Every element listed must be reflected in the premise — do not drop any:\n${elementContext}${steerLine}`,
       config: {
         systemInstruction:
           'You are an elite Hollywood script doctor. Distil the concept into a title and ONE punchy strapline — a single-sentence logline, like a movie-poster tagline. Output ONLY a valid JSON object with exactly two keys: "title" and "logline". The "logline" MUST be a single sentence. Do NOT include a plot summary, synopsis, or any other keys. Do not use markdown backticks.',
