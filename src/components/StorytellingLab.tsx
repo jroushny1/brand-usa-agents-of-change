@@ -19,7 +19,7 @@ const LEGEND: [string, string][] = [
 ]
 
 type Example = { title: string; year: string; poster: string | null; explanation: string }
-type GenOut = { kind: 'gen'; title: string; logline: string; synopsis: string; realWorldExamples: Example[] }
+type GenOut = { kind: 'gen'; title: string; logline: string; realWorldExamples: Example[] }
 type Breakdown = { id: string; reason: string }
 type AnalyzeOut = { kind: 'analyze'; title: string; synopsis: string; poster: string | null; breakdowns: Breakdown[] }
 type OutState = null | { kind: 'loading'; msg: string } | { kind: 'error'; msg: string } | GenOut | AnalyzeOut
@@ -218,9 +218,7 @@ export default function StorytellingLab() {
           {out.kind === 'gen' && (
             <div className="pr-5">
               <h3 className="font-display text-xl font-bold text-brand-navy">{out.title}</h3>
-              <p className="mt-0.5 text-sm italic text-gray-500">&ldquo;{out.logline}&rdquo;</p>
-              <div className="mt-3 text-[0.7rem] font-bold uppercase tracking-wider text-gray-400">Synthesized concept</div>
-              <p className="mt-1 whitespace-pre-line text-sm leading-relaxed text-gray-700">{out.synopsis}</p>
+              <p className="mt-1 text-base italic text-gray-700 leading-relaxed">&ldquo;{out.logline}&rdquo;</p>
               <div className="mt-4 text-[0.7rem] font-bold uppercase tracking-wider text-gray-400">Real-world genetics — TMDB-verified</div>
               <div className="mt-1 space-y-1.5">
                 {out.realWorldExamples.map((ex, i) => (

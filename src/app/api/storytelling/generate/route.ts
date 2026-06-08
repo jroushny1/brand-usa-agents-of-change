@@ -42,10 +42,10 @@ export async function POST(req: Request) {
     // Stage 1: Creative generation (must use every element).
     const creativeAI = await ai.models.generateContent({
       model: 'gemini-2.5-flash',
-      contents: `Synthesize one original narrative concept that incorporates ALL of the following storytelling elements. Every single element listed must be clearly present and identifiable in the plot — do not drop any:\n${elementContext}`,
+      contents: `Devise one original story concept that fuses ALL of the following storytelling elements into a single premise. Every element listed must be reflected in the premise — do not drop any:\n${elementContext}`,
       config: {
         systemInstruction:
-          'You are an elite Hollywood script doctor. You must weave EVERY supplied element into a single cohesive story. Output ONLY a valid JSON object with keys: "title", "logline", "synopsis" (3 paragraphs detailed breakdown). Do not use markdown backticks.',
+          'You are an elite Hollywood script doctor. Distil the concept into a title and ONE punchy strapline — a single-sentence logline, like a movie-poster tagline. Output ONLY a valid JSON object with exactly two keys: "title" and "logline". The "logline" MUST be a single sentence. Do NOT include a plot summary, synopsis, or any other keys. Do not use markdown backticks.',
         responseMimeType: 'application/json',
         temperature: 0.85,
       },
