@@ -105,7 +105,7 @@ export default function ShortsPage() {
     videoRefs.current.forEach((video, index) => {
       if (video) {
         if (index === currentIndex) {
-          video.play().catch(e => console.log('Auto-play prevented:', e))
+          video.play().catch(() => { /* autoplay blocked by browser */ })
         } else {
           video.pause()
         }

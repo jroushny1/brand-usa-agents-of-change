@@ -1,9 +1,17 @@
 import { GoogleGenAI } from '@google/genai'
 
 // Shared server-side helpers for the /storytelling API routes.
-export const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY })
+function requireEnv(name: string): string {
+  const v = process.env[name]
+  if (!v) throw new Error(`Missing required environment variable: ${name}`)
+  return v
+}
 
-const TMDB_API_KEY = process.env.TMDB_API_KEY
+// Constructed lazily so a missing key fails with a clear error at request time, not at import.
+let _ai: GoogleGenAI | undefined
+export function getAi(): GoogleGenAI {
+  return (_ai ??= new GoogleGenAI({ apiKey: requireEnv('GEMINI_API_KEY') }))
+}
 const TMDB_BASE = 'https://api.themoviedb.org/3'
 const TMDB_IMG = 'https://image.tmdb.org/t/p/w500'
 const TMDB_TIMEOUT_MS = 8000
@@ -52,9 +60,10 @@ type TmdbMovie = {
 
 /** Search TMDB and return the first result, or null on no-result / upstream error / timeout. */
 export async function tmdbSearchFirst(query: string, year?: string): Promise<TmdbMovie | null> {
+  const apiKey = requireEnv('TMDB_API_KEY')
   try {
     const yq = year ? `&year=${encodeURIComponent(year)}` : ''
-    const url = `${TMDB_BASE}/search/movie?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(query)}${yq}`
+    const url = `${TMDB_BASE}/search/movie?api_key=${apiKey}&query=${encodeURIComponent(query)}${yq}`
     const res = await fetch(url, { signal: AbortSignal.timeout(TMDB_TIMEOUT_MS) })
     if (!res.ok) return null
     const data = await res.json()

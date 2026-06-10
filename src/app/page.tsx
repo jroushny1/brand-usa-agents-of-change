@@ -192,7 +192,7 @@ export default function HomePage() {
     "name": "Brand USA Agents of Change",
     "alternateName": "Agents of Change",
     "description": "Official AI learning platform for U.S. destination marketing organizations and tourism professionals. Provides comprehensive training on AI agents, Custom GPTs, Model Context Protocol, and AI governance for the tourism industry.",
-    "url": "https://brand-usa-agents-of-change.vercel.app",
+    "url": "https://www.janetteroush.com",
     "sameAs": BRAND_USA_AOC_SAMEAS,
     "parentOrganization": {
       "@type": "Organization",
@@ -308,7 +308,7 @@ export default function HomePage() {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "Brand USA Agents of Change",
-    "url": "https://brand-usa-agents-of-change.vercel.app",
+    "url": "https://www.janetteroush.com",
     "description": "AI Learning Platform for Destination Marketing Organizations and US tourism professionals",
     "about": {
       "@type": "Thing",
@@ -332,7 +332,7 @@ export default function HomePage() {
       {
         "@type": "Course",
         "name": "AI Fundamentals Webinar Series",
-        "description": "12 comprehensive webinars covering AI fundamentals, strategy, and implementation for tourism marketing",
+        "description": `${webinars.length} comprehensive webinars covering AI fundamentals, strategy, and implementation for tourism marketing`,
         "numberOfCredits": 9,
         "provider": {
           "@type": "Organization",
@@ -461,7 +461,7 @@ export default function HomePage() {
                 AI Training Videos
               </h3>
               <p className="text-gray-600 mb-6 leading-relaxed">
-                12 comprehensive webinars covering AI fundamentals, strategy, and implementation for tourism marketing
+                {webinars.length} comprehensive webinars covering AI fundamentals, strategy, and implementation for tourism marketing
               </p>
               <div className="inline-flex items-center text-brand-cyan font-semibold group-hover:gap-2 transition-all">
                 Watch Now

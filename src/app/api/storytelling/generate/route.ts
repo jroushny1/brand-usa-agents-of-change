@@ -1,4 +1,4 @@
-import { ai, verifyMovie, parseModelJson, withRetry, isTransientAiError } from '@/lib/storytelling'
+import { getAi, verifyMovie, parseModelJson, withRetry, isTransientAiError } from '@/lib/storytelling'
 
 export const runtime = 'nodejs'
 export const maxDuration = 60
@@ -27,7 +27,7 @@ export async function POST(req: Request) {
     const steerLine = steer ? `\n\nAdditional creative direction (the concept MUST honor this): ${steer}` : ''
 
     // Stage 1: title + one-line strapline (must use every element).
-    const creativeAI = await withRetry(() => ai.models.generateContent({
+    const creativeAI = await withRetry(() => getAi().models.generateContent({
       model: 'gemini-2.5-flash',
       contents: `Devise one original story concept that fuses ALL of the following storytelling elements into a single premise. Every element listed must be reflected in the premise — do not drop any:\n${elementContext}${steerLine}`,
       config: {
@@ -51,7 +51,7 @@ export async function POST(req: Request) {
     // Stage 2: real-world comps (low temperature). Parse defensively — failure here is non-fatal.
     let rawRecs: Rec[] = []
     try {
-      const archivistAI = await withRetry(() => ai.models.generateContent({
+      const archivistAI = await withRetry(() => getAi().models.generateContent({
         model: 'gemini-2.5-flash',
         contents: `Identify 3 real-world mainstream movies famous for combining or highlighting these tropes: ${elementNames}`,
         config: {
