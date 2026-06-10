@@ -20,7 +20,7 @@ export default function AboutPage() {
     'name': 'Agents of Change AI Lab',
     'alternateName': 'Brand USA AI Lab',
     'description': 'The Agents of Change program is dedicated to advancing AI literacy in the tourism industry. This research lab serves as a central archive for frameworks, tools, and strategies developed to help DMOs navigate the generative AI revolution.',
-    'url': 'https://www.janetteroush.com/about',
+    'url': 'https://janetteroush.com/about',
     'founder': {
       '@type': 'Person',
       'name': 'Janette Roush',

@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   return {
     title: podcast.title,
     description: podcast.description,
-    alternates: { canonical: `https://www.janetteroush.com/podcast/${id}` },
+    alternates: { canonical: `https://janetteroush.com/podcast/${id}` },
     openGraph: {
       title: podcast.title,
       description: podcast.description,
@@ -38,10 +38,10 @@ export default async function PodcastPage({ params }: { params: Promise<{ id: st
   const podcastEpisodeSchema = {
     '@context': 'https://schema.org',
     '@type': 'PodcastEpisode',
-    '@id': `https://www.janetteroush.com/podcast/${id}`,
+    '@id': `https://janetteroush.com/podcast/${id}`,
     'name': podcast.title,
     'description': podcast.description,
-    'url': `https://www.janetteroush.com/podcast/${id}`,
+    'url': `https://janetteroush.com/podcast/${id}`,
     'datePublished': podcast.publishDate,
     'episodeNumber': podcast.episode,
     'partOfSeason': {
@@ -51,7 +51,7 @@ export default async function PodcastPage({ params }: { params: Promise<{ id: st
     'partOfSeries': {
       '@type': 'PodcastSeries',
       'name': podcast.podcastName,
-      'url': `https://www.janetteroush.com/library`
+      'url': `https://janetteroush.com/library`
     },
     'author': podcast.hosts.map(host => ({
       '@type': 'Person',
@@ -114,19 +114,19 @@ export default async function PodcastPage({ params }: { params: Promise<{ id: st
         '@type': 'ListItem',
         'position': 1,
         'name': 'Home',
-        'item': 'https://www.janetteroush.com'
+        'item': 'https://janetteroush.com'
       },
       {
         '@type': 'ListItem',
         'position': 2,
         'name': 'Library',
-        'item': 'https://www.janetteroush.com/library'
+        'item': 'https://janetteroush.com/library'
       },
       {
         '@type': 'ListItem',
         'position': 3,
         'name': podcast.title,
-        'item': `https://www.janetteroush.com/podcast/${id}`
+        'item': `https://janetteroush.com/podcast/${id}`
       }
     ]
   }

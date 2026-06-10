@@ -5,7 +5,7 @@ import { terms, faqs, unexpectedQuestions } from '@/data/glossary'
 export const metadata: Metadata = {
   title: 'AI for Tourism Glossary',
   description: 'Authoritative definitions of AI terminology for destination marketing professionals — AI agents, MCP, CRIT framework, Custom GPTs, and more, with FAQs from real webinar Q&As.',
-  alternates: { canonical: 'https://www.janetteroush.com/glossary' },
+  alternates: { canonical: 'https://janetteroush.com/glossary' },
   openGraph: {
     title: 'AI for Tourism Glossary',
     description: 'Authoritative definitions of AI terminology for destination marketing professionals.',

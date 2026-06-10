@@ -12,7 +12,7 @@ function escapeXml(unsafe: string): string {
 }
 
 export async function GET() {
-  const baseUrl = 'https://www.janetteroush.com'
+  const baseUrl = 'https://janetteroush.com'
   const buildDate = new Date().toUTCString()
 
   const rss = `<?xml version="1.0" encoding="UTF-8"?>

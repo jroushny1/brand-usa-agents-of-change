@@ -8,7 +8,7 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'AI Tools & Resources',
   description: 'Podcasts, tools, guides, and industry links curated for tourism professionals — Personal OS guides, Brand USA resources, AI conversations, and more.',
-  alternates: { canonical: 'https://www.janetteroush.com/library' },
+  alternates: { canonical: 'https://janetteroush.com/library' },
   openGraph: {
     title: 'AI Tools & Resources',
     description: 'Podcasts, tools, guides, and industry links curated for tourism professionals.',
@@ -23,7 +23,7 @@ const generateLibrarySchema = () => {
     '@type': 'CollectionPage',
     'name': 'AI Learning Library for Tourism Professionals',
     'description': 'Curated collection of AI resources, tools, and learning materials specifically designed for destination marketing organizations (DMOs), convention bureaus, and tourism professionals.',
-    'url': 'https://www.janetteroush.com/library',
+    'url': 'https://janetteroush.com/library',
     'author': {
       '@type': 'Person',
       'name': 'Janette Roush',

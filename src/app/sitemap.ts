@@ -4,7 +4,7 @@ import { podcastData, podcastIds } from '@/data/podcasts'
 import { fieldNotes } from '@/data/field-notes'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://www.janetteroush.com'
+  const baseUrl = 'https://janetteroush.com'
 
   const staticPages: MetadataRoute.Sitemap = [
     {

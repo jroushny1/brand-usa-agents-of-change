@@ -21,6 +21,6 @@ export default function robots(): MetadataRoute.Robots {
         allow: '/',
       },
     ],
-    sitemap: 'https://www.janetteroush.com/sitemap.xml',
+    sitemap: 'https://janetteroush.com/sitemap.xml',
   }
 }
