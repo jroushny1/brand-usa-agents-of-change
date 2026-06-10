@@ -82,7 +82,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ]
 
   const webinarPages: MetadataRoute.Sitemap = webinarIds.map((id) => {
-    const webinar = webinarData[id as keyof typeof webinarData] as { publishDate?: string }
+    const webinar = webinarData[id]
     return {
       url: `${baseUrl}/webinar/${id}`,
       lastModified: webinar.publishDate ? new Date(webinar.publishDate) : new Date(),

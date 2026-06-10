@@ -7,13 +7,13 @@ import type { NextRequest } from 'next/server'
 // List of public paths that don't need the access code
 // const PUBLIC_PATHS = ['/enter', '/api', '/_next', '/favicon.ico', '/brandusa-logo.png']
 
-export function middleware(req: NextRequest) {
+export function middleware(_req: NextRequest) {
   // Password protection disabled - allow all access
   return NextResponse.next()
 
   // Uncomment below to re-enable password protection:
   /*
-  const { pathname } = req.nextUrl
+  const { pathname } = _req.nextUrl
 
   // Allow public paths
   if (PUBLIC_PATHS.some(path => pathname.startsWith(path))) {
@@ -21,11 +21,11 @@ export function middleware(req: NextRequest) {
   }
 
   // Check for access code cookie
-  const hasAccess = req.cookies.get('partner_access')?.value === 'GoTeamUSA'
+  const hasAccess = _req.cookies.get('partner_access')?.value === 'GoTeamUSA'
 
   if (!hasAccess) {
     // Redirect to enter page
-    const url = req.nextUrl.clone()
+    const url = _req.nextUrl.clone()
     url.pathname = '/enter'
     return NextResponse.redirect(url)
   }

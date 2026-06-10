@@ -1,7 +1,26 @@
-import { BookOpen, Code, FileText, Podcast, Video, Wrench } from 'lucide-react'
+import { BookOpen, Code, FileText, Podcast, Video, Wrench, type LucideIcon } from 'lucide-react'
+
+export interface ResourceItem {
+  title: string
+  description: string
+  url: string
+  icon: LucideIcon
+  /** Internal links open in the same tab and get a different arrow treatment. */
+  isInternal?: boolean
+  /** Remote logo image; falls back to the icon when absent. */
+  logo?: string
+  date?: string
+  status?: 'recorded' | 'upcoming'
+  recordedDate?: string
+}
+
+export interface ResourceCategory {
+  category: string
+  items: ResourceItem[]
+}
 
 // Categorized resource links rendered on /library and in its JSON-LD schemas.
-export const resources = [
+export const resources: ResourceCategory[] = [
   {
     category: 'Personal OS Guides',
     items: [

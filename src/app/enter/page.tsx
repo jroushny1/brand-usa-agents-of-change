@@ -80,7 +80,7 @@ export default function EnterPage() {
               />
               {error && (
                 <p className="mt-2 text-sm text-red-600">
-                  That's not the right code. Try again! 💪
+                  That&apos;s not the right code. Try again! 💪
                 </p>
               )}
             </div>
@@ -103,7 +103,7 @@ export default function EnterPage() {
 
           <div className="mt-6 pt-6 border-t border-gray-200">
             <p className="text-center text-sm text-gray-600">
-              Don't have an access code?{' '}
+              Don&apos;t have an access code?{' '}
               <a href="mailto:partners@thebrandusa.com" className="text-brand-blue hover:underline">
                 Contact Brand USA
               </a>

@@ -13,7 +13,7 @@ interface ChaptersListProps {
 
 export default function ChaptersList({ chapters }: ChaptersListProps) {
   const handleChapterClick = (time: number) => {
-    const player = document.querySelector('video') as any
+    const player = document.querySelector('video')
     if (player) {
       player.currentTime = time
       player.play()

@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { ArrowLeft, BookOpen, ExternalLink, FileText, Video, Podcast, Code, Wrench } from 'lucide-react'
+import { ArrowLeft, ExternalLink } from 'lucide-react'
 import AccessCheck from '@/components/AccessCheck'
 import { resources } from '@/data/resources'
 import type { Metadata } from 'next'
@@ -55,7 +55,7 @@ const generateLibrarySchema = () => {
     'description': 'Expert conversations exploring AI\'s impact on destination marketing from 2023-2026',
     'numberOfItems': resources.find(r => r.category === 'Conversations on AI in Tourism')?.items.length || 0,
     'itemListElement': (resources.find(r => r.category === 'Conversations on AI in Tourism')?.items || []).map((item, index) => {
-      const podcastItem: any = {
+      const podcastItem: Record<string, unknown> = {
         '@type': 'PodcastEpisode',
         'name': item.title,
         'description': item.description,
@@ -63,17 +63,17 @@ const generateLibrarySchema = () => {
       }
 
       // Add Event schema if status and recordedDate exist
-      if ((item as any).status === 'recorded' && (item as any).recordedDate) {
+      if (item.status === 'recorded' && item.recordedDate) {
         podcastItem.recordingOf = {
           '@type': 'Event',
           'name': item.title,
           'eventStatus': 'https://schema.org/EventScheduled',
           'eventAttendanceMode': 'https://schema.org/OnlineEventAttendanceMode',
-          'startDate': (item as any).recordedDate,
-          'endDate': (item as any).recordedDate,
+          'startDate': item.recordedDate,
+          'endDate': item.recordedDate,
           'location': {
             '@type': 'VirtualLocation',
-            'url': 'https://brand-usa-agents-of-change.vercel.app'
+            'url': 'https://janetteroush.com'
           }
         }
       }
@@ -245,7 +245,7 @@ export default function LibraryPage() {
                             ? item.title.split('–').map(s => s.trim())
                             : [item.title, '']
 
-                          const isInternalLink = (item as any).isInternal
+                          const isInternalLink = item.isInternal
                           const targetUrl = item.url
 
                           return (
@@ -254,7 +254,7 @@ export default function LibraryPage() {
                                 href={targetUrl}
                                 target={isInternalLink ? undefined : "_blank"}
                                 rel={isInternalLink ? undefined : "noopener noreferrer"}
-                                aria-label={`Listen to ${item.title}${(item as any).date ? ` from ${(item as any).date}` : ''}`}
+                                aria-label={`Listen to ${item.title}${item.date ? ` from ${item.date}` : ''}`}
                                 className="group bg-white rounded-xl border border-gray-200 p-5 sm:p-6 hover:shadow-xl hover:border-brand-blue hover:-translate-y-1 transition-all duration-300 flex flex-col min-h-[240px]"
                               >
                                 {/* Podcast Icon & Name - Larger */}
@@ -268,17 +268,17 @@ export default function LibraryPage() {
                                       {podcastName}
                                     </div>
                                     <div className="flex items-center gap-2">
-                                      {(item as any).date && (
+                                      {item.date && (
                                         <div className="text-sm text-gray-500">
-                                          {(item as any).date}
+                                          {item.date}
                                         </div>
                                       )}
-                                      {(item as any).status === 'recorded' && (
+                                      {item.status === 'recorded' && (
                                         <span className="inline-flex items-center px-2 py-0.5 text-xs font-semibold rounded-full bg-blue-100 text-blue-700">
                                           RECORDED
                                         </span>
                                       )}
-                                      {(item as any).status === 'upcoming' && (
+                                      {item.status === 'upcoming' && (
                                         <span className="inline-flex items-center px-2 py-0.5 text-xs font-semibold rounded-full bg-green-100 text-green-700">
                                           UPCOMING
                                         </span>
@@ -331,11 +331,13 @@ export default function LibraryPage() {
                               >
                                 {/* Logo */}
                                 <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-lg overflow-hidden mb-2 sm:mb-3 group-hover:scale-105 transition-transform flex items-center justify-center bg-gray-50">
-                                  {(item as any).logo ? (
-                                    <img
-                                      src={(item as any).logo}
+                                  {item.logo ? (
+                                    <Image
+                                      src={item.logo}
                                       alt=""
                                       aria-hidden="true"
+                                      width={56}
+                                      height={56}
                                       className="w-full h-full object-contain p-1.5 sm:p-2"
                                     />
                                   ) : (
@@ -374,9 +376,9 @@ export default function LibraryPage() {
                             <li key={itemIndex}>
                               <a
                                 href={item.url}
-                                target={(item as any).isInternal ? undefined : "_blank"}
-                                rel={(item as any).isInternal ? undefined : "noopener noreferrer"}
-                                aria-label={`${(item as any).isInternal ? 'View' : 'Visit'} ${item.title}: ${item.description}`}
+                                target={item.isInternal ? undefined : "_blank"}
+                                rel={item.isInternal ? undefined : "noopener noreferrer"}
+                                aria-label={`${item.isInternal ? 'View' : 'Visit'} ${item.title}: ${item.description}`}
                                 className="group bg-white rounded-lg border border-gray-200 p-3 sm:p-4 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 flex gap-3 items-start h-full"
                               >
                                 {/* Icon */}
@@ -395,7 +397,7 @@ export default function LibraryPage() {
                                 </div>
 
                                 {/* Arrow */}
-                                {(item as any).isInternal ? (
+                                {item.isInternal ? (
                                   <div className="flex-shrink-0 text-brand-cyan text-lg sm:text-xl" aria-hidden="true">→</div>
                                 ) : (
                                   <ExternalLink className="flex-shrink-0 h-4 w-4 sm:h-5 sm:w-5 text-gray-400 group-hover:text-brand-cyan transition-colors" aria-hidden="true" />

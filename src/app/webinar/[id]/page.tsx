@@ -17,7 +17,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const { id } = await params
-  const webinar = webinarData[id as keyof typeof webinarData]
+  const webinar = webinarData[id]
   if (!webinar) return {}
   return {
     title: webinar.title,
@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
 
 export default async function WebinarPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
-  const webinar = webinarData[id as keyof typeof webinarData]
+  const webinar = webinarData[id]
 
   if (!webinar) {
     notFound()
@@ -51,7 +51,7 @@ export default async function WebinarPage({ params }: { params: Promise<{ id: st
     duration: webinar.duration,
     thumbnailUrl: `https://image.mux.com/${webinar.muxPlaybackId}/thumbnail.png`,
     contentUrl: `https://stream.mux.com/${webinar.muxPlaybackId}.m3u8`,
-    uploadDate: (webinar as any).publishDate || '2024-01-01',
+    uploadDate: webinar.publishDate || '2024-01-01',
     inLanguage: 'en-US',
     isAccessibleForFree: true,
     contentLocation: {
@@ -102,22 +102,22 @@ export default async function WebinarPage({ params }: { params: Promise<{ id: st
         name: 'Brand USA Agents of Change'
       }
     },
-    educationalLevel: (webinar as any).level || 'Professional',
-    keywords: (webinar as any).topics?.join(', ') || '',
-    about: (webinar as any).topics?.map((topic: string) => ({
+    educationalLevel: webinar.level || 'Professional',
+    keywords: webinar.topics?.join(', ') || '',
+    about: webinar.topics?.map((topic: string) => ({
       '@type': 'Thing',
       name: topic
     })) || [],
-    ...(webinar as any).keyTakeaways && {
-      teaches: (webinar as any).keyTakeaways
+    ...webinar.keyTakeaways && {
+      teaches: webinar.keyTakeaways
     },
-    ...(webinar as any).learningOutcomes && {
-      educationalUse: (webinar as any).learningOutcomes
+    ...webinar.learningOutcomes && {
+      educationalUse: webinar.learningOutcomes
     },
-    ...(webinar as any).targetAudience && {
+    ...webinar.targetAudience && {
       audience: {
         '@type': 'Audience',
-        audienceType: (webinar as any).targetAudience.primary
+        audienceType: webinar.targetAudience.primary
       }
     },
     ...(webinarMentions[id] && {
@@ -153,14 +153,14 @@ export default async function WebinarPage({ params }: { params: Promise<{ id: st
 
   // FAQPage schema - the key to AI discoverability (like StackList's "AI Discoverability" feature)
   // Transforms key takeaways into Q&A pairs that AI crawlers can easily parse
-  const faqSchema = (webinar as any).keyTakeaways && (webinar as any).keyTakeaways.length > 0 ? {
+  const faqSchema = webinar.keyTakeaways && webinar.keyTakeaways.length > 0 ? {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    'mainEntity': (webinar as any).keyTakeaways.map((takeaway: string, index: number) => {
+    'mainEntity': webinar.keyTakeaways.map((takeaway: string, index: number) => {
       // Generate contextual questions based on webinar content
       const questions = [
         `What are the main concepts covered in "${webinar.title}"?`,
-        `What practical tools are demonstrated in this ${(webinar as any).level === 'Strategic' ? 'strategic' : 'tactical'} webinar?`,
+        `What practical tools are demonstrated in this ${webinar.level === 'Strategic' ? 'strategic' : 'tactical'} webinar?`,
         `What are the key risks or limitations discussed in "${webinar.title}"?`,
         `How does this webinar envision the future of AI in destination marketing?`,
         `What security or governance considerations are covered?`
@@ -199,7 +199,7 @@ export default async function WebinarPage({ params }: { params: Promise<{ id: st
       'audienceType': 'tourism professionals',
       'educationalRole': 'destination marketing organization staff'
     },
-    'teaches': (webinar as any).learningOutcomes || [],
+    'teaches': webinar.learningOutcomes || [],
     'isAccessibleForFree': true,
     'inLanguage': 'en-US'
   }
@@ -258,7 +258,7 @@ export default async function WebinarPage({ params }: { params: Promise<{ id: st
       </header>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {(webinar as any).isShortForm ? (
+        {webinar.isShortForm ? (
           // TikTok-style vertical layout for short-form videos
           <div className="max-w-2xl mx-auto">
             <div className="flex flex-col items-center space-y-6">
@@ -298,9 +298,9 @@ export default async function WebinarPage({ params }: { params: Promise<{ id: st
               </div>
 
               {/* Resources - only show if resources exist */}
-              {(webinar as any).resources && (webinar as any).resources.length > 0 && (
+              {webinar.resources && webinar.resources.length > 0 && (
                 <div className="w-full max-w-md">
-                  <ResourcesList resources={(webinar as any).resources} />
+                  <ResourcesList resources={webinar.resources} />
                 </div>
               )}
             </div>
@@ -354,34 +354,34 @@ export default async function WebinarPage({ params }: { params: Promise<{ id: st
             <ChaptersList chapters={webinar.chapters} />
 
             {/* Key Takeaways - only show if exists */}
-            {(webinar as any).keyTakeaways && (webinar as any).keyTakeaways.length > 0 && (
-              <KeyTakeawaysList takeaways={(webinar as any).keyTakeaways} />
+            {webinar.keyTakeaways && webinar.keyTakeaways.length > 0 && (
+              <KeyTakeawaysList takeaways={webinar.keyTakeaways} />
             )}
 
             {/* Learning Outcomes - only show if exists */}
-            {(webinar as any).learningOutcomes && (webinar as any).learningOutcomes.length > 0 && (
-              <LearningOutcomesList outcomes={(webinar as any).learningOutcomes} />
+            {webinar.learningOutcomes && webinar.learningOutcomes.length > 0 && (
+              <LearningOutcomesList outcomes={webinar.learningOutcomes} />
             )}
 
             {/* Transcript - Server-rendered HTML for SEO/GEO crawlability */}
-            {(webinar as any).transcript && (
-              <TranscriptSection transcript={(webinar as any).transcript} />
+            {webinar.transcript && (
+              <TranscriptSection transcript={webinar.transcript} />
             )}
           </div>
 
           {/* Sidebar */}
           <div className="space-y-6">
             {/* Resources - only show if resources exist */}
-            {(webinar as any).resources && (webinar as any).resources.length > 0 && (
-              <ResourcesList resources={(webinar as any).resources} />
+            {webinar.resources && webinar.resources.length > 0 && (
+              <ResourcesList resources={webinar.resources} />
             )}
 
             {/* Related Resources/Tools - only show if exists */}
-            {(webinar as any).relatedResources && (webinar as any).relatedResources.length > 0 && (
+            {webinar.relatedResources && webinar.relatedResources.length > 0 && (
               <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
                 <h2 className="text-lg font-semibold text-brand-navy mb-4">Tools Mentioned</h2>
                 <div className="space-y-3">
-                  {(webinar as any).relatedResources.map((resource: any, index: number) => (
+                  {webinar.relatedResources.map((resource, index) => (
                     <a
                       key={index}
                       href={resource.url}

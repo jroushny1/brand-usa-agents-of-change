@@ -1,11 +1,54 @@
 // All webinar content. Single source of truth for /webinar/[id] pages,
 // the sitemap, and content validation tooling.
-export const webinarData = {
+
+export interface WebinarChapter {
+  time: number
+  title: string
+}
+
+export interface WebinarResource {
+  name: string
+  description: string
+  url: string
+}
+
+export interface Webinar {
+  id: string
+  title: string
+  description: string
+  duration: string
+  muxPlaybackId: string
+  instructor: string
+  instructorTitle: string
+  publishDate: string
+  chapters: WebinarChapter[]
+  /** Strategic | Tactical — drives the homepage card badge and schema educationalLevel. */
+  level?: string
+  /** Shorter marketing blurb for the homepage card; falls back to description. */
+  cardDescription?: string
+  isConferenceTalk?: boolean
+  isShortForm?: boolean
+  topics?: string[]
+  keyTakeaways?: string[]
+  learningOutcomes?: string[]
+  targetAudience?: {
+    primary: string
+    secondary?: string
+    tertiary?: string
+  }
+  resources?: WebinarResource[]
+  relatedResources?: WebinarResource[]
+  transcript?: string
+}
+
+export const webinarData: Record<string, Webinar> = {
   'intro-ai-agents': {
     id: 'intro-ai-agents',
     title: 'Introduction to AI Agents',
     description: 'The four types of AI agents—Operator, Researcher, Builder, and Automator—explained with live demos. Warning: "agentic" is just a fancy made-up word that means the same thing as "agent." Learn why ChatGPT still hallucinates fake LinkedIn profiles when doing lead research, and how Model Context Protocol fixes this trust problem.',
     duration: '38 min',
+    level: 'Tactical',
+    cardDescription: 'Four agent types: Operator, Researcher, Builder, Automator. "Agentic" is just a made-up fancy word for the same thing.',
     muxPlaybackId: '3TPl1Jgmg01b9BdEXU4WVtJbz4DSetOA7TsyHGvjxJQs',
     instructor: 'Janette Roush',
     instructorTitle: 'Chief AI Officer, Brand USA',
@@ -230,6 +273,8 @@ So thank you so much for joining me for this session on Introduction to Agents. 
     title: 'AI 101',
     description: 'LLMs predict the next word—they don\'t check Wikipedia. That\'s why they hallucinate. Learn the step-by-step prompting method (don\'t ask for a 6-page paper at once) and how to "prime the prompt" with your own research to avoid AI making things up. Includes why ChatGPT once wrote a fake bio claiming Janette won awards she never received.',
     duration: '45 min',
+    level: 'Strategic',
+    cardDescription: 'LLMs predict the next word—they don\'t check facts. Why ChatGPT hallucinated a fake bio with awards Janette never won.',
     muxPlaybackId: 'ue02eduy5uif9Do00iXI6jG02u02O600tu00FauvIOLX2Ayg8',
     instructor: 'Janette Roush',
     instructorTitle: 'Chief AI Officer, Brand USA',
@@ -479,6 +524,8 @@ Thank you so much for your time today. I'm really excited to see how all of you 
     title: 'AI Tool Playground',
     description: 'Hands-on exploration of AI tools specifically curated for destination marketing teams. This comprehensive tour covers the complete AI tool stack: frontier models (ChatGPT, Claude, Gemini), research tools (NotebookLM), image generation (Midjourney), video editing (Descript, Runway, Pika), no-code "vibe coding" platforms (Lovable.dev, Agent.ai, N8N), and presentation tools (Beautiful.ai, Napkin.ai).',
     duration: '44 min',
+    level: 'Tactical',
+    cardDescription: 'Hands-on exploration of AI tools specifically curated for destination marketing teams.',
     muxPlaybackId: 'H6B01F00lAc4PGT8Ick32jTwVa7LVA8Y5yqTq8xyD6DzA',
     instructor: 'Janette Roush',
     instructorTitle: 'Chief AI Officer, Brand USA',
@@ -809,6 +856,8 @@ I really appreciate you joining. Thanks so much.`
     title: 'AI for DMO Leadership',
     description: 'Strategic guidance for tourism leaders on AI adoption, governance, and organizational transformation. This comprehensive leadership guide covers scaling AI by department, creating AI governance frameworks, managing three critical risk areas (Data Security, Data Privacy, Content Integrity), developing organizational AI guidelines, handling vendor partnerships, and implementing both top-down and bottom-up adoption strategies.',
     duration: '41 min',
+    level: 'Strategic',
+    cardDescription: 'Strategic guidance for tourism leaders on AI adoption, governance, and organizational transformation.',
     muxPlaybackId: 'NQACe9aTXRuntXd4r7eHWsXVDFVhaUUwyotE8RF5SQE',
     instructor: 'Janette Roush',
     instructorTitle: 'Chief AI Officer, Brand USA',
@@ -1127,6 +1176,8 @@ There's a number of other great companies doing that work, and I could see that 
     title: 'Custom GPTs: Your New AI Colleague!',
     description: 'Discover how to create and deploy custom GPT assistants that revolutionize your tourism marketing workflows. This comprehensive guide covers building Custom GPTs from scratch, troubleshooting hallucinations, practical use cases for DMOs (expense policies, press releases, meeting follow-up, coaching), and the critical differences between Custom GPTs and Projects.',
     duration: '34 min',
+    level: 'Tactical',
+    cardDescription: 'Discover how to create and deploy custom GPT assistants that revolutionize your tourism marketing workflows.',
     muxPlaybackId: 'aYcGzhmJnP8jdz2o92EPP00JgmRWd2jLNcChaUgytgG8',
     instructor: 'Janette Roush',
     instructorTitle: 'Chief AI Officer, Brand USA',
@@ -1320,6 +1371,7 @@ All right, so that is a really quick overview of Custom GPTs. I hope that gives 
     title: 'AI for Convention Sales',
     description: 'Master Custom GPTs for meeting follow-up and lead research, then discover vibe coding to build AI-powered tools for business events.',
     duration: '42 min',
+    level: 'Tactical',
     muxPlaybackId: '5xZnY5oJP5nlS5wQsEGv00U00gsf201r00aF00Y902ug26K9o',
     instructor: 'Janette Roush',
     instructorTitle: 'Chief AI Officer, Brand USA',
@@ -1529,6 +1581,7 @@ I want to thank Gabe so much again. Thank you, Visit Orlando, for sharing Gabe w
     title: 'AI Prompting Using the CRIT Framework',
     description: 'This video introduces the CRIT (Context, Role, Interview, Task) framework for creating effective AI prompts, emphasizing that providing detailed, spoken context leads to much better results than simple typed commands. It then provides two in-depth demonstrations: first, using the CRIT method to plan a detailed one-hour workshop, and second, brainstorming a low-budget marketing activation by uploading a PDF for the AI to use as a source of truth.',
     duration: '12 min',
+    level: 'Tactical',
     muxPlaybackId: 'OC72C8icortMHMBjS87615i9PRYu3C2dGt7XA22JlWU',
     instructor: 'Janette Roush',
     instructorTitle: 'Chief AI Officer, Brand USA',
@@ -1600,6 +1653,8 @@ I want to thank Gabe so much again. Thank you, Visit Orlando, for sharing Gabe w
     title: 'CRIT Prompting Framework Workshop',
     description: 'Live demos across ChatGPT, Gemini, and Claude using the CRIT (Context, Role, Interview, Task) framework from Geoff Woods\' "AI Driven Leader." Five real use cases: starter ideas, educational strategy, difficult board conversations, partnership pitches, and strategic planning. Voice-to-text is the future—typing takes too long. Claude is a "real jerk about rate limits" but the best thought partner.',
     duration: '42 min',
+    level: 'Tactical',
+    cardDescription: 'Live demos across ChatGPT, Gemini, Claude. Voice-to-text is the future—typing takes too long. Claude is "a real jerk about rate limits."',
     muxPlaybackId: 'aKLdc9rK00v6pXvaCk01x02FBzfWOsUFodgvtn6sla5jks',
     instructor: 'Janette Roush',
     instructorTitle: 'Chief AI Officer, Brand USA',
@@ -1918,6 +1973,8 @@ Alright, great. Thank you all so much and I hope you have a wonderful rest of yo
     title: 'Model Context Protocol',
     description: '91% of travelers are excited about AI for trip planning, but only 6% fully trust it. MCP is the "source of truth" that fixes this—a universal connector that lets ChatGPT plug into real-time data from Booking.com, venue finders, and accessibility databases instead of hallucinating. The decisions you make in the next 6-12 months will shape your DMO\'s future.',
     duration: '27 min',
+    level: 'Strategic',
+    cardDescription: '91% of travelers excited about AI, but only 6% trust it. MCP is the "source of truth" that fixes the hallucination problem.',
     muxPlaybackId: 'V1DanWAF02sOwwIFov4BXNaTzwT3Kn41TnUWdcyNZfZk',
     instructor: 'Janette Roush',
     instructorTitle: 'Chief AI Officer, Brand USA',
@@ -2079,6 +2136,8 @@ Thank you so much for your time today. I hope this was helpful. And I'm excited 
     title: 'AI Policy & Governance for Organizations',
     description: 'Three questions every AI policy must answer: What are we protecting? What are we providing? What are we expecting? Covers the real fear about uploading company info to ChatGPT (spoiler: you can turn model training off), plus the AIGP certification path from IAPP. Includes Brand USA\'s actual AI policy and 12+ hours of governance coursework distilled into 40 minutes.',
     duration: '40 min',
+    level: 'Strategic',
+    cardDescription: 'Three questions every AI policy must answer: What are we protecting? What are we providing? What are we expecting? Includes Brand USA\'s actual policy.',
     muxPlaybackId: 'MIs97m4ZKNZZJwNPP35c02VDqDqIgkZKgmnWhUtzi1s4',
     instructor: 'Janette Roush',
     instructorTitle: 'Chief AI Officer, Brand USA',
@@ -2381,6 +2440,8 @@ To wrap up, this is the QR code for today's presentation if you would like to do
     title: 'AI for Presentations',
     description: 'Beautiful.ai can generate a full deck in seconds—but it won\'t match your brand templates. Learn the practical workflow instead: use ChatGPT Projects to organize research, Deep Research for sourced evidence, and AI frameworks to structure your narrative arc. Chelsea Benitez demos how AI pressure-tests data cuts, designs better charts, and writes insight-led slide titles. Plus: Gemini Nano Banana for fun images, video rehearsal coaching, and Claude Cowork for building HTML presentations with your brand guidelines.',
     duration: '44 min',
+    level: 'Tactical',
+    cardDescription: 'Beautiful.ai can generate a full deck—but it won\'t match your brand. Learn the practical workflow: ChatGPT Projects, Deep Research, Gemini images, and Claude Cowork for HTML decks.',
     muxPlaybackId: 'VUzs9CRk01QRfTtkuo5SD02PQ5uqPMszeo5GaehJ74EzE',
     instructor: 'Janette Roush & Chelsea Benitez',
     instructorTitle: 'Chief AI Officer & Head of Research, Brand USA',
@@ -2699,6 +2760,8 @@ And with that note, it is the end of the hour. I want to thank everybody for log
     title: 'Introduction to Vibe Coding',
     description: `Vibe coding means building software by describing what you want in plain language—no programming required. Janette Roush demos the full range live: a Minor League Baseball road trip planner, a Global Ambassador application form wired to a Google Apps Script, an RFP tracker, a strategy recap site built from Plaud meeting recordings, and fam-trip itinerary websites. See how Lovable.dev gets you started and how Claude Code and Claude Cowork take you further, plus how to share sites securely with GitHub, Bitbucket, and Vercel.`,
     duration: '47 min',
+    level: 'Tactical',
+    cardDescription: 'Build software by describing what you want in plain language—no code required. Janette demos a baseball road-trip planner, a Global Ambassador application form, an RFP tracker, and fam-trip itinerary sites live, using Lovable.dev, Claude Code, and Claude Cowork.',
     muxPlaybackId: 'aJlL3OprpVNj02gW6rXiMhXQg1RoiT89qM95nuViRQeE',
     instructor: 'Janette Roush',
     instructorTitle: 'Chief AI Officer, Brand USA',
@@ -3032,6 +3095,8 @@ I want to thank everybody so much, for joining the webinar. you can go to thebra
     title: 'Using AI to Manage the RFP Process',
     description: `Reviewing RFP responses is slow and inconsistent, especially with a multi-person committee reading 25-page proposals from ten agencies. Janette Roush and Skyler Clark demo a transparent, auditable system: one shared AI project, a single evaluation prompt the AI writes from your actual RFP, each proposal scored in its own fresh chat, and a Claude-built scorecard artifact that aggregates committee scores in one place. Humans stay in the loop for cultural fit, trust, and the final vote—and the same pattern works for vendor reviews, grants, and hiring.`,
     duration: '43 min',
+    level: 'Tactical',
+    cardDescription: 'Janette Roush and Skyler Clark demo a transparent, auditable system for evaluating RFP responses: one shared AI project, a single evaluation prompt, each proposal scored in a fresh chat, and a Claude-built scorecard that aggregates committee scores—with humans keeping the vote.',
     muxPlaybackId: '6HkljWWXiQm01iHgqz02tz2RFa1902jls7nguDNfrgNFqc',
     instructor: 'Janette Roush & Skyler Clark',
     instructorTitle: 'Chief AI Officer & Senior Director, Partner Strategy, Brand USA',
@@ -3289,7 +3354,14 @@ All right.`,
 export const webinarIds = Object.keys(webinarData)
 
 // Map of AI tools mentioned in each webinar for schema.org mentions property
-export const webinarMentions: Record<string, any[]> = {
+export interface SoftwareApplicationMention {
+  '@type': 'SoftwareApplication'
+  name: string
+  applicationCategory: string
+  url: string
+}
+
+export const webinarMentions: Record<string, SoftwareApplicationMention[]> = {
   'introduction-to-vibe-coding': [
     { '@type': 'SoftwareApplication', name: 'Lovable.dev', applicationCategory: 'Website Builder', url: 'https://lovable.dev' },
     { '@type': 'SoftwareApplication', name: 'Replit', applicationCategory: 'Website Builder', url: 'https://replit.com' },

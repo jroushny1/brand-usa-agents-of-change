@@ -10,11 +10,6 @@
  */
 
 const fs = require('fs');
-const path = require('path');
-const { exec } = require('child_process');
-const { promisify } = require('util');
-
-const execAsync = promisify(exec);
 
 class SiteValidator {
   constructor(baseUrl) {
@@ -141,7 +136,7 @@ class SiteValidator {
           } else {
             this.errors.push(`Link returns ${response.status}: ${link}`);
           }
-        } catch (e) {
+        } catch {
           this.errors.push(`Link failed to load: ${link}`);
         }
       }
