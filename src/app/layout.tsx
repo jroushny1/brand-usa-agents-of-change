@@ -28,14 +28,14 @@ export const metadata: Metadata = {
   // homepage. The homepage sets its own canonical in src/app/page.tsx.
   alternates: {
     types: {
-      'application/rss+xml': 'https://www.janetteroush.com/notes/feed.xml',
+      'application/rss+xml': 'https://janetteroush.com/notes/feed.xml',
     },
   },
   openGraph: {
     title: 'Agents of Change | AI Research & Innovation by Janette Roush',
     description: 'Janette Roush is the SVP, Innovation and Chief AI Officer at Brand USA. A LinkedIn Top Voice and Broadway veteran, she specializes in Generative AI strategy for travel and marketing.',
     images: ['/og-image.png'],
-    url: 'https://www.janetteroush.com',
+    url: 'https://janetteroush.com',
     siteName: 'Agents of Change | AI Research & Innovation by Janette Roush',
     locale: 'en_US',
     type: 'profile',
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     creator: '@janetteroush',
     images: ['/og-image.png'],
   },
-  metadataBase: new URL('https://www.janetteroush.com'),
+  metadataBase: new URL('https://janetteroush.com'),
   verification: {
     google: 'kjR3px6l5eGFqgVwWwl8Gu1D3OVuDKC3NhP8cLPuPTs',
   },
@@ -78,10 +78,10 @@ export default function RootLayout({
       "name": "Brand USA",
       "sameAs": BRAND_USA_SAMEAS
     },
-    "url": "https://www.janetteroush.com",
+    "url": "https://janetteroush.com",
     "sameAs": [
       "https://www.linkedin.com/in/janetteroush/",
-      "https://www.janetteroush.com"
+      "https://janetteroush.com"
     ],
     "knowsAbout": [
       "Artificial Intelligence",

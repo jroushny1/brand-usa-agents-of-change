@@ -18,9 +18,9 @@ export const metadata: Metadata = {
   // alternates is replaced (not merged) when a page defines it, so the RSS
   // autodiscovery link from layout.tsx must be repeated here.
   alternates: {
-    canonical: 'https://www.janetteroush.com',
+    canonical: 'https://janetteroush.com',
     types: {
-      'application/rss+xml': 'https://www.janetteroush.com/notes/feed.xml',
+      'application/rss+xml': 'https://janetteroush.com/notes/feed.xml',
     },
   },
 }
@@ -51,12 +51,12 @@ const BRAND_USA_SAMEAS = [
 
 const BRAND_USA_AOC_SAMEAS = [
   "https://www.thebrandusa.com",
-  "https://www.janetteroush.com"
+  "https://janetteroush.com"
 ]
 
 const JANETTE_SAMEAS = [
   "https://www.linkedin.com/in/janetteroush/",
-  "https://www.janetteroush.com"
+  "https://janetteroush.com"
 ]
 
 const UNITED_STATES_SAMEAS = [
@@ -72,7 +72,7 @@ export default function HomePage() {
     "name": "Brand USA Agents of Change",
     "alternateName": "Agents of Change",
     "description": "Official AI learning platform for U.S. destination marketing organizations and tourism professionals. Provides comprehensive training on AI agents, Custom GPTs, Model Context Protocol, and AI governance for the tourism industry.",
-    "url": "https://www.janetteroush.com",
+    "url": "https://janetteroush.com",
     "sameAs": BRAND_USA_AOC_SAMEAS,
     "parentOrganization": {
       "@type": "Organization",
@@ -188,7 +188,7 @@ export default function HomePage() {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "Brand USA Agents of Change",
-    "url": "https://www.janetteroush.com",
+    "url": "https://janetteroush.com",
     "description": "AI Learning Platform for Destination Marketing Organizations and US tourism professionals",
     "about": {
       "@type": "Thing",

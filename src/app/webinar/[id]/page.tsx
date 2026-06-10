@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   return {
     title: webinar.title,
     description: webinar.description,
-    alternates: { canonical: `https://www.janetteroush.com/webinar/${id}` },
+    alternates: { canonical: `https://janetteroush.com/webinar/${id}` },
     openGraph: {
       title: webinar.title,
       description: webinar.description,
@@ -92,7 +92,7 @@ export default async function WebinarPage({ params }: { params: Promise<{ id: st
     publisher: {
       '@type': 'Organization',
       name: 'Brand USA Agents of Change',
-      url: 'https://www.janetteroush.com'
+      url: 'https://janetteroush.com'
     },
     isPartOf: {
       '@type': 'Course',
@@ -134,19 +134,19 @@ export default async function WebinarPage({ params }: { params: Promise<{ id: st
         '@type': 'ListItem',
         position: 1,
         name: 'Home',
-        item: 'https://www.janetteroush.com'
+        item: 'https://janetteroush.com'
       },
       {
         '@type': 'ListItem',
         position: 2,
         name: 'Webinars',
-        item: 'https://www.janetteroush.com/#webinars'
+        item: 'https://janetteroush.com/#webinars'
       },
       {
         '@type': 'ListItem',
         position: 3,
         name: webinar.title,
-        item: `https://www.janetteroush.com/webinar/${id}`
+        item: `https://janetteroush.com/webinar/${id}`
       }
     ]
   }
@@ -182,11 +182,11 @@ export default async function WebinarPage({ params }: { params: Promise<{ id: st
     '@type': 'Course',
     'name': webinar.title,
     'description': webinar.description,
-    'url': `https://www.janetteroush.com/webinar/${id}`,
+    'url': `https://janetteroush.com/webinar/${id}`,
     'provider': {
       '@type': 'Organization',
       'name': 'Brand USA Agents of Change',
-      'url': 'https://www.janetteroush.com'
+      'url': 'https://janetteroush.com'
     },
     'instructor': {
       '@type': 'Person',

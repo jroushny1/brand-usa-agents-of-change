@@ -23,7 +23,7 @@ export default function FieldNotesPage() {
     "@type": "Blog",
     "name": "AI Research Field Notes",
     "description": "Research notes and insights on AI for destination marketing",
-    "url": "https://www.janetteroush.com/notes",
+    "url": "https://janetteroush.com/notes",
     "author": {
       "@type": "Person",
       "name": "Janette Roush",

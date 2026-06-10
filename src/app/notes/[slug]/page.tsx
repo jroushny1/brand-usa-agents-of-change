@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: note.title,
     description,
-    alternates: { canonical: `https://www.janetteroush.com/notes/${slug}` },
+    alternates: { canonical: `https://janetteroush.com/notes/${slug}` },
     openGraph: {
       title: note.title,
       description,
@@ -44,7 +44,7 @@ export default async function FieldNotePage({ params }: { params: Promise<{ slug
     '@type': 'TechArticle',
     headline: note.title,
     datePublished: note.date,
-    url: `https://www.janetteroush.com/notes/${slug}`,
+    url: `https://janetteroush.com/notes/${slug}`,
     author: {
       '@type': 'Person',
       name: 'Janette Roush',
@@ -66,19 +66,19 @@ export default async function FieldNotePage({ params }: { params: Promise<{ slug
         '@type': 'ListItem',
         position: 1,
         name: 'Home',
-        item: 'https://www.janetteroush.com',
+        item: 'https://janetteroush.com',
       },
       {
         '@type': 'ListItem',
         position: 2,
         name: 'Field Notes',
-        item: 'https://www.janetteroush.com/notes',
+        item: 'https://janetteroush.com/notes',
       },
       {
         '@type': 'ListItem',
         position: 3,
         name: note.title,
-        item: `https://www.janetteroush.com/notes/${slug}`,
+        item: `https://janetteroush.com/notes/${slug}`,
       },
     ],
   }
