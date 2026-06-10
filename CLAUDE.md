@@ -13,36 +13,51 @@ Janette Roush's AI training platform for tourism professionals. Built with Next.
 
 ## Site Architecture
 
-Next.js App Router. All data is inline in page files (no CMS, no database for content).
+Next.js App Router. All content lives in TypeScript modules under `src/data/` (no CMS, no database for content). Pages import from those modules.
 
 ### Routes
 
 | Route | Purpose |
 |-------|---------|
-| `/` | Homepage — webinar cards grid, hero, stats |
-| `/webinar/[id]` | Individual webinar pages — video (Mux), transcript, chapters, schema |
-| `/podcast/[id]` | Podcast episode pages — audio, transcript, chapters, schema |
+| `/` | Homepage — webinar cards grid, hero, stats (counts computed from data) |
+| `/webinar/[id]` | Individual webinar pages — video (Mux), transcript, chapters, schema. Statically generated with per-webinar metadata |
+| `/podcast/[id]` | Podcast episode pages — audio, transcript, chapters, schema. Statically generated |
 | `/notes` | Field Notes blog — research notes, frameworks, case studies |
+| `/notes/feed.xml` | RSS feed for Field Notes (derived from the same data module) |
 | `/glossary` | AI/tourism glossary with structured definitions |
 | `/library` | Resources page — curated links, Personal OS guides |
 | `/about` | About Janette / Agents of Change program |
-| `/ai-audit` | Interactive AI audit tool for DMOs |
+| `/press` | Press / media page |
+| `/ai-audit` | Interactive AI audit tool for DMOs (client tool in `AuditClient.tsx`) |
+| `/storytelling` | Storytelling Lab — periodic table of storytelling + Gemini API routes (`/api/storytelling/*`) |
 | `/shorts` | Short-form video content |
 | `/personal-os` | Personal OS guide v1 (HTML embedded in React) |
 | `/personal-os-2` | Personal OS guide v2 (HTML embedded in React) |
-| `/login`, `/register`, `/enter` | Auth (Supabase) |
+| `/personal-os/walkthrough` | Personal OS video walkthrough |
+| `/login`, `/register`, `/enter` | Auth placeholders (auth intentionally disabled; site is public) |
 
 ### Components
 
-- `Header.tsx` — Site nav (desktop + mobile). Currently 6 items: Home, About, Field Notes, Glossary, Resources, AI Audit
-- `AccessCheck.tsx` — Auth wrapper
+- `Header.tsx` — Site nav (desktop + mobile). Currently 8 items: Home, About, Field Notes, Glossary, Resources, Press, AI Audit, Storytelling
+- `AccessCheck.tsx` — Auth wrapper (currently a pass-through)
+- `src/app/not-found.tsx` / `src/app/error.tsx` — branded 404 and error pages
 
-### Key Data Files
+### Key Data Files (single source of truth: `src/data/`)
 
-- **Webinars:** `src/app/webinar/[id]/page.tsx` — all webinar data inline (10 webinars). Each has: id, title, description, duration, muxPlaybackId, instructor, publishDate, keyTakeaways, topics, chapters, transcript, webinarMentions (SoftwareApplication schema)
-- **Field Notes:** `src/app/notes/page.tsx` — `fieldNotes` array with id, title, date, tags, content
-- **Homepage cards:** `src/app/page.tsx` — webinar listing cards (must stay in sync with webinar data)
-- **Resources:** `src/app/library/page.tsx` — categorized resource links
+- **Webinars:** `src/data/webinars.ts` — `webinarData` (full content: id, title, description, duration, muxPlaybackId, instructor, publishDate, keyTakeaways, topics, chapters, transcript) plus `webinarMentions` (SoftwareApplication schema) and `webinarIds`
+- **Homepage cards:** `src/data/webinar-cards.ts` — short marketing blurbs for the homepage grid
+- **Shorts:** `src/data/shorts.ts` — shared by homepage grid and `/shorts`
+- **Field Notes:** `src/data/field-notes.ts` — `fieldNotes` array + `fieldNoteFaqs` (FAQ schema entries); also feeds the RSS route
+- **Podcasts:** `src/data/podcasts.ts`
+- **Glossary:** `src/data/glossary.ts` — `terms`, `faqs`, `unexpectedQuestions`
+- **Resources:** `src/data/resources.ts` — categorized library links
+
+### Scripts
+
+- `npm run build` — production build (run before committing content changes)
+- `npm run typecheck` — `tsc --noEmit`
+- `npm run validate` — content consistency checks (`scripts/validate-content.mts`): every homepage card id must exist in `webinarData`, mux ids must agree per id and be unique, orphan webinars are flagged unless allowlisted
+- `node tests/site-validation.js [baseUrl]` — schema/link/layout smoke tests; needs a running server (defaults to `http://localhost:3000`)
 
 ## Content Conventions
 
@@ -55,7 +70,9 @@ Every content page includes JSON-LD structured data. Common schemas:
 - `Course` (webinar series)
 - `BreadcrumbList`, `SoftwareApplication` (tool mentions)
 
-When adding content, always include appropriate schema markup.
+When adding content, always include appropriate schema markup. Detail pages
+(`/webinar/[id]`, `/podcast/[id]`) also get per-page `<title>`/OG metadata via
+`generateMetadata` — this works automatically from the data modules.
 
 ### Field Notes Content Format
 
@@ -66,7 +83,7 @@ Content is stored as template literal strings. The renderer converts:
 
 ### Video Hosting
 
-All video is hosted on Mux. Playback IDs are stored inline. Thumbnails auto-generate from `https://image.mux.com/{playbackId}/thumbnail.png?width=800&height=450&time=10`.
+All video is hosted on Mux. Playback IDs live in the data modules. Thumbnails auto-generate from `https://image.mux.com/{playbackId}/thumbnail.png?width=800&height=450&time=10`.
 
 ### Branding
 
@@ -77,17 +94,21 @@ Brand USA design system. See `30_Resources/Brand_USA_brand_resources/BRANDING_US
 
 ## Adding Content
 
+After any content change, run `npm run validate && npm run build`.
+
 ### New Webinar
-1. Add entry to webinar data array in `src/app/webinar/[id]/page.tsx` (id, title, transcript, chapters, etc.)
-2. Add `webinarMentions` entry for SoftwareApplication schemas
-3. Add homepage card in `src/app/page.tsx`
-4. Update webinar count on homepage (appears twice — hero text and stats)
+1. Add entry to `webinarData` in `src/data/webinars.ts` (id, title, transcript, chapters, etc.)
+2. Add `webinarMentions` entry in the same file for SoftwareApplication schemas
+3. Add homepage card in `src/data/webinar-cards.ts` (same id and muxPlaybackId)
+4. Webinar counts on the homepage are computed from the array — no manual count updates
+5. The webinar page, sitemap, and validation pick the new entry up automatically
 
 ### New Field Note
-1. Add entry to `fieldNotes` array in `src/app/notes/page.tsx`
-2. Add FAQ schema entry in the same file
-3. Newest entries go first in the array
+1. Add entry to `fieldNotes` in `src/data/field-notes.ts` (newest first)
+2. Add a matching FAQ entry to `fieldNoteFaqs` in the same file
+3. The RSS feed updates automatically from the same module
 
 ### New Podcast Episode
-1. Add entry to podcast data in `src/app/podcast/[id]/page.tsx`
-2. Add homepage card if applicable
+1. Add entry to `podcastData` in `src/data/podcasts.ts`
+2. Optional transcript: add `public/transcripts/podcasts/{id}.md`
+3. Add homepage card if applicable
