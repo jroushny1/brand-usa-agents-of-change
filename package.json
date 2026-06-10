@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
-    "validate": "node --experimental-strip-types --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/validate-content.mts"
+    "validate": "tsx scripts/validate-content.mts"
   },
   "dependencies": {
     "@google/genai": "^1.52.0",
@@ -31,6 +31,7 @@
     "eslint-config-next": "^16.0.10",
     "postcss": "^8",
     "tailwindcss": "^3.3.0",
+    "tsx": "^4.22.4",
     "typescript": "^5"
   }
 }

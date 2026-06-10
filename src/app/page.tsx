@@ -11,7 +11,7 @@ import { webinarData } from '@/data/webinars'
 // Conference talks live in webinarData (flagged isConferenceTalk) and get their
 // own homepage section instead of webinar cards.
 const conferenceTalks = Object.values(webinarData).filter(
-  (w) => (w as { isConferenceTalk?: boolean }).isConferenceTalk
+  (w) => w.isConferenceTalk
 )
 
 export const metadata: Metadata = {
