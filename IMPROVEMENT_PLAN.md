@@ -1,5 +1,15 @@
 # janetteroush.com — Improvement Plan
 
+> **Status (2026-06-10): Phases 1–5 are IMPLEMENTED** (see the `Phase N:` commits on
+> this branch). Phase 6 remains deferred pending owner decisions. Notes from
+> implementation: the OG image was kept at its original 1216×864 composition
+> (a 1200×630 crop cut the logo) and recompressed 1.3 MB → 312 KB; the RSS feed's
+> drifted copy of the field notes was missing the `plaud-to-website` note — fixed by
+> deriving the feed from `src/data/field-notes.ts`; `GlossaryClient.tsx` had its own
+> duplicate of the glossary data — also consolidated. Pre-existing, unfixed:
+> `npm run lint` is broken because `next lint` was removed in Next 16 and the repo
+> has no ESLint config; setting up flat-config ESLint is a candidate follow-up.
+
 This is a step-by-step implementation plan produced from a full site review (June 2026).
 It is written so a smaller/less expensive model can execute it phase by phase without
 re-deriving the analysis.
