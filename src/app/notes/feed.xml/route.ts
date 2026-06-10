@@ -35,7 +35,7 @@ ${fieldNotes
       <pubDate>${new Date(note.date).toUTCString()}</pubDate>
       <dc:creator>Janette Roush</dc:creator>
       <category>${escapeXml(note.tags.join(', '))}</category>
-      <description>${escapeXml(note.content.substring(0, 300) + '...')}</description>
+      <description>${escapeXml(note.content.replace(/<[^>]+>/g, '').replace(/\*\*/g, '').substring(0, 300) + '...')}</description>
       <content:encoded xmlns:content="http://purl.org/rss/1.0/modules/content/">
         <![CDATA[${note.content}]]>
       </content:encoded>

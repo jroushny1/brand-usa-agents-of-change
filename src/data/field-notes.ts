@@ -14,7 +14,7 @@ I am not a developer. I am a Chief AI Officer. And I do all my work inside a cod
 
 **What My Actual Workflow Looks Like**
 
-My entire work life runs through a system I call a Personal OS. It's a folder of markdown files on my local machine, organized with a simple numbered structure: 00_Inbox for daily agendas, 10_Projects for active work, 20_Areas for ongoing responsibilities, 30_Resources for reference materials, and 99_System for configuration files that teach Claude how to work with me.
+My entire work life runs through a system I call a <a href="/personal-os">Personal OS</a>. It's a folder of markdown files on my local machine, organized with a simple numbered structure: 00_Inbox for daily agendas, 10_Projects for active work, 20_Areas for ongoing responsibilities, 30_Resources for reference materials, and 99_System for configuration files that teach Claude how to work with me.
 
 At the root sits a file called CLAUDE.md. Claude reads this automatically every time I start a session. It tells Claude its role ("Chief of Staff for Personal Operating System"), where my files live, and how to behave ("Read local files before asking for context. Concise, actionable responses—no lectures."). Every project folder can have its own CLAUDE.md with project-specific instructions.
 
@@ -104,7 +104,7 @@ The chatbot era gave us an important proof of concept: AI can do useful work. Th
 
 These two priorities reinforce each other. A strong Source of Truth makes your team's AI work more effective, and a capable team builds better data.
 
-**Start with the AI Audit.** Before you build anything, you need to know where you stand. Three steps to do today:
+**Start with the <a href="/ai-audit">AI Audit</a>.** Before you build anything, you need to know where you stand. Three steps to do today:
 
 1. Open ChatGPT, Perplexity, and Google AI Overviews. Ask each about your destination. Write down what's wrong, outdated, or missing. That list is your work order.
 2. Search your top three visitor experiences. Does AI cite your website as the source — or someone else's?
@@ -124,7 +124,7 @@ Authoritative Citations — AI systems favor sources that credible third parties
 
 **Becoming AI-Capable Across the Organization.** The second priority means AI fluency in every department. In marketing: audience analysis and targeting — using AI to identify emerging feeder markets, synthesize visitor research, and sharpen campaign targeting. In research: rapid insight synthesis — analyzing visitor surveys, competitive landscapes, and trend reports in hours. In partner services: personalized outreach — tailoring communications, co-op proposals, and grant summaries to each recipient. In operations: board prep and reporting — summarizing monthly metrics and building briefing documents in a fraction of the time.
 
-**Build the Governance.** Without structure, AI adoption stalls at the enthusiasts and risk exposure grows quietly. Three things to stand up: an AI use policy (set guardrails before tools proliferate — short and actionable beats comprehensive and ignored), an AI champion per department (one designated advocate per function who shares wins, surfaces blockers, and keeps their team moving), and an AI steering committee (cross-functional, meets quarterly, evaluates tools, tracks ROI, and aligns AI investment with strategic priorities).
+**Build the Governance.** Without structure, AI adoption stalls at the enthusiasts and risk exposure grows quietly. Three things to stand up: an <a href="/webinar/ai-policy-governance">AI use policy</a> (set guardrails before tools proliferate — short and actionable beats comprehensive and ignored), an AI champion per department (one designated advocate per function who shares wins, surfaces blockers, and keeps their team moving), and an AI steering committee (cross-functional, meets quarterly, evaluates tools, tracks ROI, and aligns AI investment with strategic priorities).
 
 **Your First Three Moves:**
 
@@ -141,7 +141,7 @@ A state DMO, city DMO, and national tourism organization face different constrai
     tags: ['Claude Code', 'Plaud', 'Workflow', 'Case Study'],
     content: `I gave a keynote at the Wyoming Governor's Conference on Tourism in February 2026. The talk covered AI's dual impact on tourism — how it's changing traveler behavior and how it's changing the way we work. I recorded the entire session on my Plaud device, a pocket-sized AI recorder that generates transcripts automatically.
 
-Here's what happened next: I took that transcript and fed it into Claude Code. Within a single working session, Claude Code turned a raw voice recording into a fully designed, responsive website — complete with slide imagery, Brand USA typography, structured sections, and social sharing metadata. The result is live at wyoming-keynote-recap.vercel.app.
+Here's what happened next: I took that transcript and fed it into <a href="/webinar/introduction-to-vibe-coding">Claude Code</a>. Within a single working session, Claude Code turned a raw voice recording into a fully designed, responsive website — complete with slide imagery, Brand USA typography, structured sections, and social sharing metadata. The result is live at wyoming-keynote-recap.vercel.app.
 
 **The workflow was three steps:**
 
@@ -166,7 +166,7 @@ See the live result: <a href="https://wyoming-keynote-recap.vercel.app" target="
     title: 'AI Agents Taxonomy: Four Types That Matter for Tourism',
     date: '2025-01-15',
     tags: ['AI Agents', 'Framework', 'Tourism Strategy'],
-    content: `After analyzing hundreds of AI tools and their applications in destination marketing, a clear taxonomy has emerged. There are four distinct types of AI agents, each serving different operational needs:
+    content: `After analyzing hundreds of AI tools and their applications in destination marketing, a <a href="/glossary">clear taxonomy</a> has emerged. There are <a href="/webinar/intro-ai-agents">four distinct types of AI agents</a>, each serving different operational needs:
 
 **Operator Agents** automate browser-based tasks—the digital equivalent of "using the mouse for you." For DMOs, this means automated lead generation, competitive web scraping, and data extraction. Tools like Browse.ai and Manus.im fall into this category.
 
@@ -183,9 +183,9 @@ Understanding this taxonomy helps DMOs make strategic technology decisions. Each
     title: 'Model Context Protocol: Solving the Trust Problem',
     date: '2025-01-10',
     tags: ['MCP', 'Technical', 'Data Accuracy'],
-    content: `AI hallucination isn't a bug—it's a feature of how large language models work. They generate plausible text based on patterns, not facts. This is fine for creative writing, catastrophic for travel planning.
+    content: `<a href="/glossary">AI hallucination</a> isn't a bug—it's a feature of how large language models work. They generate plausible text based on patterns, not facts. This is fine for creative writing, catastrophic for travel planning.
 
-The Model Context Protocol (MCP) represents a paradigm shift. Instead of trying to train AI to "know" facts, MCP creates a standardized way for AI to query authoritative data sources in real-time. Think of it as an API layer specifically designed for AI agents.
+The <a href="/webinar/model-context-protocol">Model Context Protocol (MCP)</a> represents a paradigm shift. Instead of trying to train AI to "know" facts, MCP creates a standardized way for AI to query authoritative data sources in real-time. Think of it as an API layer specifically designed for AI agents.
 
 For tourism, the implications are profound:
 - Accessible travel route verification (no more hallucinated ramp locations)
@@ -203,7 +203,7 @@ This is not future speculation. Anthropic's Claude Desktop already implements MC
     tags: ['CRIT Framework', 'Prompting', 'Methodology'],
     content: `Most AI prompt guidance focuses on the task: "Write me an email." "Create a social media post." This approach consistently produces mediocre results for strategic work.
 
-The CRIT Framework (Context, Role, Interview, Task) emerged from observing what separates exceptional AI outputs from generic ones: **rich context**.
+The <a href="/webinar/crit-framework">CRIT Framework (Context, Role, Interview, Task)</a> emerged from observing what separates exceptional AI outputs from generic ones: **rich context**.
 
 **Context:** Tourism professionals operate in a specialized domain. AI doesn't inherently understand DMO budget cycles, state tourism office hierarchies, or CVB stakeholder dynamics. Providing this context—often through voice input for natural explanation—transforms output quality.
 
