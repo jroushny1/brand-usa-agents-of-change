@@ -3,6 +3,10 @@
 /**
  * Site Validation Test Suite
  * Tests for schema markup, layout issues, links, and content freshness
+ *
+ * Requires a running server (not wired to npm test for that reason):
+ *   npm run build && npm run start   # in one terminal
+ *   node tests/site-validation.js http://localhost:3000 [report.md]
  */
 
 const fs = require('fs');

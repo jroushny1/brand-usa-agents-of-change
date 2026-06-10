@@ -1,129 +1,30 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import type { Metadata } from 'next'
 import { Play, Clock, Video, Headphones, Wrench, ArrowRight } from 'lucide-react'
 import AccessCheck from '@/components/AccessCheck'
 import Header from '@/components/Header'
+import { webinarCards as webinars } from '@/data/webinar-cards'
+import { shortFormVideos } from '@/data/shorts'
+import { webinarData } from '@/data/webinars'
 
-// Temporary data - we'll move this to Supabase later
-const webinars = [
-  {
-    id: 'ai-101',
-    title: 'AI 101',
-    description: 'LLMs predict the next word—they don\'t check facts. Why ChatGPT hallucinated a fake bio with awards Janette never won.',
-    duration: '45 min',
-    muxPlaybackId: 'ue02eduy5uif9Do00iXI6jG02u02O600tu00FauvIOLX2Ayg8',
-    thumbnail: 'https://image.mux.com/ue02eduy5uif9Do00iXI6jG02u02O600tu00FauvIOLX2Ayg8/thumbnail.png?width=800&height=450&time=10',
-    level: 'Strategic',
+// Conference talks live in webinarData (flagged isConferenceTalk) and get their
+// own homepage section instead of webinar cards.
+const conferenceTalks = Object.values(webinarData).filter(
+  (w) => (w as { isConferenceTalk?: boolean }).isConferenceTalk
+)
+
+export const metadata: Metadata = {
+  // alternates is replaced (not merged) when a page defines it, so the RSS
+  // autodiscovery link from layout.tsx must be repeated here.
+  alternates: {
+    canonical: 'https://www.janetteroush.com',
+    types: {
+      'application/rss+xml': 'https://www.janetteroush.com/notes/feed.xml',
+    },
   },
-  {
-    id: 'intro-ai-agents',
-    title: 'Introduction to AI Agents',
-    description: 'Four agent types: Operator, Researcher, Builder, Automator. "Agentic" is just a made-up fancy word for the same thing.',
-    duration: '38 min',
-    muxPlaybackId: '3TPl1Jgmg01b9BdEXU4WVtJbz4DSetOA7TsyHGvjxJQs',
-    thumbnail: 'https://image.mux.com/3TPl1Jgmg01b9BdEXU4WVtJbz4DSetOA7TsyHGvjxJQs/thumbnail.png?width=800&height=450&time=10',
-    level: 'Tactical',
-  },
-  {
-    id: 'ai-tool-playground',
-    title: 'AI Tool Playground',
-    description: 'Hands-on exploration of AI tools specifically curated for destination marketing teams.',
-    duration: '44 min',
-    muxPlaybackId: 'H6B01F00lAc4PGT8Ick32jTwVa7LVA8Y5yqTq8xyD6DzA',
-    thumbnail: 'https://image.mux.com/H6B01F00lAc4PGT8Ick32jTwVa7LVA8Y5yqTq8xyD6DzA/thumbnail.png?width=800&height=450&time=10',
-    level: 'Tactical',
-  },
-  {
-    id: 'ai-dmo-leadership',
-    title: 'AI for DMO Leadership',
-    description: 'Strategic guidance for tourism leaders on AI adoption, governance, and organizational transformation.',
-    duration: '41 min',
-    muxPlaybackId: 'NQACe9aTXRuntXd4r7eHWsXVDFVhaUUwyotE8RF5SQE',
-    thumbnail: 'https://image.mux.com/NQACe9aTXRuntXd4r7eHWsXVDFVhaUUwyotE8RF5SQE/thumbnail.png?width=800&height=450&time=10',
-    level: 'Strategic',
-  },
-  {
-    id: 'custom-gpts',
-    title: 'Custom GPTs: Your New AI Colleague!',
-    description: 'Discover how to create and deploy custom GPT assistants that revolutionize your tourism marketing workflows.',
-    duration: '34 min',
-    muxPlaybackId: 'aYcGzhmJnP8jdz2o92EPP00JgmRWd2jLNcChaUgytgG8',
-    thumbnail: 'https://image.mux.com/aYcGzhmJnP8jdz2o92EPP00JgmRWd2jLNcChaUgytgG8/thumbnail.png?width=800&height=450&time=10',
-    level: 'Tactical',
-  },
-  {
-    id: 'ai-convention-sales',
-    title: 'AI for Convention Sales',
-    description: 'Master Custom GPTs for meeting follow-up and lead research, then discover vibe coding to build AI-powered tools for business events.',
-    duration: '42 min',
-    muxPlaybackId: '5xZnY5oJP5nlS5wQsEGv00U00gsf201r00aF00Y902ug26K9o',
-    thumbnail: 'https://image.mux.com/5xZnY5oJP5nlS5wQsEGv00U00gsf201r00aF00Y902ug26K9o/thumbnail.png?width=800&height=450&time=10',
-    level: 'Tactical',
-  },
-  {
-    id: 'crit-framework',
-    title: 'AI Prompting Using the CRIT Framework',
-    description: 'This video introduces the CRIT (Context, Role, Interview, Task) framework for creating effective AI prompts, emphasizing that providing detailed, spoken context leads to much better results than simple typed commands. It then provides two in-depth demonstrations: first, using the CRIT method to plan a detailed one-hour workshop, and second, brainstorming a low-budget marketing activation by uploading a PDF for the AI to use as a source of truth.',
-    duration: '12 min',
-    muxPlaybackId: 'OC72C8icortMHMBjS87615i9PRYu3C2dGt7XA22JlWU',
-    thumbnail: 'https://image.mux.com/OC72C8icortMHMBjS87615i9PRYu3C2dGt7XA22JlWU/thumbnail.png?width=800&height=450&time=10',
-    level: 'Tactical',
-  },
-  {
-    id: 'crit-framework-workshop',
-    title: 'CRIT Prompting Framework Workshop',
-    description: 'Live demos across ChatGPT, Gemini, Claude. Voice-to-text is the future—typing takes too long. Claude is "a real jerk about rate limits."',
-    duration: '42 min',
-    muxPlaybackId: 'aKLdc9rK00v6pXvaCk01x02FBzfWOsUFodgvtn6sla5jks',
-    thumbnail: 'https://image.mux.com/aKLdc9rK00v6pXvaCk01x02FBzfWOsUFodgvtn6sla5jks/thumbnail.png?width=800&height=450&time=10',
-    level: 'Tactical',
-  },
-  {
-    id: 'model-context-protocol',
-    title: 'Model Context Protocol',
-    description: '91% of travelers excited about AI, but only 6% trust it. MCP is the "source of truth" that fixes the hallucination problem.',
-    duration: '27 min',
-    muxPlaybackId: 'V1DanWAF02sOwwIFov4BXNaTzwT3Kn41TnUWdcyNZfZk',
-    thumbnail: 'https://image.mux.com/V1DanWAF02sOwwIFov4BXNaTzwT3Kn41TnUWdcyNZfZk/thumbnail.png?width=800&height=450&time=10',
-    level: 'Strategic',
-  },
-  {
-    id: 'ai-policy-governance',
-    title: 'AI Policy & Governance for Organizations',
-    description: 'Three questions every AI policy must answer: What are we protecting? What are we providing? What are we expecting? Includes Brand USA\'s actual policy.',
-    duration: '40 min',
-    muxPlaybackId: 'MIs97m4ZKNZZJwNPP35c02VDqDqIgkZKgmnWhUtzi1s4',
-    thumbnail: 'https://image.mux.com/MIs97m4ZKNZZJwNPP35c02VDqDqIgkZKgmnWhUtzi1s4/thumbnail.png?width=800&height=450&time=10',
-    level: 'Strategic',
-  },
-  {
-    id: 'ai-for-presentations',
-    title: 'AI for Presentations',
-    description: 'Beautiful.ai can generate a full deck—but it won\'t match your brand. Learn the practical workflow: ChatGPT Projects, Deep Research, Gemini images, and Claude Cowork for HTML decks.',
-    duration: '44 min',
-    muxPlaybackId: 'VUzs9CRk01QRfTtkuo5SD02PQ5uqPMszeo5GaehJ74EzE',
-    thumbnail: 'https://image.mux.com/VUzs9CRk01QRfTtkuo5SD02PQ5uqPMszeo5GaehJ74EzE/thumbnail.png?width=800&height=450&time=10',
-    level: 'Tactical',
-  },
-  {
-    id: 'introduction-to-vibe-coding',
-    title: 'Introduction to Vibe Coding',
-    description: 'Build software by describing what you want in plain language\u2014no code required. Janette demos a baseball road-trip planner, a Global Ambassador application form, an RFP tracker, and fam-trip itinerary sites live, using Lovable.dev, Claude Code, and Claude Cowork.',
-    duration: '47 min',
-    muxPlaybackId: 'aJlL3OprpVNj02gW6rXiMhXQg1RoiT89qM95nuViRQeE',
-    thumbnail: 'https://image.mux.com/aJlL3OprpVNj02gW6rXiMhXQg1RoiT89qM95nuViRQeE/thumbnail.png?width=800&height=450&time=10',
-    level: 'Tactical',
-  },
-  {
-    id: 'managing-the-rfp-process',
-    title: 'Using AI to Manage the RFP Process',
-    description: 'Janette Roush and Skyler Clark demo a transparent, auditable system for evaluating RFP responses: one shared AI project, a single evaluation prompt, each proposal scored in a fresh chat, and a Claude-built scorecard that aggregates committee scores\u2014with humans keeping the vote.',
-    duration: '43 min',
-    muxPlaybackId: '6HkljWWXiQm01iHgqz02tz2RFa1902jls7nguDNfrgNFqc',
-    thumbnail: 'https://image.mux.com/6HkljWWXiQm01iHgqz02tz2RFa1902jls7nguDNfrgNFqc/thumbnail.png?width=800&height=450&time=10',
-    level: 'Tactical',
-  },
-]
+}
+
 
 // Featured walkthrough
 const featuredWalkthrough = {
@@ -134,27 +35,6 @@ const featuredWalkthrough = {
   thumbnail: 'https://image.mux.com/kFK1tI42m01NNgSm02ZVjzlZLZ01kWPwH7La7ICRrABz8g/thumbnail.png?width=800&height=450&time=5',
 }
 
-// Short-form video content - demos, quick tutorials, and bite-sized learning
-const shortFormVideos = [
-  {
-    id: 'clueless-packing-app',
-    title: 'Building a "Clueless"-Inspired AI Packing App Using Claude Artifacts',
-    description: 'Using Anthropic\'s Claude, the team used the "artifacts" feature—described as a reusable prompt similar to a custom GPT—to build a "Business Trip Packing Assistant." The app\'s design was inspired by the iconic virtual closet from the movie Clueless. Learn how the tool was developed entirely with natural language prompts (like "make it more sparkly"), resulting in a "sparkly, interactive app" that any employee can now use to plan their clothing for business trips.',
-    duration: '1 min',
-    muxPlaybackId: 'O7pzzrithO55xsLb6p02GCgtmGyXTO1C7rSztJDl0002Bo',
-    thumbnail: 'https://image.mux.com/O7pzzrithO55xsLb6p02GCgtmGyXTO1C7rSztJDl0002Bo/thumbnail.png?width=800&height=450&time=10',
-    category: 'Demo',
-  },
-  {
-    id: 'ai-presentations',
-    title: 'How AI Can Help with Presentations',
-    description: 'Janette walks you through her complete AI-powered workflow for creating compelling presentations from the ground up. She shares her entire process, from organizing research in ChatGPT and brainstorming narrative frameworks to generating custom images and even getting AI-powered rehearsal feedback from Gemini.',
-    duration: '9 min',
-    muxPlaybackId: 'qZkSL00Sd00Qe01OLuiv6TdEiIVYKXZKKk1UPR5RckP2fM',
-    thumbnail: 'https://image.mux.com/qZkSL00Sd00Qe01OLuiv6TdEiIVYKXZKKk1UPR5RckP2fM/thumbnail.png?width=800&height=450&time=10',
-    category: 'Tutorial',
-  },
-]
 
 
 // Shared sameAs anchors — used across every entity reference below so AI engines
@@ -192,7 +72,7 @@ export default function HomePage() {
     "name": "Brand USA Agents of Change",
     "alternateName": "Agents of Change",
     "description": "Official AI learning platform for U.S. destination marketing organizations and tourism professionals. Provides comprehensive training on AI agents, Custom GPTs, Model Context Protocol, and AI governance for the tourism industry.",
-    "url": "https://brand-usa-agents-of-change.vercel.app",
+    "url": "https://www.janetteroush.com",
     "sameAs": BRAND_USA_AOC_SAMEAS,
     "parentOrganization": {
       "@type": "Organization",
@@ -308,7 +188,7 @@ export default function HomePage() {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "Brand USA Agents of Change",
-    "url": "https://brand-usa-agents-of-change.vercel.app",
+    "url": "https://www.janetteroush.com",
     "description": "AI Learning Platform for Destination Marketing Organizations and US tourism professionals",
     "about": {
       "@type": "Thing",
@@ -332,7 +212,7 @@ export default function HomePage() {
       {
         "@type": "Course",
         "name": "AI Fundamentals Webinar Series",
-        "description": "12 comprehensive webinars covering AI fundamentals, strategy, and implementation for tourism marketing",
+        "description": `${webinars.length} comprehensive webinars covering AI fundamentals, strategy, and implementation for tourism marketing`,
         "numberOfCredits": 9,
         "provider": {
           "@type": "Organization",
@@ -461,7 +341,7 @@ export default function HomePage() {
                 AI Training Videos
               </h3>
               <p className="text-gray-600 mb-6 leading-relaxed">
-                12 comprehensive webinars covering AI fundamentals, strategy, and implementation for tourism marketing
+                {webinars.length} comprehensive webinars covering AI fundamentals, strategy, and implementation for tourism marketing
               </p>
               <div className="inline-flex items-center text-brand-cyan font-semibold group-hover:gap-2 transition-all">
                 Watch Now
@@ -672,6 +552,64 @@ export default function HomePage() {
                   </h3>
                   <p className="text-gray-600 text-sm line-clamp-3">
                     {video.description}
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Conference Talks */}
+      <section className="py-16 lg:py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
+              Conference Talks
+            </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Keynotes and live sessions from tourism industry events.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {conferenceTalks.map((talk) => (
+              <Link
+                key={talk.id}
+                href={`/webinar/${talk.id}`}
+                className="group relative rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 bg-white"
+              >
+                <div className="aspect-video relative overflow-hidden bg-gray-100">
+                  <Image
+                    src={`https://image.mux.com/${talk.muxPlaybackId}/thumbnail.png?width=800&height=450&time=10`}
+                    alt={talk.title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                  <div className="absolute bottom-4 left-4 right-4">
+                    <div className="flex items-center text-white">
+                      <Play className="h-10 w-10 mr-3 drop-shadow-lg" fill="white" />
+                      <span className="font-semibold text-lg drop-shadow-lg">Play Video</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="p-6">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-sm font-medium px-3 py-1 rounded-full bg-amber-100 text-amber-700">
+                      Conference Talk
+                    </span>
+                    <div className="flex items-center text-gray-500 text-sm">
+                      <Clock className="h-4 w-4 mr-1" />
+                      {talk.duration}
+                    </div>
+                  </div>
+                  <h3 className="text-xl font-bold text-brand-navy mb-2 group-hover:text-brand-blue transition-colors">
+                    {talk.title}
+                  </h3>
+                  <p className="text-gray-600 line-clamp-2">
+                    {talk.description}
                   </p>
                 </div>
               </Link>

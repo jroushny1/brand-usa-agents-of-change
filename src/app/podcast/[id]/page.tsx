@@ -1,93 +1,37 @@
-'use client'
-
-import { use, useState, useEffect } from 'react'
 import Link from 'next/link'
+import { notFound } from 'next/navigation'
+import type { Metadata } from 'next'
 import { ArrowLeft, Podcast as PodcastIcon, Calendar, Users, ExternalLink } from 'lucide-react'
-import TranscriptSection from '@/components/webinar/TranscriptSection'
 import ResourcesList from '@/components/webinar/ResourcesList'
+import PodcastTranscript from './PodcastTranscript'
+import { podcastData, podcastIds } from '@/data/podcasts'
 
-// Podcast data structure
-const podcastData = {
-  'fandom-unpacked-ai-live-entertainment': {
-    id: 'fandom-unpacked-ai-live-entertainment',
-    title: 'AI\'s Impact on Live Entertainment: Unpacking the Business Effects on Sports, Arts, and Ticketed Events',
-    podcastName: 'Fandom Unpacked',
-    season: 1,
-    episode: 9,
-    publishDate: 'April 23, 2025',
-    hosts: ['Damian Bazadona', 'Peter Yagecic', 'Maureen Andersen'],
-    guests: ['Janette Roush'],
-    description: 'This episode explores how artificial intelligence is transforming live entertainment discovery and fan experiences. The discussion covers AI-powered recommendations moving away from keyword-driven search toward personalized fan connections, practical tools like ChatGPT Team, Claude, Google Notebook LM, Midjourney, and Descript, and envisions a future where personal AI assistants proactively recommend experiences based on individual preferences and schedules.',
-    audioUrl: 'https://www.buzzsprout.com/2449648/17030825-ai-s-impact-on-live-entertainment-unpacking-the-business-effects-on-sports-arts-and-ticketed-events.mp3',
-    buzzsproutEmbedUrl: 'https://www.buzzsprout.com/2449648/episodes/17030825',
-    thumbnailUrl: '',
-    duration: '',
-    topics: [
-      'AI in Live Entertainment',
-      'Fan Experience',
-      'Personalized Recommendations',
-      'ChatGPT',
-      'Claude',
-      'Google Notebook LM',
-      'Midjourney',
-      'Descript',
-      'Marketing AI',
-      'Sports & Entertainment'
-    ],
-    relatedResources: [
-      {
-        name: 'Presentation Slides',
-        description: 'Download the full presentation from the episode',
-        url: 'https://situationlive.com/aipdf'
-      },
-      {
-        name: 'Listen on Apple Podcasts',
-        description: 'Subscribe and listen on Apple Podcasts',
-        url: 'https://podcasts.apple.com/podcast/fandom-unpacked'
-      },
-      {
-        name: 'Listen on Spotify',
-        description: 'Subscribe and listen on Spotify',
-        url: 'https://open.spotify.com/show/fandom-unpacked'
-      }
-    ]
+export function generateStaticParams() {
+  return podcastIds.map((id) => ({ id }))
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  const { id } = await params
+  const podcast = podcastData[id as keyof typeof podcastData]
+  if (!podcast) return {}
+  return {
+    title: podcast.title,
+    description: podcast.description,
+    alternates: { canonical: `https://www.janetteroush.com/podcast/${id}` },
+    openGraph: {
+      title: podcast.title,
+      description: podcast.description,
+    },
+    twitter: { card: 'summary' },
   }
 }
 
-export default function PodcastPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = use(params)
+export default async function PodcastPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
   const podcast = podcastData[id as keyof typeof podcastData]
-  const [transcript, setTranscript] = useState<string>('')
-  const [transcriptLoading, setTranscriptLoading] = useState(true)
-
-  useEffect(() => {
-    async function loadTranscript() {
-      try {
-        const res = await fetch(`/transcripts/podcasts/${id}.md`)
-        if (res.ok) {
-          const text = await res.text()
-          setTranscript(text)
-        }
-      } catch (error) {
-        console.error('Error loading transcript:', error)
-      } finally {
-        setTranscriptLoading(false)
-      }
-    }
-    loadTranscript()
-  }, [id])
 
   if (!podcast) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-brand-navy mb-4">Podcast Not Found</h1>
-          <Link href="/library" className="text-brand-blue hover:text-brand-cyan">
-            Return to Library
-          </Link>
-        </div>
-      </div>
-    )
+    notFound()
   }
 
   // PodcastEpisode schema for AI discoverability
@@ -317,11 +261,7 @@ export default function PodcastPage({ params }: { params: Promise<{ id: string }
           )}
 
           {/* Transcript */}
-          {!transcriptLoading && transcript && (
-            <div className="bg-white rounded-2xl shadow-lg mb-8">
-              <TranscriptSection transcript={transcript} />
-            </div>
-          )}
+          <PodcastTranscript id={id} />
 
           {/* Related Resources */}
           {podcast.relatedResources && podcast.relatedResources.length > 0 && (

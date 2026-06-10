@@ -1,4 +1,4 @@
-import { ai, tmdbSearchFirst, posterUrl, parseModelJson, withRetry, isTransientAiError } from '@/lib/storytelling'
+import { getAi, tmdbSearchFirst, posterUrl, parseModelJson, withRetry, isTransientAiError } from '@/lib/storytelling'
 
 export const runtime = 'nodejs'
 export const maxDuration = 60
@@ -28,7 +28,7 @@ export async function POST(req: Request) {
     const catalogue = elements.map((e) => `${e.id} = ${e.name}`).join('\n')
     const validIds = new Set(elements.map((e) => e.id))
 
-    const analyzerAI = await withRetry(() => ai.models.generateContent({
+    const analyzerAI = await withRetry(() => getAi().models.generateContent({
       model: 'gemini-2.5-flash',
       contents: `Analyze this film: ${movie.title}. Synopsis: "${movie.overview || '(no synopsis available)'}"\n\nValid storytelling element IDs (choose ONLY from this list, copy IDs verbatim):\n${catalogue}`,
       config: {
