@@ -199,7 +199,7 @@ export default function StorytellingLab() {
               {selected.map((k) => (
                 <span key={k} className="inline-flex items-center gap-1 rounded-full border border-black/10 px-2 py-0.5 text-xs text-gray-900" style={{ background: CAT_HEX[reg[k]?.cat] || '#ddd' }}>
                   <b>{reg[k]?.id}</b> {reg[k]?.name}
-                  <span className="cursor-pointer opacity-60 hover:opacity-100" onClick={() => setSelected((p) => p.filter((x) => x !== k))}>✕</span>
+                  <button type="button" aria-label={`Remove ${reg[k]?.name || k}`} className="appearance-none bg-transparent cursor-pointer opacity-60 hover:opacity-100" onClick={() => setSelected((p) => p.filter((x) => x !== k))}>✕</button>
                 </span>
               ))}
             </div>
@@ -229,7 +229,8 @@ export default function StorytellingLab() {
 
       {/* The real chart, scaled to fit */}
       <div ref={viewportRef} className="w-full overflow-hidden px-2">
-        <div id="PToS" ref={chartRef} onClick={onChartClick} dangerouslySetInnerHTML={{ __html: CHART_HTML }} />
+        {/* Mouse-driven chart; selected elements can also be removed via the keyboard-accessible ✕ buttons above. */}
+        <div id="PToS" ref={chartRef} role="application" aria-label="Periodic table of storytelling — click an element tile to add it to the beaker" onClick={onChartClick} dangerouslySetInnerHTML={{ __html: CHART_HTML }} />
       </div>
 
       <p className="max-w-5xl mx-auto px-4 mt-4 mb-10 text-center text-xs text-gray-400">
