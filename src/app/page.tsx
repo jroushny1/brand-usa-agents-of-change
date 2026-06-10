@@ -1,10 +1,22 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import type { Metadata } from 'next'
 import { Play, Clock, Video, Headphones, Wrench, ArrowRight } from 'lucide-react'
 import AccessCheck from '@/components/AccessCheck'
 import Header from '@/components/Header'
 import { webinarCards as webinars } from '@/data/webinar-cards'
 import { shortFormVideos } from '@/data/shorts'
+
+export const metadata: Metadata = {
+  // alternates is replaced (not merged) when a page defines it, so the RSS
+  // autodiscovery link from layout.tsx must be repeated here.
+  alternates: {
+    canonical: 'https://www.janetteroush.com',
+    types: {
+      'application/rss+xml': 'https://www.janetteroush.com/notes/feed.xml',
+    },
+  },
+}
 
 
 // Featured walkthrough

@@ -1,8 +1,7 @@
-'use client'
-
-import { use } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { notFound } from 'next/navigation'
+import type { Metadata } from 'next'
 import { ArrowLeft, Clock, BookOpen } from 'lucide-react'
 import HLSPlayer from './hls-player'
 import KeyTakeawaysList from '@/components/webinar/KeyTakeawaysList'
@@ -10,19 +9,36 @@ import LearningOutcomesList from '@/components/webinar/LearningOutcomesList'
 import TranscriptSection from '@/components/webinar/TranscriptSection'
 import ChaptersList from '@/components/webinar/ChaptersList'
 import ResourcesList from '@/components/webinar/ResourcesList'
-import { webinarData, webinarMentions } from '@/data/webinars'
+import { webinarData, webinarIds, webinarMentions } from '@/data/webinars'
 
+export function generateStaticParams() {
+  return webinarIds.map((id) => ({ id }))
+}
 
-export default function WebinarPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = use(params)
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  const { id } = await params
+  const webinar = webinarData[id as keyof typeof webinarData]
+  if (!webinar) return {}
+  return {
+    title: webinar.title,
+    description: webinar.description,
+    alternates: { canonical: `https://www.janetteroush.com/webinar/${id}` },
+    openGraph: {
+      title: webinar.title,
+      description: webinar.description,
+      type: 'video.other',
+      images: [`https://image.mux.com/${webinar.muxPlaybackId}/thumbnail.png?width=1200&height=630&time=10`],
+    },
+    twitter: { card: 'summary_large_image' },
+  }
+}
+
+export default async function WebinarPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
   const webinar = webinarData[id as keyof typeof webinarData]
 
   if (!webinar) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p className="text-xl text-gray-600">Webinar not found</p>
-      </div>
-    )
+    notFound()
   }
 
 

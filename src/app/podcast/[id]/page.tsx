@@ -1,47 +1,37 @@
-'use client'
-
-import { use, useState, useEffect } from 'react'
 import Link from 'next/link'
+import { notFound } from 'next/navigation'
+import type { Metadata } from 'next'
 import { ArrowLeft, Podcast as PodcastIcon, Calendar, Users, ExternalLink } from 'lucide-react'
-import TranscriptSection from '@/components/webinar/TranscriptSection'
 import ResourcesList from '@/components/webinar/ResourcesList'
-import { podcastData } from '@/data/podcasts'
+import PodcastTranscript from './PodcastTranscript'
+import { podcastData, podcastIds } from '@/data/podcasts'
 
+export function generateStaticParams() {
+  return podcastIds.map((id) => ({ id }))
+}
 
-export default function PodcastPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = use(params)
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  const { id } = await params
   const podcast = podcastData[id as keyof typeof podcastData]
-  const [transcript, setTranscript] = useState<string>('')
-  const [transcriptLoading, setTranscriptLoading] = useState(true)
+  if (!podcast) return {}
+  return {
+    title: podcast.title,
+    description: podcast.description,
+    alternates: { canonical: `https://www.janetteroush.com/podcast/${id}` },
+    openGraph: {
+      title: podcast.title,
+      description: podcast.description,
+    },
+    twitter: { card: 'summary' },
+  }
+}
 
-  useEffect(() => {
-    async function loadTranscript() {
-      try {
-        const res = await fetch(`/transcripts/podcasts/${id}.md`)
-        if (res.ok) {
-          const text = await res.text()
-          setTranscript(text)
-        }
-      } catch (error) {
-        console.error('Error loading transcript:', error)
-      } finally {
-        setTranscriptLoading(false)
-      }
-    }
-    loadTranscript()
-  }, [id])
+export default async function PodcastPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
+  const podcast = podcastData[id as keyof typeof podcastData]
 
   if (!podcast) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-brand-navy mb-4">Podcast Not Found</h1>
-          <Link href="/library" className="text-brand-blue hover:text-brand-cyan">
-            Return to Library
-          </Link>
-        </div>
-      </div>
-    )
+    notFound()
   }
 
   // PodcastEpisode schema for AI discoverability
@@ -271,11 +261,7 @@ export default function PodcastPage({ params }: { params: Promise<{ id: string }
           )}
 
           {/* Transcript */}
-          {!transcriptLoading && transcript && (
-            <div className="bg-white rounded-2xl shadow-lg mb-8">
-              <TranscriptSection transcript={transcript} />
-            </div>
-          )}
+          <PodcastTranscript id={id} />
 
           {/* Related Resources */}
           {podcast.relatedResources && podcast.relatedResources.length > 0 && (

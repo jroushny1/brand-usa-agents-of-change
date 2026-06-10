@@ -3,6 +3,17 @@ import Image from 'next/image'
 import { ArrowLeft, BookOpen, ExternalLink, FileText, Video, Podcast, Code, Wrench } from 'lucide-react'
 import AccessCheck from '@/components/AccessCheck'
 import { resources } from '@/data/resources'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'AI Tools & Resources',
+  description: 'Podcasts, tools, guides, and industry links curated for tourism professionals — Personal OS guides, Brand USA resources, AI conversations, and more.',
+  alternates: { canonical: 'https://www.janetteroush.com/library' },
+  openGraph: {
+    title: 'AI Tools & Resources',
+    description: 'Podcasts, tools, guides, and industry links curated for tourism professionals.',
+  },
+}
 
 // Generate JSON-LD structured data for the resource library
 const generateLibrarySchema = () => {
