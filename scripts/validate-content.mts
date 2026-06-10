@@ -4,10 +4,6 @@ import { webinarData } from '../src/data/webinars.ts'
 import { webinarCards } from '../src/data/webinar-cards.ts'
 import { shortFormVideos } from '../src/data/shorts.ts'
 
-// Webinars that intentionally have no homepage card (conference talks pending
-// an owner decision on a homepage section — see IMPROVEMENT_PLAN.md Phase 6.3).
-const CARDLESS_ALLOWLIST = ['minnesota-ai-tourism', 'ai-ideas-exchange']
-
 let failed = false
 const fail = (msg: string) => {
   failed = true
@@ -37,10 +33,12 @@ for (const card of webinarCards) {
   }
 }
 
-// 3. Every webinar should be reachable from the homepage (card) unless allowlisted.
-for (const id of dataIds) {
-  if (!cardIds.has(id) && !shortIds.has(id) && !CARDLESS_ALLOWLIST.includes(id)) {
-    warn(`webinar '${id}' has no homepage card and is not allowlisted`)
+// 3. Every webinar should be reachable from the homepage — via a card, the
+// shorts grid, or the conference-talks section (isConferenceTalk entries).
+for (const [id, w] of Object.entries(webinarData)) {
+  const isConferenceTalk = (w as { isConferenceTalk?: boolean }).isConferenceTalk
+  if (!cardIds.has(id) && !shortIds.has(id) && !isConferenceTalk) {
+    warn(`webinar '${id}' is not reachable from the homepage`)
   }
 }
 

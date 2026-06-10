@@ -6,6 +6,13 @@ import AccessCheck from '@/components/AccessCheck'
 import Header from '@/components/Header'
 import { webinarCards as webinars } from '@/data/webinar-cards'
 import { shortFormVideos } from '@/data/shorts'
+import { webinarData } from '@/data/webinars'
+
+// Conference talks live in webinarData (flagged isConferenceTalk) and get their
+// own homepage section instead of webinar cards.
+const conferenceTalks = Object.values(webinarData).filter(
+  (w) => (w as { isConferenceTalk?: boolean }).isConferenceTalk
+)
 
 export const metadata: Metadata = {
   // alternates is replaced (not merged) when a page defines it, so the RSS
@@ -545,6 +552,64 @@ export default function HomePage() {
                   </h3>
                   <p className="text-gray-600 text-sm line-clamp-3">
                     {video.description}
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Conference Talks */}
+      <section className="py-16 lg:py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
+              Conference Talks
+            </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Keynotes and live sessions from tourism industry events.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {conferenceTalks.map((talk) => (
+              <Link
+                key={talk.id}
+                href={`/webinar/${talk.id}`}
+                className="group relative rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 bg-white"
+              >
+                <div className="aspect-video relative overflow-hidden bg-gray-100">
+                  <Image
+                    src={`https://image.mux.com/${talk.muxPlaybackId}/thumbnail.png?width=800&height=450&time=10`}
+                    alt={talk.title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                  <div className="absolute bottom-4 left-4 right-4">
+                    <div className="flex items-center text-white">
+                      <Play className="h-10 w-10 mr-3 drop-shadow-lg" fill="white" />
+                      <span className="font-semibold text-lg drop-shadow-lg">Play Video</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="p-6">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-sm font-medium px-3 py-1 rounded-full bg-amber-100 text-amber-700">
+                      Conference Talk
+                    </span>
+                    <div className="flex items-center text-gray-500 text-sm">
+                      <Clock className="h-4 w-4 mr-1" />
+                      {talk.duration}
+                    </div>
+                  </div>
+                  <h3 className="text-xl font-bold text-brand-navy mb-2 group-hover:text-brand-blue transition-colors">
+                    {talk.title}
+                  </h3>
+                  <p className="text-gray-600 line-clamp-2">
+                    {talk.description}
                   </p>
                 </div>
               </Link>
