@@ -260,3 +260,9 @@ export const fieldNoteFaqs = [
     }
   }
 ]
+
+// Plain-text excerpt of a note's first paragraph, for metadata descriptions.
+export function noteExcerpt(content: string, max = 160): string {
+  const text = content.replace(/\*\*/g, '').replace(/<[^>]+>/g, '').split('\n\n')[0]
+  return text.length <= max ? text : `${text.slice(0, max - 1).trimEnd()}…`
+}

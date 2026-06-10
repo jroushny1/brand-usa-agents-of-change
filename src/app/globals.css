@@ -41,3 +41,14 @@ body {
   color: #111827;
   font-family: var(--font-montserrat), system-ui, sans-serif;
 }
+
+/* Links inside field-note content (inserted as inline HTML in the data file) */
+.note-content a {
+  color: #00A9E0;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.note-content a:hover {
+  color: #00549F;
+}

@@ -30,7 +30,7 @@ ${fieldNotes
   .map(
     (note) => `    <item>
       <title>${escapeXml(note.title)}</title>
-      <link>${baseUrl}/notes#${note.id}</link>
+      <link>${baseUrl}/notes/${note.id}</link>
       <guid isPermaLink="false">${note.id}</guid>
       <pubDate>${new Date(note.date).toUTCString()}</pubDate>
       <dc:creator>Janette Roush</dc:creator>

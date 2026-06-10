@@ -1,5 +1,7 @@
+import Link from 'next/link'
 import Header from '@/components/Header'
 import AccessCheck from '@/components/AccessCheck'
+import FieldNoteContent from '@/components/FieldNoteContent'
 import { fieldNotes, fieldNoteFaqs } from '@/data/field-notes'
 import { FileText, Calendar, Tag } from 'lucide-react'
 import type { Metadata } from 'next'
@@ -122,9 +124,11 @@ export default function FieldNotesPage() {
                     </div>
                   </div>
 
-                  {/* Title */}
+                  {/* Title — links to the note's own page */}
                   <h2 className="text-2xl md:text-3xl font-bold text-brand-navy mb-4 leading-tight">
-                    {note.title}
+                    <Link href={`/notes/${note.id}`} className="hover:text-brand-blue transition-colors">
+                      {note.title}
+                    </Link>
                   </h2>
 
                   {/* Tags */}
@@ -141,22 +145,7 @@ export default function FieldNotesPage() {
                   </div>
 
                   {/* Content */}
-                  <div className="prose prose-lg max-w-none">
-                    {note.content.split('\n\n').map((paragraph, idx) => {
-                      // Convert **bold** to <strong> tags
-                      const html = paragraph.replace(
-                        /\*\*(.+?)\*\*/g,
-                        '<strong class="text-brand-navy font-semibold">$1</strong>'
-                      )
-                      return (
-                        <p
-                          key={idx}
-                          className="text-gray-700 leading-relaxed mb-4"
-                          dangerouslySetInnerHTML={{ __html: html }}
-                        />
-                      )
-                    })}
-                  </div>
+                  <FieldNoteContent content={note.content} />
                 </article>
               ))}
             </div>
