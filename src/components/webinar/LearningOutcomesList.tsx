@@ -8,7 +8,7 @@ interface LearningOutcomesListProps {
 export default function LearningOutcomesList({ outcomes }: LearningOutcomesListProps) {
   return (
     <CardContainer>
-      <h2 className="text-lg font-semibold text-brand-navy mb-4">What You'll Learn</h2>
+      <h2 className="text-lg font-semibold text-brand-navy mb-4">What You&apos;ll Learn</h2>
       <p className="text-sm text-gray-600 mb-4">After watching this video, you will be able to:</p>
       <ul className="space-y-2">
         {outcomes.map((outcome, index) => (

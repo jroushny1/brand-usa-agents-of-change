@@ -230,7 +230,7 @@ export default function HomePage() {
       {
         "@type": "Course",
         "name": "Industry Conversations Series",
-        "description": "13 expert conversations exploring AI's impact on destination marketing from 2023-2025",
+        "description": "13 expert conversations exploring AI&apos;s impact on destination marketing from 2023-2025",
         "numberOfCredits": 13,
         "provider": {
           "@type": "Organization",
@@ -361,7 +361,7 @@ export default function HomePage() {
                 Podcasts & Interviews
               </h3>
               <p className="text-gray-600 mb-6 leading-relaxed">
-                13 expert conversations exploring AI's impact on destination marketing from 2023-2025
+                13 expert conversations exploring AI&apos;s impact on destination marketing from 2023-2025
               </p>
               <div className="inline-flex items-center text-brand-cyan font-semibold group-hover:gap-2 transition-all">
                 Listen
@@ -519,7 +519,7 @@ export default function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {shortFormVideos.map((video, index) => (
+            {shortFormVideos.map((video) => (
               <Link
                 key={video.id}
                 href="/shorts"

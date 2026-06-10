@@ -1,6 +1,7 @@
 'use client'
 
 import { useCallback, useEffect, useRef, useState } from 'react'
+import Image from 'next/image'
 import { Sparkles, FlaskConical, Film, X, Loader2 } from 'lucide-react'
 import { CHART_HTML } from './periodicChart'
 import './periodic.css'
@@ -258,7 +259,7 @@ export default function StorytellingLab() {
               <div className="mt-1 space-y-1.5">
                 {(out.realWorldExamples ?? []).map((ex, i) => (
                   <div key={i} className="flex gap-2 rounded border-l-[3px] border-brand-cyan bg-gray-50 p-2">
-                    {ex.poster && <img src={ex.poster} alt="" className="w-11 h-auto self-start shrink-0 rounded" />}
+                    {ex.poster && <Image src={ex.poster} alt="" width={44} height={66} className="w-11 h-auto self-start shrink-0 rounded" />}
                     <div>
                       <div className="text-sm font-bold text-brand-navy">{ex.title} ({ex.year})</div>
                       <div className="text-xs text-gray-600">{ex.explanation}</div>
@@ -271,7 +272,7 @@ export default function StorytellingLab() {
           {out.kind === 'analyze' && (
             <div className="pr-5">
               <div className="flex gap-3">
-                {out.poster && <img src={out.poster} alt="" className="w-16 h-auto self-start shrink-0 rounded" />}
+                {out.poster && <Image src={out.poster} alt="" width={64} height={96} className="w-16 h-auto self-start shrink-0 rounded" />}
                 <div>
                   <h3 className="font-display text-lg font-bold text-brand-navy">{out.title}</h3>
                   <p className="text-xs text-gray-500">{out.synopsis}</p>
