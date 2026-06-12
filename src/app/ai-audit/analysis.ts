@@ -531,7 +531,7 @@ const SCHEMA_LIBRARY: SchemaRecommendation[] = [
   "name": "Video Title",
   "description": "Brief description",
   "thumbnailUrl": "https://yourdomain.com/thumbnail.jpg",
-  "uploadDate": "2026-05-23",
+  "uploadDate": "2026-05-23T09:00:00-05:00",
   "duration": "PT5M30S",
   "contentUrl": "https://yourdomain.com/video.mp4"
 }` },
