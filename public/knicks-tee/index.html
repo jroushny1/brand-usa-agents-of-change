@@ -104,6 +104,21 @@
     color: var(--ink);
   }
   input[type=text]:focus { outline: 3px solid var(--orange); }
+  .fixedline {
+    width: 100%;
+    font-family: 'Permanent Marker', cursive;
+    font-size: 17px;
+    padding: 8px 10px;
+    border: 2.5px dashed rgba(27,27,31,.45);
+    border-radius: 8px;
+    background: #f1ecdd;
+    margin-bottom: 7px;
+    color: rgba(27,27,31,.75);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .fixedline .lock { font-size: 13px; opacity: .6; }
   .chips { display: flex; flex-wrap: wrap; gap: 7px; }
   .chip {
     font-family: 'Permanent Marker', cursive;
@@ -169,14 +184,14 @@
 
 <div class="wrap">
   <div class="panel">
-    <span class="label">YOUR CHANT (write whatever's in your heart)</span>
-    <input type="text" id="line1" maxlength="34" value="MY MAYOR IS MUSLIM">
-    <input type="text" id="line2" maxlength="34" value="MY BAGEL IS JEWISH">
-    <input type="text" id="line3" maxlength="34" value="MY CHRISTIAN DIOR">
-    <input type="text" id="line4" maxlength="34" value="KNICKS IN FIVE">
+    <span class="label">THE CHANT (three lines are law. one is yours)</span>
+    <div class="fixedline">MY MAYOR MUSLIM <span class="lock">🔒</span></div>
+    <div class="fixedline">MY BAGEL JEWISH <span class="lock">🔒</span></div>
+    <input type="text" id="line3" maxlength="28" value="MY CHRISTIAN DIOR">
+    <div class="fixedline">KNICKS IN FIVE <span class="lock">🔒</span></div>
 
-    <span class="label">KNICKS IN ___ (things that rhyme with five, mostly)</span>
-    <div class="chips" id="rhymes"></div>
+    <span class="label">OR BORROW A THIRD LINE</span>
+    <div class="chips" id="suggestions"></div>
 
     <span class="label">TEE STYLE</span>
     <div class="chips" id="styles"></div>
@@ -197,8 +212,7 @@
 
     <div class="btnrow">
       <button class="big dl" id="download">⬇ SAVE MY TEE</button>
-      <button class="big shuffle" id="shuffle">🎲 SHUFFLE LINES</button>
-      <button class="big reset" id="reset">back to the chant</button>
+      <button class="big reset" id="reset">back to Dior</button>
     </div>
   </div>
 
@@ -211,30 +225,21 @@
 <script>
 const SITE_TAG = "JANETTEROUSH.COM/KNICKS-TEE";
 
-const RHYMES = [
-  "FIVE", "FIVE (OBVIOUSLY)", "ALIVE", "A VIBE", "OVERDRIVE",
-  "HIGH FIVE", "STAYIN' ALIVE", "SURVIVE & ADVANCE", "FIVE, BABY"
-];
+const FIXED_TOP = ["MY MAYOR MUSLIM", "MY BAGEL JEWISH"];
+const FIXED_END = "KNICKS IN FIVE";
+const DIOR = "MY CHRISTIAN DIOR";
 
-const SHUFFLE_POOL = [
-  "MY LANDLORD IS LURKING",
-  "MY RAT IS GORGEOUS",
-  "MY BODEGA CAT IS UNDEFEATED",
-  "MY TRAIN IS DELAYED",
-  "MY SLICE IS A DOLLAR",
-  "MY STOOP IS SACRED",
-  "MY THERAPIST IS PROUD",
-  "MY DELI GUY KNOWS MY ORDER",
-  "MY PIGEON IS CARRYING US",
-  "MY HALAL CART IS HEATING UP",
-  "MY SUPER IS SCREENING MY CALLS",
-  "MY BLOCK IS BUZZING",
-  "MY COUSIN HAS A GUY",
-  "MY GARDEN IS SQUARE",
-  "MY HEART IS ORANGE & BLUE"
+// the Dior slot — same cadence, your own devotion
+const SUGGESTIONS = [
+  "MY CHRISTIAN DIOR",
+  "MY RAT GORGEOUS",
+  "MY THERAPIST PROUD",
+  "MY LANDLORD NERVOUS",
+  "MY BODEGA ETERNAL",
+  "MY SLICE FOLDED",
+  "MY GARDEN ELECTRIC",
+  "MY PIGEON FEARLESS"
 ];
-
-const DEFAULTS = ["MY MAYOR IS MUSLIM", "MY BAGEL IS JEWISH", "MY CHRISTIAN DIOR", "KNICKS IN FIVE"];
 
 const STYLES = [
   { key: "marker",  name: "MARKER",     font: "Permanent Marker" },
@@ -402,16 +407,21 @@ function fitFont(c, text, fontFamily, weight, maxW, startSize) {
 function drawChant(c, lines, style, inks, teeIsDark, x, y, w, h, seed) {
   const rnd = mulberry32(seed + 7);
   const styleDef = STYLES.find(s => s.key === style);
-  const maxW = w * 0.66;
+  // keep lettering on the shirt body, off the sleeves
+  const maxW = w * 0.44;
   const cx = x + w * 0.5;
   const active = lines.filter(l => l.trim().length);
   if (!active.length) return;
 
-  const baseSize = style === "puff" ? w * 0.085 : w * 0.062;
+  const baseSize = style === "puff" ? w * 0.078 : w * 0.058;
   const weight = style === "puff" ? "700" : "400";
 
-  // measure all lines first so the block centers vertically in the chest area
-  const sizes = active.map(l => fitFont(c, l, styleDef.font, weight, maxW, baseSize));
+  // measure all lines first so the block centers vertically in the chest area;
+  // the closer gets to be the loudest line on the shirt
+  const sizes = active.map((l, i) => {
+    const big = i === active.length - 1;
+    return fitFont(c, l, styleDef.font, weight, maxW * (big ? 1.08 : 1), baseSize * (big ? 1.3 : 1));
+  });
   const gaps = sizes.map(s => s * (style === "scrawl" ? 1.65 : 1.3));
   const totalH = gaps.reduce((a, b) => a + b, 0);
   const chestTop = y + h * 0.27;
@@ -424,10 +434,11 @@ function drawChant(c, lines, style, inks, teeIsDark, x, y, w, h, seed) {
     const size = sizes[i];
     c.save();
     c.translate(cx, ty);
-    c.rotate(((rnd() - 0.5) * 3) * Math.PI / 180);
+    c.rotate(((rnd() - 0.5) * 2) * Math.PI / 180);
     c.font = `${weight} ${size}px "${styleDef.font}"`;
     c.textAlign = "center";
     c.textBaseline = "alphabetic";
+    const lineW = c.measureText(line).width;
 
     if (style === "ironon") {
       // each letter placed by hand, slightly crooked
@@ -461,6 +472,11 @@ function drawChant(c, lines, style, inks, teeIsDark, x, y, w, h, seed) {
         c.fillText(line, size * 0.02, -size * 0.015);
         c.globalAlpha = 1;
       }
+    }
+    // little stars flank the closer
+    if (i === active.length - 1) {
+      drawStar(c, -lineW / 2 - size * 0.5, -size * 0.32, size * 0.18, ink, rnd);
+      drawStar(c, lineW / 2 + size * 0.5, -size * 0.32, size * 0.18, ink, rnd);
     }
     c.restore();
     lastBaseline = ty;
@@ -511,6 +527,44 @@ function drawBall(c, x, y, r, color, rnd) {
   c.restore();
 }
 
+function drawHeart(c, x, y, r, color, rnd) {
+  c.save();
+  c.translate(x, y);
+  c.rotate((rnd() - 0.5) * 0.5);
+  c.strokeStyle = color;
+  c.lineWidth = r * 0.22;
+  c.lineJoin = "round";
+  c.beginPath();
+  c.moveTo(0, r * 0.35);
+  c.bezierCurveTo(-r * 1.3, -r * 0.55, -r * 0.5, -r * 1.25, 0, -r * 0.45);
+  c.bezierCurveTo(r * 0.5, -r * 1.25, r * 1.3, -r * 0.55, 0, r * 0.35);
+  c.closePath();
+  c.stroke();
+  c.restore();
+}
+
+function drawPin(c, x, y, w, color, outline) {
+  c.save();
+  c.translate(x, y);
+  c.fillStyle = color;
+  c.strokeStyle = outline;
+  c.lineWidth = w * 0.14;
+  c.lineJoin = "round";
+  const pw = w, ph = w * 2.3;
+  c.beginPath();
+  c.roundRect(-pw / 2, -ph * 0.62, pw, ph, w * 0.35);
+  c.fill();
+  c.stroke();
+  // spring slot
+  c.beginPath();
+  c.moveTo(0, ph * 0.05);
+  c.lineTo(0, ph * 0.38);
+  c.lineWidth = w * 0.16;
+  c.globalAlpha = 0.55;
+  c.stroke();
+  c.restore();
+}
+
 function drawSpark(c, x, y, r, color) {
   c.save();
   c.strokeStyle = color;
@@ -532,7 +586,8 @@ function render() {
   canvas.width = fmt.w;
   canvas.height = fmt.h;
 
-  const lines = [1, 2, 3, 4].map(i => document.getElementById("line" + i).value.toUpperCase());
+  const line3 = document.getElementById("line3").value.toUpperCase();
+  const lines = [FIXED_TOP[0], FIXED_TOP[1], line3, FIXED_END];
   const tee = TEE_COLORS[state.teeColor];
   const inks = INKS[state.ink].colors;
   const teeIsDark = ["blue", "orange", "black"].includes(tee.name);
@@ -562,13 +617,35 @@ function render() {
   ctx.fillText("FEELING RIGHT NOW", 0, fmt.w * 0.075);
   ctx.restore();
 
-  // tee
-  const teeW = fmt.w * 0.82;
-  const teeH = teeW * 1.06;
-  const teeX = (fmt.w - teeW) / 2;
+  // tee — sized to always fit between headline and footer
   const teeY = state.format === "story"
     ? headY + fmt.w * 0.16
     : headY + fmt.w * 0.115;
+  const footerRoom = fmt.w * (state.format === "story" ? 0.55 : 0.13);
+  let teeW = fmt.w * 0.82;
+  const maxTeeH = fmt.h - teeY - footerRoom;
+  if (teeW * 1.06 > maxTeeH) teeW = maxTeeH / 1.06;
+  const teeH = teeW * 1.06;
+  const teeX = (fmt.w - teeW) / 2;
+
+  // clothesline strung across the frame, sagging a little under the weight of belief
+  const ropeY = teeY + teeH * 0.055;
+  ctx.save();
+  ctx.strokeStyle = "#8a6f4d";
+  ctx.lineWidth = fmt.w * 0.006;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.moveTo(-10, ropeY - fmt.w * 0.035);
+  ctx.quadraticCurveTo(fmt.w * 0.5, ropeY + fmt.w * 0.045, fmt.w + 10, ropeY - fmt.w * 0.045);
+  ctx.stroke();
+  ctx.restore();
+
+  // tee hangs from the line, slightly crooked, like laundry
+  const teeCx = teeX + teeW / 2;
+  ctx.save();
+  ctx.translate(teeCx, teeY);
+  ctx.rotate(-0.022);
+  ctx.translate(-teeCx, -teeY);
 
   // soft shadow behind tee
   ctx.save();
@@ -583,6 +660,34 @@ function render() {
   drawTee(ctx, teeX, teeY, teeW, teeH, tee.tee, tee.outline, seed);
   drawChant(ctx, lines, state.style, inks, teeIsDark, teeX, teeY, teeW, teeH, seed);
 
+  // care label peeking out of the hem
+  const tagW = teeW * 0.185, tagH = teeW * 0.115;
+  const tagX = teeX + teeW * 0.60, tagY = teeY + teeH * 0.938;
+  ctx.save();
+  ctx.translate(tagX + tagW / 2, tagY);
+  ctx.rotate(0.05);
+  ctx.fillStyle = "#fffef8";
+  ctx.strokeStyle = "rgba(27,27,31,.8)";
+  ctx.lineWidth = fmt.w * 0.0035;
+  ctx.beginPath();
+  ctx.roundRect(-tagW / 2, 0, tagW, tagH, 6);
+  ctx.fill();
+  ctx.stroke();
+  ctx.font = `700 ${tagH * 0.34}px "Caveat"`;
+  ctx.textAlign = "center";
+  ctx.fillStyle = "#1b1b1f";
+  ctx.fillText("100% cotton", 0, tagH * 0.42);
+  ctx.fillStyle = "#F58426";
+  ctx.fillText("100% believing", 0, tagH * 0.80);
+  ctx.restore();
+
+  // wooden clothespins at the shoulders
+  const pinW = fmt.w * 0.022;
+  drawPin(ctx, teeX + teeW * 0.235, teeY + teeH * 0.085, pinW, "#d3a86c", "#8a6f4d");
+  drawPin(ctx, teeX + teeW * 0.765, teeY + teeH * 0.082, pinW, "#d3a86c", "#8a6f4d");
+
+  ctx.restore(); // end hanging-tee group
+
   // doodles in the margins
   const dColors = ["#006BB6", "#F58426"];
   const spots = state.format === "story"
@@ -590,9 +695,10 @@ function render() {
     : [[0.07, 0.05], [0.93, 0.06], [0.05, 0.55], [0.95, 0.58], [0.12, 0.93], [0.88, 0.94]];
   spots.forEach(([fx, fy], i) => {
     const x = fx * fmt.w, y = fy * fmt.h, col = dColors[i % 2];
-    const kind = i % 3;
+    const kind = i % 4;
     if (kind === 0) drawStar(ctx, x, y, fmt.w * 0.022, col, rnd);
     else if (kind === 1) drawBall(ctx, x, y, fmt.w * 0.024, col, rnd);
+    else if (kind === 2) drawHeart(ctx, x, y, fmt.w * 0.020, col, rnd);
     else drawSpark(ctx, x, y, fmt.w * 0.018, col);
   });
 
@@ -647,9 +753,9 @@ function buildSwatches(containerId, items, getColor, isOn, onPick) {
 }
 
 function refreshUI() {
-  buildChips("rhymes", RHYMES, r => r,
-    r => document.getElementById("line4").value.toUpperCase() === "KNICKS IN " + r,
-    r => { document.getElementById("line4").value = "KNICKS IN " + r; });
+  buildChips("suggestions", SUGGESTIONS, s => s,
+    s => document.getElementById("line3").value.toUpperCase() === s,
+    s => { document.getElementById("line3").value = s; });
   buildChips("styles", STYLES, s => s.name,
     s => s.key === state.style,
     s => { state.style = s.key; });
@@ -667,23 +773,10 @@ function refreshUI() {
     (k, i) => { state.ink = i; });
 }
 
-[1, 2, 3, 4].forEach(i =>
-  document.getElementById("line" + i).addEventListener("input", () => { refreshUI(); render(); }));
-
-document.getElementById("shuffle").onclick = () => {
-  const pool = [...SHUFFLE_POOL];
-  for (let i = pool.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [pool[i], pool[j]] = [pool[j], pool[i]];
-  }
-  document.getElementById("line1").value = pool[0];
-  document.getElementById("line2").value = pool[1];
-  document.getElementById("line3").value = pool[2];
-  refreshUI(); render();
-};
+document.getElementById("line3").addEventListener("input", () => { refreshUI(); render(); });
 
 document.getElementById("reset").onclick = () => {
-  DEFAULTS.forEach((v, i) => document.getElementById("line" + (i + 1)).value = v);
+  document.getElementById("line3").value = DIOR;
   refreshUI(); render();
 };
 
