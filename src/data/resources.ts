@@ -25,16 +25,22 @@ export const resources: ResourceCategory[] = [
     category: 'Personal OS Guides',
     items: [
       {
-        title: 'Set Up Your Personal OS for Claude Code',
-        description: 'Start here. A simple file system that helps AI understand your work and become a true productivity partner. Covers folder structure, CLAUDE.md, task schema, and your first two slash commands.',
+        title: 'Set Up Your Personal OS in Claude Cowork',
+        description: 'Start here. A simple folder of files that helps Claude understand your work and become a true productivity partner. Covers the desktop app, folder structure, CLAUDE.md, task schema, and an interview-driven setup.',
         url: '/personal-os',
         icon: Wrench,
       },
       {
-        title: 'Level Up Your Personal OS (2.0)',
-        description: 'For week-2+ users. Covers memory files, the People directory, writing profiles, advanced slash commands (/call, /review, /insights, /remember), MCP servers, and the weekly review workflow.',
+        title: 'Level Up Your Personal OS in Cowork (2.0)',
+        description: 'For week-2+ users. Capture pipelines (Granola), a voice system, the People and Companies wiki, shipping branded work from the vault, connectors, and the weekly review rhythm.',
         url: '/personal-os-2',
         icon: Wrench,
+      },
+      {
+        title: 'The Claude Code Build (Advanced)',
+        description: 'For power users who work in an editor. The full engine: filesystem skills as real slash commands, auto memory that persists across sessions, and MCP servers. Runs in VS Code with Claude Code.',
+        url: '/personal-os-3',
+        icon: Code,
       },
     ]
   },

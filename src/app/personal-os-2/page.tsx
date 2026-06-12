@@ -752,13 +752,13 @@ export default function PersonalOS2GuidePage() {
         <h3>What's in This Guide</h3>
         <ul>
             <li><a href="#where-leverage">Where the Leverage Actually Is</a></li>
-            <li><a href="#memory">Auto Memory (How It Really Works)</a></li>
+            <li><a href="#memory">Memory in Cowork</a></li>
             <li><a href="#skills">The Skills Ecosystem</a></li>
             <li><a href="#capture">Capture Pipelines: The Input Layer</a></li>
             <li><a href="#voice">The Voice System</a></li>
             <li><a href="#companies">Companies as Wiki Entries</a></li>
             <li><a href="#shipping">Shipping From the Vault</a></li>
-            <li><a href="#mcp">MCP Servers: What's Actually Worth Connecting</a></li>
+            <li><a href="#mcp">Connectors: What to Wire In</a></li>
             <li><a href="#guardrails">Writing Rules &amp; Guardrails</a></li>
             <li><a href="#lessons">Hard-Won Lessons</a></li>
             <li><a href="#weekly">The Weekly Rhythm</a></li>
@@ -768,7 +768,7 @@ export default function PersonalOS2GuidePage() {
     <div class="intro-box" id="where-leverage">
         <h3>Where the Leverage Actually Is</h3>
         <p>The first guide gets you to "useful filing system." Folders, a CLAUDE.md, two skills, a working daily rhythm.</p>
-        <p>This guide is about what happens after. The parts that took me six months to build and that I'd build again on day one if I were starting fresh: a memory system that persists across sessions, a skills library that automates real workflows, capture pipelines that fill the vault while I'm in meetings, a voice system that lets Claude draft in my actual cadence, and the realization that the vault is also a workshop where I ship things to the web.</p>
+        <p>This guide is about what happens after. The parts that took me six months to build and that I'd build again on day one if I were starting fresh: a memory habit that keeps Claude current on how I work, a skills library that automates real workflows, capture pipelines that fill the vault while I'm in meetings, a voice system that lets Claude draft in my actual cadence, and the realization that the vault is also a workshop where I ship things to the web.</p>
         <p style="margin-bottom: 0;">Every section here describes something I use weekly. The audience is the same: working professionals who use Claude as a productivity tool and want the system to compound.</p>
     </div>
 
@@ -792,7 +792,7 @@ export default function PersonalOS2GuidePage() {
             <ul>
                 <li>Claude knows your role, team, projects, vendors, voice</li>
                 <li>30+ skills across daily rhythm, meetings, content, review, shipping</li>
-                <li>CLAUDE.md is short; details live in memory files Claude loads on demand</li>
+                <li>CLAUDE.md plus a learnings file keep Claude current on how you work</li>
                 <li>Companies are wiki entries; People link in; Calls update both</li>
                 <li>Claude drafts in your voice using your actual speaking positions</li>
                 <li>Recorder, Zoom transcripts, and phone-to-vault channels feed the system automatically</li>
@@ -801,177 +801,28 @@ export default function PersonalOS2GuidePage() {
     </div>
 
     <!-- SECTION: Memory -->
-    <h2 id="memory">Auto Memory (How It Really Works)</h2>
+    <h2 id="memory">Memory in Cowork</h2>
 
-    <p>This is the part most people miss. Claude Code has two complementary ways to carry knowledge across sessions: <strong>CLAUDE.md</strong> (instructions you write) and <strong>auto memory</strong> (notes Claude writes itself). The first guide covered CLAUDE.md. This section is about the second one &mdash; the layer that turns Claude into a coworker who learns from how you actually work.</p>
+    <p>You want Claude to remember how you work without re-explaining it every session. In Cowork, two things carry that memory:</p>
 
-    <h3>CLAUDE.md vs. Auto Memory</h3>
-
-    <table class="comparison-table">
-        <tr>
-            <th></th>
-            <th>CLAUDE.md</th>
-            <th>Auto Memory</th>
-        </tr>
-        <tr>
-            <td><strong>Who writes it</strong></td>
-            <td>You</td>
-            <td>Claude</td>
-        </tr>
-        <tr>
-            <td><strong>Contains</strong></td>
-            <td>Instructions and rules</td>
-            <td>Learnings and patterns</td>
-        </tr>
-        <tr>
-            <td><strong>Best for</strong></td>
-            <td>Architecture, conventions, "always do X" rules</td>
-            <td>Corrections, preferences Claude discovers, durable facts</td>
-        </tr>
-        <tr>
-            <td><strong>Loaded into context</strong></td>
-            <td>Every session, in full</td>
-            <td>Every session (first 200 lines or 25KB of the index)</td>
-        </tr>
-    </table>
-
-    <p>Use CLAUDE.md when you want to instruct. Auto memory lets Claude take notes for itself based on your corrections, without you writing anything.</p>
+    <ul>
+        <li><strong>Your CLAUDE.md</strong> &mdash; the instructions and rules you write at the root of your folder. Claude reads it at the start of every session. When you correct Claude, say <em>"add that as a rule to my CLAUDE.md."</em></li>
+        <li><strong>A learnings file</strong> &mdash; ask Claude to keep <code>99_System/learnings.md</code>, a running list of preferences and corrections it should honor. Point Claude at it when you start something new.</li>
+    </ul>
 
     <div class="tip-box">
-        <h4>Requires Claude Code v2.1.59 or later</h4>
-        <p>Auto memory is on by default in current versions. Check yours with <code>claude --version</code>. To toggle it, run <code>/memory</code> in a session.</p>
+        <h4>Write the rule the moment something annoys you</h4>
+        <p>Every time Claude does something you would correct, say "add that as a rule." A rule with its reason attached is the durable kind &mdash; "never suggest stopping, because I decide my own pace" survives edge cases that a bare instruction misses. Two weeks of this and most of the friction is gone.</p>
     </div>
-
-    <h3>Where Auto Memory Lives</h3>
-    <p>Each project gets its own auto memory directory:</p>
-    <div class="code-block">
-        <pre>~/.claude/projects/&lt;project&gt;/memory/</pre>
-    </div>
-
-    <p>The <code>&lt;project&gt;</code> path is derived from the git repository, so all worktrees and subdirectories within the same repo share one auto memory directory. Outside a git repo, the project root is used instead.</p>
-
-    <p>Inside that folder, two things matter:</p>
-    <ul>
-        <li><strong>MEMORY.md</strong> &mdash; an index file. The first 200 lines or 25KB (whichever comes first) load into Claude's context at the start of every session.</li>
-        <li><strong>Topic files</strong> &mdash; additional markdown files Claude creates as memories accumulate. These are <em>lazy-loaded</em>: Claude reads them on demand when something in the current conversation makes them relevant.</li>
-    </ul>
 
     <div class="explanation">
-        <strong>Why this design works:</strong> The index is small enough that loading it every session is cheap. Topic files can be detailed without bloating Claude's context window. You get instant awareness of every rule and reference Claude has ever saved, plus deep detail on the ones that come up in the current conversation. Claude keeps <code>MEMORY.md</code> concise by moving longer notes into topic files.
-    </div>
-
-    <h3>The <code>/memory</code> Command</h3>
-    <p>Run <code>/memory</code> in any Claude Code session to:</p>
-    <ul>
-        <li>See which CLAUDE.md and rules files are loaded in your current session</li>
-        <li>Toggle auto memory on or off</li>
-        <li>Open the auto memory folder in your editor to browse, edit, or delete files</li>
-    </ul>
-
-    <p>Auto memory is plain markdown. You can read and edit any file by hand &mdash; Claude treats your edits as the source of truth.</p>
-
-    <h3>How Auto Memory Gets Written</h3>
-    <p>Claude decides what's worth remembering based on whether the information would help in a future conversation. The common triggers:</p>
-    <ul>
-        <li><strong>You correct Claude.</strong> "Don't do that again" tends to become a durable note.</li>
-        <li><strong>You confirm a non-obvious choice was right.</strong> Worth saving so Claude doesn't second-guess the same call next month.</li>
-        <li><strong>You teach Claude a durable fact.</strong> Vendor relationships, process details, who handles what.</li>
-        <li><strong>You say "remember this."</strong> Direct trigger.</li>
-    </ul>
-
-    <p>When you see "Writing memory" or "Recalled memory" in the Claude Code interface, Claude is actively updating or reading from your auto memory folder.</p>
-
-    <h3>How I Organize Mine</h3>
-    <p>Anthropic doesn't prescribe a file structure or frontmatter format for auto memory &mdash; Claude writes whatever's useful. Over time I've settled on a convention that makes the index easier to scan:</p>
-
-    <table class="comparison-table">
-        <tr>
-            <th>Prefix</th>
-            <th>What it holds</th>
-            <th>Example</th>
-        </tr>
-        <tr>
-            <td><code>feedback_*</code></td>
-            <td>Rules about how Claude should behave, with the reason</td>
-            <td>"Never suggest stopping or pausing &mdash; I decide my own pace"</td>
-        </tr>
-        <tr>
-            <td><code>reference_*</code></td>
-            <td>Slow-moving facts about people, vendors, configs</td>
-            <td>"Wrike MCP is configured in three places; the active one is .mcp.json"</td>
-        </tr>
-        <tr>
-            <td><code>project_*</code></td>
-            <td>One-line pointers to active projects with current-state context</td>
-            <td>"FY27 Strategy site is internal, password-gated, lives at fy27-strategy.vercel.app"</td>
-        </tr>
-    </table>
-
-    <p>The convention is mine, not the system's. Claude doesn't care what you name files &mdash; the prefixes just make the index easier to read at a glance.</p>
-
-    <h3>What a Real Auto Memory File Looks Like</h3>
-    <p>This is one of my feedback memories:</p>
-
-    <div class="code-block">
-        <pre><span class="label">REAL AUTO MEMORY EXAMPLE</span>
-
----
-<span class="keyword">name:</span> <span class="string">feedback-no-stopping-suggestions</span>
-<span class="keyword">description:</span> <span class="string">Never suggest stopping, pausing, or saving work for later.
-  She decides when to stop.</span>
-<span class="keyword">type:</span> <span class="string">feedback</span>
----
-
-Never suggest stopping, pausing, deferring, or "saving for later" &mdash;
-including soft framings like "clean stopping point," "pause here,"
-"call it for tonight," or "fresh eyes tomorrow."
-
-<span class="header">**Why:**</span> I flagged this directly after Claude repeatedly offered
-exit ramps during a productive Saturday session. The pattern was
-Claude pattern-matching on session length as a signal I should stop.
-That signal is wrong. Time of day and accumulated progress carry
-zero information about my capacity to continue.
-
-<span class="header">**How to apply:**</span>
-<span class="bullet">-</span> Continue executing. When one piece finishes, offer the next concrete
-  option.
-<span class="bullet">-</span> If multiple options exist, present them as choices to make.
-<span class="bullet">-</span> If I want a break, I'll say so directly.</pre>
-    </div>
-
-    <div class="tip-box">
-        <h4>The "Why" line is load-bearing</h4>
-        <p>A rule without a reason is brittle. The next time Claude faces an edge case, the reason is what tells it whether the rule applies. The headline ("never suggest stopping") is enough 95% of the time. The reason is what lets Claude judge the 5% intelligently.</p>
-    </div>
-
-    <h3>What I Actually Have in Memory</h3>
-    <p>My auto memory folder right now has 60+ files. They cluster into:</p>
-
-    <div class="why-grid">
-        <div class="why-card">
-            <h4>Behavioral feedback (~40)</h4>
-            <p>Rules I've discovered through friction. Things like "fix only the phrase I flagged, don't rewrite adjacent content" or "speak up immediately when a tool fails."</p>
-        </div>
-        <div class="why-card">
-            <h4>Reference facts (~15)</h4>
-            <p>Who's at which company, how a workflow is configured, what filenames mean. Slow-moving facts that are tedious to re-explain.</p>
-        </div>
-        <div class="why-card">
-            <h4>Project pointers (~10)</h4>
-            <p>One line per active project pointing to where it lives, who's involved, and any current-state notes that don't belong in the project's CLAUDE.md.</p>
-        </div>
-    </div>
-
-    <div class="warning-box">
-        <h4>Auto memory is point-in-time, not live state</h4>
-        <p>A memory file written six months ago about "the current deploy URL" may be wrong now. When Claude reads memory, it should treat it as "what was true last time we discussed it" &mdash; and verify before asserting if the answer matters. Claude Code even surfaces an age warning on older memories.</p>
-        <p>The implication: store stable patterns, durable rules, and slow-moving facts. Skip anything that changes weekly.</p>
+        <strong>The self-writing version lives in Claude Code.</strong> Cowork has no equivalent of Claude Code's auto memory &mdash; the layer where Claude writes its own durable notes to disk and recalls them across every session, with no file for you to maintain. If that's what you want, it's the headline feature of <a href="/personal-os-3" style="color: var(--brand-blue); font-weight: 600;">Guide 3, the Claude Code build</a>.
     </div>
 
     <!-- SECTION: Skills -->
     <h2 id="skills">The Skills Ecosystem</h2>
 
-    <p>The first guide showed two skills: <code>/today</code> and <code>/shutdown</code>. A mature Personal OS has 30+. Each one is a folder inside <code>~/.claude/skills/</code> with a <code>SKILL.md</code> file describing what it does and when to use it. Claude reads the descriptions and triggers automatically when a request matches. The <code>/</code> prefix is shorthand to force a specific skill to run.</p>
+    <p>The first guide kept it to a couple of saved shortcuts. A mature Personal OS leans on many more &mdash; each one a few lines of instructions Claude reuses, so you stop re-explaining a workflow. In Cowork you save a skill under <strong>Settings &rarr; Customize &rarr; Skills</strong>, or you simply ask Claude to run the workflow by name.</p>
 
     <h3>What I Actually Run</h3>
     <p>Here's how mine cluster, by job:</p>
@@ -1035,7 +886,9 @@ Create a structured call note.
    update Engagement Timeline; if not, create from template.
 4. Create the call note in 20_Areas/Calls/YYYY-MM-DD_Contact-Name.md
    using the call schema in CLAUDE.md.
-5. Surface any prior notes with this contact from past calls.</pre>
+5. When the source is a Granola meeting, always read the full transcript
+   via get_meeting_transcript. Never rely on the AI-generated summary.
+6. Surface any prior notes with this contact from past calls.</pre>
     </div>
 
     <div class="tip-box">
@@ -1044,13 +897,13 @@ Create a structured call note.
     </div>
 
     <h3>Install the Core Five</h3>
-    <p>The first guide installed <code>/today</code> and <code>/shutdown</code>. Past those, these five do the most work in a typical week: meeting capture, pre-meeting prep, auto memory hygiene, Monday kickoff, and Friday wrap-up. Paste this into Claude to install all five at once.</p>
+    <p>Past the daily agenda, these do the most work in a typical week: meeting capture, pre-meeting prep, a learnings habit, Monday kickoff, and Friday wrap-up. In Cowork, save each as a skill (Settings &rarr; Customize &rarr; Skills), or paste the prompt below and have Claude keep them in your vault so you can ask for them by name.</p>
 
     <div class="prompt-box">
         <h4>Copy and paste into Claude:</h4>
-        <pre>Please install five skills for me. Each lives at ~/.claude/skills/&lt;name&gt;/SKILL.md.
+        <pre>Please set up five workflows for me. For each, either save it as a skill (Settings &rarr; Customize &rarr; Skills) or keep the instructions in my vault so I can ask for it by name.
 
-1. ~/.claude/skills/call/SKILL.md
+1. A "call" skill:
 
 ---
 name: call
@@ -1068,11 +921,12 @@ Create a structured call note.
 2. Check 20_Areas/People/ for the contact. If found, read their profile for context. If not, create one from the template.
 3. Check 20_Areas/Companies/ for their company. If exists, update Engagement Timeline. If not, create from template.
 4. Create the call note at 20_Areas/Calls/YYYY-MM-DD_Contact-Name.md.
-5. Surface any prior notes with this contact.
-6. Append a Relationship History line to the person's profile.
+5. When the source is a Granola meeting, ALWAYS read the full transcript via get_meeting_transcript. Never work from the AI-generated summary; summaries drop and distort decisions.
+6. Surface any prior notes with this contact.
+7. Append a Relationship History line to the person's profile.
 
 
-2. ~/.claude/skills/brief/SKILL.md
+2. A "brief" skill:
 
 ---
 name: brief
@@ -1092,27 +946,25 @@ Generate a one-page brief.
 4. Save to 00_Inbox/YYYY-MM-DD_Brief_Topic.md and tell me where it is.
 
 
-3. ~/.claude/skills/remember/SKILL.md
+3. A "remember" skill:
 
 ---
 name: remember
-description: Review the current session and save durable learnings to auto memory.
-allowed-tools: Read(*), Write(*), Edit(*)
+description: Review the current session and save durable learnings to my vault.
 ---
 
-# /remember
+# remember
 
-Review what happened in the session and propose memory updates.
+Review what happened in the session and propose what to save.
 
 ## What to do
 
 1. Scan the conversation for: corrections I gave, durable facts I shared, non-obvious choices that worked, patterns worth keeping.
-2. For each candidate, propose a memory file name and a one-line summary.
-3. Ask which to save; write the approved ones to ~/.claude/projects/&lt;this-project&gt;/memory/.
-4. Update MEMORY.md index with new entries.
+2. For each candidate, propose a one-line entry.
+3. Ask which to save; append the approved ones to 99_System/learnings.md, and add any lasting rules to my CLAUDE.md.
 
 
-4. ~/.claude/skills/weekstart/SKILL.md
+4. A "weekstart" skill:
 
 ---
 name: weekstart
@@ -1133,7 +985,7 @@ Monday morning routine.
 5. Save everything as 00_Inbox/YYYY-MM-DD_Weekstart.md.
 
 
-5. ~/.claude/skills/weekend/SKILL.md
+5. A "weekend" skill:
 
 ---
 name: weekend
@@ -1182,7 +1034,7 @@ Create all five now and confirm when done.</pre>
             <div class="workflow-icon">2</div>
             <div class="workflow-content">
                 <h5>Enable the Granola connector in Claude</h5>
-                <p>In Claude.ai, open Settings &rarr; Connectors and enable Granola. In Claude Code, add the Granola MCP server per Granola's docs. Either way, Claude will then have tools like <code>list_meetings</code> and <code>get_meeting_transcript</code> available.</p>
+                <p>In Claude's desktop app, open Settings &rarr; Connectors and enable Granola. Claude then has tools like <code>list_meetings</code> and <code>get_meeting_transcript</code> available. (In Claude Code you add the Granola MCP server instead &mdash; see <a href="/personal-os-3">Guide 3</a>.)</p>
             </div>
         </div>
         <div class="workflow-item">
@@ -1198,7 +1050,7 @@ Create all five now and confirm when done.</pre>
         <h4>Copy and paste into Claude:</h4>
         <pre>Please install a Granola filing skill for me.
 
-Save this as ~/.claude/skills/granola/SKILL.md:
+Set this up as a "granola" skill (Settings &rarr; Customize &rarr; Skills), or keep it in my vault and run it by name:
 
 ---
 name: granola
@@ -1217,7 +1069,7 @@ File recent Granola meetings into the vault as call notes.
    - SKIP: solo notes, recurring 1:1s with my manager, routine internal ops syncs, social events, held meetings with no transcript
    - FILE: external calls, partner meetings, customer calls, new contacts, strategic discussions
 3. For each meeting to file:
-   - Pull the transcript and summary via the Granola connector
+   - Pull the FULL transcript via get_meeting_transcript (never the AI summary; it drops and distorts decisions)
    - Check 20_Areas/People/ for the participants; create or update profiles
    - Check 20_Areas/Companies/ for their org; update Engagement Timeline
    - Create a call note at 20_Areas/Calls/YYYY-MM-DD_Meeting-Name.md
@@ -1472,7 +1324,7 @@ Create all three templates and the CLAUDE.md addition now.</pre>
     <!-- SECTION: Shipping -->
     <h2 id="shipping">Shipping From the Vault</h2>
 
-    <p>The vault isn't just a filing system. It's also a workshop where I produce branded artifacts and deploy them to the web.</p>
+    <p>The vault doubles as a workshop where I produce branded artifacts and deploy them to the web.</p>
 
     <h3>What I Ship From Here</h3>
 
@@ -1522,19 +1374,19 @@ Once I've answered all five:
 1. Propose a skill name and short description.
 2. Draft a SKILL.md that orchestrates the full workflow: pulling sources, applying voice and brand, producing the artifact, deploying or filing it, confirming success.
 3. Flag any external setup I need (API keys, account access, MCP connectors).
-4. Save the skill to ~/.claude/skills/&lt;name&gt;/SKILL.md and tell me how to trigger it.</pre>
+4. Save it as a skill (Settings &rarr; Customize &rarr; Skills) and tell me how to trigger it.</pre>
     </div>
 
     <!-- SECTION: MCP -->
-    <h2 id="mcp">MCP Servers: What's Actually Worth Connecting</h2>
+    <h2 id="mcp">Connectors: What to Wire In</h2>
 
-    <p>MCP (Model Context Protocol) servers let Claude reach beyond your filesystem &mdash; into project management tools, calendars, CRMs, BigQuery, your inbox. After months of use, only a few are load-bearing.</p>
+    <p>Connectors let Claude reach beyond your folder &mdash; into project management tools, calendars, CRMs, your inbox, cloud storage. In Cowork you turn them on under <strong>Settings &rarr; Connectors</strong>. After months of use, only a few are load-bearing.</p>
 
     <h3>What I Actually Use</h3>
 
     <table class="comparison-table">
         <tr>
-            <th>Server</th>
+            <th>Connector</th>
             <th>What It Unlocks</th>
         </tr>
         <tr>
@@ -1563,37 +1415,18 @@ Once I've answered all five:
         </tr>
     </table>
 
-    <h3>Two Environments, Two Configs</h3>
-    <p>If you use both Claude Code (in VS Code) and Claude Desktop, MCP servers are configured separately:</p>
-
-    <table class="comparison-table">
-        <tr>
-            <th>Claude Code</th>
-            <th>Claude Desktop</th>
-        </tr>
-        <tr>
-            <td>Config: <code>.claude/.mcp.json</code> in your project, plus <code>enabledMcpjsonServers</code> in settings</td>
-            <td>Config: <code>~/Library/Application Support/Claude/claude_desktop_config.json</code></td>
-        </tr>
-        <tr>
-            <td>Best for: file work, coding, vault management, batch automation</td>
-            <td>Best for: research, browsing, conversational use, email reading</td>
-        </tr>
-        <tr>
-            <td>Same servers can be enabled in both, but each needs its own setup</td>
-            <td>Some MCP servers only work in Desktop (e.g. Outlook integrations)</td>
-        </tr>
-    </table>
-
     <div class="warning-box">
-        <h4>Two gotchas worth knowing</h4>
-        <p><strong>Claude Desktop overwrites its config on restart.</strong> If you're editing <code>claude_desktop_config.json</code>, quit Desktop first (Cmd+Q on Mac, not just close the window), then edit, then relaunch.</p>
-        <p><strong>MCP servers consume context.</strong> Each connected server adds its tool descriptions to Claude's context window. Don't connect everything. Connect the two or three that match your real workflow and turn the rest off.</p>
+        <h4>Don't connect everything</h4>
+        <p>Each connector adds its tools to Claude's context window. Turn on the two or three that match your real workflow and leave the rest off.</p>
+    </div>
+
+    <div class="explanation">
+        <strong>In Claude Code, connectors are MCP servers</strong> you configure in files rather than toggle in Settings, with separate configs for the editor and the desktop app. The full setup, including the config gotchas, is in <a href="/personal-os-3" style="color: var(--brand-blue); font-weight: 600;">Guide 3</a>.
     </div>
 
     <div class="tip-box">
         <h4>Start with your project management tool</h4>
-        <p>For most people, the highest-leverage first MCP server is whichever project management tool runs your day. Once Claude can see your tasks, deadlines, and assignments, <code>/today</code> becomes meaningfully better &mdash; it pulls from your vault and your PM tool in the same view.</p>
+        <p>For most people, the highest-leverage first connector is whichever project management tool runs your day. Once Claude can see your tasks, deadlines, and assignments, <code>/today</code> becomes meaningfully better &mdash; it pulls from your vault and your PM tool in the same view.</p>
     </div>
 
     <!-- SECTION: Writing Rules -->
@@ -1657,8 +1490,8 @@ flag it instead of filling the gap.</pre>
 
     <div class="step">
         <span class="step-number">2</span>
-        <h3>Write a Memory When Something Surprises You</h3>
-        <p>The highest-leverage habit. When Claude does something unexpectedly right, write a feedback memory confirming it. When it does something wrong, write one correcting it. Either way, the system compounds. Skip this step and you'll have the same correction conversation three times.</p>
+        <h3>Write a Rule When Something Surprises You</h3>
+        <p>The highest-leverage habit. When Claude does something unexpectedly right, ask it to note that as a rule. When it does something wrong, ask it to add the correction. Either way, the system compounds. Skip this step and you'll have the same correction conversation three times.</p>
     </div>
 
     <div class="step">
@@ -1723,7 +1556,7 @@ flag it instead of filling the gap.</pre>
             <div class="workflow-icon">4</div>
             <div class="workflow-content">
                 <h5>Periodically: <code>/remember</code></h5>
-                <p>When a pattern emerges across the week, capture it as a memory. Friday is a natural moment for this &mdash; ask Claude to review the week's calls and decisions and propose what's worth saving.</p>
+                <p>When a pattern emerges across the week, ask Claude to save it to your learnings file or add a rule to your CLAUDE.md. Friday is a natural moment &mdash; have Claude review the week's calls and decisions and propose what's worth keeping.</p>
             </div>
         </div>
         <div class="workflow-item">
@@ -1787,8 +1620,8 @@ flag it instead of filling the gap.</pre>
 
     <div class="cta-section">
         <h2>The System Grows With You</h2>
-        <p>None of this is a checklist. It's a direction. Start with one capture pipeline, write your first feedback memory the next time you correct Claude, ship one thing from the vault to prove it can be done, and add the rest as the friction calls for it. Six months from now, you'll have something nobody else has &mdash; an AI coworker who knows your work.</p>
-        <a href="https://janetteroush.com" class="cta-button">More From Agents of Change</a>
+        <p>None of this is a checklist. It's a direction. Start with one capture pipeline, ask Claude to save your first rule the next time you correct it, ship one thing from the vault to prove it can be done, and add the rest as the friction calls for it. Six months from now, you'll have something nobody else has &mdash; an AI coworker who knows your work.</p>
+        <a href="/personal-os-3" class="cta-button">Go Deeper: The Claude Code Build &rarr;</a>
     </div>
 
 </main>

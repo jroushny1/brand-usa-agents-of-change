@@ -650,18 +650,18 @@ export default function PersonalOSGuidePage() {
             <h3>What You&apos;ll Need</h3>
             <div className="requirements-grid">
               <div className="requirement-item">
-                <h4>VS Code</h4>
-                <p>Free editor. Claude Code runs inside it.<br /><a href="https://code.visualstudio.com" target="_blank" rel="noopener noreferrer">Download here</a></p>
+                <h4>Claude desktop app</h4>
+                <p>Download the desktop app and use Cowork. The desktop app can read and write files on your computer; the website cannot.<br /><a href="https://claude.ai/download" target="_blank" rel="noopener noreferrer">Download here</a></p>
               </div>
               <div className="requirement-item">
                 <h4>Claude Pro or Max</h4>
-                <p>The subscription that powers Claude Code.<br /><a href="https://claude.ai" target="_blank" rel="noopener noreferrer">Subscribe here</a></p>
+                <p>The subscription that powers Cowork.<br /><a href="https://claude.ai" target="_blank" rel="noopener noreferrer">Subscribe here</a></p>
               </div>
             </div>
 
             <div className="tool-box">
-              <h4>A note on viewing your notes</h4>
-              <p>When you want to read a markdown file like a document instead of editing it, hit <code>Cmd+Shift+V</code> (Mac) or <code>Ctrl+Shift+V</code> (Windows) in VS Code. It opens a preview pane with formatted headings, lists, and links. This is how I read my daily agenda every morning. A separate notes app would be doing the same thing twice.</p>
+              <h4>Why the desktop app, not the website</h4>
+              <p>Open Claude&apos;s desktop app and go to <strong>Cowork</strong>. Cowork can see and write the files in your Personal OS folder &mdash; that local file access is the whole point. Claude on the website works in the cloud, which is handy for picking up a conversation from your phone, and it stays walled off from your files. Start in the desktop app.</p>
             </div>
 
             <div className="warning-box">
@@ -694,7 +694,7 @@ export default function PersonalOSGuidePage() {
             </div>
             <div className="why-card">
               <h4>Tasks That Travel</h4>
-              <p>Tasks live as markdown files with structured metadata. Skills like <code>/today</code> scan the whole vault and build a daily agenda automatically.</p>
+              <p>Tasks live as markdown files with structured metadata. Ask Claude to build your agenda and it scans the whole vault, pulling everything due into one daily list.</p>
             </div>
             <div className="why-card">
               <h4>The System Grows</h4>
@@ -769,6 +769,8 @@ with precision and low friction.
 `}<span className="bullet">-</span>{` Read local files before asking for context.
 `}<span className="bullet">-</span>{` Confirm before deleting; edit freely if aligned.
 `}<span className="bullet">-</span>{` Concise responses — no lectures.
+`}<span className="bullet">-</span>{` When setting something new up, interview me one
+  question at a time instead of guessing.
 
 
 `}<span className="header">## Architecture</span>{`
@@ -826,29 +828,18 @@ PARA-based vault:
           </div>
 
           <h2 id="setup">Day-1 Setup</h2>
-          <p>Claude does most of the work. You install the tools, create one empty folder, and paste a few prompts.</p>
+          <p>Claude does most of the work. You download one app, create one empty folder, and let Claude interview you to build the rest.</p>
 
           <div className="step">
             <span className="step-number">1</span>
-            <h3>Install VS Code</h3>
-            <p>Download from <a href="https://code.visualstudio.com" target="_blank" rel="noopener noreferrer">code.visualstudio.com</a> and run the installer. Default settings are fine.</p>
+            <h3>Download the Claude Desktop App</h3>
+            <p>Get it from <a href="https://claude.ai/download" target="_blank" rel="noopener noreferrer">claude.ai/download</a> and sign in. Open it and go to <strong>Cowork</strong>. The website works in the cloud and stays walled off from your files; the desktop app can read and write them.</p>
           </div>
 
           <div className="step">
             <span className="step-number">2</span>
-            <h3>Install Claude Code</h3>
-            <div className="substep">
-              <p>Open VS Code. Click the Extensions icon in the left sidebar, or press <code>Cmd+Shift+X</code> (Mac) / <code>Ctrl+Shift+X</code> (Windows).</p>
-            </div>
-            <div className="substep">
-              <p>Search for &quot;Claude&quot; and install the official extension by Anthropic. Sign in with your Claude account when prompted.</p>
-            </div>
-          </div>
-
-          <div className="step">
-            <span className="step-number">3</span>
             <h3>Create Your Personal_OS Folder</h3>
-            <p>One empty folder. This is the only thing you need to do manually.</p>
+            <p>One empty folder. This is the only thing you make by hand.</p>
 
             <h4>On Mac:</h4>
             <div className="substep">
@@ -862,78 +853,84 @@ PARA-based vault:
           </div>
 
           <div className="step">
+            <span className="step-number">3</span>
+            <h3>Point Cowork at the Folder</h3>
+            <div className="substep">
+              <p>In Cowork, start a new task and choose <strong>Work in a project</strong> → <strong>Choose different folder</strong> → select your <code>Personal_OS</code> folder.</p>
+            </div>
+            <div className="substep">
+              <p>Set the model to <strong>Opus 4.8</strong> before you start typing. You can&apos;t switch models once a conversation is going.</p>
+            </div>
+          </div>
+
+          <div className="step">
             <span className="step-number">4</span>
-            <h3>Open the Folder in VS Code</h3>
-            <div className="substep">
-              <p>VS Code: File → Open Folder → select your <code>Personal_OS</code> folder → Open.</p>
-            </div>
-            <div className="substep">
-              <p>If VS Code asks &quot;Do you trust the authors?&quot;, click &quot;Yes.&quot;</p>
-            </div>
+            <h3>Connect Your Tools</h3>
+            <p>Click your name (lower left) → <strong>Settings → Connectors</strong>, and turn on the ones you use &mdash; Granola, Outlook, Box, Wrike. Set them to <strong>&quot;always allow&quot;</strong> so Claude isn&apos;t stopping to ask permission on every step.</p>
           </div>
 
           <div className="step">
             <span className="step-number">5</span>
-            <h3>Have Claude Build the Structure</h3>
-            <p>Open the Claude Code panel and paste this prompt:</p>
+            <h3>Have Claude Interview You and Build the Structure</h3>
+            <p>Paste this prompt. Claude interviews you first, then writes everything from your answers &mdash; so the CLAUDE.md reflects how you actually work instead of a blank template.</p>
 
             <div className="prompt-box">
-              <h4>Copy and paste into Claude:</h4>
-              <pre>{`Please set up a Personal OS for me. Create:
+              <h4>Copy and paste into Cowork:</h4>
+              <pre>{`Please set up a Personal OS for me, and interview me to get it right.
 
-1. These folders:
-   - 00_Inbox
-   - 10_Projects
-   - 20_Areas
-   - 20_Areas/Calls
-   - 20_Areas/People
-   - 20_Areas/Companies
-   - 30_Resources
-   - 40_Archives
-   - 50_Personal
-   - 99_System/Context_Library/project_specs
-   - 99_System/Scripts
-   - Apps
+First, interview me ONE question at a time, waiting for each answer
+before asking the next. Don't dump all the questions at once. Cover:
+  - My name, title, and organization
+  - What I do day to day and who I work with most
+  - How I want you to behave: concise or more explanatory, tone
+  - The 2-3 projects or responsibilities that matter most right now
+Tell me I can answer by voice if that's faster.
 
-2. A CLAUDE.md file at the root with:
-   - A "Role" section: you are my Chief of Staff for this vault
-   - A "Who I Am" section: [add my name, title, organization]
-   - A "Core Behavior" section: edit files directly, keep changes
-     minimal, read local files before asking, confirm before deleting,
-     concise responses
-   - An "Architecture" section describing the folders above
-   - A "Task Schema" section with the YAML format for tasks
-     (type, status, created, due_date, priority, tags)
+Once I've answered, create these folders in my Personal_OS folder:
+  00_Inbox, 10_Projects, 20_Areas, 20_Areas/Calls,
+  20_Areas/People, 20_Areas/Companies, 30_Resources,
+  40_Archives, 50_Personal, 99_System/Context_Library, Apps
 
-3. A Someday_Maybe.md in 20_Areas/ with sections for Ideas,
-   Long-Term Projects, Things to Explore, Wishlist.
+Then create a CLAUDE.md at the root, built from my answers, with:
+  - Role: you are my Chief of Staff for this vault
+  - Who I Am: my name, title, organization, and context
+  - Core Behavior: edit files directly, keep changes minimal,
+    read local files before asking, confirm before deleting,
+    concise responses, AND whenever you set something new up,
+    interview me one question at a time rather than guessing
+  - Architecture: the folders above
+  - Task Schema: YAML with type, status, created, due_date,
+    priority, tags
 
-Create everything now.`}</pre>
+Also create a Someday_Maybe.md in 20_Areas/ with sections for Ideas,
+Long-Term Projects, Things to Explore, Wishlist.
+
+Create everything once I've answered.`}</pre>
             </div>
 
-            <p>Claude creates all the folders and files. You&apos;ll see them appear in VS Code&apos;s file explorer on the left.</p>
+            <p>Claude asks its questions one at a time &mdash; answer by voice with the microphone if that&apos;s faster &mdash; then creates all the folders and your CLAUDE.md.</p>
           </div>
 
           <div className="step">
             <span className="step-number">6</span>
-            <h3>Install Your First Two Skills</h3>
-            <p>Skills are folders inside <code>~/.claude/skills/</code> with a <code>SKILL.md</code> file describing what they do. Claude reads the descriptions and triggers them when relevant. The <code>/</code> prefix is shorthand to force a specific skill to run.</p>
+            <h3>Skills in Cowork</h3>
+            <p>A skill is a saved shortcut &mdash; a few lines of instructions Claude reuses, so you stop re-explaining a workflow. In Cowork you have two ways to use one:</p>
 
-            <p>Paste this prompt into Claude:</p>
+            <div className="substep">
+              <p><strong>Just ask.</strong> The simplest path: say &quot;build my agenda for today by scanning my vault for tasks with due dates.&quot; Cowork does the work with no skill installed.</p>
+            </div>
+            <div className="substep">
+              <p><strong>Save it as a skill.</strong> To make it one click next time, go to <strong>Settings → Customize → Skills → &quot;+&quot;</strong> and create a skill. Paste the text below as your first one. Cowork keeps its own skill store, so this is where your skills live.</p>
+            </div>
 
             <div className="prompt-box">
-              <h4>Copy and paste into Claude:</h4>
-              <pre>{`Please create two skills for me.
-
-1. ~/.claude/skills/today/SKILL.md with this content:
-
----
+              <h4>Paste this as the body of a &quot;today&quot; skill:</h4>
+              <pre>{`---
 name: today
-description: Scans the vault for tasks due today and creates a daily agenda.
-allowed-tools: Bash(*), Read(*), Write(*)
+description: Scan the vault for tasks due today and create a daily agenda.
 ---
 
-# /today
+# today
 
 Build today's agenda by scanning all .md files in 10_Projects/ and
 00_Inbox/ for YAML frontmatter with a due_date field.
@@ -943,54 +940,33 @@ Build today's agenda by scanning all .md files in 10_Projects/ and
 1. Group tasks: Overdue, Due Today, Due This Week, Due Next Week
 2. Create a new file in 00_Inbox/ named YYYY-MM-DD_Agenda.md
 3. Format with sections for each group, plus Daily Focus and Quick Notes
-4. Tell me: "Your agenda is ready: [filename]"
+4. Tell me: "Your agenda is ready: [filename]"`}</pre>
+            </div>
 
-
-2. ~/.claude/skills/shutdown/SKILL.md with this content:
-
----
-name: shutdown
-description: End-of-day ritual — captures what moved, what didn't, and what's queued for tomorrow.
-allowed-tools: Bash(*), Read(*), Write(*), Edit(*)
----
-
-# /shutdown
-
-End-of-day capture.
-
-## What to do
-
-1. Review today's agenda in 00_Inbox/
-2. For each task: mark done, carry over, or mark as waiting
-3. Append a brief end-of-day summary to today's agenda file:
-   - What moved (3-5 lines max)
-   - What stalled and why
-   - Tomorrow's top 3 candidates
-4. Tell me: "Shutdown complete. Tomorrow's queue: [top 3]"
-
-Create both skills now.`}</pre>
+            <div className="explanation">
+              <strong>Heads up:</strong> Cowork&apos;s skills are less automatic than the VS Code version. A saved skill may not always fire on its own. If it doesn&apos;t, ask Claude in plain words &mdash; that always works. The full <code>/slash</code>-command engine, where skills auto-trigger, lives in the <Link href="/personal-os-3">Claude Code build</Link>.
             </div>
           </div>
 
           <div className="step">
             <span className="step-number">7</span>
             <h3>Test It</h3>
-            <p>Type <code>/today</code> in the Claude chat. Claude creates your first daily agenda file in <code>00_Inbox/</code>. Open it in VS Code and hit <code>Cmd+Shift+V</code> to preview it formatted.</p>
+            <p>Ask: <strong>&quot;Build my agenda for today.&quot;</strong> Claude scans your vault for tasks with due dates and writes a grouped agenda into <code>00_Inbox/</code>. To read any file formatted instead of raw, ask Claude to walk you through it, or open it from the folder.</p>
           </div>
 
           <h2 id="daily-rhythm">Your Daily Rhythm</h2>
-          <p>Two skills are enough to anchor a day. Here&apos;s what it looks like in practice:</p>
+          <p>Two routines are enough to anchor a day. Ask for them directly, or save them as skills &mdash; either way, here&apos;s what it looks like in practice:</p>
 
           <div className="skill-card">
-            <h4><code>/today</code> — Morning</h4>
-            <p>First thing, open VS Code, type <code>/today</code> in the Claude chat. Claude scans the vault for tasks with due dates, builds a grouped agenda (overdue, today, this week, next week), and writes it to <code>00_Inbox/YYYY-MM-DD_Agenda.md</code>.</p>
-            <p style={{ marginBottom: 0 }}><strong>Then:</strong> open the agenda file, hit <code>Cmd+Shift+V</code>, and you have a formatted to-do list next to your chat panel.</p>
+            <h4>Morning — Build the agenda</h4>
+            <p>First thing, open Cowork on your Personal OS project and say <strong>&quot;build my agenda for today.&quot;</strong> Claude scans the vault for tasks with due dates, builds a grouped agenda (overdue, today, this week, next week), and writes it to <code>00_Inbox/YYYY-MM-DD_Agenda.md</code>.</p>
+            <p style={{ marginBottom: 0 }}><strong>Then:</strong> ask Claude to walk you through it, or open the file to read it.</p>
           </div>
 
           <div className="skill-card">
-            <h4><code>/shutdown</code> — End of Day</h4>
-            <p>Before closing your laptop, type <code>/shutdown</code>. Claude reviews today&apos;s agenda, asks what moved and what didn&apos;t, and writes a one-paragraph summary at the bottom of today&apos;s agenda file. Includes tomorrow&apos;s top 3 candidates.</p>
-            <p style={{ marginBottom: 0 }}><strong>The next morning</strong>, <code>/today</code> can read yesterday&apos;s shutdown notes and carry the queue forward.</p>
+            <h4>End of day — Capture what moved</h4>
+            <p>Before you close your laptop, say <strong>&quot;run my shutdown.&quot;</strong> Claude reviews today&apos;s agenda, asks what moved and what didn&apos;t, and writes a one-paragraph summary at the bottom of today&apos;s agenda file, including tomorrow&apos;s top 3.</p>
+            <p style={{ marginBottom: 0 }}><strong>The next morning,</strong> the agenda build reads yesterday&apos;s shutdown notes and carries the queue forward.</p>
           </div>
 
           <h2 id="starting-rules">Rules I&apos;d Give Myself If Starting Over</h2>
@@ -1005,8 +981,9 @@ Create both skills now.`}</pre>
 
           <div className="cta-section">
             <h2>That&apos;s the Foundation</h2>
-            <p>A folder, a CLAUDE.md, two skills. From here, the real leverage comes from how the system compounds — memory that persists, skills that automate your real workflows, capture pipelines that feed the vault while you sleep, and a voice system that lets Claude write like you.</p>
+            <p>A folder, a CLAUDE.md, a working daily rhythm. From here, the real leverage comes from how the system compounds — capture pipelines that feed the vault while you&apos;re in meetings, a voice system that lets Claude write like you, and a relationship wiki that builds itself.</p>
             <Link href="/personal-os-2" className="cta-button">Read How It Compounds →</Link>
+            <p style={{ marginTop: 24, marginBottom: 0, fontSize: '0.95rem' }}>Ready to work in an editor? The <Link href="/personal-os-3" style={{ color: 'var(--brand-cyan)', fontWeight: 600 }}>Claude Code build</Link> adds real slash commands, auto memory, and MCP servers.</p>
           </div>
         </main>
 
