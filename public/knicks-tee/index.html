@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Make Your Knicks Tee</title>
+<meta name="description" content="Make your own homemade Knicks playoff tee. Fill in the chant, pick your marker, post it everywhere.">
+<meta property="og:title" content="Make Your Knicks Tee">
+<meta property="og:description" content="The city is chanting. Put it on a shirt. Fill in your own chant, pick your marker, save your tee.">
+<meta property="og:url" content="https://janetteroush.com/knicks-tee">
+<meta property="og:image" content="https://janetteroush.com/knicks-tee/og.png">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Rock+Salt&family=Caveat:wght@700&family=Archivo+Black&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #006BB6;
+    --orange: #F58426;
+    --ink: #1b1b1f;
+    --paper: #f6f1e4;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    background-image: radial-gradient(#e8e0cc 1px, transparent 1px);
+    background-size: 22px 22px;
+    color: var(--ink);
+    font-family: Caveat, cursive;
+    font-size: 20px;
+  }
+  header {
+    text-align: center;
+    padding: 28px 16px 6px;
+  }
+  header h1 {
+    font-family: 'Permanent Marker', cursive;
+    font-size: clamp(30px, 6vw, 52px);
+    margin: 0;
+    transform: rotate(-1.5deg);
+  }
+  header h1 .b { color: var(--blue); }
+  header h1 .o { color: var(--orange); }
+  header p {
+    margin: 6px 0 0;
+    font-size: 22px;
+    transform: rotate(0.6deg);
+  }
+  .wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px;
+    justify-content: center;
+    align-items: flex-start;
+    max-width: 1100px;
+    margin: 18px auto 60px;
+    padding: 0 16px;
+  }
+  .panel {
+    flex: 1 1 380px;
+    max-width: 470px;
+    background: #fffdf6;
+    border: 3px solid var(--ink);
+    border-radius: 14px;
+    box-shadow: 6px 6px 0 rgba(27,27,31,.85);
+    padding: 18px 20px 22px;
+    transform: rotate(-0.4deg);
+  }
+  .preview {
+    flex: 1 1 320px;
+    max-width: 430px;
+    text-align: center;
+    position: sticky;
+    top: 14px;
+  }
+  canvas {
+    width: 100%;
+    height: auto;
+    border: 3px solid var(--ink);
+    border-radius: 12px;
+    box-shadow: 6px 6px 0 rgba(27,27,31,.85);
+    background: #fff;
+  }
+  .label {
+    font-family: 'Permanent Marker', cursive;
+    font-size: 17px;
+    letter-spacing: .5px;
+    margin: 16px 0 6px;
+    display: block;
+  }
+  .label:first-child { margin-top: 0; }
+  input[type=text] {
+    width: 100%;
+    font-family: 'Permanent Marker', cursive;
+    font-size: 17px;
+    padding: 8px 10px;
+    border: 2.5px solid var(--ink);
+    border-radius: 8px;
+    background: #fff;
+    margin-bottom: 7px;
+    color: var(--ink);
+  }
+  input[type=text]:focus { outline: 3px solid var(--orange); }
+  .chips { display: flex; flex-wrap: wrap; gap: 7px; }
+  .chip {
+    font-family: 'Permanent Marker', cursive;
+    font-size: 14px;
+    border: 2.5px solid var(--ink);
+    border-radius: 999px;
+    background: #fff;
+    padding: 5px 12px;
+    cursor: pointer;
+    transition: transform .08s;
+  }
+  .chip:hover { transform: rotate(-2deg) scale(1.06); }
+  .chip.on { background: var(--orange); color: #fff; }
+  .swatches { display: flex; flex-wrap: wrap; gap: 8px; }
+  .swatch {
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    border: 2.5px solid var(--ink);
+    cursor: pointer;
+    position: relative;
+  }
+  .swatch.on::after {
+    content: "✓";
+    position: absolute; inset: 0;
+    display: grid; place-items: center;
+    font-family: 'Permanent Marker', cursive;
+    color: #fff;
+    text-shadow: 0 0 3px rgba(0,0,0,.8);
+  }
+  .split { display: flex; gap: 18px; flex-wrap: wrap; }
+  .split > div { flex: 1 1 150px; }
+  .btnrow { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
+  button.big {
+    font-family: 'Permanent Marker', cursive;
+    font-size: 18px;
+    padding: 10px 18px;
+    border: 3px solid var(--ink);
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 3px 3px 0 rgba(27,27,31,.85);
+    transition: transform .08s;
+  }
+  button.big:active { transform: translate(2px,2px); box-shadow: 0 0 0; }
+  .dl { background: var(--blue); color: #fff; }
+  .shuffle { background: #fff; }
+  .reset { background: #fff; font-size: 14px; }
+  .tag {
+    margin-top: 12px;
+    font-size: 18px;
+    opacity: .75;
+  }
+  @media (max-width: 760px) {
+    .preview { position: static; order: -1; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1><span class="b">MAKE YOUR</span> <span class="o">KNICKS TEE</span></h1>
+  <p>the city is chanting. put it on a shirt. ✶ no design skills allowed ✶</p>
+</header>
+
+<div class="wrap">
+  <div class="panel">
+    <span class="label">YOUR CHANT (write whatever's in your heart)</span>
+    <input type="text" id="line1" maxlength="34" value="MY MAYOR IS MUSLIM">
+    <input type="text" id="line2" maxlength="34" value="MY BAGEL IS JEWISH">
+    <input type="text" id="line3" maxlength="34" value="MY CHRISTIAN DIOR">
+    <input type="text" id="line4" maxlength="34" value="KNICKS IN FIVE">
+
+    <span class="label">KNICKS IN ___ (things that rhyme with five, mostly)</span>
+    <div class="chips" id="rhymes"></div>
+
+    <span class="label">TEE STYLE</span>
+    <div class="chips" id="styles"></div>
+
+    <div class="split">
+      <div>
+        <span class="label">TEE COLOR</span>
+        <div class="swatches" id="teeColors"></div>
+      </div>
+      <div>
+        <span class="label">MARKER</span>
+        <div class="swatches" id="inkColors"></div>
+      </div>
+    </div>
+
+    <span class="label">FORMAT</span>
+    <div class="chips" id="formats"></div>
+
+    <div class="btnrow">
+      <button class="big dl" id="download">⬇ SAVE MY TEE</button>
+      <button class="big shuffle" id="shuffle">🎲 SHUFFLE LINES</button>
+      <button class="big reset" id="reset">back to the chant</button>
+    </div>
+  </div>
+
+  <div class="preview">
+    <canvas id="canvas"></canvas>
+    <div class="tag">made with love &amp; a sharpie in nyc 🧡💙</div>
+  </div>
+</div>
+
+<script>
+const SITE_TAG = "JANETTEROUSH.COM/KNICKS-TEE";
+
+const RHYMES = [
+  "FIVE", "FIVE (OBVIOUSLY)", "ALIVE", "A VIBE", "OVERDRIVE",
+  "HIGH FIVE", "STAYIN' ALIVE", "SURVIVE & ADVANCE", "FIVE, BABY"
+];
+
+const SHUFFLE_POOL = [
+  "MY LANDLORD IS LURKING",
+  "MY RAT IS GORGEOUS",
+  "MY BODEGA CAT IS UNDEFEATED",
+  "MY TRAIN IS DELAYED",
+  "MY SLICE IS A DOLLAR",
+  "MY STOOP IS SACRED",
+  "MY THERAPIST IS PROUD",
+  "MY DELI GUY KNOWS MY ORDER",
+  "MY PIGEON IS CARRYING US",
+  "MY HALAL CART IS HEATING UP",
+  "MY SUPER IS SCREENING MY CALLS",
+  "MY BLOCK IS BUZZING",
+  "MY COUSIN HAS A GUY",
+  "MY GARDEN IS SQUARE",
+  "MY HEART IS ORANGE & BLUE"
+];
+
+const DEFAULTS = ["MY MAYOR IS MUSLIM", "MY BAGEL IS JEWISH", "MY CHRISTIAN DIOR", "KNICKS IN FIVE"];
+
+const STYLES = [
+  { key: "marker",  name: "MARKER",     font: "Permanent Marker" },
+  { key: "scrawl",  name: "SCRAWL",     font: "Rock Salt" },
+  { key: "puff",    name: "PUFF PAINT", font: "Caveat" },
+  { key: "ironon",  name: "IRON-ON",    font: "Archivo Black" }
+];
+
+const TEE_COLORS = [
+  { name: "white",  tee: "#fbfaf5", outline: "#1b1b1f" },
+  { name: "cream",  tee: "#f3ecd8", outline: "#1b1b1f" },
+  { name: "heather",tee: "#d9d9d6", outline: "#1b1b1f" },
+  { name: "blue",   tee: "#006BB6", outline: "#0c2438" },
+  { name: "orange", tee: "#F58426", outline: "#5d2e06" },
+  { name: "black",  tee: "#222226", outline: "#000000" }
+];
+
+const INKS = [
+  { name: "black",     colors: ["#1b1b1f"] },
+  { name: "blue",      colors: ["#006BB6"] },
+  { name: "orange",    colors: ["#F58426"] },
+  { name: "blue+orange", colors: ["#006BB6", "#F58426"] },
+  { name: "white",     colors: ["#ffffff"] }
+];
+
+const FORMATS = [
+  { key: "story",  name: "STORY 9:16",  w: 1080, h: 1920 },
+  { key: "square", name: "SQUARE 1:1",  w: 1080, h: 1080 }
+];
+
+const state = {
+  style: "marker",
+  teeColor: 0,
+  ink: 3,           // blue+orange default — it's a knicks shirt
+  format: "square",
+  rhyme: "FIVE"
+};
+
+// ---------- seeded wobble ----------
+function hashStr(s) {
+  let h = 2166136261;
+  for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); }
+  return h >>> 0;
+}
+function mulberry32(seed) {
+  return function () {
+    seed |= 0; seed = (seed + 0x6D2B79F5) | 0;
+    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+// ---------- canvas helpers ----------
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+
+function wobblyLine(c, x1, y1, x2, y2, mag, rnd) {
+  const segs = Math.max(2, Math.floor(Math.hypot(x2 - x1, y2 - y1) / 40));
+  c.moveTo(x1, y1);
+  for (let i = 1; i <= segs; i++) {
+    const t = i / segs;
+    const nx = x1 + (x2 - x1) * t + (rnd() - 0.5) * mag;
+    const ny = y1 + (y2 - y1) * t + (rnd() - 0.5) * mag;
+    c.lineTo(nx, ny);
+  }
+}
+
+function wobblyPath(c, pts, mag, rnd, close) {
+  c.beginPath();
+  for (let i = 0; i < pts.length - 1; i++) {
+    if (i === 0) c.moveTo(pts[0][0], pts[0][1]);
+    wobblyLine(c, pts[i][0], pts[i][1], pts[i + 1][0], pts[i + 1][1], mag, rnd);
+  }
+  if (close) c.closePath();
+}
+
+// ---------- tee drawing ----------
+function teePoints(x, y, w, h) {
+  const p = (px, py) => [x + px * w, y + py * h];
+  return [
+    p(0.38, 0.055),                 // neck left
+    p(0.205, 0.095),                // shoulder left
+    p(0.03, 0.265),                 // sleeve outer left
+    p(0.115, 0.415),                // sleeve hem left
+    p(0.255, 0.335),                // armpit left
+    p(0.245, 0.95),                 // hem left
+    p(0.755, 0.95),                 // hem right
+    p(0.745, 0.335),                // armpit right
+    p(0.885, 0.415),                // sleeve hem right
+    p(0.97, 0.265),                 // sleeve outer right
+    p(0.795, 0.095),                // shoulder right
+    p(0.62, 0.055)                  // neck right
+  ];
+}
+
+function drawTee(c, x, y, w, h, teeColor, outlineColor, seed) {
+  const rnd = mulberry32(seed);
+  const mag = w * 0.012;
+  const pts = teePoints(x, y, w, h);
+
+  // shirt body
+  c.save();
+  wobblyPath(c, pts, mag, rnd, false);
+  // neckline scoop closes the shape
+  c.quadraticCurveTo(x + 0.5 * w, y + 0.16 * h, pts[0][0], pts[0][1]);
+  c.closePath();
+  c.fillStyle = teeColor;
+  c.fill();
+  c.lineJoin = "round";
+  c.lineCap = "round";
+  c.strokeStyle = outlineColor;
+  c.lineWidth = w * 0.012;
+  c.stroke();
+  // second sketchy pass, slightly offset
+  c.save();
+  c.translate(w * 0.004, -w * 0.003);
+  c.globalAlpha = 0.45;
+  c.lineWidth = w * 0.006;
+  c.stroke();
+  c.restore();
+
+  // collar
+  c.beginPath();
+  c.moveTo(pts[0][0], pts[0][1]);
+  c.quadraticCurveTo(x + 0.5 * w, y + 0.205 * h, pts[11][0], pts[11][1]);
+  c.lineWidth = w * 0.009;
+  c.globalAlpha = 0.85;
+  c.stroke();
+  c.globalAlpha = 1;
+
+  // sleeve seams
+  c.beginPath();
+  wobblyLine(c, pts[1][0] + w * 0.03, pts[1][1] + h * 0.02, pts[4][0], pts[4][1], mag, rnd);
+  c.moveTo(pts[10][0] - w * 0.03, pts[10][1] + h * 0.02);
+  wobblyLine(c, pts[10][0] - w * 0.03, pts[10][1] + h * 0.02, pts[7][0], pts[7][1], mag, rnd);
+  c.lineWidth = w * 0.006;
+  c.globalAlpha = 0.5;
+  c.stroke();
+  c.globalAlpha = 1;
+
+  // hem stitches
+  c.beginPath();
+  c.setLineDash([w * 0.018, w * 0.014]);
+  wobblyLine(c, pts[5][0] + w * 0.02, pts[5][1] - h * 0.025, pts[6][0] - w * 0.02, pts[6][1] - h * 0.025, mag * 0.5, rnd);
+  c.lineWidth = w * 0.005;
+  c.globalAlpha = 0.5;
+  c.stroke();
+  c.setLineDash([]);
+  c.globalAlpha = 1;
+  c.restore();
+}
+
+// ---------- text on tee ----------
+function fitFont(c, text, fontFamily, weight, maxW, startSize) {
+  let size = startSize;
+  while (size > 14) {
+    c.font = `${weight} ${size}px "${fontFamily}"`;
+    if (c.measureText(text).width <= maxW) break;
+    size -= 2;
+  }
+  return size;
+}
+
+function drawChant(c, lines, style, inks, teeIsDark, x, y, w, h, seed) {
+  const rnd = mulberry32(seed + 7);
+  const styleDef = STYLES.find(s => s.key === style);
+  const maxW = w * 0.66;
+  const cx = x + w * 0.5;
+  const active = lines.filter(l => l.trim().length);
+  if (!active.length) return;
+
+  const baseSize = style === "puff" ? w * 0.085 : w * 0.062;
+  const weight = style === "puff" ? "700" : "400";
+
+  // measure all lines first so the block centers vertically in the chest area
+  const sizes = active.map(l => fitFont(c, l, styleDef.font, weight, maxW, baseSize));
+  const gaps = sizes.map(s => s * (style === "scrawl" ? 1.65 : 1.3));
+  const totalH = gaps.reduce((a, b) => a + b, 0);
+  const chestTop = y + h * 0.27;
+  const chestH = h * 0.52;
+  let ty = chestTop + Math.max(0, (chestH - totalH) / 2) + sizes[0];
+  let lastBaseline = ty;
+
+  active.forEach((line, i) => {
+    const ink = inks[i % inks.length];
+    const size = sizes[i];
+    c.save();
+    c.translate(cx, ty);
+    c.rotate(((rnd() - 0.5) * 3) * Math.PI / 180);
+    c.font = `${weight} ${size}px "${styleDef.font}"`;
+    c.textAlign = "center";
+    c.textBaseline = "alphabetic";
+
+    if (style === "ironon") {
+      // each letter placed by hand, slightly crooked
+      const letters = line.split("");
+      const widths = letters.map(ch => c.measureText(ch).width);
+      const lineW = widths.reduce((a, b) => a + b, 0);
+      let lx = -lineW / 2;
+      c.textAlign = "left";
+      letters.forEach((ch, li) => {
+        c.save();
+        c.translate(lx + widths[li] / 2, (rnd() - 0.5) * size * 0.16);
+        c.rotate((rnd() - 0.5) * 0.12);
+        c.fillStyle = ink;
+        c.fillText(ch, -widths[li] / 2, 0);
+        c.restore();
+        lx += widths[li];
+      });
+    } else if (style === "puff") {
+      c.lineJoin = "round";
+      c.lineWidth = size * 0.28;
+      c.strokeStyle = teeIsDark ? "rgba(255,255,255,.92)" : "rgba(27,27,31,.85)";
+      c.strokeText(line, 0, 0);
+      c.fillStyle = ink;
+      c.fillText(line, 0, 0);
+    } else {
+      c.fillStyle = ink;
+      c.fillText(line, 0, 0);
+      if (style === "marker") {
+        // double pass = marker that ran out a little
+        c.globalAlpha = 0.4;
+        c.fillText(line, size * 0.02, -size * 0.015);
+        c.globalAlpha = 1;
+      }
+    }
+    c.restore();
+    lastBaseline = ty;
+    ty += gaps[i] || 0;
+  });
+
+  // underline flourish below the last line
+  const lastSize = sizes[sizes.length - 1];
+  const flY = lastBaseline + lastSize * 0.45;
+  c.save();
+  c.strokeStyle = inks[(active.length - 1) % inks.length];
+  c.lineWidth = lastSize * 0.07;
+  c.lineCap = "round";
+  c.beginPath();
+  wobblyLine(c, cx - maxW * 0.3, flY, cx + maxW * 0.3, flY, 5, rnd);
+  c.stroke();
+  c.restore();
+}
+
+// ---------- doodles ----------
+function drawStar(c, x, y, r, color, rnd) {
+  c.save();
+  c.translate(x, y);
+  c.rotate(rnd() * Math.PI);
+  c.strokeStyle = color;
+  c.lineWidth = r * 0.22;
+  c.lineCap = "round";
+  c.beginPath();
+  for (let i = 0; i < 5; i++) {
+    const a1 = (i * 144 - 90) * Math.PI / 180;
+    c.lineTo(Math.cos(a1) * r, Math.sin(a1) * r);
+  }
+  c.closePath();
+  c.stroke();
+  c.restore();
+}
+
+function drawBall(c, x, y, r, color, rnd) {
+  c.save();
+  c.translate(x, y);
+  c.rotate((rnd() - 0.5) * 0.6);
+  c.strokeStyle = color;
+  c.lineWidth = r * 0.16;
+  c.lineCap = "round";
+  c.beginPath(); c.arc(0, 0, r, 0, Math.PI * 2); c.stroke();
+  c.beginPath(); c.moveTo(-r, 0); c.quadraticCurveTo(0, r * 0.25, r, 0); c.stroke();
+  c.beginPath(); c.moveTo(0, -r); c.quadraticCurveTo(r * 0.25, 0, 0, r); c.stroke();
+  c.restore();
+}
+
+function drawSpark(c, x, y, r, color) {
+  c.save();
+  c.strokeStyle = color;
+  c.lineWidth = r * 0.25;
+  c.lineCap = "round";
+  for (let i = 0; i < 3; i++) {
+    const a = (-30 + i * 30) * Math.PI / 180;
+    c.beginPath();
+    c.moveTo(x + Math.cos(a) * r * 0.5, y + Math.sin(a) * r * 0.5);
+    c.lineTo(x + Math.cos(a) * r * 1.4, y + Math.sin(a) * r * 1.4);
+    c.stroke();
+  }
+  c.restore();
+}
+
+// ---------- compose ----------
+function render() {
+  const fmt = FORMATS.find(f => f.key === state.format);
+  canvas.width = fmt.w;
+  canvas.height = fmt.h;
+
+  const lines = [1, 2, 3, 4].map(i => document.getElementById("line" + i).value.toUpperCase());
+  const tee = TEE_COLORS[state.teeColor];
+  const inks = INKS[state.ink].colors;
+  const teeIsDark = ["blue", "orange", "black"].includes(tee.name);
+  const seed = hashStr(state.style + tee.name + lines.join("|") + state.format);
+  const rnd = mulberry32(seed + 99);
+
+  // poster background
+  ctx.fillStyle = "#f6f1e4";
+  ctx.fillRect(0, 0, fmt.w, fmt.h);
+  ctx.fillStyle = "rgba(0,107,182,.05)";
+  for (let gy = 0; gy < fmt.h; gy += 26) {
+    for (let gx = 0; gx < fmt.w; gx += 26) {
+      if ((gx + gy) % 52 === 0) ctx.fillRect(gx, gy, 3, 3);
+    }
+  }
+
+  // headline
+  const headY = fmt.h * (state.format === "story" ? 0.085 : 0.10);
+  ctx.save();
+  ctx.translate(fmt.w / 2, headY);
+  ctx.rotate(-0.025);
+  ctx.font = `400 ${fmt.w * 0.062}px "Permanent Marker"`;
+  ctx.textAlign = "center";
+  ctx.fillStyle = "#006BB6";
+  ctx.fillText("NEW YORK IS A", 0, 0);
+  ctx.fillStyle = "#F58426";
+  ctx.fillText("FEELING RIGHT NOW", 0, fmt.w * 0.075);
+  ctx.restore();
+
+  // tee
+  const teeW = fmt.w * 0.82;
+  const teeH = teeW * 1.06;
+  const teeX = (fmt.w - teeW) / 2;
+  const teeY = state.format === "story"
+    ? headY + fmt.w * 0.16
+    : headY + fmt.w * 0.115;
+
+  // soft shadow behind tee
+  ctx.save();
+  ctx.translate(10, 14);
+  ctx.globalAlpha = 0.12;
+  const shRnd = mulberry32(seed);
+  wobblyPath(ctx, teePoints(teeX, teeY, teeW, teeH), 8, shRnd, true);
+  ctx.fillStyle = "#1b1b1f";
+  ctx.fill();
+  ctx.restore();
+
+  drawTee(ctx, teeX, teeY, teeW, teeH, tee.tee, tee.outline, seed);
+  drawChant(ctx, lines, state.style, inks, teeIsDark, teeX, teeY, teeW, teeH, seed);
+
+  // doodles in the margins
+  const dColors = ["#006BB6", "#F58426"];
+  const spots = state.format === "story"
+    ? [[0.10, 0.045], [0.90, 0.05], [0.07, 0.42], [0.93, 0.46], [0.10, 0.86], [0.88, 0.84], [0.5, 0.93]]
+    : [[0.07, 0.05], [0.93, 0.06], [0.05, 0.55], [0.95, 0.58], [0.12, 0.93], [0.88, 0.94]];
+  spots.forEach(([fx, fy], i) => {
+    const x = fx * fmt.w, y = fy * fmt.h, col = dColors[i % 2];
+    const kind = i % 3;
+    if (kind === 0) drawStar(ctx, x, y, fmt.w * 0.022, col, rnd);
+    else if (kind === 1) drawBall(ctx, x, y, fmt.w * 0.024, col, rnd);
+    else drawSpark(ctx, x, y, fmt.w * 0.018, col);
+  });
+
+  // story format gets the arena chant in the space below the tee
+  if (state.format === "story") {
+    ctx.save();
+    ctx.translate(fmt.w / 2, teeY + teeH + fmt.w * 0.16);
+    ctx.rotate(0.02);
+    ctx.font = `400 ${fmt.w * 0.075}px "Permanent Marker"`;
+    ctx.textAlign = "center";
+    ctx.fillStyle = "#006BB6";
+    ctx.fillText("GO NY GO NY GO", 0, 0);
+    ctx.font = `700 ${fmt.w * 0.05}px "Caveat"`;
+    ctx.fillStyle = "#F58426";
+    ctx.fillText("✶ the whole city is humming ✶", 0, fmt.w * 0.085);
+    ctx.restore();
+  }
+
+  // footer tag
+  ctx.save();
+  ctx.font = `700 ${fmt.w * 0.030}px "Caveat"`;
+  ctx.textAlign = "center";
+  ctx.fillStyle = "rgba(27,27,31,.65)";
+  ctx.fillText(`★ ${SITE_TAG} ★`, fmt.w / 2, fmt.h - fmt.w * 0.035);
+  ctx.restore();
+}
+
+// ---------- UI wiring ----------
+function buildChips(containerId, items, getLabel, isOn, onPick) {
+  const el = document.getElementById(containerId);
+  el.innerHTML = "";
+  items.forEach((item, i) => {
+    const b = document.createElement("button");
+    b.className = "chip" + (isOn(item, i) ? " on" : "");
+    b.textContent = getLabel(item);
+    b.onclick = () => { onPick(item, i); refreshUI(); render(); };
+    el.appendChild(b);
+  });
+}
+
+function buildSwatches(containerId, items, getColor, isOn, onPick) {
+  const el = document.getElementById(containerId);
+  el.innerHTML = "";
+  items.forEach((item, i) => {
+    const s = document.createElement("div");
+    s.className = "swatch" + (isOn(item, i) ? " on" : "");
+    s.style.background = getColor(item);
+    s.title = item.name;
+    s.onclick = () => { onPick(item, i); refreshUI(); render(); };
+    el.appendChild(s);
+  });
+}
+
+function refreshUI() {
+  buildChips("rhymes", RHYMES, r => r,
+    r => document.getElementById("line4").value.toUpperCase() === "KNICKS IN " + r,
+    r => { document.getElementById("line4").value = "KNICKS IN " + r; });
+  buildChips("styles", STYLES, s => s.name,
+    s => s.key === state.style,
+    s => { state.style = s.key; });
+  buildChips("formats", FORMATS, f => f.name,
+    f => f.key === state.format,
+    f => { state.format = f.key; });
+  buildSwatches("teeColors", TEE_COLORS, t => t.tee,
+    (t, i) => i === state.teeColor,
+    (t, i) => { state.teeColor = i; });
+  buildSwatches("inkColors", INKS,
+    k => k.colors.length > 1
+      ? `linear-gradient(135deg, ${k.colors[0]} 50%, ${k.colors[1]} 50%)`
+      : k.colors[0],
+    (k, i) => i === state.ink,
+    (k, i) => { state.ink = i; });
+}
+
+[1, 2, 3, 4].forEach(i =>
+  document.getElementById("line" + i).addEventListener("input", () => { refreshUI(); render(); }));
+
+document.getElementById("shuffle").onclick = () => {
+  const pool = [...SHUFFLE_POOL];
+  for (let i = pool.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [pool[i], pool[j]] = [pool[j], pool[i]];
+  }
+  document.getElementById("line1").value = pool[0];
+  document.getElementById("line2").value = pool[1];
+  document.getElementById("line3").value = pool[2];
+  refreshUI(); render();
+};
+
+document.getElementById("reset").onclick = () => {
+  DEFAULTS.forEach((v, i) => document.getElementById("line" + (i + 1)).value = v);
+  refreshUI(); render();
+};
+
+document.getElementById("download").onclick = async () => {
+  render();
+  const blob = await new Promise(res => canvas.toBlob(res, "image/png"));
+  const file = new File([blob], "my-knicks-tee.png", { type: "image/png" });
+  if (navigator.canShare && navigator.canShare({ files: [file] })) {
+    try { await navigator.share({ files: [file], title: "My Knicks Tee" }); return; }
+    catch (e) { /* user cancelled share — fall through to download */ }
+  }
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "my-knicks-tee.png";
+  a.click();
+  URL.revokeObjectURL(a.href);
+};
+
+refreshUI();
+document.fonts.ready.then(render);
+render();
+</script>
+</body>
+</html>
