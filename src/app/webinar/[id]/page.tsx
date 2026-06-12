@@ -11,6 +11,23 @@ import ChaptersList from '@/components/webinar/ChaptersList'
 import ResourcesList from '@/components/webinar/ResourcesList'
 import { webinarData, webinarIds, webinarMentions } from '@/data/webinars'
 
+// Schema.org expects an ISO 8601 duration (e.g. "PT38M"), not "38 min".
+function toISO8601Duration(value: string): string {
+  const hours = /(\d+)\s*h/i.exec(value)
+  const mins = /(\d+)\s*m/i.exec(value)
+  const h = hours ? parseInt(hours[1], 10) : 0
+  const m = mins ? parseInt(mins[1], 10) : 0
+  if (!h && !m) return 'PT0M'
+  return `PT${h ? `${h}H` : ''}${m ? `${m}M` : ''}`
+}
+
+// Schema.org expects an ISO 8601 datetime WITH a timezone for uploadDate.
+// Anchor a bare YYYY-MM-DD to noon US Eastern so the value is unambiguous.
+function toUploadDate(value?: string): string {
+  const raw = value && /^\d{4}-\d{2}-\d{2}/.test(value) ? value : '2024-01-01'
+  return raw.length === 10 ? `${raw}T12:00:00-05:00` : raw
+}
+
 export function generateStaticParams() {
   return webinarIds.map((id) => ({ id }))
 }
@@ -48,10 +65,10 @@ export default async function WebinarPage({ params }: { params: Promise<{ id: st
     '@type': 'VideoObject',
     name: webinar.title,
     description: webinar.description,
-    duration: webinar.duration,
+    duration: toISO8601Duration(webinar.duration),
     thumbnailUrl: `https://image.mux.com/${webinar.muxPlaybackId}/thumbnail.png`,
     contentUrl: `https://stream.mux.com/${webinar.muxPlaybackId}.m3u8`,
-    uploadDate: webinar.publishDate || '2024-01-01',
+    uploadDate: toUploadDate(webinar.publishDate),
     inLanguage: 'en-US',
     isAccessibleForFree: true,
     contentLocation: {
