@@ -2,10 +2,11 @@ import Header from '@/components/Header'
 import AccessCheck from '@/components/AccessCheck'
 import { BookOpen, Users } from 'lucide-react'
 import type { Metadata } from 'next'
+import Script from 'next/script'
 
 export const metadata: Metadata = {
   title: 'About',
-  description: 'The Agents of Change program is dedicated to advancing AI literacy in the tourism industry. This research lab serves as a central archive for frameworks, tools, and strategies developed to help DMOs navigate the generative AI revolution.',
+  description: 'The Agents of Change program is dedicated to advancing AI literacy in the tourism industry. Janette Roush shares the AI tools and frameworks her team uses at Brand USA, so destination marketers can put them to work in their own organizations.',
   openGraph: {
     title: 'About | Agents of Change',
     description: 'The Agents of Change program is dedicated to advancing AI literacy in the tourism industry.',
@@ -17,9 +18,9 @@ export default function AboutPage() {
   const organizationSchema = {
     '@context': 'https://schema.org',
     '@type': 'EducationalOrganization',
-    'name': 'Agents of Change AI Lab',
-    'alternateName': 'Brand USA AI Lab',
-    'description': 'The Agents of Change program is dedicated to advancing AI literacy in the tourism industry. This research lab serves as a central archive for frameworks, tools, and strategies developed to help DMOs navigate the generative AI revolution.',
+    'name': 'Agents of Change',
+    'alternateName': 'Brand USA Agents of Change',
+    'description': 'The Agents of Change program is dedicated to advancing AI literacy in the tourism industry. Janette Roush shares the AI tools and frameworks her team uses at Brand USA, so destination marketers can put them to work in their own organizations.',
     'url': 'https://janetteroush.com/about',
     'founder': {
       '@type': 'Person',
@@ -51,10 +52,10 @@ export default function AboutPage() {
     'mainEntity': [
       {
         '@type': 'Question',
-        'name': 'What is the Agents of Change AI Lab?',
+        'name': 'What is the Agents of Change?',
         'acceptedAnswer': {
           '@type': 'Answer',
-          'text': 'The Agents of Change program is dedicated to advancing AI literacy in the tourism industry. This research lab serves as a central archive for frameworks, tools, and strategies developed to help DMOs navigate the generative AI revolution.'
+          'text': 'The Agents of Change program is dedicated to advancing AI literacy in the tourism industry. Janette Roush shares the AI tools and frameworks her team uses at Brand USA, so destination marketers can put them to work in their own organizations.'
         }
       },
       {
@@ -108,11 +109,11 @@ export default function AboutPage() {
               <div className="flex items-center gap-3 mb-6">
                 <BookOpen className="h-10 w-10 text-brand-cyan" />
                 <h1 className="text-4xl md:text-5xl font-bold text-brand-navy font-display">
-                  About the Agents of Change Lab
+                  About Agents of Change
                 </h1>
               </div>
               <p className="text-xl text-gray-700 leading-relaxed max-w-3xl">
-                The Agents of Change program is dedicated to advancing AI literacy in the tourism industry. This research lab serves as a central archive for frameworks, tools, and strategies developed to help DMOs navigate the generative AI revolution.
+                The Agents of Change program is dedicated to advancing AI literacy in the tourism industry. Here, Janette Roush shares the AI tools and frameworks her team uses at Brand USA, so destination marketers can put them to work in their own organizations.
               </p>
             </div>
           </section>
@@ -127,19 +128,45 @@ export default function AboutPage() {
                 </h2>
               </div>
               <p className="text-lg text-gray-700 leading-relaxed mb-8">
-                Janette Roush and the Brand USA innovation team are available to present these findings to industry partners and stakeholders.
+                Janette Roush speaks to destination marketing organizations and industry audiences about using AI in tourism — the practical tools and workflows her team uses at Brand USA.
               </p>
-              <a
-                href="https://www.thebrandusa.com/requestspeaker"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-brand-blue text-white px-6 py-3 rounded-lg font-semibold hover:bg-brand-navy transition-colors"
-              >
-                View Speaker Availability via Brand USA
-                <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                </svg>
-              </a>
+
+              {/* Speaker reel */}
+              <Script
+                src="https://cdn.jsdelivr.net/npm/@mux/mux-player@3/dist/mux-player.mjs"
+                type="module"
+                strategy="afterInteractive"
+              />
+              <div className="mb-8">
+                <div className="mx-auto max-w-[440px] overflow-hidden rounded-xl shadow-md bg-brand-navy">
+                  {/* @ts-expect-error - mux-player is a web component loaded via script */}
+                  <mux-player
+                    playback-id="IS37ei5cyOT43UHAFBqrEmWP9Dsmi02o7VEgc3NlHCag"
+                    stream-type="on-demand"
+                    autoplay="muted"
+                    loop
+                    muted
+                    playsinline
+                    accent-color="#00A9E0"
+                    metadata-video-title="Janette Roush — Speaker Reel"
+                    style={{ aspectRatio: '1 / 1', width: '100%', display: 'block' }}
+                  />
+                </div>
+              </div>
+
+              <div className="flex justify-center">
+                <a
+                  href="https://www.thebrandusa.com/requestspeaker"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 bg-brand-blue text-white px-6 py-3 rounded-lg font-semibold hover:bg-brand-navy transition-colors"
+                >
+                  View Speaker Availability via Brand USA
+                  <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </a>
+              </div>
             </div>
           </section>
         </div>
