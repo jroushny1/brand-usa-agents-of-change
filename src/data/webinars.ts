@@ -3349,6 +3349,396 @@ Yeah, it's definitely been really helpful and all the hours in the beginning and
 
 All right.`,
   },
+  'chat-data-to-travel-intelligence': {
+    id: 'chat-data-to-travel-intelligence',
+    title: `What Are Your Visitors Actually Asking? Turning Chat Data into Travel Intelligence`,
+    description: `For a year, Brand USA has run a Mindtrip-powered AI itinerary builder on VisitTheUSA.com and AmericaTheBeautiful.com. Matt Nicoletta walks through how his team turns those conversations into a travel-intelligence system: every chat transcript lands in BigQuery, gets matched to its Google Analytics 4 session through a shared Mindtrip chat ID, and runs through a large language model (Gemini Flash 2.5) that extracts structured fields — trip length, party type, season, budget, accessibility, and thematic topics. The result is first-party data on what travelers actually want, sliced by market and by marketing channel. Janette Roush hosts this open, question-driven session, with examples from India, Brazil, the UK, and a cross-topic World Cup insight.`,
+    duration: '56 min',
+    level: 'Tactical',
+    cardDescription: `Matt Nicoletta shows how Brand USA connects its Mindtrip itinerary builder to Google Analytics and BigQuery, then uses a large language model to turn raw conversation transcripts into structured travel intelligence — trip length, party type, topics, and custom engagement metrics, sliced by market and channel.`,
+    muxPlaybackId: 'trKT2TQvvnX1QkY8FE0001WrU01YW2BV9dzFD1bJUZMwaY',
+    instructor: 'Janette Roush & Matt Nicoletta',
+    instructorTitle: 'Chief AI Officer & Senior Manager, Marketing Analytics, Brand USA',
+    publishDate: '2026-06-15',
+    keyTakeaways: [
+      `An AI itinerary builder becomes a research instrument once you connect it to your analytics. Brand USA pulls every Mindtrip chat transcript into BigQuery and matches it to its Google Analytics 4 session using a shared Mindtrip chat ID that both systems record. That single join turns anonymous, unstructured conversations into first-party data the team can slice by market, by marketing channel, and by on-site behavior.`,
+      `A large language model imposes structure on free-text conversations. Each transcript runs through Gemini Flash 2.5 with a prompt that returns valid JSON: trip duration, travel dates or season, party composition, budget, purpose, accessibility needs, entry-requirement and safety questions, and two-to-five thematic tags. The model reads the customer side and the assistant side of the conversation separately, so traveler intent stays distinct from the itinerary builder's suggestions.`,
+      `Prompt design is where the accuracy lives. Matt's first prompt over-flagged accessibility because a traveler asked whether a scenic overlook was reachable by road, so he added explicit definitions of what each field means. Generative models are non-deterministic, so the same idea comes back as 'national park,' 'national parks,' and 'National Park' — a recurring human normalization pass folds those raw tags into a stable taxonomy that holds up over time.`,
+      `Custom metrics measure real intent. Brand USA defines an action session (the visitor clicked, scrolled a map, or otherwise participated rather than idled), an AI engagement rate (the visitor used the itinerary builder at least once), and an AI adoption rate (two or more rounds of conversation). Visitors who engage with the itinerary builder view about twice as many pages and bounce less — Matt frames this as a strong correlation seen across markets and channels, with causation still an open question.`,
+      `The insights point straight at marketing decisions. Trip-length and party-type patterns differ by market: Indian travelers skewed toward longer national-park and wine-country trips, Brazilian chats centered on food, astronomy, and urban culture, and UK chats surfaced Route 66 and Nashville. A cross-topic view linked World Cup planning to music festivals and nightlife, pointing to where additional advertising could land. The same pattern works on any site that captures chat data — Matt suggests starting with Mindtrip's own transcript exports and batching them through a model like Claude when BigQuery is out of reach.`,
+    ],
+    topics: [
+      `Mindtrip`,
+      `Conversation Analytics`,
+      `Google Analytics 4`,
+      `BigQuery`,
+      `Google Gemini`,
+      `Large Language Models`,
+      `Claude Code`,
+      `Topic Modeling`,
+      `Structured Data Extraction`,
+      `JSON`,
+      `First-Party Data`,
+      `Traveler Intent`,
+      `Trip Planning Insights`,
+      `Market Segmentation`,
+      `Marketing Attribution`,
+      `Google Tag Manager`,
+      `Looker Studio`,
+      `AI Itinerary Builder`,
+      `World Cup 2026`,
+      `Tourism Analytics`,
+      `AI in Tourism`,
+      `Destination Marketing Organization (DMO)`,
+    ],
+    targetAudience: {
+      primary: `Destination Marketing Organization (DMO) research and analytics teams`,
+      secondary: `Marketing analysts, data and BI teams, and digital leads working with chatbot or website data`,
+      tertiary: `Tourism marketers curious about what AI chat data reveals about traveler intent`
+    },
+    learningOutcomes: [
+      `Describe how a shared Mindtrip chat ID links a trip-planning conversation to its Google Analytics 4 session.`,
+      `Explain the limits of native GA4 for this work — language-variant pages counted separately and a 14-month history cap — and how BigQuery resolves both.`,
+      `Write an LLM prompt that converts a free-text chat transcript into structured JSON fields such as trip duration, party type, and thematic tags.`,
+      `Define explicit field meanings inside a prompt to prevent mis-flagging, using accessibility as the worked example.`,
+      `Build custom engagement metrics — action session, AI engagement rate, and AI adoption rate — that capture active intent.`,
+      `Interpret cross-topic patterns, such as World Cup planning linked to music festivals, to guide where marketing goes.`,
+      `Start small on your own site by exporting Mindtrip transcripts and batching them through a large language model when a data warehouse is unavailable.`,
+    ],
+    relatedResources: [
+      { name: `Mindtrip`, description: `The AI itinerary builder powering VisitTheUSA.com and AmericaTheBeautiful.com`, url: `https://mindtrip.ai` },
+      { name: `Google Analytics 4`, description: `Website event and session analytics`, url: `https://analytics.google.com` },
+      { name: `Google BigQuery`, description: `Cloud data warehouse where chat transcripts and GA events are joined`, url: `https://cloud.google.com/bigquery` },
+      { name: `Google Gemini`, description: `The Gemini Flash model used to extract structured fields from transcripts`, url: `https://gemini.google.com` },
+      { name: `Claude Code`, description: `Used to build the analysis pipeline and tagging tools in plain language`, url: `https://claude.ai` },
+      { name: `Looker Studio`, description: `Dashboarding and reporting on the structured chat data`, url: `https://lookerstudio.google.com` },
+    ],
+    chapters: [
+      { time: 0, title: `Welcome & a New, Interactive Format` },
+      { time: 41, title: `Handing the Floor to Matt Nicoletta` },
+      { time: 75, title: `Matt's Role: Marketing Analytics & Business Insights` },
+      { time: 170, title: `What We'll Cover Today` },
+      { time: 216, title: `AmericaTheBeautiful.com: One Year In` },
+      { time: 275, title: `What We Want to Know: Topics, Trip Logistics, Segments` },
+      { time: 364, title: `Early Insights from IPW: Trip Length & Party Type` },
+      { time: 419, title: `Breaking Insights Down by Market` },
+      { time: 478, title: `Q&A: Are the Chats in Their Own Language?` },
+      { time: 581, title: `Q&A: Are Meeting & Event Planners Using the Site?` },
+      { time: 635, title: `Market Summaries: India, Brazil & the UK` },
+      { time: 714, title: `Real Traveler Questions, in Their Own Words` },
+      { time: 786, title: `The Engagement Lift: With vs. Without the Itinerary Builder` },
+      { time: 834, title: `Where Users Click Out: Attractions Lead` },
+      { time: 875, title: `The System Behind It: Mindtrip to BigQuery to GA4` },
+      { time: 1100, title: `Google Tag Manager & Mindtrip's Custom Events` },
+      { time: 1246, title: `Why Native GA4 Falls Short` },
+      { time: 1300, title: `BigQuery: The Live Event Stream & the Chat-ID Match` },
+      { time: 1438, title: `Sessionizing: Assigning Chat IDs to GA Sessions` },
+      { time: 1582, title: `Custom Metrics: Defining the Action Session` },
+      { time: 1628, title: `AI Engagement & AI Adoption: Two Rounds of Chat` },
+      { time: 1730, title: `Analyzing the Transcripts with an LLM` },
+      { time: 1793, title: `The LLM Prompt: Structured JSON Extraction` },
+      { time: 1805, title: `Built with Claude Code` },
+      { time: 1872, title: `Designing the Flags: Duration, Party, Budget, Safety` },
+      { time: 2030, title: `A Prompt Pitfall: What 'Accessibility' Means` },
+      { time: 2059, title: `Thematic Tags: Customer Side vs. Bot Side` },
+      { time: 2132, title: `From Prompt to a Structured Table` },
+      { time: 2233, title: `Topic Modeling: The Data-Science Approach` },
+      { time: 2317, title: `World Cup x Music Festivals: A Cross-Topic Insight` },
+      { time: 2576, title: `Why Tags Beat Clustering: Tracking Change Over Time` },
+      { time: 2611, title: `Tag Normalization: Part Art, Part Science` },
+      { time: 2758, title: `How to Get Started on Your Own Site` },
+      { time: 2894, title: `Batching Transcripts Through an LLM` },
+      { time: 3013, title: `What's Next: Place Mentions & DMO Partner Reporting` },
+      { time: 3147, title: `Why This First-Party Chat Data Matters` },
+      { time: 3239, title: `Q&A: How Long Did This Take to Build?` },
+      { time: 3326, title: `Closing` },
+    ],
+    transcript: `And I want to say good afternoon from God's favorite city, New York City, home of the championship in New York Knicks. Thanks for signing on. You will notice that the format for this version of Agents of Change, thank you Courtney, is a little different than what we normally do. Because we wanted to give everybody the opportunity to weigh in and ask questions in real time.
+
+Oh, hi Paul, it's so good to see you. So we will share the recording and the granola transcript if you would like it after the webinar is over. But really, I want to turn this now over to Matt Nicoletta, who is going to walk through what he has done on the back end of all of the information that we get from the Mindtrip conversations that happen on our website on VisitTheUSA.com and the insights that he is able to derive by connecting those chats to GA4 sessions. And so Matt, I'm going to let you have the floor.
+
+Thanks, Janette, for the warm welcome. I appreciate it. Great to be here with everyone. I am a senior manager of marketing analytics and business insights here at Brand USA, I sit on the research team, and my probably the biggest thing I've worked on for the better part of the year is really understanding how visitors are coming to our website properties.
+
+So AmericaTheBeautiful.com and VisitTheUSA.com and what they've been doing on the sites, including interacting with the chatbot powered by Mindtrip. So I have a deck that I'm going to share and we can kind of go through some of those things when I'm also going to flip out to other resources and show you things and this is an open format. So please, as Janette encouraged us to do, ask questions. This is apparently technical topic.
+
+I can go very deep down and ram it cool, but I'd like to keep this out of the 30,000 foot level for the most part. So if you have any questions or don't understand something, please just go ahead and jump in in the chat or even just unmute yourself. All right, I'm trying to manage three screens here. So I'm not sure that I will always see chats.
+
+So someone, Janette or someone can keep an eye on chats and call this to a part of attention. I'd appreciate it. Can everyone see my screen? We see it, but it's not in slideshow view.
+
+All right. There you go. Yeah, okay. All right.
+
+So this is agents of change. They have a website line trip integration and was Janette put it recently at IPW. We've taken a chat bot and turned it into a travel or intelligence system. Today, we're going to cover when we're done the welcome.
+
+We're going to cover the actual integration. So we'll go over some of the sort of key points for if you are implementing Mindtrip chat bot on your site, sort of how we've integrated it with Google Analytics to get some of these insights. We'll talk about some of the new metrics, enhanced analytics that we've created as a result to help measure our performance. And then we'll jump into the transcript analysis.
+
+So we do get full chat transcripts anytime someone interacts with the bot. And where some of our most interesting and meaningful insights probably come from that. And then we'll talk a little bit about what we're continuing to develop and build out before wrapping up. So quick note, AmericaTheBeautiful.com is where this all started.
+
+So just a year ago, I was just realizing that June 16th was the official launch date last year at IPW. So we're tomorrow is technically the one year mark. We launched the site as a very new sort of DMO website, right? So everyone is concerned that search is declining.
+
+Traffic is probably showing off on a lot of your DMO sites. And that's a huge problem for our marketing activities. And part of that is because people are using AI outside of traditional search or even when they're using search, getting an AI summary and then not clicking through. So in some part, this site was a huge experiment for us to try to bring guy into the DMO website experience and heavily integrate it.
+
+You can still use AmericaTheBeautiful.com. It will redirect you to VisitTheUSA.com, which is of course Brand USA's main consumer facing website. They both talk to the same place. So what are the types and things we want to know?
+
+What are people talking about? Number one topic analysis, right? What's hot? What's new?
+
+To the extent that people provide this to us in their conversations, we want to understand what we can about trip logistics, right? All the types of things that will help us better understand what sort of segment they might belong to for a marketing perspective. So if they belong to things like Arty Sars is this a couple's trip, is it a family's trip? If they tell us how long they're planning, right?
+
+Is this a weekend excursion? Is it a two week vacation? Is it something longer? Seasonality, what are they looking for?
+
+You know, how far in advance are they looking? Is this a summer trip? We also want to assess the bot performance, right? So that's something that's important to us, how the bot is responding and the information that it's given.
+
+Special topics, events like the World Cup happening now, we can talk a little bit about some of the analysis we've done there and some of the interesting insights we've gotten. That's a great example of a topic that we'll train at certain points in time and, you know, may give us insight into how we might want to place some of our additional marketing advertising. And then we'll look a little bit about how we, because we've integrated this with Google Analytics, we can slice by marketing channel. We can sort of measure the overall website experience that a visitor has, not just how they interact with the bot or which pages they click on, but sort of the overall experience that they have on a beautiful campaign on the VisitTheUSA.com website.
+
+These are a few slides that I borrowed from Janette, and she'll see who's shown at IPW. So I assume many of you are familiar with these types of insights, but I thought I'm not going to go through all these in great detail, but I thought it would be sort of useful to share some of the insights that we are currently obtaining from this data. So this is a really interesting sort of breakdown of what folks have indicated being their trip length to be. So we often see trips planned around 10 days, but you can see in this case, we have 45 percent, almost half of people who had conversations during this period.
+
+We're planning 4-to-7-day trips, shorter trips. You can see the breakdown by party type, and you can see that, you know, what is termed here as a hidden signal. Group travel planners are actually using this site. So that could be tour operators or whatever travel agents are booking for larger parties.
+
+We also break it down by markets. So we can see, you know, India is one of the top markets that chats with us, which is kind of really interesting, right? You wouldn't necessarily expect that Brazil as well. Every market plans a little bit differently.
+
+So these are some of the key elements that we found when we looked at different markets. And you can see that based on 4,000 chats, on average Indian travelers, we're planning trips in average duration of almost nine days. And a lot of chats were actually about wine country, like Napa Valley. Perhaps a surprising insight, but obviously an interesting marketing opportunity.
+
+You can contrast that with a country like Mexico, for example, we're really interested in winter sports. And planning trips that were less than a week. Matt, can we stop you? Chris has a question, actually.
+
+Chris Ellis on our partnership team. Hi, Chris. Hi, how are you? So I understand India obviously chat because they speak English and communicate English.
+
+Brazil was very surprising, though. Yeah, that's a great point. Actually, all the chats are in language. Oh, they're in language?
+
+Oh, OK. And then we've translated them. So our website, the market is beautiful and calm. We do have, I don't know, how many languages it is, seven or eight languages.
+
+So we do have Spanish portuguese, Brazilian portuguese, Japanese, Korean, German, French, and a few other languages I'm probably forgetting. And Mindtrip actually does handle just about any language. I see Michelle from Mindtrip noting that, which is interesting. So do they're in language?
+
+I did realize that the chat was actually in language as well. Yeah, the chat itself can be in, I don't even know, 80 something languages. But we also translated the interface into the languages that Matt talked about, because we had more than the chat. So all of the capabilities, you know, all the navigation, everything.
+
+Cool, thank you. Yeah, and that's that's true on the brand new listings, VisitTheUSA.com website as well. We translate all of the buttons and all the text on the site. So it should be a fairly seamless experience, which is fantastic.
+
+And we will talk about that a little bit later, how we do translate the chats. We have the files from Mindtrip in the original language, which we like. But then we also translate them into English because most of us here work primarily in that language. And then one other question from Courtney in Minneapolis.
+
+And I haven't noted this myself, but I was curious if you have seen any signals that my meeting planners event planners are using the site. Yeah, I mean, I think outside of just noting that sometimes people are asking about large groups, it's hard for us to identify sort of mice activity specifically. We haven't seen a ton of it. I'd also know that the site is primarily named at consumers.
+
+And not necessarily a trade group tour, the travel trade industry. We also tend to exclude traffic from the US from this analysis. So I imagine a lot of tour operators or, you know, you know, mice planning, mice planning would happen in the US or from the US to some extent. And so we're probably not capturing some of that traffic here.
+
+But that's a really great question and something we probably should look into a little more thoroughly. Great. Thanks, Matt. Great.
+
+Thank you. Both of the questions. Fantastic. And then these are just a couple of summaries for markets that Janette shared at IPW.
+
+So again, just noting that India had a lot of luxury travel, right? And so looking at national park engagement, definitely family travelers. It's very in line with what we know love and expect from Indian travel culture. Same thing with Brazil, interesting that they were chatting a lot about food, astronomy, urban cultural focus, not necessarily the beach.
+
+Well, there's beaches, at least in some parts of Brazil, right? The United Kingdom. This isn't a market that we've invested in very heavily with a lot of our consumer marketing of late, but we do get a significant number of chats here from them enough to tell us that they are interested in Route 66 and Nashville and music, which is kind of interesting. And then just a few more quick ones, right?
+
+We can kind of look at breaking down by market again and then topic analysis. So we'll talk a little bit about how we've derived these topics and how we've paired them together to kind of give us a little bit better understanding of what people are talking about beyond just national parks, right? Like what aspect of trip planning surrounding national parks is a particular chat focusing on? And we can pull out rotations, right?
+
+So this is always really helpful to contextualize some of the data that we share and give real examples of actual things travelers have asked us or shared with us during their chat conversations. So for example, is there a more scenic alternative to the direct drive from the Redwoods to Sequoia and us by travel where it's planning a trip from Mexico? Really interesting to add this to all the analytics reports and kind of get that little bit of color in their own words, so to speak. And we can also talk about how we've derived some of these metrics.
+
+We're seeing correlation in engagement with those across the site, the VisitTheUSA.com, with those travelers who have interacted with the chatbot at much higher rates than those that ignore, right? So there's a lift here. We're not saying that this is causal per se, but it was a very strong correlation and it shows up across the board. These numbers tend to fluctuate, depending on which market you're talking about, which time period you're talking about, or which specific marketing channels were used to drive traffic to the site.
+
+But in general, across the board, we're seeing this remain pretty steady. Folks tend to view about twice as many pages on our site if they've engaged at all with the chatbot. They spend meaningfully longer on the site than those who don't, and they're less likely to bounce. And our web action rate, this is a metric that we created and it is basically capturing any time during a session someone has taken at least one action, an active participation in the session, meaning they've clicked on something, they've interacted with a map element, they haven't just sat there on a page, right?
+
+We see a huge jump for those who have engaged with the bot in our web action rate over those who have the bot. Okay, and then when users engage with the bot, sometimes they exit the site, where do they go? Well, they will often click through to places that were mentioned during the chat conversation. This could be an attraction, like Yosemite, it could be a hotel or a restaurant that was recommended within the chatbot.
+
+We don't allow direct bookings currently in our chatbot experience, perhaps for obvious reasons, but we do let folks click out two websites and make their own bookings or explore for the accommodations, restaurants, other activities, etc. Really interesting that primarily people are looking at attractions, roughly two thirds of traffic that does click out on the bot really wants more information about some local attraction. And now we'll jump into the system behind it. So this is again, another slide that should have put together, which I think really captures what we're doing very, very well.
+
+So we get all the Mindtrip chat transcripts. We pull those into our data warehouse, which is BigQuery, we're at Google Cloud Platform Shop. We also pull in information from our Google analytics into our BigQuery session. And we do a lot of magic here behind the scenes and data engineering work that we'll kind of talk about quickly to match up the chat transcripts with the Google analytics user session where possible.
+
+And that really brings structure to our unstructured data, right? What we're really trying to do here is take a huge volume of unstruct ured text data provided by the users, provided by the chat bot, and understand what's going on . Well, one way to do that is to impose a structure on it. And we'll talk about how we do that.
+
+Our methodology, and this is sort of just a very quick overview, we reprocess the chat transcripts that come in. We put them in a format that lets us feed them to a large language model to analyze. We actually use Gemini Flash 2.5 model. The 2.5 is going to be retired in a month or so.
+
+We'll probably switch over to Gemini 3. You could use any model that you like. For us , we chose this because it is a native Google product and easy to implement within BigQuery, Google's data warehouse that we use. I'll show you the prompt that we use and how we go through it.
+
+But when we get back the response from the chat bot, I'm sorry, from the large language model, the Gemini model, there's a little bit of work that we need to do to post process to make sure that everything is sort of normalized. Then we arrange all the topic tags. So we asked the LLM tag each conversation with topics. And then we organize all those topics and we're able to look at what topics are trending in a particular market.
+
+We're by a particular marketing channel. Only pull out specific chat quotations, as I said before, and every day in this rungs and all new conversations are analyzed and put into a table for reporting purposes and then we're able to report that out sort of on a monthly basis. This is what it looks like. So I'm going to assume most people have been here, but I'm going to quickly go and actually flip over to the American beautiful site.
+
+You've all seen this picture. I just want to make it clear. We don't actually have a team of people sitting at Mission Control and analyzing the chat transcripts all the time, but we do have an inside wizard in case you're wondering. So, back to the beautiful, I'm sure you've all seen this.
+
+If you click on any of these pull to action buttons with the little magic wand icon, it will pre prompt the chat button, right? So I clicked on call to action button and where to today, right? So outdoor experiences, this is a prompt that's associated with this button that I clicked on. And this is the bot's response.
+
+How does this work? Well, the American beautiful website and visit the USA, I use the two interchangeably since they are kind of all one website now. It's a WordPress powered website. Mindtrip, the chat bot is powered on their own servers.
+
+And we have an iframe here. So all of this content is hitting Mindtrip directly and then being provided to us to display to the user in this I think whenever you do anything and interact with this, but whether you click on a suggested next prompt that passes it through the iframe window back to Mindtrip servers, they do their processing the bot response. And what they do is when they pass us some Google Analytics information, custom events, that they pass through this iframe window and that we catch. So Google Tag Manager is how we've set up all the tagging on our site.
+
+And you can see that there are any number of things we're tracking on our site that are standard Google events and then custom events we 've created. So for example, anytime somebody clicks on one of these chat open buttons like I just did, there's an event that gets fired into our Google Analytics stream. Well, Mindtrip also has all of these events that help us understand when somebody's interacting with the chat bot. And those get pushed into the Google data layer and then caught by our container.
+
+So I'm assuming most of you are using Google Analytics, you're probably seeing Google Analytics in the native UI, which is certainly something that you can use. So in this case, what we're looking at is all the different event names that get pushed into the Google Analytics layer. And if we look at this one is by page. So we can see how many for events are firing.
+
+These happen to be chat initiation events are firing on the different web pages here. The challenge for also using standard Google Analytics, there's a couple of things. So number one is you can see that these are the different page paths that we have here. The slash is the home page.
+
+So this is the American the Beautiful dot com page that you end up with where the VisitTheUSA.com home page. This right here, and this is back to Chris Ellison's question about languages. This is also the home page, but this is the home page in Spanish. Well, Google doesn't realize that these are the same pages.
+
+So these statistics are not aggregated if you just go to Google Analytics native. This is the Japanese version of the same page. That's a problem for us. The other challenge is the Google Analytics UI only allows 14 months of history .
+
+Well, we really like that. So that's why we put everything in BigQuery. BigQuery, not to be scary. This is BigQuery.
+
+This is Brand USA's live real time data stream for Google Analytics events. So everything that's happening on the the back end of the website right now is just showing up right here. If we just refresh this query, you'll see, you'll see it spin for a second. And then all this data comes.
+
+Now, what are we looking at? These are the actual events that are being generated in real time on the website. So there's an event timestamp. There's a user pseudo ID, which is a cookie that Google sends in your browser.
+
+And that's how we know you're you, but we don't know you're actually you. We just know that you're that's a browser. And using this, this is a page view event, right? And these are all the parameters associated with the page.
+
+Now, what's interesting is, and this is the key part, if we look at just Mindtrip events, all I'm doing is refreshing now. I've uncommented this line that's going to filter event names that only have Mindtrip in them. And we'll see that this is an embedded widget open event. That is what happens when somebody clicks on the button on the side of the page and the Mindtrip widget comes up.
+
+I'm looking for different type of event. So, and it's chat talk will be you chat page message. What I'm looking for is Mindtrip chat ID. So in this event parameter, there's a Mindtrip chat ID.
+
+So every time a new chat is initiating with Mindtrip, there's a unique ID assigned to it. And you can see that if we look on the back end of Mindtrip, so if you log in to Mindtrip and go to the dashboard, and you can look at chats, these are chats for June, you can see that there is a chat ID associated with each of these. And this is what this is how the magic happens, right? So what have I shown you?
+
+Over here, the Google Analytics stream, there is a chat ID associated with this user session. That chat ID can now be matched up with the chat ID that Mindtrip is providing in the chat transcripts. And that's sort of where the key, the magic happens, right? I'm going to pause there for just a second.
+
+I've gotten a little technical. Is everybody following along? Is anybody sleeping? Are there any questions?
+
+All right. So what do we do with all this? Well, Mindtrip is very, very kind to be able to push chat transcripts to us every night. They drop them on that Google Cloud storage bucket for us so you can see all these files come in.
+
+And this is basically yesterday's chat transcripts. We bring them into our BigQuery instance. And I won't get too heavy on the code, but I will show you just very quickly sort of how we combine all these things together. We take the Google Analytics events, we group them all into sessions.
+
+So whenever somebody comes to a website, a session starts, and all the events that happen during that session, page views, the scrolls, the map interactions, interactions with the bot, each one of those events is part of that unique session until somebody leaves the site for 30 minutes, closes your browser, and then their session ends. But there is no actual end time to a session. There's no event that happens. So Google will, you know, basically call a session after 30 minutes of inactivity.
+
+But for us, what happens is if somebody opens and closes the chat window multiple times, there might be multiple different chat IDs associated with a Google Analytics session. So in order to match them up, we basically saying that a session ends when a new session starts or the current time. And then any of the chat IDs that occur within that session, we look at the message timestamp, and we put it in the correct session. That's a very technical way in saying that what we get to is this.
+
+So at the end of the day, after we do all of that magic, and we assign each of the chat IDs into a Google Analytics session, we get this. This is the Google session ID, the chat ID that Mindtrip gave us, the message ID . So individual messages also have IDs. The timestamp it happened, whether this was a customer message or a bot message.
+
+And then here's the full transcript. Because we've now matched up the transcript to the Google session ID, we can do things like count the number of messages that you hear actually sent to the number of messages a bot sent along they've spent. And you start to get really interesting website metrics. Right.
+
+So here, we can now look at these are sessions. So the number of sessions that entered the VisitTheUSA.com site via a paid social channel during this time period was just over three million engaged. This is a standard Google metric. This is somebody who spoke at least 10 seconds of engaged time on site or clicked on more than one page.
+
+But 15% of these three million sessions were engaged. But then we've defined our own metric called an action session, which I mentioned earlier. And the action session is basically all saying, great, we're not looking for passive engagement metrics. We only want to know when somebody is actively seeking information, clicking on something, asking a chat box for information.
+
+This is different than just spending 10 seconds on site. And you can see that the action session is a little bit lower. But I can tell you that the action session engagement rate with the AI is much higher than just a standard engaged session. AI interaction is any time during a session, somebody has actually interacted at least once with the bot.
+
+And we call that our AI engagement rate. And you can see that this varies by channel quite a bit. And then AI adoption is a custom metric that we've come up with as well. And this is if somebody's gone at least two rounds of chat with the bot.
+
+And the reason we do that is because, sorry, if you've just gone and opened the bot using one of these prompts, that's the user sending a message, right? So clicking on any of these buttons is a seated prompt that looks like a user prompt to us. And if somebody clicks on this, and then sees the window and then closes it, that's one round of conversation, which is, hey, great, somebody is engaged with the bot. They didn't necessarily have a deep engagement with the bot, but they did engage with it.
+
+If somebody clicks, that's one round , right? You've clicked. You've seen that this prompt has responded. And then if you were to do a second round, to us, not saying you've now adopted AI, but as something useful and interesting.
+
+So all of our metrics going forward that we'll discuss throughout the rest of this presentation are based on users who've had two rounds of chat conversations with the bot. And we were able to match them up with their Google and accessions so that we have any permission to use those metrics. And B, that we can have a comprehensive understanding of the site's names that a user had when they came to our site. All right, let's see.
+
+We're going to buy it. So I'm going to take a quick look. I'm going to show you back in my presentation. All right, so we might bet this.
+
+These are the chat transcripts. And then how do we analyze the transcripts? Because I imagine this is what most of you have tuned in for. And this is the really interesting part of the work that we do.
+
+And this is the AI portion that really fits in with our agents of change seminar series. This is a really complex graphic that basically just shows all the pieces of what we do to analyze the chat transcript text. We combine it with the Google Analytics sessions as I showed you, and then pre-format the chat transcripts with the Google Analytics information in a way that is usable by the bot, readable by a bot. And then we have, sorry, not the bot, the large language model that we use.
+
+And then we have the large language model analyzed each one of the chat transcripts individually, and it pulls out all those pieces of information that make it really useful for us. So we have it flag specific topics of the conversation. We look at specific call outs. This is the LLM prompt.
+
+So we'll go through this quickly, but I'm going to show you the full prompt because I think that's much more interesting. We kind of go through it a little bit. All right, actually built all of this using Claude Code, which made things a lot faster in many ways. And this was actually the prompt that we pass each time we analyze a chat transcript.
+
+So we asked Google Gemini, first we tell it, yeah, we're going to analyze this conversation, and we want to turn it into structured JSON. What is JSON? JSON stands for JavaScript Object notation. It is just a structured format that works really well for us program matically to then, you know, see the response.
+
+It's basically key value pairs typically. So only return valid JSON, start the braces that define something as a JSON string, and, you know, only populate things when there's actually something to populate. We tell it extract structured shields first, and then we want everything captured in the appropriate shield. So what is this?
+
+Again, this is us bringing structured to unstructured data. We wanted to look for things like five-day itinerary, you know, week-long trip, right? This is how we get those trip duration insights. We want to look for specific dates if they're mentioned.
+
+If not, we want to know months. We want to know days. Seasonality is better than nothing, right? If somebody's planning a summer trip, then we can sort of define what summary is.
+
+So here we've said, summer is June, July, and August, just to normalize every same thing for party composition. So we're sending a bunch of flags. I want to know if somebody mentioned family travel, then to me, this is, yes, this is a family travel conversation, right? It could be more than one.
+
+They might mention different trips in one chat conversation, right? Like, there are many different ways some of these flags could be set, but then it helps us understand easily slice by people who are looking at solo travelers versus family travelers, and then we could find interesting insights based on that. Budget, did they mention anything about budget or the purpose of the trip, right? Are they celebrating something?
+
+Are they, is it a leisure trip? Special needs. We're really interested in understanding if somebody is looking for information about, you know, disabilities, you know, do we need wheelchair access? Is this something that we want to know?
+
+Beside entry requirements, obviously very important to Brand USA with our new campaign, right? We also want to know about safety concerns or political violence, anything that people are asking about, and that will allow us to flag those conversations, not only to understand how many people are asking about it, but to ensure that our bot is responding appropriately. And this is a process that I know Dan Rosenbaum has talked about quite a bit, and so these other webinars, we red team the bot all the time, which is fantastic. It's a great way for us to go and try to get the bot to say things we don't want it to say so that we can pass that feedback to mine ship, and that process has been fantastic at occasionally catching things, and the team at mine ship has been great about making tweaks to fix that.
+
+And then lastly, we asked about customer-stated trip parameters, any of the things that we can find here for any of those explicit booleans, right, that we set, but also just, you know, giving instructions to the bot on how it analyzes this conversation, and trying to avoid pitfalls, because language might be similar, but have different meanings sometimes, right, accessibility can be different things. So when I first set up this prompt, I did not give it explicit instructions about what accessibility means, because humans generally would know that we're talking about someone dealing with maybe mobility issues, or blindness, or deafness, or some other condition that would warrant assistance, but a number of conversations came back as flagging accessibility needs, because somebody asked if the scenic overlook was accessible from a particular road. So lots of little things about when you build a prompt like this for a large language model, we need to be very careful. And then thematic tags.
+
+So this is where we're asking the bot to create two to five tags that discover the topics the customer asked about or expressed interest in. What we find is that the signal to noise ratio to a certain extent in these conversations is a little bit of a challenge. So a lot of what we're interested in is what the customer is asking, what the customer needs, but a lot of times those sentences are relatively short, and the bot produces a lot of text that, you know, is often giving many options, or, you know, trying to narrow things down. And that's fantastic.
+
+But a lot of times when we're looking at intent, we want to look at what the customer side of the customer side of the conversation is. We also look at what the bot mentioned, right? So when we do this tagging for topics analysis, we look at both sides separately. And we give it some rules about how to structure all of this and put it all together.
+
+So this is the main prompt that we run. What does that look like? Well, we can put that into a table. And basically, you can see they have like the chat ID.
+
+And then here's a summary of the actual conversation that was had. And then just a couple of the fields you can kind of see here, so like customer stated destinations in this conversation , the customer was explicitly asking about Boston. And man, this is includes children. Well, they're going to send way, but they're not taking the kids.
+
+So this is kind of what comes out of all that analysis from the bot. And now we have a structured table that we can handle, which is where all the really fun stuff comes from. You'll see some of these are repeated. This is just an artifact of the display here.
+
+It's because Looker Studio doesn't handle or he's very well. So really, all of these places are associated with the same chat conversation, right? It's kind of a long line for that. But that is how we get there.
+
+And then let's see. So once we have all of that, we have all these chat transcripts. Now, now comes the fun part of assembling it and trying to understand some meaning. So there's a couple of ways we do that.
+
+Oh, this is just a boost processing issue. We'll talk about that in a second. But let me show you this. So this is the standard way in which in which data scientists have long analyzed conversations using a natural language processing technique called topic modeling.
+
+There's many techniques you can use. This is one that's really kind of interesting. This is a statistical based and machine learning based approach. And actually, I will show you the actual model that we built.
+
+What we did here was take all of those summaries, right? And here you can see that's exactly what we're looking at. And we use the process called topic modeling, which is there are different algorithms for it. They take all of the text, they tokenize it, and then they group things together when they're semantically similar, right?
+
+So language that themes the same, uses some of the same words. This is sort of the elementary beginnings of where large language models sort of do now as a matter of course, but a few years ago in graduate school, this was sort of the state of the art topic, state of the art way to analyze chat conversations or text in general. If we filter out a few of these nodes that can't be, couldn't be classified, you'll see very, very clean node structures here. And all these connections in between, all these lines in between, represent where there are strong connections between different types of different conversations.
+
+This cluster up here, this purple stuff, these are all world world cup training conversations that are happening. And what's really interesting is you can kind of see how they're connected to each other even across different countries. But then you can see they're connected in some small part to these pink dots, which is a different topic altogether. It's music festivals and nightlife.
+
+So this is one way to derive really interesting insights, what you can take from this is world cup trip planners, regardless of what country they were in. Often, also had conversations while music festivals and nightlife, right? People planning trips here for the world cup back in January, weren't interested just in going to the soccer patches. They also wanted to go experience other things that were happening in and around those matches while we were here.
+
+And you can see that sort of thing all over the place, right? Look like this is people looking at East Coast multi-city itineraries. And that's related to Boston and New England, which kind of makes a certain amount of sets because they are on the East Coast. And you can see that's connected them to Mid Atlantic history and food.
+
+And you can start to really suss out some really interesting connections here. You can also slice this by marking and you can highlight specific clusters if you want. What are the challenges with this? Well, it's computationally expensive, which just means that it takes a lot of processing power to kind of get this.
+
+This is just one love to check conversation, not even a particularly large love for chat conversations. But this doesn't load very quickly. I pre- lorate it, so we wouldn't have to sit here and read. But clustering methodology clusters are unstable.
+
+So if we add new chat conversations to this and then run the clustering algorithm again, some of these conversations might move over here, et cetera, which makes it really difficult to compare across time, while things are changing and evolving. And all these clusters, these names, these all have to be figured out by a human, right? Like these clusters didn't come with these names, you have to go and examine what each cluster looks like. I used Claude to help me do that, you sure can.
+
+But what I wanted to come up with was a better way or a different way to take advantage of large language models to do this instead of this standard clustering technique. And so what I did was come up with all those tags. We rolled them up into things, right? So obviously, there's a lot of trip planning.
+
+There's conversations that are happening around destinations, natured outdoors. These are sort of the top level conversations that are happening. And you see there are subcategories, right? So within trip planning, there are several subcategories, or I guess national parks should be a better one.
+
+Within national parks, there are things like scenic drives and overlooks, road trips, natural wonders. And what we do is look at the number of conversations, which subcategory A and subcategory B both coexist. And this gives us a very similar grouping as what the clustering did. So I did some analysis in roughly two thirds of the groups where conversations could be identified by two different subcategories mapped almost perfectly, or at least within 90% to the clustering methodology.
+
+What is that? That's a long-winded way of me saying, I think this methodology is scientifically valid, right? Because it maps very cleanly to something that has been used by statisticians and data scientists for many years now, and it sort of held up as state-of-the-art. So all these tags that the large language model has analyzed from the chat conversation that rolled up into these categories, and then we look at where these categories coexist.
+
+And you can kind of see like, okay, fine. Here is national parks and scenic drives on their eyes over time, and then it's all lost, and you can see sort of which topics are going up, or we're going down at an end. And then we get to sort of some of the same traveler profile information that we got to agree. When I'm gonna pause there again, how are we doing?
+
+I just wanted to point out that one of the reasons you liked the topics versus the clustering was the ability to track changes over time, right? Yes, absolutely. It's not that you can't do it with clustering, but conversations might actually get re-clustered into different buckets, right, different closures when you do those algorithms. And it's because there might be new conversations that are semantically similar to old conversations more sem antically similar than they were in their previous clusters.
+
+So every time you run that algorithm, it could change. For us, we're managing these tags, and we can cultivate them. And it's actually really kind of interesting. If you look at the normalization process, so one of the challenges we have with tagging is that we're using a large language model, and of course, it's called generative AI for review, right?
+
+It's not deterministic. It means that the tag created by the LLM when we run it, like this one is national parks, right? Well, sometimes it would tag a conversation and say national parks. Sometimes it might say national park.
+
+Sometimes it might say, you know, you ask national park. All of those two human mean the same thing, but when you're trying to run an analysis, when you're trying to group things, those show up as three different tags. So we have a normalization process that we go through after every, I don't know, I usually run this every couple of weeks, whenever I sit down to do any sort of analysis. The first thing I do is look at all the new raw tags that were generated by the LLM in conversation analysis that happens every night.
+
+And then I sit down and I have one look at all the raw tags that come in and how they should be normalized into sort of the existing tags. We don't want to just create new tags really really, certainly when they overlap, but you also don't want to have too few tags that, you know, you're only rolling things up to the top level category, and then you really lose a lot of the detail and nuance of your ins. So it's a little bit of an art, a little bit of a science, a little bit of a pink cloth, help me figure out what the best way to do this is. And we consistently update these tags.
+
+So we have the initial cat transcript analysis that was done by the LLM, we can always go back and, you know, rerun that analysis if we want to. But the nice thing is these tags are stable over time. So I don't know about a lot at you, but please ask any questions or anything you're curious about. Well, I see we have 10 minutes left for this.
+
+So I don't know if you have more presentation to go through, or if you want to give people some confidence on how would you get started doing this? Yeah, I think that's a great place to transition to. I think if you wanted to get started doing this, right? Number one, Mindtrip already provides you with some really interesting transcript insights that if you do roll out Mindtrip, for instance, on your site , right?
+
+Like, this is a great place to start. And they've been providing really interesting dashboard metrics. What they don't have insight into is your Google Analytics stream. And the ability to match up these conversations to your Google Analytics stream and then understand, great, somebody came to our site from one of our paid promotions, right, one of our paid media promotions, and then they had this conversation with the chat line.
+
+That's really where I think that the top level insights, the things that that really help us understand actionably how we can take these insights and tweak our marketing, right? If you want to do that, I think it's difficult to do and go low Analytics alone in the UI. I know that it's not the best answer to hear, but what's really artists to combine data sets in this UI. So BigQuery is relatively easy since it's all Google native.
+
+I think that that's really the best place to combine things using the Mindtrip chat ID. You can do this in spreadsheets for small numbers of small numbers and chat conversations, but to do this on a scale that we see with the volume of sessions we see every month on VisitTheUSA.com. I see Michelle came off camera. Did you have something that you wanted to add?
+
+No, okay. I think you could also, you know, the other thing you can do is you can export the transcripts from Mindtrip directly. So you could take these out and you could put them into a large language model, whether that's water, whatever your LLM of choice is and ask it to do some of the similar type of analysis, right? So that's another approach you could take.
+
+The challenge that you have with that is context windows, right? These chat conversations can be pretty large and they're getting better all the time, whatever large language model you're using, but you know, if you put more than a million or a couple million characters of context, that can be difficult. So you might, you might want to have, you might want to have Claude, for example, batch these, right? So you could have it read the file and do so many conversations at a time and then log it's results out to a file and do that in batches all the way through.
+
+If you wanted to give it a similar prompt like we have to summarize a conversation to tag the conversation with topics, that prompt, you know, certainly would get you started, then it could write that out to a file in batches and then it could analyze the funnel, right? So you would do this in a couple of stages. And that's actually where we started, you know, experimenting with what's a large language model going to do with this much data. I actually started trying to analyze transcripts in batches and what I found was I was running up against context windows and it just really was either timing out or in some cases just not giving you really good analysis.
+
+And what I found was doing them one at a time was the best approach in this scale. But I think if you're just getting started, it would be a good place. I guess the only thing I would add, Matt, is on the Mindtrip site anyways, we 're continuing to expand. I mean, this is the area that reporting standpoint makes the most sense for us.
+
+So we'll continue to expand how do we help, you know, mine the chats and provide insights and what you can do with that. But when we won't have, we won't ever have your individual context to the point you were making before. So how you want to connect that with what the consumer is doing in other parts of the website and what, you know, campaigns that came from and all that stuff. But, you know, we do like to work with folks and keep evolving the type of reporting capabilities that they have.
+
+Yeah, absolutely. We've appreciated in all the work that you've put into helping us do those analysis too, right? Like this has been a challenge for all of us and it's been really interesting to see how things are evolving. I think the other thing I've mentioned is just kind of where we're going from here.
+
+The bot does mention places. And I know that particularly our DMO partners are really interested in when their places are being mentioned and when there's conversations are happening, we have been working very hard behind the scenes to try to really build out all the infrastructure we need to support robust reporting. There are a few challenges there. What is volume?
+
+So some places get a lot of mention and a lot of volume and some of our larger DMO partners certainly might have the volume to support interesting analytics there . But some of our smaller ones might not yet have that volume to really make that actionable. Number two is, you know, place data is a little bit messy. So we are working on how we map place mentions or places in general to partners and that's an internal project that we have ongoing.
+
+But that's definitely sort of the next step that is a focus for us in the very near-generation sort of getting a handle on all these place mentions as well. And I think that's more or less what I've had. I 'm going to stop screen sharing so we can park anymore. But I hope folks have found this interesting and helpful.
+
+I know I got a little bit technical at times so hopefully I didn't lose folks but do feel free to reach out if you have follow up questions. We love being able to build the public and sort of pull back the curtain and share particularly with our DMO partners sort of how we're approaching some of these things and what we're doing. I'd love to hear from other DMOs who are implementing this or have implemented similar things and kind of see what you're doing. So definitely feel free to connect and share with us.
+
+Yes, I'm excited to see how many members of the research community join this call. So certainly your feedback and what you are doing on your end. I'm always really interested in hearing. Absolutely.
+
+Any final questions? I think what I like about all the techniques that you've put together here, Matt, is that it's we love obviously using it with Mindtrip but it is a bit agnostic in terms of it's just about wherever you are able to get that chat data which is such interesting first party data we never had access to before in our roles and then to be able to apply the various techniques that you've used in order to understand what it is we're learning about. Our site visitors is really it's been really interesting to see. Really helpful.
+
+It's a real nice supplement to some of the other data sources we have. So we can look at our search and booking data to kind of understand what people are searching or where they might want to go but to have this additional layer of context beyond just where they want to go or how many people are traveling, what they want to do while they're there, what other things they might be interested in. It really helps us understand how people are using our site and whether our marketing has lined up in the way that we would expect if someone came to our site because they click from a luxury segmented campaign ad and then they talked about budget things well maybe lots of indication that there is a little bit of a mess in our targeting right when our messaging still work perhaps. So those are the types of these sites that I think are really really interesting and useful from a directly similar marketing perspective and that's why it's so critical for us to be able to match those different data sources up and really get those insights that we would otherwise be missing.
+
+So. And how long did it take you to get to this level of sophistication? Timothy Weber is asking. Yeah, that's a great question.
+
+I think I started well we started building the AmericaTheBeautiful.com website about six weeks before it actually launched at IPW from the beginning early May. Right from for mid-june launch which was a little bit nuts. The Miles team working miles flat out on that. And they do Mindtrip.
+
+Right, we were we were building the site and I was I was working on building out the analytics. So we had the basic site analytics at launch so the types of things you would expect should page use in session if it's what not. Laring in the chat bot data probably took a couple more months of really, you know, integrating, refining, building the methodology to get there and then so by the end of the year we were up and running with the general reporting methodology. So I've continued to refine this since say December.
+
+What I think around January was was when we really started having enough history to build out the full picture. So it took me a few weeks. I'm a fairly technical person, so take that for what it's worth. All right, any final questions because we are at time.
+
+All right, thank you everybody for joining the webinar and`,
+  },
 }
 
 export const webinarIds = Object.keys(webinarData)
@@ -3362,6 +3752,15 @@ export interface SoftwareApplicationMention {
 }
 
 export const webinarMentions: Record<string, SoftwareApplicationMention[]> = {
+  'chat-data-to-travel-intelligence': [
+    { '@type': 'SoftwareApplication', name: 'Mindtrip', applicationCategory: 'AI Itinerary Builder', url: 'https://mindtrip.ai' },
+    { '@type': 'SoftwareApplication', name: 'Google Analytics 4', applicationCategory: 'Web Analytics', url: 'https://analytics.google.com' },
+    { '@type': 'SoftwareApplication', name: 'Google BigQuery', applicationCategory: 'Data Warehouse', url: 'https://cloud.google.com/bigquery' },
+    { '@type': 'SoftwareApplication', name: 'Google Gemini', applicationCategory: 'AI Assistant', url: 'https://gemini.google.com' },
+    { '@type': 'SoftwareApplication', name: 'Claude Code', applicationCategory: 'AI Development Tool', url: 'https://claude.ai' },
+    { '@type': 'SoftwareApplication', name: 'Looker Studio', applicationCategory: 'Data Visualization', url: 'https://lookerstudio.google.com' },
+    { '@type': 'SoftwareApplication', name: 'Google Tag Manager', applicationCategory: 'Tag Management', url: 'https://tagmanager.google.com' },
+  ],
   'introduction-to-vibe-coding': [
     { '@type': 'SoftwareApplication', name: 'Lovable.dev', applicationCategory: 'Website Builder', url: 'https://lovable.dev' },
     { '@type': 'SoftwareApplication', name: 'Replit', applicationCategory: 'Website Builder', url: 'https://replit.com' },

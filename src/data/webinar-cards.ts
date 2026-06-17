@@ -17,6 +17,7 @@ const cardOrder = [
   'ai-for-presentations',
   'introduction-to-vibe-coding',
   'managing-the-rfp-process',
+  'chat-data-to-travel-intelligence',
 ]
 
 export const webinarCards = cardOrder.map((id) => {
