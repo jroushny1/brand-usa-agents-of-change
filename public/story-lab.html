@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Story Lab — The Periodic Table of Travel Storytelling | Brand USA</title>
+<link rel="icon" href="/favicon.ico" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Oswald:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#101F36; --ink2:#182A48; --ink3:#213A5E;
+    --parch:#F4EFE3; --parch-dim:#9DB0C6; --line:#2B466F;
+    --why:#E07C92; --stakes:#E0A24A; --sensory:#56BEB2; --journey:#8197D6;
+    --human:#E08A63; --friction:#B488CC; --transform:#E6C24E; --noble:#6E7A8A;
+    --dest:#A8BA6A; --advisor:#56AECC;
+    --accent:#00A9E0;
+    --disp:"Oswald",Impact,system-ui,sans-serif; --ui:"Montserrat",system-ui,sans-serif; --mono:"Space Mono",monospace;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    background:
+      radial-gradient(1200px 600px at 80% -10%, rgba(0,169,224,.07), transparent 60%),
+      radial-gradient(900px 500px at -10% 110%, rgba(0,84,159,.10), transparent 60%),
+      var(--ink);
+    color:var(--parch); font-family:var(--ui);
+    -webkit-font-smoothing:antialiased; line-height:1.45;
+  }
+  .wrap{max-width:1280px; margin:0 auto; padding:34px 22px 80px}
+  header.top{display:flex; flex-wrap:wrap; gap:20px 28px; align-items:flex-end; justify-content:space-between; border-bottom:1px solid var(--line); padding-bottom:24px}
+  .logo{height:62px; width:auto; display:block; margin-bottom:13px}
+  .brandmark{font-family:var(--mono); font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--parch-dim)}
+  h1{font-family:var(--disp); font-weight:600; font-size:clamp(32px,5.2vw,56px); line-height:1.04; margin:6px 0 0; letter-spacing:.005em; text-transform:uppercase}
+  .thesis{font-family:var(--ui); font-weight:400; font-style:italic; font-size:clamp(14px,1.7vw,18px); color:var(--parch-dim); margin-top:13px; max-width:48ch}
+  .thesis b{color:var(--parch); font-style:normal; font-weight:600}
+
+  /* mode toggle */
+  .modes{display:inline-flex; background:var(--ink2); border:1px solid var(--line); border-radius:999px; padding:4px}
+  .modes button{font-family:var(--ui); font-weight:500; font-size:13px; color:var(--parch-dim); background:none; border:0; padding:9px 16px; border-radius:999px; cursor:pointer; transition:color .2s, background .2s}
+  .modes button[aria-pressed="true"]{background:var(--parch); color:var(--ink)}
+  .modes button:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+
+  .layout{display:grid; grid-template-columns:1fr 360px; gap:28px; margin-top:30px}
+  @media(max-width:980px){ .layout{grid-template-columns:1fr} }
+
+  /* families */
+  .hall{display:flex; flex-wrap:wrap; gap:18px; align-content:flex-start}
+  .family{flex:1 1 280px; min-width:240px; background:linear-gradient(180deg, rgba(255,255,255,.025), transparent 40%); border:1px solid var(--line); border-radius:14px; padding:13px 13px 15px}
+  .family.wing{flex-basis:100%}
+  .fam-head{display:flex; align-items:baseline; gap:8px; margin:2px 2px 11px}
+  .fam-dot{width:9px; height:9px; border-radius:2px; flex:none; transform:translateY(1px)}
+  .fam-name{font-weight:700; font-size:12.5px; letter-spacing:.04em; text-transform:uppercase}
+  .fam-sub{font-family:var(--mono); font-size:10px; color:var(--parch-dim); margin-left:auto; letter-spacing:.02em}
+  .tiles{display:grid; grid-template-columns:repeat(auto-fill,minmax(60px,1fr)); gap:7px}
+
+  .tile{position:relative; aspect-ratio:1/1.14; border-radius:9px; border:1px solid color-mix(in srgb, var(--fc) 38%, transparent); background:linear-gradient(165deg, color-mix(in srgb, var(--fc) 17%, var(--ink2)), var(--ink2)); color:var(--parch); cursor:pointer; padding:6px 5px; text-align:left; font-family:var(--ui); display:flex; flex-direction:column; justify-content:space-between; transition:transform .16s ease, box-shadow .2s ease, border-color .2s, opacity .25s, filter .25s; box-shadow:0 0 calc(var(--glow)*1px) rgba(0,0,0,0); }
+  .tile .sym{font-family:var(--disp); font-weight:600; font-size:20px; color:var(--fc); line-height:1; letter-spacing:.02em}
+  .tile .r{position:absolute; top:5px; right:6px; font-family:var(--mono); font-size:9.5px; color:var(--parch-dim)}
+  .tile .nm{font-size:9.5px; line-height:1.12; color:var(--parch-dim); font-weight:500}
+  .tile .meter{height:2px; border-radius:2px; background:rgba(255,255,255,.08); margin-top:4px; overflow:hidden}
+  .tile .meter i{display:block; height:100%; background:var(--fc); width:calc(var(--rp)*1%)}
+  .tile:hover{transform:translateY(-3px); border-color:var(--fc); box-shadow:0 6px 22px color-mix(in srgb, var(--fc) calc(var(--glow)*1%), transparent)}
+  .tile:focus-visible{outline:2px solid var(--fc); outline-offset:2px}
+  .tile[aria-pressed="true"]{border-color:var(--fc); box-shadow:0 0 0 2px color-mix(in srgb, var(--fc) 70%, transparent), 0 6px 22px color-mix(in srgb, var(--fc) 40%, transparent)}
+
+  /* noble gases: inert, dead on the board */
+  .family.noble{border-style:dashed}
+  .family.noble .tile{filter:grayscale(1) brightness(.82); opacity:.62}
+  .family.noble .tile:hover{transform:none; box-shadow:none; opacity:.78}
+  .family.noble .fam-sub{color:var(--noble)}
+
+  /* diagnostic states */
+  .hall.scanned .tile{opacity:.2; filter:grayscale(.6)}
+  .hall.scanned .tile.present{opacity:1; filter:none; box-shadow:0 0 0 2px color-mix(in srgb,var(--fc) 65%,transparent), 0 6px 26px color-mix(in srgb,var(--fc) 45%,transparent)}
+  .hall.scanned .tile.missing{opacity:.85; filter:none; border-style:dashed; border-color:var(--fc); animation:want 1.8s ease-in-out infinite}
+  @keyframes want{0%,100%{box-shadow:0 0 0 1px color-mix(in srgb,var(--fc) 30%,transparent)}50%{box-shadow:0 0 0 2px color-mix(in srgb,var(--fc) 60%,transparent)}}
+
+  /* console */
+  .console{align-self:start; position:sticky; top:18px; background:var(--ink2); border:1px solid var(--line); border-radius:16px; overflow:hidden}
+  @media(max-width:980px){ .console{position:static} }
+  .tabs{display:flex; border-bottom:1px solid var(--line)}
+  .tabs button{flex:1; background:none; border:0; color:var(--parch-dim); font-family:var(--ui); font-weight:500; font-size:13px; padding:14px 10px; cursor:pointer; letter-spacing:.02em}
+  .tabs button[aria-selected="true"]{color:var(--parch); box-shadow:inset 0 -2px 0 var(--accent)}
+  .tabs button:focus-visible{outline:2px solid var(--accent); outline-offset:-4px}
+  .panel{padding:18px}
+  .panel[hidden]{display:none}
+  .panel h2{font-family:var(--ui); text-transform:uppercase; letter-spacing:.06em; font-size:11px; color:var(--parch-dim); margin:0 0 6px; font-weight:700}
+  .panel p.lede{font-size:12.5px; color:var(--parch-dim); margin:0 0 14px}
+
+  .chips{display:flex; flex-wrap:wrap; gap:6px; min-height:30px; margin-bottom:12px}
+  .chip{font-family:var(--ui); font-size:12px; font-weight:500; padding:5px 9px; border-radius:999px; border:1px solid color-mix(in srgb,var(--fc) 50%,transparent); color:var(--parch); background:color-mix(in srgb,var(--fc) 14%,var(--ink3)); cursor:pointer; display:inline-flex; gap:6px; align-items:center}
+  .chip:hover{border-color:var(--fc)}
+  .chip .x{color:var(--parch-dim); font-weight:700}
+  .empty{font-size:12px; color:var(--parch-dim); font-style:italic; font-family:var(--ui)}
+
+  .reaction{font-family:var(--mono); font-size:10px; letter-spacing:.04em; text-transform:uppercase; color:var(--accent); margin:2px 0 10px; min-height:14px}
+  button.act{width:100%; font-family:var(--ui); font-weight:700; font-size:13px; letter-spacing:.02em; color:var(--ink); background:var(--accent); border:0; border-radius:10px; padding:13px; cursor:pointer; transition:filter .15s, opacity .2s}
+  button.act:hover{filter:brightness(1.06)}
+  button.act:disabled{opacity:.5; cursor:default}
+  button.act:focus-visible{outline:2px solid var(--parch); outline-offset:2px}
+  button.ghost{background:none; color:var(--parch-dim); border:1px solid var(--line); font-weight:500; margin-top:8px}
+  button.ghost:hover{color:var(--parch); border-color:var(--parch-dim)}
+
+  .out{margin-top:15px; border-top:1px solid var(--line); padding-top:15px; min-height:8px}
+  .hook{font-family:var(--ui); font-weight:400; font-style:italic; font-size:17px; line-height:1.4; color:var(--parch)}
+  .hook::before{content:"“"; color:var(--accent); margin-right:1px}
+  .hook::after{content:"”"; color:var(--accent); margin-left:1px}
+
+  textarea{width:100%; min-height:120px; resize:vertical; background:var(--ink); color:var(--parch); border:1px solid var(--line); border-radius:10px; padding:11px; font-family:var(--ui); font-size:13px; line-height:1.45; margin-bottom:10px}
+  textarea:focus-visible{outline:2px solid var(--accent); outline-offset:1px; border-color:var(--accent)}
+
+  .readout{margin-top:15px; border-top:1px solid var(--line); padding-top:15px}
+  .gauge{display:flex; align-items:baseline; gap:9px; margin-bottom:4px}
+  .gauge .big{font-family:var(--mono); font-weight:700; font-size:34px; color:var(--parch)}
+  .gauge .unit{font-family:var(--ui); font-size:12px; color:var(--parch-dim)}
+  .bar{height:7px; border-radius:7px; background:var(--ink3); overflow:hidden; margin:8px 0 14px}
+  .bar i{display:block; height:100%; background:linear-gradient(90deg,var(--sensory),var(--stakes),var(--why)); width:0; transition:width .7s ease}
+  .verdict{font-family:var(--ui); font-size:14px; line-height:1.45; color:var(--parch); margin-bottom:14px}
+  .rolabel{font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:var(--parch-dim); margin:0 0 6px; font-weight:700}
+  .term{font-family:var(--mono); font-size:11px; color:var(--noble); background:var(--ink3); border:1px solid var(--line); border-radius:6px; padding:3px 7px; display:inline-block; margin:0 5px 5px 0; text-decoration:line-through}
+
+  .err{font-size:12.5px; color:#F0A6A6; font-family:var(--ui); margin-top:10px}
+  .spin{display:inline-block; width:13px; height:13px; border:2px solid rgba(0,0,0,.25); border-top-color:var(--ink); border-radius:50%; animation:sp .7s linear infinite; vertical-align:-2px; margin-right:7px}
+  @keyframes sp{to{transform:rotate(360deg)}}
+
+  footer{margin-top:46px; border-top:1px solid var(--line); padding-top:18px; font-size:11.5px; color:var(--parch-dim); font-family:var(--mono); letter-spacing:.02em; line-height:1.7; display:flex; gap:20px; align-items:center; flex-wrap:wrap}
+  .foot-logo{height:46px; width:auto; flex:none}
+  footer b{color:var(--parch); font-weight:700}
+
+  /* chips (with editable label + remove) */
+  .chip-label{background:none; border:0; color:inherit; font:inherit; cursor:pointer; padding:0; text-align:left}
+  .chip-label:hover{text-decoration:underline}
+  .chip .x{background:none; border:0; cursor:pointer; color:var(--parch-dim); font-weight:700; font-size:14px; line-height:1; padding:0 0 0 2px}
+  .chip .x:hover{color:#F0A6A6}
+
+  /* element picker */
+  .scrim{position:fixed; inset:0; background:rgba(8,16,30,.6); z-index:40; opacity:0; pointer-events:none; transition:opacity .18s}
+  .scrim.on{opacity:1; pointer-events:auto}
+  .picker{position:fixed; z-index:50; width:min(340px,calc(100vw - 28px)); background:var(--ink3); border:1px solid var(--line); border-radius:14px; box-shadow:0 18px 50px rgba(0,0,0,.5); padding:16px; opacity:0; transform:translateY(6px) scale(.985); pointer-events:none; transition:opacity .16s, transform .16s}
+  .picker.on{opacity:1; transform:none; pointer-events:auto}
+  .picker .pk-name{font-family:var(--disp); font-weight:600; font-size:22px; color:var(--fc); line-height:1.1; text-transform:uppercase; letter-spacing:.01em}
+  .picker .pk-gloss{font-size:12.5px; color:var(--parch-dim); margin:5px 0 13px}
+  .picker .pk-label{font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:var(--parch-dim); margin:0 0 8px; font-weight:700}
+  .picker .pk-opts{display:flex; flex-wrap:wrap; gap:6px; margin-bottom:12px; max-height:172px; overflow:auto}
+  .picker .opt{font-family:var(--ui); font-size:12px; padding:6px 10px; border-radius:999px; border:1px solid color-mix(in srgb,var(--fc) 42%,transparent); background:color-mix(in srgb,var(--fc) 10%,transparent); color:var(--parch); cursor:pointer; text-align:left}
+  .picker .opt:hover{border-color:var(--fc); background:color-mix(in srgb,var(--fc) 22%,transparent)}
+  .picker input{width:100%; background:var(--ink); border:1px solid var(--line); border-radius:9px; padding:9px 10px; color:var(--parch); font-family:var(--ui); font-size:13px; margin-bottom:10px}
+  .picker input:focus-visible{outline:2px solid var(--fc); outline-offset:1px}
+  .picker .pk-row{display:flex; gap:8px}
+  .picker .pk-row button{flex:1; font-family:var(--ui); font-weight:600; font-size:12.5px; border-radius:9px; padding:10px; cursor:pointer; border:1px solid var(--line); background:none; color:var(--parch)}
+  .picker .pk-row button:hover{border-color:var(--parch-dim)}
+  .picker .pk-row .primary{background:var(--fc); border-color:var(--fc); color:var(--ink)}
+  .picker .pk-row .primary:hover{filter:brightness(1.06)}
+  .picker .pk-remove{color:#F0A6A6; border:0; background:none; font-family:var(--ui); font-size:12px; margin-top:9px; width:100%; cursor:pointer; padding:6px}
+  .picker .pk-remove:hover{text-decoration:underline}
+  @media(max-width:560px){ .picker{left:14px!important; right:14px!important; top:auto!important; bottom:14px!important; width:auto} }
+
+
+  @media(prefers-reduced-motion:reduce){*{animation:none!important; transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div>
+      <a href="/" aria-label="Brand USA — Agents of Change home"><img class="logo" src="/brandusa-wordmark-white.svg" alt="Brand USA" /></a>
+      <div class="brandmark">An instrument by Janette Roush · Agents of Change</div>
+      <h1>The Periodic Table of<br>Travel Storytelling</h1>
+      <p class="thesis">Every travel story is built from a finite set of elements. <b>The best storytelling reaches for the ones that react.</b></p>
+    </div>
+    <div class="modes" role="group" aria-label="Audience mode">
+      <button data-mode="both" aria-pressed="true">Both</button>
+      <button data-mode="dest" aria-pressed="false">Destination</button>
+      <button data-mode="advisor" aria-pressed="false">Advisor</button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <main>
+      <div class="hall" id="hall"></div>
+    </main>
+
+    <aside class="console">
+      <div class="tabs" role="tablist">
+        <button role="tab" id="tab-beaker" aria-selected="true" aria-controls="panel-beaker">The Beaker</button>
+        <button role="tab" id="tab-diag" aria-selected="false" aria-controls="panel-diag">The Diagnostic</button>
+      </div>
+
+      <section class="panel" id="panel-beaker" role="tabpanel" aria-labelledby="tab-beaker">
+        <h2>Combine elements</h2>
+        <p class="lede">Click a tile to choose a specific instance — a 50th birthday, the call to prayer, a missed train — then bond them into a story hook.</p>
+        <div class="chips" id="beaker"><span class="empty">Nothing in the beaker yet.</span></div>
+        <div class="reaction" id="reaction"></div>
+        <button class="act" id="gen">Generate a story hook</button>
+        <button class="act ghost" id="clearBeaker">Clear</button>
+        <div class="out" id="hookOut" aria-live="polite"></div>
+      </section>
+
+      <section class="panel" id="panel-diag" role="tabpanel" aria-labelledby="tab-diag" hidden>
+        <h2>Scan a pitch</h2>
+        <p class="lede">Paste destination copy or a trip description. The board shows what's present, what's missing, and how much of it is inert.</p>
+        <textarea id="copyIn" placeholder="e.g. Discover paradise on our once-in-a-lifetime curated journey through authentic, breathtaking landscapes…"></textarea>
+        <button class="act" id="scan">Scan copy</button>
+        <button class="act ghost" id="clearScan">Clear scan</button>
+        <div class="readout" id="diagOut" aria-live="polite"></div>
+      </section>
+    </aside>
+  </div>
+
+  <footer>
+    <img class="foot-logo" src="/brandusa-wordmark-white.svg" alt="Brand USA" />
+    <div>
+      <b>The Periodic Table of Travel Storytelling</b> — an original element set by Janette Roush / Agents of Change.<br>
+      Resonance (R) is an editorial estimate of how reliably an element holds a listener's attention. Tune to taste.
+    </div>
+  </footer>
+</div>
+
+<script>
+/* ---------- ELEMENT DATA (the build-ready dataset) ---------- */
+const FAMS = {
+  why:      {name:"The Why",            sub:"the internal engine",  var:"--why"},
+  stakes:   {name:"Stakes & Tension",   sub:"the drama",            var:"--stakes"},
+  sensory:  {name:"Sensory Anchors",    sub:"the concrete",         var:"--sensory"},
+  journey:  {name:"The Journey Shape",  sub:"structure",            var:"--journey"},
+  human:    {name:"Human Connection",   sub:"social capital",       var:"--human"},
+  friction: {name:"Contrast & Friction",sub:"the un-smooth",        var:"--friction"},
+  transform:{name:"Transformation",     sub:"the payoff",           var:"--transform"},
+  noble:    {name:"Noble Gases",        sub:"inert · reacts with nothing", var:"--noble"},
+  dest:     {name:"Destination Wing",   sub:"possibility & identity",var:"--dest"},
+  advisor:  {name:"Advisor Wing",       sub:"specificity & intimacy",var:"--advisor"},
+};
+
+const ELEMENTS = [
+  // The Why
+  {sym:"Wnd",name:"The Wound",fam:"why",r:8,gloss:"What they're escaping or healing."},
+  {sym:"Mil",name:"The Milestone",fam:"why",r:7,gloss:"The 50th, the anniversary, the divorce, the retirement."},
+  {sym:"Crv",name:"The Craving",fam:"why",r:7,gloss:"The secret want: to feel young, brave, unburdened."},
+  {sym:"Prm",name:"The Permission",fam:"why",r:6,gloss:"The trip as license to be someone else for a week."},
+  {sym:"Rnv",name:"The Reinvention",fam:"why",r:6,gloss:"Travel as the start of a different self."},
+  // Stakes & Tension
+  {sym:"Stk",name:"The Stakes",fam:"stakes",r:9,gloss:"What's lost if it doesn't land."},
+  {sym:"Clk",name:"The Ticking Clock",fam:"stakes",r:7,gloss:"Now or never — the knees, the kids, the years."},
+  {sym:"Dbt",name:"The Doubt",fam:"stakes",r:7,gloss:"“Can we still do this at our age?”"},
+  {sym:"Str",name:"The Stretch",fam:"stakes",r:6,gloss:"One step past the comfort zone."},
+  {sym:"Amd",name:"The Almost-Didn't",fam:"stakes",r:6,gloss:"It nearly never happened."},
+  // Sensory Anchors
+  {sym:"Smh",name:"The Smell",fam:"sensory",r:9,gloss:"The strongest memory hook there is."},
+  {sym:"Lgt",name:"The Light",fam:"sensory",r:8,gloss:"A specific golden hour, not “beautiful views.”"},
+  {sym:"Tst",name:"The Taste",fam:"sensory",r:8,gloss:"The one bite they'll chase forever."},
+  {sym:"Snd",name:"The Sound",fam:"sensory",r:7,gloss:"The noise that means the place."},
+  {sym:"Glm",name:"The First Glimpse",fam:"sensory",r:7,gloss:"The moment it comes into view."},
+  // Journey Shape
+  {sym:"Arr",name:"The Arrival",fam:"journey",r:8,gloss:"The arrival that rearranges you."},
+  {sym:"Trn",name:"The Turn",fam:"journey",r:8,gloss:"The moment it clicks."},
+  {sym:"Ret",name:"The Return",fam:"journey",r:7,gloss:"Coming home changed."},
+  {sym:"Dis",name:"The Disorientation",fam:"journey",r:6,gloss:"Lost, in the productive way."},
+  {sym:"Dep",name:"The Departure",fam:"journey",r:4,gloss:"Leaving the known behind."},
+  // Human Connection
+  {sym:"Loc",name:"The Local Witness",fam:"human",r:9,gloss:"The person who lives there and lets you in."},
+  {sym:"Kin",name:"The Stranger's Kindness",fam:"human",r:8,gloss:"Help you didn't earn and won't forget."},
+  {sym:"Cmp",name:"The Companion",fam:"human",r:8,gloss:"Who you're with rewrites the whole story."},
+  {sym:"Gde",name:"The Guide",fam:"human",r:7,gloss:"The one who knows the door."},
+  {sym:"Ins",name:"The Insider Door",fam:"human",r:6,gloss:"Access no one else could open."},
+  // Contrast & Friction
+  {sym:"Mis",name:"The Misadventure",fam:"friction",r:9,gloss:"It went wrong and became the story they tell forever."},
+  {sym:"Scl",name:"The Scale",fam:"friction",r:8,gloss:"The feeling of being gloriously small."},
+  {sym:"Jux",name:"The Juxtaposition",fam:"friction",r:7,gloss:"A linen tablecloth in the middle of nowhere."},
+  {sym:"Csk",name:"The Culture Shock",fam:"friction",r:6,gloss:"The world doesn't work the way you assumed."},
+  {sym:"Unx",name:"The Unexpected",fam:"friction",r:6,gloss:"The thing no itinerary promised."},
+  // Transformation
+  {sym:"New",name:"The New Self",fam:"transform",r:8,gloss:"Who they became by the end."},
+  {sym:"Rcl",name:"The Recalibration",fam:"transform",r:8,gloss:"Priorities quietly reordered."},
+  {sym:"Shf",name:"The Shift",fam:"transform",r:7,gloss:"Something moved that won't move back."},
+  {sym:"Nvr",name:"The “I'll Never Forget”",fam:"transform",r:7,gloss:"The line they'll repeat at dinner parties."},
+  {sym:"Svr",name:"The Souvenir",fam:"transform",r:6,gloss:"The object that actually means something."},
+  // Noble Gases (inert)
+  {sym:"Lux",name:"Luxury",fam:"noble",r:0,gloss:"Inert. Says nothing about what it feels like."},
+  {sym:"Btl",name:"Bucket List",fam:"noble",r:1,gloss:"Inert. A checklist is not a story."},
+  {sym:"Par",name:"Paradise",fam:"noble",r:0,gloss:"Inert. Everywhere and therefore nowhere."},
+  {sym:"Hdn",name:"Hidden Gem",fam:"noble",r:1,gloss:"Inert. Claimed by ten thousand listings."},
+  {sym:"Aut",name:"Authentic",fam:"noble",r:0,gloss:"Inert. The word that proves you weren't."},
+  {sym:"Cur",name:"Curated",fam:"noble",r:0,gloss:"Inert. Means “we chose things,” i.e. nothing."},
+  {sym:"Imm",name:"Immersive",fam:"noble",r:1,gloss:"Inert. Show the immersion; don't label it."},
+  {sym:"Bre",name:"Breathtaking",fam:"noble",r:0,gloss:"Inert. Describe the breath, not the adjective."},
+  {sym:"Unf",name:"Unforgettable",fam:"noble",r:0,gloss:"Inert. Memory is shown, never asserted."},
+  {sym:"Ocl",name:"Once-in-a-Lifetime",fam:"noble",r:0,gloss:"Inert. Pressure, not feeling."},
+  // Destination Wing
+  {sym:"Inv",name:"The Invitation",fam:"dest",r:8,gloss:"The you-shaped space left open in the story.",wing:"dest"},
+  {sym:"Cnt",name:"The Counter-Narrative",fam:"dest",r:8,gloss:"Fighting the stereotype, the “is it safe?”",wing:"dest"},
+  {sym:"Mlt",name:"The Multiplicity",fam:"dest",r:7,gloss:"A place is never one story.",wing:"dest"},
+  {sym:"Myt",name:"The Mythos",fam:"dest",r:7,gloss:"The legend the place carries.",wing:"dest"},
+  {sym:"Prd",name:"The Local Pride",fam:"dest",r:6,gloss:"The story told from the inside out.",wing:"dest"},
+  // Advisor Wing
+  {sym:"Spc",name:"The Specific Client",fam:"advisor",r:9,gloss:"One real person, not a persona.",wing:"advisor"},
+  {sym:"Sig",name:"The Signature",fam:"advisor",r:8,gloss:"Your point of view, your niche.",wing:"advisor"},
+  {sym:"Mch",name:"The Match",fam:"advisor",r:7,gloss:"Your taste meeting their need.",wing:"advisor"},
+  {sym:"Acc",name:"The Access",fam:"advisor",r:7,gloss:"The rare door only you can open.",wing:"advisor"},
+  {sym:"Dbf",name:"The Debrief",fam:"advisor",r:7,gloss:"The post-trip story that becomes referral fuel.",wing:"advisor"},
+  {sym:"Ant",name:"The Anticipation",fam:"advisor",r:6,gloss:"Selling the dream before they leave.",wing:"advisor"},
+];
+
+/* Known reactions: when all symbols are in the beaker, surface the compound name */
+const COMPOUNDS = [
+  {parts:["Wnd","Arr","Loc"], name:"The Healing Arrival"},
+  {parts:["Mil","Str","New"], name:"The Proof You've Still Got It"},
+  {parts:["Smh","Cmp","Ret"], name:"The Madeleine"},
+  {parts:["Mis","Kin"],        name:"The Best Story at Every Dinner Party"},
+  {parts:["Scl","Trn"],        name:"The Awe That Resets You"},
+];
+
+const FAM_ORDER = ["why","stakes","sensory","journey","human","friction","transform","noble","dest","advisor"];
+const BY_SYM = Object.fromEntries(ELEMENTS.map(e=>[e.sym,e]));
+
+/* Variant options per element — examples that prime; users can also type their own */
+const VARIANTS={
+  Wnd:["a divorce","an empty nest","a layoff","a loss","burnout","a health scare survived","a long illness behind them"],
+  Mil:["a 50th birthday","a 25th anniversary","retirement","a graduation","a remission","a last trip before the baby","a new citizenship"],
+  Crv:["to feel young again","to be brave","to be anonymous","to slow down","to reconnect as a couple","to feel awe"],
+  Prm:["to splurge for once","to go off the grid","to say no to work","to be a beginner again","to do absolutely nothing"],
+  Rnv:["first time traveling solo","learning to dive at 60","a sabbatical","a post-career first chapter","a single parent's restart"],
+  Stk:["the marriage needs this","the last trip Dad can take","the kids leave next year","every dollar they saved","they've never gone alone"],
+  Clk:["a knee replacement scheduled","aging parents","a child's last summer home","a closing window of health","a 70th coming up"],
+  Dbt:["are we too old for this","can we really afford it","will the kids be okay","is it safe there","can I keep up"],
+  Str:["a first long-haul flight","a first solo leg","a physical challenge","no common language","well outside the comfort zone"],
+  Amd:["a near cancellation","cold feet","a passport scare","a fight the week before","a budget that almost killed it"],
+  Smh:["jasmine at dusk","woodsmoke","sea salt","market spices","rain on hot stone"],
+  Lgt:["golden hour on the water","fog lifting off the peaks","neon after dark","candlelight","alpenglow"],
+  Tst:["the first oyster","something from a street cart","a grandmother's recipe","a wine in the place it's made"],
+  Snd:["the call to prayer","a language they don't speak","total silence","surf at night","a night market"],
+  Glm:["the skyline from the plane","the peak through the clouds","the door opening to the view","the coastline appearing"],
+  Arr:["stepping off into the heat","the first taxi ride","the room door opening to the view","the welcome at the gate"],
+  Trn:["the moment they finally relaxed","the conversation that changed it","the detour that became the trip","the fear they let go of"],
+  Ret:["the habit they kept","what they couldn't un-see","the thing they did differently at home","booking the next one before landing"],
+  Dis:["jet-lagged wonder","lost in the medina","the language wall","a total time-zone fog"],
+  Dep:["the goodbye at the door","leaving it all behind","the last look back"],
+  Loc:["a fisherman","a shopkeeper","a host grandmother","a kid who showed the way","a chef who fed them"],
+  Kin:["a ride when stranded","a meal offered freely","a stranger's translation","a wallet returned"],
+  Cmp:["a spouse of thirty years","an adult child","their solo self","an old friend","a new grandchild"],
+  Gde:["a private historian","a wildlife tracker","a sommelier","a dive instructor","a local fixer"],
+  Ins:["an after-hours museum","a chef's table","a home, not a hotel","a closed site opened just for them"],
+  Mis:["a missed train that led somewhere better","a sudden storm","a wrong turn","lost luggage","a flat tire miles from anywhere"],
+  Scl:["under a glacier","inside a cathedral","the desert at night","the open ocean","beneath the redwoods"],
+  Jux:["caviar in a tent","black-tie in the bush","no wifi, every comfort","ancient ruins, modern city"],
+  Csk:["a market haggle","a different sense of time","an unfamiliar table custom","stepping into a sacred space"],
+  Unx:["a festival they stumbled into","a wildlife encounter","a surprise upgrade","a chance meeting"],
+  New:["braver","slower","more present","reconnected","lighter"],
+  Rcl:["quit the job","moved cities","mended a relationship","changed a priority","rebooked before landing"],
+  Shf:["a fear faced","a grief loosened","a marriage rekindled","a confidence found"],
+  Nvr:["the line they repeat","the photo on the fridge","the story at every dinner party"],
+  Svr:["a rug haggled for","a recipe carried home","a tattoo","a ring","a habit that stuck"],
+  Inv:["you, on this trail","you, at this table","the empty chair in the photo","your seat is waiting"],
+  Cnt:["safer than the headlines","more than the postcard","not what you think","beyond the stereotype"],
+  Mlt:["ten neighborhoods, ten stories","one country, many worlds","a different place each season"],
+  Myt:["the legend","the history beneath it","the famous figure from here","the myth that draws you"],
+  Prd:["told by the people who live here","the third-generation owner","the craftsperson at work"],
+  Spc:["the Hendersons, 30th anniversary","a solo widow, first trip since","a family of five with teens","a couple's first trip post-kids"],
+  Sig:["adventure honeymoons","multigen safaris","slow Italy","dive expeditions","culinary journeys"],
+  Mch:["why this place for this client","the room you knew they'd love","the guide built for them"],
+  Acc:["your contact on the ground","your room block","your private guide","your table"],
+  Dbf:["the testimonial","the referral","the rebooking","the photo they sent from the summit"],
+  Ant:["the itinerary reveal","the countdown","the surprise inclusion","the welcome letter"]
+};
+ELEMENTS.forEach(e=>{ if(VARIANTS[e.sym]) e.v=VARIANTS[e.sym]; });
+
+/* ---------- STATE ---------- */
+let mode = "both";
+const selected = new Map(); // sym -> variant string | null
+
+/* ---------- RENDER TABLE ---------- */
+const hall = document.getElementById("hall");
+function buildTable(){
+  hall.innerHTML="";
+  FAM_ORDER.forEach(fk=>{
+    const fam = FAMS[fk];
+    const members = ELEMENTS.filter(e=>e.fam===fk);
+    const block = document.createElement("section");
+    block.className = "family" + (fk==="noble"?" noble":"") + ((fk==="dest"||fk==="advisor")?" wing":"");
+    block.dataset.fam = fk;
+    block.style.setProperty("--fc", `var(${fam.var})`);
+    block.innerHTML = `<div class="fam-head">
+        <span class="fam-dot" style="background:var(${fam.var})"></span>
+        <span class="fam-name">${fam.name}</span>
+        <span class="fam-sub">${fam.sub}</span>
+      </div><div class="tiles"></div>`;
+    const tiles = block.querySelector(".tiles");
+    members.forEach((e,i)=>{
+      const t = document.createElement("button");
+      t.className="tile"; t.dataset.sym=e.sym; t.type="button";
+      t.style.setProperty("--fc", `var(${fam.var})`);
+      t.style.setProperty("--glow", e.r*3);          // glow scales with resonance
+      t.style.setProperty("--rp", e.r*10);            // meter width %
+      t.setAttribute("aria-pressed", selected.has(e.sym));
+      t.setAttribute("title", e.name + " — " + e.gloss);
+      t.setAttribute("aria-label", `${e.name}. Resonance ${e.r} of 10. ${e.gloss}`);
+      t.innerHTML = `<span class="r">${e.r.toString().replace(/^0$/,"0")}</span>
+        <span class="sym">${e.sym}</span>
+        <span class="nm">${e.name.replace(/^The /,"")}</span>
+        <span class="meter"><i></i></span>`;
+      t.addEventListener("click", ()=>onTileClick(e.sym));
+      tiles.appendChild(t);
+    });
+    hall.appendChild(block);
+  });
+  applyMode();
+}
+
+function applyMode(){
+  document.querySelectorAll(".family.wing").forEach(b=>{
+    const fk=b.dataset.fam;
+    const show = mode==="both" || mode===fk;
+    b.style.display = show ? "" : "none";
+  });
+}
+
+/* ---------- BEAKER ---------- */
+const beaker = document.getElementById("beaker");
+const reactionEl = document.getElementById("reaction");
+function setEl(sym, variant){
+  selected.set(sym, variant||null);
+  document.querySelectorAll(`.tile[data-sym="${sym}"]`).forEach(t=>t.setAttribute("aria-pressed","true"));
+  renderBeaker();
+}
+function removeEl(sym){
+  selected.delete(sym);
+  document.querySelectorAll(`.tile[data-sym="${sym}"]`).forEach(t=>t.setAttribute("aria-pressed","false"));
+  renderBeaker();
+}
+function onTileClick(sym){
+  const e=BY_SYM[sym];
+  if(e.fam==="noble"){ selected.has(sym)?removeEl(sym):setEl(sym,null); return; } // inert: no options
+  openPicker(sym);
+}
+function renderBeaker(){
+  beaker.innerHTML="";
+  if(selected.size===0){ beaker.innerHTML='<span class="empty">Nothing in the beaker yet.</span>'; reactionEl.textContent=""; return; }
+  [...selected.entries()].forEach(([sym,variant])=>{
+    const e=BY_SYM[sym];
+    const c=document.createElement("span");
+    c.className="chip"; c.style.setProperty("--fc", `var(${FAMS[e.fam].var})`);
+    const label=document.createElement("button");
+    label.type="button"; label.className="chip-label";
+    label.textContent = variant ? `${e.name}: ${variant}` : e.name;
+    label.addEventListener("click", ()=>{ if(e.fam!=="noble") openPicker(sym); });
+    const x=document.createElement("button");
+    x.type="button"; x.className="x"; x.textContent="×"; x.setAttribute("aria-label",`Remove ${e.name}`);
+    x.addEventListener("click", ()=>removeEl(sym));
+    c.append(label,x);
+    beaker.appendChild(c);
+  });
+  // detect known compound
+  const keys=[...selected.keys()];
+  const hit=COMPOUNDS.find(c=>c.parts.every(p=>keys.includes(p)) && c.parts.length<=keys.length);
+  reactionEl.textContent = hit ? `Known reaction · ${hit.name}` : "";
+}
+document.getElementById("clearBeaker").addEventListener("click", ()=>{
+  selected.clear();
+  document.querySelectorAll('.tile[aria-pressed="true"]').forEach(t=>t.setAttribute("aria-pressed","false"));
+  renderBeaker(); document.getElementById("hookOut").innerHTML="";
+});
+
+/* ---------- AI: synthesize a story hook ---------- */
+const genBtn=document.getElementById("gen");
+const hookOut=document.getElementById("hookOut");
+genBtn.addEventListener("click", async ()=>{
+  const entries=[...selected.entries()];
+  if(entries.length===0){ hookOut.innerHTML='<p class="err">Add an element first — the beaker is empty.</p>'; return; }
+  const reactive=entries.filter(([s])=>BY_SYM[s].fam!=="noble");
+  if(reactive.length===0){ hookOut.innerHTML='<p class="hook" style="color:var(--noble)">No reaction. Inert elements don’t bond.</p>'; return; }
+  genBtn.disabled=true; genBtn.innerHTML='<span class="spin"></span>Synthesizing…'; hookOut.innerHTML="";
+  const payload={ mode, elements: reactive.map(([s,v])=>({name:BY_SYM[s].name, variant:v||""})) };
+  try{
+    const res=await fetch("/api/travel-storytelling/generate",{
+      method:"POST", headers:{"Content-Type":"application/json"},
+      body:JSON.stringify(payload)
+    });
+    const data=await res.json();
+    if(!res.ok){ throw new Error((data&&data.error)||"Request failed"); }
+    hookOut.innerHTML = data.hook ? `<p class="hook">${data.hook}</p>` : '<p class="err">The lab returned nothing. Try again.</p>';
+  }catch(err){
+    hookOut.innerHTML='<p class="err">'+((err&&err.message)||"Couldn’t reach the synthesis engine. Check the connection and try again.")+'</p>';
+  }finally{
+    genBtn.disabled=false; genBtn.textContent="Generate a story hook";
+  }
+});
+
+/* ---------- AI: diagnostic scan ---------- */
+const scanBtn=document.getElementById("scan");
+const diagOut=document.getElementById("diagOut");
+const copyIn=document.getElementById("copyIn");
+scanBtn.addEventListener("click", async ()=>{
+  const copy=copyIn.value.trim();
+  if(copy.length<12){ diagOut.innerHTML='<p class="err">Paste a longer passage — at least a sentence or two.</p>'; return; }
+  scanBtn.disabled=true; scanBtn.innerHTML='<span class="spin"></span>Scanning…'; diagOut.innerHTML="";
+  const cat=ELEMENTS.filter(e=>e.fam!=="noble" && (!e.wing || mode==="both" || e.wing===mode))
+                    .map(e=>({sym:e.sym,name:e.name}));
+  try{
+    const res=await fetch("/api/travel-storytelling/analyze",{
+      method:"POST", headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({copy, mode, elements:cat})
+    });
+    const j=await res.json();
+    if(!res.ok){ throw new Error((j&&j.error)||"Request failed"); }
+    paintScan(j);
+  }catch(err){
+    diagOut.innerHTML='<p class="err">'+((err&&err.message)||"The scan couldn’t complete. Try again, or shorten the passage.")+'</p>';
+  }finally{
+    scanBtn.disabled=false; scanBtn.textContent="Scan copy";
+  }
+});
+
+function paintScan(j){
+  // light up the board
+  hall.classList.add("scanned");
+  document.querySelectorAll(".tile").forEach(t=>t.classList.remove("present","missing"));
+  (j.present||[]).forEach(sym=>document.querySelectorAll(`.tile[data-sym="${sym}"]`).forEach(t=>t.classList.add("present")));
+  (j.missing||[]).forEach(sym=>document.querySelectorAll(`.tile[data-sym="${sym}"]`).forEach(t=>t.classList.add("missing")));
+  const pct=Math.max(0,Math.min(100, parseInt(j.inert_pct,10)||0));
+  const missChips=(j.missing||[]).map(s=>{const e=BY_SYM[s]; if(!e)return""; return `<span class="chip" style="--fc:var(${FAMS[e.fam].var}); cursor:default">${e.name}</span>`;}).join("");
+  const terms=(j.inert_terms||[]).map(t=>`<span class="term">${t}</span>`).join("") || '<span class="empty">None found — nicely done.</span>';
+  diagOut.innerHTML=`
+    <div class="gauge"><span class="big">${pct}%</span><span class="unit">inert</span></div>
+    <div class="bar"><i style="width:${pct}%"></i></div>
+    <p class="verdict">${j.verdict||""}</p>
+    <p class="rolabel">Reactive elements it's missing</p>
+    <div class="chips" style="margin-bottom:14px">${missChips||'<span class="empty">—</span>'}</div>
+    <p class="rolabel">Inert language found</p>
+    <div>${terms}</div>`;
+}
+document.getElementById("clearScan").addEventListener("click", ()=>{
+  hall.classList.remove("scanned");
+  document.querySelectorAll(".tile").forEach(t=>t.classList.remove("present","missing"));
+  diagOut.innerHTML=""; copyIn.value="";
+});
+
+/* ---------- TABS ---------- */
+const tabBeaker=document.getElementById("tab-beaker"), tabDiag=document.getElementById("tab-diag");
+const panBeaker=document.getElementById("panel-beaker"), panDiag=document.getElementById("panel-diag");
+function setTab(which){
+  const b=which==="beaker";
+  tabBeaker.setAttribute("aria-selected",b); tabDiag.setAttribute("aria-selected",!b);
+  panBeaker.hidden=!b; panDiag.hidden=b;
+}
+tabBeaker.addEventListener("click",()=>setTab("beaker"));
+tabDiag.addEventListener("click",()=>setTab("diag"));
+
+/* ---------- MODE TOGGLE ---------- */
+document.querySelectorAll(".modes button").forEach(b=>{
+  b.addEventListener("click", ()=>{
+    mode=b.dataset.mode;
+    document.querySelectorAll(".modes button").forEach(x=>x.setAttribute("aria-pressed", x===b));
+    applyMode();
+  });
+});
+
+/* ---------- ELEMENT PICKER (variant chooser) ---------- */
+let pickerEl=null, scrimEl=null;
+function ensurePicker(){
+  scrimEl=document.createElement("div"); scrimEl.className="scrim";
+  pickerEl=document.createElement("div"); pickerEl.className="picker"; pickerEl.setAttribute("role","dialog"); pickerEl.setAttribute("aria-modal","true");
+  document.body.append(scrimEl,pickerEl);
+  scrimEl.addEventListener("click",closePicker);
+  document.addEventListener("keydown",e=>{ if(e.key==="Escape") closePicker(); });
+}
+function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;"); }
+function openPicker(sym){
+  if(!pickerEl) ensurePicker();
+  const e=BY_SYM[sym], cur=selected.get(sym);
+  pickerEl.style.setProperty("--fc", `var(${FAMS[e.fam].var})`);
+  const opts=(e.v||[]).map(v=>`<button class="opt" data-v="${esc(v)}">${v}</button>`).join("");
+  pickerEl.innerHTML=`
+    <div class="pk-name">${e.name}</div>
+    <div class="pk-gloss">${e.gloss}</div>
+    <p class="pk-label">Pick a specific one, or name your own</p>
+    <div class="pk-opts">${opts}</div>
+    <input type="text" id="pkInput" placeholder="Type the exact one…" value="${cur?esc(cur):''}">
+    <div class="pk-row">
+      <button class="primary" id="pkAdd">Add</button>
+      <button id="pkAsis">Add as-is</button>
+    </div>
+    ${selected.has(sym)?'<button class="pk-remove" id="pkRemove">Remove from beaker</button>':''}`;
+  pickerEl.querySelectorAll(".opt").forEach(o=>o.addEventListener("click",()=>{ setEl(sym,o.dataset.v); closePicker(); }));
+  const input=pickerEl.querySelector("#pkInput");
+  pickerEl.querySelector("#pkAdd").addEventListener("click",()=>{ setEl(sym, input.value.trim()||null); closePicker(); });
+  pickerEl.querySelector("#pkAsis").addEventListener("click",()=>{ setEl(sym,null); closePicker(); });
+  input.addEventListener("keydown",ev=>{ if(ev.key==="Enter"){ setEl(sym, input.value.trim()||null); closePicker(); }});
+  const rm=pickerEl.querySelector("#pkRemove"); if(rm) rm.addEventListener("click",()=>{ removeEl(sym); closePicker(); });
+  positionPicker(sym);
+  scrimEl.classList.add("on"); pickerEl.classList.add("on");
+  setTimeout(()=>input && input.focus(), 30);
+}
+function positionPicker(sym){
+  if(window.innerWidth<=560){ pickerEl.style.removeProperty("top"); pickerEl.style.removeProperty("left"); return; } // CSS bottom-sheet
+  const tile=document.querySelector(`.tile[data-sym="${sym}"]`); if(!tile) return;
+  const r=tile.getBoundingClientRect(), pw=Math.min(340, window.innerWidth-28);
+  let left=Math.max(14, Math.min(r.left + r.width/2 - pw/2, window.innerWidth-pw-14));
+  pickerEl.style.width=pw+"px"; pickerEl.style.left=left+"px";
+  const ph=pickerEl.offsetHeight||320;
+  let top=r.bottom+8; if(top+ph>window.innerHeight-10) top=Math.max(10, r.top-ph-8);
+  pickerEl.style.top=top+"px";
+}
+function closePicker(){ if(!pickerEl) return; scrimEl.classList.remove("on"); pickerEl.classList.remove("on"); }
+
+/* ---------- INIT ---------- */
+buildTable();
+renderBeaker();
+</script>
+</body>
+</html>
