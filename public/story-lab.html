@@ -5,6 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Story Lab — The Periodic Table of Travel Storytelling | Brand USA</title>
 <link rel="icon" href="/favicon.ico" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DXWHJGXCKD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DXWHJGXCKD');
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Oswald:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -107,6 +115,8 @@
   .hook{font-family:var(--ui); font-weight:400; font-style:italic; font-size:17px; line-height:1.4; color:var(--parch)}
   .hook::before{content:"“"; color:var(--accent); margin-right:1px}
   .hook::after{content:"”"; color:var(--accent); margin-left:1px}
+  .ss-angle{font-family:var(--ui); font-weight:600; font-size:15px; line-height:1.42; color:var(--parch); margin:0 0 15px}
+  .ss-move{font-family:var(--ui); font-size:13px; line-height:1.46; color:var(--parch-dim); margin:0}
 
   textarea{width:100%; min-height:120px; resize:vertical; background:var(--ink); color:var(--parch); border:1px solid var(--line); border-radius:10px; padding:11px; font-family:var(--ui); font-size:13px; line-height:1.45; margin-bottom:10px}
   textarea:focus-visible{outline:2px solid var(--accent); outline-offset:1px; border-color:var(--accent)}
@@ -191,10 +201,10 @@
 
       <section class="panel" id="panel-beaker" role="tabpanel" aria-labelledby="tab-beaker">
         <h2>Combine elements</h2>
-        <p class="lede">Click a tile to choose a specific instance — a 50th birthday, the call to prayer, a missed train — then bond them into a story hook.</p>
+        <p class="lede">Click a tile to choose a specific instance - a 50th birthday, the call to prayer, a missed train - then build a story starter you can use: an angle, ready copy, and the move.</p>
         <div class="chips" id="beaker"><span class="empty">Nothing in the beaker yet.</span></div>
         <div class="reaction" id="reaction"></div>
-        <button class="act" id="gen">Generate a story hook</button>
+        <button class="act" id="gen">Build a story starter</button>
         <button class="act ghost" id="clearBeaker">Clear</button>
         <div class="out" id="hookOut" aria-live="polite"></div>
       </section>
@@ -479,11 +489,22 @@ genBtn.addEventListener("click", async ()=>{
     });
     const data=await res.json();
     if(!res.ok){ throw new Error((data&&data.error)||"Request failed"); }
-    hookOut.innerHTML = data.hook ? `<p class="hook">${data.hook}</p>` : '<p class="err">The lab returned nothing. Try again.</p>';
+    if(data && data.copy){
+      const useAs = data.useAs ? ` · ${data.useAs}` : "";
+      hookOut.innerHTML =
+        `<p class="rolabel">The angle</p>`+
+        `<p class="ss-angle">${data.angle||""}</p>`+
+        `<p class="rolabel">Use it${useAs}</p>`+
+        `<p class="hook" style="margin:2px 0 16px">${data.copy}</p>`+
+        `<p class="rolabel">The move</p>`+
+        `<p class="ss-move">${data.move||""}</p>`;
+    } else {
+      hookOut.innerHTML='<p class="err">The lab returned nothing. Try again.</p>';
+    }
   }catch(err){
     hookOut.innerHTML='<p class="err">'+((err&&err.message)||"Couldn’t reach the synthesis engine. Check the connection and try again.")+'</p>';
   }finally{
-    genBtn.disabled=false; genBtn.textContent="Generate a story hook";
+    genBtn.disabled=false; genBtn.textContent="Build a story starter";
   }
 });
 
