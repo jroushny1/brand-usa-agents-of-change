@@ -73,6 +73,13 @@
   .tile:focus-visible{outline:2px solid var(--fc); outline-offset:2px}
   .tile[aria-pressed="true"]{border-color:var(--fc); box-shadow:0 0 0 2px color-mix(in srgb, var(--fc) 70%, transparent), 0 6px 22px color-mix(in srgb, var(--fc) 40%, transparent)}
 
+  /* hover preview tooltip */
+  .eltip{position:fixed; z-index:60; width:min(240px,calc(100vw - 24px)); background:var(--ink3); border:1px solid color-mix(in srgb, var(--fc) 45%, var(--line)); border-radius:10px; box-shadow:0 12px 32px rgba(0,0,0,.5); padding:10px 12px; opacity:0; transform:translateY(4px); pointer-events:none; transition:opacity .12s ease, transform .12s ease}
+  .eltip.on{opacity:1; transform:none}
+  .eltip .et-name{font-family:var(--disp); font-weight:600; font-size:15px; line-height:1.12; color:var(--fc); text-transform:uppercase; letter-spacing:.01em}
+  .eltip .et-gloss{font-family:var(--ui); font-size:12px; line-height:1.4; color:var(--parch-dim); margin-top:5px}
+  .eltip .et-r{font-family:var(--mono); font-size:9.5px; letter-spacing:.03em; text-transform:uppercase; color:var(--parch-dim); margin-top:7px}
+
   /* noble gases: inert, dead on the board */
   .family.noble{border-style:dashed}
   .family.noble .tile{filter:grayscale(1) brightness(.82); opacity:.62}
@@ -404,13 +411,16 @@ function buildTable(){
       t.style.setProperty("--glow", e.r*3);          // glow scales with resonance
       t.style.setProperty("--rp", e.r*10);            // meter width %
       t.setAttribute("aria-pressed", selected.has(e.sym));
-      t.setAttribute("title", e.name + " — " + e.gloss);
       t.setAttribute("aria-label", `${e.name}. Resonance ${e.r} of 10. ${e.gloss}`);
       t.innerHTML = `<span class="r">${e.r.toString().replace(/^0$/,"0")}</span>
         <span class="sym">${e.sym}</span>
         <span class="nm">${e.name.replace(/^The /,"")}</span>
         <span class="meter"><i></i></span>`;
       t.addEventListener("click", ()=>onTileClick(e.sym));
+      t.addEventListener("mouseenter", ()=>showTip(e.sym, t));
+      t.addEventListener("mouseleave", hideTip);
+      t.addEventListener("focus", ()=>showTip(e.sym, t));
+      t.addEventListener("blur", hideTip);
       tiles.appendChild(t);
     });
     hall.appendChild(block);
@@ -440,6 +450,7 @@ function removeEl(sym){
   renderBeaker();
 }
 function onTileClick(sym){
+  hideTip();
   const e=BY_SYM[sym];
   if(e.fam==="noble"){ selected.has(sym)?removeEl(sym):setEl(sym,null); return; } // inert: no options
   openPicker(sym);
@@ -624,6 +635,27 @@ function positionPicker(sym){
   pickerEl.style.top=top+"px";
 }
 function closePicker(){ if(!pickerEl) return; scrimEl.classList.remove("on"); pickerEl.classList.remove("on"); }
+
+/* ---------- HOVER PREVIEW (element tooltip) ---------- */
+let elTip=null;
+function ensureTip(){ elTip=document.createElement("div"); elTip.className="eltip"; elTip.setAttribute("role","tooltip"); document.body.appendChild(elTip); }
+function showTip(sym, tileEl){
+  if(!elTip) ensureTip();
+  const e=BY_SYM[sym];
+  elTip.style.setProperty("--fc", `var(${FAMS[e.fam].var})`);
+  const rLabel = e.fam==="noble" ? `Inert · R ${e.r}/10` : `Resonance ${e.r}/10`;
+  elTip.innerHTML = `<div class="et-name">${e.name}</div><div class="et-gloss">${e.gloss}</div><div class="et-r">${rLabel}</div>`;
+  const r=tileEl.getBoundingClientRect(), w=Math.min(240, window.innerWidth-24);
+  elTip.style.width=w+"px";
+  elTip.style.left=Math.max(12, Math.min(r.left + r.width/2 - w/2, window.innerWidth - w - 12))+"px";
+  const h=elTip.offsetHeight||90;
+  let top=r.top - h - 8; if(top<8) top=r.bottom+8;
+  elTip.style.top=top+"px";
+  elTip.classList.add("on");
+}
+function hideTip(){ if(elTip) elTip.classList.remove("on"); }
+window.addEventListener("scroll", hideTip, true);
+window.addEventListener("resize", hideTip);
 
 /* ---------- INIT ---------- */
 buildTable();
