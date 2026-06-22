@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 import './globals.css'
 import Script from 'next/script'
+import AnalyticsEvents from '@/components/AnalyticsEvents'
 
 const montserrat = localFont({
   src: '../fonts/montserrat-variable.woff2',
@@ -119,6 +120,7 @@ export default function RootLayout({
             gtag('config', 'G-DXWHJGXCKD');
           `}
         </Script>
+        <AnalyticsEvents />
       </body>
     </html>
   )
