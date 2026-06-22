@@ -126,6 +126,10 @@
   .ss-move{font-family:var(--ui); font-size:13px; line-height:1.46; color:var(--parch-dim); margin:0}
 
   textarea{width:100%; min-height:120px; resize:vertical; background:var(--ink); color:var(--parch); border:1px solid var(--line); border-radius:10px; padding:11px; font-family:var(--ui); font-size:13px; line-height:1.45; margin-bottom:10px}
+  .intake{display:flex; flex-direction:column; gap:11px; margin-bottom:13px}
+  .iq{display:block}
+  .iq>span{display:block; font-size:12px; font-weight:500; color:var(--parch); margin-bottom:5px; line-height:1.3}
+  .iq textarea{min-height:0; margin-bottom:0; line-height:1.4}
   textarea:focus-visible{outline:2px solid var(--accent); outline-offset:1px; border-color:var(--accent)}
 
   .readout{margin-top:15px; border-top:1px solid var(--line); padding-top:15px}
@@ -203,6 +207,7 @@
     <aside class="console">
       <div class="tabs" role="tablist">
         <button role="tab" id="tab-beaker" aria-selected="true" aria-controls="panel-beaker">The Beaker</button>
+        <button role="tab" id="tab-intake" aria-selected="false" aria-controls="panel-intake">The Intake</button>
         <button role="tab" id="tab-diag" aria-selected="false" aria-controls="panel-diag">The Diagnostic</button>
       </div>
 
@@ -214,6 +219,21 @@
         <button class="act" id="gen">Build a story starter</button>
         <button class="act ghost" id="clearBeaker">Clear</button>
         <div class="out" id="hookOut" aria-live="polite"></div>
+      </section>
+
+      <section class="panel" id="panel-intake" role="tabpanel" aria-labelledby="tab-intake" hidden>
+        <h2>Client intake</h2>
+        <p class="lede">Answer with what you heard on the discovery call. The board fills itself, and you get the story to design and sell.</p>
+        <div class="intake" id="intakeQs">
+          <label class="iq"><span>What are they running toward, or away from?</span><textarea data-q="Running toward or away from" rows="2" placeholder="e.g. empty nest, wants to feel young again"></textarea></label>
+          <label class="iq"><span>What's the occasion - and what's the clock on it?</span><textarea data-q="Occasion and time pressure" rows="2" placeholder="e.g. her 55th, knees aren't getting better"></textarea></label>
+          <label class="iq"><span>Who are they traveling as, and with whom?</span><textarea data-q="Who they travel as and with" rows="2" placeholder="e.g. just the two of them, first time alone in years"></textarea></label>
+          <label class="iq"><span>What would make this trip a failure for them?</span><textarea data-q="What failure looks like" rows="2" placeholder="e.g. if it feels like a packaged tour"></textarea></label>
+          <label class="iq"><span>How do they want to feel, and who do they want to be after?</span><textarea data-q="Feeling and transformation" rows="2" placeholder="e.g. brave again, present, unhurried"></textarea></label>
+        </div>
+        <button class="act" id="runIntake">Find the story</button>
+        <button class="act ghost" id="clearIntake">Clear</button>
+        <div class="out" id="intakeOut" aria-live="polite"></div>
       </section>
 
       <section class="panel" id="panel-diag" role="tabpanel" aria-labelledby="tab-diag" hidden>
@@ -483,6 +503,18 @@ document.getElementById("clearBeaker").addEventListener("click", ()=>{
   renderBeaker(); document.getElementById("hookOut").innerHTML="";
 });
 
+/* ---------- Story Starter rendering (shared by Beaker + Intake) ---------- */
+function renderStarter(el, data){
+  const useAs = data.useAs ? ` · ${data.useAs}` : "";
+  el.innerHTML =
+    `<p class="rolabel">The angle</p>`+
+    `<p class="ss-angle">${data.angle||""}</p>`+
+    `<p class="rolabel">Use it${useAs}</p>`+
+    `<p class="hook" style="margin:2px 0 16px">${data.copy||""}</p>`+
+    `<p class="rolabel">The move</p>`+
+    `<p class="ss-move">${data.move||""}</p>`;
+}
+
 /* ---------- AI: synthesize a story hook ---------- */
 const genBtn=document.getElementById("gen");
 const hookOut=document.getElementById("hookOut");
@@ -500,18 +532,8 @@ genBtn.addEventListener("click", async ()=>{
     });
     const data=await res.json();
     if(!res.ok){ throw new Error((data&&data.error)||"Request failed"); }
-    if(data && data.copy){
-      const useAs = data.useAs ? ` · ${data.useAs}` : "";
-      hookOut.innerHTML =
-        `<p class="rolabel">The angle</p>`+
-        `<p class="ss-angle">${data.angle||""}</p>`+
-        `<p class="rolabel">Use it${useAs}</p>`+
-        `<p class="hook" style="margin:2px 0 16px">${data.copy}</p>`+
-        `<p class="rolabel">The move</p>`+
-        `<p class="ss-move">${data.move||""}</p>`;
-    } else {
-      hookOut.innerHTML='<p class="err">The lab returned nothing. Try again.</p>';
-    }
+    if(data && data.copy){ renderStarter(hookOut, data); }
+    else { hookOut.innerHTML='<p class="err">The lab returned nothing. Try again.</p>'; }
   }catch(err){
     hookOut.innerHTML='<p class="err">'+((err&&err.message)||"Couldn’t reach the synthesis engine. Check the connection and try again.")+'</p>';
   }finally{
@@ -568,16 +590,53 @@ document.getElementById("clearScan").addEventListener("click", ()=>{
   diagOut.innerHTML=""; copyIn.value="";
 });
 
-/* ---------- TABS ---------- */
-const tabBeaker=document.getElementById("tab-beaker"), tabDiag=document.getElementById("tab-diag");
-const panBeaker=document.getElementById("panel-beaker"), panDiag=document.getElementById("panel-diag");
-function setTab(which){
-  const b=which==="beaker";
-  tabBeaker.setAttribute("aria-selected",b); tabDiag.setAttribute("aria-selected",!b);
-  panBeaker.hidden=!b; panDiag.hidden=b;
+/* ---------- AI: client intake ---------- */
+const runIntakeBtn=document.getElementById("runIntake");
+const intakeOut=document.getElementById("intakeOut");
+function clearBoard(){
+  selected.clear();
+  document.querySelectorAll('.tile[aria-pressed="true"]').forEach(t=>t.setAttribute("aria-pressed","false"));
+  renderBeaker();
 }
-tabBeaker.addEventListener("click",()=>setTab("beaker"));
-tabDiag.addEventListener("click",()=>setTab("diag"));
+runIntakeBtn.addEventListener("click", async ()=>{
+  const answers=[...document.querySelectorAll("#intakeQs textarea")]
+    .map(t=>({q:t.dataset.q, a:t.value.trim()})).filter(x=>x.a);
+  if(answers.length===0){ intakeOut.innerHTML='<p class="err">Add a few notes from the call first.</p>'; return; }
+  runIntakeBtn.disabled=true; runIntakeBtn.innerHTML='<span class="spin"></span>Finding the story…'; intakeOut.innerHTML="";
+  const cat=ELEMENTS.filter(e=>e.fam!=="noble" && (!e.wing || mode==="both" || e.wing===mode))
+                    .map(e=>({sym:e.sym,name:e.name}));
+  try{
+    const res=await fetch("/api/travel-storytelling/intake",{
+      method:"POST", headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({answers, mode, elements:cat})
+    });
+    const data=await res.json();
+    if(!res.ok){ throw new Error((data&&data.error)||"Request failed"); }
+    clearBoard();
+    (data.selected||[]).forEach(s=>{ if(BY_SYM[s.sym]) setEl(s.sym, s.variant||null); });
+    if(data.copy){ renderStarter(intakeOut, data); }
+    else { intakeOut.innerHTML='<p class="err">The lab returned nothing. Try again.</p>'; }
+  }catch(err){
+    intakeOut.innerHTML='<p class="err">'+((err&&err.message)||"Couldn’t reach the lab. Try again.")+'</p>';
+  }finally{
+    runIntakeBtn.disabled=false; runIntakeBtn.textContent="Find the story";
+  }
+});
+document.getElementById("clearIntake").addEventListener("click", ()=>{
+  document.querySelectorAll("#intakeQs textarea").forEach(t=>t.value="");
+  intakeOut.innerHTML=""; clearBoard();
+});
+
+/* ---------- TABS ---------- */
+const TABS=[["tab-beaker","panel-beaker"],["tab-intake","panel-intake"],["tab-diag","panel-diag"]];
+function setTab(id){
+  TABS.forEach(([t,p])=>{
+    const sel = (t===id);
+    document.getElementById(t).setAttribute("aria-selected", sel);
+    document.getElementById(p).hidden = !sel;
+  });
+}
+TABS.forEach(([t])=>document.getElementById(t).addEventListener("click",()=>setTab(t)));
 
 /* ---------- MODE TOGGLE ---------- */
 document.querySelectorAll(".modes button").forEach(b=>{
