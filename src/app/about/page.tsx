@@ -18,21 +18,19 @@ export const metadata: Metadata = {
 // 20_Areas/Topics/Speaking-and-Keynotes.md. Future-dated events are listed as
 // upcoming so the page stays accurate.
 const upcomingTalks = [
-  { event: 'Virtuoso Travel Tech Summit', place: 'Las Vegas', when: 'Aug 2026', role: 'Main-stage keynote' },
-  { event: "West Virginia Governor's Conference on Tourism", place: 'Charleston, WV', when: 'Sept 2026', role: 'Keynote' },
-  { event: 'ATIA Annual Convention & Trade Show', place: 'Fairbanks, AK', when: 'Oct 2026', role: 'Featured speaker' },
-  { event: 'American Indian Tourism Conference', place: 'United States', when: 'Oct 2026', role: 'Featured speaker' },
+  { event: 'Virtuoso Travel Tech Summit', place: 'Las Vegas', when: 'Aug 2026' },
+  { event: "West Virginia Governor's Conference on Tourism", place: 'Charleston, WV', when: 'Sept 2026' },
+  { event: 'ATIA Annual Convention & Trade Show', place: 'Fairbanks, AK', when: 'Oct 2026' },
+  { event: 'American Indian Tourism Conference', place: 'United States', when: 'Oct 2026' },
 ]
 
 const recentTalks = [
-  { event: 'IPW — AI Theatre', place: 'Fort Lauderdale, FL', when: 'May 2026', role: 'Lectures' },
-  { event: 'micebook C-Suite Summit', place: 'NeueHouse, NYC', when: 'May 2026', role: 'Keynote' },
-  { event: 'City Nation Place Americas', place: 'Vancouver', when: 'Apr 2026', role: 'Keynote' },
-  { event: 'Maine Tourism Conference', place: 'Maine', when: 'Apr 2026', role: 'Keynote' },
-  { event: 'Phocuswright Travel Marketing AI Summit', place: 'New York City', when: 'Mar 2026', role: 'Panelist' },
-  { event: "Wyoming Governor's Conference on Tourism", place: 'Wyoming', when: 'Feb 2026', role: 'Keynote' },
-  { event: 'Austrian DMO AI Strategy Lecture', place: 'Virtual — Austria', when: 'Apr 2026', role: 'Lecture' },
-  { event: 'IITA Summit — AI for Sales Teams', place: 'Virtual', when: 'Feb 2026', role: 'Keynote' },
+  { event: 'IPW — AI Theatre', place: 'Fort Lauderdale, FL', when: 'May 2026' },
+  { event: 'micebook C-Suite Summit', place: 'NeueHouse, NYC', when: 'May 2026' },
+  { event: 'City Nation Place Americas', place: 'Vancouver', when: 'Apr 2026' },
+  { event: 'Maine Tourism Conference', place: 'Maine', when: 'Apr 2026' },
+  { event: 'Phocuswright Travel Marketing AI Summit', place: 'New York City', when: 'Mar 2026' },
+  { event: "Wyoming Governor's Conference on Tourism", place: 'Wyoming', when: 'Feb 2026' },
 ]
 
 // Press features, sourced from 20_Areas/Press_Coverage/. Positive coverage only.
@@ -92,7 +90,7 @@ export default function AboutPage() {
         'name': 'Who leads the Brand USA AI initiative?',
         'acceptedAnswer': {
           '@type': 'Answer',
-          'text': 'Janette Roush, SVP, Innovation and Chief AI Officer at Brand USA, leads the Agents of Change program and the Brand USA innovation team.'
+          'text': 'Janette Roush, SVP, Innovation and Chief AI Officer at Brand USA, leads the Agents of Change program.'
         }
       },
       {
@@ -100,7 +98,7 @@ export default function AboutPage() {
         'name': 'Can I book Janette Roush as a speaker for AI in tourism?',
         'acceptedAnswer': {
           '@type': 'Answer',
-          'text': 'Yes! Janette Roush and the Brand USA innovation team are available to present AI findings to industry partners and stakeholders. Visit thebrandusa.com/requestspeaker to view speaker availability.'
+          'text': 'Yes! Janette Roush speaks to industry partners and stakeholders about putting AI to work in tourism. Visit thebrandusa.com/requestspeaker to view speaker availability.'
         }
       },
       {
@@ -282,8 +280,8 @@ export default function AboutPage() {
               Where Janette speaks
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mb-12">
-              Keynotes, panels, and lectures on AI in tourism — for governors&apos; conferences,
-              global summits, and destination marketing organizations across the country and beyond.
+              Talks on AI in tourism — for governors&apos; conferences, global summits,
+              and destination marketing organizations across the country and beyond.
             </p>
 
             {/* Upcoming */}
@@ -298,7 +296,7 @@ export default function AboutPage() {
                 >
                   <div>
                     <div className="font-bold text-brand-navy">{t.event}</div>
-                    <div className="text-sm text-gray-600">{t.place} · {t.role}</div>
+                    <div className="text-sm text-gray-600">{t.place}</div>
                   </div>
                   <div className="text-sm font-semibold text-brand-blue whitespace-nowrap">{t.when}</div>
                 </div>
@@ -317,7 +315,7 @@ export default function AboutPage() {
                 >
                   <div>
                     <div className="font-bold text-brand-navy">{t.event}</div>
-                    <div className="text-sm text-gray-600">{t.place} · {t.role}</div>
+                    <div className="text-sm text-gray-600">{t.place}</div>
                   </div>
                   <div className="text-sm font-medium text-gray-500 whitespace-nowrap">{t.when}</div>
                 </div>
@@ -397,8 +395,8 @@ export default function AboutPage() {
               Bring AI in tourism to your stage
             </h2>
             <p className="text-lg text-white/75 mb-8">
-              Janette and the Brand USA innovation team present AI findings to industry partners
-              and stakeholders. Speaking is arranged through Brand USA.
+              Janette speaks to industry partners and stakeholders about putting AI to work
+              in tourism. Speaking is arranged through Brand USA.
             </p>
             <a
               href="https://www.thebrandusa.com/requestspeaker"
