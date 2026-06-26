@@ -634,6 +634,7 @@ export default function PersonalOSGuidePage() {
               <li><a href="#why-structure">Why Structure Matters</a></li>
               <li><a href="#folder-structure">The Folder Layout</a></li>
               <li><a href="#claude-md">CLAUDE.md: The File Claude Reads First</a></li>
+              <li><a href="#find-things">Help Claude Find Things Fast</a></li>
               <li><a href="#setup">Day-1 Setup</a></li>
               <li><a href="#daily-rhythm">Your Daily Rhythm</a></li>
               <li><a href="#starting-rules">Rules I&apos;d Give Myself If Starting Over</a></li>
@@ -795,7 +796,7 @@ PARA-based vault:
           </div>
 
           <div className="explanation">
-            <strong>Why this works:</strong> Claude reads this once at the start of the session and behaves accordingly for the entire conversation. The task schema is especially load-bearing — every task Claude creates uses these exact field names, so skills like <code>/today</code> can find them reliably.
+            <strong>Why this works:</strong> Claude reads this once at the start of the session and behaves accordingly for the entire conversation. The task schema is especially load-bearing — every task Claude creates uses these exact field names, so when you ask Claude to build your agenda, it can scan for them reliably.
           </div>
 
           <h3>Nested CLAUDE.md Files</h3>
@@ -825,6 +826,46 @@ PARA-based vault:
 
           <div className="explanation">
             <strong>The pattern that matters:</strong> Global behavior at the root, project-specific behavior in the project. Don&apos;t put project details in the root CLAUDE.md — they pollute every session. Don&apos;t put global rules in project CLAUDE.md files — they only apply when you&apos;re in that folder.
+          </div>
+
+          <h2 id="find-things">Help Claude Find Things Fast</h2>
+          <p>In Cowork, Claude answers by reading your files. Ask it about one person and, with no help, it may open half your vault looking for them — slow, and it crowds out room for the real work. Two habits keep it fast: give the things you look up most a consistent shape, and keep a short index Claude can read first.</p>
+
+          <h3>Give People and Companies a Shape</h3>
+          <p>Tasks already have a shape — the Task Schema in your CLAUDE.md. Do the same for the two things you&apos;ll look up most: the people you work with, and the organizations they belong to. The Company file is the hub; each person links into it.</p>
+
+          <div className="code-block">
+            <pre>{`--- People file: 20_Areas/People/Jane-Smith.md ---
+type: person
+name: Jane Smith
+company: "[[Acme-Co]]"     # links to the company hub
+role: VP Partnerships
+last_contact: 2026-06-20
+
+--- Company file: 20_Areas/Companies/Acme-Co.md ---
+type: company
+name: Acme Co
+relationship: partner
+# a Key People table lists everyone who links here`}</pre>
+          </div>
+
+          <div className="explanation">
+            <strong>Why the company is the hub:</strong> people change jobs; organizations stay. When someone moves, you update one <code>company:</code> line and their history stays intact. When someone new joins a partner you already track, they inherit everything you already know about that org.
+          </div>
+
+          <h3>Keep an Index So Claude Reads One File, Not a Hundred</h3>
+          <p>An index is a plain list — one line per item, with a link to the full file. Claude reads the index, finds the row it needs, and opens just that one file. Keep one for each thing you accumulate: people, companies, recurring topics.</p>
+
+          <div className="code-block">
+            <pre>{`--- 20_Areas/People/People_Index.md ---
+| Name           | Company | Role            | Last contact |
+|----------------|---------|-----------------|--------------|
+| [[Jane-Smith]] | Acme Co | VP Partnerships | 2026-06-20   |
+| [[Raj-Patel]]  | Globex  | CMO             | 2026-06-12   |`}</pre>
+          </div>
+
+          <div className="explanation">
+            <strong>Make it Claude&apos;s job, not yours.</strong> Add a rule to your CLAUDE.md: whenever you add or update a Person or Company, update its index in the same edit. The index stays current on its own, and &quot;who do I know at Acme?&quot; gets answered from one short file instead of a vault-wide search.
           </div>
 
           <h2 id="setup">Day-1 Setup</h2>
@@ -913,38 +954,25 @@ Create everything once I've answered.`}</pre>
 
           <div className="step">
             <span className="step-number">6</span>
-            <h3>Skills in Cowork</h3>
-            <p>A skill is a saved shortcut &mdash; a few lines of instructions Claude reuses, so you stop re-explaining a workflow. In Cowork you have two ways to use one:</p>
-
-            <div className="substep">
-              <p><strong>Just ask.</strong> The simplest path: say &quot;build my agenda for today by scanning my vault for tasks with due dates.&quot; Cowork does the work with no skill installed.</p>
-            </div>
-            <div className="substep">
-              <p><strong>Save it as a skill.</strong> To make it one click next time, go to <strong>Settings → Customize → Skills → &quot;+&quot;</strong> and create a skill. Paste the text below as your first one. Cowork keeps its own skill store, so this is where your skills live.</p>
-            </div>
+            <h3>How You Run Workflows in Cowork</h3>
+            <p>In Cowork you run everything by asking in plain words. There&apos;s no skills feature or slash-command setup &mdash; the plain-language request is the interface. Say &quot;build my agenda for today by scanning my vault for tasks with due dates,&quot; and Claude does it.</p>
+            <p>For a workflow you&apos;ll repeat, write the instructions down once and keep them in your vault &mdash; a markdown file in <code>99_System/Prompts/</code>. Next time, point Claude at it: &quot;run my agenda workflow in 99_System/Prompts/agenda.md.&quot; The file is the reusable part; the plain-language ask is how you trigger it.</p>
 
             <div className="prompt-box">
-              <h4>Paste this as the body of a &quot;today&quot; skill:</h4>
-              <pre>{`---
-name: today
-description: Scan the vault for tasks due today and create a daily agenda.
----
+              <h4>Save this as 99_System/Prompts/agenda.md:</h4>
+              <pre>{`# Build my agenda
 
-# today
-
-Build today's agenda by scanning all .md files in 10_Projects/ and
-00_Inbox/ for YAML frontmatter with a due_date field.
-
-## What to do
+Scan all .md files in 10_Projects/ and 00_Inbox/ for YAML
+frontmatter with a due_date field.
 
 1. Group tasks: Overdue, Due Today, Due This Week, Due Next Week
 2. Create a new file in 00_Inbox/ named YYYY-MM-DD_Agenda.md
-3. Format with sections for each group, plus Daily Focus and Quick Notes
+3. Format with a section for each group, plus Daily Focus and Quick Notes
 4. Tell me: "Your agenda is ready: [filename]"`}</pre>
             </div>
 
             <div className="explanation">
-              <strong>Heads up:</strong> Cowork&apos;s skills are less automatic than the VS Code version. A saved skill may not always fire on its own. If it doesn&apos;t, ask Claude in plain words &mdash; that always works. The full <code>/slash</code>-command engine, where skills auto-trigger, lives in the <Link href="/personal-os-3">Claude Code build</Link>.
+              <strong>Where the auto-firing version lives:</strong> Typed <code>/slash</code> commands that fire on their own — a real skills engine with <code>SKILL.md</code> files — are a <Link href="/personal-os-3">Claude Code</Link> feature. In Cowork, a prompt file plus a plain-language ask does the same job, with one extra sentence from you.
             </div>
           </div>
 
@@ -955,7 +983,7 @@ Build today's agenda by scanning all .md files in 10_Projects/ and
           </div>
 
           <h2 id="daily-rhythm">Your Daily Rhythm</h2>
-          <p>Two routines are enough to anchor a day. Ask for them directly, or save them as skills &mdash; either way, here&apos;s what it looks like in practice:</p>
+          <p>Two routines are enough to anchor a day. Ask for them in plain words — or keep them as prompt files and point Claude at them. Here&apos;s what it looks like in practice:</p>
 
           <div className="skill-card">
             <h4>Morning — Build the agenda</h4>

@@ -743,7 +743,7 @@ export default function PersonalOS2GuidePage() {
 <section class="hero">
     <span class="hero-badge">The Long Game</span>
     <h1>How a Personal OS<br>Compounds Over Time</h1>
-    <p>The leverage layer. Memory, skills, capture pipelines, voice, and shipping &mdash; the parts that turn a folder of markdown into a coworker who knows your work.</p>
+    <p>The leverage layer. Memory, saved workflows, capture pipelines, voice, and shipping &mdash; the parts that turn a folder of markdown into a coworker who knows your work.</p>
 </section>
 
 <main class="container">
@@ -753,7 +753,7 @@ export default function PersonalOS2GuidePage() {
         <ul>
             <li><a href="#where-leverage">Where the Leverage Actually Is</a></li>
             <li><a href="#memory">Memory in Cowork</a></li>
-            <li><a href="#skills">The Skills Ecosystem</a></li>
+            <li><a href="#skills">The Workflow Library</a></li>
             <li><a href="#capture">Capture Pipelines: The Input Layer</a></li>
             <li><a href="#voice">The Voice System</a></li>
             <li><a href="#companies">Companies as Wiki Entries</a></li>
@@ -768,7 +768,7 @@ export default function PersonalOS2GuidePage() {
     <div class="intro-box" id="where-leverage">
         <h3>Where the Leverage Actually Is</h3>
         <p>The first guide gets you to "useful filing system." Folders, a CLAUDE.md, two skills, a working daily rhythm.</p>
-        <p>This guide is about what happens after. The parts that took me six months to build and that I'd build again on day one if I were starting fresh: a memory habit that keeps Claude current on how I work, a skills library that automates real workflows, capture pipelines that fill the vault while I'm in meetings, a voice system that lets Claude draft in my actual cadence, and the realization that the vault is also a workshop where I ship things to the web.</p>
+        <p>This guide is about what happens after. The parts that took me six months to build and that I'd build again on day one if I were starting fresh: a memory habit that keeps Claude current on how I work, a library of saved workflows I run by name, capture pipelines that fill the vault while I'm in meetings, a voice system that lets Claude draft in my actual cadence, and the realization that the vault is also a workshop where I ship things to the web.</p>
         <p style="margin-bottom: 0;">Every section here describes something I use weekly. The audience is the same: working professionals who use Claude as a productivity tool and want the system to compound.</p>
     </div>
 
@@ -780,7 +780,7 @@ export default function PersonalOS2GuidePage() {
             <h4>Week 1</h4>
             <ul>
                 <li>You explain your role each session</li>
-                <li>Two skills: <code>/today</code> and <code>/shutdown</code></li>
+                <li>Two workflows: build the agenda, run the shutdown</li>
                 <li>CLAUDE.md has role and task schema</li>
                 <li>Projects are folders with notes</li>
                 <li>You write everything yourself</li>
@@ -791,7 +791,7 @@ export default function PersonalOS2GuidePage() {
             <h4>Month 6+</h4>
             <ul>
                 <li>Claude knows your role, team, projects, vendors, voice</li>
-                <li>30+ skills across daily rhythm, meetings, content, review, shipping</li>
+                <li>30+ saved workflows across daily rhythm, meetings, content, review, shipping</li>
                 <li>CLAUDE.md plus a learnings file keep Claude current on how you work</li>
                 <li>Companies are wiki entries; People link in; Calls update both</li>
                 <li>Claude drafts in your voice using your actual speaking positions</li>
@@ -820,9 +820,9 @@ export default function PersonalOS2GuidePage() {
     </div>
 
     <!-- SECTION: Skills -->
-    <h2 id="skills">The Skills Ecosystem</h2>
+    <h2 id="skills">The Workflow Library</h2>
 
-    <p>The first guide kept it to a couple of saved shortcuts. A mature Personal OS leans on many more &mdash; each one a few lines of instructions Claude reuses, so you stop re-explaining a workflow. In Cowork you save a skill under <strong>Settings &rarr; Customize &rarr; Skills</strong>, or you simply ask Claude to run the workflow by name.</p>
+    <p>The first guide kept it to a couple of saved shortcuts. A mature Personal OS leans on many more &mdash; each one a few lines of instructions Claude reuses, so you stop re-explaining a workflow. In Cowork these live as plain prompt files in <code>99_System/Prompts/</code>: write the steps down once, then ask Claude to run one by name. The auto-firing <code>/slash</code>-command version, where each becomes a real installed skill, is the <a href="/personal-os-3" style="color: var(--brand-blue); font-weight: 600;">Claude Code build</a>.</p>
 
     <h3>What I Actually Run</h3>
     <p>Here's how mine cluster, by job:</p>
@@ -830,7 +830,7 @@ export default function PersonalOS2GuidePage() {
     <table class="comparison-table">
         <tr>
             <th>Category</th>
-            <th>Skills</th>
+            <th>Workflows</th>
         </tr>
         <tr>
             <td><strong>Daily rhythm</strong></td>
@@ -862,8 +862,8 @@ export default function PersonalOS2GuidePage() {
         <strong>The pattern that emerged:</strong> Each skill replaces a 15-30 minute task that I used to do manually. Built up slowly &mdash; one or two a month &mdash; whenever I noticed myself repeating a workflow. The library is wide because the workflows are real, not because I went on a skill-building spree.
     </div>
 
-    <h3>How a Skill Is Structured</h3>
-    <p>A SKILL.md file looks like this:</p>
+    <h3>How a Workflow File Looks</h3>
+    <p>A prompt file is just instructions &mdash; a title and the steps. The same file works as a Claude Code skill if you add a frontmatter header; in Cowork you can skip it. Here's the call workflow:</p>
 
     <div class="code-block">
         <pre>---
@@ -896,12 +896,12 @@ Create a structured call note.
         <p>The skills I use most weren't planned. They came from noticing the third or fourth time I was repeating the same multi-step prompt. When that happens, ask Claude: "Turn this into a skill." Claude writes the SKILL.md, drops it in the right place, and the next time you need that workflow it's one trigger away.</p>
     </div>
 
-    <h3>Install the Core Five</h3>
-    <p>Past the daily agenda, these do the most work in a typical week: meeting capture, pre-meeting prep, a learnings habit, Monday kickoff, and Friday wrap-up. In Cowork, save each as a skill (Settings &rarr; Customize &rarr; Skills), or paste the prompt below and have Claude keep them in your vault so you can ask for them by name.</p>
+    <h3>Build the Core Five</h3>
+    <p>Past the daily agenda, these do the most work in a typical week: meeting capture, pre-meeting prep, a learnings habit, Monday kickoff, and Friday wrap-up. Paste the prompt below and Claude keeps them as prompt files in <code>99_System/Prompts/</code>, so you can ask for any of them by name.</p>
 
     <div class="prompt-box">
         <h4>Copy and paste into Claude:</h4>
-        <pre>Please set up five workflows for me. For each, either save it as a skill (Settings &rarr; Customize &rarr; Skills) or keep the instructions in my vault so I can ask for it by name.
+        <pre>Please set up five workflows for me. Keep each as a prompt file in 99_System/Prompts/ so I can ask for it by name.
 
 1. A "call" skill:
 
@@ -1040,17 +1040,17 @@ Create all five now and confirm when done.</pre>
         <div class="workflow-item">
             <div class="workflow-icon">3</div>
             <div class="workflow-content">
-                <h5>Install the <code>/granola</code> skill</h5>
-                <p>The skill below tells Claude how to use the connector to file meetings into the right vault folders. Paste the prompt to install it.</p>
+                <h5>Save the granola filing workflow</h5>
+                <p>The prompt below tells Claude how to use the connector to file meetings into the right vault folders. Paste it to save the workflow.</p>
             </div>
         </div>
     </div>
 
     <div class="prompt-box">
         <h4>Copy and paste into Claude:</h4>
-        <pre>Please install a Granola filing skill for me.
+        <pre>Please set up a Granola filing workflow for me.
 
-Set this up as a "granola" skill (Settings &rarr; Customize &rarr; Skills), or keep it in my vault and run it by name:
+Keep it as a prompt file in 99_System/Prompts/ and run it by name:
 
 ---
 name: granola
@@ -1080,7 +1080,7 @@ Confirm when the skill is installed.</pre>
 
     <div class="tip-box">
         <h4>Other capture sources</h4>
-        <p>If you use a wearable recorder, Otter, Fireflies, or any other source, the pattern is the same: a SKILL.md that knows where new transcripts arrive and how to file them. Tell Claude what you've got and ask it to scaffold a skill modeled on <code>/granola</code>.</p>
+        <p>If you use a wearable recorder, Otter, Fireflies, or any other source, the pattern is the same: a prompt file that knows where new transcripts arrive and how to file them. Tell Claude what you've got and ask it to scaffold one modeled on the granola workflow.</p>
     </div>
 
     <!-- SECTION: Voice -->
@@ -1115,7 +1115,7 @@ Confirm when the skill is installed.</pre>
 
     <div class="skill-card">
         <h4>email_voice_guide.md</h4>
-        <p>How I actually write to different audiences &mdash; C-suite, legal, internal team, external partners. Built from my own sent mail. The <code>/janette-voice</code> skill loads this file when drafting any email so the result sounds like me, not like Claude.</p>
+        <p>How I actually write to different audiences &mdash; C-suite, legal, internal team, external partners. Built from my own sent mail. My voice workflow loads this file when drafting any email so the result sounds like me.</p>
     </div>
 
     <h3>Build Your Voice Files</h3>
@@ -1318,7 +1318,7 @@ Create all three templates and the CLAUDE.md addition now.</pre>
 
     <div class="success-box">
         <h4>The payoff</h4>
-        <p>Once installed, you can say "prep me on [Company Name]" and Claude opens the Company file, reads the Key People table, scans recent Engagement Timeline entries, surfaces open items, and gives you a brief with everything you need. The Company file is the single hub; everything else links into it.</p>
+        <p>Once installed, you can say "prep me on [Company Name]" and Claude opens the Company file, reads the Key People table, scans recent Engagement Timeline entries, surfaces open items, and gives you a brief with everything you need. The Company file is the single hub; everything else links into it. Keep a one-line-per-row index &mdash; a People_Index and a Companies index &mdash; so Claude finds the right hub from one short file instead of scanning the whole folder.</p>
     </div>
 
     <!-- SECTION: Shipping -->
@@ -1331,19 +1331,19 @@ Create all three templates and the CLAUDE.md addition now.</pre>
     <div class="why-grid">
         <div class="why-card">
             <h4>Single-use sites</h4>
-            <p>A skill (<code>/single-use-site</code>) takes a recipient name and a purpose, scaffolds an HTML page using the right brand identity, adds favicon and logos, deploys to Vercel under the correct team, and disables SSO so the recipient can open it without a login. From "build me a walkthrough page for X" to a live URL takes about 90 seconds.</p>
+            <p>A workflow (<code>single-use-site</code>) takes a recipient name and a purpose, scaffolds an HTML page using the right brand identity, adds favicon and logos, deploys to Vercel under the correct team, and disables SSO so the recipient can open it without a login. From "build me a walkthrough page for X" to a live URL takes about 90 seconds.</p>
         </div>
         <div class="why-card">
             <h4>Webinar pages</h4>
-            <p>A skill (<code>/add-webinar</code>) takes a video file, uploads to Mux, auto-generates a transcript, drafts page metadata, adds a card to my homepage, rebuilds the site, and deploys. One command turns a recording into a public, searchable webinar page.</p>
+            <p>A workflow (<code>add-webinar</code>) takes a video file, uploads to Mux, auto-generates a transcript, drafts page metadata, adds a card to my homepage, rebuilds the site, and deploys. One command turns a recording into a public, searchable webinar page.</p>
         </div>
         <div class="why-card">
             <h4>Branded presentations</h4>
-            <p>A skill (<code>/build-pptx</code>) that handles brand detection, layout planning, color and typography application, and logo placement. I describe the deck, Claude produces a polished PPTX.</p>
+            <p>A workflow (<code>build-pptx</code>) that handles brand detection, layout planning, color and typography application, and logo placement. I describe the deck, Claude produces a polished PPTX.</p>
         </div>
         <div class="why-card">
             <h4>LinkedIn carousels</h4>
-            <p>A skill (<code>/linkedin-carousel</code>) that takes source material (a transcript, a webinar, a call), pulls images from my image library, applies brand styling, and produces a print-ready PDF carousel. Learns my voice over time through a recursive improvement loop.</p>
+            <p>A workflow (<code>linkedin-carousel</code>) that takes source material (a transcript, a webinar, a call), pulls images from my image library, applies brand styling, and produces a print-ready PDF carousel. Learns my voice over time through a recursive improvement loop.</p>
         </div>
     </div>
 
@@ -1351,7 +1351,7 @@ Create all three templates and the CLAUDE.md addition now.</pre>
     <p>Two reasons:</p>
     <ul>
         <li><strong>Source material is already here.</strong> The transcript I want to turn into a webinar page is in <code>20_Areas/Keynotes/</code>. The brand logo files are in <code>30_Resources/</code>. The voice that should narrate the page is in <code>99_System/Context_Library/</code>. Building elsewhere means dragging all that context to a new tool.</li>
-        <li><strong>Skills can compose.</strong> A skill like <code>/add-webinar</code> uses the voice system to draft the page copy, the brand resources for visuals, and the deploy infrastructure to ship. Each piece was built for a different reason; the skill stitches them together.</li>
+        <li><strong>Workflows can compose.</strong> A workflow like <code>add-webinar</code> uses the voice system to draft the page copy, the brand resources for visuals, and the deploy infrastructure to ship. Each piece was built for a different reason; the workflow stitches them together. The deploy-grade ones &mdash; pushing code, uploading video &mdash; run their smoothest in the <a href="/personal-os-3" style="color: var(--brand-blue); font-weight: 600;">Claude Code build</a>.</li>
     </ul>
 
     <h3>Build Your Own Shipping Skill</h3>
@@ -1374,7 +1374,7 @@ Once I've answered all five:
 1. Propose a skill name and short description.
 2. Draft a SKILL.md that orchestrates the full workflow: pulling sources, applying voice and brand, producing the artifact, deploying or filing it, confirming success.
 3. Flag any external setup I need (API keys, account access, MCP connectors).
-4. Save it as a skill (Settings &rarr; Customize &rarr; Skills) and tell me how to trigger it.</pre>
+4. Keep it as a prompt file in 99_System/Prompts/ and tell me how to trigger it.</pre>
     </div>
 
     <!-- SECTION: MCP -->
@@ -1527,35 +1527,35 @@ flag it instead of filling the gap.</pre>
     <!-- SECTION: Weekly Rhythm -->
     <h2 id="weekly">The Weekly Rhythm</h2>
 
-    <p>A mature system benefits from a weekly maintenance pass. About 15 minutes. Most of it runs through skills.</p>
+    <p>A mature system benefits from a weekly maintenance pass. About 15 minutes. Most of it runs through saved workflows.</p>
 
     <div class="workflow-box">
         <h4>The Weekly Loop</h4>
         <div class="workflow-item">
             <div class="workflow-icon">1</div>
             <div class="workflow-content">
-                <h5>Monday: <code>/weekstart</code></h5>
+                <h5>Monday: <code>weekstart</code></h5>
                 <p>Daily agenda, overdue triage, project health check, people follow-ups due, and a one-line focus for the week.</p>
             </div>
         </div>
         <div class="workflow-item">
             <div class="workflow-icon">2</div>
             <div class="workflow-content">
-                <h5>Daily: <code>/today</code> + <code>/shutdown</code></h5>
+                <h5>Daily: <code>today</code> + <code>shutdown</code></h5>
                 <p>Morning agenda, end-of-day capture. Built up across the week, these feed the Friday summary.</p>
             </div>
         </div>
         <div class="workflow-item">
             <div class="workflow-icon">3</div>
             <div class="workflow-content">
-                <h5>Friday: <code>/weekend</code></h5>
+                <h5>Friday: <code>weekend</code></h5>
                 <p>Weekly review, unresolved items, updates to process notes, and a one-page summary of what moved.</p>
             </div>
         </div>
         <div class="workflow-item">
             <div class="workflow-icon">4</div>
             <div class="workflow-content">
-                <h5>Periodically: <code>/remember</code></h5>
+                <h5>Periodically: <code>remember</code></h5>
                 <p>When a pattern emerges across the week, ask Claude to save it to your learnings file or add a rule to your CLAUDE.md. Friday is a natural moment &mdash; have Claude review the week's calls and decisions and propose what's worth keeping.</p>
             </div>
         </div>
@@ -1563,7 +1563,7 @@ flag it instead of filling the gap.</pre>
             <div class="workflow-icon">5</div>
             <div class="workflow-content">
                 <h5>Monthly: archive and prune</h5>
-                <p>Move completed projects to <code>40_Archives/</code>. Scan your skills folder for skills you haven't used in 60 days and decide whether to keep, fix, or delete.</p>
+                <p>Move completed projects to <code>40_Archives/</code>. Scan your prompt files for any you haven't used in 60 days and decide whether to keep, fix, or delete.</p>
             </div>
         </div>
     </div>
