@@ -49,7 +49,7 @@ export default function ShortsPage() {
         'name': video.title,
         'description': video.description,
         'thumbnailUrl': `https://image.mux.com/${video.muxPlaybackId}/thumbnail.png`,
-        'contentUrl': `https://stream.mux.com/${video.muxPlaybackId}.m3u8`,
+        'contentUrl': `https://stream.mux.com/${video.muxPlaybackId}/highest.mp4`,
         'duration': `PT${parseInt(video.duration) || 5}M`,
         'author': { '@type': 'Person', 'name': video.instructor },
         'genre': video.category

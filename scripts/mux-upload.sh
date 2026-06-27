@@ -39,7 +39,7 @@ API="https://api.mux.com/video/v1"
 echo "==> Creating direct upload slot..."
 UPLOAD_JSON=$(curl -sf -u "$AUTH" -X POST "$API/uploads" \
   -H "Content-Type: application/json" \
-  -d '{"new_asset_settings":{"playback_policy":["public"],"encoding_tier":"smart"},"cors_origin":"*"}')
+  -d '{"new_asset_settings":{"playback_policy":["public"],"encoding_tier":"smart","static_renditions":[{"resolution":"highest"}]},"cors_origin":"*"}')
 
 UPLOAD_URL=$(echo "$UPLOAD_JSON" | python3 -c 'import sys,json;print(json.load(sys.stdin)["data"]["url"])')
 UPLOAD_ID=$(echo "$UPLOAD_JSON" | python3 -c 'import sys,json;print(json.load(sys.stdin)["data"]["id"])')

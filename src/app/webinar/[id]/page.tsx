@@ -67,7 +67,7 @@ export default async function WebinarPage({ params }: { params: Promise<{ id: st
     description: webinar.description,
     duration: toISO8601Duration(webinar.duration),
     thumbnailUrl: `https://image.mux.com/${webinar.muxPlaybackId}/thumbnail.png`,
-    contentUrl: `https://stream.mux.com/${webinar.muxPlaybackId}.m3u8`,
+    contentUrl: `https://stream.mux.com/${webinar.muxPlaybackId}/highest.mp4`,
     uploadDate: toUploadDate(webinar.publishDate),
     inLanguage: 'en-US',
     isAccessibleForFree: true,
