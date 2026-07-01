@@ -4,6 +4,7 @@ import { webinarData } from './webinars'
 // card (title, blurb, duration, video, badge) derives from webinarData — edit
 // content there; edit this list only to reorder or add/remove cards.
 const cardOrder = [
+  'ai-chief-of-staff',
   'ai-101',
   'intro-ai-agents',
   'ai-tool-playground',
