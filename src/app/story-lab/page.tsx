@@ -4,11 +4,11 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Story Lab — The Periodic Table of Travel Storytelling',
   description:
-    'An interactive lab for travel storytelling: combine elements into a Story Starter, run a client intake to find the story to design and sell, or scan copy for inert clichés. Built for Brand USA, US destinations.',
+    'Every travel story is built from a finite set of elements. Combine them into story hooks, scan copy for inert clichés, and see why specificity is retrievability in the AI search era.',
   openGraph: {
     title: 'Story Lab | Agents of Change',
     description:
-      'The Periodic Table of Travel Storytelling — turn story elements into usable, US-focused copy.',
+      'The Periodic Table of Travel Storytelling — an instrument for copy machines can cite and travelers can feel.',
   },
 }
 
