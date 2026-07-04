@@ -6,31 +6,34 @@
 <title>The Periodic Table of Travel Storytelling</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#17130E; --ink2:#211B14; --ink3:#2C241B;
-    --parch:#EFE7D6; --parch-dim:#B8AD98; --line:#3A3025;
-    --why:#C65B73; --stakes:#D08A33; --sensory:#4FA39A; --journey:#6E83C0;
-    --human:#C9714E; --friction:#9C6FB0; --transform:#D4B14A; --noble:#6B665C;
-    --dest:#93A35C; --advisor:#3E8AA6;
-    --disp:"Fraunces",Georgia,serif; --ui:"Space Grotesk",system-ui,sans-serif; --mono:"Space Mono",monospace;
+    /* Brand USA corporate palette on a navy base */
+    --ink:#101F36; --ink2:#182B47; --ink3:#21344F;
+    --parch:#F4EFE3; --parch-dim:#9AA6B6; --line:#2E425F;
+    --why:#E4739A; --stakes:#E8A24C; --sensory:#2BBFA6; --journey:#8A9BE0;
+    --human:#E07856; --friction:#B583D8; --transform:#00A9E0; --noble:#7E8794;
+    --dest:#8FB85A; --advisor:#3D8AC4;
+    --disp:"Oswald","Arial Narrow",system-ui,sans-serif; --ui:"Montserrat",system-ui,sans-serif; --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
   }
   *{box-sizing:border-box}
   html,body{margin:0}
   body{
     background:
-      radial-gradient(1200px 600px at 80% -10%, rgba(212,177,74,.06), transparent 60%),
-      radial-gradient(900px 500px at -10% 110%, rgba(79,163,154,.06), transparent 60%),
+      radial-gradient(1200px 600px at 80% -10%, rgba(0,169,224,.08), transparent 60%),
+      radial-gradient(900px 500px at -10% 110%, rgba(90,126,180,.07), transparent 60%),
       var(--ink);
     color:var(--parch); font-family:var(--ui);
     -webkit-font-smoothing:antialiased; line-height:1.45;
   }
   .wrap{max-width:1280px; margin:0 auto; padding:34px 22px 80px}
   header.top{display:flex; flex-wrap:wrap; gap:20px 28px; align-items:flex-end; justify-content:space-between; border-bottom:1px solid var(--line); padding-bottom:24px}
-  .brandmark{font-family:var(--mono); font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--parch-dim)}
-  h1{font-family:var(--disp); font-weight:900; font-size:clamp(30px,5vw,54px); line-height:1.02; margin:8px 0 0; letter-spacing:-.01em}
-  .thesis{font-family:var(--disp); font-weight:400; font-style:italic; font-size:clamp(15px,1.9vw,19px); color:var(--parch-dim); margin-top:12px; max-width:46ch}
+  .brandmark{display:flex; flex-direction:column; gap:9px; align-items:flex-start; margin-bottom:14px}
+  .brandmark .bu-logo{height:76px; width:auto; display:block}
+  .brandmark .credit{font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--parch-dim)}
+  h1{font-family:var(--disp); font-weight:700; font-size:clamp(32px,5.2vw,56px); line-height:1.02; margin:6px 0 0; letter-spacing:.005em; text-transform:uppercase}
+  .thesis{font-family:var(--ui); font-weight:400; font-size:clamp(15px,1.9vw,18px); color:var(--parch-dim); margin-top:12px; max-width:48ch; line-height:1.5}
   .thesis b{color:var(--parch); font-style:normal; font-weight:600}
 
   /* mode toggle */
@@ -40,6 +43,10 @@
   .modes button:focus-visible{outline:2px solid var(--transform); outline-offset:2px}
 
   .layout{display:grid; grid-template-columns:1fr 360px; gap:28px; margin-top:30px}
+  .board-head{display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:16px}
+  .board-label{font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--parch-dim)}
+  .family.flash{animation:famflash 1.8s ease}
+  @keyframes famflash{0%,100%{box-shadow:none}25%,55%{box-shadow:0 0 0 2px var(--fc), 0 10px 34px color-mix(in srgb, var(--fc) 40%, transparent)}}
   @media(max-width:980px){ .layout{grid-template-columns:1fr} }
 
   /* families */
@@ -133,7 +140,7 @@
   /* why band */
   .why{margin:34px 0 6px; padding-bottom:30px; border-bottom:1px solid var(--line)}
   .why-kicker{font-family:var(--mono); font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--parch-dim)}
-  .why h2{font-family:var(--disp); font-weight:900; font-size:clamp(22px,3.4vw,34px); margin:8px 0 20px; letter-spacing:-.01em}
+  .why h2{font-family:var(--disp); font-weight:700; font-size:clamp(22px,3.4vw,34px); margin:8px 0 20px; letter-spacing:.01em; text-transform:uppercase}
   .why-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:16px}
   .why-card{border:1px solid var(--line); border-radius:14px; padding:18px 18px 20px; background:linear-gradient(180deg, color-mix(in srgb, var(--fc) 8%, transparent), transparent 60%)}
   .why-card h3{font-family:var(--disp); font-weight:600; font-size:19px; margin:0 0 8px; color:var(--fc)}
@@ -180,14 +187,25 @@
 
   <header class="top">
     <div>
-      <div class="brandmark">Agents of Change · An Instrument by Janette Roush</div>
+      <div class="brandmark">
+        <svg class="bu-logo" role="img" aria-label="Brand USA" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 415.12 296.38">
+          <g fill="#fff">
+            <path d="M88.18,170.68v-48.75h25.5v48.13c0,11.32,5.47,18.16,15.55,18.16s15.55-6.84,15.55-18.16v-48.13h25.5v48.75c0,25.12-14.05,39.43-41.04,39.43s-41.04-14.3-41.04-39.43Z"/>
+            <path d="M295.47,121.42h-31.22l-15.22,42.79c2.77,4.63,4.17,10.2,4.17,16.67,0,12.02-5.04,21.52-14.03,27.61h19.11l5.47-16.29h31.96l5.47,16.29h25.75l-31.47-87.06ZM270.34,172.29l9.33-27.74,9.33,27.74h-18.66Z"/>
+            <path d="M213.15,120.31c-22.76,0-37.19,10.07-37.19,28.11,0,34.2,46.02,22.14,46.02,34.82,0,4.1-3.23,6.47-12.06,6.47-9.57,0-18.89-2.86-26.97-8.45l-7.46,21.03c9,5.03,20.32,7.81,34.44,7.81,23.51,0,36.94-11.19,36.94-29.23,0-34.58-46.02-22.64-46.02-34.2,0-3.98,3.98-5.97,12.44-5.97s16.12,2.47,21.47,6.31l7.21-20.32c-7.42-3.81-17.46-6.39-28.81-6.39Z"/>
+          </g>
+          <g fill="#00a9e0">
+            <path d="M88.13,88.47h11.74c2.91,0,5.12.75,6.61,2.23,1.16,1.15,1.73,2.58,1.73,4.29v.07c0,.72-.09,1.36-.27,1.91-.18.55-.42,1.05-.72,1.5-.3.44-.65.84-1.05,1.17-.4.34-.83.62-1.28.87,1.47.55,2.62,1.31,3.47,2.26.84.95,1.26,2.27,1.26,3.96v.07c0,1.16-.22,2.17-.67,3.04-.45.87-1.08,1.59-1.91,2.17-.83.58-1.83,1.01-3,1.3-1.17.29-2.46.43-3.88.43h-12.03v-25.28ZM102.68,95.93c0-.84-.31-1.48-.94-1.92-.63-.44-1.53-.66-2.71-.66h-5.49v5.31h5.13c1.23,0,2.2-.21,2.93-.63.72-.42,1.08-1.09,1.08-2.03v-.07ZM104.09,106.06c0-.84-.33-1.51-.97-2-.65-.49-1.7-.74-3.14-.74h-6.43v5.56h6.61c1.23,0,2.19-.22,2.89-.67.7-.44,1.05-1.14,1.05-2.08v-.07Z"/>
+            <path d="M114.2,88.47h11.56c3.2,0,5.66.85,7.37,2.56,1.44,1.44,2.17,3.37,2.17,5.78v.07c0,2.05-.5,3.71-1.5,5-1,1.29-2.31,2.23-3.92,2.83l6.18,9.03h-6.5l-5.42-8.09h-4.37v8.09h-5.56v-25.28ZM125.4,100.75c1.37,0,2.42-.32,3.16-.97.73-.65,1.1-1.51,1.1-2.59v-.07c0-1.2-.39-2.1-1.16-2.69-.77-.6-1.84-.9-3.21-.9h-5.53v7.22h5.63Z"/>
+            <path d="M148.98,88.29h5.13l10.83,25.46h-5.81l-2.31-5.67h-10.69l-2.31,5.67h-5.67l10.83-25.46ZM154.83,103.17l-3.36-8.2-3.36,8.2h6.72Z"/>
+            <path d="M168.12,88.47h5.13l11.85,15.56v-15.56h5.49v25.28h-4.73l-12.24-16.07v16.07h-5.49v-25.28Z"/>
+            <path d="M196.65,88.47h9.86c1.97,0,3.79.32,5.43.96,1.65.64,3.07,1.52,4.26,2.65,1.19,1.13,2.11,2.46,2.76,3.99.65,1.53.97,3.18.97,4.97v.07c0,1.78-.33,3.44-.97,4.98-.65,1.54-1.57,2.88-2.76,4.01-1.19,1.13-2.61,2.02-4.26,2.67-1.65.65-3.46.98-5.43.98h-9.86v-25.28ZM202.21,93.53v15.17h4.3c1.13,0,2.17-.18,3.11-.54.94-.36,1.74-.87,2.4-1.55s1.18-1.46,1.55-2.37.56-1.93.56-3.06v-.07c0-1.1-.19-2.12-.56-3.05s-.89-1.74-1.55-2.41-1.46-1.19-2.4-1.56c-.94-.37-1.97-.56-3.11-.56h-4.3Z"/>
+          </g>
+        </svg>
+        <div class="credit">An instrument by Janette Roush</div>
+      </div>
       <h1>The Periodic Table of<br>Travel Storytelling</h1>
-      <p class="thesis">Every travel story is built from a finite set of elements. <b>Most marketing uses the dead ones.</b></p>
-    </div>
-    <div class="modes" role="group" aria-label="Audience mode">
-      <button data-mode="both" aria-pressed="true">Both</button>
-      <button data-mode="dest" aria-pressed="false">Destination</button>
-      <button data-mode="advisor" aria-pressed="false">Advisor</button>
+      <p class="thesis">Every travel story is built from a finite set of elements.</p>
     </div>
   </header>
 
@@ -212,6 +230,14 @@
 
   <div class="layout">
     <main>
+      <div class="board-head">
+        <span class="board-label">Audience lens</span>
+        <div class="modes" role="group" aria-label="Audience mode">
+          <button data-mode="both" aria-pressed="true">Both</button>
+          <button data-mode="dest" aria-pressed="false">Destination</button>
+          <button data-mode="advisor" aria-pressed="false">Advisor</button>
+        </div>
+      </div>
       <div class="hall" id="hall"></div>
     </main>
 
@@ -618,6 +644,15 @@ document.querySelectorAll(".modes button").forEach(b=>{
     mode=b.dataset.mode;
     document.querySelectorAll(".modes button").forEach(x=>x.setAttribute("aria-pressed", x===b));
     applyMode();
+    if(mode!=="both"){
+      const wing=document.querySelector(`.family[data-fam="${mode}"]`);
+      if(wing){
+        wing.scrollIntoView({behavior:"smooth", block:"center"});
+        wing.classList.remove("flash"); void wing.offsetWidth;
+        wing.classList.add("flash");
+        setTimeout(()=>wing.classList.remove("flash"), 1900);
+      }
+    }
   });
 });
 
