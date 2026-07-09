@@ -1,27 +1,33 @@
 import type { Metadata } from 'next'
-import localFont from 'next/font/local'
+import { Fraunces, Newsreader, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 import Script from 'next/script'
 import AnalyticsEvents from '@/components/AnalyticsEvents'
 
-const montserrat = localFont({
-  src: '../fonts/montserrat-variable.woff2',
-  variable: '--font-montserrat',
+const fraunces = Fraunces({
+  subsets: ['latin'],
+  variable: '--font-fraunces',
   display: 'swap',
-  weight: '100 900',
+  style: ['normal', 'italic'],
 })
 
-const oswald = localFont({
-  src: '../fonts/oswald-variable.woff2',
-  variable: '--font-oswald',
+const newsreader = Newsreader({
+  subsets: ['latin'],
+  variable: '--font-newsreader',
   display: 'swap',
-  weight: '200 700',
+  style: ['normal', 'italic'],
+})
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-jetbrains',
+  display: 'swap',
 })
 
 export const metadata: Metadata = {
   title: {
-    default: 'Agents of Change | AI Research & Innovation by Janette Roush',
-    template: '%s | Agents of Change',
+    default: 'Janette Roush | Working Inside of AI',
+    template: '%s | Janette Roush',
   },
   description: 'Janette Roush is the SVP, Innovation and Chief AI Officer at Brand USA. A LinkedIn Top Voice and Broadway veteran, she specializes in Generative AI strategy for travel and marketing.',
   // Note: no global canonical here — a layout-level canonical is inherited by
@@ -33,17 +39,17 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Agents of Change | AI Research & Innovation by Janette Roush',
+    title: 'Janette Roush | Working Inside of AI',
     description: 'Janette Roush is the SVP, Innovation and Chief AI Officer at Brand USA. A LinkedIn Top Voice and Broadway veteran, she specializes in Generative AI strategy for travel and marketing.',
     images: ['/og-image.png'],
     url: 'https://janetteroush.com',
-    siteName: 'Agents of Change | AI Research & Innovation by Janette Roush',
+    siteName: 'Janette Roush',
     locale: 'en_US',
     type: 'profile',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Agents of Change | AI Research & Innovation by Janette Roush',
+    title: 'Janette Roush | Working Inside of AI',
     description: 'Janette Roush is the SVP, Innovation and Chief AI Officer at Brand USA. A LinkedIn Top Voice and Broadway veteran, she specializes in Generative AI strategy for travel and marketing.',
     creator: '@janetteroush',
     images: ['/og-image.png'],
@@ -103,8 +109,8 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
         />
       </head>
-      <body className={`${montserrat.variable} ${oswald.variable} font-sans`}>
-        <div className="min-h-screen bg-white">
+      <body className={`${fraunces.variable} ${newsreader.variable} ${jetbrainsMono.variable} font-body`}>
+        <div className="min-h-screen">
           {children}
         </div>
         {/* Google Analytics */}

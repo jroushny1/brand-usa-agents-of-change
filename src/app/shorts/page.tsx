@@ -1,11 +1,7 @@
-'use client'
-
-import { useEffect, useRef, useState } from 'react'
-import Link from 'next/link'
-import { ArrowLeft, ChevronUp, ChevronDown } from 'lucide-react'
-import Image from 'next/image'
-import HLSPlayer from '../webinar/[id]/hls-player'
 import AccessCheck from '@/components/AccessCheck'
+import Header from '@/components/Header'
+import Footer from '@/components/Footer'
+import HLSPlayer from '../webinar/[id]/hls-player'
 
 // Short-form video content
 const shortFormVideos = [
@@ -30,10 +26,6 @@ const shortFormVideos = [
 ]
 
 export default function ShortsPage() {
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const containerRef = useRef<HTMLDivElement>(null)
-  const videoRefs = useRef<(HTMLVideoElement | null)[]>([])
-
   // ItemList schema for AI discoverability
   const itemListSchema = {
     '@context': 'https://schema.org',
@@ -81,48 +73,6 @@ export default function ShortsPage() {
     ]
   }
 
-  // Handle scroll snap
-  useEffect(() => {
-    const container = containerRef.current
-    if (!container) return
-
-    const handleScroll = () => {
-      const scrollTop = container.scrollTop
-      const videoHeight = window.innerHeight
-      const newIndex = Math.round(scrollTop / videoHeight)
-
-      if (newIndex !== currentIndex && newIndex >= 0 && newIndex < shortFormVideos.length) {
-        setCurrentIndex(newIndex)
-      }
-    }
-
-    container.addEventListener('scroll', handleScroll)
-    return () => container.removeEventListener('scroll', handleScroll)
-  }, [currentIndex])
-
-  // Auto-play current video
-  useEffect(() => {
-    videoRefs.current.forEach((video, index) => {
-      if (video) {
-        if (index === currentIndex) {
-          video.play().catch(() => { /* autoplay blocked by browser */ })
-        } else {
-          video.pause()
-        }
-      }
-    })
-  }, [currentIndex])
-
-  const scrollToVideo = (index: number) => {
-    const container = containerRef.current
-    if (container) {
-      container.scrollTo({
-        top: index * window.innerHeight,
-        behavior: 'smooth'
-      })
-    }
-  }
-
   return (
     <>
       {/* JSON-LD Structured Data for AI Discoverability */}
@@ -138,111 +88,49 @@ export default function ShortsPage() {
       />
 
       <AccessCheck>
-        <>
-          {/* Header */}
-          <header className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm border-b border-gray-800">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex justify-between items-center h-16">
-              <Link
-                href="/"
-                className="flex items-center text-white hover:text-gray-300"
-              >
-                <ArrowLeft className="h-5 w-5 mr-2" />
-                Back to Home
-              </Link>
-              <div className="flex items-center">
-                <Image
-                  src="/brandusa-logo.png"
-                  alt="Brand USA"
-                  width={100}
-                  height={33}
-                  className="h-7 w-auto"
-                />
-              </div>
-            </div>
+        <Header />
+
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
+          {/* Editorial page header */}
+          <div className="border-b border-brand-navy pb-10 mb-14">
+            <div className="dateline text-brand-cyan mb-4">Short-form video</div>
+            <h1 className="font-display font-medium text-4xl md:text-6xl leading-none text-brand-navy">
+              Quick Demos &amp; Tutorials
+            </h1>
+            <p className="mt-5 max-w-2xl text-xl leading-relaxed text-brand-navy">
+              Bite-sized videos showcasing practical AI applications and hands-on demonstrations for destination marketing.
+            </p>
           </div>
-        </header>
 
-        {/* Vertical Video Feed */}
-        <div
-          ref={containerRef}
-          className="h-screen overflow-y-scroll snap-y snap-mandatory"
-          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-        >
-          <style jsx>{`
-            div::-webkit-scrollbar {
-              display: none;
-            }
-          `}</style>
-
-          {shortFormVideos.map((video, index) => (
-            <div
-              key={video.id}
-              className="h-screen w-full snap-start snap-always flex items-center justify-center bg-black relative"
-            >
-              {/* Video Player */}
-              <div className="w-full max-w-md h-full relative">
-                <div className="absolute inset-0">
-                  <HLSPlayer
-                    playbackId={video.muxPlaybackId}
-                    poster={`https://image.mux.com/${video.muxPlaybackId}/thumbnail.png`}
-                  />
-                </div>
-
-                {/* Video Info Overlay - Minimal */}
-                <div className="absolute bottom-16 left-0 right-0 px-4 pb-4 bg-gradient-to-t from-black/90 via-black/60 to-transparent pt-8">
-                  <div className="text-white">
-                    <div className="flex items-center justify-between mb-1">
-                      <div className="flex items-center">
-                        <span className="bg-brand-sky px-2 py-0.5 rounded text-xs font-semibold mr-2">
-                          {video.category}
-                        </span>
-                        <span className="text-xs opacity-80">{video.duration}</span>
-                      </div>
-                    </div>
-                    <h2 className="text-base font-bold line-clamp-2">{video.title}</h2>
+          {/* Video grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-14">
+            {shortFormVideos.map((video) => (
+              <article key={video.id}>
+                <div className="relative aspect-video overflow-hidden bg-brand-navy">
+                  <div className="absolute inset-0">
+                    <HLSPlayer
+                      playbackId={video.muxPlaybackId}
+                      poster={`https://image.mux.com/${video.muxPlaybackId}/thumbnail.png`}
+                    />
                   </div>
+                  <div className="absolute inset-3 border border-brand-paper/80 pointer-events-none" />
                 </div>
-              </div>
+                <div className="mt-4 flex items-baseline justify-between dateline">
+                  <span className="text-brand-cyan">{video.category}</span>
+                  <span className="text-brand-slate">{video.duration}</span>
+                </div>
+                <h2 className="mt-2 font-display text-2xl leading-tight text-brand-navy">
+                  {video.title}
+                </h2>
+                <p className="mt-2 text-brand-gray-blue">
+                  {video.description}
+                </p>
+              </article>
+            ))}
+          </div>
+        </main>
 
-              {/* Navigation Controls */}
-              {index > 0 && (
-                <button
-                  onClick={() => scrollToVideo(index - 1)}
-                  className="absolute top-24 right-4 p-3 bg-black/50 rounded-full text-white hover:bg-black/70 transition"
-                  aria-label="Previous video"
-                >
-                  <ChevronUp className="h-6 w-6" />
-                </button>
-              )}
-
-              {index < shortFormVideos.length - 1 && (
-                <button
-                  onClick={() => scrollToVideo(index + 1)}
-                  className="absolute bottom-24 right-4 p-3 bg-black/50 rounded-full text-white hover:bg-black/70 transition"
-                  aria-label="Next video"
-                >
-                  <ChevronDown className="h-6 w-6" />
-                </button>
-              )}
-
-              {/* Progress Indicators */}
-              <div className="absolute top-20 right-4 flex flex-col gap-2">
-                {shortFormVideos.map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => scrollToVideo(i)}
-                    className={`w-1.5 h-8 rounded-full transition-all ${
-                      i === currentIndex ? 'bg-white' : 'bg-white/30'
-                    }`}
-                    aria-label={`Go to video ${i + 1}`}
-                  />
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-        </>
+        <Footer />
       </AccessCheck>
     </>
   )

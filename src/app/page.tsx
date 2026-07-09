@@ -1,9 +1,10 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import type { Metadata } from 'next'
-import { Play, Clock, Video, Headphones, Wrench, ArrowRight } from 'lucide-react'
+import { Play, Clock, ArrowRight } from 'lucide-react'
 import AccessCheck from '@/components/AccessCheck'
 import Header from '@/components/Header'
+import Footer from '@/components/Footer'
 import { webinarCards as webinars } from '@/data/webinar-cards'
 import { shortFormVideos } from '@/data/shorts'
 import { webinarData } from '@/data/webinars'
@@ -25,6 +26,25 @@ export const metadata: Metadata = {
   },
 }
 
+
+// Curated "latest" index for the front page — newest items across press,
+// podcasts, and field notes. Edit this list by hand when something new lands.
+const latestIndex = [
+  { date: 'May 21 ’26', title: 'What Should DMOs Actually Be Doing With AI Right Now?', category: 'Podcast', href: '/press' },
+  { date: 'May 4 ’26', title: 'Destinations’ high-stakes game with AI — Travel Weekly', category: 'Press', href: '/press' },
+  { date: 'Mar 7 ’26', title: 'The Leapfrog Thesis: Why Some Teams Should Skip Chatbots Entirely', category: 'Field Note', href: '/notes/leapfrog-thesis' },
+  { date: 'Mar 4 ’26', title: 'From Voice Recording to Live Website: How I Built the Wyoming Keynote Recap', category: 'Field Note', href: '/notes/plaud-to-website' },
+  { date: 'Feb ’26', title: 'The Taylor Swift of Travel AI — Hospitality Daily', category: 'Podcast', href: '/press' },
+]
+
+// Story Lab element tiles shown on the front-page Lab card (real identifiers
+// from the Periodic Table of Storytelling chart).
+const storyLabTiles = [
+  { symbol: 'C', name: 'Conflict' },
+  { symbol: 'Re', name: 'Reveal' },
+  { symbol: 'Cmx', name: 'Climax' },
+  { symbol: 'Den', name: 'Dénouement' },
+]
 
 // Featured walkthrough
 const featuredWalkthrough = {
@@ -267,371 +287,283 @@ export default function HomePage() {
       <AccessCheck>
         <Header />
 
-      {/* Hero Section */}
-      <section className="relative overflow-hidden h-[600px] flex items-center text-white">
-        {/* Background Image */}
-        <div className="absolute inset-0 z-0">
+      {/* Hero — full-bleed stage photo, hairline frame, headline on paper chips */}
+      <section className="relative">
+        <div className="relative h-[80vh] min-h-[540px] max-h-[760px] overflow-hidden bg-[#0A1220]">
           <Image
-            src="https://images.unsplash.com/photo-1534430480872-3498386e7856?q=80&w=2070&auto=format&fit=crop"
-            alt="Times Square in New York City illuminated at night with crowds of tourists - representing destination marketing and tourism innovation"
+            src="/hero-keynote.jpg"
+            alt="Janette Roush delivering a keynote on the Destination as a Service framework to a full room"
             fill
-            className="object-cover"
+            className="object-cover object-[50%_38%]"
             priority
+            sizes="100vw"
           />
-          <div className="absolute inset-0 bg-brand-navy opacity-85" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0A1220]/10 via-transparent to-[#0A1220]/40" />
+          <div className="absolute inset-5 border border-brand-paper/90 z-10 pointer-events-none" />
+          <div className="absolute top-10 left-10 md:left-12 z-20 dateline text-brand-paper bg-[#0A1220]/55 px-3 py-2">
+            Keynotes · Tools · Field Notes
+          </div>
+          <div className="absolute bottom-10 right-10 md:right-12 z-20 dateline text-brand-paper bg-[#0A1220]/55 px-3 py-1.5">
+            From the stage archive · 2026
+          </div>
         </div>
-
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          <div className="text-center max-w-4xl mx-auto">
-            <div className="text-xs tracking-widest text-gray-400 uppercase mb-4 font-medium">
-              Curated by Janette Roush
-            </div>
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight tracking-tight">
-              The AI Lab for Travel Innovation
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="relative z-20 -mt-24 md:-mt-36 pb-14 border-b border-brand-navy">
+            <h1 className="font-display font-medium text-brand-navy leading-none text-5xl sm:text-6xl md:text-7xl lg:text-8xl flex flex-col items-start">
+              <span className="bg-brand-paper px-3 md:px-4 pt-3 pb-1">Working <em>inside</em></span>
+              <span className="bg-brand-paper px-3 md:px-4 pt-2 pb-3">of AI.</span>
             </h1>
-            <div className="text-xs text-gray-400 mb-4">
-              Last Updated: {new Date().toISOString().split('T')[0]}
-            </div>
-            <p className="text-xl md:text-2xl mb-10 text-white/90 max-w-3xl mx-auto leading-relaxed">
-              A strategic toolkit and research library for the Agents of Change program.
+            <p className="mt-7 max-w-xl text-xl leading-relaxed text-brand-navy">
+              Keynotes, working tools, and field notes from the person building the thing she talks about on stage.
             </p>
-
-            {/* Dual CTAs */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
-              <a
-                href="#webinars"
-                className="bg-white text-brand-cyan px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition inline-flex items-center justify-center shadow-lg hover:shadow-xl text-lg"
-              >
-                Start Learning
-                <Play className="ml-2 h-5 w-5" />
-              </a>
-              <Link
-                href="/library"
-                className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white/10 transition inline-flex items-center justify-center text-lg"
-              >
-                Explore Resources
-              </Link>
-            </div>
           </div>
         </div>
       </section>
 
-      {/* Content Navigation Cards */}
-      <section className="py-16 bg-gradient-to-b from-gray-50 to-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-brand-navy mb-4 font-display">
-              Explore Our Platform
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Choose your learning path with curated content designed for tourism professionals
-            </p>
+      {/* Front page — the Lab lead + latest index */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
+        <div className="dateline text-brand-slate flex items-center gap-4 mb-10">
+          <span>The Lab &amp; the latest</span>
+          <span className="flex-1 h-px bg-brand-sand" aria-hidden="true" />
+        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          <div className="lg:col-span-5 space-y-8">
+            <Link href="/story-lab" className="group block relative border border-brand-navy p-6 hover:border-brand-cyan transition-colors">
+              <span className="absolute -top-2.5 left-5 bg-brand-paper px-2 dateline text-brand-cyan">The Lab</span>
+              <h3 className="font-display text-3xl text-brand-navy group-hover:text-brand-cyan transition-colors">Story Lab</h3>
+              <p className="mt-2 mb-6 text-brand-gray-blue">
+                The Periodic Table of Travel Storytelling — score any destination&apos;s content against the elements of narrative.
+              </p>
+              <div className="flex gap-2" aria-hidden="true">
+                {storyLabTiles.map((tile, i) => (
+                  <div
+                    key={tile.symbol}
+                    className={`w-14 h-16 border p-1.5 flex flex-col justify-between ${
+                      i === 1 ? 'bg-brand-cyan border-brand-cyan' : 'bg-brand-paper2 border-brand-sand'
+                    }`}
+                  >
+                    <span className={`font-display text-lg leading-none ${i === 1 ? 'text-brand-paper' : 'text-brand-navy'}`}>
+                      {tile.symbol}
+                    </span>
+                    <span className={`font-mono text-[8px] uppercase tracking-wide leading-tight ${i === 1 ? 'text-brand-paper/85' : 'text-brand-slate'}`}>
+                      {tile.name}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </Link>
+            <Link href="/ai-audit" className="group block relative border border-brand-navy p-6 hover:border-brand-cyan transition-colors">
+              <span className="absolute -top-2.5 left-5 bg-brand-paper px-2 dateline text-brand-cyan">The Lab</span>
+              <h3 className="font-display text-3xl text-brand-navy group-hover:text-brand-cyan transition-colors">AI Site Audit</h3>
+              <p className="mt-2 mb-5 text-brand-gray-blue">Run any DMO website through the readiness scan.</p>
+              <div className="border-t border-brand-sand">
+                {['Schema coverage', 'Site hygiene', 'Content patterns'].map((row) => (
+                  <div key={row} className="flex justify-between items-baseline py-2 border-b border-brand-sand dateline text-brand-navy">
+                    <span>{row}</span>
+                    <span className="text-brand-cyan" aria-hidden="true">→</span>
+                  </div>
+                ))}
+              </div>
+            </Link>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {/* AI Training Videos Card */}
-            <Link
-              href="#webinars"
-              className="group bg-white rounded-xl border border-gray-200 p-8 hover:shadow-xl hover:-translate-y-2 transition-all duration-300"
-            >
-              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-brand-blue to-brand-cyan flex items-center justify-center mb-6">
-                <Video className="h-8 w-8 text-white" />
-              </div>
-              <h3 className="text-2xl font-semibold text-brand-navy mb-3">
-                AI Training Videos
-              </h3>
-              <p className="text-gray-600 mb-6 leading-relaxed">
-                {webinars.length} comprehensive webinars covering AI fundamentals, strategy, and implementation for tourism marketing
-              </p>
-              <div className="inline-flex items-center text-brand-cyan font-semibold group-hover:gap-2 transition-all">
-                Watch Now
-                <ArrowRight className="ml-1 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-              </div>
-            </Link>
-
-            {/* Podcasts & Interviews Card */}
-            <Link
-              href="/library#podcasts"
-              className="group bg-white rounded-xl border border-gray-200 p-8 hover:shadow-xl hover:-translate-y-2 transition-all duration-300"
-            >
-              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-brand-blue to-brand-navy flex items-center justify-center mb-6">
-                <Headphones className="h-8 w-8 text-white" />
-              </div>
-              <h3 className="text-2xl font-semibold text-brand-navy mb-3">
-                Podcasts & Interviews
-              </h3>
-              <p className="text-gray-600 mb-6 leading-relaxed">
-                13 expert conversations exploring AI&apos;s impact on destination marketing from 2023-2025
-              </p>
-              <div className="inline-flex items-center text-brand-cyan font-semibold group-hover:gap-2 transition-all">
-                Listen
-                <ArrowRight className="ml-1 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-              </div>
-            </Link>
-
-            {/* AI Tools & Resources Card */}
-            <Link
-              href="/library"
-              className="group bg-white rounded-xl border border-gray-200 p-8 hover:shadow-xl hover:-translate-y-2 transition-all duration-300"
-            >
-              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-brand-cyan to-brand-blue flex items-center justify-center mb-6">
-                <Wrench className="h-8 w-8 text-white" />
-              </div>
-              <h3 className="text-2xl font-semibold text-brand-navy mb-3">
-                AI Tools & Resources
-              </h3>
-              <p className="text-gray-600 mb-6 leading-relaxed">
-                Curated AI tools, platforms, templates, and industry resources for immediate implementation
-              </p>
-              <div className="inline-flex items-center text-brand-cyan font-semibold group-hover:gap-2 transition-all">
-                Browse
-                <ArrowRight className="ml-1 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-              </div>
-            </Link>
+          <div className="lg:col-span-7">
+            <div className="border-t border-brand-navy">
+              {latestIndex.map((item) => (
+                <Link
+                  key={item.title}
+                  href={item.href}
+                  className="group grid grid-cols-1 sm:grid-cols-[6.5rem_1fr_auto] gap-2 sm:gap-5 items-baseline py-5 border-b border-brand-sand"
+                >
+                  <span className="dateline text-brand-slate">{item.date}</span>
+                  <h4 className="text-xl leading-snug text-brand-navy group-hover:text-brand-cyan transition-colors">
+                    {item.title}
+                  </h4>
+                  <span className="dateline text-brand-cyan whitespace-nowrap">{item.category}</span>
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       {/* Webinars Grid */}
-      <section id="webinars" className="py-16 lg:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
-              Webinar Series
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Deep-dive sessions from industry experts on AI implementation for tourism marketing.
-            </p>
+      <section id="webinars" className="border-t border-brand-sand">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
+          <div className="dateline text-brand-slate flex items-center gap-4 mb-10">
+            <span>Webinar Series</span>
+            <span className="flex-1 h-px bg-brand-sand" aria-hidden="true" />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-14">
             {webinars.map((webinar, index) => (
-              <Link
-                key={webinar.id}
-                href={`/webinar/${webinar.id}`}
-                className="group relative rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 bg-white"
-              >
-                <div className="aspect-video relative overflow-hidden bg-gray-100">
+              <Link key={webinar.id} href={`/webinar/${webinar.id}`} className="group">
+                <div className="relative aspect-video overflow-hidden bg-brand-navy">
                   <Image
                     src={webinar.thumbnail}
                     alt={webinar.title}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-300"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
                     priority={index === 0}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <div className="flex items-center text-white">
-                      <Play className="h-10 w-10 mr-3 drop-shadow-lg" fill="white" />
-                      <span className="font-semibold text-lg drop-shadow-lg">Play Video</span>
-                    </div>
-                  </div>
+                  <div className="absolute inset-3 border border-brand-paper/80 pointer-events-none" />
                 </div>
-                <div className="p-6">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className={`text-sm font-medium px-3 py-1 rounded-full ${
-                      webinar.level === 'Tactical' ? 'bg-blue-100 text-blue-700' :
-                      'bg-purple-100 text-purple-700'
-                    }`}>
-                      {webinar.level}
-                    </span>
-                    <div className="flex items-center text-gray-500 text-sm">
-                      <Clock className="h-4 w-4 mr-1" />
-                      {webinar.duration}
-                    </div>
-                  </div>
-                  <h3 className="text-xl font-bold text-brand-navy mb-2 group-hover:text-brand-blue transition-colors">
-                    {webinar.title}
-                  </h3>
-                  <p className="text-gray-600 line-clamp-2">
-                    {webinar.description}
-                  </p>
+                <div className="mt-4 flex items-baseline justify-between dateline">
+                  <span className="text-brand-cyan">{webinar.level}</span>
+                  <span className="text-brand-slate">{webinar.duration}</span>
                 </div>
+                <h3 className="mt-2 font-display text-2xl leading-tight text-brand-navy group-hover:text-brand-cyan transition-colors">
+                  {webinar.title}
+                </h3>
+                <p className="mt-2 text-brand-gray-blue line-clamp-2">
+                  {webinar.description}
+                </p>
               </Link>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Featured Walkthrough */}
-      <section className="py-16 lg:py-24 bg-gradient-to-b from-brand-navy to-[#1a2d4a]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <div className="text-xs tracking-widest text-brand-cyan uppercase mb-4 font-semibold">
-                Video Walkthrough
-              </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 font-display">
-                {featuredWalkthrough.title}
-              </h2>
-              <p className="text-lg text-gray-300 mb-6 leading-relaxed">
-                {featuredWalkthrough.description}
-              </p>
-              <div className="flex items-center gap-6 mb-8">
-                <span className="flex items-center text-gray-400 text-sm">
-                  <Clock className="h-4 w-4 mr-1" />
-                  {featuredWalkthrough.duration}
-                </span>
-                <span className="text-sm font-medium px-3 py-1 rounded-full bg-brand-cyan/20 text-brand-cyan">
-                  9 focused clips
-                </span>
-              </div>
-              <Link
-                href={featuredWalkthrough.href}
-                className="inline-flex items-center bg-brand-cyan text-brand-navy px-6 py-3 rounded-lg font-semibold hover:bg-white transition"
-              >
-                Watch the Walkthrough
-                <Play className="ml-2 h-5 w-5" />
-              </Link>
+      {/* Featured Walkthrough — ink band */}
+      <section className="bg-brand-navy">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <div className="dateline text-[#E0559B] mb-5">Video Walkthrough</div>
+            <h2 className="font-display text-4xl md:text-5xl leading-tight text-brand-paper mb-5">
+              {featuredWalkthrough.title}
+            </h2>
+            <p className="text-lg text-brand-paper/80 leading-relaxed mb-6 max-w-xl">
+              {featuredWalkthrough.description}
+            </p>
+            <div className="flex items-center gap-6 mb-8 dateline text-brand-paper/70">
+              <span className="flex items-center">
+                <Clock className="h-4 w-4 mr-2" />
+                {featuredWalkthrough.duration}
+              </span>
+              <span>9 focused clips</span>
             </div>
-            <Link href={featuredWalkthrough.href} className="group relative rounded-xl overflow-hidden shadow-2xl">
-              <div className="aspect-video relative overflow-hidden bg-gray-900">
-                <Image
-                  src={featuredWalkthrough.thumbnail}
-                  alt={featuredWalkthrough.title}
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-300 opacity-80"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-16 h-16 rounded-full bg-brand-cyan/90 flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <Play className="h-8 w-8 text-white" fill="white" />
-                  </div>
-                </div>
-              </div>
+            <Link
+              href={featuredWalkthrough.href}
+              className="inline-flex items-center dateline text-brand-paper border border-brand-paper px-5 py-3 hover:bg-brand-paper hover:text-brand-navy transition-colors"
+            >
+              Watch the Walkthrough
+              <Play className="ml-2 h-4 w-4" />
             </Link>
           </div>
+          <Link href={featuredWalkthrough.href} className="group relative block">
+            <div className="aspect-video relative overflow-hidden bg-[#0A1220]">
+              <Image
+                src={featuredWalkthrough.thumbnail}
+                alt={featuredWalkthrough.title}
+                fill
+                className="object-cover opacity-90 group-hover:opacity-100 transition-opacity"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+              <div className="absolute inset-3 border border-brand-paper/80 pointer-events-none" />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-16 h-16 rounded-full bg-brand-paper/90 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <Play className="h-7 w-7 text-brand-navy" fill="currentColor" />
+                </div>
+              </div>
+            </div>
+          </Link>
         </div>
       </section>
 
       {/* Short-Form Videos Section */}
-      <section className="py-16 lg:py-24 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
-              Quick Demos & Tutorials
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Bite-sized videos showcasing practical AI applications and hands-on demonstrations.
-            </p>
-          </div>
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
+        <div className="dateline text-brand-slate flex items-center gap-4 mb-10">
+          <span>Quick Demos &amp; Tutorials</span>
+          <span className="flex-1 h-px bg-brand-sand" aria-hidden="true" />
+        </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {shortFormVideos.map((video) => (
-              <Link
-                key={video.id}
-                href="/shorts"
-                className="group relative rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 bg-white"
-              >
-                <div className="aspect-video relative overflow-hidden bg-gray-100">
-                  <Image
-                    src={video.thumbnail}
-                    alt={video.title}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-300"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                  <div className="absolute top-3 right-3">
-                    <span className="bg-brand-sky text-white text-xs font-semibold px-2 py-1 rounded">
-                      {video.category}
-                    </span>
-                  </div>
-                  <div className="absolute bottom-3 left-3 right-3">
-                    <div className="flex items-center text-white">
-                      <Play className="h-8 w-8 mr-2 drop-shadow-lg" fill="white" />
-                      <span className="font-semibold drop-shadow-lg">{video.duration}</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="p-5">
-                  <h3 className="text-lg font-bold text-brand-navy mb-2 group-hover:text-brand-blue transition-colors line-clamp-2">
-                    {video.title}
-                  </h3>
-                  <p className="text-gray-600 text-sm line-clamp-3">
-                    {video.description}
-                  </p>
-                </div>
-              </Link>
-            ))}
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+          {shortFormVideos.map((video) => (
+            <Link key={video.id} href="/shorts" className="group">
+              <div className="relative aspect-video overflow-hidden bg-brand-navy">
+                <Image
+                  src={video.thumbnail}
+                  alt={video.title}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
+                <div className="absolute inset-3 border border-brand-paper/80 pointer-events-none" />
+              </div>
+              <div className="mt-4 flex items-baseline justify-between dateline">
+                <span className="text-brand-cyan">{video.category}</span>
+                <span className="text-brand-slate">{video.duration}</span>
+              </div>
+              <h3 className="mt-2 font-display text-xl leading-tight text-brand-navy group-hover:text-brand-cyan transition-colors line-clamp-2">
+                {video.title}
+              </h3>
+            </Link>
+          ))}
         </div>
       </section>
 
       {/* Conference Talks */}
-      <section className="py-16 lg:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
-              Conference Talks
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Keynotes and live sessions from tourism industry events.
-            </p>
+      <section className="border-t border-brand-sand">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
+          <div className="dateline text-brand-slate flex items-center gap-4 mb-10">
+            <span>Conference Talks</span>
+            <span className="flex-1 h-px bg-brand-sand" aria-hidden="true" />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-14">
             {conferenceTalks.map((talk) => (
-              <Link
-                key={talk.id}
-                href={`/webinar/${talk.id}`}
-                className="group relative rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 bg-white"
-              >
-                <div className="aspect-video relative overflow-hidden bg-gray-100">
+              <Link key={talk.id} href={`/webinar/${talk.id}`} className="group">
+                <div className="relative aspect-video overflow-hidden bg-brand-navy">
                   <Image
                     src={`https://image.mux.com/${talk.muxPlaybackId}/thumbnail.png?width=800&height=450&time=10`}
                     alt={talk.title}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-300"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <div className="flex items-center text-white">
-                      <Play className="h-10 w-10 mr-3 drop-shadow-lg" fill="white" />
-                      <span className="font-semibold text-lg drop-shadow-lg">Play Video</span>
-                    </div>
-                  </div>
+                  <div className="absolute inset-3 border border-brand-paper/80 pointer-events-none" />
                 </div>
-                <div className="p-6">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm font-medium px-3 py-1 rounded-full bg-amber-100 text-amber-700">
-                      Conference Talk
-                    </span>
-                    <div className="flex items-center text-gray-500 text-sm">
-                      <Clock className="h-4 w-4 mr-1" />
-                      {talk.duration}
-                    </div>
-                  </div>
-                  <h3 className="text-xl font-bold text-brand-navy mb-2 group-hover:text-brand-blue transition-colors">
-                    {talk.title}
-                  </h3>
-                  <p className="text-gray-600 line-clamp-2">
-                    {talk.description}
-                  </p>
+                <div className="mt-4 flex items-baseline justify-between dateline">
+                  <span className="text-brand-cyan">Conference Talk</span>
+                  <span className="text-brand-slate">{talk.duration}</span>
                 </div>
+                <h3 className="mt-2 font-display text-2xl leading-tight text-brand-navy group-hover:text-brand-cyan transition-colors">
+                  {talk.title}
+                </h3>
+                <p className="mt-2 text-brand-gray-blue line-clamp-2">
+                  {talk.description}
+                </p>
               </Link>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-16 bg-brand-blue text-white">
-        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Ready to Transform Your Destination Marketing?
-          </h2>
-          <p className="text-xl mb-8 text-blue-100">
-            Join tourism professionals across the USA who are leading with AI.
-          </p>
-          <div className="space-y-4 text-sm text-blue-100">
-            <p>Questions? Email <a href="mailto:jroush@thebrandusa.com" className="underline">jroush@thebrandusa.com</a></p>
+      {/* In the Media — press as pull quotes */}
+      <section className="bg-brand-paper2 border-t border-brand-navy">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
+          <div className="dateline text-brand-slate flex items-center gap-4 mb-10">
+            <span>In the Media</span>
+            <span className="flex-1 h-px bg-brand-sand" aria-hidden="true" />
           </div>
+          <blockquote className="font-display italic text-3xl md:text-5xl leading-tight max-w-4xl text-brand-navy">
+            <span className="text-brand-cyan">&ldquo;</span>AI isn&rsquo;t giving us a roadmap. As a DMO, we have to figure it out.<span className="text-brand-cyan">&rdquo;</span>
+          </blockquote>
+          <cite className="dateline text-brand-slate block mt-6 not-italic">
+            Travel Weekly · &ldquo;Destinations&rsquo; high-stakes game with AI&rdquo; · May 2026
+          </cite>
+          <Link
+            href="/press"
+            className="mt-10 inline-flex items-center dateline text-brand-navy border border-brand-navy px-5 py-3 hover:border-brand-cyan hover:text-brand-cyan transition-colors"
+          >
+            All press &amp; podcast appearances
+            <ArrowRight className="ml-2 h-4 w-4" />
+          </Link>
         </div>
       </section>
+
+      <Footer />
+
       </AccessCheck>
     </>
   )

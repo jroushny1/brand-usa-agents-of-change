@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowLeft, ExternalLink } from 'lucide-react'
 import AccessCheck from '@/components/AccessCheck'
+import Footer from '@/components/Footer'
 import { resources } from '@/data/resources'
 import type { Metadata } from 'next'
 
@@ -140,6 +141,10 @@ const generateLibrarySchema = () => {
 export default function LibraryPage() {
   const { collectionSchema, podcastListSchema, faqSchema } = generateLibrarySchema()
 
+  // Featured guides get the bordered Lab-card treatment; everything else is
+  // rendered as a rule-separated editorial index.
+  const featuredCategories = ['Personal OS Guides']
+
   return (
     <AccessCheck>
       <>
@@ -161,14 +166,14 @@ export default function LibraryPage() {
         />
 
         {/* Header */}
-        <header className="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
+        <header className="bg-brand-paper/95 backdrop-blur-sm border-b border-brand-navy sticky top-0 z-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-16">
               <Link
                 href="/"
-                className="flex items-center text-brand-navy hover:text-brand-cyan transition-colors"
+                className="flex items-center dateline text-brand-navy hover:text-brand-cyan transition-colors"
               >
-                <ArrowLeft className="h-5 w-5 mr-2" aria-hidden="true" />
+                <ArrowLeft className="h-4 w-4 mr-2" aria-hidden="true" />
                 Back to Home
               </Link>
               <div className="flex items-center">
@@ -185,224 +190,114 @@ export default function LibraryPage() {
         </header>
 
         {/* Page Header */}
-        <section className="relative bg-gradient-to-br from-brand-navy via-brand-blue to-brand-cyan py-8 sm:py-12 md:py-16">
-          <div className="absolute inset-0 opacity-10">
-            <div className="absolute top-10 left-10 w-72 h-72 bg-white rounded-full blur-3xl"></div>
-            <div className="absolute bottom-10 right-10 w-96 h-96 bg-white rounded-full blur-3xl"></div>
-          </div>
-          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-white mb-3 sm:mb-4">
-              AI Tools & Resources
-            </h1>
-            <p className="text-base sm:text-lg md:text-xl text-white/90 max-w-3xl mx-auto">
-              Podcasts, tools, guides, and industry links curated for tourism professionals
-            </p>
-          </div>
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12 border-b border-brand-navy">
+          <div className="dateline text-brand-cyan mb-5">The Library</div>
+          <h1 className="font-display font-medium text-brand-navy leading-none text-5xl sm:text-6xl md:text-7xl">
+            AI Tools &amp; Resources
+          </h1>
+          <p className="mt-6 max-w-2xl text-xl leading-relaxed text-brand-navy">
+            Podcasts, tools, guides, and industry links curated for tourism professionals
+          </p>
         </section>
 
         {/* Main Content */}
-        <main className="bg-gradient-to-b from-gray-50 to-white min-h-screen">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 md:py-12">
+        <main>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
 
             {/* Resource Categories */}
-            <div className="space-y-6 sm:space-y-10 md:space-y-12">
+            <div className="space-y-16 lg:space-y-20">
               {resources.map((category, categoryIndex) => {
-                const isPodcast = category.category.includes('Podcast') || category.category === 'Conversations on AI in Tourism'
-                const isTools = category.category.includes('AI') && !category.category.includes('Podcast') && category.category !== 'Conversations on AI in Tourism'
-
-                // Define gradient colors by category
-                const getCategoryGradient = () => {
-                  if (isPodcast) return 'from-brand-blue to-brand-navy'
-                  if (isTools) return 'from-brand-cyan to-brand-blue'
-                  if (category.category.includes('Industry')) return 'from-brand-accent-blue to-brand-navy'
-                  if (category.category.includes('Official')) return 'from-brand-blue to-brand-cyan'
-                  if (category.category.includes('Learning')) return 'from-brand-blue to-brand-cyan'
-                  return 'from-brand-blue to-brand-cyan'
-                }
-
-                const getBgColor = () => {
-                  if (isPodcast) return 'bg-gradient-to-br from-blue-50 to-cyan-50'
-                  if (isTools) return 'bg-gradient-to-br from-cyan-50 to-blue-50'
-                  return 'bg-white'
-                }
+                const isFeatured = featuredCategories.includes(category.category)
 
                 return (
-                  <section key={categoryIndex} id={category.category.toLowerCase().replace(/\s+/g, '-')} className={`${getBgColor()} rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 shadow-sm`}>
-                    {/* Section Header */}
-                    <div className="mb-4 sm:mb-6">
-                      <h2 className="text-xl sm:text-2xl md:text-3xl font-display font-bold text-brand-navy">
-                        {category.category}
-                      </h2>
+                  <section key={categoryIndex} id={category.category.toLowerCase().replace(/\s+/g, '-')}>
+                    {/* Section Label */}
+                    <div className="flex items-center gap-4 mb-10">
+                      <h2 className="dateline text-brand-slate">{category.category}</h2>
+                      <span className="flex-1 h-px bg-brand-sand" aria-hidden="true" />
                     </div>
 
-                    {/* Podcast Layout - Improved Cards with Full Text */}
-                    {isPodcast ? (
-                      <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 list-none">
-                        {category.items.map((item, itemIndex) => {
-                          const Icon = item.icon
-                          // Extract podcast name and episode title from the title
-                          const [podcastName, episodeTitle] = item.title.includes('–')
-                            ? item.title.split('–').map(s => s.trim())
-                            : [item.title, '']
-
-                          const isInternalLink = item.isInternal
-                          const targetUrl = item.url
-
-                          return (
-                            <li key={itemIndex}>
-                              <Link
-                                href={targetUrl}
-                                target={isInternalLink ? undefined : "_blank"}
-                                rel={isInternalLink ? undefined : "noopener noreferrer"}
-                                aria-label={`Listen to ${item.title}${item.date ? ` from ${item.date}` : ''}`}
-                                className="group bg-white rounded-xl border border-gray-200 p-5 sm:p-6 hover:shadow-xl hover:border-brand-blue hover:-translate-y-1 transition-all duration-300 flex flex-col min-h-[240px]"
-                              >
-                                {/* Podcast Icon & Name - Larger */}
-                                <div className="flex items-start gap-3 mb-4">
-                                  <div className="w-14 h-14 flex-shrink-0 rounded-xl bg-gradient-to-br from-brand-blue to-brand-navy flex items-center justify-center group-hover:scale-105 transition-transform">
-                                    <Icon className="h-7 w-7 text-white" aria-hidden="true" />
-                                  </div>
-                                  {/* Podcast Name & Date */}
-                                  <div className="flex-1">
-                                    <div className="text-base font-bold text-brand-blue leading-tight mb-1">
-                                      {podcastName}
-                                    </div>
-                                    <div className="flex items-center gap-2">
-                                      {item.date && (
-                                        <div className="text-sm text-gray-500">
-                                          {item.date}
-                                        </div>
-                                      )}
-                                      {item.status === 'recorded' && (
-                                        <span className="inline-flex items-center px-2 py-0.5 text-xs font-semibold rounded-full bg-blue-100 text-blue-700">
-                                          RECORDED
-                                        </span>
-                                      )}
-                                      {item.status === 'upcoming' && (
-                                        <span className="inline-flex items-center px-2 py-0.5 text-xs font-semibold rounded-full bg-green-100 text-green-700">
-                                          UPCOMING
-                                        </span>
-                                      )}
-                                    </div>
-                                  </div>
-                                </div>
-
-                                {/* Episode Title - No Truncation */}
-                                {episodeTitle && (
-                                  <h3 className="text-base sm:text-lg font-bold text-brand-navy mb-3 group-hover:text-brand-cyan transition-colors leading-snug">
-                                    {episodeTitle}
-                                  </h3>
-                                )}
-
-                                {/* Description - More Visible */}
-                                <p className="text-sm text-gray-600 leading-relaxed mb-4 line-clamp-4 flex-grow">
-                                  {item.description}
-                                </p>
-
-                                {/* Action Link */}
-                                <div className="mt-auto pt-3 border-t border-gray-100">
-                                  <span className="text-sm font-semibold text-brand-blue group-hover:text-brand-cyan inline-flex items-center gap-2 group-hover:gap-3 transition-all">
-                                    {isInternalLink ? 'View Full Episode' : 'Listen Now'}
-                                    {isInternalLink ? (
-                                      <span className="text-lg" aria-hidden="true">→</span>
-                                    ) : (
-                                      <ExternalLink className="h-4 w-4" aria-hidden="true" />
-                                    )}
-                                  </span>
-                                </div>
-                              </Link>
-                            </li>
-                          )
-                        })}
+                    {isFeatured ? (
+                      /* Featured guides — bordered Lab cards */
+                      <ul className="grid grid-cols-1 md:grid-cols-3 gap-8 list-none">
+                        {category.items.map((item, itemIndex) => (
+                          <li key={itemIndex}>
+                            <a
+                              href={item.url}
+                              target={item.isInternal ? undefined : '_blank'}
+                              rel={item.isInternal ? undefined : 'noopener noreferrer'}
+                              aria-label={`${item.isInternal ? 'View' : 'Visit'} ${item.title}: ${item.description}`}
+                              className="group relative block h-full border border-brand-navy p-6 hover:border-brand-cyan transition-colors"
+                            >
+                              <span className="absolute -top-2.5 left-5 bg-brand-paper px-2 dateline text-brand-cyan">
+                                Guide {String(itemIndex + 1).padStart(2, '0')}
+                              </span>
+                              <h3 className="font-display text-2xl leading-tight text-brand-navy group-hover:text-brand-cyan transition-colors">
+                                {item.title}
+                              </h3>
+                              <p className="mt-3 text-brand-gray-blue">
+                                {item.description}
+                              </p>
+                            </a>
+                          </li>
+                        ))}
                       </ul>
-                    ) : isTools ? (
-                      /* AI Tools Layout - Logo Grid */
-                      <ul className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 list-none">
+                    ) : (
+                      /* Editorial index — rule-separated rows */
+                      <ul className="border-t border-brand-navy list-none">
                         {category.items.map((item, itemIndex) => {
-                          const Icon = item.icon
-                          return (
-                            <li key={itemIndex}>
+                          const RowLink = ({ children, className }: { children: React.ReactNode; className: string }) =>
+                            item.isInternal ? (
+                              <Link
+                                href={item.url}
+                                aria-label={`View ${item.title}: ${item.description}`}
+                                className={className}
+                              >
+                                {children}
+                              </Link>
+                            ) : (
                               <a
                                 href={item.url}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                aria-label={`Explore ${item.title}: ${item.description}`}
-                                className="group bg-white rounded-lg border border-gray-200 p-3 sm:p-4 hover:shadow-lg hover:border-brand-cyan hover:-translate-y-0.5 transition-all duration-200 flex flex-col h-full"
+                                aria-label={`Visit ${item.title}: ${item.description}`}
+                                className={className}
                               >
-                                {/* Logo */}
-                                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-lg overflow-hidden mb-2 sm:mb-3 group-hover:scale-105 transition-transform flex items-center justify-center bg-gray-50">
-                                  {item.logo ? (
-                                    <Image
-                                      src={item.logo}
-                                      alt=""
-                                      aria-hidden="true"
-                                      width={56}
-                                      height={56}
-                                      className="w-full h-full object-contain p-1.5 sm:p-2"
-                                    />
-                                  ) : (
-                                    <div className={`w-full h-full bg-gradient-to-br ${getCategoryGradient()} flex items-center justify-center`}>
-                                      <Icon className="h-6 w-6 sm:h-7 sm:w-7 text-white" aria-hidden="true" />
-                                    </div>
-                                  )}
-                                </div>
-
-                                {/* Title */}
-                                <h3 className="text-sm sm:text-base font-bold text-brand-navy mb-1.5 sm:mb-2 group-hover:text-brand-cyan transition-colors line-clamp-1">
-                                  {item.title}
-                                </h3>
-
-                                {/* Description */}
-                                <p className="text-xs sm:text-sm text-gray-600 leading-relaxed mb-2 line-clamp-2 sm:line-clamp-3">
-                                  {item.description}
-                                </p>
-
-                                {/* CTA */}
-                                <div className="inline-flex items-center text-xs sm:text-sm font-semibold text-brand-cyan group-hover:gap-1 transition-all mt-auto">
-                                  Explore
-                                  <ExternalLink className="ml-1 h-3 w-3 sm:h-4 sm:w-4" aria-hidden="true" />
-                                </div>
+                                {children}
                               </a>
-                            </li>
-                          )
-                        })}
-                      </ul>
-                    ) : (
-                      /* Other Resources - Compact Cards */
-                      <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 list-none">
-                        {category.items.map((item, itemIndex) => {
-                          const Icon = item.icon
+                            )
+
                           return (
                             <li key={itemIndex}>
-                              <a
-                                href={item.url}
-                                target={item.isInternal ? undefined : "_blank"}
-                                rel={item.isInternal ? undefined : "noopener noreferrer"}
-                                aria-label={`${item.isInternal ? 'View' : 'Visit'} ${item.title}: ${item.description}`}
-                                className="group bg-white rounded-lg border border-gray-200 p-3 sm:p-4 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 flex gap-3 items-start h-full"
-                              >
-                                {/* Icon */}
-                                <div className={`flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-gradient-to-br ${getCategoryGradient()} flex items-center justify-center group-hover:scale-105 transition-transform`}>
-                                  <Icon className="h-5 w-5 sm:h-6 sm:w-6 text-white" aria-hidden="true" />
-                                </div>
-
-                                {/* Content */}
+                              <RowLink className="group flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-8 py-5 border-b border-brand-sand">
                                 <div className="flex-1 min-w-0">
-                                  <h3 className="text-sm sm:text-base font-bold text-brand-navy mb-1 sm:mb-1.5 group-hover:text-brand-cyan transition-colors">
+                                  <h3 className="font-display text-xl leading-snug text-brand-navy group-hover:text-brand-cyan transition-colors">
                                     {item.title}
                                   </h3>
-                                  <p className="text-gray-600 text-xs sm:text-sm leading-relaxed line-clamp-2">
+                                  <p className="mt-1.5 text-brand-gray-blue">
                                     {item.description}
                                   </p>
                                 </div>
-
-                                {/* Arrow */}
-                                {item.isInternal ? (
-                                  <div className="flex-shrink-0 text-brand-cyan text-lg sm:text-xl" aria-hidden="true">→</div>
-                                ) : (
-                                  <ExternalLink className="flex-shrink-0 h-4 w-4 sm:h-5 sm:w-5 text-gray-400 group-hover:text-brand-cyan transition-colors" aria-hidden="true" />
-                                )}
-                              </a>
+                                <div className="flex items-baseline gap-4 dateline whitespace-nowrap">
+                                  {item.date && (
+                                    <span className="text-brand-slate">{item.date}</span>
+                                  )}
+                                  {item.status === 'recorded' && (
+                                    <span className="text-brand-slate">Recorded</span>
+                                  )}
+                                  {item.status === 'upcoming' && (
+                                    <span className="text-brand-cyan">Upcoming</span>
+                                  )}
+                                  {item.isInternal ? (
+                                    <span className="text-brand-cyan" aria-hidden="true">→</span>
+                                  ) : (
+                                    <ExternalLink
+                                      className="h-3.5 w-3.5 self-center text-brand-slate group-hover:text-brand-cyan transition-colors"
+                                      aria-hidden="true"
+                                    />
+                                  )}
+                                </div>
+                              </RowLink>
                             </li>
                           )
                         })}
@@ -414,14 +309,17 @@ export default function LibraryPage() {
             </div>
 
             {/* Footer Note */}
-            <div className="mt-8 sm:mt-12 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-brand-navy to-brand-blue rounded-xl sm:rounded-2xl shadow-lg">
-              <h3 className="text-lg sm:text-xl md:text-2xl font-display font-bold text-white mb-2 sm:mb-3">Have a Resource to Share?</h3>
-              <p className="text-white/90 text-sm sm:text-base md:text-lg">
-                Found a helpful AI tool or resource for tourism professionals? Email <a href="mailto:jroush@thebrandusa.com" className="text-white hover:text-brand-cyan underline font-semibold transition-colors">jroush@thebrandusa.com</a> to suggest additions to this library.
+            <div className="relative mt-20 border border-brand-navy p-6 sm:p-8">
+              <span className="absolute -top-2.5 left-5 bg-brand-paper px-2 dateline text-brand-cyan">Contribute</span>
+              <h3 className="font-display text-2xl sm:text-3xl text-brand-navy mb-3">Have a Resource to Share?</h3>
+              <p className="text-lg text-brand-gray-blue leading-relaxed">
+                Found a helpful AI tool or resource for tourism professionals? Email <a href="mailto:jroush@thebrandusa.com" className="text-brand-cyan underline underline-offset-2 hover:text-brand-navy transition-colors">jroush@thebrandusa.com</a> to suggest additions to this library.
               </p>
             </div>
           </div>
         </main>
+
+        <Footer />
       </>
     </AccessCheck>
   )

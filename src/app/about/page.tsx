@@ -1,7 +1,8 @@
 import Header from '@/components/Header'
+import Footer from '@/components/Footer'
 import AccessCheck from '@/components/AccessCheck'
 import Link from 'next/link'
-import { Mic, Calendar, Newspaper, ArrowRight, Sparkles, Wrench } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import type { Metadata } from 'next'
 import Script from 'next/script'
 
@@ -129,107 +130,103 @@ export default function AboutPage() {
       <AccessCheck>
         <Header />
 
-        {/* ===== Hero — person-forward ===== */}
-        <section className="relative bg-brand-navy text-white overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-brand-navy via-brand-navy to-[#1a2d4a]" />
-          <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-              {/* Left: positioning */}
-              <div>
-                <div className="text-xs tracking-[0.2em] text-brand-cyan uppercase font-semibold mb-5">
-                  SVP, Innovation &amp; Chief AI Officer · Brand USA
-                </div>
-                <h1 className="text-5xl md:text-6xl font-bold leading-[1.05] tracking-tight font-display mb-6">
-                  Janette Roush
-                </h1>
-                <p className="text-2xl text-white/90 leading-snug mb-6">
-                  AI strategy for the business of travel.
-                </p>
-                <p className="text-lg text-white/75 leading-relaxed max-w-xl mb-8">
-                  25+ years in travel, from theater ticketing in the 1990s to leading
-                  AI strategy for international tourism marketing. Janette started experimenting
-                  with AI the week ChatGPT launched and committed to trying something new with it
-                  every day at work. That daily practice became a career pivot — and the
-                  Agents of Change program, where she shares the tools and workflows her team
-                  uses at Brand USA so the industry can put them to work.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <a
-                    href="https://www.thebrandusa.com/requestspeaker"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    data-ga-event="speaker_availability_click"
-                    className="inline-flex items-center justify-center gap-2 bg-brand-cyan text-brand-navy px-7 py-3.5 rounded-lg font-semibold hover:bg-white transition-colors"
-                  >
-                    <Mic className="h-5 w-5" />
-                    View Speaker Availability via Brand USA
-                  </a>
-                  <Link
-                    href="/notes"
-                    className="inline-flex items-center justify-center gap-2 border border-white/30 text-white px-7 py-3.5 rounded-lg font-semibold hover:bg-white/10 transition-colors"
-                  >
-                    Follow the work
-                    <ArrowRight className="h-5 w-5" />
-                  </Link>
-                </div>
+        {/* ===== Hero — editorial profile ===== */}
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 lg:pt-24 pb-16">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+            {/* Left: positioning */}
+            <div className="lg:col-span-7">
+              <div className="dateline text-brand-cyan mb-6">
+                SVP, Innovation &amp; Chief AI Officer · Brand USA
               </div>
+              <h1 className="font-display font-medium text-brand-navy leading-none text-6xl md:text-7xl lg:text-8xl mb-7">
+                Janette Roush
+              </h1>
+              <p className="font-display text-2xl md:text-3xl text-brand-navy leading-snug mb-7">
+                AI strategy for the business of travel.
+              </p>
+              <p className="max-w-[68ch] text-lg leading-relaxed text-brand-gray-blue mb-10">
+                25+ years in travel, from theater ticketing in the 1990s to leading
+                AI strategy for international tourism marketing. Janette started experimenting
+                with AI the week ChatGPT launched and committed to trying something new with it
+                every day at work. That daily practice became a career pivot — and the
+                Agents of Change program, where she shares the tools and workflows her team
+                uses at Brand USA so the industry can put them to work.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <a
+                  href="https://www.thebrandusa.com/requestspeaker"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-ga-event="speaker_availability_click"
+                  className="inline-flex items-center justify-center dateline text-brand-navy border border-brand-navy px-5 py-3 hover:border-brand-cyan hover:text-brand-cyan transition-colors"
+                >
+                  View Speaker Availability via Brand USA
+                </a>
+                <Link
+                  href="/notes"
+                  className="inline-flex items-center justify-center dateline text-brand-navy border border-brand-navy px-5 py-3 hover:border-brand-cyan hover:text-brand-cyan transition-colors"
+                >
+                  Follow the work
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </div>
+            </div>
 
-              {/* Right: speaker reel */}
-              <div>
-                <Script
-                  src="https://cdn.jsdelivr.net/npm/@mux/mux-player@3/dist/mux-player.mjs"
-                  type="module"
-                  strategy="afterInteractive"
+            {/* Right: speaker reel */}
+            <div className="lg:col-span-5">
+              <Script
+                src="https://cdn.jsdelivr.net/npm/@mux/mux-player@3/dist/mux-player.mjs"
+                type="module"
+                strategy="afterInteractive"
+              />
+              <div className="relative overflow-hidden bg-[#0A1220]">
+                {/* @ts-expect-error - mux-player is a web component loaded via script */}
+                <mux-player
+                  playback-id="IS37ei5cyOT43UHAFBqrEmWP9Dsmi02o7VEgc3NlHCag"
+                  stream-type="on-demand"
+                  autoplay="muted"
+                  loop
+                  muted
+                  playsinline
+                  accent-color="#00A9E0"
+                  metadata-video-title="Janette Roush — Speaker Reel"
+                  style={{ aspectRatio: '1 / 1', width: '100%', display: 'block' }}
                 />
-                <div className="overflow-hidden rounded-2xl shadow-2xl bg-black ring-1 ring-white/10">
-                  {/* @ts-expect-error - mux-player is a web component loaded via script */}
-                  <mux-player
-                    playback-id="IS37ei5cyOT43UHAFBqrEmWP9Dsmi02o7VEgc3NlHCag"
-                    stream-type="on-demand"
-                    autoplay="muted"
-                    loop
-                    muted
-                    playsinline
-                    accent-color="#00A9E0"
-                    metadata-video-title="Janette Roush — Speaker Reel"
-                    style={{ aspectRatio: '1 / 1', width: '100%', display: 'block' }}
-                  />
-                </div>
-                <p className="text-center text-xs text-white/50 mt-3 tracking-wide">
-                  Speaking on AI in tourism · Brand USA
-                </p>
+                <div className="absolute inset-3 border border-brand-paper/80 pointer-events-none" />
               </div>
+              <p className="dateline text-brand-slate text-center mt-4">
+                Speaking on AI in tourism · Brand USA
+              </p>
             </div>
           </div>
         </section>
 
         {/* ===== Signature point of view ===== */}
-        <section className="bg-white">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-            <div className="flex items-center gap-3 mb-3">
-              <Sparkles className="h-6 w-6 text-brand-cyan" />
-              <span className="text-xs tracking-[0.2em] text-brand-blue uppercase font-semibold">
-                A point of view
-              </span>
+        <section className="border-t border-brand-sand">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
+            <div className="dateline text-brand-slate flex items-center gap-4 mb-10">
+              <span>A point of view</span>
+              <span className="flex-1 h-px bg-brand-sand" aria-hidden="true" />
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-brand-navy font-display mb-12 max-w-3xl">
+            <h2 className="font-display text-3xl md:text-4xl text-brand-navy mb-12 max-w-3xl">
               Two ideas Janette is known for in the travel industry
             </h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
               {/* DaaS */}
-              <div className="bg-gray-50 border border-gray-200 rounded-2xl p-8">
-                <h3 className="text-2xl font-bold text-brand-navy mb-4">
+              <div className="relative border border-brand-navy p-8">
+                <span className="absolute -top-2.5 left-6 bg-brand-paper px-2 dateline text-brand-cyan">01</span>
+                <h3 className="font-display text-2xl text-brand-navy mb-4">
                   Destination as a Service
                 </h3>
-                <p className="text-gray-700 leading-relaxed mb-5">
+                <p className="text-brand-gray-blue leading-relaxed mb-6">
                   As AI systems begin to answer travelers directly, destinations have a new job
                   to do. Janette frames it as two parts: a verification layer, where AI checks
                   claims against the local authority, and content portability, where a
                   destination&apos;s first-person storytelling is made machine-readable so AI
                   systems can use it.
                 </p>
-                <blockquote className="border-l-4 border-brand-cyan pl-5 text-brand-navy italic leading-relaxed">
+                <blockquote className="border-l border-brand-cyan pl-5 font-display italic text-xl text-brand-navy leading-relaxed">
                   &ldquo;We&apos;re shifting from only being a creator of content to also being a
                   steward of data. We still need to make the content — that&apos;s what feeds the
                   systems.&rdquo;
@@ -237,16 +234,17 @@ export default function AboutPage() {
               </div>
 
               {/* Operating system */}
-              <div className="bg-gray-50 border border-gray-200 rounded-2xl p-8">
-                <h3 className="text-2xl font-bold text-brand-navy mb-4">
+              <div className="relative border border-brand-navy p-8">
+                <span className="absolute -top-2.5 left-6 bg-brand-paper px-2 dateline text-brand-cyan">02</span>
+                <h3 className="font-display text-2xl text-brand-navy mb-4">
                   AI as the operating system of business
                 </h3>
-                <p className="text-gray-700 leading-relaxed mb-5">
+                <p className="text-brand-gray-blue leading-relaxed mb-6">
                   Janette&apos;s daily practice reshaped how she works, and it points to where the
                   whole industry is heading. The shift she describes is from using AI in a separate
                   window to doing the actual work inside it.
                 </p>
-                <blockquote className="border-l-4 border-brand-cyan pl-5 text-brand-navy italic leading-relaxed">
+                <blockquote className="border-l border-brand-cyan pl-5 font-display italic text-xl text-brand-navy leading-relaxed">
                   &ldquo;AI isn&apos;t just a thing that lives inside a separate chat window that you
                   go to ask questions to. It is now the operating system of business.&rdquo;
                 </blockquote>
@@ -255,146 +253,136 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* ===== Pull-quote band ===== */}
-        <section className="bg-brand-blue text-white">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
-            <p className="text-3xl md:text-4xl font-bold leading-snug font-display">
-              &ldquo;Most of us use AI. Few of us work inside of it. That&apos;s the shift.&rdquo;
-            </p>
-            <p className="text-brand-cyan/90 text-sm tracking-widest uppercase mt-6">
+        {/* ===== Pull-quote band — ink ===== */}
+        <section className="bg-brand-navy">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
+            <blockquote className="font-display italic text-3xl md:text-5xl leading-tight text-brand-paper">
+              <span className="text-[#E0559B]">&ldquo;</span>Most of us use AI. Few of us work inside of it. That&apos;s the shift.<span className="text-[#E0559B]">&rdquo;</span>
+            </blockquote>
+            <cite className="dateline text-brand-paper/70 block mt-6 not-italic">
               Janette Roush
-            </p>
+            </cite>
           </div>
         </section>
 
         {/* ===== Speaking wall ===== */}
-        <section className="bg-white">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-            <div className="flex items-center gap-3 mb-3">
-              <Calendar className="h-6 w-6 text-brand-cyan" />
-              <span className="text-xs tracking-[0.2em] text-brand-blue uppercase font-semibold">
-                On stage
-              </span>
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-brand-navy font-display mb-3">
-              Where Janette speaks
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mb-12">
-              Talks on AI in tourism — for governors&apos; conferences, global summits,
-              and destination marketing organizations across the country and beyond.
-            </p>
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
+          <div className="dateline text-brand-slate flex items-center gap-4 mb-10">
+            <span>On stage</span>
+            <span className="flex-1 h-px bg-brand-sand" aria-hidden="true" />
+          </div>
+          <h2 className="font-display text-3xl md:text-4xl text-brand-navy mb-4">
+            Where Janette speaks
+          </h2>
+          <p className="max-w-[68ch] text-lg leading-relaxed text-brand-gray-blue mb-12">
+            Talks on AI in tourism — for governors&apos; conferences, global summits,
+            and destination marketing organizations across the country and beyond.
+          </p>
 
-            {/* Upcoming */}
-            <h3 className="text-sm font-semibold tracking-widest uppercase text-brand-cyan mb-5">
-              Upcoming
-            </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-12">
-              {upcomingTalks.map((t) => (
-                <div
-                  key={t.event}
-                  className="flex items-start justify-between gap-4 border border-brand-cyan/30 bg-brand-cyan/5 rounded-xl p-5"
-                >
-                  <div>
-                    <div className="font-bold text-brand-navy">{t.event}</div>
-                    <div className="text-sm text-gray-600">{t.place}</div>
-                  </div>
-                  <div className="text-sm font-semibold text-brand-blue whitespace-nowrap">{t.when}</div>
-                </div>
-              ))}
-            </div>
+          {/* Upcoming */}
+          <h3 className="dateline text-brand-cyan mb-4">
+            Upcoming
+          </h3>
+          <div className="border-t border-brand-navy mb-14">
+            {upcomingTalks.map((t) => (
+              <div
+                key={t.event}
+                className="grid grid-cols-1 sm:grid-cols-[6.5rem_1fr_auto] gap-1 sm:gap-5 items-baseline py-5 border-b border-brand-sand"
+              >
+                <span className="dateline text-brand-cyan whitespace-nowrap">{t.when}</span>
+                <span className="text-xl leading-snug text-brand-navy">{t.event}</span>
+                <span className="dateline text-brand-slate">{t.place}</span>
+              </div>
+            ))}
+          </div>
 
-            {/* Recent */}
-            <h3 className="text-sm font-semibold tracking-widest uppercase text-gray-400 mb-5">
-              Recent stages
-            </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {recentTalks.map((t) => (
-                <div
-                  key={t.event}
-                  className="flex items-start justify-between gap-4 border border-gray-200 rounded-xl p-5 hover:border-gray-300 transition-colors"
-                >
-                  <div>
-                    <div className="font-bold text-brand-navy">{t.event}</div>
-                    <div className="text-sm text-gray-600">{t.place}</div>
-                  </div>
-                  <div className="text-sm font-medium text-gray-500 whitespace-nowrap">{t.when}</div>
-                </div>
-              ))}
-            </div>
+          {/* Recent */}
+          <h3 className="dateline text-brand-slate mb-4">
+            Recent stages
+          </h3>
+          <div className="border-t border-brand-navy">
+            {recentTalks.map((t) => (
+              <div
+                key={t.event}
+                className="grid grid-cols-1 sm:grid-cols-[6.5rem_1fr_auto] gap-1 sm:gap-5 items-baseline py-5 border-b border-brand-sand"
+              >
+                <span className="dateline text-brand-slate whitespace-nowrap">{t.when}</span>
+                <span className="text-xl leading-snug text-brand-navy">{t.event}</span>
+                <span className="dateline text-brand-slate">{t.place}</span>
+              </div>
+            ))}
           </div>
         </section>
 
         {/* ===== Press ===== */}
-        <section className="bg-gray-50 border-y border-gray-200">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-            <div className="flex items-center gap-3 mb-3">
-              <Newspaper className="h-6 w-6 text-brand-cyan" />
-              <span className="text-xs tracking-[0.2em] text-brand-blue uppercase font-semibold">
-                In the press
-              </span>
+        <section className="bg-brand-paper2 border-t border-brand-navy">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
+            <div className="dateline text-brand-slate flex items-center gap-4 mb-10">
+              <span>In the press</span>
+              <span className="flex-1 h-px bg-brand-sand" aria-hidden="true" />
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-brand-navy font-display mb-12">
+            <h2 className="font-display text-3xl md:text-4xl text-brand-navy mb-12">
               Featured in the travel trade
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div className="border-t border-brand-navy">
               {press.map((p) => (
-                <div key={p.headline} className="bg-white border border-gray-200 rounded-xl p-6">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="font-bold text-brand-blue">{p.outlet}</span>
-                    <span className="text-sm text-gray-500">{p.when}</span>
-                  </div>
-                  <p className="text-gray-700 leading-snug">&ldquo;{p.headline}&rdquo;</p>
+                <div
+                  key={p.headline}
+                  className="grid grid-cols-1 sm:grid-cols-[8.5rem_1fr_auto] gap-1 sm:gap-5 items-baseline py-5 border-b border-brand-sand"
+                >
+                  <span className="dateline text-brand-cyan">{p.outlet}</span>
+                  <span className="text-xl leading-snug text-brand-navy">&ldquo;{p.headline}&rdquo;</span>
+                  <span className="dateline text-brand-slate whitespace-nowrap">{p.when}</span>
                 </div>
               ))}
             </div>
-            <div className="mt-8">
-              <Link href="/press" className="inline-flex items-center gap-1 text-brand-blue font-semibold hover:gap-2 transition-all">
+            <div className="mt-10">
+              <Link
+                href="/press"
+                className="inline-flex items-center dateline text-brand-navy border border-brand-navy px-5 py-3 hover:border-brand-cyan hover:text-brand-cyan transition-colors"
+              >
                 See all press coverage
-                <ArrowRight className="h-5 w-5" />
+                <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </div>
           </div>
         </section>
 
         {/* ===== Selected work ===== */}
-        <section className="bg-white">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-            <div className="flex items-center gap-3 mb-3">
-              <Wrench className="h-6 w-6 text-brand-cyan" />
-              <span className="text-xs tracking-[0.2em] text-brand-blue uppercase font-semibold">
-                What her team builds
-              </span>
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-brand-navy font-display mb-12">
-              Selected work
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <Link href="/personal-os" className="group border border-gray-200 rounded-2xl p-7 hover:shadow-xl hover:-translate-y-1 transition-all">
-                <h3 className="text-xl font-bold text-brand-navy mb-2 group-hover:text-brand-blue transition-colors">Personal Operating System</h3>
-                <p className="text-gray-600 leading-relaxed mb-4">A live system for giving AI full context on your work — built with Claude Code and a file-based vault.</p>
-                <span className="inline-flex items-center gap-1 text-brand-cyan font-semibold group-hover:gap-2 transition-all">Explore<ArrowRight className="h-4 w-4" /></span>
-              </Link>
-              <Link href="/ai-audit" className="group border border-gray-200 rounded-2xl p-7 hover:shadow-xl hover:-translate-y-1 transition-all">
-                <h3 className="text-xl font-bold text-brand-navy mb-2 group-hover:text-brand-blue transition-colors">AI Visibility Audit</h3>
-                <p className="text-gray-600 leading-relaxed mb-4">A tool to see how a destination shows up when travelers ask AI search engines where to go.</p>
-                <span className="inline-flex items-center gap-1 text-brand-cyan font-semibold group-hover:gap-2 transition-all">Try it<ArrowRight className="h-4 w-4" /></span>
-              </Link>
-              <Link href="/library" className="group border border-gray-200 rounded-2xl p-7 hover:shadow-xl hover:-translate-y-1 transition-all">
-                <h3 className="text-xl font-bold text-brand-navy mb-2 group-hover:text-brand-blue transition-colors">Agents of Change Library</h3>
-                <p className="text-gray-600 leading-relaxed mb-4">Webinars, tools, and resources the Brand USA team uses, shared for destination marketers.</p>
-                <span className="inline-flex items-center gap-1 text-brand-cyan font-semibold group-hover:gap-2 transition-all">Browse<ArrowRight className="h-4 w-4" /></span>
-              </Link>
-            </div>
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
+          <div className="dateline text-brand-slate flex items-center gap-4 mb-10">
+            <span>What her team builds</span>
+            <span className="flex-1 h-px bg-brand-sand" aria-hidden="true" />
+          </div>
+          <h2 className="font-display text-3xl md:text-4xl text-brand-navy mb-12">
+            Selected work
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+            <Link href="/personal-os" className="group border border-brand-navy p-6 hover:border-brand-cyan transition-colors">
+              <h3 className="font-display text-2xl text-brand-navy mb-3 group-hover:text-brand-cyan transition-colors">Personal Operating System</h3>
+              <p className="text-brand-gray-blue leading-relaxed mb-5">A live system for giving AI full context on your work — built with Claude Code and a file-based vault.</p>
+              <span className="inline-flex items-center dateline text-brand-cyan">Explore<ArrowRight className="ml-2 h-4 w-4" /></span>
+            </Link>
+            <Link href="/ai-audit" className="group border border-brand-navy p-6 hover:border-brand-cyan transition-colors">
+              <h3 className="font-display text-2xl text-brand-navy mb-3 group-hover:text-brand-cyan transition-colors">AI Visibility Audit</h3>
+              <p className="text-brand-gray-blue leading-relaxed mb-5">A tool to see how a destination shows up when travelers ask AI search engines where to go.</p>
+              <span className="inline-flex items-center dateline text-brand-cyan">Try it<ArrowRight className="ml-2 h-4 w-4" /></span>
+            </Link>
+            <Link href="/library" className="group border border-brand-navy p-6 hover:border-brand-cyan transition-colors">
+              <h3 className="font-display text-2xl text-brand-navy mb-3 group-hover:text-brand-cyan transition-colors">Agents of Change Library</h3>
+              <p className="text-brand-gray-blue leading-relaxed mb-5">Webinars, tools, and resources the Brand USA team uses, shared for destination marketers.</p>
+              <span className="inline-flex items-center dateline text-brand-cyan">Browse<ArrowRight className="ml-2 h-4 w-4" /></span>
+            </Link>
           </div>
         </section>
 
-        {/* ===== Closing CTA ===== */}
-        <section className="bg-brand-navy text-white">
-          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold font-display mb-4">
+        {/* ===== Closing CTA — ink band ===== */}
+        <section className="bg-brand-navy">
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20 text-center">
+            <h2 className="font-display text-3xl md:text-4xl text-brand-paper mb-5">
               Bring AI in tourism to your stage
             </h2>
-            <p className="text-lg text-white/75 mb-8">
+            <p className="text-lg text-brand-paper/80 leading-relaxed mb-9">
               Janette speaks to industry partners and stakeholders about putting AI to work
               in tourism. Speaking is arranged through Brand USA.
             </p>
@@ -403,13 +391,14 @@ export default function AboutPage() {
               target="_blank"
               rel="noopener noreferrer"
               data-ga-event="speaker_availability_click"
-              className="inline-flex items-center justify-center gap-2 bg-brand-cyan text-brand-navy px-8 py-4 rounded-lg font-semibold hover:bg-white transition-colors"
+              className="inline-flex items-center justify-center dateline text-brand-paper border border-brand-paper px-5 py-3 hover:bg-brand-paper hover:text-brand-navy transition-colors"
             >
-              <Mic className="h-5 w-5" />
               View Speaker Availability via Brand USA
             </a>
           </div>
         </section>
+
+        <Footer />
       </AccessCheck>
     </>
   )

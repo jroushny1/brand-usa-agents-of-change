@@ -2,61 +2,49 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 import { Menu, X } from 'lucide-react'
+
+const navLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/about', label: 'About' },
+  { href: '/notes', label: 'Field Notes' },
+  { href: '/glossary', label: 'Glossary' },
+  { href: '/library', label: 'Resources' },
+  { href: '/press', label: 'Press' },
+  { href: '/ai-audit', label: 'AI Audit' },
+  { href: '/story-lab', label: 'Story Lab' },
+]
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
-    <header className="border-b border-gray-200 bg-white shadow-sm sticky top-0 z-50">
+    <header className="border-b border-brand-navy bg-brand-paper/95 backdrop-blur-sm sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-18">
-          <Link href="/" className="flex items-center hover:opacity-80 transition-opacity">
-            <Image
-              src="/brandusa-logo.png"
-              alt="Brand USA - Destination Marketing Organization for the United States"
-              width={100}
-              height={33}
-              className="h-8 w-auto"
-            />
-            <span className="ml-4 text-xl font-semibold text-brand-navy font-display">
-              Agents of Change
+        <div className="flex justify-between items-baseline py-5">
+          <Link href="/" className="hover:opacity-80 transition-opacity">
+            <span className="font-display text-2xl md:text-3xl leading-none text-brand-navy">
+              Janette <em>Roush</em>
             </span>
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
-            <Link href="/" className="text-base font-medium text-brand-navy hover:text-brand-cyan transition-colors">
-              Home
-            </Link>
-            <Link href="/about" className="text-base font-medium text-brand-navy hover:text-brand-cyan transition-colors">
-              About
-            </Link>
-            <Link href="/notes" className="text-base font-medium text-brand-navy hover:text-brand-cyan transition-colors">
-              Field Notes
-            </Link>
-            <Link href="/glossary" className="text-base font-medium text-brand-navy hover:text-brand-cyan transition-colors">
-              Glossary
-            </Link>
-            <Link href="/library" className="text-base font-medium text-brand-navy hover:text-brand-cyan transition-colors">
-              Resources
-            </Link>
-            <Link href="/press" className="text-base font-medium text-brand-navy hover:text-brand-cyan transition-colors">
-              Press
-            </Link>
-            <Link href="/ai-audit" className="text-base font-medium text-brand-navy hover:text-brand-cyan transition-colors">
-              AI Audit
-            </Link>
-            <Link href="/story-lab" className="text-base font-medium text-brand-navy hover:text-brand-cyan transition-colors">
-              Story Lab
-            </Link>
+          <nav className="hidden lg:flex items-baseline gap-6">
+            {navLinks.slice(1).map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="dateline text-brand-navy hover:text-brand-cyan transition-colors"
+              >
+                {link.label}
+              </Link>
+            ))}
           </nav>
 
           {/* Mobile menu button */}
           <button
             type="button"
-            className="md:hidden inline-flex items-center justify-center p-2 rounded-md text-brand-navy hover:text-brand-cyan hover:bg-gray-100 transition-colors"
+            className="lg:hidden inline-flex items-center justify-center p-2 text-brand-navy hover:text-brand-cyan transition-colors"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -71,64 +59,18 @@ export default function Header() {
 
       {/* Mobile menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-gray-200">
-          <div className="px-2 pt-2 pb-3 space-y-1">
-            <Link
-              href="/"
-              className="block px-3 py-2 rounded-md text-base font-medium text-brand-navy hover:text-brand-cyan hover:bg-gray-50 transition-colors"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Home
-            </Link>
-            <Link
-              href="/about"
-              className="block px-3 py-2 rounded-md text-base font-medium text-brand-navy hover:text-brand-cyan hover:bg-gray-50 transition-colors"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              About
-            </Link>
-            <Link
-              href="/notes"
-              className="block px-3 py-2 rounded-md text-base font-medium text-brand-navy hover:text-brand-cyan hover:bg-gray-50 transition-colors"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Field Notes
-            </Link>
-            <Link
-              href="/glossary"
-              className="block px-3 py-2 rounded-md text-base font-medium text-brand-navy hover:text-brand-cyan hover:bg-gray-50 transition-colors"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Glossary
-            </Link>
-            <Link
-              href="/library"
-              className="block px-3 py-2 rounded-md text-base font-medium text-brand-navy hover:text-brand-cyan hover:bg-gray-50 transition-colors"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Resources
-            </Link>
-            <Link
-              href="/press"
-              className="block px-3 py-2 rounded-md text-base font-medium text-brand-navy hover:text-brand-cyan hover:bg-gray-50 transition-colors"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Press
-            </Link>
-            <Link
-              href="/ai-audit"
-              className="block px-3 py-2 rounded-md text-base font-medium text-brand-navy hover:text-brand-cyan hover:bg-gray-50 transition-colors"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              AI Audit
-            </Link>
-            <Link
-              href="/story-lab"
-              className="block px-3 py-2 rounded-md text-base font-medium text-brand-navy hover:text-brand-cyan hover:bg-gray-50 transition-colors"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Story Lab
-            </Link>
+        <div className="lg:hidden border-t border-brand-sand">
+          <div className="px-4 py-3 space-y-1">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="block px-3 py-2 dateline text-brand-navy hover:text-brand-cyan transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {link.label}
+              </Link>
+            ))}
           </div>
         </div>
       )}

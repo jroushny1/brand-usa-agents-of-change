@@ -10,24 +10,33 @@ const config: Config = {
     extend: {
       colors: {
         brand: {
-          blue: '#00549F',      // Primary brand blue
-          cyan: '#00A9E0',      // Primary brand cyan
-          navy: '#101F36',      // Alternate navy
+          // Editorial personal palette (July 2026 redesign). The legacy token
+          // names (blue/cyan/navy) are kept and remapped so every page shifts
+          // to the new identity without touching each file.
+          blue: '#8F1D55',      // deep fuchsia — links, hovers (was Brand USA blue)
+          cyan: '#B12467',      // fuchsia accent (was Brand USA cyan)
+          navy: '#0E1B2C',      // ink navy — headings, dark grounds
+          sky: '#5A7EB4',       // legacy medium blue, kept for badges
+          paper: '#F4EFE3',     // page ground — warm bond
+          paper2: '#ECE5D3',    // alternate section ground
+          sand: '#D9CFB8',      // hairline rules on paper
+          slate: '#5A6068',     // datelines, captions, secondary text
           gray: {
-            blue: '#4c5768',    // Complementary gray-blue
-            brown: '#7b6b6b',   // Complementary gray-brown
-            DEFAULT: '#878f9a', // Complementary light gray
+            blue: '#4c5768',
+            brown: '#7b6b6b',
+            DEFAULT: '#878f9a',
           },
           accent: {
-            blue: '#5a7eb4',    // Complementary medium blue
-            cream: '#f4efe3',   // Complementary cream
+            blue: '#5a7eb4',
+            cream: '#f4efe3',
           }
         }
       },
       fontFamily: {
-        sans: ['var(--font-montserrat)', 'system-ui', 'sans-serif'],
-        display: ['var(--font-oswald)', 'sans-serif'],
-        body: ['var(--font-montserrat)', 'system-ui', 'sans-serif'],
+        sans: ['system-ui', '-apple-system', 'Segoe UI', 'sans-serif'],
+        body: ['var(--font-newsreader)', 'Georgia', 'serif'],
+        display: ['var(--font-fraunces)', 'Georgia', 'serif'],
+        mono: ['var(--font-jetbrains)', 'ui-monospace', 'SF Mono', 'Menlo', 'monospace'],
       },
       animation: {
         'fade-in': 'fade-in 0.5s ease-out',

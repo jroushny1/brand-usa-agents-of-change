@@ -3,8 +3,9 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { ArrowLeft, ChevronDown, ChevronUp, BookOpen, HelpCircle, Lightbulb } from 'lucide-react'
+import { ArrowLeft, ChevronDown, ChevronUp } from 'lucide-react'
 import AccessCheck from '@/components/AccessCheck'
+import Footer from '@/components/Footer'
 import { terms, faqs, unexpectedQuestions } from '@/data/glossary'
 
 export default function GlossaryClient() {
@@ -16,14 +17,14 @@ export default function GlossaryClient() {
     <AccessCheck>
       <>
         {/* Header */}
-        <header className="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
+        <header className="bg-brand-paper border-b border-brand-sand sticky top-0 z-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-16">
               <Link
                 href="/"
-                className="flex items-center text-brand-navy hover:text-brand-cyan transition-colors"
+                className="flex items-center dateline text-brand-navy hover:text-brand-cyan transition-colors"
               >
-                <ArrowLeft className="h-5 w-5 mr-2" />
+                <ArrowLeft className="h-4 w-4 mr-2" />
                 Back to Home
               </Link>
               <div className="flex items-center">
@@ -39,53 +40,47 @@ export default function GlossaryClient() {
           </div>
         </header>
 
-        {/* Hero Section */}
-        <section className="relative bg-gradient-to-br from-brand-navy via-brand-blue to-brand-cyan py-16">
-          <div className="absolute inset-0 opacity-10">
-            <div className="absolute top-10 left-10 w-72 h-72 bg-white rounded-full blur-3xl"></div>
-            <div className="absolute bottom-10 right-10 w-96 h-96 bg-white rounded-full blur-3xl"></div>
-          </div>
-          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 font-display">
-              AI for Tourism Glossary
-            </h1>
-            <p className="text-xl text-white/90 max-w-3xl mx-auto">
-              Authoritative definitions of AI terminology for destination marketing professionals
-            </p>
-          </div>
+        {/* Page header */}
+        <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 lg:pt-20 pb-14 border-b border-brand-navy">
+          <div className="dateline text-brand-cyan mb-5">Reference</div>
+          <h1 className="font-display font-medium text-brand-navy leading-none text-5xl md:text-6xl">
+            AI for Tourism Glossary
+          </h1>
+          <p className="mt-6 max-w-2xl text-xl leading-relaxed text-brand-navy">
+            Authoritative definitions of AI terminology for destination marketing professionals
+          </p>
         </section>
 
         {/* Main Content */}
-        <main className="bg-gradient-to-b from-gray-50 to-white min-h-screen py-16">
+        <main className="min-h-screen py-16">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
 
             {/* Glossary Section */}
-            <section className="mb-16">
-              <div className="flex items-center mb-8">
-                <BookOpen className="h-8 w-8 text-brand-cyan mr-3" />
-                <h2 className="text-3xl font-bold text-brand-navy font-display">Key Terms</h2>
+            <section className="mb-20">
+              <div className="dateline text-brand-slate flex items-center gap-4 mb-10">
+                <h2 className="dateline">Key Terms</h2>
+                <span className="flex-1 h-px bg-brand-sand" aria-hidden="true" />
               </div>
 
-              <div className="space-y-4">
+              <div className="border-t border-brand-navy">
                 {terms.map((term, index) => (
-                  <div
-                    key={index}
-                    className="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow"
-                  >
+                  <div key={index} className="border-b border-brand-sand">
                     <button
                       onClick={() => setExpandedTerm(expandedTerm === term.name ? null : term.name)}
-                      className="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition"
+                      className="group w-full flex items-center justify-between gap-4 py-5 text-left"
                     >
-                      <h3 className="text-xl font-semibold text-brand-navy">{term.name}</h3>
+                      <h3 className="font-display text-2xl text-brand-navy group-hover:text-brand-cyan transition-colors">
+                        {term.name}
+                      </h3>
                       {expandedTerm === term.name ? (
-                        <ChevronUp className="h-6 w-6 text-gray-500 flex-shrink-0" />
+                        <ChevronUp className="h-5 w-5 text-brand-slate flex-shrink-0" />
                       ) : (
-                        <ChevronDown className="h-6 w-6 text-gray-500 flex-shrink-0" />
+                        <ChevronDown className="h-5 w-5 text-brand-slate flex-shrink-0" />
                       )}
                     </button>
                     {expandedTerm === term.name && (
-                      <div className="px-6 pb-6">
-                        <p className="text-gray-700 leading-relaxed">{term.description}</p>
+                      <div className="pb-7">
+                        <p className="max-w-2xl leading-relaxed text-brand-navy">{term.description}</p>
                       </div>
                     )}
                   </div>
@@ -94,32 +89,31 @@ export default function GlossaryClient() {
             </section>
 
             {/* FAQ Section */}
-            <section className="mb-16">
-              <div className="flex items-center mb-8">
-                <HelpCircle className="h-8 w-8 text-brand-cyan mr-3" />
-                <h2 className="text-3xl font-bold text-brand-navy font-display">Frequently Asked Questions</h2>
+            <section className="mb-20">
+              <div className="dateline text-brand-slate flex items-center gap-4 mb-10">
+                <h2 className="dateline">Frequently Asked Questions</h2>
+                <span className="flex-1 h-px bg-brand-sand" aria-hidden="true" />
               </div>
 
-              <div className="space-y-4">
+              <div className="border-t border-brand-navy">
                 {faqs.map((faq, index) => (
-                  <div
-                    key={index}
-                    className="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow"
-                  >
+                  <div key={index} className="border-b border-brand-sand">
                     <button
                       onClick={() => setExpandedFaq(expandedFaq === faq.question ? null : faq.question)}
-                      className="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition"
+                      className="group w-full flex items-center justify-between gap-4 py-5 text-left"
                     >
-                      <h3 className="text-lg font-semibold text-brand-navy pr-4">{faq.question}</h3>
+                      <h3 className="text-xl leading-snug text-brand-navy group-hover:text-brand-cyan transition-colors pr-4">
+                        {faq.question}
+                      </h3>
                       {expandedFaq === faq.question ? (
-                        <ChevronUp className="h-6 w-6 text-gray-500 flex-shrink-0" />
+                        <ChevronUp className="h-5 w-5 text-brand-slate flex-shrink-0" />
                       ) : (
-                        <ChevronDown className="h-6 w-6 text-gray-500 flex-shrink-0" />
+                        <ChevronDown className="h-5 w-5 text-brand-slate flex-shrink-0" />
                       )}
                     </button>
                     {expandedFaq === faq.question && (
-                      <div className="px-6 pb-6">
-                        <p className="text-gray-700 leading-relaxed">{faq.answer}</p>
+                      <div className="pb-7">
+                        <p className="max-w-2xl leading-relaxed text-brand-navy">{faq.answer}</p>
                       </div>
                     )}
                   </div>
@@ -129,34 +123,33 @@ export default function GlossaryClient() {
 
             {/* Questions You Didn't Know to Ask */}
             <section>
-              <div className="flex items-center mb-4">
-                <Lightbulb className="h-8 w-8 text-amber-500 mr-3" />
-                <h2 className="text-3xl font-bold text-brand-navy font-display">Questions You Didn&apos;t Know to Ask</h2>
+              <div className="dateline text-brand-cyan flex items-center gap-4 mb-6">
+                <h2 className="dateline">Questions You Didn&apos;t Know to Ask</h2>
+                <span className="flex-1 h-px bg-brand-sand" aria-hidden="true" />
               </div>
-              <p className="text-gray-600 mb-8">
+              <p className="text-brand-slate mb-10 max-w-2xl">
                 Real questions from our webinar Q&As—the things people discover only after they start using AI.
               </p>
 
-              <div className="space-y-4">
+              <div className="border-t border-brand-navy">
                 {unexpectedQuestions.map((q, index) => (
-                  <div
-                    key={index}
-                    className="bg-gradient-to-r from-amber-50 to-white rounded-xl border border-amber-200 shadow-sm hover:shadow-md transition-shadow"
-                  >
+                  <div key={index} className="border-b border-brand-sand">
                     <button
                       onClick={() => setExpandedUnexpected(expandedUnexpected === q.question ? null : q.question)}
-                      className="w-full flex items-center justify-between p-6 text-left hover:bg-amber-50/50 transition"
+                      className="group w-full flex items-center justify-between gap-4 py-5 text-left"
                     >
-                      <h3 className="text-lg font-semibold text-brand-navy pr-4">{q.question}</h3>
+                      <h3 className="text-xl leading-snug text-brand-navy group-hover:text-brand-cyan transition-colors pr-4">
+                        {q.question}
+                      </h3>
                       {expandedUnexpected === q.question ? (
-                        <ChevronUp className="h-6 w-6 text-amber-600 flex-shrink-0" />
+                        <ChevronUp className="h-5 w-5 text-brand-cyan flex-shrink-0" />
                       ) : (
-                        <ChevronDown className="h-6 w-6 text-amber-600 flex-shrink-0" />
+                        <ChevronDown className="h-5 w-5 text-brand-cyan flex-shrink-0" />
                       )}
                     </button>
                     {expandedUnexpected === q.question && (
-                      <div className="px-6 pb-6">
-                        <p className="text-gray-700 leading-relaxed">{q.answer}</p>
+                      <div className="pb-7">
+                        <p className="max-w-2xl leading-relaxed text-brand-navy">{q.answer}</p>
                       </div>
                     )}
                   </div>
@@ -165,6 +158,8 @@ export default function GlossaryClient() {
             </section>
           </div>
         </main>
+
+        <Footer />
       </>
     </AccessCheck>
   )

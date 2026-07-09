@@ -2,13 +2,6 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-@layer base {
-  :root {
-    --font-montserrat: var(--font-montserrat);
-    --font-oswald: var(--font-oswald);
-  }
-}
-
 @layer components {
   /* Card container - replaces 72-char string with 14 chars */
   .card-container {
@@ -34,21 +27,33 @@
   .takeaway-badge {
     @apply flex-shrink-0 h-6 w-6 rounded-full bg-brand-cyan/10 text-brand-cyan flex items-center justify-center text-sm font-semibold mr-3 mt-0.5;
   }
+
+  /* Small-caps mono dateline — kickers, credits, nav, index dates */
+  .dateline {
+    @apply font-mono text-xs uppercase tracking-[0.13em];
+  }
 }
 
+/* Editorial ground: warm bond paper with grain baked into the stock.
+   The noise is a body background layer — opaque elements (photos, headline
+   chips, cards) sit above it, so photography always stays clean. */
 body {
-  background-color: #f3f4f6;
-  color: #111827;
-  font-family: var(--font-montserrat), system-ui, sans-serif;
+  background-color: #F4EFE3;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='linear' slope='0.05'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E");
+  color: #0E1B2C;
+  font-family: var(--font-newsreader), Georgia, serif;
+  font-size: 18px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
 }
 
 /* Links inside field-note content (inserted as inline HTML in the data file) */
 .note-content a {
-  color: #00A9E0;
+  color: #B12467;
   text-decoration: underline;
   text-underline-offset: 2px;
 }
 
 .note-content a:hover {
-  color: #00549F;
+  color: #8F1D55;
 }

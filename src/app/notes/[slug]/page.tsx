@@ -1,8 +1,9 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
-import { ArrowLeft, Calendar, Tag } from 'lucide-react'
+import { ArrowLeft } from 'lucide-react'
 import Header from '@/components/Header'
+import Footer from '@/components/Footer'
 import AccessCheck from '@/components/AccessCheck'
 import FieldNoteContent from '@/components/FieldNoteContent'
 import { fieldNotes, noteExcerpt } from '@/data/field-notes'
@@ -99,51 +100,46 @@ export default async function FieldNotePage({ params }: { params: Promise<{ slug
       <AccessCheck>
         <Header />
 
-        <div className="min-h-screen bg-gray-50">
-          <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <Link
-              href="/notes"
-              className="inline-flex items-center text-gray-600 hover:text-brand-cyan mb-8 transition-colors"
-            >
-              <ArrowLeft className="h-4 w-4 mr-1" />
-              All Field Notes
-            </Link>
+        <article className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
+          <Link
+            href="/notes"
+            className="dateline text-brand-slate hover:text-brand-cyan inline-flex items-center mb-12 transition-colors"
+          >
+            <ArrowLeft className="h-4 w-4 mr-2" />
+            All Field Notes
+          </Link>
 
-            <div className="bg-white border border-gray-200 rounded-lg p-8 shadow-sm">
-              <div className="flex items-center gap-4 text-sm text-gray-500 mb-4">
-                <div className="flex items-center gap-1">
-                  <Calendar className="h-4 w-4" />
-                  <time dateTime={note.date}>
-                    {new Date(note.date).toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric',
-                    })}
-                  </time>
-                </div>
-                <span>By Janette Roush</span>
-              </div>
+          {/* Dateline kicker */}
+          <div className="dateline text-brand-slate flex flex-wrap items-baseline gap-x-4 gap-y-1 mb-6">
+            <time dateTime={note.date}>
+              {new Date(note.date).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              })}
+            </time>
+            <span>By Janette Roush</span>
+          </div>
 
-              <h1 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4 leading-tight font-display">
-                {note.title}
-              </h1>
+          {/* Headline */}
+          <h1 className="font-display text-4xl md:text-5xl text-brand-navy leading-tight mb-8">
+            {note.title}
+          </h1>
 
-              <div className="flex items-center gap-2 mb-8 flex-wrap">
-                <Tag className="h-4 w-4 text-gray-400" />
-                {note.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="text-xs font-medium px-3 py-1 bg-brand-accent-cream text-brand-navy rounded-full"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
+          {/* Tag markers — hairline rule closes the head matter */}
+          <div className="flex flex-wrap gap-x-5 gap-y-1 dateline text-brand-cyan pb-8 mb-10 border-b border-brand-sand">
+            {note.tags.map((tag) => (
+              <span key={tag}>{tag}</span>
+            ))}
+          </div>
 
-              <FieldNoteContent content={note.content} />
-            </div>
-          </article>
-        </div>
+          {/* Article body — readable measure, serif prose */}
+          <div className="max-w-[68ch] text-lg leading-relaxed">
+            <FieldNoteContent content={note.content} />
+          </div>
+        </article>
+
+        <Footer />
       </AccessCheck>
     </>
   )
