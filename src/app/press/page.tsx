@@ -94,6 +94,13 @@ const pressItems = [
 // Podcast & video appearances (guest or host). Reverse chronological.
 const appearances = [
   {
+    title: 'Travel Tech Insider — "Future Destinations: The Evolving Role of the DMO"',
+    description:
+      'With hosts Gilad Berenstein and Cara Whitehill, alongside co-guest Meaghan Ferrigno — how DMOs are redefining their role as AI-generated content and new discovery behaviors reshape destination marketing.',
+    url: 'https://open.spotify.com/episode/1cxj6FoSKRuvSVdtR7Daud',
+    dateDisplay: 'July 14, 2026',
+  },
+  {
     title: 'Destination Discourse — "What Should DMOs Actually Be Doing With AI Right Now?" (with Dan Holowack)',
     description:
       'A no-fluff conversation with Stuart Butler and Adam Stoker on the shift from "using AI" to "working inside AI," why every DMO needs an AI champion now, and why doing nothing is the biggest risk.',
