@@ -2,28 +2,8 @@ import AccessCheck from '@/components/AccessCheck'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import HLSPlayer from '../webinar/[id]/hls-player'
+import { shortFormVideos } from '@/data/shorts'
 
-// Short-form video content
-const shortFormVideos = [
-  {
-    id: 'clueless-packing-app',
-    title: 'Building a "Clueless"-Inspired AI Packing App Using Claude Artifacts',
-    description: 'Using Anthropic\'s Claude, the team used the "artifacts" feature—described as a reusable prompt similar to a custom GPT—to build a "Business Trip Packing Assistant." The app\'s design was inspired by the iconic virtual closet from the movie Clueless.',
-    duration: '1 min',
-    muxPlaybackId: 'O7pzzrithO55xsLb6p02GCgtmGyXTO1C7rSztJDl0002Bo',
-    category: 'Demo',
-    instructor: 'Janette Roush',
-  },
-  {
-    id: 'ai-presentations',
-    title: 'How AI Can Help with Presentations',
-    description: 'Janette walks you through her complete AI-powered workflow for creating compelling presentations from the ground up. She shares her entire process, from organizing research in ChatGPT and brainstorming narrative frameworks to generating custom images.',
-    duration: '9 min',
-    muxPlaybackId: 'qZkSL00Sd00Qe01OLuiv6TdEiIVYKXZKKk1UPR5RckP2fM',
-    category: 'Tutorial',
-    instructor: 'Janette Roush',
-  },
-]
 
 export default function ShortsPage() {
   // ItemList schema for AI discoverability
