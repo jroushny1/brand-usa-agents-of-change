@@ -17,6 +17,18 @@ export const metadata: Metadata = {
 // Pull quotes are verified verbatim from the published pieces.
 const pressItems = [
   {
+    id: 'jtf-curating-trust',
+    publication: 'Journal of Tourism Futures',
+    reporter: 'Bernadett Papp',
+    dateDisplay: 'July 24, 2026',
+    date: '2026-07-24',
+    title: 'Curating trust for an AI future: an interview with Janette Roush on the evolving roles of NTOs and DMOs',
+    url: 'https://www.emerald.com/jtf/article/doi/10.1108/JTF-06-2026-0288/1388605/Curating-trust-for-an-AI-future-an-interview-with',
+    summary:
+      'A peer-reviewed, open-access interview on how NTOs and DMOs evolve from marketing organizations into intelligence hubs and validators of destination information — data coordination, content provenance, and transparency as the foundation of traveler trust.',
+    quote: "I think it's time to start thinking about AI not as a chatbot, but as your personal operating system.",
+  },
+  {
     id: 'travel-weekly-high-stakes',
     publication: 'Travel Weekly',
     reporter: 'Emma Weissmann',
