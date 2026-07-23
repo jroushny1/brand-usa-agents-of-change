@@ -6,10 +6,15 @@ Janette Roush's personal site — keynotes, working tools (Story Lab, AI Site Au
 
 ## Deployment
 
-- **Canonical domain:** janetteroush.com
+- **Canonical domain:** janetteroush.com (apex; `www` 308-redirects to apex). Also mirrors to `agents-of-change.brandusa.org` (Brand USA Vercel team deployment).
 - **Vercel backup URL:** brand-usa-agents-of-change.vercel.app
 - **Repo:** GitHub — `jroushny1/brand-usa-agents-of-change`
-- **Deploy:** Push to `main` triggers auto-deploy via Vercel
+- **Deploy:** Push to `main` triggers auto-deploy via Vercel (usually < 1 min). No CLI needed to ship code.
+- **Vercel account = personal (janetteroush@gmail.com)**, project `prj_E9dAA2IuGDfQW3HDiLV5Fq7YzxfV` under org `team_OGaRKQdVNdePb0pJhaM4pgPT`. NOT the Brand USA team, NOT jroush-8588 — "brand-usa" in the repo name is just a name; hosting is personal. **CLI/MCP logged into the work accounts returns 403 for this project** — to set env vars / read build logs you must auth as janetteroush@gmail.com.
+- **Always `git fetch origin` + rebase before editing/deploying.** Other sessions push here, so the local checkout can be many commits behind `main`; editing stale and pushing will reject.
+- **DNS (Porkbun registrar, default nameservers; migrated 2026-06-04 from dormant Wix DNS):** A record apex → `216.198.79.1`; CNAME `www` → `eaf046cb9fd7aa8f.vercel-dns-017.com.` (older `76.76.21.21` / `cname.vercel-dns.com` still work).
+- **Email `jr@janetteroush.com`:** receive-only forwarding via Porkbun's free email forwarding → `janetteroush@gmail.com` (set up in Porkbun's Email tab; MX managed automatically — don't add MX manually). She does not send from this address; it's a placeholder.
+- **Personal OS guides:** `/personal-os` + `/personal-os-2` are the **Claude Cowork** track; `/personal-os-3` is the **Claude Code (VS Code)** advanced build. Keep that split.
 
 ## Site Architecture
 
