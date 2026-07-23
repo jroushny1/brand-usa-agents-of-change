@@ -14,9 +14,33 @@ export const metadata: Metadata = {
   },
 }
 
+const storytellingSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'The Periodic Table of Storytelling',
+  url: 'https://janetteroush.com/storytelling',
+  description:
+    'An interactive AI lab built on the Periodic Table of Storytelling: scan any film to reveal the tropes in its DNA, or select narrative elements to synthesize an original story concept.',
+  applicationCategory: 'Interactive AI demo',
+  operatingSystem: 'Web browser',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  creator: {
+    '@type': 'Person',
+    name: 'Janette Roush',
+    jobTitle: 'SVP, Innovation and Chief AI Officer',
+    affiliation: { '@type': 'Organization', name: 'Brand USA' },
+  },
+  isPartOf: { '@type': 'WebSite', name: 'Agents of Change', url: 'https://janetteroush.com' },
+}
+
 export default function StorytellingPage() {
   return (
-    <AccessCheck>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(storytellingSchema) }}
+      />
+      <AccessCheck>
       <Header />
       <main className="min-h-screen" style={{ backgroundColor: '#f4efe3' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 text-center">
@@ -27,5 +51,6 @@ export default function StorytellingPage() {
         <StorytellingLab />
       </main>
     </AccessCheck>
+    </>
   )
 }

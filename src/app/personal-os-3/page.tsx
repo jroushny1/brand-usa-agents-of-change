@@ -5,9 +5,30 @@ export const metadata: Metadata = {
   description: 'The advanced track. The full Claude Code engine: filesystem skills as real slash commands, auto memory that persists across sessions, and MCP servers. For people who have outgrown the Cowork setup.',
 }
 
+const personalOs3Schema = {
+  '@context': 'https://schema.org',
+  '@type': 'TechArticle',
+  headline: 'Build Your Personal OS in Claude Code (VS Code)',
+  url: 'https://janetteroush.com/personal-os-3',
+  description:
+    'The advanced track. The full Claude Code engine: filesystem skills as real slash commands, auto memory that persists across sessions, and MCP servers. For people who have outgrown the Cowork setup.',
+  author: {
+    '@type': 'Person',
+    name: 'Janette Roush',
+    jobTitle: 'SVP, Innovation and Chief AI Officer',
+    affiliation: { '@type': 'Organization', name: 'Brand USA' },
+  },
+  publisher: { '@type': 'Organization', name: 'Agents of Change', url: 'https://janetteroush.com' },
+  isPartOf: { '@type': 'WebSite', name: 'Agents of Change', url: 'https://janetteroush.com' },
+}
+
 export default function PersonalOS3GuidePage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personalOs3Schema) }}
+      />
       <style dangerouslySetInnerHTML={{ __html: `
 .pos3-page {
             --brand-navy: #1a2744;

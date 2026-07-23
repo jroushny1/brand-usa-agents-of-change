@@ -5,9 +5,30 @@ export const metadata: Metadata = {
   description: 'The leverage layer: memory, skills, capture pipelines, voice system, and shipping from the vault. What happens when a folder of markdown becomes a coworker.',
 }
 
+const personalOs2Schema = {
+  '@context': 'https://schema.org',
+  '@type': 'TechArticle',
+  headline: 'How a Personal OS Compounds Over Time',
+  url: 'https://janetteroush.com/personal-os-2',
+  description:
+    'The leverage layer: memory, skills, capture pipelines, voice system, and shipping from the vault. What happens when a folder of markdown becomes a coworker.',
+  author: {
+    '@type': 'Person',
+    name: 'Janette Roush',
+    jobTitle: 'SVP, Innovation and Chief AI Officer',
+    affiliation: { '@type': 'Organization', name: 'Brand USA' },
+  },
+  publisher: { '@type': 'Organization', name: 'Agents of Change', url: 'https://janetteroush.com' },
+  isPartOf: { '@type': 'WebSite', name: 'Agents of Change', url: 'https://janetteroush.com' },
+}
+
 export default function PersonalOS2GuidePage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personalOs2Schema) }}
+      />
       <style dangerouslySetInnerHTML={{ __html: `
 .pos2-page {
             --brand-navy: #1a2744;
