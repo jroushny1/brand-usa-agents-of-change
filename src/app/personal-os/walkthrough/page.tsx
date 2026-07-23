@@ -118,9 +118,37 @@ const sections = [
   },
 ]
 
+const walkthroughSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'TechArticle',
+  headline: 'Building a Personal Operating System — Video Walkthrough',
+  url: 'https://janetteroush.com/personal-os/walkthrough',
+  description:
+    'A live walkthrough of how to build a Personal Operating System with Claude Code, VS Code, and the PARA method. From file structure to API automations.',
+  author: {
+    '@type': 'Person',
+    name: 'Janette Roush',
+    jobTitle: 'SVP, Innovation and Chief AI Officer',
+    affiliation: { '@type': 'Organization', name: 'Brand USA' },
+  },
+  publisher: { '@type': 'Organization', name: 'Agents of Change', url: 'https://janetteroush.com' },
+  isPartOf: { '@type': 'WebSite', name: 'Agents of Change', url: 'https://janetteroush.com' },
+  hasPart: sections.map((s) => ({
+    '@type': 'VideoObject',
+    name: s.title,
+    description: s.description,
+    thumbnailUrl: `https://image.mux.com/${s.playbackId}/thumbnail.jpg`,
+    contentUrl: `https://stream.mux.com/${s.playbackId}.m3u8`,
+  })),
+}
+
 export default function WalkthroughPage() {
   return (
     <div className="walkthrough-page">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(walkthroughSchema) }}
+      />
       <style dangerouslySetInnerHTML={{ __html: `
         .walkthrough-page {
           --navy: #101F36;

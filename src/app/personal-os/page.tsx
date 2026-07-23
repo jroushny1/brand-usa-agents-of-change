@@ -6,9 +6,30 @@ export const metadata: Metadata = {
   description: 'A folder of markdown files that turns Claude from a chatbot into a coworker who knows your work. The foundation guide.',
 }
 
+const personalOsSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'TechArticle',
+  headline: 'The Shape of a Personal OS for Claude',
+  url: 'https://janetteroush.com/personal-os',
+  description:
+    'A folder of markdown files that turns Claude from a chatbot into a coworker who knows your work. The foundation guide.',
+  author: {
+    '@type': 'Person',
+    name: 'Janette Roush',
+    jobTitle: 'SVP, Innovation and Chief AI Officer',
+    affiliation: { '@type': 'Organization', name: 'Brand USA' },
+  },
+  publisher: { '@type': 'Organization', name: 'Agents of Change', url: 'https://janetteroush.com' },
+  isPartOf: { '@type': 'WebSite', name: 'Agents of Change', url: 'https://janetteroush.com' },
+}
+
 export default function PersonalOSGuidePage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personalOsSchema) }}
+      />
       <style dangerouslySetInnerHTML={{ __html: `
         .pos-page {
           --brand-navy: #1a2744;
