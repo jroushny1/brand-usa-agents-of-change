@@ -16,24 +16,17 @@ const conferenceTalks = Object.values(webinarData).filter(
 )
 
 export const metadata: Metadata = {
-  // alternates is replaced (not merged) when a page defines it, so the RSS
-  // autodiscovery link from layout.tsx must be repeated here.
   alternates: {
     canonical: 'https://janetteroush.com',
-    types: {
-      'application/rss+xml': 'https://janetteroush.com/notes/feed.xml',
-    },
   },
 }
 
 
-// Curated "latest" index for the front page — newest items across press,
-// podcasts, and field notes. Edit this list by hand when something new lands.
+// Curated "latest" index for the front page — newest items across press and
+// podcasts. Edit this list by hand when something new lands.
 const latestIndex = [
   { date: 'May 21 ’26', title: 'What Should DMOs Actually Be Doing With AI Right Now?', category: 'Podcast', href: '/press' },
   { date: 'May 4 ’26', title: 'Destinations’ high-stakes game with AI — Travel Weekly', category: 'Press', href: '/press' },
-  { date: 'Mar 7 ’26', title: 'The Leapfrog Thesis: Why Some Teams Should Skip Chatbots Entirely', category: 'Field Note', href: '/notes/leapfrog-thesis' },
-  { date: 'Mar 4 ’26', title: 'From Voice Recording to Live Website: How I Built the Wyoming Keynote Recap', category: 'Field Note', href: '/notes/plaud-to-website' },
   { date: 'Feb ’26', title: 'The Taylor Swift of Travel AI — Hospitality Daily', category: 'Podcast', href: '/press' },
 ]
 
@@ -301,7 +294,7 @@ export default function HomePage() {
           <div className="absolute inset-0 bg-gradient-to-b from-[#0A1220]/10 via-transparent to-[#0A1220]/40" />
           <div className="absolute inset-5 border border-brand-paper/90 z-10 pointer-events-none" />
           <div className="absolute top-10 left-10 md:left-12 z-20 dateline text-brand-paper bg-[#0A1220]/55 px-3 py-2">
-            Keynotes · Tools · Field Notes
+            Keynotes · Tools
           </div>
           <div className="absolute bottom-10 right-10 md:right-12 z-20 dateline text-brand-paper bg-[#0A1220]/55 px-3 py-1.5">
             From the stage archive · 2026
@@ -314,7 +307,7 @@ export default function HomePage() {
               <span className="bg-brand-paper px-3 md:px-4 pt-2 pb-3">of AI.</span>
             </h1>
             <p className="mt-7 max-w-xl text-xl leading-relaxed text-brand-navy">
-              Keynotes, working tools, and field notes from the person building the thing she talks about on stage.
+              Keynotes and working tools from the person building the thing she talks about on stage.
             </p>
           </div>
         </div>

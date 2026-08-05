@@ -10,6 +10,11 @@
 > `npm run lint` is broken because `next lint` was removed in Next 16 and the repo
 > has no ESLint config; setting up flat-config ESLint is a candidate follow-up.
 
+> **Superseded (2026-08-05):** Field Notes and the Glossary were retired on an analytics
+> read (see `CLAUDE.md` § Redesign Status). Every reference to `/notes`, `/glossary`,
+> `src/data/field-notes.ts`, `src/data/glossary.ts`, `GlossaryClient.tsx`, and the RSS
+> feed below is historical record only. Phase 6 items **6.1, 6.5, and 6.6 are void.**
+
 This is a step-by-step implementation plan produced from a full site review (June 2026).
 It is written so a smaller/less expensive model can execute it phase by phase without
 re-deriving the analysis.

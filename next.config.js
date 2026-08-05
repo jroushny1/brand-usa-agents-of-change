@@ -71,6 +71,17 @@ const nextConfig = {
   env: {
     NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
   },
+  // Field Notes and the Glossary were retired in August 2026 (no readership on
+  // either; no individual note was ever opened). Both were indexed, so the old
+  // URLs — including the RSS feed and every article slug — 301 to the resource
+  // library rather than 404.
+  async redirects() {
+    return [
+      { source: '/glossary', destination: '/library', permanent: true },
+      { source: '/notes', destination: '/library', permanent: true },
+      { source: '/notes/:path*', destination: '/library', permanent: true },
+    ]
+  },
 }
 
 module.exports = nextConfig

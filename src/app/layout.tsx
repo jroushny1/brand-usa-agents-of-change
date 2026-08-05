@@ -33,11 +33,6 @@ export const metadata: Metadata = {
   // Note: no global canonical here — a layout-level canonical is inherited by
   // every page that doesn't override it, marking them all as duplicates of the
   // homepage. The homepage sets its own canonical in src/app/page.tsx.
-  alternates: {
-    types: {
-      'application/rss+xml': 'https://janetteroush.com/notes/feed.xml',
-    },
-  },
   openGraph: {
     title: 'Janette Roush | Working Inside of AI',
     description: 'Janette Roush is the SVP, Innovation and Chief AI Officer at Brand USA. A LinkedIn Top Voice and Broadway veteran, she specializes in Generative AI strategy for travel and marketing.',

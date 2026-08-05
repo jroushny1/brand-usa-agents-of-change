@@ -8,7 +8,7 @@ export default function Footer() {
           <Link href="/" className="font-display text-2xl text-brand-navy hover:text-brand-cyan transition-colors">
             Janette <em>Roush</em>
           </Link>
-          <p className="dateline text-brand-slate mt-3">Keynotes · Tools · Field Notes</p>
+          <p className="dateline text-brand-slate mt-3">Keynotes · Tools</p>
         </div>
         <div className="flex flex-col md:items-end gap-2">
           <a href="mailto:jroush@thebrandusa.com" className="dateline text-brand-slate hover:text-brand-cyan transition-colors">
@@ -21,9 +21,6 @@ export default function Footer() {
             className="dateline text-brand-slate hover:text-brand-cyan transition-colors"
           >
             LinkedIn
-          </a>
-          <a href="/notes/feed.xml" className="dateline text-brand-slate hover:text-brand-cyan transition-colors">
-            Field Notes RSS
           </a>
         </div>
       </div>
