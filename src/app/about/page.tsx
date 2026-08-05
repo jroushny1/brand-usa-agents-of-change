@@ -165,7 +165,7 @@ export default function AboutPage() {
                     View Speaker Availability via Brand USA
                   </a>
                   <Link
-                    href="/notes"
+                    href="/library"
                     className="inline-flex items-center justify-center gap-2 border border-white/30 text-white px-7 py-3.5 rounded-lg font-semibold hover:bg-white/10 transition-colors"
                   >
                     Follow the work

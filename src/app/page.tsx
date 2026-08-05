@@ -15,13 +15,8 @@ const conferenceTalks = Object.values(webinarData).filter(
 )
 
 export const metadata: Metadata = {
-  // alternates is replaced (not merged) when a page defines it, so the RSS
-  // autodiscovery link from layout.tsx must be repeated here.
   alternates: {
     canonical: 'https://janetteroush.com',
-    types: {
-      'application/rss+xml': 'https://janetteroush.com/notes/feed.xml',
-    },
   },
 }
 

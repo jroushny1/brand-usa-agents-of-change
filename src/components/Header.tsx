@@ -33,12 +33,6 @@ export default function Header() {
             <Link href="/about" className="text-base font-medium text-brand-navy hover:text-brand-cyan transition-colors">
               About
             </Link>
-            <Link href="/notes" className="text-base font-medium text-brand-navy hover:text-brand-cyan transition-colors">
-              Field Notes
-            </Link>
-            <Link href="/glossary" className="text-base font-medium text-brand-navy hover:text-brand-cyan transition-colors">
-              Glossary
-            </Link>
             <Link href="/library" className="text-base font-medium text-brand-navy hover:text-brand-cyan transition-colors">
               Resources
             </Link>
@@ -86,20 +80,6 @@ export default function Header() {
               onClick={() => setMobileMenuOpen(false)}
             >
               About
-            </Link>
-            <Link
-              href="/notes"
-              className="block px-3 py-2 rounded-md text-base font-medium text-brand-navy hover:text-brand-cyan hover:bg-gray-50 transition-colors"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Field Notes
-            </Link>
-            <Link
-              href="/glossary"
-              className="block px-3 py-2 rounded-md text-base font-medium text-brand-navy hover:text-brand-cyan hover:bg-gray-50 transition-colors"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Glossary
             </Link>
             <Link
               href="/library"

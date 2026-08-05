@@ -1,6 +1,6 @@
 # janetteroush.com
 
-Janette Roush's personal site — keynotes, working tools (Story Lab, AI Site Audit), field notes, press, and podcast appearances, plus the AI webinar library (moving to thebrandusa.com in August 2026). Built with Next.js, deployed to Vercel. Editorial redesign shipped July 2026.
+Janette Roush's personal site — keynotes, working tools (Story Lab, AI Site Audit), press, and podcast appearances, plus the AI webinar library (moving to thebrandusa.com in August 2026). Built with Next.js, deployed to Vercel. Editorial redesign shipped July 2026.
 
 > **Naming:** Always refer to this site as **janetteroush.com** in conversation. `brand-usa-agents-of-change` is just the underlying Vercel project and GitHub repo name. Do not call it that in chat.
 
@@ -27,9 +27,6 @@ Next.js App Router. All content lives in TypeScript modules under `src/data/` (n
 | `/` | Homepage — editorial front page: chip hero, Lab cards, curated `latestIndex`, webinar/shorts/conference grids, In the Media pull quote |
 | `/webinar/[id]` | Individual webinar pages — video (Mux), transcript, chapters, schema. Statically generated with per-webinar metadata |
 | `/podcast/[id]` | Podcast episode pages — audio, transcript, chapters, schema. Statically generated |
-| `/notes` | Field Notes blog — research notes, frameworks, case studies |
-| `/notes/feed.xml` | RSS feed for Field Notes (derived from the same data module) |
-| `/glossary` | AI/tourism glossary with structured definitions |
 | `/library` | Resources page — curated links, Personal OS guides |
 | `/about` | About Janette / Agents of Change program |
 | `/press` | Press / media page |
@@ -43,8 +40,8 @@ Next.js App Router. All content lives in TypeScript modules under `src/data/` (n
 
 ### Components
 
-- `Header.tsx` — Personal masthead ("Janette Roush", Fraunces italic surname) + small-caps mono nav (desktop + mobile). 8 items: Home, About, Field Notes, Glossary, Resources, Press, AI Audit, Story Lab
-- `Footer.tsx` — wordmark, email, LinkedIn, Field Notes RSS
+- `Header.tsx` — Personal masthead ("Janette Roush", Fraunces italic surname) + small-caps mono nav (desktop + mobile). 6 items: Home, About, Resources, Press, AI Audit, Story Lab
+- `Footer.tsx` — wordmark, email, LinkedIn
 - `AccessCheck.tsx` — Auth wrapper (currently a pass-through)
 - `src/app/not-found.tsx` / `src/app/error.tsx` — branded 404 and error pages
 
@@ -53,9 +50,7 @@ Next.js App Router. All content lives in TypeScript modules under `src/data/` (n
 - **Webinars:** `src/data/webinars.ts` — `webinarData` (full content: id, title, description, duration, muxPlaybackId, instructor, publishDate, keyTakeaways, topics, chapters, transcript) plus `webinarMentions` (SoftwareApplication schema) and `webinarIds`
 - **Homepage cards:** `src/data/webinar-cards.ts` — short marketing blurbs for the homepage grid
 - **Shorts:** `src/data/shorts.ts` — shared by homepage grid and `/shorts`
-- **Field Notes:** `src/data/field-notes.ts` — `fieldNotes` array + `fieldNoteFaqs` (FAQ schema entries); also feeds the RSS route
 - **Podcasts:** `src/data/podcasts.ts`
-- **Glossary:** `src/data/glossary.ts` — `terms`, `faqs`, `unexpectedQuestions`
 - **Resources:** `src/data/resources.ts` — categorized library links
 
 ### Scripts
@@ -71,21 +66,12 @@ Next.js App Router. All content lives in TypeScript modules under `src/data/` (n
 
 Every content page includes JSON-LD structured data. Common schemas:
 - `VideoObject` (webinars), `PodcastEpisode` (podcasts)
-- `FAQPage` (field notes, glossary — key for AI discoverability)
-- `TechArticle` / `Blog` (field notes)
 - `Course` (webinar series)
 - `BreadcrumbList`, `SoftwareApplication` (tool mentions)
 
 When adding content, always include appropriate schema markup. Detail pages
 (`/webinar/[id]`, `/podcast/[id]`) also get per-page `<title>`/OG metadata via
 `generateMetadata` — this works automatically from the data modules.
-
-### Field Notes Content Format
-
-Content is stored as template literal strings. The renderer converts:
-- `**bold**` → `<strong>` tags via regex
-- Inline HTML (`<a>` tags) supported via `dangerouslySetInnerHTML`
-- Paragraphs split on `\n\n`
 
 ### Video Hosting
 
@@ -113,6 +99,8 @@ Personal editorial identity. The full plan, comps, and decisions log live in the
 
 **Phase 1 + interior editorial pass — DONE (2026-07-06, local):** editorial design system, personal masthead, chip hero (`public/hero-keynote.jpg`), editorial homepage, Footer, token remap, AND a full editorial pass on every public interior page — press (clippings wall), notes index + article, glossary (dictionary), library (resource index), about (profile), shorts (video grid), ai-audit + story-lab (header shells over untouched tools), 404/error. `/webinar/[id]` pages skipped (leaving for thebrandusa.com in August). All JSON-LD schema kept verbatim. Verified: typecheck + build + rendered screenshots of all pages. Awaiting Janette's go to push/deploy.
 
+**Field Notes + Glossary retired — DONE (2026-08-05, `main` and `editorial-redesign`):** both sections removed on an analytics read. Over the GA4 property's full life, no individual field note ever registered a single pageview; `/notes` index drew 184 pageviews and `/glossary` 59 against a site total of 8,275 (365 days), and Search Console showed 0 clicks on either over 62 days — the impressions they did get came from searches for Janette's own name. AI assistants (ChatGPT, Gemini, Perplexity, NotebookLM) sent 24 sessions in a year and landed every one on `/personal-os` or `/`, never on the schema-marked pages. Deleted: both route trees, `src/data/{field-notes,glossary}.ts`, `FieldNoteContent.tsx`, the RSS route and its autodiscovery `alternates`, 2 of 8 nav items, and their sitemap entries. `/glossary`, `/notes`, `/notes/:path*` (incl. `feed.xml`) 301 to `/library` via `redirects()` in `next.config.js`. The About page's "Follow the work" CTA now points at `/library`.
+
 **Phase 2 — August 2026, triggered by the video library moving to thebrandusa.com:**
 - [ ] Get receiving URL structure → slug-to-slug 301 map for every `/webinar/*`, `/shorts`, library video URL; ship the same day videos move
 - [ ] Rewrite homepage JSON-LD: Organization/Course → Person + ProfilePage with full sameAs graph (Janette = canonical entity node)
@@ -122,7 +110,7 @@ Personal editorial identity. The full plan, comps, and decisions log live in the
 
 **Phase 3 — September 2026 (partly pulled forward):** interior editorial pass is DONE (see above). Remaining: a dedicated Speaking page (Event schema + booking CTA) and downloadable speaker assets on About.
 
-**Standing rule:** the schema-density strategy survives every redesign — never remove structured data, RSS, or sitemap coverage in a visual change.
+**Standing rule:** the schema-density strategy survives every redesign — never remove structured data, RSS, or sitemap coverage in a visual change. Retiring a whole section on an analytics decision is the one exception (see Field Notes + Glossary above); when that happens the removed URLs get 301s, never 404s, so the accumulated indexing lands on a page that is still live.
 
 ## Adding Content
 
@@ -134,11 +122,6 @@ After any content change, run `npm run validate && npm run build`.
 3. Add homepage card in `src/data/webinar-cards.ts` (same id and muxPlaybackId)
 4. Webinar counts on the homepage are computed from the array — no manual count updates
 5. The webinar page, sitemap, and validation pick the new entry up automatically
-
-### New Field Note
-1. Add entry to `fieldNotes` in `src/data/field-notes.ts` (newest first)
-2. Add a matching FAQ entry to `fieldNoteFaqs` in the same file
-3. The RSS feed updates automatically from the same module
 
 ### New Podcast Episode
 1. Add entry to `podcastData` in `src/data/podcasts.ts`

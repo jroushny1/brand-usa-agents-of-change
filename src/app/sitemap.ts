@@ -1,7 +1,6 @@
 import { MetadataRoute } from 'next'
 import { webinarData, webinarIds } from '@/data/webinars'
 import { podcastData, podcastIds } from '@/data/podcasts'
-import { fieldNotes } from '@/data/field-notes'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://janetteroush.com'
@@ -14,22 +13,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
-      url: `${baseUrl}/notes`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.95,
-    },
-    {
       url: `${baseUrl}/library`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/glossary`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
     },
     {
       url: `${baseUrl}/about`,
@@ -107,12 +94,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }
   })
 
-  const notePages: MetadataRoute.Sitemap = fieldNotes.map((note) => ({
-    url: `${baseUrl}/notes/${note.id}`,
-    lastModified: new Date(note.date),
-    changeFrequency: 'monthly',
-    priority: 0.85,
-  }))
-
-  return [...staticPages, ...webinarPages, ...podcastPages, ...notePages]
+  return [...staticPages, ...webinarPages, ...podcastPages]
 }
