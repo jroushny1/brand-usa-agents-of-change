@@ -96,7 +96,11 @@ export default function HLSPlayer({
       if (!video) {
         return
       }
-      if (video.canPlayType('application/vnd.apple.mpegurl')) {
+      // Only Safari truly plays HLS natively, and it reports 'probably'. Chrome,
+      // Edge and Firefox all return the truthy string 'maybe' here while being
+      // unable to decode HLS at all — assigning the .m3u8 to video.src in those
+      // browsers fails with MEDIA_ERR_SRC_NOT_SUPPORTED, so require 'probably'.
+      if (video.canPlayType('application/vnd.apple.mpegurl') === 'probably') {
         // Native HLS support (Safari)
         video.src = src
       } else if (window.Hls && window.Hls.isSupported()) {
