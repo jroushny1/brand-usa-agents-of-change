@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import Image from 'next/image'
 import { ArrowLeft, ExternalLink } from 'lucide-react'
 import AccessCheck from '@/components/AccessCheck'
 import Footer from '@/components/Footer'
@@ -176,15 +175,6 @@ export default function LibraryPage() {
                 <ArrowLeft className="h-4 w-4 mr-2" aria-hidden="true" />
                 Back to Home
               </Link>
-              <div className="flex items-center">
-                <Image
-                  src="/brandusa-logo.png"
-                  alt="Brand USA"
-                  width={100}
-                  height={33}
-                  className="h-7 w-auto"
-                />
-              </div>
             </div>
           </div>
         </header>

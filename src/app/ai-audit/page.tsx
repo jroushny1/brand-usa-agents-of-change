@@ -26,10 +26,9 @@ const aiAuditSchema = {
   creator: {
     '@type': 'Person',
     name: 'Janette Roush',
-    jobTitle: 'SVP, Innovation and Chief AI Officer',
-    affiliation: { '@type': 'Organization', name: 'Brand USA' },
+    url: 'https://janetteroush.com',
   },
-  isPartOf: { '@type': 'WebSite', name: 'Agents of Change', url: 'https://janetteroush.com' },
+  isPartOf: { '@type': 'WebSite', name: 'Janette Roush', url: 'https://janetteroush.com' },
 }
 
 export default function AIAuditPage() {

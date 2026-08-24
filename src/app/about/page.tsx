@@ -135,8 +135,11 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
             {/* Left: positioning */}
             <div className="lg:col-span-7">
-              <div className="dateline text-brand-cyan mb-6">
+              <div className="dateline text-brand-cyan mb-2">
                 SVP, Innovation &amp; Chief AI Officer · Brand USA
+              </div>
+              <div className="dateline text-brand-slate mb-6">
+                Expert advisor · AI Opener for Destinations, Europe &amp; North America
               </div>
               <h1 className="font-display font-medium text-brand-navy leading-none text-6xl md:text-7xl lg:text-8xl mb-7">
                 Janette Roush
@@ -150,7 +153,10 @@ export default function AboutPage() {
                 with AI the week ChatGPT launched and committed to trying something new with it
                 every day at work. That daily practice became a career pivot — and the
                 Agents of Change program, where she shares the tools and workflows her team
-                uses at Brand USA so the industry can put them to work.
+                uses at Brand USA so the industry can put them to work. She also serves as an
+                expert advisor to the European and North American cohorts of AI Opener for
+                Destinations, Group NAO&rsquo;s program for destination organizations putting
+                AI strategy into practice.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <a

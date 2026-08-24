@@ -75,11 +75,19 @@ export default function RootLayout({
     "@type": "Person",
     "name": "Janette Roush",
     "jobTitle": "SVP, Innovation and Chief AI Officer",
-    "affiliation": {
-      "@type": "Organization",
-      "name": "Brand USA",
-      "sameAs": BRAND_USA_SAMEAS
-    },
+    "affiliation": [
+      {
+        "@type": "Organization",
+        "name": "Brand USA",
+        "sameAs": BRAND_USA_SAMEAS
+      },
+      {
+        "@type": "Organization",
+        "name": "AI Opener for Destinations",
+        "description": "Group NAO's AI strategy program for destination organizations. Janette Roush is an expert advisor to the European and North American cohorts.",
+        "url": "https://www.aiopenerfordestinations.com/"
+      }
+    ],
     "url": "https://janetteroush.com",
     "sameAs": [
       "https://www.linkedin.com/in/janetteroush/",
