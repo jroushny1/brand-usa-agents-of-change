@@ -19,7 +19,7 @@ declare global {
 }
 
 function eventForHref(href: string): string | null {
-  if (href.includes('thebrandusa.com/requestspeaker')) return 'speaker_availability_click'
+  if (href.includes('thebrandusa.com/about/brand-usa-speakers')) return 'speaker_availability_click'
   // Strip the origin so query strings and hashes don't break detection.
   const path = href.replace(/^https?:\/\/[^/]+/, '')
   if (path.startsWith('/personal-os')) return 'personal_os_open'

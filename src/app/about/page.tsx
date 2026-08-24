@@ -99,7 +99,7 @@ export default function AboutPage() {
         'name': 'Can I book Janette Roush as a speaker for AI in tourism?',
         'acceptedAnswer': {
           '@type': 'Answer',
-          'text': 'Yes! Janette Roush speaks to industry partners and stakeholders about putting AI to work in tourism. Visit thebrandusa.com/requestspeaker to view speaker availability.'
+          'text': 'Yes! Janette Roush speaks to industry partners and stakeholders about putting AI to work in tourism. Visit thebrandusa.com/about/brand-usa-speakers to view speaker availability.'
         }
       },
       {
@@ -154,7 +154,7 @@ export default function AboutPage() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <a
-                  href="https://www.thebrandusa.com/requestspeaker"
+                  href="https://www.thebrandusa.com/about/brand-usa-speakers/"
                   target="_blank"
                   rel="noopener noreferrer"
                   data-ga-event="speaker_availability_click"
@@ -387,7 +387,7 @@ export default function AboutPage() {
               in tourism. Speaking is arranged through Brand USA.
             </p>
             <a
-              href="https://www.thebrandusa.com/requestspeaker"
+              href="https://www.thebrandusa.com/about/brand-usa-speakers/"
               target="_blank"
               rel="noopener noreferrer"
               data-ga-event="speaker_availability_click"
