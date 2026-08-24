@@ -6,7 +6,6 @@ import AccessCheck from '@/components/AccessCheck'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import { webinarCards as webinars } from '@/data/webinar-cards'
-import { shortFormVideos } from '@/data/shorts'
 import { webinarData } from '@/data/webinars'
 
 // Conference talks live in webinarData (flagged isConferenceTalk) and get their
@@ -460,38 +459,6 @@ export default function HomePage() {
               </div>
             </div>
           </Link>
-        </div>
-      </section>
-
-      {/* Short-Form Videos Section */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
-        <div className="dateline text-brand-slate flex items-center gap-4 mb-10">
-          <span>Quick Demos &amp; Tutorials</span>
-          <span className="flex-1 h-px bg-brand-sand" aria-hidden="true" />
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
-          {shortFormVideos.map((video) => (
-            <Link key={video.id} href="/shorts" className="group">
-              <div className="relative aspect-video overflow-hidden bg-brand-navy">
-                <Image
-                  src={video.thumbnail}
-                  alt={video.title}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                />
-                <div className="absolute inset-3 border border-brand-paper/80 pointer-events-none" />
-              </div>
-              <div className="mt-4 flex items-baseline justify-between dateline">
-                <span className="text-brand-cyan">{video.category}</span>
-                <span className="text-brand-slate">{video.duration}</span>
-              </div>
-              <h3 className="mt-2 font-display text-xl leading-tight text-brand-navy group-hover:text-brand-cyan transition-colors line-clamp-2">
-                {video.title}
-              </h3>
-            </Link>
-          ))}
         </div>
       </section>
 

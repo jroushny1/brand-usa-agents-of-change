@@ -4,13 +4,7 @@ import { webinarData } from './webinars'
 // card (title, blurb, duration, video, badge) derives from webinarData — edit
 // content there; edit this list only to reorder or add/remove cards.
 const cardOrder = [
-  'build-the-deck',
-  'from-conversation-to-knowledge',
-  'ai-chief-of-staff',
   'ai-101',
-  'intro-ai-agents',
-  'ai-tool-playground',
-  'ai-dmo-leadership',
   'custom-gpts',
   'ai-convention-sales',
   'crit-framework',
@@ -18,9 +12,6 @@ const cardOrder = [
   'model-context-protocol',
   'ai-policy-governance',
   'ai-for-presentations',
-  'introduction-to-vibe-coding',
-  'managing-the-rfp-process',
-  'chat-data-to-travel-intelligence',
 ]
 
 export const webinarCards = cardOrder.map((id) => {
