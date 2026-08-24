@@ -24,15 +24,14 @@ Next.js App Router. All content lives in TypeScript modules under `src/data/` (n
 
 | Route | Purpose |
 |-------|---------|
-| `/` | Homepage — editorial front page: chip hero, Lab cards, curated `latestIndex`, webinar/shorts/conference grids, In the Media pull quote |
-| `/webinar/[id]` | Individual webinar pages — video (Mux), transcript, chapters, schema. Statically generated with per-webinar metadata |
+| `/` | Homepage — editorial front page: chip hero, Lab cards, curated `latestIndex`, webinar + conference grids, In the Media pull quote |
+| `/webinar/[id]` | Individual webinar pages — video (Mux), transcript, chapters, schema. Statically generated. **10 remain**; nine migrated to thebrandusa.com 2026-08-24 and 301 there from `redirects()` |
 | `/podcast/[id]` | Podcast episode pages — audio, transcript, chapters, schema. Statically generated |
 | `/library` | Resources page — curated links, Personal OS guides |
 | `/about` | About Janette / Agents of Change program |
 | `/press` | Press / media page |
 | `/ai-audit` | Interactive AI audit tool for DMOs (client tool in `AuditClient.tsx`) |
 | `/storytelling` | Storytelling Lab — periodic table of storytelling + Gemini API routes (`/api/storytelling/*`) |
-| `/shorts` | Short-form video content |
 | `/personal-os` | Personal OS guide v1 (HTML embedded in React) |
 | `/personal-os-2` | Personal OS guide v2 (HTML embedded in React) |
 | `/personal-os/walkthrough` | Personal OS video walkthrough |
@@ -49,7 +48,6 @@ Next.js App Router. All content lives in TypeScript modules under `src/data/` (n
 
 - **Webinars:** `src/data/webinars.ts` — `webinarData` (full content: id, title, description, duration, muxPlaybackId, instructor, publishDate, keyTakeaways, topics, chapters, transcript) plus `webinarMentions` (SoftwareApplication schema) and `webinarIds`
 - **Homepage cards:** `src/data/webinar-cards.ts` — short marketing blurbs for the homepage grid
-- **Shorts:** `src/data/shorts.ts` — shared by homepage grid and `/shorts`
 - **Podcasts:** `src/data/podcasts.ts`
 - **Resources:** `src/data/resources.ts` — categorized library links
 
@@ -97,18 +95,39 @@ Personal editorial identity. The full plan, comps, and decisions log live in the
 
 ## Redesign Status & To-Dos
 
-**Phase 1 + interior editorial pass — DONE (2026-07-06, local):** editorial design system, personal masthead, chip hero (`public/hero-keynote.jpg`), editorial homepage, Footer, token remap, AND a full editorial pass on every public interior page — press (clippings wall), notes index + article, glossary (dictionary), library (resource index), about (profile), shorts (video grid), ai-audit + story-lab (header shells over untouched tools), 404/error. `/webinar/[id]` pages skipped (leaving for thebrandusa.com in August). All JSON-LD schema kept verbatim. Verified: typecheck + build + rendered screenshots of all pages. Awaiting Janette's go to push/deploy.
+**Phase 1 + interior editorial pass — SHIPPED LIVE 2026-08-24:** editorial design system, personal masthead, chip hero (`public/hero-keynote.jpg`), editorial homepage, Footer, token remap, AND a full editorial pass on every public interior page — press (clippings wall), notes index + article, glossary (dictionary), library (resource index), about (profile), ai-audit + story-lab (header shells over untouched tools), 404/error. `/webinar/[id]` pages skipped (leaving for thebrandusa.com in August). All JSON-LD schema kept verbatim. Merged to `main` and deployed 2026-08-24 alongside the Phase 2 migration below.
 
 **Field Notes + Glossary retired — DONE (2026-08-05, `main` and `editorial-redesign`):** both sections removed on an analytics read. Over the GA4 property's full life, no individual field note ever registered a single pageview; `/notes` index drew 184 pageviews and `/glossary` 59 against a site total of 8,275 (365 days), and Search Console showed 0 clicks on either over 62 days — the impressions they did get came from searches for Janette's own name. AI assistants (ChatGPT, Gemini, Perplexity, NotebookLM) sent 24 sessions in a year and landed every one on `/personal-os` or `/`, never on the schema-marked pages. Deleted: both route trees, `src/data/{field-notes,glossary}.ts`, `FieldNoteContent.tsx`, the RSS route and its autodiscovery `alternates`, 2 of 8 nav items, and their sitemap entries. `/glossary`, `/notes`, `/notes/:path*` (incl. `feed.xml`) 301 to `/library` via `redirects()` in `next.config.js`. The About page's "Follow the work" CTA now points at `/library`.
 
 Copy that named the retired sections changed with them on `editorial-redesign`: the hero kicker and Footer tagline both read "Keynotes · Tools" (was "Keynotes · Tools · Field Notes"), the hero standfirst reads "Keynotes and working tools from the person building the thing she talks about on stage," and the homepage `latestIndex` lost its two Field Note rows — it is down to 3 curated items and wants topping up next time something lands.
 
-**Phase 2 — August 2026, triggered by the video library moving to thebrandusa.com:**
-- [ ] Get receiving URL structure → slug-to-slug 301 map for every `/webinar/*`, `/shorts`, library video URL; ship the same day videos move
+**Phase 2 — PARTIALLY SHIPPED 2026-08-24.** Brand USA's new corporate site is live, so the
+migration started with the sessions that have real destinations.
+
+- [x] **Nine webinars migrated and 301'd.** Every destination URL was fetched and confirmed live
+      before shipping. Removed from `webinarData`, `webinarMentions`, and `cardOrder`; each source
+      URL now 308s to thebrandusa.com. Full table: `Migration_301_Map.md` in the vault project.
+- [x] **Short-form video retired** on a content call — route, `src/data/shorts.ts`, homepage grid,
+      library link, and sitemap entry deleted. `/shorts` and `/webinar/clueless-packing-app`
+      301 to `/library`.
+- [ ] **Ten webinars still here** — Brand USA has published no pages for them: `ai-101`,
+      `custom-gpts`, `ai-convention-sales`, `crit-framework`, `crit-framework-workshop`,
+      `model-context-protocol`, `ai-policy-governance`, `ai-for-presentations`, plus the two
+      conference talks (`minnesota-ai-tourism`, `ai-ideas-exchange`) which likely never belonged
+      to the series. Migrate as destinations appear.
 - [ ] Rewrite homepage JSON-LD: Organization/Course → Person + ProfilePage with full sameAs graph (Janette = canonical entity node)
 - [ ] Ask receiving team to mark Janette as performer/author with `sameAs: janetteroush.com` on new video pages
 - [ ] Remove AccessCheck gate + `/enter`, `/login`, `/register`
-- [ ] Add llms.txt
+- [ ] Add llms.txt (a version exists on the stale `live-site-edits` branch — check before rewriting)
+
+**Two URL structures on thebrandusa.com.** Legacy `/events/all/agents-change-<slug>` (stopwords
+dropped) and current `/events/agents-of-change-<slug>/` (full title slugified). Target the current
+one. News articles moved the same way: `/media/newsletters/article/<slug>` → `/news/<slug>/`.
+
+**The transcripts did not travel.** Brand USA's back-catalog event pages carry a recording link and
+a slides PDF with no written transcript; only the 2026 sessions have full transcripts. That sharpens
+the open corpus question in `Redesign_Plan.md` — the ten webinars still here hold transcripts that
+exist nowhere else, which is a reason to keep them beyond the missing destinations.
 
 **Phase 3 — September 2026 (partly pulled forward):** interior editorial pass is DONE (see above). Remaining: a dedicated Speaking page (Event schema + booking CTA) and downloadable speaker assets on About.
 
