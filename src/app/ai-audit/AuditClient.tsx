@@ -9,7 +9,6 @@ import {
   Activity,
   AlertTriangle,
   CheckCircle,
-  Cpu,
   Image as ImageIcon,
   Type,
   Globe,
@@ -17,7 +16,6 @@ import {
   Info,
   ShieldCheck,
   Zap,
-  ArrowLeft,
   Layers,
   AlertOctagon,
   List,
@@ -186,24 +184,9 @@ export default function AuditClient() {
 
   return (
     <div className="flex flex-col h-screen bg-gray-50 font-sans text-gray-800">
-      {/* Header */}
-      <header className="bg-white shadow-sm border-b px-6 py-4 flex justify-between items-center z-10">
-        <div className="flex items-center space-x-3">
-          <Link
-            href="/"
-            className="flex items-center text-brand-navy hover:text-brand-cyan transition-colors mr-4"
-          >
-            <ArrowLeft className="h-5 w-5 mr-2" aria-hidden="true" />
-            Back to Home
-          </Link>
-          <div className="bg-brand-cyan p-2 rounded-lg text-white">
-            <Cpu size={24} />
-          </div>
-          <div>
-            <h1 className="text-xl font-bold text-brand-navy font-display">AI Vision Simulator</h1>
-            <p className="text-xs text-gray-500">See what ChatGPT, Claude, and Perplexity see on your site</p>
-          </div>
-        </div>
+      {/* Toolbar. The site header and the page header above own the name, the
+          description, and navigation — this bar carries only the action. */}
+      <header className="bg-white shadow-sm border-b px-6 py-3 flex justify-end items-center z-10">
         <button
           onClick={loadDemo}
           className="text-sm bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-md transition-colors"

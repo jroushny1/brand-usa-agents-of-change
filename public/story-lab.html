@@ -6,23 +6,25 @@
 <title>The Periodic Table of Travel Storytelling</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    /* Instrument palette on a navy base */
-    --ink:#101F36; --ink2:#182B47; --ink3:#21344F;
-    --parch:#F4EFE3; --parch-dim:#9AA6B6; --line:#2E425F;
-    --why:#E4739A; --stakes:#E8A24C; --sensory:#2BBFA6; --journey:#8A9BE0;
-    --human:#E07856; --friction:#B583D8; --transform:#00A9E0; --noble:#7E8794;
-    --dest:#8FB85A; --advisor:#3D8AC4;
-    --disp:"Oswald","Arial Narrow",system-ui,sans-serif; --ui:"Montserrat",system-ui,sans-serif; --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+    /* The site's editorial palette — paper ground, ink navy type, fuchsia accent.
+       --ink is the page ground and --parch the type, so the names read inverted
+       here; they are kept so every downstream rule works unchanged. */
+    --ink:#F4EFE3; --ink2:#ECE5D3; --ink3:#E6DDC9;
+    --parch:#0E1B2C; --parch-dim:#5A6068; --line:#D9CFB8;
+    --why:#B2295F; --stakes:#9A5E0C; --sensory:#0F7A69; --journey:#3F53A6;
+    --human:#A8482A; --friction:#6E3F99; --transform:#B12467; --noble:#5F6875;
+    --dest:#4F7522; --advisor:#245A8C;
+    --disp:"Fraunces",Georgia,serif; --ui:"Newsreader",Georgia,serif; --mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
   }
   *{box-sizing:border-box}
   html,body{margin:0}
   body{
     background:
-      radial-gradient(1200px 600px at 80% -10%, rgba(0,169,224,.08), transparent 60%),
-      radial-gradient(900px 500px at -10% 110%, rgba(90,126,180,.07), transparent 60%),
+      radial-gradient(1200px 600px at 80% -10%, rgba(177,36,103,.05), transparent 60%),
+      radial-gradient(900px 500px at -10% 110%, rgba(217,207,184,.35), transparent 60%),
       var(--ink);
     color:var(--parch); font-family:var(--ui);
     -webkit-font-smoothing:antialiased; line-height:1.45;
@@ -31,7 +33,7 @@
   header.top{display:flex; flex-wrap:wrap; gap:20px 28px; align-items:flex-end; justify-content:space-between; border-bottom:1px solid var(--line); padding-bottom:24px}
   .brandmark{display:flex; flex-direction:column; gap:9px; align-items:flex-start; margin-bottom:14px}
   .brandmark .credit{font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--parch-dim)}
-  h1{font-family:var(--disp); font-weight:700; font-size:clamp(32px,5.2vw,56px); line-height:1.02; margin:6px 0 0; letter-spacing:.005em; text-transform:uppercase}
+  h1{font-family:var(--disp); font-weight:600; font-size:clamp(32px,5.2vw,56px); line-height:1.05; margin:6px 0 0; letter-spacing:0}
   .thesis{font-family:var(--ui); font-weight:400; font-size:clamp(15px,1.9vw,18px); color:var(--parch-dim); margin-top:12px; max-width:48ch; line-height:1.5}
   .thesis b{color:var(--parch); font-style:normal; font-weight:600}
 
@@ -50,7 +52,7 @@
 
   /* families */
   .hall{display:flex; flex-wrap:wrap; gap:18px; align-content:flex-start}
-  .family{flex:1 1 280px; min-width:240px; background:linear-gradient(180deg, rgba(255,255,255,.018), transparent 40%); border:1px solid var(--line); border-radius:14px; padding:13px 13px 15px}
+  .family{flex:1 1 280px; min-width:240px; background:linear-gradient(180deg, rgba(14,27,44,.022), transparent 40%); border:1px solid var(--line); border-radius:14px; padding:13px 13px 15px}
   .family.wing{flex-basis:100%}
   .fam-head{display:flex; align-items:baseline; gap:8px; margin:2px 2px 11px}
   .fam-dot{width:9px; height:9px; border-radius:2px; flex:none; transform:translateY(1px)}
@@ -62,15 +64,15 @@
   .tile .sym{font-family:var(--ui); font-weight:700; font-size:18px; color:var(--fc); line-height:1; letter-spacing:.01em}
   .tile .r{position:absolute; top:5px; right:6px; font-family:var(--mono); font-size:9.5px; color:var(--parch-dim)}
   .tile .nm{font-size:9.5px; line-height:1.12; color:var(--parch-dim); font-weight:500}
-  .tile .demand{position:absolute; top:5px; left:6px; font-family:var(--mono); font-size:9px; color:var(--transform); background:rgba(0,0,0,.35); border-radius:4px; padding:0 3px}
-  .tile .meter{height:2px; border-radius:2px; background:rgba(255,255,255,.08); margin-top:4px; overflow:hidden}
+  .tile .demand{position:absolute; top:5px; left:6px; font-family:var(--mono); font-size:9px; color:var(--transform); background:rgba(14,27,44,.07); border-radius:4px; padding:0 3px}
+  .tile .meter{height:2px; border-radius:2px; background:rgba(14,27,44,.12); margin-top:4px; overflow:hidden}
   .tile .meter i{display:block; height:100%; background:var(--fc); width:calc(var(--rp)*1%)}
   .tile:hover{transform:translateY(-3px); border-color:var(--fc); box-shadow:0 6px 22px color-mix(in srgb, var(--fc) calc(var(--glow)*1%), transparent)}
   .tile:focus-visible{outline:2px solid var(--fc); outline-offset:2px}
   .tile[aria-pressed="true"]{border-color:var(--fc); box-shadow:0 0 0 2px color-mix(in srgb, var(--fc) 70%, transparent), 0 6px 22px color-mix(in srgb, var(--fc) 40%, transparent)}
 
   /* hover preview tooltip */
-  .eltip{position:fixed; z-index:60; width:min(240px,calc(100vw - 24px)); background:var(--ink3); border:1px solid color-mix(in srgb, var(--fc) 45%, var(--line)); border-radius:10px; box-shadow:0 12px 32px rgba(0,0,0,.5); padding:10px 12px; opacity:0; transform:translateY(4px); pointer-events:none; transition:opacity .12s ease, transform .12s ease}
+  .eltip{position:fixed; z-index:60; width:min(240px,calc(100vw - 24px)); background:var(--ink3); border:1px solid color-mix(in srgb, var(--fc) 45%, var(--line)); border-radius:10px; box-shadow:0 12px 32px rgba(14,27,44,.18); padding:10px 12px; opacity:0; transform:translateY(4px); pointer-events:none; transition:opacity .12s ease, transform .12s ease}
   .eltip.on{opacity:1; transform:none}
   .eltip .et-name{font-family:var(--disp); font-weight:600; font-size:15px; line-height:1.12; color:var(--fc); text-transform:uppercase; letter-spacing:.01em}
   .eltip .et-gloss{font-family:var(--ui); font-size:12px; line-height:1.4; color:var(--parch-dim); margin-top:5px}
@@ -133,7 +135,7 @@
   .term{font-family:var(--mono); font-size:11px; color:var(--noble); background:var(--ink3); border:1px solid var(--line); border-radius:6px; padding:3px 7px; display:inline-block; margin:0 5px 5px 0; text-decoration:line-through}
 
   .err{font-size:12.5px; color:#E8A0A0; font-family:var(--ui); margin-top:10px}
-  .spin{display:inline-block; width:13px; height:13px; border:2px solid rgba(0,0,0,.25); border-top-color:var(--ink); border-radius:50%; animation:sp .7s linear infinite; vertical-align:-2px; margin-right:7px}
+  .spin{display:inline-block; width:13px; height:13px; border:2px solid rgba(244,239,227,.45); border-top-color:var(--ink); border-radius:50%; animation:sp .7s linear infinite; vertical-align:-2px; margin-right:7px}
   @keyframes sp{to{transform:rotate(360deg)}}
 
   /* why band */
@@ -158,7 +160,7 @@
   /* element picker */
   .scrim{position:fixed; inset:0; background:rgba(10,8,5,.55); z-index:40; opacity:0; pointer-events:none; transition:opacity .18s}
   .scrim.on{opacity:1; pointer-events:auto}
-  .picker{position:fixed; z-index:50; width:min(340px,calc(100vw - 28px)); background:var(--ink3); border:1px solid var(--line); border-radius:14px; box-shadow:0 18px 50px rgba(0,0,0,.5); padding:16px; opacity:0; transform:translateY(6px) scale(.985); pointer-events:none; transition:opacity .16s, transform .16s}
+  .picker{position:fixed; z-index:50; width:min(340px,calc(100vw - 28px)); background:var(--ink3); border:1px solid var(--line); border-radius:14px; box-shadow:0 18px 50px rgba(14,27,44,.20); padding:16px; opacity:0; transform:translateY(6px) scale(.985); pointer-events:none; transition:opacity .16s, transform .16s}
   .picker.on{opacity:1; transform:none; pointer-events:auto}
   .picker .pk-name{font-family:var(--disp); font-weight:600; font-size:21px; color:var(--fc); line-height:1.1}
   .picker .pk-gloss{font-size:12.5px; color:var(--parch-dim); margin:5px 0 13px}
@@ -184,15 +186,6 @@
 <body>
 <div class="wrap">
 
-  <header class="top">
-    <div>
-      <div class="brandmark">
-        <div class="credit">An instrument by Janette Roush</div>
-      </div>
-      <h1>The Periodic Table of<br>Travel Storytelling</h1>
-      <p class="thesis">Every travel story is built from a finite set of elements.</p>
-    </div>
-  </header>
 
   <section class="why">
     <div class="why-kicker">The Instrument</div>
