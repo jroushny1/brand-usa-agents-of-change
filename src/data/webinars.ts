@@ -4303,6 +4303,329 @@ So to close us out, and please, if you have any questions, go ahead and put them
 
 And with that, I want you to think about what will your first workflow be? So I want to thank everybody very much for their time today, and I look forward to seeing you at the next Agents of Change webinar series. Have a great afternoon.`
   },
+  'build-the-deck': {
+    id: 'build-the-deck',
+    title: `Build the Deck`,
+    description: `One workflow builds every deck you owe someone — a board update, a partner readout, a campaign pitch, a conference keynote. Janette Roush walks through the six chained Claude skills she used to build this very presentation, live: Writer's Room to break the story, a Keynote skill to map beats to slides, a brand-aware PowerPoint skill that applies your colors, fonts, and logo automatically, an AI advisory panel that scores the deck and says what to fix, and Podium to track every speaking commitment.`,
+    duration: `56 min`,
+    level: `Tactical`,
+    cardDescription: `The six-step Claude workflow behind every deck you owe someone — break the story, map beats to slides, apply your brand automatically, and score it with an AI advisory panel. Built live, on the deck you're watching.`,
+    muxPlaybackId: `BngXUvtHb7ecjfi302SeuqVM4rObIn5fr5vXGyl7rtmI`,
+    instructor: `Janette Roush`,
+    instructorTitle: `Chief AI Officer, Brand USA`,
+    publishDate: `2026-08-04`,
+    keyTakeaways: [
+      `One workflow for every deck. Every presentation you owe — a board update, a partner readout, a campaign pitch, a keynote — can run through the same six-step pipeline. Janette built the very deck you're watching with it, chaining five Claude skills so each skill's output becomes the next skill's input. The point isn't the slides; there's no bonus prize for spending seven hours on a ten-minute task. The work is the idea reaching your stakeholders.`,
+      `Break the story before you design it. Deciding your argument while it's still words is cheap; re-cutting a designed deck is expensive. The Writer's Room skill moves from harvesting ideas to the spine (the plot of your talk) to beats (the smallest units of dramatic action) to a ledger that tracks how often each idea is used — so the narrative is settled before a single slide exists.`,
+      `A skill is just plain-English instructions, and you can build on Anthropic's. A skill is a saved prompt you write once. Brand USA's PowerPoint skill wraps Anthropic's own open-source PowerPoint skill (on GitHub) with the brand's colors, fonts, logo rules, and layout templates, so decks come out on-brand automatically. Because it lives at the company level, it updates once for everyone instead of file by file.`,
+      `Make the AI check its own work, then get a second opinion. The PowerPoint skill builds in chunks of four slides and screenshots each one to QA against your rules — logo on every page, images kept to their real dimensions, margins respected. Then an AI advisory panel of presentation experts (personas like Nancy Duarte and Brene Brown) scores the deck and returns specific fixes, which moved this presentation to an 8.4 out of 10.`,
+      `Close the loop and stay ahead of deadlines. The Podium skill scans the next 90 days of speaking commitments every Monday and flags what's behind. After each talk, Janette feeds the recording (Granola on Zoom, a Plaud pen live) back to Claude to capture what to change and harvest ideas for future decks. Every skill is deeply personalized to how she works — a starting point to adapt, never one-size-fits-all.`,
+    ],
+    topics: [
+      `presentations`,
+      `PowerPoint`,
+      `Claude`,
+      `Claude Code`,
+      `Claude Cowork`,
+      `AI skills`,
+      `workflow automation`,
+      `Writer's Room`,
+      `keynote prep`,
+      `storytelling`,
+      `narrative structure`,
+      `brand templates`,
+      `Anthropic PowerPoint skill`,
+      `Gemini API`,
+      `AI image generation`,
+      `AI advisory panel`,
+      `personas`,
+      `speaking pipeline`,
+      `personal operating system`,
+      `markdown`,
+      `DMO marketing`,
+      `prompt engineering`,
+    ],
+    targetAudience: {
+      primary: `Destination marketing and communications professionals who build frequent decks — board updates, partner readouts, campaign pitches, and conference keynotes.`,
+      secondary: `Anyone learning to chain Claude skills into repeatable workflows, and teams that want brand-consistent presentations without touching a hex code or dragging a logo.`,
+      tertiary: `Speakers and knowledge workers who need to stay ahead of a busy presentation and speaking calendar.`,
+    },
+    learningOutcomes: [
+      `Chain multiple Claude skills so each skill's output feeds directly into the next`,
+      `Use a Writer's Room step to settle a deck's spine and beats before designing any slide`,
+      `Build a brand-aware PowerPoint skill on top of Anthropic's open-source skill so decks come out on-brand automatically`,
+      `Turn a plain-text blueprint into finished slides, one line of the plan per slide`,
+      `Wire the Gemini API into Claude to generate images inline while a deck is being built`,
+      `Stand up an AI advisory panel that scores a deck and returns specific, actionable fixes`,
+      `Track a 90-day speaking pipeline with a Podium skill and close the feedback loop after every talk`,
+    ],
+    relatedResources: [
+      { name: `Brand USA Skills Library`, description: `Download the actual Claude skills shown in this webinar — Writer's Room, Keynote, PowerPoint, Advisory, and Podium — to read and adapt for your own workflow.`, url: `https://busa-skills-library.vercel.app` },
+      { name: `Anthropic PowerPoint skill (GitHub)`, description: `Anthropic's open-source skill for generating PowerPoint presentations — the base that Brand USA's brand-aware skill is built on.`, url: `https://github.com/anthropics/skills` },
+      { name: `AI as Your Chief of Staff`, description: `Janette's companion webinar on setting up a personal operating system in Claude — the foundation the workflow in this session runs on.`, url: `https://www.janetteroush.com/webinar/ai-chief-of-staff` },
+    ],
+    chapters: [
+      { time: 0, title: `Welcome & Brand USA's AI vision` },
+      { time: 99, title: `The decks you already owe someone` },
+      { time: 182, title: `One workflow, built live on this deck` },
+      { time: 300, title: `What a Claude skill actually is` },
+      { time: 482, title: `Step 1 - Writer's Room: break the story first` },
+      { time: 617, title: `The spine: the plot of your deck` },
+      { time: 858, title: `Beats: the smallest unit of dramatic action` },
+      { time: 1297, title: `Step 2 - Keynote prep: anticipate the room's questions` },
+      { time: 1428, title: `Beats become a plain-text slide blueprint` },
+      { time: 1665, title: `Step 3 - The brand-aware PowerPoint skill` },
+      { time: 2019, title: `Adding images with the Gemini API` },
+      { time: 2195, title: `Self-QA before you review` },
+      { time: 2300, title: `Step 4 - The AI advisory panel scores the deck` },
+      { time: 2506, title: `Step 5 - Podium: your 90-day speaking pipeline` },
+      { time: 2668, title: `Make it yours` },
+      { time: 2758, title: `The skills library (download link)` },
+      { time: 2940, title: `Live skills-library walkthrough` },
+      { time: 3259, title: `Close` },
+    ],
+    transcript: `Thank you so much for logging on. My name is Janette Roush, and I am the SVP of Innovation and the Chief AI Officer for Brand USA. And this edition of our Agents of Change AI Webinar Series is about building the deck. How can you use Claude in order to create on-brand presentations from start to finish, all inside of Claude?
+
+And so as we get started, I just want to remind everyone, as I always do, of Brand USA's AI vision, which is to lead global destination marketing into the AI era by using intelligent systems to connect the world to the stories, people, and places of the United States. So we wanna make discovery personal, inspiration effortless, and travel decisions frictionless.
+
+And the way that we do this is through three modes. The first is internal. It's operational excellence. So how at Brand USA are we using AI to do our jobs better? The second piece is then industry empowerment, which is part of what this webinar series is designed to do. So this is about how we can take the learnings from using AI internally at Brand USA to expand the ability of the United States tourism industry to attract overseas visitors.
+
+And then the third piece is the traveler experience itself. So how are we making the United States more discoverable and more bookable through the use of AI, through AI visibility, and through AI tools? And so now let's talk about building presentations, PowerPoint decks, Google Slide decks, et cetera. We all know that the work of putting those presentations together is not the actual work that we do.
+
+There's no bonus prize for spending seven hours on that ten-minute task. If it takes you three weeks to put together your board deck or something else, you don't get a special prize for that. The actual work is when the information gets shared with the external stakeholders that you're looking to share it with.
+
+So that is my goal in using AI: to make it less painful to build those PowerPoint decks. And let's be clear, we all already owe somebody somewhere a deck, whether it's a project update for your boss, an update for your partners, you're promoting or creating a new campaign, you're doing an educational webinar just like this one, or even a keynote at a conference, which is frequently why I am putting together PowerPoint presentations.
+
+There's a variety of reasons why we need to put together these decks, and my goal is to create one workflow that can help build them all. And because I want to eat my own dog food, as they say in the tech industry, I used this exact workflow to prepare the presentation that we are viewing right now.
+
+So all of this I did inside of my Claude Code account using my personal operating system setup. And if you're not familiar with that setup, you can visit thebrandusa.com to see all of our backlog of webinar videos. And I recently did a webinar on how do you set up a personal operating system in Claude.
+
+So that makes it easier to do this process because it means you have a place where you are already collecting all of your thoughts and ideas, but it's certainly not necessary. And I think starting with a workflow like this helps to get you accustomed to the idea that in the future, we're going to be working inside of AI.
+
+And this is an example of that type of workflow. So the way that I have created this workflow is I have chained together six steps with five different skills. And so each step is a separate skill. We see here that Keynote is a skill that crosses two of the steps in this process, and the output of one skill is then used as the input for the next skill.
+
+And so that's what it means to chain something together. And what is a skill? A skill in Claude is a saved prompt that you build one time. So if you're using Google Gemini, then something similar would be called a gem in that system. Although I find the Gemini framework is not yet quite as agentic as Claude has become.
+
+And then in ChatGPT, they are also coming out with these workflows as part of their new ChatGPT work system. So I have not set this up specifically inside of ChatGPT yet, but I know that Chat can now see and read files that are saved on your computer, and that's the first step to really creating these saved prompts.
+
+So this is a short example of what that would look like inside of Claude. It's a plain text file that contains directions that are written in plain English that provide a series of steps that tell Claude what to do. And an important part of this skill that you're seeing me use here, the actual PowerPoint presentation that you're watching me deliver, this was a skill that was built on top of another skill, which sounds awkward until you remember a skill is just a bunch of text that tells Claude what to do.
+
+So Anthropic, which is the creator of Claude, they already have a set of instructions that they have written for how to make a PowerPoint presentation. And because it's written by Anthropic, it's really good. They know exactly what to tell Claude to do in order to make a PowerPoint presentation.
+
+And you can actually find that skill right now. Just go to GitHub, or do a quick search for GitHub. The company name will be Anthropics, and then you are looking for the PowerPoint skill. And this is just a file full of text that is telling Claude how to make a PowerPoint. So what we have done at Brand USA, and what I'm suggesting that you do, is create a new skill that incorporates this existing set of instructions from Anthropic, but that you give it your own instructions on what your brand looks like.
+
+So whether you're a DMO or another organization, you're going to have your own logos, your own fonts, your own color scheme. You can give that information to Claude along with this existing skill, and it will write a new skill just for your organization that would incorporate your branding elements with Anthropic's instructions on how to create a PowerPoint presentation. Now I'm going to walk through my actual workflow for creating a presentation.
+
+And the first step that I do is thinking about what do I actually want this presentation to say? What's the spine, and what are the beats of this workflow, before Claude's actually wasting a lot of tokens trying to design something for me? So the way that I do this is through a skill I have created called Writer's Room.
+
+And don't worry, at the end of the presentation, I am going to give you a link to a site you can go to to actually read and download all of these skills to adapt them for your own use. So we want to decide what the story is of a deck before we're actually designing it because, as it says here, you want to figure out your argument while it's still cheap to change.
+
+Meaning we're just looking at an outline, or we're just looking at words before we are looking at a PowerPoint and thinking, "Ugh, that's not really good. I can't use that." I find for myself, even starting from a slide outline is too far down the funnel of my personal process for it to be very useful for me.
+
+And so here in this example of what the skill looks like, it is breaking out the elements of my workflow. So starting with harvesting ideas, then creating the spine, which you could also think of as the outline. What is it that I want to say and in what order? The beats, that's going to be a little bit more of a theater term for me.
+
+Because I have that theater background. So that's just like a moment where you are letting an idea land. And then the ledger is how Claude's going to keep track of how many times I share each individual idea. So the spine is going to be the plot of your speech. What is the story that your deck is going to tell?
+
+So more than just the through line, it's the shape that you want the audience to feel from the open to the close of the presentation. And this is going to be true whether you are sharing ideas for a new creative campaign that your organization is developing or, again, if it's an educational webinar.
+
+So these are examples of plot lines that I have used, or that were suggested here for this specific presentation. So I could have talked about using AI as a car and then AI as the driver. That's a spine that I use in a number of my presentations where I am looking at the shift from AI as, you know, like ChatGPT or Claude, the actual tool that we use, versus AI as the tool that consumers use in order to discover what we are promoting.
+
+I liked this one, which is what we ended up moving forward with for this deck. So talking about what are the types of presentations we owe people? How can we create a workflow that would build any of those presentations? And then how do we make that process yours? How do you take this on into your own organization? I also liked this third one here, that everything the machine can do becomes free, which then takes you out of the actual work of doing the work, and it makes your story the actual asset.
+
+But I wanted to be a little bit more practical and hands-on with this particular presentation. And so this is a screenshot from my actual conversation with Claude putting together this deck. So it suggested three different spines for me for this presentation. One is very meta. It's let's watch this deck build itself. We had a very linear pipeline version. Let's follow me building this deck step by step. And then we have the one that we mostly moved forward with, which is one workflow to cover every deck that you owe somebody.
+
+And then what I like about this process for me working with Claude is that before you're asking me to look at an outline and determine what idea do I speak about at what point, I need to have a sense of the arc of what are we doing here. And what this does is it gives me three different arcs, and then I can say, "I hate all of them. Try again." Or I can say, as you see down here, "No, they're all good. I think C is most useful for this audience." I don't want to talk about a pitch. Typically, we're not pitching people, but perhaps we're providing an update to partners.
+
+And then we want to go from starting with the audience problem into spine B, where we are solving the problem step by step. You also see that I have a bunch of typos in here when I'm talking to Claude. Now, typically, what I recommend people do is speak to it. Use the microphone button and actually have a conversation with Claude.
+
+Here I wasn't doing that because I'm bad at taking my own advice. But what I will say is do not get hung up on fixing your typos when you are having a conversation with AI because it's a waste of your time. You're going to give yourself carpal tunnel, and it does not make the output any better.
+
+Claude knows what you are saying, regardless of how horribly garbled the information is. So please leave the typos when you're working with Claude. So then when we have the spine, the arc of the story, rather than moving to what is a literal outline for the presentation, I think of it in terms of beats — the smallest unit of dramatic action.
+
+So one intention or one shift in the conversation that we are having. A deck, the presentation, I think of as a conversation. Even if I'm just sending it to you over email, this is me trying to communicate an idea to you, and the communication of an idea is going to have a series of small moves that take you from one level of understanding to the next level of understanding.
+
+And so this is just broadly speaking. This has nothing to do with actual AI. This is about how clearly I have needed to spell out my work process, and to understand things that I might have done intuitively in the past I now do very literally, because AI rewards that level of literalness.
+
+When you can really spell out a workflow in detail, that is when AI will work for you the best. So here, this is the process in the skill that is called harvesting. And so the beats start as candidates, and Claude suggests a number of beats to me of things that I could include as moments in the arc of my story that could move my story forward.
+
+And here you see at the top, it's like react in shorthand. So I like this number and that number, kill these ideas, merge these two ideas. This is interesting. Here are some new ideas that this gave me. And what I really like about my personal operating system workflow is that I have hundreds, I'm guessing, of ideas already saved in markdown files where it's really easy for Claude to find them.
+
+So it can go back through every presentation I've ever done. It's going to have an outline of what that presentation looked like, what the arc was, what the beats were. Plus, whenever I'm on a phone call and I save a transcript from the call, it will go through the transcript of each call and pull out ideas that it thinks I might want to harvest in the future.
+
+And I've built a skill to review my call transcripts for exactly this purpose. And I know everybody might not do that. I probably do a lot more presentations than some of the folks on this call. But no matter what you are talking about, if you're putting together a deck for a board meeting, that's going to be easier if you've been keeping track of ideas that you need to bring to the board.
+
+And then this helps you take those ideas and make a flow for your presentation that is going to take the viewer or the listener on a journey with you. And it's going to take you from point A to point B, rather than just listening to a book report. So here we have a number of different ideas. It's like, give me your gut reaction.
+
+What gets you excited about this particular presentation? And then I say, "These are what I like. This is what still needs some work." And then we start architecting these beats one at a time. So the first beat in this presentation was the decks that you owe somebody. And you already listened to that beat.
+
+I did it ten minutes ago. So this is a little more chatty than what I ended up going with because I don't read a script when I'm talking. I just kind of react to the slide on the screen. But we know everybody's working on presentations. That's why you joined this webinar. So we have a proof moment in that I am showing you a webinar that was designed from this actual process.
+
+I did not do an audience check moment, because I don't think we have a live chat on this webinar, but certainly put in the Q&A which decks are you currently working on. And then we move to the handoff — that decks always are going to follow the same workflow. And let's talk about the writer's room.
+
+So you can now see the arc of the story, the beat that we hit, the decks that we owe somebody, and then how that transitioned into step one, which was the writer's room skill. And then down here, you see here's my reaction to this flow. Yes, I like sharing this presentation as one of those decks. I don't know if every deck starts with an argument.
+
+Does the writer's room set up an argument? Maybe thesis would be better here, but I don't know if a board deck has a thesis, so maybe we'll just skip the whole idea. But yes, let's add in the no bonus prize for seven hours on a ten-minute task, which as you saw, we did include. So the beats that we put together for this presentation, we talked about decks that we owe somebody.
+
+We are right now concluding the spine and the beats moment. So we have gone through the writer's room process of actually creating what is the outline for this presentation, what are the slides that need to be built. Then we're going to go through and anticipate — we're going to use my keynote skill to anticipate what people will need and turn that into slides.
+
+We'll go through the building a PowerPoint skill to build an on-brand PowerPoint presentation. We are going to share that presentation with my advisory board and show you how to create your own advisory board so that you can have somebody besides yourself actually reviewing the presentation. And then Podium is the skill that I created to help me stay on top of all of my various speaking commitments.
+
+And then we'll close it out with how are you going to make these skills yours? So that's really the second beat for this presentation. We're now moving on to thinking of the questions that your audience is going to ask, and how are we going to use the slides in your presentation to answer those questions.
+
+So the first point is keynote prep. How are you getting ready for the room? So this skill is going to list what your audience is going to want to know, and then make sure that each answer lands on a slide for your audience. So think of it as anticipating needs for the people you're speaking to.
+
+So the skill is going to read your topic and who is going to be in the room, because you're going to tell it that. It's going to draft questions that your audience may have, and then you're going to make sure that you have a slide that answers each one of those questions. And if you don't, that's probably an opportunity to add another slide to your outline.
+
+So questions that you might have here, for example: is this only going to be for keynotes? Because that is a large part of my speaking commitments. The answer is no. There's all types of presentations where you still want to communicate an idea to somebody. So again, whether it's a pitch deck, a partner presentation or readout, creating a new campaign and getting buy-in across multiple departments.
+
+Like in business, we are very accustomed to using slides to sell ideas because it's so much more visual than trying to communicate something in an email. Do you need to code to do this? No. A skill is plain English. You do not need to code. And again, what about my brand? We talked through that a little bit.
+
+We'll talk through a little bit more. How do you incorporate your brand into the presentation? Is the AI even good at doing this? And I will show you my advisory skill process where I improve the rating of this presentation to be an eight point four out of ten, based on the feedback from my advisory board. And then, where are you going to start? We're going to make sure you leave this presentation with a download link for these skills so you can get started this week.
+
+So now let's look at turning this into actual slides — how the spine and the beats of your presentation are going to become that plain text blueprint. So this is the second half of using the keynote skill, which is mapping your beats to actual slides. And so this becomes the blueprint that tells Claude exactly which slides it's going to be building. So here you see that it's just plain text before we are looking at pixels of designs.
+
+And then the plan — one line from the plan is going to become one finished slide. So here we see that slide five at the time was going to be a slide type that we call a named concept. And so that's something that my advisory board baked into my personal keynote skill for me at some point, which is three or four times in a presentation, you want to give your audience a concept that they can name and return to.
+
+And so you will see that there are different points in this presentation when I do exactly that. It's probably going to be more appropriate for this type of webinar. Maybe a named concept that your audience will remember isn't something you're looking for for your board presentation or for your partner presentation.
+
+But for this particular presentation, this works uniquely for me. But regardless, there might be a slide type you develop that is numeric proof, and you're going to, over time, as you do this more and more, say, "Great, whenever I have a numeric proof slide, you're going to need to ask me for the numbers to put on the slide along with the backup for where those numbers came from, so that my audience understands I'm not just making stuff up — that this is the results from our previous campaign, or these are the number of sales that we are reporting."
+
+And then you also want to bake in rules into this skill. So again, these are my own personal rules based on what I do and don't like when I'm working on a presentation. And they all live in this markdown file. In this case, it's called Slide Playbook, that tells my Claude account what I like and what I don't like.
+
+So here, I like slides that tell a story. I want to put a stake in the ground and make a named concept, but it can't be every single slide in the deck. It can't be more than three per presentation. I specifically put in no triads anywhere, because Claude and all AI tools really like this trope of taking an idea and breaking it into three steps, or here's the three parts or the three components of something, and it's starting to feel a little bit trite to me.
+
+So I ask my Claude to specifically not do that. I also have instructions for what I like images to look like in my presentations, and you'll see a couple of examples of that later on. And if you want to do this yourself, just ask Claude to make a rules file for you. And again, you're going to want to be in Claude Cowork or Claude Code to do this, because that is the version of Claude that can write files on your computer.
+
+But that becomes a file of your personal taste. And when Claude gives you something that you hate, you can say, "Hey, I hate that. Add that to my rules file." Or, "Oh, I really liked this. Add that to my rules file." And that is how Claude begins to get better over time. So now we're in the next beat of the story, which is we're going to actually build this on-brand presentation using another skill, and this is the PowerPoint skill.
+
+It's going to make sure that your brand is automatically applied whenever you are creating a presentation in Claude. So as I mentioned at the beginning, this is a skill that Claude itself has made, that Anthropic has made, and Brand USA, we have amended that skill to add in not just our own hex codes or logos, and as you can see here, also our fonts.
+
+But we also have a certain template that we use for our PowerPoint decks, and we don't want Claude to randomly come up with its own designs. We have this color of background. We're going to have this subhead and this main headline. This is what we want body copy to look like.
+
+So the rules that we have are more specific than just, "Hey, use this color, use this font." But all of those instructions are included in plain text inside of our build a PowerPoint skill. So here you can see, this is one step from our actual skill. So we want the blueprint to pick out a layout — there are a number of layouts we have given our Claude skill to use for PowerPoint.
+
+We want to decide, like these slides, you see, they go back and forth between these light slides and this darker background. And here it's like decide light versus dark for rhythm, because we don't want this to get monotonous. And so we enforce the lack of monotony inside the actual code that Claude uses to write. And then here are the instructions on how to actually apply our brand.
+
+I will say Claude, for some reason, always wants to, in my presentations, write Brand USA as the words Brand USA, and it'll put it in one of our fonts. But I have to remind it a lot: please remember to use our logo on every single slide. Don't just type out in text Brand USA. So you will find in your own work that there are things that Claude is just a little bit funny about, and you'll have to kind of beat it back into submission.
+
+And then Claude has instructions to write each type of slide. So here there's a story slide, named concept slide. We have divider slides, how it adds code and tables to the slides. And so it's going to build in chunks of four. So it's not going to make the entire deck in one go. It's going to make four slides, then it's going to QA itself.
+
+So it actually takes a screenshot of what the code that it wrote for your slide looks like, and makes sure that it follows the rules that you have given it. For example, if there's a certain amount of white space that you want around the border of your slide, you want to tell Claude that in your PowerPoint skill, and then when it QAs the slide, it'll make sure that it's following that, because you don't want text right up at the edge of the screen.
+
+And then when it is done with that, it'll build out those four PowerPoint slides and then move on to the next four. And then this is just an example of our color palettes, all of our brand assets. And this is great because when you have a skill like this, at Brand USA, we have a skill that lives at the corporate level.
+
+So every person at the company doesn't have to build a PowerPoint skill. It's managed by one team, and when it's time to make a change to it, that skill gets updated once at the company level, and then every deck across the company moving forward is going to inherit that updated skill.
+
+So it saves you from fixing a hundred old files. If you opened up an old file that was created by Claude, you could say, "Apply the new brand guidelines, apply this new skill to it," and it will find the text and the images, preserve those, but update everything else around it.
+
+And then sometimes in my presentations, I like to incorporate images. Now, this is tricky in destination marketing, because we don't want to use AI-generated images in order to represent our products or our destinations. So when I am using AI to create an image for me, typically it's going to be something funny.
+
+Often it is going to be an image of me doing something, because for me, that really telegraphs that this image is fake, and we are not here to trick or fool anybody into thinking something AI-generated was actually a real photo. So for my presentations, I could get instructions from Claude on, "Okay, you want to go over to Gemini now and give this prompt to Gemini in order to make an image."
+
+But what's actually faster and easier for me is that I have connected my API key for Gemini, which is Google's AI tool. I gave that API key to Claude and built a rule where there's a certain point in building the deck where it says, "Okay, now I need to add an image to this. The presentation is a little bit too dry.
+
+We want to add in a moment of levity." It will write a prompt to Gemini saying, "This is the image that I am looking for." Gemini creates it and delivers the image through the API, and then Claude puts it in the PowerPoint presentation. For my workflow, it also saves the image on my computer inside of my library of photos, and it names it something that will help it describe what it is an image of.
+
+And it also then adds the name of that image and its description to an index that it has. And if you are running a personal operating system, having an index of information is really helpful, because I want Claude to be able to reuse some of these images. Or if it has something that already works, I don't want it to waste the time and tokens to go and recreate it.
+
+So if it has just a list in plain text of all the images that you already have, that allows it to scan it very quickly and say, "Oh, maybe I'll now go and actually open up this image and see if, based on the description, this is the image that I want to use." So at this point, when I was working on this presentation, I said, "I wanna show how the API skill works."
+
+You actually use it and then inject that image into the presentation. So here we see we're going to get a photorealistic bald eagle in a tiny navy business suit at a podium, presenting a glowing PowerPoint to a boardroom of golden retrievers in blazers. Dramatic corporate lighting.
+
+And this is what we got, with the name that Claude gave for it itself: Global Avian Enterprises Q4 Predator-Prey Dynamics. Looks like business is good. And then the next part of this skill is that we want it to check its own work before I have to go in and check the deck. And this is effective because these are checks that Claude and I wrote together and that we iterate on.
+
+So if I open up a deck and I'm like, "What went wrong here?" I say, "Hey, Claude, what went wrong here? What did you do wrong? And how can you rewrite your skill so that the next time we do a PowerPoint, you don't do it wrong like this?" And so it's checking for things like, is the logo present on every page?
+
+Did I remember to put a logo and not just type out the words? Are the images sized correctly? Because it does have a bad habit of resizing images, and I've had to be very strict with it about respecting the original dimensions of an image. Even if it's an AI-generated image, you can't pull or squeeze those images.
+
+They look silly.
+
+And so there's two ways that you are going to be able to do this moving forward. The first is going to be easiest, and that's in Cowork. I'm going to give you this list of skills that you can download yourself from a website at the end of the presentation. So you don't even have to screenshot the skill.
+
+You just paste in and say, "Hey, can you build me this skill?" And then you save it. And then when you say, "Hey, I wanna build a PowerPoint presentation, can we use my skill?" It should know to do so. And you can also get very literal with it. You can go to your Claude folder. If you already have Claude, this folder already exists on your computer, and you can paste in this file and save it as skill.md.
+
+And again, it's going to be running that same command to make it work.
+
+So now we have a completed PowerPoint, but we don't know if it's good enough yet. We want to get a second opinion. So this is how I have a panel score my deck and tell me exactly what to fix. So here I call this skill my advisory skill. I have five experts on delivering presentations, and honestly, I don't even know who most of these people are.
+
+I said to Claude — I heard a webinar of somebody else doing this exact same idea. I just lifted it from other people. And so I went to my personal operating system, and I said, "I want to build an advisory skill to review my presentations. Who are the best people at delivering presentations?
+
+Just figure out who they are, make an AI persona for them, and I'm going to invoke them in the future in order to review and rate my presentations."
+
+And so this is an example of the actual live feedback that I got from this presentation. And the idea is that it's not just that these folks give you a rating, because that doesn't really mean anything. You want them to tell you what exactly to fix. So this is Nancy Duarte, who's a presentation expert.
+
+Actually, preparing for this webinar, I watched a little bit of an interview that she gave, to prepare for it, and I was like, "Oh yeah, no, she really knows her stuff." So she wants to remind me that the end of the presentation, it can't be about me. This isn't about...
+
+Presentations are never about the person who's giving the presentation. It's about the audience and what the audience gains or learns from the presentation. How does the audience become the hero? And I'd argue that is true for any deck you build. Whether it's reporting something up to your boss, the idea there is to make your boss the hero.
+
+It's not to make you the hero. It's the same thing for the board. It's the same thing if you are talking to your partners or, goodness knows, if you're doing a pitch of any kind. It is not about you, it is about the opportunity for the person that you are presenting to. So the final section, you'll see we're going to cut to the audience's win here.
+
+Here we have the hook happened at the wrong point in the presentation. You want to move it up earlier. Brené Brown said you need to name the fear that the audience has out loud. We want to make sure that everything that someone needs to do is actually on a slide, so that you don't have to go back and try to remember what it is you wanted to do when this webinar was over.
+
+And then here, just as a quick example, these are the members of my advisory board and moves that we made that got us to a better presentation in the end.
+
+And then this is a little outside of the actual building of the presentation, but it's been very helpful for me in terms of keeping track of all of my deliverables and what I owe people. And so I have created a skill that is called Podium that looks at my next ninety days and is always scanning my upcoming engagements.
+
+And every Monday morning, it is giving me that bird's eye view of what's coming up and where am I at with each one of those presentations. And then it kind of sends emergency flares if I have a presentation coming up and I'm not far enough along yet. Or if I owe somebody the deck at a certain date, and I'm about to miss that deadline.
+
+So this is an example of the real output from when I ran Podium about two weeks ago. So I was nine days out from a webinar with Mindtrip. I was preparing for this actual presentation. So it's like, okay, you're at the skeleton stage. I have an event at Virtuoso travel week coming up.
+
+And you can see that I was on version three of the deck for the advisory board. I'd been going around and around with it, so I was on round three there. And it was reminding me that I had booked my travel, which thank goodness, because I would hate to forget to book that. And then I have the skeleton of a speech prepared for the West Virginia Governor's Conference at the end of September.
+
+And then I have a few items that are further in the future, but they're not in that ninety-days window, so we don't really have to worry about it yet. And then it's kind of walking me through in plain language where am I at on some of this stuff, and it's suggesting what it can do next. For example, for this Virtuoso deck, it's like we can run the keynote skill in order to move that forward.
+
+I think this is actually for the build the slides deck. And it's suggesting you don't really need to do the writer's room unless you're worried about the narrative spine. And of course, that spine became the actual story of building this deck, in that kind of meta way. So I ended up running writer's room. I didn't skip any steps when it came to building this exact presentation.
+
+And so now what does this look like on your terms? I'm going to give you these skills. You're going to point it at your organization's own brand guidelines. You're going to start writing your own rules file, and then after every presentation, closing that feedback loop becomes very important.
+
+So I record all of my presentations. If I'm on a Zoom call like this one, I'm using Granola to record a transcript of it. If I'm doing a live event, I have a physical device that's called a Plaud Pen, P-L-A-U-D, and I wear it to record my speaking engagements. And then I have a workflow when the speech is done where I upload the transcript to Claude, and it's like, all right, I have a few questions for you about how this went, anything you'd change, anything that you would delete, and we work together to improve the product for the next time.
+
+And also, sometimes I'll have ideas where I'll say, "I really wish that I talked about this," or something will have come up in the Q&A that I think should probably be addressed in a deck slide for the next presentation. Then it's going to go into the harvesting step. That becomes an idea that, where applicable, Claude may suggest it later on, so it can actually get built into a future presentation. And so, as promised, this is a download link for the skills library that I've been talking about.
+
+And I'll warn you, with the exception of this PowerPoint skill, which is the Claude base PowerPoint skill, and it includes some instructions on how to customize it yourself — these are all my real skills. So they rely on some things that you may not have set up in your Claude account unless you are literally using the personal operating system that I am running on.
+
+So some of the skills, like the podium skill, assume that every Monday you are running a skill in Claude that gives you your agenda for the week. So my skill is called Week Start, and I run it every Monday, and it goes through, "Here is your agenda for today," which it creates by looking at all of the markdown files that I have saved in my Claude inbox and determining, based on the due dates, here is what's due today, here is what's due this week, here is what is due next week.
+
+But it also then will say, oh, I should also now run the podium skill. So let's look at the next ninety days, see what's outstanding, and suggest some next steps, so that inside of that same Claude chat, it's not just giving me the to-do list, but it is saying, "Hey, if you have ten minutes, we can move this project forward twenty percent."
+
+And that is, for me, a really helpful way of organizing my day, because I think it's very easy for knowledge workers to end up being run by our calendars, or managed by our email inboxes. And this system is how I attempt to be in control of what I need to get done in each day, instead of just being really reactive.
+
+So you will see, in some of the things like the writer's room step, there is a lot of information in there about how Janette doesn't respond well to outlines until she knows what it is that she's trying to say. Don't give her a giant block of text. Now, the truth is, that just happens to be the way I work.
+
+That does not mean that it is the way that you work. So use these to give you that broad idea of what to do, but they're not meant to be one size fits all. These are extremely customized for me, and I think it can provide a starting point for you to help move you along the path of getting to your own custom solution.
+
+And as I said, every step that you just watched were the steps that built this deck. So it is all part of a piece. And you can see here in the background that this is an example of an image that Claude decided, "Oh, the deck got a little bit too bland. Let's put in an actual image to spice it up a little bit."
+
+And it followed the rules that you had seen earlier about using a full bleed image, so that it fills up the entire screen. So I'm going to stop the presentation really quickly, and I'm going to re-share so that you can see the actual skills library that I built, because I just want to quickly show you: if you click download, that is going to download an actual markdown file for you.
+
+And so if you don't use markdown a lot, your computer might be like, "Oh, goodness, what do I use to open this file?" You can open it in your Notepad or in a text reader. You can also open it in Visual Studio Code, which is what I use to read markdown. And so this is the output of markdown.
+
+If markdown just looks like a bunch of code that says, "Oh, this is bold and a headline, and this is code, so put it in a special code box" — markdown is just the code that creates this actual file that is a little bit more friendly for somebody to look at.
+
+And so here we see that building the deck used to be how I thought through organizing a speech. And truly, it would take me forever, because I would make slides and then I'd move them around, and then I'd delete two of them, and then I'd bring one back, because I was trying to picture in my head what a finished speech would look like.
+
+And the same thing for working on how to share the idea behind a new campaign with senior leadership. What's the best way to tell this story? Do we start with the problem statement? Do we start with research? Do we want to start with too much research? What if people get bored?
+
+All of those questions you ask yourself. I always wanted to be very visual and move it around. And so Claude needed to make a process for me that relied on words rather than the work of making all of these slides and moving them around and then ditching everything. Now, you might find that that is still your process, and then perhaps you build out this writer's room with your own personal Claude account, where it actually builds just shells of slides first, and then you move them around and then you say, "Great, can we lock this and now make them beautiful?"
+
+So it's all totally dependent on what your actual workflow is. But as you can see here, if you skip straight to an outline, or the PowerPoint, then we're skipping my ideation phase, and I end up starting from scratch, and that's been true a number of times. And then here, giving me cards to react to rather than a bunch of prose.
+
+This is funny — it wrote this on itself: don't make it longer than 30 lines. Split into a new conversation if you have more lines than that. That was probably a good idea on its part. Yes, one decision per message. Use shorthand, which I always try to use with Claude. I like to ramble to Claude.
+
+Turn that rambling into opportunities for possible cards.
+
+And then this shows you how when I am providing ideas in other places, make sure that you are capturing those ideas without any friction. This is saying if I want to run the writer's room on this particular webinar, you're either going to run the room or resume the room if that's something we'd already been working on.
+
+And then this is what markdown looks like. And this is just an example of markdown text for a particular project. What that outline would look like before it's filled in. And then here we're explaining the harvest step. So accumulating every possible idea that would apply to a talk and then weeding out the ones that I don't think are great.
+
+So again, I can do that quick two-minute triage. And then here we're walking again through the spine, through the beats.
+
+The mechanical check to make sure that we're not talking in circles or reiterating things, and then the handoff. So in here you'll see that there are the skills outlined for each step, for each skill that I shared today. And so that's going to give you the opportunity to take those skills. You could give this URL to Claude and say, "Look at all of these skills and tell me what would be useful for me.
+
+What could you help me rebuild based on my own personal workflow?" Or you could copy and paste in the skills, or you can download those markdown files and upload them back to Claude. But the idea is that you use this as the starting point to create a workflow that is absolutely customized and personalized to the way that you like to work.
+
+And with that, I want to thank you so much for spending part of your day with me. This webinar will be available at thebrandusa.com on our Webinars landing page shortly, and I hope you all have a wonderful rest of your week. Thank you so much.`
+  },
 }
 
 export const webinarIds = Object.keys(webinarData)
@@ -4442,5 +4765,17 @@ export const webinarMentions: Record<string, SoftwareApplicationMention[]> = {
     { '@type': 'SoftwareApplication', name: 'Google Drive', applicationCategory: 'File Storage', url: 'https://drive.google.com' },
     { '@type': 'SoftwareApplication', name: 'Salesforce', applicationCategory: 'CRM', url: 'https://www.salesforce.com' },
     { '@type': 'SoftwareApplication', name: 'Box', applicationCategory: 'File Storage', url: 'https://www.box.com' },
+  ],
+  'build-the-deck': [
+    { '@type': 'SoftwareApplication', name: `Claude`, applicationCategory: `AI Assistant`, url: `https://claude.ai` },
+    { '@type': 'SoftwareApplication', name: `Claude Code`, applicationCategory: `AI Development Tool`, url: `https://claude.ai` },
+    { '@type': 'SoftwareApplication', name: `Claude Cowork`, applicationCategory: `AI Development Tool`, url: `https://claude.ai` },
+    { '@type': 'SoftwareApplication', name: `ChatGPT`, applicationCategory: `AI Assistant`, url: `https://chatgpt.com` },
+    { '@type': 'SoftwareApplication', name: `Google Gemini`, applicationCategory: `AI Assistant`, url: `https://gemini.google.com` },
+    { '@type': 'SoftwareApplication', name: `Microsoft PowerPoint`, applicationCategory: `Presentation Software`, url: `https://www.microsoft.com/microsoft-365/powerpoint` },
+    { '@type': 'SoftwareApplication', name: `GitHub`, applicationCategory: `Version Control`, url: `https://github.com` },
+    { '@type': 'SoftwareApplication', name: `Granola`, applicationCategory: `AI Meeting Notes`, url: `https://www.granola.ai` },
+    { '@type': 'SoftwareApplication', name: `Plaud`, applicationCategory: `AI Voice Recorder`, url: `https://www.plaud.ai` },
+    { '@type': 'SoftwareApplication', name: `Visual Studio Code`, applicationCategory: `Code Editor`, url: `https://code.visualstudio.com` },
   ],
 }
