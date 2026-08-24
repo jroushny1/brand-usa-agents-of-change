@@ -7,11 +7,11 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'AI Tools & Resources',
-  description: 'Podcasts, tools, guides, and industry links curated for tourism professionals — Personal OS guides, Brand USA resources, AI conversations, and more.',
+  description: 'Guides, tools, and industry links curated for tourism professionals — the Personal OS guides, the Agents of Change webinar library, AI Opener for Destinations, and AI governance references.',
   alternates: { canonical: 'https://janetteroush.com/library' },
   openGraph: {
     title: 'AI Tools & Resources',
-    description: 'Podcasts, tools, guides, and industry links curated for tourism professionals.',
+    description: 'Guides, tools, and industry links curated for tourism professionals.',
   },
 }
 
@@ -47,45 +47,6 @@ const generateLibrarySchema = () => {
     )
   }
 
-  // ItemList schema for podcasts
-  const podcastListSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'ItemList',
-    'name': 'AI in Tourism Podcast Collection',
-    'description': 'Expert conversations exploring AI\'s impact on destination marketing from 2023-2026',
-    'numberOfItems': resources.find(r => r.category === 'Conversations on AI in Tourism')?.items.length || 0,
-    'itemListElement': (resources.find(r => r.category === 'Conversations on AI in Tourism')?.items || []).map((item, index) => {
-      const podcastItem: Record<string, unknown> = {
-        '@type': 'PodcastEpisode',
-        'name': item.title,
-        'description': item.description,
-        'url': item.url
-      }
-
-      // Add Event schema if status and recordedDate exist
-      if (item.status === 'recorded' && item.recordedDate) {
-        podcastItem.recordingOf = {
-          '@type': 'Event',
-          'name': item.title,
-          'eventStatus': 'https://schema.org/EventScheduled',
-          'eventAttendanceMode': 'https://schema.org/OnlineEventAttendanceMode',
-          'startDate': item.recordedDate,
-          'endDate': item.recordedDate,
-          'location': {
-            '@type': 'VirtualLocation',
-            'url': 'https://janetteroush.com'
-          }
-        }
-      }
-
-      return {
-        '@type': 'ListItem',
-        'position': index + 1,
-        'item': podcastItem
-      }
-    })
-  }
-
   // FAQPage schema - key to AI discoverability (like StackList)
   const faqSchema = {
     '@context': 'https://schema.org',
@@ -96,15 +57,15 @@ const generateLibrarySchema = () => {
         'name': 'What AI resources does Brand USA provide for destination marketing organizations?',
         'acceptedAnswer': {
           '@type': 'Answer',
-          'text': 'Brand USA provides a comprehensive AI learning library including 9+ training webinars, 13+ podcast episodes featuring industry experts, curated AI tools, industry programs like AI Opener for Destinations, and official Brand USA resources. Topics cover AI agents, Custom GPTs, Model Context Protocol (MCP), CRIT framework, and AI governance.'
+          'text': 'This library collects the three Personal OS guides for building an AI working system, the Agents of Change webinar series, AI Opener for Destinations, and a set of AI governance and policy references. Topics cover AI agents, Custom GPTs, Model Context Protocol (MCP), the CRIT prompting framework, and organizational AI policy.'
         }
       },
       {
         '@type': 'Question',
-        'name': 'What podcasts feature Janette Roush discussing AI in tourism?',
+        'name': 'Where can I find podcasts featuring Janette Roush on AI in tourism?',
         'acceptedAnswer': {
           '@type': 'Answer',
-          'text': 'Janette Roush has appeared on multiple podcasts including: SEEN Saturday Series, Destination Discourse, Travel Trends, Arival\'s Best Part of Travel, Tourpreneur, The Future of Tourism, Fandom Unpacked, Brand USA Talks Travel, Pass the Mic, Hospitality Daily, Travel Marketing Podcast, and Destination Marketing Podcast. These conversations cover AI governance, destination marketing strategy, practical AI implementation for DMOs, and bridging complex technology with sports tourism applications.'
+          'text': 'Every podcast and video appearance is listed on the Press page at https://janetteroush.com/press, alongside articles and interviews. Shows include SEEN Saturday Series, Destination Discourse, Travel Trends, Arival\'s Best Part of Travel, Tourpreneur, The Future of Tourism, Fandom Unpacked, Pass the Mic, Hospitality Daily, and the Destination Marketing Podcast. The conversations cover AI governance, destination marketing strategy, and practical AI implementation for DMOs.'
         }
       },
       {
@@ -120,7 +81,7 @@ const generateLibrarySchema = () => {
         'name': 'How can sports tourism organizations apply AI to their destination marketing?',
         'acceptedAnswer': {
           '@type': 'Answer',
-          'text': 'Janette Roush, Brand USA\'s Chief AI Officer, discussed practical AI applications for sports tourism on the SEEN Saturday Series podcast. As the first Chief AI Officer for a national DMO, she bridges complex technology with practical applications for sports event planning, venue marketing, and sports destination strategies. The conversation covers implementing AI while maintaining authenticity in sports tourism marketing.'
+          'text': 'Janette Roush discussed practical AI applications for sports tourism on the SEEN Saturday Series podcast, linked from https://janetteroush.com/press. As the first Chief AI Officer for a national DMO, she bridges complex technology with practical applications for sports event planning, venue marketing, and sports destination strategies, including how to implement AI while keeping sports tourism marketing authentic.'
         }
       },
       {
@@ -128,17 +89,17 @@ const generateLibrarySchema = () => {
         'name': 'What is agentic AI and how can tourism organizations use it?',
         'acceptedAnswer': {
           '@type': 'Answer',
-          'text': 'Janette Roush, dubbed "The Taylor Swift of Travel AI," discusses agentic AI on the Hospitality Daily podcast. Agentic AI refers to autonomous AI systems that can take action and make decisions independently. For tourism organizations, this includes AI agents that can handle complex tasks like research, content creation, and workflow automation. Roush emphasizes the importance of organizational upskilling and building trust as teams adopt these advanced AI capabilities.'
+          'text': 'Janette Roush, dubbed "The Taylor Swift of Travel AI," discusses agentic AI on the Hospitality Daily podcast, linked from https://janetteroush.com/press. Agentic AI refers to autonomous AI systems that take action and make decisions independently. For tourism organizations that includes agents handling research, content creation, and workflow automation. Roush emphasizes organizational upskilling and building trust as teams adopt these capabilities.'
         }
       }
     ]
   }
 
-  return { collectionSchema, podcastListSchema, faqSchema }
+  return { collectionSchema, faqSchema }
 }
 
 export default function LibraryPage() {
-  const { collectionSchema, podcastListSchema, faqSchema } = generateLibrarySchema()
+  const { collectionSchema, faqSchema } = generateLibrarySchema()
 
   // Featured guides get the bordered Lab-card treatment; everything else is
   // rendered as a rule-separated editorial index.
@@ -152,11 +113,6 @@ export default function LibraryPage() {
           id="collection-schema"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }}
-        />
-        <script
-          id="podcast-list-schema"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(podcastListSchema) }}
         />
         <script
           id="faq-schema"
@@ -186,7 +142,7 @@ export default function LibraryPage() {
             AI Tools &amp; Resources
           </h1>
           <p className="mt-6 max-w-2xl text-xl leading-relaxed text-brand-navy">
-            Podcasts, tools, guides, and industry links curated for tourism professionals
+            Guides, tools, and industry links curated for tourism professionals
           </p>
         </section>
 
@@ -298,14 +254,6 @@ export default function LibraryPage() {
               })}
             </div>
 
-            {/* Footer Note */}
-            <div className="relative mt-20 border border-brand-navy p-6 sm:p-8">
-              <span className="absolute -top-2.5 left-5 bg-brand-paper px-2 dateline text-brand-cyan">Contribute</span>
-              <h3 className="font-display text-2xl sm:text-3xl text-brand-navy mb-3">Have a Resource to Share?</h3>
-              <p className="text-lg text-brand-gray-blue leading-relaxed">
-                Found a helpful AI tool or resource for tourism professionals? Email <a href="mailto:jroush@thebrandusa.com" className="text-brand-cyan underline underline-offset-2 hover:text-brand-navy transition-colors">jroush@thebrandusa.com</a> to suggest additions to this library.
-              </p>
-            </div>
           </div>
         </main>
 

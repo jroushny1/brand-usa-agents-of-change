@@ -2,8 +2,9 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import AccessCheck from '@/components/AccessCheck'
 import Link from 'next/link'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, ExternalLink } from 'lucide-react'
 import type { Metadata } from 'next'
+import { pressItems, type PressItem } from '@/data/press'
 import Script from 'next/script'
 
 export const metadata: Metadata = {
@@ -15,31 +16,20 @@ export const metadata: Metadata = {
   },
 }
 
-// Upcoming and recent stages, sourced from 20_Areas/Keynotes/ and
-// 20_Areas/Topics/Speaking-and-Keynotes.md. Future-dated events are listed as
-// upcoming so the page stays accurate.
-const upcomingTalks = [
-  { event: 'Virtuoso Travel Tech Summit', place: 'Las Vegas', when: 'Aug 2026' },
-  { event: "West Virginia Governor's Conference on Tourism", place: 'Charleston, WV', when: 'Sept 2026' },
-  { event: 'ATIA Annual Convention & Trade Show', place: 'Fairbanks, AK', when: 'Oct 2026' },
-  { event: 'American Indian Tourism Conference', place: 'United States', when: 'Oct 2026' },
+// The "Where Janette speaks" section is parked in
+// src/components/parked/SpeakingWall.tsx (2026-08-24) along with its data.
+
+// Press features shown on this page — the three most recent articles, pulled by id
+// from the shared press module so the headlines and links can never drift from /press.
+const FEATURED_PRESS_IDS = [
+  'phocuswire-daas',
+  'travel-weekly-high-stakes',
+  'phocuswire-ai-visibility',
 ]
 
-const recentTalks = [
-  { event: 'IPW — AI Theatre', place: 'Fort Lauderdale, FL', when: 'May 2026' },
-  { event: 'micebook C-Suite Summit', place: 'NeueHouse, NYC', when: 'May 2026' },
-  { event: 'City Nation Place Americas', place: 'Vancouver', when: 'Apr 2026' },
-  { event: 'Maine Tourism Conference', place: 'Maine', when: 'Apr 2026' },
-  { event: 'Phocuswright Travel Marketing AI Summit', place: 'New York City', when: 'Mar 2026' },
-  { event: "Wyoming Governor's Conference on Tourism", place: 'Wyoming', when: 'Feb 2026' },
-]
-
-// Press features, sourced from 20_Areas/Press_Coverage/. Positive coverage only.
-const press = [
-  { outlet: 'PhocusWire', headline: 'DMOs shift toward destination-as-a-service model in AI era', when: 'May 2026' },
-  { outlet: 'Travel Weekly', headline: "Destinations' high-stakes game with AI", when: 'May 2026' },
-  { outlet: 'PhocusWire', headline: 'Travel players weigh approaches to winning AI visibility', when: 'Mar 2026' },
-]
+const press = FEATURED_PRESS_IDS
+  .map((id) => pressItems.find((item) => item.id === id))
+  .filter((item): item is PressItem => Boolean(item))
 
 export default function AboutPage() {
   // EducationalOrganization schema for AI discoverability
@@ -271,55 +261,6 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* ===== Speaking wall ===== */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
-          <div className="dateline text-brand-slate flex items-center gap-4 mb-10">
-            <span>On stage</span>
-            <span className="flex-1 h-px bg-brand-sand" aria-hidden="true" />
-          </div>
-          <h2 className="font-display text-3xl md:text-4xl text-brand-navy mb-4">
-            Where Janette speaks
-          </h2>
-          <p className="max-w-[68ch] text-lg leading-relaxed text-brand-gray-blue mb-12">
-            Talks on AI in tourism — for governors&apos; conferences, global summits,
-            and destination marketing organizations across the country and beyond.
-          </p>
-
-          {/* Upcoming */}
-          <h3 className="dateline text-brand-cyan mb-4">
-            Upcoming
-          </h3>
-          <div className="border-t border-brand-navy mb-14">
-            {upcomingTalks.map((t) => (
-              <div
-                key={t.event}
-                className="grid grid-cols-1 sm:grid-cols-[6.5rem_1fr_auto] gap-1 sm:gap-5 items-baseline py-5 border-b border-brand-sand"
-              >
-                <span className="dateline text-brand-cyan whitespace-nowrap">{t.when}</span>
-                <span className="text-xl leading-snug text-brand-navy">{t.event}</span>
-                <span className="dateline text-brand-slate">{t.place}</span>
-              </div>
-            ))}
-          </div>
-
-          {/* Recent */}
-          <h3 className="dateline text-brand-slate mb-4">
-            Recent stages
-          </h3>
-          <div className="border-t border-brand-navy">
-            {recentTalks.map((t) => (
-              <div
-                key={t.event}
-                className="grid grid-cols-1 sm:grid-cols-[6.5rem_1fr_auto] gap-1 sm:gap-5 items-baseline py-5 border-b border-brand-sand"
-              >
-                <span className="dateline text-brand-slate whitespace-nowrap">{t.when}</span>
-                <span className="text-xl leading-snug text-brand-navy">{t.event}</span>
-                <span className="dateline text-brand-slate">{t.place}</span>
-              </div>
-            ))}
-          </div>
-        </section>
-
         {/* ===== Press ===== */}
         <section className="bg-brand-paper2 border-t border-brand-navy">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
@@ -332,14 +273,20 @@ export default function AboutPage() {
             </h2>
             <div className="border-t border-brand-navy">
               {press.map((p) => (
-                <div
-                  key={p.headline}
-                  className="grid grid-cols-1 sm:grid-cols-[8.5rem_1fr_auto] gap-1 sm:gap-5 items-baseline py-5 border-b border-brand-sand"
+                <a
+                  key={p.id}
+                  href={p.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group grid grid-cols-1 sm:grid-cols-[8.5rem_1fr_auto] gap-1 sm:gap-5 items-baseline py-5 border-b border-brand-sand"
                 >
-                  <span className="dateline text-brand-cyan">{p.outlet}</span>
-                  <span className="text-xl leading-snug text-brand-navy">&ldquo;{p.headline}&rdquo;</span>
-                  <span className="dateline text-brand-slate whitespace-nowrap">{p.when}</span>
-                </div>
+                  <span className="dateline text-brand-cyan">{p.publication}</span>
+                  <span className="text-xl leading-snug text-brand-navy group-hover:text-brand-cyan transition-colors">
+                    &ldquo;{p.title}&rdquo;
+                    <ExternalLink className="inline-block ml-2 h-4 w-4 align-baseline text-brand-slate group-hover:text-brand-cyan transition-colors" aria-hidden="true" />
+                  </span>
+                  <span className="dateline text-brand-slate whitespace-nowrap">{p.dateDisplay}</span>
+                </a>
               ))}
             </div>
             <div className="mt-10">

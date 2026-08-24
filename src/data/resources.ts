@@ -1,4 +1,4 @@
-import { BookOpen, Code, FileText, Podcast, Video, Wrench, type LucideIcon } from 'lucide-react'
+import { BookOpen, Code, FileText, Video, Wrench, type LucideIcon } from 'lucide-react'
 
 export interface ResourceItem {
   title: string
@@ -68,18 +68,6 @@ export const resources: ResourceCategory[] = [
         description: 'Group NAO’s expert program for destination organizations putting AI strategy into practice. Janette is an expert advisor to both the European and North American cohorts.',
         url: 'https://www.aiopenerfordestinations.com/',
         icon: BookOpen,
-      },
-    ]
-  },
-  {
-    category: 'Conversations on AI in Tourism',
-    items: [
-      {
-        title: 'Podcasts & Appearances → Press',
-        description: 'Janette’s podcast and video appearances now live on the Press page, alongside articles and interviews.',
-        url: '/press',
-        icon: Podcast,
-        isInternal: true,
       },
     ]
   },
