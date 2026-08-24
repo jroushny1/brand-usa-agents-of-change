@@ -36,3 +36,6 @@ yarn-error.log*
 next-env.d.ts
 # Explicitly ignore the tracked-by-accident env file
 .env.local
+
+# Claude Code local settings (machine-specific, do not commit)
+.claude/settings.local.json

@@ -94,13 +94,6 @@ export const resources: ResourceCategory[] = [
         icon: Video,
         isInternal: true,
       },
-      {
-        title: 'Short-Form Tutorials',
-        description: 'Quick demos and practical AI applications.',
-        url: '/shorts',
-        icon: Video,
-        isInternal: true,
-      },
     ]
   },
   {
