@@ -213,6 +213,13 @@ export default function SummaryTab({ analysis, robotsAnalysis, reportCopied, onC
       <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 text-xs text-gray-600 leading-relaxed">
         <strong>About these labels:</strong> Strong / Needs work / Critical are based on the underlying check thresholds in each tab. The audit tool intentionally avoids a single composite &ldquo;AI readiness score&rdquo; &mdash; those numbers look precise but the underlying signal weights are guesses. Read each category on its own merits.
       </div>
+
+      <div className="bg-blue-50 p-4 rounded-lg border border-blue-100 flex items-start">
+        <Bot className="flex-shrink-0 text-blue-500 mr-3 mt-0.5" size={18} />
+        <div className="text-xs text-blue-800 leading-relaxed">
+          <strong className="text-blue-900">Not sure what to do with this?</strong> Screenshot this page &mdash; or use <em>Copy report</em> above &mdash; and paste it into ChatGPT, Claude, Gemini, or whichever AI tool you already use. Ask it to explain the findings in plain language and put the fixes in order for you. Tell it what kind of organisation you are, too: a five-person tour operator and a national tourism board need very different next steps from the same report.
+        </div>
+      </div>
     </div>
   );
 }
