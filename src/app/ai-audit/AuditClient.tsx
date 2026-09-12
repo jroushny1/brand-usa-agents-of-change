@@ -341,7 +341,7 @@ export default function AuditClient() {
                       <div>
                         <h3 className="text-sm font-bold text-blue-900 mb-1 font-display">Entity Graph</h3>
                         <p className="text-sm text-blue-800 leading-relaxed">
-                          When AI mentions your organization in an answer, it needs to know exactly who you are. <code className="bg-blue-100 px-1 rounded">sameAs</code> links in your structured data point to your authoritative profiles &mdash; Wikipedia, LinkedIn, Wikidata, Crunchbase. With them, AI cites you with confidence. Without them, AI has to guess whether you&apos;re the right Visit Springfield or one of the other towns with that name.
+                          When AI mentions your organization in an answer, it needs to know exactly who you are. <code className="bg-blue-100 px-1 rounded">sameAs</code> links in your structured data point to your authoritative profiles &mdash; Wikipedia, LinkedIn, Wikidata, Crunchbase. With them, AI cites you with confidence. Without them, AI has to guess whether you&apos;re the right Visit Springfield or one of the other towns with that name. You don&apos;t need a Wikipedia page for this. LinkedIn, Crunchbase, and consistent listings across the directories you&apos;re already in resolve the same ambiguity.
                         </p>
                       </div>
                     </div>
@@ -357,7 +357,7 @@ export default function AuditClient() {
                       const strengthConfig = {
                         strong: { label: 'Strong', color: 'text-green-700', bg: 'bg-green-50', border: 'border-green-200', desc: 'Multiple authoritative sources resolve your entities. AI cites you with confidence.' },
                         medium: { label: 'Medium', color: 'text-amber-700', bg: 'bg-amber-50', border: 'border-amber-200', desc: 'Some authoritative anchors exist. Adding Wikipedia, Wikidata, or LinkedIn to the rest of your entities would close the gap.' },
-                        weak: { label: 'Weak', color: 'text-red-700', bg: 'bg-red-50', border: 'border-red-200', desc: 'Few or no authoritative anchors. AI cannot confidently tell whether your organization is the right one or another with a similar name. Adding sameAs links should be a priority.' },
+                        weak: { label: 'Weak', color: 'text-red-700', bg: 'bg-red-50', border: 'border-red-200', desc: 'Few or no authoritative anchors. AI cannot confidently tell whether your organization is the right one or another with a similar name. Adding sameAs links should be a priority. If you\'re a small business, three anchors is often unrealistic — LinkedIn plus a consistent name, address, and phone across the directories you already appear in does most of the work.' },
                       }[strength];
 
                       return (

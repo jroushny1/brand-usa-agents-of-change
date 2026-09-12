@@ -973,7 +973,7 @@ export function generateMarkdownReport(analysis: PageAnalysis, robotsAnalysis: R
   if (schemaStatus === 'Critical') priorities.push('Add structured data (JSON-LD) to your page, starting with `Organization` and `WebSite` schemas. AI engines extract facts from this layer.');
   if (crawlerStatus === 'Critical') priorities.push('Unblock AI retrieval bots in your `robots.txt`. With them blocked, your site is invisible in live AI answers from ChatGPT Search, Perplexity, and Claude.');
   if (freshStatus === 'Critical') priorities.push('Add `dateModified` to your structured data. AI engines weight content freshness; without this field, your page reads as ageless or stale.');
-  if (patternStatus === 'Critical') priorities.push('Add direct quotes, statistics, and links to authoritative sources (Wikipedia, .gov, .edu, established news). Princeton GEO research found these patterns lift AI citation by 30-41%.');
+  if (patternStatus === 'Critical') priorities.push('Add direct quotes, statistics, and links to authoritative sources (Wikipedia, .gov, .edu, established news). Princeton GEO research associated these patterns with higher citation rates, though later benchmarks found the effect inconsistent across domains.');
   if (hygieneStatus === 'Critical') priorities.push('Fix the hygiene checks marked "fail" — likely missing canonical, noindex set, or missing Open Graph tags. See Site Hygiene tab for specifics.');
   if (priorities.length === 0) {
     lines.push('No critical issues. See the detail sections below for warnings and nice-to-have improvements.');
