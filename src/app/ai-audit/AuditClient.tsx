@@ -464,6 +464,72 @@ export default function AuditClient() {
                     })()}
 
 
+                    {/* Name consistency — check the page against itself, then hand
+                        the off-page comparison to the user, since we only see one page. */}
+                    {analysis.nameConsistency.variants.length >= 2 && (
+                      analysis.nameConsistency.consistent ? (
+                        <div className="bg-green-50 p-5 rounded-lg border border-green-200 flex items-start">
+                          <CheckCircle className="flex-shrink-0 text-green-600 mr-3 mt-0.5" size={18} />
+                          <div>
+                            <h4 className="text-sm font-bold text-green-900 font-display mb-1">Name is consistent across this page</h4>
+                            <p className="text-xs text-green-800 leading-relaxed">
+                              All {analysis.nameConsistency.variants.length} places this page names the business agree. Matching strings are what let AI resolve your profiles into one entity instead of several weak ones.
+                            </p>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="bg-amber-50 p-5 rounded-lg border border-amber-200">
+                          <div className="flex items-start mb-3">
+                            <AlertTriangle className="flex-shrink-0 text-amber-600 mr-3 mt-0.5" size={18} />
+                            <div>
+                              <h4 className="text-sm font-bold text-amber-900 font-display mb-1">This page spells your name more than one way</h4>
+                              <p className="text-xs text-amber-800 leading-relaxed">
+                                AI matches on strings, so each spelling can resolve as a separate, weaker entity instead of reinforcing one. Pick one canonical form, use it everywhere, and add the others as <code className="bg-amber-100 px-1 rounded">alternateName</code> in your Organization schema.
+                              </p>
+                            </div>
+                          </div>
+                          <div className="space-y-1.5">
+                            {analysis.nameConsistency.variants.map((v, i) => (
+                              <div key={i} className="flex flex-wrap items-baseline text-xs bg-white rounded border border-amber-100 px-3 py-2">
+                                <code className="text-amber-700 font-mono mr-2 flex-shrink-0">{v.source}:</code>
+                                <span className="text-gray-800 break-words">&ldquo;{v.value}&rdquo;</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )
+                    )}
+
+                    {analysis.nameConsistency.primaryName && (
+                      <div className="bg-blue-50 p-5 rounded-lg border border-blue-100 flex items-start">
+                        <Globe className="flex-shrink-0 text-blue-500 mr-3 mt-0.5" size={18} />
+                        <div className="min-w-0">
+                          <h4 className="text-sm font-bold text-blue-900 font-display mb-1">Check how Google spells your name</h4>
+                          <p className="text-xs text-blue-800 leading-relaxed mb-2">
+                            This audit only sees one page. The rest of your entity lives on other platforms &mdash; open your listing and compare it line by line.
+                          </p>
+                          <a
+                            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(analysis.nameConsistency.primaryName)}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center text-xs font-semibold text-blue-700 underline hover:text-blue-900 mb-3"
+                          >
+                            Open Google Maps for &ldquo;{analysis.nameConsistency.primaryName}&rdquo;
+                            <ExternalLink size={12} className="ml-1 flex-shrink-0" />
+                          </a>
+                          <ul className="space-y-1 text-xs text-blue-800 leading-relaxed list-disc pl-4">
+                            <li>Is the business name spelled the same as on your site, including spaces?</li>
+                            <li>Is the address identical, including abbreviations like St vs Street?</li>
+                            <li>Is the phone number the same, including country code?</li>
+                            <li>Does the website field point to your canonical domain, with or without www, matching your canonical tag?</li>
+                          </ul>
+                          <p className="text-xs text-blue-800 leading-relaxed mt-2">
+                            If any of these differ, claim the Google Business Profile and align it. Don&apos;t delete old listings elsewhere &mdash; claim and link them instead. A linked duplicate resolves; an abandoned one does not.
+                          </p>
+                        </div>
+                      </div>
+                    )}
+
                     {/* Image Audit */}
                     {analysis.images.length > 0 && (
                     <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">

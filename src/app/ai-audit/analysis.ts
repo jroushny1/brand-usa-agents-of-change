@@ -180,6 +180,132 @@ export function extractEntities(jsonLdArray: unknown[]): DiscoveredEntity[] {
   return entities;
 }
 
+// --- Name consistency (self-check across the page's own name claims) ---
+// Entity resolution matches on strings, so a business that spells itself
+// differently in different places splits into several weak entities instead of
+// one confident one. This only sees a single page, so it checks the page
+// against itself and hands the off-page comparison to the user via Google.
+
+export interface NameVariant {
+  source: string;
+  value: string;
+  normalized: string;
+}
+
+export interface NameConsistency {
+  variants: NameVariant[];
+  primaryName: string | null;
+  consistent: boolean;
+}
+
+const ORG_NAME_TYPES = new Set([
+  'Organization', 'LocalBusiness', 'Corporation', 'NGO', 'GovernmentOrganization',
+  'TouristAttraction', 'TouristDestination', 'EducationalOrganization', 'NewsMediaOrganization',
+]);
+
+/** Titles usually read "Brand | Tagline". Compare the first segment only. The
+ *  separators must be whitespace-padded so hyphenated names (Jean-Pierre) survive. */
+export function stripTagline(value: string): string {
+  return value.split(/\s+[|\-–—:·»]\s+/)[0].trim();
+}
+
+const LEGAL_SUFFIX = /[\s,]+\b(inc|llc|ltd|limited|co|corp|corporation|gmbh|bv|sa|pty|plc|srl|ab|oy|nv)\b\.?$/i;
+
+/** Lowercase, collapse repeated whitespace, trim edge punctuation, drop a legal
+ *  suffix or .com. Internal spacing and punctuation are deliberately preserved:
+ *  "Venice Insider" and "VeniceInsider" are different strings to a machine, and
+ *  telling them apart is the entire point of this check. */
+export function normalizeName(value: string): string {
+  let out = value
+    .toLowerCase()
+    .replace(/[‘’]/g, "'")
+    .replace(/\s+/g, ' ')
+    .replace(/^[\s.,!?|:;'"–—-]+/, '')
+    .replace(/[\s.,!?|:;'"–—-]+$/, '')
+    .trim();
+  const noDomain = out.replace(/\.com$/i, '').trim();
+  if (noDomain.length >= 3) out = noDomain;
+  const noSuffix = out.replace(LEGAL_SUFFIX, '').trim();
+  if (noSuffix.length >= 3) out = noSuffix;
+  return out;
+}
+
+/** One name containing the other is a descriptor ("Venice Insider" vs "Venice
+ *  Insider Small Group Tours"), not a conflicting name. The length floor stops
+ *  very short tokens from matching everything. */
+function namesMatch(a: string, b: string): boolean {
+  if (a === b) return true;
+  const [shorter, longer] = a.length <= b.length ? [a, b] : [b, a];
+  return shorter.length >= 4 && longer.includes(shorter);
+}
+
+export function extractNameVariants(doc: Document, jsonLdArray: unknown[]): NameConsistency {
+  const variants: NameVariant[] = [];
+  const schemaNames: string[] = [];
+
+  const add = (source: string, raw: string | null | undefined): void => {
+    if (!raw) return;
+    const value = stripTagline(String(raw));
+    const normalized = normalizeName(value);
+    if (!normalized) return;
+    variants.push({ source, value, normalized });
+  };
+
+  const walk = (obj: unknown): void => {
+    if (!obj || typeof obj !== 'object') return;
+    if (Array.isArray(obj)) { obj.forEach(walk); return; }
+    if (!isRecord(obj)) return;
+
+    const typeRaw = obj['@type'];
+    const types: unknown[] = Array.isArray(typeRaw) ? typeRaw : [typeRaw];
+    if (types.some((t) => typeof t === 'string' && ORG_NAME_TYPES.has(t))) {
+      if (typeof obj.name === 'string' && obj.name.trim()) {
+        schemaNames.push(obj.name.trim());
+        add('schema name', obj.name);
+      }
+      const altRaw = obj.alternateName;
+      const alts: unknown[] = Array.isArray(altRaw) ? altRaw : (altRaw ? [altRaw] : []);
+      alts.forEach((a) => { if (typeof a === 'string') add('schema alternateName', a); });
+    }
+
+    Object.values(obj).forEach(walk);
+  };
+  jsonLdArray.forEach(walk);
+
+  add('<title>', doc.querySelector('title')?.textContent);
+  add('og:title', doc.querySelector('meta[property="og:title"]')?.getAttribute('content'));
+  // The first H1 is deliberately NOT a source. On most marketing sites it is a
+  // headline ("Discover the Algarve"), not a name claim, so including it flags a
+  // false inconsistency on pages whose naming is actually fine.
+
+  const logo = doc.querySelector('img[class*="logo" i], img[id*="logo" i], img[src*="logo" i], img[alt*="logo" i]');
+  const logoAlt = logo?.getAttribute('alt')?.replace(/\s*logo\s*$/i, '').trim();
+  if (logoAlt && !/^(logo|brand|home|image|icon)$/i.test(logoAlt)) add('logo alt text', logoAlt);
+
+  const seen = new Set<string>();
+  const unique = variants.filter((v) => {
+    const key = `${v.source}::${v.normalized}`;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+
+  // All pairs must agree — containment is not transitive, so comparing
+  // everything to the first entry would miss a genuine conflict.
+  let consistent = true;
+  outer: for (let i = 0; i < unique.length; i++) {
+    for (let j = i + 1; j < unique.length; j++) {
+      if (!namesMatch(unique[i].normalized, unique[j].normalized)) {
+        consistent = false;
+        break outer;
+      }
+    }
+  }
+
+  const titleFallback = unique.find((v) => v.source === '<title>')?.value ?? null;
+  return { variants: unique, primaryName: schemaNames[0] ?? titleFallback, consistent };
+}
+
 // --- Content Freshness audit ---
 export interface DateSignal {
   source: string;
@@ -846,6 +972,7 @@ export interface PageAnalysis {
   meta: PageMeta;
   jsonLd: unknown[];
   entities: DiscoveredEntity[];
+  nameConsistency: NameConsistency;
   freshness: FreshnessAnalysis;
   contentPatterns: ContentPatterns;
   schemaCoverage: SchemaTypeCoverage;
@@ -983,6 +1110,27 @@ export function generateMarkdownReport(analysis: PageAnalysis, robotsAnalysis: R
   lines.push('');
 
   // Detail sections
+  const nc = analysis.nameConsistency;
+  if (nc && nc.variants.length > 0) {
+    lines.push('## Entity Graph: name consistency');
+    lines.push('');
+    if (nc.consistent) {
+      lines.push(`This page names the business consistently (${nc.variants.length} ${nc.variants.length === 1 ? 'place' : 'places'} checked).`);
+    } else {
+      lines.push('This page spells the business name more than one way. AI matches on strings, so each variant can resolve as a separate, weaker entity.');
+      lines.push('');
+      nc.variants.forEach((v) => lines.push(`- \`${v.source}\`: "${v.value}"`));
+      lines.push('');
+      lines.push('Pick one canonical form and add the others as `alternateName` in your Organization schema.');
+    }
+    if (nc.primaryName) {
+      lines.push('');
+      lines.push(`Then check the spelling off-page: https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(nc.primaryName)}`);
+      lines.push('Compare the name (including spaces), the address (St vs Street), the phone (including country code), and the website field against your canonical domain.');
+    }
+    lines.push('');
+  }
+
   if (sc) {
     lines.push('## Schema Coverage detail');
     lines.push('');
@@ -1368,6 +1516,9 @@ export function parseContent(content: string, sourceUrl = ''): PageAnalysis | nu
     // 6. Entity Graph (sameAs) Extraction
     const entities = extractEntities(jsonLd.filter((x) => typeof x === 'object'));
 
+    // 6b. Name consistency across the page's own name claims
+    const nameConsistency = extractNameVariants(doc, jsonLd.filter((x) => typeof x === 'object'));
+
     // 7. Content Freshness Extraction
     const freshness = extractDates(doc, jsonLd.filter((x) => typeof x === 'object'));
 
@@ -1398,6 +1549,7 @@ export function parseContent(content: string, sourceUrl = ''): PageAnalysis | nu
         meta: { title: metaTitle, description: metaDesc },
         jsonLd,
         entities,
+        nameConsistency,
         freshness,
         contentPatterns,
         schemaCoverage,
