@@ -969,11 +969,11 @@ export function generateMarkdownReport(analysis: PageAnalysis, robotsAnalysis: R
   lines.push('## Top priorities');
   lines.push('');
   const priorities: string[] = [];
-  if (entityStatus === 'Critical') priorities.push('Add Wikipedia, Wikidata, and LinkedIn URLs to a `sameAs` array on your Organization schema. Without these, AI engines cannot confidently identify your organization.');
+  if (entityStatus === 'Critical') priorities.push('Add a `sameAs` array to your Organization schema pointing at profiles you already have — LinkedIn first, plus Crunchbase and any directories where your name, address, and phone are listed consistently. Wikipedia and Wikidata help if you have them, but are not required. Without any anchors, AI engines cannot confidently tell your organization apart from others with a similar name.');
   if (schemaStatus === 'Critical') priorities.push('Add structured data (JSON-LD) to your page, starting with `Organization` and `WebSite` schemas. AI engines extract facts from this layer.');
   if (crawlerStatus === 'Critical') priorities.push('Unblock AI retrieval bots in your `robots.txt`. With them blocked, your site is invisible in live AI answers from ChatGPT Search, Perplexity, and Claude.');
   if (freshStatus === 'Critical') priorities.push('Add `dateModified` to your structured data. AI engines weight content freshness; without this field, your page reads as ageless or stale.');
-  if (patternStatus === 'Critical') priorities.push('Add direct quotes, statistics, and links to authoritative sources (Wikipedia, .gov, .edu, established news). Princeton GEO research associated these patterns with higher citation rates, though later benchmarks found the effect inconsistent across domains.');
+  if (patternStatus === 'Critical') priorities.push('Add direct quotes, statistics, and links to authoritative sources (Wikipedia, .gov, .edu, established news). Princeton GEO research ([Aggarwal et al. 2024](https://arxiv.org/abs/2311.09735)) associated these patterns with higher citation rates, though later benchmarks ([Puerto et al. 2025](https://arxiv.org/abs/2506.11097)) found the effect inconsistent across domains.');
   if (hygieneStatus === 'Critical') priorities.push('Fix the hygiene checks marked "fail" — likely missing canonical, noindex set, or missing Open Graph tags. See Site Hygiene tab for specifics.');
   if (priorities.length === 0) {
     lines.push('No critical issues. See the detail sections below for warnings and nice-to-have improvements.');
