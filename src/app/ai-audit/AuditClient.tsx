@@ -493,6 +493,11 @@ export default function AuditClient() {
                               <div key={i} className="flex flex-wrap items-baseline text-xs bg-white rounded border border-amber-100 px-3 py-2">
                                 <code className="text-amber-700 font-mono mr-2 flex-shrink-0">{v.source}:</code>
                                 <span className="text-gray-800 break-words">&ldquo;{v.value}&rdquo;</span>
+                                {v.declared && (
+                                  <span className="ml-2 px-1.5 py-0.5 rounded bg-gray-100 text-gray-600 text-[10px] font-medium flex-shrink-0">
+                                    declared &mdash; accepted
+                                  </span>
+                                )}
                               </div>
                             ))}
                           </div>

@@ -190,6 +190,9 @@ export interface NameVariant {
   source: string;
   value: string;
   normalized: string;
+  /** Came from schema name/alternateName — a form the site has explicitly
+   *  declared, so it is an accepted spelling and never counts as a conflict. */
+  declared?: boolean;
 }
 
 export interface NameConsistency {
@@ -203,10 +206,17 @@ const ORG_NAME_TYPES = new Set([
   'TouristAttraction', 'TouristDestination', 'EducationalOrganization', 'NewsMediaOrganization',
 ]);
 
-/** Titles usually read "Brand | Tagline". Compare the first segment only. The
- *  separators must be whitespace-padded so hyphenated names (Jean-Pierre) survive. */
+/** Split a title into its segments. Separators must be whitespace-padded so
+ *  hyphenated names (Jean-Pierre) survive. */
+function splitTitleSegments(value: string): string[] {
+  return value.split(/\s+[|\-–—:·»]\s+/).map((s) => s.trim()).filter(Boolean);
+}
+
+/** Titles read both "Brand | Tagline" and "Tagline | Brand", so callers should
+ *  prefer whichever segment the site has already declared. This first-segment
+ *  form is the fallback when nothing matches. */
 export function stripTagline(value: string): string {
-  return value.split(/\s+[|\-–—:·»]\s+/)[0].trim();
+  return splitTitleSegments(value)[0] ?? value.trim();
 }
 
 const LEGAL_SUFFIX = /[\s,]+\b(inc|llc|ltd|limited|co|corp|corporation|gmbh|bv|sa|pty|plc|srl|ab|oy|nv)\b\.?$/i;
@@ -240,16 +250,8 @@ function namesMatch(a: string, b: string): boolean {
 }
 
 export function extractNameVariants(doc: Document, jsonLdArray: unknown[]): NameConsistency {
-  const variants: NameVariant[] = [];
   const schemaNames: string[] = [];
-
-  const add = (source: string, raw: string | null | undefined): void => {
-    if (!raw) return;
-    const value = stripTagline(String(raw));
-    const normalized = normalizeName(value);
-    if (!normalized) return;
-    variants.push({ source, value, normalized });
-  };
+  const alternateNames: string[] = [];
 
   const walk = (obj: unknown): void => {
     if (!obj || typeof obj !== 'object') return;
@@ -259,28 +261,62 @@ export function extractNameVariants(doc: Document, jsonLdArray: unknown[]): Name
     const typeRaw = obj['@type'];
     const types: unknown[] = Array.isArray(typeRaw) ? typeRaw : [typeRaw];
     if (types.some((t) => typeof t === 'string' && ORG_NAME_TYPES.has(t))) {
-      if (typeof obj.name === 'string' && obj.name.trim()) {
-        schemaNames.push(obj.name.trim());
-        add('schema name', obj.name);
-      }
+      if (typeof obj.name === 'string' && obj.name.trim()) schemaNames.push(obj.name.trim());
       const altRaw = obj.alternateName;
       const alts: unknown[] = Array.isArray(altRaw) ? altRaw : (altRaw ? [altRaw] : []);
-      alts.forEach((a) => { if (typeof a === 'string') add('schema alternateName', a); });
+      alts.forEach((a) => { if (typeof a === 'string' && a.trim()) alternateNames.push(a.trim()); });
     }
 
     Object.values(obj).forEach(walk);
   };
   jsonLdArray.forEach(walk);
 
-  add('<title>', doc.querySelector('title')?.textContent);
-  add('og:title', doc.querySelector('meta[property="og:title"]')?.getAttribute('content'));
+  // Declared forms: the name the site claims, plus any alternateName it has
+  // explicitly registered. An alternateName is the documented fix for spelling
+  // variance, so matching one is a pass — never a conflict.
+  const accepted = [...schemaNames, ...alternateNames]
+    .map((n) => normalizeName(n))
+    .filter((n) => n.length > 0);
+  const matchesAccepted = (n: string): boolean => accepted.some((a) => namesMatch(a, n));
+
+  const variants: NameVariant[] = [];
+  schemaNames.forEach((n) => {
+    const normalized = normalizeName(n);
+    if (normalized) variants.push({ source: 'schema name', value: n, normalized, declared: true });
+  });
+  alternateNames.forEach((n) => {
+    const normalized = normalizeName(n);
+    if (normalized) variants.push({ source: 'schema alternateName', value: n, normalized, declared: true });
+  });
+
+  const addObserved = (source: string, raw: string | null | undefined): void => {
+    if (!raw) return;
+    const segments = splitTitleSegments(String(raw));
+    if (segments.length === 0) return;
+    // Titles are written both "Brand | Tagline" and "Tagline | Brand", so take
+    // whichever segment the site has already declared rather than assuming the
+    // brand comes first. Falls back to the first segment when none match.
+    const declaredSegment = accepted.length > 0
+      ? segments.find((s) => {
+          const n = normalizeName(s);
+          return n.length > 0 && matchesAccepted(n);
+        })
+      : undefined;
+    const value = declaredSegment ?? segments[0];
+    const normalized = normalizeName(value);
+    if (!normalized) return;
+    variants.push({ source, value, normalized });
+  };
+
+  addObserved('<title>', doc.querySelector('title')?.textContent);
+  addObserved('og:title', doc.querySelector('meta[property="og:title"]')?.getAttribute('content'));
   // The first H1 is deliberately NOT a source. On most marketing sites it is a
   // headline ("Discover the Algarve"), not a name claim, so including it flags a
   // false inconsistency on pages whose naming is actually fine.
 
   const logo = doc.querySelector('img[class*="logo" i], img[id*="logo" i], img[src*="logo" i], img[alt*="logo" i]');
   const logoAlt = logo?.getAttribute('alt')?.replace(/\s*logo\s*$/i, '').trim();
-  if (logoAlt && !/^(logo|brand|home|image|icon)$/i.test(logoAlt)) add('logo alt text', logoAlt);
+  if (logoAlt && !/^(logo|brand|home|image|icon)$/i.test(logoAlt)) addObserved('logo alt text', logoAlt);
 
   const seen = new Set<string>();
   const unique = variants.filter((v) => {
@@ -290,14 +326,21 @@ export function extractNameVariants(doc: Document, jsonLdArray: unknown[]): Name
     return true;
   });
 
-  // All pairs must agree — containment is not transitive, so comparing
-  // everything to the first entry would miss a genuine conflict.
+  const observed = unique.filter((v) => !v.declared);
   let consistent = true;
-  outer: for (let i = 0; i < unique.length; i++) {
-    for (let j = i + 1; j < unique.length; j++) {
-      if (!namesMatch(unique[i].normalized, unique[j].normalized)) {
-        consistent = false;
-        break outer;
+  if (accepted.length > 0) {
+    // Anchored on the declared name(s): every observed spelling must match one.
+    consistent = observed.every((v) => matchesAccepted(v.normalized));
+  } else {
+    // Nothing declared to anchor against, so compare observed names to each
+    // other. All pairs must agree — containment is not transitive, so comparing
+    // everything to the first entry would miss a genuine conflict.
+    outer: for (let i = 0; i < observed.length; i++) {
+      for (let j = i + 1; j < observed.length; j++) {
+        if (!namesMatch(observed[i].normalized, observed[j].normalized)) {
+          consistent = false;
+          break outer;
+        }
       }
     }
   }
@@ -1119,7 +1162,7 @@ export function generateMarkdownReport(analysis: PageAnalysis, robotsAnalysis: R
     } else {
       lines.push('This page spells the business name more than one way. AI matches on strings, so each variant can resolve as a separate, weaker entity.');
       lines.push('');
-      nc.variants.forEach((v) => lines.push(`- \`${v.source}\`: "${v.value}"`));
+      nc.variants.forEach((v) => lines.push(`- \`${v.source}\`: "${v.value}"${v.declared ? ' _(declared — accepted)_' : ''}`));
       lines.push('');
       lines.push('Pick one canonical form and add the others as `alternateName` in your Organization schema.');
     }
