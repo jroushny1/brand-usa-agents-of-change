@@ -1099,7 +1099,7 @@ export function generateMarkdownReport(analysis: PageAnalysis, robotsAnalysis: R
       cp.questionHeadingPercent >= 30,
     ].filter(Boolean).length;
     patternStatus = strongCount >= 3 ? 'Strong' : strongCount >= 1 ? 'Needs work' : 'Critical';
-    patternFinding = `${strongCount} of 4 patterns at strong density`;
+    patternFinding = `${strongCount} of 4 patterns in the top band`;
   }
 
   const hyg: HygieneAnalysis | undefined = analysis.hygiene;

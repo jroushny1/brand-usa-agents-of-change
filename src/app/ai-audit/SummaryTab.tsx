@@ -133,7 +133,7 @@ export default function SummaryTab({ analysis, robotsAnalysis, reportCopied, onC
             cp.questionHeadingPercent >= 30,
           ].filter(Boolean).length;
           patternStatus = strongCount >= 3 ? 'pass' : strongCount >= 1 ? 'warn' : 'fail';
-          patternHeadline = `${strongCount} of 4 patterns at "strong" density`;
+          patternHeadline = `${strongCount} of 4 patterns in the top band`;
         }
 
         // 6. Site Hygiene
