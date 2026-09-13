@@ -41,10 +41,14 @@ export default function ContentPatternsTab({ contentPatterns }: ContentPatternsT
           );
         }
 
+        // Quantity bands, not grades. This tab is a craft check — the copy says
+        // so, and the presentation has to agree with it. Same thresholds as
+        // before; only the words changed. No red/amber/green anywhere on this
+        // tab: nothing here is a pass or a fail.
         const score = (value: number, strong: number, medium: number) => {
-          if (value >= strong) return { label: 'Strong', color: 'text-green-700', bg: 'bg-green-50', border: 'border-green-200' };
-          if (value >= medium) return { label: 'Medium', color: 'text-amber-700', bg: 'bg-amber-50', border: 'border-amber-200' };
-          return { label: 'Weak', color: 'text-red-700', bg: 'bg-red-50', border: 'border-red-200' };
+          if (value >= strong) return { label: 'Plenty' };
+          if (value >= medium) return { label: 'Some' };
+          return { label: 'Few' };
         };
 
         const checks = [
@@ -64,10 +68,10 @@ export default function ContentPatternsTab({ contentPatterns }: ContentPatternsT
             {checks.map((check, i) => {
               const Icon = check.icon;
               return (
-                <div key={i} className={`p-6 rounded-lg border-2 ${check.score.bg} ${check.score.border}`}>
+                <div key={i} className="p-6 rounded-lg bg-white border border-brand-sand">
                   <div className="flex items-start justify-between mb-3">
                     <div className="flex items-start flex-1">
-                      <Icon className={`flex-shrink-0 ${check.score.color} mr-3 mt-1`} size={20} />
+                      <Icon className="flex-shrink-0 text-brand-slate mr-3 mt-1" size={20} />
                       <div className="flex-1">
                         <h4 className="text-base font-bold text-brand-navy font-display">{check.name}</h4>
                         <div className="mt-1 text-sm text-gray-700">
@@ -77,17 +81,17 @@ export default function ContentPatternsTab({ contentPatterns }: ContentPatternsT
                         </div>
                       </div>
                     </div>
-                    <div className={`px-3 py-1 rounded-full text-sm font-bold ${check.score.color} ${check.score.bg} border ${check.score.border} whitespace-nowrap`}>
+                    <div className="dateline text-brand-slate whitespace-nowrap">
                       {check.score.label}
                     </div>
                   </div>
-                  <p className={`text-xs leading-relaxed ${check.score.color}`}>{check.why}</p>
+                  <p className="text-xs leading-relaxed text-brand-slate">{check.why}</p>
                 </div>
               );
             })}
 
             <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 text-xs text-gray-600 leading-relaxed">
-              <strong>About these labels:</strong> Strong / Medium / Weak are rough guesses based on common ranges, not thresholds any study established. Aim for &ldquo;enough of each&rdquo; &mdash; your interview quotes, your real stats, your real source links. Made-up content to game the audit backfires; AI engines get sharper at spotting it every quarter. And know the ceiling: <a href="https://doi.org/10.1080/13683500.2026.2654066" target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-900">Najafi &amp; Costa (2026)</a> in <em>Current Issues in Tourism</em> found AI travel recommendations concentrate on already-prominent destinations regardless of how individual pages are written. Content tactics won&apos;t overcome that alone &mdash; which is why the entity, schema, and crawler tabs matter more.
+              <strong>About these labels:</strong> Plenty / Some / Few are rough bands based on common ranges, not thresholds any study established &mdash; and not grades. Nothing on this tab is a pass or a fail. Aim for &ldquo;enough of each&rdquo; &mdash; your interview quotes, your real stats, your real source links. Made-up content to game the audit backfires; AI engines get sharper at spotting it every quarter. And know the ceiling: <a href="https://doi.org/10.1080/13683500.2026.2654066" target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-900">Najafi &amp; Costa (2026)</a> in <em>Current Issues in Tourism</em> found AI travel recommendations concentrate on already-prominent destinations regardless of how individual pages are written. Content tactics won&apos;t overcome that alone &mdash; which is why the entity, schema, and crawler tabs matter more.
             </div>
           </>
         );
