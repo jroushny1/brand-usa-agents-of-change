@@ -295,14 +295,13 @@ export function extractNameVariants(doc: Document, jsonLdArray: unknown[]): Name
     if (segments.length === 0) return;
     // Titles are written both "Brand | Tagline" and "Tagline | Brand", so take
     // whichever segment the site has already declared rather than assuming the
-    // brand comes first. Falls back to the first segment when none match.
-    const declaredSegment = accepted.length > 0
-      ? segments.find((s) => {
-          const n = normalizeName(s);
-          return n.length > 0 && matchesAccepted(n);
-        })
-      : undefined;
-    const value = declaredSegment ?? segments[0];
+    // brand comes first. Prefer an exact match over a containment match so a
+    // short segment like "Venice" cannot win over the real "VeniceInsider".
+    // Falls back to the first segment when nothing matches.
+    const candidates = segments.map((s) => ({ s, n: normalizeName(s) })).filter((x) => x.n.length > 0);
+    const exact = candidates.find((x) => accepted.includes(x.n));
+    const matched = exact ?? candidates.find((x) => matchesAccepted(x.n));
+    const value = (matched ?? candidates[0])?.s ?? segments[0];
     const normalized = normalizeName(value);
     if (!normalized) return;
     variants.push({ source, value, normalized });
@@ -310,13 +309,11 @@ export function extractNameVariants(doc: Document, jsonLdArray: unknown[]): Name
 
   addObserved('<title>', doc.querySelector('title')?.textContent);
   addObserved('og:title', doc.querySelector('meta[property="og:title"]')?.getAttribute('content'));
-  // The first H1 is deliberately NOT a source. On most marketing sites it is a
-  // headline ("Discover the Algarve"), not a name claim, so including it flags a
-  // false inconsistency on pages whose naming is actually fine.
-
-  const logo = doc.querySelector('img[class*="logo" i], img[id*="logo" i], img[src*="logo" i], img[alt*="logo" i]');
-  const logoAlt = logo?.getAttribute('alt')?.replace(/\s*logo\s*$/i, '').trim();
-  if (logoAlt && !/^(logo|brand|home|image|icon)$/i.test(logoAlt)) addObserved('logo alt text', logoAlt);
+  // Only the places a site DECLARES its name are sources. The first H1 and the
+  // logo alt text are deliberately excluded: an H1 is usually a headline
+  // ("Discover the Algarve"), and the first logo-like <img> on a tourism site is
+  // often a partner strip ("Hilton"). Both produced false inconsistencies on
+  // pages whose naming was fine — the one failure mode this check must not have.
 
   const seen = new Set<string>();
   const unique = variants.filter((v) => {
@@ -345,8 +342,11 @@ export function extractNameVariants(doc: Document, jsonLdArray: unknown[]): Name
     }
   }
 
+  // Primary name for the Google handoff: the first schema name that survives
+  // normalization — a name of "..." must not become a Maps search — else title.
+  const usableSchemaName = schemaNames.find((n) => normalizeName(n).length > 0) ?? null;
   const titleFallback = unique.find((v) => v.source === '<title>')?.value ?? null;
-  return { variants: unique, primaryName: schemaNames[0] ?? titleFallback, consistent };
+  return { variants: unique, primaryName: usableSchemaName ?? titleFallback, consistent };
 }
 
 // --- Content Freshness audit ---
@@ -578,7 +578,7 @@ const SCHEMA_LIBRARY: SchemaRecommendation[] = [
     {"@type": "ListItem", "position": 3, "name": "Current Page"}
   ]
 }` },
-  { type: 'Person', category: 'foundational', priority: 'recommended', description: 'Staff bios, authors, leadership', whyMatters: 'Personal credibility is the foundation of E-E-A-T. Author Person schemas with sameAs anchors get cited far more than anonymous content.', starter: `{
+  { type: 'Person', category: 'foundational', priority: 'recommended', description: 'Staff bios, authors, leadership', whyMatters: 'Personal credibility is the foundation of E-E-A-T. An author Person schema with sameAs anchors tells AI who is speaking and lets it verify them; anonymous content gives it nothing to check.', starter: `{
   "@context": "https://schema.org",
   "@type": "Person",
   "name": "Person Name",
@@ -673,7 +673,7 @@ const SCHEMA_LIBRARY: SchemaRecommendation[] = [
 }` },
 
   // Content
-  { type: 'Article', category: 'content', priority: 'recommended', description: 'Editorial content, blog posts, guides', whyMatters: 'Article schema gives AI the headline, author, date, and image. Pages with Article schema get cited 2-3x more often than plain HTML.', starter: `{
+  { type: 'Article', category: 'content', priority: 'recommended', description: 'Editorial content, blog posts, guides', whyMatters: 'Article schema gives AI the headline, author, date, and image directly. Without it, AI has to infer those from the page body, and it often gets the author or date wrong.', starter: `{
   "@context": "https://schema.org",
   "@type": "Article",
   "headline": "Article Title",
@@ -1307,32 +1307,35 @@ export function getSuggestedSameAs(entity: GroupedEntity): SuggestedLink[] {
   const isPerson = entity.type.includes('Person');
   const isOrg = entity.type.includes('Organization') || entity.type.includes('Corporation') || entity.type.includes('LocalBusiness') || entity.type.includes('NGO');
 
-  if (!hasPlat('Wikipedia')) {
-    suggestions.push({
-      platform: 'Wikipedia',
-      example: `https://en.wikipedia.org/wiki/${slugUnder}`,
-      note: 'Highest-authority anchor. Only add if a Wikipedia page actually exists.',
-    });
-  }
-  if (!hasPlat('Wikidata')) {
-    suggestions.push({
-      platform: 'Wikidata',
-      example: `https://www.wikidata.org/wiki/QXXXXXX`,
-      note: `Search wikidata.org for "${entity.name}" to find the real Q-number.`,
-    });
-  }
+  // Order matters: this list is read top-down as a to-do. Lead with anchors
+  // nearly every organization can actually obtain; Wikipedia last, because most
+  // organizations have no page and should not be told to go get one.
   if (!hasPlat('LinkedIn')) {
     suggestions.push({
       platform: 'LinkedIn',
       example: isPerson ? `https://www.linkedin.com/in/${slug}` : `https://www.linkedin.com/company/${slug}`,
-      note: isPerson ? 'Person profile.' : 'Organization page.',
+      note: isPerson ? 'Person profile. Start here.' : 'Organization page. Start here — almost every business already has one.',
     });
   }
   if (isOrg && !hasPlat('Crunchbase')) {
     suggestions.push({
       platform: 'Crunchbase',
       example: `https://www.crunchbase.com/organization/${slug}`,
-      note: 'Useful for companies; less critical for DMOs / non-profits.',
+      note: 'Free to claim. Useful for companies; less critical for DMOs / non-profits.',
+    });
+  }
+  if (!hasPlat('Wikidata')) {
+    suggestions.push({
+      platform: 'Wikidata',
+      example: `https://www.wikidata.org/wiki/QXXXXXX`,
+      note: `Search wikidata.org for "${entity.name}". Only add if an entry already exists.`,
+    });
+  }
+  if (!hasPlat('Wikipedia')) {
+    suggestions.push({
+      platform: 'Wikipedia',
+      example: `https://en.wikipedia.org/wiki/${slugUnder}`,
+      note: 'Strong anchor if a page exists. Most organizations do not have one, and that is fine — do not create one for this.',
     });
   }
   if (!hasPlat('X / Twitter')) {

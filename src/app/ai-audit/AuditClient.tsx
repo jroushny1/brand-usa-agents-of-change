@@ -356,7 +356,7 @@ export default function AuditClient() {
                       const strength = authoritativeCount >= 3 ? 'strong' : authoritativeCount >= 1 ? 'medium' : 'weak';
                       const strengthConfig = {
                         strong: { label: 'Strong', color: 'text-green-700', bg: 'bg-green-50', border: 'border-green-200', desc: 'Multiple authoritative sources resolve your entities. AI cites you with confidence.' },
-                        medium: { label: 'Medium', color: 'text-amber-700', bg: 'bg-amber-50', border: 'border-amber-200', desc: 'Some authoritative anchors exist. Adding Wikipedia, Wikidata, or LinkedIn to the rest of your entities would close the gap.' },
+                        medium: { label: 'Medium', color: 'text-amber-700', bg: 'bg-amber-50', border: 'border-amber-200', desc: 'Some authoritative anchors exist. Add LinkedIn and Crunchbase to your remaining entities, plus Wikidata or Wikipedia if you have them. More anchors, spelled consistently, is what closes the gap.' },
                         weak: { label: 'Weak', color: 'text-red-700', bg: 'bg-red-50', border: 'border-red-200', desc: 'Few or no authoritative anchors. AI cannot confidently tell whether your organization is the right one or another with a similar name. Adding sameAs links should be a priority. If you\'re a small business, three anchors is often unrealistic — LinkedIn plus a consistent name, address, and phone across the directories you already appear in does most of the work.' },
                       }[strength];
 
@@ -386,7 +386,7 @@ export default function AuditClient() {
                               <AlertOctagon className="mx-auto text-amber-500 mb-3" size={32} />
                               <h4 className="text-base font-semibold text-brand-navy mb-2">No entities found in structured data</h4>
                               <p className="text-sm text-gray-600 max-w-md mx-auto">
-                                The page has no Organization, Person, LocalBusiness, or TouristAttraction schema with identifiable entities. Add at minimum an Organization block with <code className="bg-gray-100 px-1 rounded text-xs">@type</code>, <code className="bg-gray-100 px-1 rounded text-xs">name</code>, and a <code className="bg-gray-100 px-1 rounded text-xs">sameAs</code> array linking to Wikipedia, LinkedIn, and your other canonical profiles.
+                                The page has no Organization, Person, LocalBusiness, or TouristAttraction schema with identifiable entities. Add at minimum an Organization block with <code className="bg-gray-100 px-1 rounded text-xs">@type</code>, <code className="bg-gray-100 px-1 rounded text-xs">name</code>, and a <code className="bg-gray-100 px-1 rounded text-xs">sameAs</code> array linking to LinkedIn, Crunchbase, and any other profiles you already have. Wikipedia and Wikidata help if they exist &mdash; most organizations have neither, and that is fine.
                               </p>
                             </div>
                           ) : (
