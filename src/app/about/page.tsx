@@ -178,7 +178,7 @@ export default function AboutPage() {
               <div className="relative overflow-hidden bg-[#0A1220]">
                 {/* @ts-expect-error - mux-player is a web component loaded via script */}
                 <mux-player
-                  playback-id="IS37ei5cyOT43UHAFBqrEmWP9Dsmi02o7VEgc3NlHCag"
+                  playback-id="eSKx6dcIAeGTRgXQZN8CHEqXMLEBtHmnqqvYuzRoBwM"
                   stream-type="on-demand"
                   autoplay="muted"
                   loop
