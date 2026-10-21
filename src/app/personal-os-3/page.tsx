@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Build Your Personal OS in Claude Code (VS Code) | Agents of Change',
+  title: 'Build Your Personal OS in Claude Code (VS Code)',
   description: 'The advanced track. The full Claude Code engine: filesystem skills as real slash commands, auto memory that persists across sessions, and MCP servers. For people who have outgrown the Cowork setup.',
 }
 

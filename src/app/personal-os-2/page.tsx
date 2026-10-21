@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'How a Personal OS Compounds Over Time | Agents of Change',
+  title: 'How a Personal OS Compounds Over Time',
   description: 'The leverage layer: memory, skills, capture pipelines, voice system, and shipping from the vault. What happens when a folder of markdown becomes a coworker.',
 }
 

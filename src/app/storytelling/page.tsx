@@ -1,6 +1,7 @@
 import Header from '@/components/Header'
 import AccessCheck from '@/components/AccessCheck'
 import StorytellingLab from '@/components/StorytellingLab'
+import { OG_IMAGE } from '@/lib/og'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -8,9 +9,10 @@ export const metadata: Metadata = {
   description:
     'An interactive AI lab built on the Periodic Table of Storytelling: scan any film to reveal the tropes in its DNA, or select narrative elements to synthesize an original story concept.',
   openGraph: {
-    title: 'Periodic Table of Storytelling | Agents of Change',
+    title: 'Periodic Table of Storytelling | Janette Roush',
     description:
       'Scan a film to reveal its storytelling DNA, or combine narrative elements into an original concept — an interactive AI demo.',
+    images: [OG_IMAGE],
   },
 }
 

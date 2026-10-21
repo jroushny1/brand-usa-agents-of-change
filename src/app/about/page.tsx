@@ -3,16 +3,18 @@ import Footer from '@/components/Footer'
 import AccessCheck from '@/components/AccessCheck'
 import Link from 'next/link'
 import { ArrowRight, ExternalLink } from 'lucide-react'
+import { OG_IMAGE } from '@/lib/og'
 import type { Metadata } from 'next'
 import { pressItems, type PressItem } from '@/data/press'
 import Script from 'next/script'
 
 export const metadata: Metadata = {
-  title: 'About Janette Roush',
+  title: { absolute: 'About Janette Roush' },
   description: 'Janette Roush is SVP, Innovation and Chief AI Officer at Brand USA. She speaks to destination marketing organizations and industry audiences about putting AI to work in tourism — the practical tools and workflows her team uses every day.',
   openGraph: {
-    title: 'About Janette Roush | Agents of Change',
+    title: 'About Janette Roush',
     description: 'SVP, Innovation and Chief AI Officer at Brand USA. AI strategy for the business of travel.',
+    images: [OG_IMAGE],
   },
 }
 
@@ -192,6 +194,9 @@ export default function AboutPage() {
               </div>
               <p className="dateline text-brand-slate text-center mt-4">
                 Speaking on AI in tourism · Brand USA
+              </p>
+              <p className="text-xs text-brand-slate text-center mt-2">
+                Video: Nolan Nichols · Joe York, Miles Partnership
               </p>
             </div>
           </div>

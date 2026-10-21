@@ -108,6 +108,13 @@ export const pressItems: PressItem[] = [
 // Podcast & video appearances (guest or host). Reverse chronological.
 export const appearances = [
   {
+    title: 'Destination Discourse — "Does Your DMO Need a Hive Mind?"',
+    description:
+      'With Adam Stoker and Stuart Butler on the hive mind: one central index that a DMO\'s reports, transcripts, and partner conversations all feed. Janette walks through the index Brand USA built across monthly reports from 15 international offices, how permissions stay intact, and where to start.',
+    url: 'https://www.youtube.com/watch?v=H6Dgj7_v_QE',
+    dateDisplay: 'Oct 1, 2026',
+  },
+  {
     title: 'Travel Tech Insider — "Future Destinations: The Evolving Role of the DMO"',
     description:
       'With hosts Gilad Berenstein and Cara Whitehill, alongside co-guest Meaghan Ferrigno — how DMOs are redefining their role as AI-generated content and new discovery behaviors reshape destination marketing.',
@@ -117,7 +124,7 @@ export const appearances = [
   {
     title: 'Destination Discourse — "What Should DMOs Actually Be Doing With AI Right Now?" (with Dan Holowack)',
     description:
-      'A no-fluff conversation with Stuart Butler and Adam Stoker on the shift from "using AI" to "working inside AI," why every DMO needs an AI champion now, and why doing nothing is the biggest risk.',
+      'A conversation with Stuart Butler and Adam Stoker on the shift from "using AI" to "working inside AI," why every DMO needs an AI champion now, and why doing nothing is the biggest risk.',
     url: 'https://www.youtube.com/watch?v=xxO4Sh0un1Q',
     dateDisplay: 'May 21, 2026',
   },

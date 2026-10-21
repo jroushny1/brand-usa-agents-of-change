@@ -1,3 +1,4 @@
+import { OG_IMAGE } from '@/lib/og'
 import type { Metadata } from 'next'
 import { Fraunces, Newsreader, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
@@ -36,7 +37,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Janette Roush | Working Inside of AI',
     description: 'Janette Roush is the SVP, Innovation and Chief AI Officer at Brand USA. A LinkedIn Top Voice and Broadway veteran, she specializes in Generative AI strategy for travel and marketing.',
-    images: ['/og-image.png'],
+    images: [OG_IMAGE],
     url: 'https://janetteroush.com',
     siteName: 'Janette Roush',
     locale: 'en_US',
@@ -47,7 +48,7 @@ export const metadata: Metadata = {
     title: 'Janette Roush | Working Inside of AI',
     description: 'Janette Roush is the SVP, Innovation and Chief AI Officer at Brand USA. A LinkedIn Top Voice and Broadway veteran, she specializes in Generative AI strategy for travel and marketing.',
     creator: '@janetteroush',
-    images: ['/og-image.png'],
+    images: [OG_IMAGE.url],
   },
   metadataBase: new URL('https://janetteroush.com'),
   verification: {

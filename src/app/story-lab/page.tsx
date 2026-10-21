@@ -1,6 +1,7 @@
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import StoryLabFrame from '@/components/StoryLabFrame'
+import { OG_IMAGE } from '@/lib/og'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -12,6 +13,7 @@ export const metadata: Metadata = {
     title: 'Story Lab',
     description:
       'The Periodic Table of Travel Storytelling — an instrument for copy machines can cite and travelers can feel.',
+    images: [OG_IMAGE],
   },
 }
 

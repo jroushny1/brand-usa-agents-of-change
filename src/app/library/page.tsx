@@ -3,6 +3,7 @@ import { ArrowLeft, ExternalLink } from 'lucide-react'
 import AccessCheck from '@/components/AccessCheck'
 import Footer from '@/components/Footer'
 import { resources } from '@/data/resources'
+import { OG_IMAGE } from '@/lib/og'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -12,6 +13,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'AI Tools & Resources',
     description: 'Guides, tools, and industry links curated for tourism professionals.',
+    images: [OG_IMAGE],
   },
 }
 

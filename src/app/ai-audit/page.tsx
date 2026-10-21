@@ -1,3 +1,4 @@
+import { OG_IMAGE } from '@/lib/og'
 import type { Metadata } from 'next'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
@@ -10,6 +11,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'AI Vision Simulator — AI Readiness Audit',
     description: 'See what ChatGPT, Claude, and Perplexity see on your site. An interactive AI readiness audit for destination marketing organizations.',
+    images: [OG_IMAGE],
   },
 }
 

@@ -1524,7 +1524,7 @@ To wrap up, this is the QR code for today's presentation if you would like to do
   'ai-in-tourism-mississippi-2026': {
     id: 'ai-in-tourism-mississippi-2026',
     title: `AI in Tourism: How It's Changing Travelers and How It's Changing Our Work`,
-    description: `Keynote at the Mississippi Governor's Conference on Tourism in Oxford, Mississippi. The first half covers the front door: how travelers discover and plan trips with AI, and what makes a destination's content findable. The second half covers the back office: four ways Brand USA uses AI at work, from a single task to an index of reports from 15 international offices.`,
+    description: `Keynote at the Mississippi Governor's Conference on Tourism in Oxford, Mississippi. The first half covers the front door: how travelers discover and plan trips with AI, and what makes a destination's content findable. The second half covers the back office: four ways Brand USA uses AI at work, from a single task to an index of reports from 15 international offices. Filmed by Joe York of Miles Partnership.`,
     duration: '53 min',
     level: 'Strategic',
     cardDescription: `How travelers now plan trips with AI, how DMOs become trust brokers, and four ways Brand USA uses AI at work. Recorded in Oxford, Mississippi.`,

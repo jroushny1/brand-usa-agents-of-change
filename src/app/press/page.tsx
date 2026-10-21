@@ -2,6 +2,7 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import AccessCheck from '@/components/AccessCheck'
 import { ExternalLink } from 'lucide-react'
+import { OG_IMAGE } from '@/lib/og'
 import type { Metadata } from 'next'
 import { pressItems, appearances } from '@/data/press'
 
@@ -9,8 +10,9 @@ export const metadata: Metadata = {
   title: 'Press',
   description: 'Press coverage, interviews, and podcast appearances featuring Janette Roush, SVP of Innovation and Chief AI Officer at Brand USA, on AI, destination marketing, and the future of travel discovery.',
   openGraph: {
-    title: 'Press | Agents of Change',
+    title: 'Press | Janette Roush',
     description: 'Press coverage, interviews, and podcast appearances featuring Janette Roush on AI and the future of destination marketing.',
+    images: [OG_IMAGE],
   },
 }
 

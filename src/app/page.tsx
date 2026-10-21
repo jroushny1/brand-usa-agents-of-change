@@ -24,10 +24,9 @@ export const metadata: Metadata = {
 // Curated "latest" index for the front page — newest items across press and
 // podcasts. Edit this list by hand when something new lands.
 const latestIndex = [
+  { date: 'Oct 1 ’26', title: 'Does Your DMO Need a Hive Mind? — Destination Discourse', category: 'Podcast', href: '/press' },
   { date: 'May 21 ’26', title: 'What Should DMOs Actually Be Doing With AI Right Now?', category: 'Podcast', href: '/press' },
-  { date: 'May 4 ’26', title: 'Destinations’ high-stakes game with AI — Travel Weekly', category: 'Press', href: '/press' },
-  { date: 'Feb ’26', title: 'The Taylor Swift of Travel AI — Hospitality Daily', category: 'Podcast', href: '/press' },
-]
+  { date: 'May 4 ’26', title: 'Destinations’ high-stakes game with AI — Travel Weekly', category: 'Press', href: '/press' },]
 
 // Story Lab element tiles shown on the front-page Lab card (real identifiers
 // from the Periodic Table of Storytelling chart).
