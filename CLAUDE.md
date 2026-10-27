@@ -14,7 +14,7 @@ Janette Roush's personal site — keynotes, working tools (Story Lab, AI Site Au
 - **Always `git fetch origin` + rebase before editing/deploying.** Other sessions push here, so the local checkout can be many commits behind `main`; editing stale and pushing will reject.
 - **DNS (Porkbun registrar, default nameservers; migrated 2026-06-04 from dormant Wix DNS):** A record apex → `216.198.79.1`; CNAME `www` → `eaf046cb9fd7aa8f.vercel-dns-017.com.` (older `76.76.21.21` / `cname.vercel-dns.com` still work).
 - **Email `jr@janetteroush.com`:** receive-only forwarding via Porkbun's free email forwarding → `janetteroush@gmail.com` (set up in Porkbun's Email tab; MX managed automatically — don't add MX manually). She does not send from this address; it's a placeholder.
-- **Personal OS guides:** `/personal-os` + `/personal-os-2` are the **Claude Cowork** track; `/personal-os-3` is the **Claude Code (VS Code)** advanced build. Keep that split.
+- **Personal OS guides:** canonical copies live on thebrandusa.com (`/insights-resources/ai-innovation/`). Since 2026-10-27 `/personal-os`, `/personal-os-2` and `/personal-os-3` 301 there from `redirects()`; the page source stays in `src/app/` but is unreachable. Edit the guides' titles and descriptions on the Brand USA CMS. `/personal-os/walkthrough` (video) stays here.
 
 ## Site Architecture
 
@@ -32,8 +32,7 @@ Next.js App Router. All content lives in TypeScript modules under `src/data/` (n
 | `/press` | Press / media page |
 | `/ai-audit` | Interactive AI audit tool for DMOs (client tool in `AuditClient.tsx`) |
 | `/storytelling` | Storytelling Lab — periodic table of storytelling + Gemini API routes (`/api/storytelling/*`) |
-| `/personal-os` | Personal OS guide v1 (HTML embedded in React) |
-| `/personal-os-2` | Personal OS guide v2 (HTML embedded in React) |
+| `/personal-os`, `/personal-os-2`, `/personal-os-3` | 301 to the canonical guides on thebrandusa.com |
 | `/personal-os/walkthrough` | Personal OS video walkthrough |
 | `/login`, `/register`, `/enter` | Auth placeholders (auth intentionally disabled; site is public) |
 
