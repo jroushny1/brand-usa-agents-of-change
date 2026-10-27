@@ -316,7 +316,7 @@ export default function AboutPage() {
             Selected work
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-            <Link href="/personal-os" className="group border border-brand-navy p-6 hover:border-brand-cyan transition-colors">
+            <Link href="https://www.thebrandusa.com/insights-resources/ai-innovation/the-shape-of-a-personal-os-for-claude/" className="group border border-brand-navy p-6 hover:border-brand-cyan transition-colors">
               <h3 className="font-display text-2xl text-brand-navy mb-3 group-hover:text-brand-cyan transition-colors">Personal Operating System</h3>
               <p className="text-brand-gray-blue leading-relaxed mb-5">A live system for giving AI full context on your work — built with Claude Code and a file-based vault.</p>
               <span className="inline-flex items-center dateline text-brand-cyan">Explore<ArrowRight className="ml-2 h-4 w-4" /></span>

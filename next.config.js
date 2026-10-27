@@ -77,6 +77,7 @@ const nextConfig = {
   // library rather than 404.
   async redirects() {
     const BUSA = 'https://www.thebrandusa.com/events'
+    const BUSA_GUIDES = 'https://www.thebrandusa.com/insights-resources/ai-innovation'
     return [
       { source: '/glossary', destination: '/library', permanent: true },
       { source: '/notes', destination: '/library', permanent: true },
@@ -95,6 +96,13 @@ const nextConfig = {
       { source: '/webinar/ai-chief-of-staff', destination: `${BUSA}/agents-of-change-ai-as-your-chief-of-staff-building-a-personal-operating-system-with-claude-code/`, permanent: true },
       { source: '/webinar/from-conversation-to-knowledge', destination: `${BUSA}/agents-of-change-from-conversation-to-knowledge-how-ai-turns-your-calls-into-strategy/`, permanent: true },
       { source: '/webinar/build-the-deck', destination: `${BUSA}/agents-of-change-build-the-deck-on-brand-presentations-start-to-finish-in-claude/`, permanent: true },
+
+      // Personal OS guides (October 2026). thebrandusa.com holds the canonical
+      // copies; all three were confirmed indexed there before shipping. The
+      // video walkthrough at /personal-os/walkthrough stays here.
+      { source: '/personal-os', destination: `${BUSA_GUIDES}/the-shape-of-a-personal-os-for-claude/`, permanent: true },
+      { source: '/personal-os-2', destination: `${BUSA_GUIDES}/how-a-personal-oscompounds-over-time/`, permanent: true },
+      { source: '/personal-os-3', destination: `${BUSA_GUIDES}/build-your-personal-osin-claude-code/`, permanent: true },
 
       // Short-form video section retired August 2026. Both indexed URLs land on
       // the resource library rather than 404.
