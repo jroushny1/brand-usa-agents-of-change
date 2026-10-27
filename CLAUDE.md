@@ -6,7 +6,7 @@ Janette Roush's personal site — keynotes, working tools (Story Lab, AI Site Au
 
 ## Deployment
 
-- **Canonical domain:** janetteroush.com (apex; `www` 308-redirects to apex). Also mirrors to `agents-of-change.brandusa.org` (Brand USA Vercel team deployment).
+- **Canonical domain:** janetteroush.com (apex; `www` 308-redirects to apex).
 - **Vercel backup URL:** brand-usa-agents-of-change.vercel.app
 - **Repo:** GitHub — `jroushny1/brand-usa-agents-of-change`
 - **Deploy:** Push to `main` triggers auto-deploy via Vercel (usually < 1 min). No CLI needed to ship code.
