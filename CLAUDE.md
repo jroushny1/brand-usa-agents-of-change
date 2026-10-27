@@ -25,7 +25,7 @@ Next.js App Router. All content lives in TypeScript modules under `src/data/` (n
 | Route | Purpose |
 |-------|---------|
 | `/` | Homepage — editorial front page: chip hero, Lab cards, curated `latestIndex`, webinar + conference grids, In the Media pull quote |
-| `/webinar/[id]` | Individual webinar pages — video (Mux), transcript, chapters, schema. Statically generated. Nine webinars migrated to thebrandusa.com 2026-08-24 and 301 there from `redirects()`. Of the 11 entries left in `webinarData`, eight are Agents of Change webinars headed to thebrandusa.com (package handed to Sofia Dunn, Wrike 4587406098). The other three (`ai-in-tourism-mississippi-2026`, `minnesota-ai-tourism`, `ai-ideas-exchange`) are recordings of Janette's live conference talks, not webinars; they stay on janetteroush.com permanently |
+| `/webinar/[id]` | Individual webinar pages — video (Mux), transcript, chapters, schema. Statically generated. Nine webinars migrated to thebrandusa.com 2026-08-24 and 301 there from `redirects()`. Of the 11 entries left in `webinarData`, eight are Agents of Change webinars headed to thebrandusa.com (package handed to Sofia Dunn, Wrike 4587406098). The other three (`ai-in-tourism-mississippi-2026`, `minnesota-ai-tourism`, `ai-ideas-exchange`) are recordings of Janette's live conference talks and stay on janetteroush.com permanently |
 | `/podcast/[id]` | Podcast episode pages — audio, transcript, chapters, schema. Statically generated |
 | `/library` | Resources page — curated links, Personal OS guides |
 | `/about` | About Janette / Agents of Change program |
