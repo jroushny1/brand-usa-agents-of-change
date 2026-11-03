@@ -927,7 +927,7 @@ export async function fetchHygieneChecks(pageUrl: string): Promise<HygieneCheck[
   // Sitemap
   try {
     const sitemapUrl = `${origin}/sitemap.xml`;
-    const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(sitemapUrl)}`);
+    const response = await fetch(`/api/fetch-page?url=${encodeURIComponent(sitemapUrl)}`);
     const data = await response.json();
     if (data.contents && (data.contents.includes('<urlset') || data.contents.includes('<sitemapindex'))) {
       checks.push({
@@ -957,7 +957,7 @@ export async function fetchHygieneChecks(pageUrl: string): Promise<HygieneCheck[
   for (const filename of ['llms.txt', 'llms-full.txt']) {
     try {
       const url = `${origin}/${filename}`;
-      const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`);
+      const response = await fetch(`/api/fetch-page?url=${encodeURIComponent(url)}`);
       const data = await response.json();
       if (data.contents && !data.contents.toLowerCase().includes('<html') && data.contents.trim().startsWith('#')) {
         checks.push({
@@ -1437,7 +1437,7 @@ export async function fetchRobotsTxt(pageUrl: string): Promise<RobotsAnalysis> {
   try {
     const origin = new URL(pageUrl).origin;
     robotsUrl = `${origin}/robots.txt`;
-    const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(robotsUrl)}`);
+    const response = await fetch(`/api/fetch-page?url=${encodeURIComponent(robotsUrl)}`);
     const data = await response.json();
 
     if (!data.contents || data.contents.toLowerCase().includes('<html')) {
@@ -1456,7 +1456,7 @@ export async function fetchRobotsTxt(pageUrl: string): Promise<RobotsAnalysis> {
       url: robotsUrl,
       found: false,
       raw: '',
-      error: `Could not fetch ${robotsUrl || 'robots.txt'} through the proxy (network error or CORS). Try opening it directly in a new tab, or paste the contents below.`,
+      error: `Could not fetch ${robotsUrl || 'robots.txt'} (the site may block automated requests). Try opening it directly in a new tab, or paste the contents below.`,
       bots: AI_BOTS.map((bot) => ({ ...bot, status: 'not-mentioned', source: 'wildcard', rules: { allow: [], disallow: [] } })),
     };
   }

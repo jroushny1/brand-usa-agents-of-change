@@ -132,7 +132,7 @@ export default function AuditClient() {
     setActiveTab('summary'); // Default to Summary view
 
     try {
-        const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(urlInput)}`);
+        const response = await fetch(`/api/fetch-page?url=${encodeURIComponent(urlInput)}`);
         const data = await response.json();
 
         if (data.contents) {
@@ -146,8 +146,10 @@ export default function AuditClient() {
             fetchHygieneChecks(urlInput).then((fetchChecks) => {
               setAnalysis((prev) => prev ? { ...prev, hygiene: { ...prev.hygiene, fetchChecks } } : prev);
             });
+        } else if (data.status === 401 || data.status === 403 || data.status === 429) {
+            setFetchError(`This site turned away our request (HTTP ${data.status}). Its bot protection may treat AI crawlers the same way. To audit it anyway, open the page, right-click, choose View Page Source, and paste the HTML.`);
         } else {
-            throw new Error("Could not retrieve content. The site might block proxies.");
+            throw new Error("Could not retrieve content.");
         }
     } catch {
         setFetchError("Failed to fetch. Some sites block automated tools. Try pasting HTML source.");
@@ -790,7 +792,7 @@ export default function AuditClient() {
                           <details className="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
                             <summary className="cursor-pointer text-sm font-semibold text-brand-navy">Paste robots.txt manually</summary>
                             <p className="mt-3 text-xs text-gray-600 mb-2">
-                              If the fetch failed (some sites block our proxy), open the robots.txt URL in your browser, copy its contents, and paste here.
+                              If the fetch failed (some sites block automated requests), open the robots.txt URL in your browser, copy its contents, and paste here.
                             </p>
                             <textarea
                               value={manualRobotsTxt}
