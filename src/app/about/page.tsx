@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { ArrowRight, ExternalLink } from 'lucide-react'
 import { OG_IMAGE } from '@/lib/og'
 import type { Metadata } from 'next'
-import { pressItems, type PressItem } from '@/data/press'
+import { pressItems, featuredPressIds, type PressItem } from '@/data/press'
 import Script from 'next/script'
 
 export const metadata: Metadata = {
@@ -23,13 +23,9 @@ export const metadata: Metadata = {
 
 // Press features shown on this page — the three most recent articles, pulled by id
 // from the shared press module so the headlines and links can never drift from /press.
-const FEATURED_PRESS_IDS = [
-  'phocuswire-daas',
-  'travel-weekly-high-stakes',
-  'phocuswire-ai-visibility',
-]
-
-const press = FEATURED_PRESS_IDS
+// The visible copy on this page is mirrored in the Markdown copy at /about.md
+// (src/lib/markdown-pages.ts). Change both together; `npm run check:markdown` compares them.
+const press = featuredPressIds
   .map((id) => pressItems.find((item) => item.id === id))
   .filter((item): item is PressItem => Boolean(item))
 

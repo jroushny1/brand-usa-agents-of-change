@@ -71,6 +71,13 @@ const nextConfig = {
   env: {
     NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
   },
+  // Markdown copies of the conference-talk pages: /webinar/<id>.md is served by
+  // the route handler at src/app/md/webinar/[id].
+  async rewrites() {
+    return [
+      { source: '/webinar/:id([^/]+)\\.md', destination: '/md/webinar/:id' },
+    ]
+  },
   // Field Notes and the Glossary were retired in August 2026 (no readership on
   // either; no individual note was ever opened). Both were indexed, so the old
   // URLs — including the RSS feed and every article slug — 301 to the resource

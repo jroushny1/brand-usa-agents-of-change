@@ -56,6 +56,16 @@ Next.js App Router. All content lives in TypeScript modules under `src/data/` (n
 - `npm run typecheck` — `tsc --noEmit`
 - `npm run validate` — content consistency checks (`scripts/validate-content.mts`): every homepage card id must exist in `webinarData`, mux ids must agree per id and be unique, orphan webinars are flagged unless allowlisted
 - `node tests/site-validation.js [baseUrl]` — schema/link/layout smoke tests; needs a running server (defaults to `http://localhost:3000`)
+- `npm run check:markdown [baseUrl]` — confirms every Markdown copy and `/llms.txt` says only what its HTML page says; needs a running server or the live URL (`npm run check:markdown https://janetteroush.com`)
+
+### AI visibility: llms.txt, Markdown copies, bot-hit log (30-day test, started 2026-11-24)
+
+Plan and results: `10_Projects/JanetteRoush_Editorial_Redesign/2026-11-24_AI-Visibility-Findings.md` in the vault.
+
+- **`/llms.txt`** lists the key pages with their published meta descriptions and links each Markdown copy.
+- **Markdown copies:** `/about.md`, `/press.md`, `/library.md`, `/ai-audit.md`, `/story-lab.md`, and `/webinar/<id>.md` for the three conference talks (`isConferenceTalk` in `webinarData`; a rewrite in `next.config.js` maps them to `src/app/md/webinar/[id]`). All are built by `src/lib/markdown-pages.ts` and served static as `text/markdown` with a `Link: rel="canonical"` header pointing at the HTML page.
+- **Standing rule: no cloaking.** A Markdown copy carries the same words a person reads on the HTML page, and every visitor and bot gets the same response. Press, library and talk copies come from the data modules and update automatically. The `/about`, `/ai-audit` and `/story-lab` copy lives in the page components, so **an edit to that page copy needs the same edit in `markdown-pages.ts`**; a changed page title or meta description needs the same edit in `llmsPages`. Run `npm run check:markdown` after either.
+- **Bot-hit log:** `src/middleware.ts` matches the user agent against `src/lib/ai-bots.ts` and writes one JSON line per hit to the Vercel runtime log: `{"event":"ai_bot_hit","bot":...,"path":...,"ts":...}`. It only logs; the response is untouched. When the `GA4_API_SECRET` env var exists in Vercel, each hit also goes to GA4 (Measurement Protocol, event `ai_bot_hit`, params `bot_name` and `page_path`). As of 2026-11-24 that variable is unset, so the runtime log is the only record, and Hobby keeps runtime logs for 1 hour.
 
 ## Content Conventions
 
@@ -117,7 +127,7 @@ migration started with the sessions that have real destinations.
 - [ ] Rewrite homepage JSON-LD: Organization/Course → Person + ProfilePage with full sameAs graph (Janette = canonical entity node)
 - [ ] Ask receiving team to mark Janette as performer/author with `sameAs: janetteroush.com` on new video pages
 - [ ] Remove AccessCheck gate + `/enter`, `/login`, `/register`
-- [ ] Add llms.txt (a version exists on the stale `live-site-edits` branch — check before rewriting)
+- [x] Add llms.txt — shipped 2026-11-24 as a route handler (`src/app/llms.txt/route.ts`), with Markdown copies of the key pages
 
 **Two URL structures on thebrandusa.com.** Legacy `/events/all/agents-change-<slug>` (stopwords
 dropped) and current `/events/agents-of-change-<slug>/` (full title slugified). Target the current

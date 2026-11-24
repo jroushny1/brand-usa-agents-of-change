@@ -105,6 +105,14 @@ export const pressItems: PressItem[] = [
   },
 ]
 
+// The three articles featured on /about ("Featured in the travel trade") and in
+// its Markdown copy at /about.md. Kept here so the two can never drift.
+export const featuredPressIds = [
+  'phocuswire-daas',
+  'travel-weekly-high-stakes',
+  'phocuswire-ai-visibility',
+]
+
 // Podcast & video appearances (guest or host). Reverse chronological.
 export const appearances = [
   {

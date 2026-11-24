@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "validate": "tsx scripts/validate-content.mts"
+    "validate": "tsx scripts/validate-content.mts",
+    "check:markdown": "node scripts/check-markdown.mjs"
   },
   "dependencies": {
     "@google/genai": "^1.52.0",
